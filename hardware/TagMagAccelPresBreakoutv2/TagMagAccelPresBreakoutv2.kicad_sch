@@ -6,7 +6,8 @@
 	(paper "USLetter")
 	(title_block
 		(title "Tag with Mag, Accel,Pressure")
-		(date "2025-03-20")
+		(date "2025-04-16")
+		(rev "v2")
 		(company "IUCS")
 		(comment 1 "Geoffrey Brown")
 	)
@@ -6157,12 +6158,6 @@
 		(uuid "20c315f4-1e4f-49aa-8d61-778a7389df7e")
 	)
 	(junction
-		(at 259.08 109.22)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "2b084352-29a6-4c81-90af-b6409053abce")
-	)
-	(junction
 		(at 46.99 118.11)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -7804,17 +7799,6 @@
 		)
 		(uuid "39e497e2-7316-45c2-8575-998501aa662f")
 	)
-	(text "WARNING -- POWER LINES REVERSED on\nAK09940A"
-		(exclude_from_sim no)
-		(at 210.82 123.825 0)
-		(effects
-			(font
-				(size 1.524 1.524)
-				(color 255 25 71 1)
-			)
-		)
-		(uuid "3e63aee2-6d24-453a-8859-1e15b19d0e0f")
-	)
 	(text "Note LPS_RX/LPS_TX swapped -- must be configured in software"
 		(exclude_from_sim no)
 		(at 162.306 16.256 0)
@@ -7824,6 +7808,16 @@
 			)
 		)
 		(uuid "6080d017-f4b5-42d8-85b8-6f0a9b2c0cbc")
+	)
+	(text "Fixed voltage swap on AK09940A"
+		(exclude_from_sim no)
+		(at 205.74 123.19 0)
+		(effects
+			(font
+				(size 1.524 1.524)
+			)
+		)
+		(uuid "8a9fdeab-ca46-4811-ab6b-664bc9a21498")
 	)
 	(text "USART2"
 		(exclude_from_sim no)
@@ -8406,12 +8400,12 @@
 		(uuid "93492e7a-a8ef-4d3e-898f-0833dbfcbf18")
 	)
 	(label "AK_PWR"
-		(at 158.75 111.76 180)
+		(at 252.095 109.22 0)
 		(effects
 			(font
 				(size 1.524 1.524)
 			)
-			(justify right bottom)
+			(justify left bottom)
 		)
 		(uuid "97de0f8e-947d-4c21-be40-f2ed013e8314")
 	)
@@ -11468,7 +11462,7 @@
 	)
 	(symbol
 		(lib_id "power:+1V8")
-		(at 259.08 109.22 0)
+		(at 158.75 111.76 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -11477,7 +11471,7 @@
 		(fields_autoplaced yes)
 		(uuid "0d2cd6dc-328f-481f-8155-53816d9da2cf")
 		(property "Reference" "#PWR17"
-			(at 259.08 113.03 0)
+			(at 158.75 115.57 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11486,7 +11480,7 @@
 			)
 		)
 		(property "Value" "+1V8"
-			(at 259.08 104.14 0)
+			(at 158.75 106.68 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11494,7 +11488,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 259.08 109.22 0)
+			(at 158.75 111.76 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11503,7 +11497,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 259.08 109.22 0)
+			(at 158.75 111.76 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11512,7 +11506,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+1V8\""
-			(at 259.08 109.22 0)
+			(at 158.75 111.76 0)
 			(effects
 				(font
 					(size 1.27 1.27)
