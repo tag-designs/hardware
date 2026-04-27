@@ -78,7 +78,7 @@
         "duplicate_footprints": "warning",
         "extra_footprint": "warning",
         "footprint": "error",
-        "footprint_filters_mismatch": "ignore",
+        "footprint_filters_mismatch": "warning",
         "footprint_symbol_mismatch": "warning",
         "footprint_type_mismatch": "error",
         "hole_clearance": "error",
@@ -95,13 +95,13 @@
         "malformed_courtyard": "error",
         "microvia_drill_out_of_range": "error",
         "mirrored_text_on_front_layer": "warning",
-        "missing_courtyard": "ignore",
+        "missing_courtyard": "warning",
         "missing_footprint": "warning",
         "net_conflict": "warning",
         "nonmirrored_text_on_back_layer": "warning",
-        "npth_inside_courtyard": "ignore",
+        "npth_inside_courtyard": "warning",
         "padstack": "error",
-        "pth_inside_courtyard": "ignore",
+        "pth_inside_courtyard": "warning",
         "shorting_items": "error",
         "silk_edge_clearance": "warning",
         "silk_over_copper": "warning",
@@ -251,7 +251,19 @@
   "erc": {
     "erc_exclusions": [
       [
+        "footprint_link_issues|558800|1181100|35fc9cc5-e935-4369-9e64-794588c0e0f0|00000000-0000-0000-0000-000000000000|||",
+        ""
+      ],
+      [
+        "lib_symbol_issues|1981200|800100|00000000-0000-0000-0000-00005f9c4db7|00000000-0000-0000-0000-000000000000|||",
+        ""
+      ],
+      [
         "lib_symbol_issues|495300|1270000|00000000-0000-0000-0000-00005f9c4db7|00000000-0000-0000-0000-000000000000|||",
+        ""
+      ],
+      [
+        "lib_symbol_issues|558800|1181100|35fc9cc5-e935-4369-9e64-794588c0e0f0|00000000-0000-0000-0000-000000000000|||",
         ""
       ]
     ],
@@ -481,7 +493,7 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "CompassTagBreakout.kicad_pro",
+    "filename": "IMUTagBreakout.kicad_pro",
     "version": 3
   },
   "net_settings": {
@@ -660,7 +672,7 @@
       ],
       "filter_string": "",
       "group_symbols": true,
-      "include_excluded_from_bom": false,
+      "include_excluded_from_bom": true,
       "name": "",
       "sort_asc": true,
       "sort_field": "Reference"
