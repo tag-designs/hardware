@@ -5958,7 +5958,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "GRM033R60J105MEA2D"
+		(property "MPN" "GRM033R60J104KE19D"
 			(at 60.96 97.79 0)
 			(effects
 				(font
@@ -5967,7 +5967,7 @@
 				(hide yes)
 			)
 		)
-		(property "DISTPN" "490-7229-1-ND"
+		(property "DISTPN" "490-3167-1-ND"
 			(at 0 195.58 0)
 			(effects
 				(font
@@ -5976,7 +5976,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C181047"
+		(property "LCSC" "C76928"
 			(at 60.96 97.79 0)
 			(effects
 				(font
@@ -6072,7 +6072,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "GRM033R60J105MEA2D"
+		(property "MPN" "GRM033R60J104KE19D"
 			(at 68.58 97.79 0)
 			(effects
 				(font
@@ -6081,7 +6081,7 @@
 				(hide yes)
 			)
 		)
-		(property "DISTPN" "490-7229-1-ND"
+		(property "DISTPN" "490-3167-1-ND"
 			(at 0 195.58 0)
 			(effects
 				(font
@@ -6090,7 +6090,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C181047"
+		(property "LCSC" "C76928"
 			(at 68.58 97.79 0)
 			(effects
 				(font
@@ -6177,7 +6177,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "BC847AMB,315"
+		(property "MPN" "PMBT2222AMBYL"
 			(at 44.45 92.71 0)
 			(effects
 				(font
@@ -6186,7 +6186,7 @@
 				(hide yes)
 			)
 		)
-		(property "DISTPN" "1727-2632-1-ND"
+		(property "DISTPN" "1727-PMBT2222AMBYLCT-ND"
 			(at 0 185.42 0)
 			(effects
 				(font
@@ -6195,7 +6195,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C686658"
+		(property "LCSC" "C552701"
 			(at 44.45 92.71 0)
 			(effects
 				(font
@@ -6285,7 +6285,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "GRM033R60J105MEA2D"
+		(property "MPN" "GRM033R60J104KE19D"
 			(at 256.54 134.62 0)
 			(effects
 				(font
@@ -6294,7 +6294,7 @@
 				(hide yes)
 			)
 		)
-		(property "DISTPN" "490-7229-1-ND"
+		(property "DISTPN" "490-3167-1-ND"
 			(at 168.91 297.18 0)
 			(effects
 				(font
@@ -6312,7 +6312,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C181047"
+		(property "LCSC" "C76928"
 			(at 256.54 134.62 0)
 			(effects
 				(font
@@ -8388,7 +8388,7 @@
 				(hide yes)
 			)
 		)
-		(property "DISTPN" "490-7229-1-ND"
+		(property "DISTPN" "490-3167-1-ND"
 			(at 313.69 280.67 0)
 			(effects
 				(font
@@ -8397,7 +8397,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "GRM033R60J105MEA2D"
+		(property "MPN" "GRM033R60J104KE19D"
 			(at 313.69 280.67 0)
 			(effects
 				(font
@@ -8406,7 +8406,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C181047"
+		(property "LCSC" "C76928"
 			(at 135.89 177.8 0)
 			(effects
 				(font
@@ -8502,7 +8502,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "GRM033R60J105MEA2D"
+		(property "MPN" "GRM033R60J104KE19D"
 			(at 165.1 101.6 0)
 			(effects
 				(font
@@ -8511,7 +8511,7 @@
 				(hide yes)
 			)
 		)
-		(property "DISTPN" "490-7229-1-ND"
+		(property "DISTPN" "490-3167-1-ND"
 			(at 96.52 199.39 0)
 			(effects
 				(font
@@ -8520,7 +8520,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C181047"
+		(property "LCSC" "C76928"
 			(at 165.1 101.6 0)
 			(effects
 				(font
@@ -8811,7 +8811,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "GRM033R60J105MEA2D"
+		(property "MPN" "GRM033R60J104KE19D"
 			(at 257.81 86.36 0)
 			(effects
 				(font
@@ -8820,7 +8820,7 @@
 				(hide yes)
 			)
 		)
-		(property "DISTPN" "490-7229-1-ND"
+		(property "DISTPN" "490-3167-1-ND"
 			(at 189.23 184.15 0)
 			(effects
 				(font
@@ -8829,7 +8829,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C181047"
+		(property "LCSC" "C76928"
 			(at 257.81 86.36 0)
 			(effects
 				(font
@@ -8943,7 +8943,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" ""
+		(property "LCSC" "C126620"
 			(at 251.46 86.36 0)
 			(effects
 				(font
@@ -9039,7 +9039,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "GRM033R60J105MEA2D"
+		(property "MPN" "GRM033R60J104KE19D"
 			(at 101.6 132.08 0)
 			(effects
 				(font
@@ -9048,7 +9048,7 @@
 				(hide yes)
 			)
 		)
-		(property "DISTPN" "490-7229-1-ND"
+		(property "DISTPN" "490-3167-1-ND"
 			(at 33.02 229.87 0)
 			(effects
 				(font
@@ -9057,7 +9057,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C181047"
+		(property "LCSC" "C76928"
 			(at 101.6 132.08 0)
 			(effects
 				(font
@@ -9564,7 +9564,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" ""
+		(property "LCSC" "C126620"
 			(at 218.44 86.36 0)
 			(effects
 				(font
@@ -9651,7 +9651,7 @@
 				(hide yes)
 			)
 		)
-		(property "MFN" "KYOCERA AVX"
+		(property "MFN" "Murata"
 			(at 236.22 39.37 0)
 			(effects
 				(font
@@ -9660,11 +9660,20 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "06036D476MAT2A"
+		(property "MPN" "GRM188R60J476ME15D"
 			(at 236.22 39.37 0)
 			(effects
 				(font
 					(size 1.524 1.524)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C140782"
+			(at 236.22 39.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 				(hide yes)
 			)
@@ -10003,7 +10012,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "TPS7A2018PDQNR"
+		(property "MPN" "TPS7A0218PDQNR"
 			(at 240.03 83.82 0)
 			(effects
 				(font
@@ -10012,7 +10021,16 @@
 				(hide yes)
 			)
 		)
-		(property "DISTPN" "296-TPS7A2018PDQNRCT-ND"
+		(property "DISTPN" "296-TPS7A0218PDQNRCT-ND"
+			(at 240.03 83.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C2862166"
 			(at 240.03 83.82 0)
 			(effects
 				(font
@@ -10315,7 +10333,7 @@
 				(hide yes)
 			)
 		)
-		(property "DISTPN" "490-7229-1-ND"
+		(property "DISTPN" "490-3167-1-ND"
 			(at 320.04 280.67 0)
 			(effects
 				(font
@@ -10324,7 +10342,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "GRM033R60J105MEA2D"
+		(property "MPN" "GRM033R60J104KE19D"
 			(at 320.04 280.67 0)
 			(effects
 				(font
@@ -10333,7 +10351,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C181047"
+		(property "LCSC" "C76928"
 			(at 142.24 177.8 0)
 			(effects
 				(font
