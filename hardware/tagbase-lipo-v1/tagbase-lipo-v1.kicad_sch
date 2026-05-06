@@ -9089,6 +9089,33 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C9382"
+			(at 158.75 135.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFN" "TI"
+			(at 158.75 135.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "SN74LVC1T45DCKR"
+			(at 158.75 135.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "54942bdd-5f0b-4377-8f52-0133e5eab276")
 		)
@@ -9169,7 +9196,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "CJS-1201B"
+		(property "MPN" "CJS-1200B2"
 			(at 149.86 58.42 0)
 			(effects
 				(font
@@ -9178,7 +9205,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C132858"
+		(property "LCSC" "C35817163"
 			(at 149.86 58.42 0)
 			(effects
 				(font
@@ -9473,6 +9500,33 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C44521811"
+			(at 224.79 121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFN" "ST Microelectonics"
+			(at 224.79 121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" " STM32C071G8U6"
+			(at 224.79 121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "4"
 			(uuid "4457b3a7-74eb-4345-a376-b8f4b5082a3e")
 		)
@@ -9611,6 +9665,33 @@
 			)
 		)
 		(property "Description" "Single-Bit Dual-Supply Bus Transceiver With Configurable Voltage Translation and 3-State Outputs, SOT-363"
+			(at 156.21 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C9382"
+			(at 156.21 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFN" "TI"
+			(at 156.21 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "SN74LVC1T45DCKR"
 			(at 156.21 106.68 0)
 			(effects
 				(font
@@ -10796,7 +10877,7 @@
 				)
 			)
 		)
-		(property "Footprint" "USP-6B_TOR"
+		(property "Footprint" "tagbase:xc6808"
 			(at 95.25 104.14 0)
 			(effects
 				(font
@@ -10877,6 +10958,100 @@
 			(project "tagbase-lipo-v1"
 				(path "/4d87b1cc-f1d4-4d5c-b687-12b1ff6c9e14"
 					(reference "U2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 198.12 129.54 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "802e96e6-8b56-4d7c-9bc0-b3acb939c924")
+		(property "Reference" "R4"
+			(at 198.12 131.572 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "100"
+			(at 198.12 129.54 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 198.12 127.762 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 198.12 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 198.12 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C22775"
+			(at 68.58 25.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MFN" "Uniroyal Elec."
+			(at 68.58 25.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "0603WAF1000T5E"
+			(at 68.58 25.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "b8fce4c0-f203-4e06-9b11-3f9915cbae8a")
+		)
+		(pin "2"
+			(uuid "fbe46713-1c53-4d31-8f52-c11cf8e256fd")
+		)
+		(instances
+			(project "tagbase-lipo-v1"
+				(path "/4d87b1cc-f1d4-4d5c-b687-12b1ff6c9e14"
+					(reference "R4")
 					(unit 1)
 				)
 			)
@@ -11332,100 +11507,6 @@
 			(project "tagbase-lipo-v1"
 				(path "/4d87b1cc-f1d4-4d5c-b687-12b1ff6c9e14"
 					(reference "#PWR013")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 198.12 129.54 270)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "ad3caa18-7e5b-4b98-afe3-8efd80a57599")
-		(property "Reference" "R4"
-			(at 202.692 130.81 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "100"
-			(at 198.374 129.54 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
-			(at 198.12 127.762 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 198.12 129.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Resistor"
-			(at 198.12 129.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC" "C25076"
-			(at 198.12 129.54 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "MFN" "UNI-ROYAL(Uniroyal Elec)"
-			(at 198.12 129.54 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "MPN" "0402WGF1000TCE"
-			(at 198.12 129.54 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "80f86c89-a671-4aa0-aa21-80e92305adfc")
-		)
-		(pin "1"
-			(uuid "825d1226-2d1b-4a19-9cad-ac3d6ec382c6")
-		)
-		(instances
-			(project ""
-				(path "/4d87b1cc-f1d4-4d5c-b687-12b1ff6c9e14"
-					(reference "R4")
 					(unit 1)
 				)
 			)
@@ -11905,7 +11986,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "CJS-1201B"
+		(property "MPN" "CJS-1200B2"
 			(at 106.68 60.96 0)
 			(effects
 				(font
@@ -11914,7 +11995,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C132858"
+		(property "LCSC" "C35817163"
 			(at 106.68 60.96 0)
 			(effects
 				(font
