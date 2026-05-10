@@ -426,7 +426,7 @@
 			)
 		)
 	)
-	(footprint "AccelTag:RV-8803-C7"
+	(footprint "tag_fp:RV-8803-C7"
 		(layer "F.Cu")
 		(uuid "00000000-0000-0000-0000-00005ef5e5e4")
 		(at 149.74 109.826458 180)
@@ -455,46 +455,35 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 180)
+			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "0e14cb94-8e46-49c5-973f-d7a2dc943bee")
 			(effects
 				(font
 					(size 1.27 1.27)
-					(thickness 0.15)
 				)
 			)
 		)
 		(property "Description" ""
-			(at 0 0 0)
+			(at 0 0 180)
+			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "a62b5cfd-fca5-400e-8c36-a387968afb8a")
 			(effects
 				(font
 					(size 1.27 1.27)
-					(thickness 0.15)
 				)
 			)
 		)
 		(property "DISTPN" "2195-RV-3028-C732.768KHZ1PPM-TA-QACT-ND"
-			(at 253.831 -32.529 90)
+			(at 0 0 180)
+			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "60a4a7a5-6dcc-4ee0-9b82-923dd5562b32")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "LCSC" "C3019759"
-			(at 253.831 -32.529 90)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "382c0894-0cdd-4726-baff-8b3037bff35c")
+			(uuid "3a486cda-7c62-4a27-97e4-0d37b4b7356d")
 			(effects
 				(font
 					(size 1 1)
@@ -503,10 +492,11 @@
 			)
 		)
 		(property "MFN" "Micro Crystal"
-			(at 253.831 -32.529 90)
+			(at 0 0 180)
+			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "e07be1d4-1ccf-41cb-b943-6f60e3ddfed0")
+			(uuid "0bad2b4e-ff82-4b79-9ba8-23c3dcec86c5")
 			(effects
 				(font
 					(size 1 1)
@@ -515,10 +505,24 @@
 			)
 		)
 		(property "MPN" "RV-3028-C7 32.768KHZ 1PPM-TA-QA"
-			(at 253.831 -32.529 90)
+			(at 0 0 180)
+			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "27eced84-a5f4-4e7e-a865-14e55fabb699")
+			(uuid "014ac109-87ef-4e72-872a-8f192274c739")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" "C3019759"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "63159f24-77fc-4d7d-a8c2-f0e079eb9b56")
 			(effects
 				(font
 					(size 1 1)
@@ -535,7 +539,7 @@
 				(pins "1" "2" "3" "4" "8" "7" "6" "5")
 			)
 		)
-		(attr smd dnp)
+		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
 			(start -0.7 -1.8)
@@ -670,7 +674,7 @@
 			(uuid "fd4eb64c-ec14-4396-a88b-6da45a5f3eb3")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/libraries/packages3D/RV-3028-C7.stp"
+		(model "${KIPRJMOD}/../kicad_libraries/3d_models/RV-3028-C7.stp"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -678,7 +682,7 @@
 				(xyz 1 1 1)
 			)
 			(rotate
-				(xyz -0 -0 90)
+				(xyz 0 0 90)
 			)
 		)
 	)
@@ -1400,6 +1404,12 @@
 		(path "/00000000-0000-0000-0000-00005fd47223")
 		(sheetname "/")
 		(sheetfile "TorporTag.kicad_sch")
+		(units
+			(unit
+				(name "A")
+				(pins "B4" "D4" "F4" "C3" "A1" "G1" "A5" "G5" "B2" "D2" "F2" "E3")
+			)
+		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -1714,7 +1724,7 @@
 			(uuid "03d88a85-11fd-47aa-954c-c318bb15294a")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/libraries/packages3D/at25wlcsp.step"
+		(model "${TAG_LIBRARIES}/packages3D/at25wlcsp.step"
 			(offset
 				(xyz -0.9 -1.2 0)
 			)
@@ -1722,7 +1732,7 @@
 				(xyz 1 1 1)
 			)
 			(rotate
-				(xyz 0 0 0)
+				(xyz -0 -0 -0)
 			)
 		)
 	)
@@ -2293,14 +2303,14 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "Package_TO_SOT_SMD:SOT-883"
+	(footprint "tag_fp:SOT-883"
 		(layer "F.Cu")
 		(uuid "00000000-0000-0000-0000-00006054b20c")
 		(at 147.0104 110.1044)
 		(descr "SOT-883, https://assets.nexperia.com/documents/outline-drawing/SOT883.pdf")
 		(tags "SOT-883")
 		(property "Reference" "Q501"
-			(at 0 -1.905 0)
+			(at 0 -1.905 180)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "03140e8f-215d-489c-90b8-c9fc298f85fd")
@@ -2312,9 +2322,8 @@
 			)
 		)
 		(property "Value" "Q_NPN_BEC"
-			(at 0 1.905 0)
+			(at 0 1.905 180)
 			(layer "F.Fab")
-			(hide yes)
 			(uuid "e2d793bb-4061-4fcf-8b4d-f27eb718bf72")
 			(effects
 				(font
@@ -2331,7 +2340,6 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-					(thickness 0.15)
 				)
 			)
 		)
@@ -2343,39 +2351,15 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "DISTPN" "1727-PMBT2222AMBYLCT-ND"
-			(at 294.06 213.622 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "ab72275a-3cf1-46a7-91aa-662e374c14d9")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "LCSC" "C552701"
-			(at 294.06 213.622 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "5c878e15-27ec-480b-b757-a4eb77d4cdb7")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
 				)
 			)
 		)
 		(property "MFN" "Nexperia"
-			(at 294.06 213.622 0)
+			(at 0 0 0)
+			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "76e12904-9740-424d-bd7c-4c17273be22f")
+			(uuid "6791961c-2af0-460a-8d0e-748158af5ca2")
 			(effects
 				(font
 					(size 1 1)
@@ -2384,10 +2368,37 @@
 			)
 		)
 		(property "MPN" "PMBT2222AMBYL"
-			(at 294.06 213.622 0)
+			(at 0 0 0)
+			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "8954c4a0-9fc4-4569-b6cf-ff82b20c28a4")
+			(uuid "cc1d6a29-ffb1-4710-a1b1-4380c6a95873")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "DISTPN" "1727-PMBT2222AMBYLCT-ND"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "b335ff53-47ba-4a6f-b51e-bc6c946bac3d")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" "C552701"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "151ee259-a86b-487e-bc8b-b59af6fbe036")
 			(effects
 				(font
 					(size 1 1)
@@ -2398,12 +2409,6 @@
 		(path "/00000000-0000-0000-0000-00005b44f199")
 		(sheetname "/")
 		(sheetfile "TorporTag.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "3" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -2527,7 +2532,7 @@
 			(uuid "2c11f5a9-ff16-4ee8-882e-b2ed5aeeb394")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 0)
+			(at 0 0 180)
 			(layer "F.Fab")
 			(uuid "7d7ea0e2-a605-4fe1-aee0-4781bfebb395")
 			(effects
@@ -2568,15 +2573,15 @@
 			(uuid "de84be00-5f17-43be-974d-93b938b766fb")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/libraries/packages3D/Diodes_DFN1006-3.step"
+		(model "${TAG_LIBRARIES}/packages3D/SOT883.step"
 			(offset
-				(xyz 0 0 0)
+				(xyz 0.75 -0.37 0.5)
 			)
 			(scale
 				(xyz 1 1 1)
 			)
 			(rotate
-				(xyz 0 0 0)
+				(xyz 90 -0 -90)
 			)
 		)
 	)
@@ -2649,7 +2654,7 @@
 				)
 			)
 		)
-		(property "MFN" ""
+		(property "MFN" "Murata"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -2662,7 +2667,7 @@
 				)
 			)
 		)
-		(property "MPN" "CL05F104ZO5NNNC"
+		(property "MPN" "GRM033R60J104KE19D"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -2675,7 +2680,7 @@
 				)
 			)
 		)
-		(property "DISTPN" ""
+		(property "DISTPN" "490-3167-1-ND"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -3083,6 +3088,19 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "3903fb3c-8d60-43f9-bbb5-b3107490eeab")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" "C192252"
+			(at 0 0 270)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "03dbd687-b140-4a37-a75b-fc5b034a5e3d")
 			(effects
 				(font
 					(size 1 1)
@@ -3981,14 +3999,14 @@
 			)
 		)
 	)
-	(footprint "Diode_SMD:D_0402_1005Metric"
+	(footprint "tag_fp:D_0402_1005Metric"
 		(layer "B.Cu")
 		(uuid "00000000-0000-0000-0000-00005f0f75d3")
 		(at 152.015 111.3)
-		(descr "Diode SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: http://www.tortai-tech.com/upload/download/2011102023233369053.pdf), generated with kicad-footprint-generator")
+		(descr "Diode SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: http://www.tortai-tech.com/upload/download/2011102023233369053.pdf), generated with kicad-footprint-generator")
 		(tags "diode")
 		(property "Reference" "D401"
-			(at 0 1.17 0)
+			(at 0 1.17 180)
 			(layer "B.SilkS")
 			(hide yes)
 			(uuid "a127f2c1-36bf-4b15-ace9-653b8378b7a4")
@@ -4001,9 +4019,8 @@
 			)
 		)
 		(property "Value" "D"
-			(at 0 -1.17 0)
+			(at 0 -1.17 180)
 			(layer "B.Fab")
-			(hide yes)
 			(uuid "6d479776-55c6-40a5-89bc-1d677ecd9266")
 			(effects
 				(font
@@ -4014,62 +4031,35 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 180)
 			(layer "B.Fab")
 			(hide yes)
 			(uuid "f7fc0abd-6a67-48a9-a4f3-fbd06301fed6")
 			(effects
 				(font
 					(size 1.27 1.27)
-					(thickness 0.15)
 				)
 				(justify mirror)
 			)
 		)
 		(property "Description" ""
-			(at 0 0 0)
+			(at 0 0 180)
 			(layer "B.Fab")
 			(hide yes)
 			(uuid "e90bc985-b80f-4ccf-b551-1ea8eec3a208")
 			(effects
 				(font
 					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-				(justify mirror)
-			)
-		)
-		(property "DISTPN" "641-1519-1-ND"
-			(at 0 0 0)
-			(layer "B.Fab")
-			(hide yes)
-			(uuid "b388ce92-13f3-4c48-9da0-59848d5f258a")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-				(justify mirror)
-			)
-		)
-		(property "LCSC" "C2886012"
-			(at 0 0 0)
-			(layer "B.Fab")
-			(hide yes)
-			(uuid "216a1769-8a11-40ea-8a87-da8466bc44f3")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
 				)
 				(justify mirror)
 			)
 		)
 		(property "MFN" "COMCHIP"
 			(at 0 0 0)
+			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "9faea2da-19b4-4996-b98a-526013d96b12")
+			(uuid "50a2a436-672a-4e56-8bc1-121431e1d268")
 			(effects
 				(font
 					(size 1 1)
@@ -4080,9 +4070,38 @@
 		)
 		(property "MPN" "CDBQC0130L-HF"
 			(at 0 0 0)
+			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "1dc6cfe8-f04c-4a14-8728-e7faa5d0a2ce")
+			(uuid "551d6f7c-d06d-4e7a-98b5-fe82bc69e727")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "DISTPN" "641-1519-1-ND"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "6722c2c9-830a-439e-80a7-80c607ef04cd")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C2886012"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "a67059bb-8c2f-44a1-8b56-fd39ecd39fc9")
 			(effects
 				(font
 					(size 1 1)
@@ -4095,12 +4114,6 @@
 		(path "/00000000-0000-0000-0000-00005c0f416f")
 		(sheetname "/")
 		(sheetfile "TorporTag.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_circle
@@ -4114,16 +4127,65 @@
 			(layer "B.SilkS")
 			(uuid "cd26405d-d6a9-497f-8a63-01f33a81cae3")
 		)
-		(fp_rect
+		(fp_line
+			(start -0.93 -0.47)
+			(end -0.93 0.47)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "B.CrtYd")
+			(uuid "4ecb0d48-1269-49ee-97fe-a6662ebfa566")
+		)
+		(fp_line
 			(start -0.93 0.47)
+			(end 0.93 0.47)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "B.CrtYd")
+			(uuid "2e5bc2f2-b62d-4c21-a6fc-d2bc3cf49a17")
+		)
+		(fp_line
+			(start 0.93 -0.47)
+			(end -0.93 -0.47)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "B.CrtYd")
+			(uuid "3fc3873b-05c9-4942-a3c8-1781ee184a40")
+		)
+		(fp_line
+			(start 0.93 0.47)
 			(end 0.93 -0.47)
 			(stroke
 				(width 0.05)
 				(type solid)
 			)
-			(fill no)
 			(layer "B.CrtYd")
-			(uuid "a0bd6189-4875-42bd-97c4-208da44f0d59")
+			(uuid "f59201ba-f56e-4bda-8f21-723274c79929")
+		)
+		(fp_line
+			(start -0.5 -0.25)
+			(end -0.5 0.25)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "B.Fab")
+			(uuid "6e05ea0f-f33e-48fb-b649-d7d7fa54f657")
+		)
+		(fp_line
+			(start -0.5 0.25)
+			(end 0.5 0.25)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "B.Fab")
+			(uuid "bdfd08d2-b594-4d0f-a58c-6142280a2d36")
 		)
 		(fp_line
 			(start -0.4 -0.25)
@@ -4145,16 +4207,25 @@
 			(layer "B.Fab")
 			(uuid "dc2c5aa0-e44d-4ba1-a87e-d742ae9b6a97")
 		)
-		(fp_rect
-			(start -0.5 0.25)
+		(fp_line
+			(start 0.5 -0.25)
+			(end -0.5 -0.25)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "B.Fab")
+			(uuid "5754c1ac-6167-4749-ab93-bfb90140628b")
+		)
+		(fp_line
+			(start 0.5 0.25)
 			(end 0.5 -0.25)
 			(stroke
 				(width 0.1)
 				(type solid)
 			)
-			(fill no)
 			(layer "B.Fab")
-			(uuid "9b51c867-0a44-44c3-b6c2-490b04804b68")
+			(uuid "8f4be40e-2833-4f19-a2a0-bcf5a36cd241")
 		)
 		(fp_text user "${REFERENCE}"
 			(at 0 0 180)
@@ -4189,7 +4260,7 @@
 			(uuid "37076562-1a7a-45ab-a45a-51b723bab4f0")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/libraries/packages3D/D_SOD-923.step"
+		(model "${TAG_LIBRARIES}/packages3D/CDBQR.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -5520,6 +5591,48 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" "C22428347"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "fb12ef1c-361c-41c0-a634-ce9a9ed502c2")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "MFN" "Texas Instruments"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "624cb49f-6600-4cb5-bd0a-eb5cc203ed93")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "MPN" "TMP119AIYBGR"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "b448f1fc-c3fe-419f-b37c-f5fb576f3ef5")
+			(effects
+				(font
+					(size 1 1)
 					(thickness 0.15)
 				)
 				(justify mirror)

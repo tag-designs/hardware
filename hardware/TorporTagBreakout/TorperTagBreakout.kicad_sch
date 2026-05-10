@@ -5977,7 +5977,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "tag_ibrary:ADXL362"
+		(property "Footprint" "tag_library:ADXL362"
 			(at 64.77 125.73 0)
 			(hide yes)
 			(show_name no)

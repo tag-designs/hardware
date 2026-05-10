@@ -490,7 +490,7 @@
 		(layer "F.Cu")
 		(uuid "2e8f855c-7494-4681-9076-252ac6e3a68d")
 		(at 130.4576 97.9932)
-		(descr "Texas Instruments, DSBGA, area grid, YBG pad definition, 0.95x1.488mm, 6 Ball, 2x3 Layout, 0.4mm Pitch, generated with kicad-footprint-generator ipc_bga_generator.py, https://www.ti.com/lit/ml/mxbg419/mxbg419.pdf, https://www.ti.com/lit/ds/symlink/tmp117.pdf")
+		(descr "Texas Instruments, DSBGA, area grid, YBG pad definition, 0.95x1.488mm, 6 Ball, 2x3 Layout, 0.4mm Pitch, https://www.ti.com/lit/ml/mxbg419/mxbg419.pdf, https://www.ti.com/lit/ds/symlink/tmp117.pdf")
 		(tags "BGA 6 0.4")
 		(property "Reference" "U3"
 			(at 0.0222 -2.413 0)
@@ -538,12 +538,12 @@
 				)
 			)
 		)
-		(property "LCSC" "C22428347"
+		(property "KiLib_Generator" "Texas Instruments"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "79b6a6a6-b860-4a2e-b3e0-f64cec51b0be")
+			(uuid "9ea5d8fb-324a-4219-af44-c47926508b4d")
 			(effects
 				(font
 					(size 1 1)
@@ -551,12 +551,12 @@
 				)
 			)
 		)
-		(property "MFN" "Texas Instruments"
+		(property "LCSC" "C22428347"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "9ea5d8fb-324a-4219-af44-c47926508b4d")
+			(uuid "79b6a6a6-b860-4a2e-b3e0-f64cec51b0be")
 			(effects
 				(font
 					(size 1 1)
@@ -594,12 +594,6 @@
 		(path "/30fa38c9-0051-46d7-bec7-46a3818acf7b")
 		(sheetname "/")
 		(sheetfile "TorperTagBreakout.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "A1" "A2" "C1" "B1" "B2" "C2")
-			)
-		)
 		(solder_mask_margin 0.05)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
@@ -788,7 +782,7 @@
 			(uuid "6d3fd8da-ae0f-4f1b-8ed7-6c2acd291577")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/libraries/packages3D/tmp119.stp"
+		(model "${TAG_LIBRARIES}/packages3D/tmp119.stp"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -796,7 +790,7 @@
 				(xyz 1 1 1)
 			)
 			(rotate
-				(xyz -0 -0 -0)
+				(xyz 0 0 0)
 			)
 		)
 	)
@@ -1785,12 +1779,6 @@
 		(path "/00000000-0000-0000-0000-00005fd47223")
 		(sheetname "/")
 		(sheetfile "TorperTagBreakout.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "B4" "D4" "F4" "C3" "A1" "G1" "A5" "G5" "B2" "D2" "F2" "E3")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -2105,7 +2093,7 @@
 			(uuid "87c31fdb-1ed5-494c-a204-2489c543a016")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/libraries/packages3D/at25wlcsp.step"
+		(model "${TAG_LIBRARIES}/packages3D/at25wlcsp.step"
 			(offset
 				(xyz -0.9 -1.2 0)
 			)
@@ -2113,7 +2101,7 @@
 				(xyz 1 1 1)
 			)
 			(rotate
-				(xyz 0 0 0)
+				(xyz -0 -0 -0)
 			)
 		)
 	)
@@ -3012,7 +3000,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C59641"
+		(property "LCSC" "C59641 "
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -3041,15 +3029,7 @@
 		(path "/720c78dc-170e-4e3f-b13f-d2db5f4f5920")
 		(sheetname "/")
 		(sheetfile "TorperTagBreakout.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2" "3" "4" "5" "16" "6" "15" "7" "14" "8" "13" "12" "11" "10"
-					"9"
-				)
-			)
-		)
-		(attr smd dnp)
+		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
 			(start -1.59766 1.4986)
@@ -3346,7 +3326,7 @@
 			(uuid "c87faa3e-ec66-4d3f-b0a7-5563415b6bc9")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/libraries/packages3D/ADXL362.STEP"
+		(model "${TAG_LIBRARIES}/packages3D/ADXL362.STEP"
 			(offset
 				(xyz 0 0 0)
 			)

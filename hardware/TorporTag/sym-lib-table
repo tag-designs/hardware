@@ -6,5 +6,5 @@
 	(lib (name "lis2du12") (type "KiCad") (uri "${KIPRJMOD}/../kicad_libraries/lib_sch/LIS2DU12TR.kicad_sym") (options "") (descr ""))
 	(lib (name "ak09940a") (type "KiCad") (uri "${KIPRJMOD}/../kicad_libraries/lib_sch/AK09940a.kicad_sym") (options "") (descr ""))
 	(lib (name "tmp119") (type "KiCad") (uri "${KIPRJMOD}/../kicad_libraries/lib_sch/tmp119.kicad_sym") (options "") (descr ""))
-	(lib (name "tag_library") (type "KiCad") (uri "${KIPRJMOD}/libraries/tag_library.kicad_sym") (options "") (descr ""))
+	(lib (name "tag_library") (type "KiCad") (uri "${TAG_LIBRARIES}/tag_library.kicad_sym") (options "") (descr ""))
 )
