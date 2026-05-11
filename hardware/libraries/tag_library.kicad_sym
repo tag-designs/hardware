@@ -1974,7 +1974,7 @@
 				)
 			)
 		)
-		(property "Footprint" "bittagv7:RV-8803-C7"
+		(property "Footprint" "tag_fp:RV-8803-C7"
 			(at -2.54 11.43 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -1985,7 +1985,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "file:///Users/geobrown/Research/tag-designs/hardware/hardware/libraries/datasheets/RV-3028-C7_App-Manual.pdf"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4060,7 +4060,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "file:///Users/geobrown/Research/tag-designs/hardware/hardware/libraries/datasheets/adxl362.pdf"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4435,7 +4435,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "file:///Users/geobrown/Research/tag-designs/hardware/hardware/libraries/datasheets/REN_DS-AT25XE321D-160P_DST_20241220.pdf"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4736,7 +4736,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "file:///Users/geobrown/Research/tag-designs/hardware/hardware/libraries/datasheets/stm32l432kc.pdf"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)

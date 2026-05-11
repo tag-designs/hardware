@@ -1924,7 +1924,7 @@
 					)
 				)
 			)
-			(property "Footprint" "bittagv7:RV-8803-C7"
+			(property "Footprint" "tag_fp:RV-8803-C7"
 				(at -2.54 11.43 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -1935,7 +1935,7 @@
 					)
 				)
 			)
-			(property "Datasheet" ""
+			(property "Datasheet" "file:///Users/geobrown/Research/tag-designs/hardware/hardware/libraries/datasheets/RV-3028-C7_App-Manual.pdf"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -2160,7 +2160,7 @@
 					)
 				)
 			)
-			(property "Datasheet" ""
+			(property "Datasheet" "file:///Users/geobrown/Research/tag-designs/hardware/hardware/libraries/datasheets/adxl362.pdf"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -2535,7 +2535,7 @@
 					)
 				)
 			)
-			(property "Datasheet" ""
+			(property "Datasheet" "file:///Users/geobrown/Research/tag-designs/hardware/hardware/libraries/datasheets/REN_DS-AT25XE321D-160P_DST_20241220.pdf"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -2836,7 +2836,7 @@
 					)
 				)
 			)
-			(property "Datasheet" ""
+			(property "Datasheet" "file:///Users/geobrown/Research/tag-designs/hardware/hardware/libraries/datasheets/stm32l432kc.pdf"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -3571,12 +3571,6 @@
 		(uuid "5ae183f3-f458-485e-ab60-6abba9656d6b")
 	)
 	(junction
-		(at 184.15 88.9)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "5cd13773-4af7-4339-8eeb-61384aa9ffc6")
-	)
-	(junction
 		(at 68.58 102.87)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -3672,12 +3666,6 @@
 		(color 0 0 0 0)
 		(uuid "f7760645-f15c-45f1-b98a-b65836767771")
 	)
-	(junction
-		(at 184.15 77.47)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "f802d67f-0423-4b4d-9083-da39056a1854")
-	)
 	(no_connect
 		(at 44.45 38.1)
 		(uuid "01c83342-fc9c-448f-b20c-64bc674c27d7")
@@ -3713,6 +3701,10 @@
 	(no_connect
 		(at 153.67 93.98)
 		(uuid "c962bebe-4bf1-4391-b89c-968fcf6c7d11")
+	)
+	(no_connect
+		(at 208.28 80.01)
+		(uuid "d40e8a90-4005-47a7-86c0-7dfaf58bb203")
 	)
 	(no_connect
 		(at 87.63 81.28)
@@ -3898,16 +3890,6 @@
 	)
 	(wire
 		(pts
-			(xy 191.77 80.01) (xy 191.77 88.9)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "34586139-dc5f-4339-a14d-18cb6fdc3456")
-	)
-	(wire
-		(pts
 			(xy 46.99 83.82) (xy 60.96 83.82)
 		)
 		(stroke
@@ -3968,16 +3950,6 @@
 	)
 	(wire
 		(pts
-			(xy 184.15 87.63) (xy 184.15 88.9)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "46389c2f-74fc-4fa6-8b9a-d688d918103e")
-	)
-	(wire
-		(pts
 			(xy 234.95 33.02) (xy 236.22 33.02)
 		)
 		(stroke
@@ -3995,16 +3967,6 @@
 			(type default)
 		)
 		(uuid "46dce8e2-fa5e-4c2a-ac20-7e5096116715")
-	)
-	(wire
-		(pts
-			(xy 184.15 77.47) (xy 184.15 80.01)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "4789b20c-8ba9-41e4-bacd-128b3e0af82f")
 	)
 	(wire
 		(pts
@@ -4288,16 +4250,6 @@
 	)
 	(wire
 		(pts
-			(xy 184.15 88.9) (xy 184.15 90.17)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "90a4d77d-c733-42df-b98d-96914f65140d")
-	)
-	(wire
-		(pts
 			(xy 46.99 87.63) (xy 46.99 83.82)
 		)
 		(stroke
@@ -4475,16 +4427,6 @@
 			(type default)
 		)
 		(uuid "b5dea51c-ab56-47d9-b131-7f44ce367c2c")
-	)
-	(wire
-		(pts
-			(xy 208.28 80.01) (xy 191.77 80.01)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b679fb81-0e4e-44e4-ae2f-51933ff297cc")
 	)
 	(wire
 		(pts
@@ -4678,7 +4620,7 @@
 	)
 	(wire
 		(pts
-			(xy 208.28 77.47) (xy 184.15 77.47)
+			(xy 208.28 77.47) (xy 204.47 77.47)
 		)
 		(stroke
 			(width 0)
@@ -4765,16 +4707,6 @@
 			(type default)
 		)
 		(uuid "edea45bf-8f4f-472b-9248-f376e3a0af2d")
-	)
-	(wire
-		(pts
-			(xy 191.77 88.9) (xy 184.15 88.9)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f53ea603-a403-4604-b83c-54e739ef9b84")
 	)
 	(wire
 		(pts
@@ -5450,7 +5382,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "file:///Users/geobrown/Research/tag-designs/hardware/hardware/libraries/datasheets/stm32l432kc.pdf"
 			(at 87.63 76.2 0)
 			(hide yes)
 			(show_name no)
@@ -6299,7 +6231,7 @@
 				)
 			)
 		)
-		(property "Footprint" "AccelTag:tagpoints6"
+		(property "Footprint" "tag_fp:tagpoints6"
 			(at 179.07 29.21 0)
 			(hide yes)
 			(show_name no)
@@ -8117,7 +8049,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "file:///Users/geobrown/Research/tag-designs/hardware/hardware/libraries/datasheets/RV-3028-C7_App-Manual.pdf"
 			(at 220.98 138.43 0)
 			(hide yes)
 			(show_name no)
@@ -8394,7 +8326,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "file:///Users/geobrown/Research/tag-designs/hardware/hardware/libraries/datasheets/REN_DS-AT25XE321D-160P_DST_20241220.pdf"
 			(at 58.42 34.29 0)
 			(hide yes)
 			(show_name no)
@@ -8797,7 +8729,7 @@
 	)
 	(symbol
 		(lib_id "power:+2V5")
-		(at 184.15 77.47 0)
+		(at 204.47 77.47 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -8807,7 +8739,7 @@
 		(dnp no)
 		(uuid "2dcf6339-1766-4082-be4b-ecefca0ec6bc")
 		(property "Reference" "#PWR8"
-			(at 184.15 81.28 0)
+			(at 204.47 81.28 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8818,7 +8750,7 @@
 			)
 		)
 		(property "Value" "+2V5"
-			(at 184.531 73.0758 0)
+			(at 204.851 73.0758 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -8828,7 +8760,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 184.15 77.47 0)
+			(at 204.47 77.47 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8839,7 +8771,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 184.15 77.47 0)
+			(at 204.47 77.47 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8850,7 +8782,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 184.15 77.47 0)
+			(at 204.47 77.47 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9153,142 +9085,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:C")
-		(at 184.15 83.82 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "631f9b15-65fa-451d-92bd-fe686503849b")
-		(property "Reference" "C5"
-			(at 184.785 81.28 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "0.1uf"
-			(at 184.785 86.36 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
-			(at 185.1152 87.63 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 184.15 83.82 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 184.15 83.82 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Macrofab" ""
-			(at 184.15 83.82 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.524 1.524)
-				)
-			)
-		)
-		(property "MFN" "Murata"
-			(at 184.15 83.82 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.524 1.524)
-				)
-			)
-		)
-		(property "DISTPN" "490-3167-1-ND"
-			(at 6.35 186.69 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "MPN" "GRM033R60J104KE19D"
-			(at 6.35 186.69 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "LCSC" "C76928"
-			(at 184.15 83.82 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.524 1.524)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "a1530f98-2943-4b7f-920b-4f880b028751")
-		)
-		(pin "2"
-			(uuid "bd027688-5eff-4500-86b7-809a975bd43f")
-		)
-		(instances
-			(project "TorporTag"
-				(path "/e44ca67a-43be-444b-8652-f54825a2eb6f"
-					(reference "C5")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "tag_library:adxl362")
 		(at 208.28 77.47 0)
 		(unit 1)
@@ -9321,7 +9117,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "AccelTag:ADXL362"
+		(property "Footprint" "tag_fp:ADXL362"
 			(at 208.28 77.47 0)
 			(hide yes)
 			(show_name no)
@@ -9332,7 +9128,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "file:///Users/geobrown/Research/tag-designs/hardware/hardware/libraries/datasheets/adxl362.pdf"
 			(at 208.28 77.47 0)
 			(hide yes)
 			(show_name no)
@@ -9652,83 +9448,6 @@
 			(project "TorporTag"
 				(path "/e44ca67a-43be-444b-8652-f54825a2eb6f"
 					(reference "C6")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 184.15 90.17 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "9d58b750-5c05-4bc2-a65f-e877ded51fbf")
-		(property "Reference" "#PWR1"
-			(at 184.15 96.52 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "GND"
-			(at 184.15 93.98 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 184.15 90.17 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 184.15 90.17 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 184.15 90.17 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "77b27c1a-d3d3-4c91-a723-9d181b3dbcef")
-		)
-		(instances
-			(project "TorporTag"
-				(path "/e44ca67a-43be-444b-8652-f54825a2eb6f"
-					(reference "#PWR1")
 					(unit 1)
 				)
 			)

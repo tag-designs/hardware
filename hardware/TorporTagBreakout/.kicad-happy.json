@@ -1,0 +1,337 @@
+{
+  "version": 1,
+
+  "project": {
+    "name": "TorporTagBreakout"
+  },
+
+  "mating_design": {
+    "name": "TorporTag",
+    "host_mcu": "STM32L432",
+    "source": "User-provided mating-design intent for breakout analysis and firmware bring-up notes.",
+    "notes": [
+      "TMP119 power is supplied from STM32 PB0 through tmp119_pwr.",
+      "TMP119 SDA, SCL, and RDY/ALERT normally use STM32L432 internal pull-ups. The I2C clock is expected to be slow because these pulls are high impedance.",
+      "R3/R4/R5 are optional fallback 10 kOhm pull-ups to tmp119_pwr and are not default population parts."
+    ],
+
+    "host_pin_map": [
+      {
+        "breakout_header": "J3.1",
+        "breakout_net": "AT25_MISO",
+        "host_pin": "PB4",
+        "host_function": "SPI MISO / AT25 SO",
+        "connected_part": "U1 AT25XE321D SO",
+        "required_state": "Pull-down or no-pull if known driven; high-Z input during reset/sleep is acceptable if nCS is held high.",
+        "reason": "Flash SO is normally tri-stated when AT25_nCS is high."
+      },
+      {
+        "breakout_header": "J3.2",
+        "breakout_net": "AT25_MOSI",
+        "host_pin": "PB5",
+        "host_function": "SPI MOSI / AT25 SI",
+        "connected_part": "U1 AT25XE321D SI",
+        "required_state": "Pull-down in reset/sleep/high-Z.",
+        "reason": "Keeps flash input quiet while the device is deselected."
+      },
+      {
+        "breakout_header": "J3.3",
+        "breakout_net": "NO_CONNECT",
+        "host_pin": "TODO_J3_3",
+        "host_function": "unused placeholder",
+        "connected_part": "none",
+        "required_state": "Confirm no connection in mating design; if routed to MCU, use analog/no-pull or another documented low-leakage state.",
+        "reason": "Placeholder keeps mating-board pin assignment explicit."
+      },
+      {
+        "breakout_header": "J3.4",
+        "breakout_net": "NO_CONNECT",
+        "host_pin": "TODO_J3_4",
+        "host_function": "unused placeholder",
+        "connected_part": "none",
+        "required_state": "Confirm no connection in mating design; if routed to MCU, use analog/no-pull or another documented low-leakage state.",
+        "reason": "Placeholder keeps mating-board pin assignment explicit."
+      },
+      {
+        "breakout_header": "J3.5",
+        "breakout_net": "NO_CONNECT",
+        "host_pin": "TODO_J3_5",
+        "host_function": "unused placeholder",
+        "connected_part": "none",
+        "required_state": "Confirm no connection in mating design; if routed to MCU, use analog/no-pull or another documented low-leakage state.",
+        "reason": "Placeholder keeps mating-board pin assignment explicit."
+      },
+      {
+        "breakout_header": "J3.6",
+        "breakout_net": "NO_CONNECT",
+        "host_pin": "TODO_J3_6",
+        "host_function": "unused placeholder",
+        "connected_part": "none",
+        "required_state": "Confirm no connection in mating design; if routed to MCU, use analog/no-pull or another documented low-leakage state.",
+        "reason": "Placeholder keeps mating-board pin assignment explicit."
+      },
+      {
+        "breakout_header": "J3.7",
+        "breakout_net": "+3.3V",
+        "host_pin": "HOST_3V3_RAIL",
+        "host_function": "3.3 V supply rail",
+        "connected_part": "U1 VCC, U2 VDDI/O/VS, LEDs, decoupling",
+        "required_state": "Supply a valid +3.3 V rail whenever AT25, ADXL362, or LEDs are in use.",
+        "reason": "Primary breakout supply rail."
+      },
+      {
+        "breakout_header": "J3.8",
+        "breakout_net": "WKUP1",
+        "host_pin": "PA0",
+        "host_function": "Wake input / ADXL362 INT2",
+        "connected_part": "U2 ADXL362 INT2",
+        "required_state": "Pull-down if interrupt is active-high; pull-up if configured active-low/open-drain.",
+        "reason": "Wake source inactive state must be deliberate for sleep current and false wake prevention."
+      },
+      {
+        "breakout_header": "J3.9",
+        "breakout_net": "tmp119_sda",
+        "host_pin": "PA1",
+        "host_function": "I2C SDA",
+        "connected_part": "U3 TMP119 SDA, optional R5 to tmp119_pwr",
+        "required_state": "Internal pull-up only when tmp119_pwr is on; no-pull/high-Z when tmp119_pwr is off.",
+        "reason": "Default design uses STM32 internal pull-up; avoid back-powering TMP119 when its rail is off."
+      },
+      {
+        "breakout_header": "J3.10",
+        "breakout_net": "tmp119_scl",
+        "host_pin": "PA2",
+        "host_function": "I2C SCL",
+        "connected_part": "U3 TMP119 SCL, optional R4 to tmp119_pwr",
+        "required_state": "Internal pull-up only when tmp119_pwr is on; no-pull/high-Z when tmp119_pwr is off.",
+        "reason": "Weak internal pull-up means slow I2C timing; avoid back-powering TMP119 when its rail is off."
+      },
+      {
+        "breakout_header": "J3.11",
+        "breakout_net": "tmp119_rdy",
+        "host_pin": "PA3",
+        "host_function": "TMP119 alert/ready",
+        "connected_part": "U3 TMP119 ALERT, optional R3 to tmp119_pwr",
+        "required_state": "Internal pull-up only when TMP119 is powered and alert is used; no-pull/high-Z when tmp119_pwr is off.",
+        "reason": "ALERT/RDY is open-drain style; avoid back-power paths."
+      },
+      {
+        "breakout_header": "J3.12",
+        "breakout_net": "ACCEL_nCS",
+        "host_pin": "PA4",
+        "host_function": "SPI chip select / ADXL362 CS",
+        "connected_part": "U2 ADXL362 ~CS",
+        "required_state": "Pull-up during reset/sleep/high-Z unless an external pull-up is added.",
+        "reason": "Keeps accelerometer deselected."
+      },
+      {
+        "breakout_header": "J3.13",
+        "breakout_net": "ACCEL_SCK",
+        "host_pin": "PA5",
+        "host_function": "SPI SCK / ADXL362 SCLK",
+        "connected_part": "U2 ADXL362 SCLK",
+        "required_state": "Pull-down in reset/sleep/high-Z.",
+        "reason": "Prevents spurious accelerometer clocks."
+      },
+      {
+        "breakout_header": "J3.14",
+        "breakout_net": "ACCEL_MISO",
+        "host_pin": "PA6",
+        "host_function": "SPI MISO / ADXL362 MSIO",
+        "connected_part": "U2 ADXL362 MSIO",
+        "required_state": "Pull-down or no-pull if ADXL362 is known driven in sleep.",
+        "reason": "Avoids floating host input while CS is high."
+      },
+      {
+        "breakout_header": "J3.15",
+        "breakout_net": "ACCEL_MOSI",
+        "host_pin": "PA7",
+        "host_function": "SPI MOSI / ADXL362 MOSI",
+        "connected_part": "U2 ADXL362 MOSI",
+        "required_state": "Pull-down in reset/sleep/high-Z.",
+        "reason": "Keeps accelerometer input quiet."
+      },
+      {
+        "breakout_header": "J3.16",
+        "breakout_net": "tmp119_pwr",
+        "host_pin": "PB0",
+        "host_function": "TMP119 switched power output",
+        "connected_part": "U3 TMP119 V+, C1, optional R3/R4/R5 pull-up rail",
+        "required_state": "Push-pull high to power TMP119; drive low or hold pull-down/off in sleep.",
+        "reason": "This pin is the switched sensor rail and controls TMP119 back-power behavior."
+      },
+      {
+        "breakout_header": "J3.17",
+        "breakout_net": "GND",
+        "host_pin": "HOST_GND",
+        "host_function": "Ground reference",
+        "connected_part": "board ground",
+        "required_state": "Connect to mating-board ground.",
+        "reason": "Common return path for all breakout signals and supplies."
+      },
+      {
+        "breakout_header": "J4.1",
+        "breakout_net": "+3.3V",
+        "host_pin": "HOST_3V3_RAIL",
+        "host_function": "3.3 V supply rail",
+        "connected_part": "same +3.3 V rail as J3.7",
+        "required_state": "Supply a valid +3.3 V rail whenever AT25, ADXL362, or LEDs are in use.",
+        "reason": "Primary breakout supply rail."
+      },
+      {
+        "breakout_header": "J4.2",
+        "breakout_net": "AT25_SCK",
+        "host_pin": "PB3",
+        "host_function": "SPI SCK / AT25 SCK",
+        "connected_part": "U1 AT25XE321D SCK",
+        "required_state": "Pull-down in reset/sleep/high-Z.",
+        "reason": "Prevents spurious flash clocks."
+      },
+      {
+        "breakout_header": "J4.3",
+        "breakout_net": "AT25_nCS",
+        "host_pin": "PA15",
+        "host_function": "SPI chip select / AT25 nCS",
+        "connected_part": "U1 AT25XE321D nCS",
+        "required_state": "Pull-up during reset/sleep/high-Z unless an external pull-up is added.",
+        "reason": "Keeps flash deselected."
+      },
+      {
+        "breakout_header": "J4.4",
+        "breakout_net": "NO_CONNECT",
+        "host_pin": "TODO_J4_4",
+        "host_function": "unused placeholder",
+        "connected_part": "none",
+        "required_state": "Confirm no connection in mating design; if routed to MCU, use analog/no-pull or another documented low-leakage state.",
+        "reason": "Placeholder keeps mating-board pin assignment explicit."
+      },
+      {
+        "breakout_header": "J4.5",
+        "breakout_net": "NO_CONNECT",
+        "host_pin": "TODO_J4_5",
+        "host_function": "unused placeholder",
+        "connected_part": "none",
+        "required_state": "Confirm no connection in mating design; if routed to MCU, use analog/no-pull or another documented low-leakage state.",
+        "reason": "Placeholder keeps mating-board pin assignment explicit."
+      },
+      {
+        "breakout_header": "J4.6",
+        "breakout_net": "NO_CONNECT",
+        "host_pin": "TODO_J4_6",
+        "host_function": "unused placeholder",
+        "connected_part": "none",
+        "required_state": "Confirm no connection in mating design; if routed to MCU, use analog/no-pull or another documented low-leakage state.",
+        "reason": "Placeholder keeps mating-board pin assignment explicit."
+      },
+      {
+        "breakout_header": "J4.7",
+        "breakout_net": "NO_CONNECT",
+        "host_pin": "TODO_J4_7",
+        "host_function": "unused placeholder",
+        "connected_part": "none",
+        "required_state": "Confirm no connection in mating design; if routed to MCU, use analog/no-pull or another documented low-leakage state.",
+        "reason": "Placeholder keeps mating-board pin assignment explicit."
+      },
+      {
+        "breakout_header": "J4.8",
+        "breakout_net": "LED1",
+        "host_pin": "TODO_LED1_HOST_PIN",
+        "host_function": "LED1 active-low drive",
+        "connected_part": "D1 cathode, R1 to +3.3V",
+        "required_state": "Pull-up or push-pull high for LED off; drive low for LED on.",
+        "reason": "LED is active-low from host perspective."
+      },
+      {
+        "breakout_header": "J4.9",
+        "breakout_net": "NO_CONNECT",
+        "host_pin": "TODO_J4_9",
+        "host_function": "unused placeholder",
+        "connected_part": "none",
+        "required_state": "Confirm no connection in mating design; if routed to MCU, use analog/no-pull or another documented low-leakage state.",
+        "reason": "Placeholder keeps mating-board pin assignment explicit."
+      },
+      {
+        "breakout_header": "J4.10",
+        "breakout_net": "NO_CONNECT",
+        "host_pin": "TODO_J4_10",
+        "host_function": "unused placeholder",
+        "connected_part": "none",
+        "required_state": "Confirm no connection in mating design; if routed to MCU, use analog/no-pull or another documented low-leakage state.",
+        "reason": "Placeholder keeps mating-board pin assignment explicit."
+      },
+      {
+        "breakout_header": "J4.11",
+        "breakout_net": "NO_CONNECT",
+        "host_pin": "TODO_J4_11",
+        "host_function": "unused placeholder",
+        "connected_part": "none",
+        "required_state": "Confirm no connection in mating design; if routed to MCU, use analog/no-pull or another documented low-leakage state.",
+        "reason": "Placeholder keeps mating-board pin assignment explicit."
+      },
+      {
+        "breakout_header": "J4.12",
+        "breakout_net": "NO_CONNECT",
+        "host_pin": "TODO_J4_12",
+        "host_function": "unused placeholder",
+        "connected_part": "none",
+        "required_state": "Confirm no connection in mating design; if routed to MCU, use analog/no-pull or another documented low-leakage state.",
+        "reason": "Placeholder keeps mating-board pin assignment explicit."
+      },
+      {
+        "breakout_header": "J4.13",
+        "breakout_net": "NO_CONNECT",
+        "host_pin": "TODO_J4_13",
+        "host_function": "unused placeholder",
+        "connected_part": "none",
+        "required_state": "Confirm no connection in mating design; if routed to MCU, use analog/no-pull or another documented low-leakage state.",
+        "reason": "Placeholder keeps mating-board pin assignment explicit."
+      },
+      {
+        "breakout_header": "J4.14",
+        "breakout_net": "NO_CONNECT",
+        "host_pin": "TODO_J4_14",
+        "host_function": "unused placeholder",
+        "connected_part": "none",
+        "required_state": "Confirm no connection in mating design; if routed to MCU, use analog/no-pull or another documented low-leakage state.",
+        "reason": "Placeholder keeps mating-board pin assignment explicit."
+      },
+      {
+        "breakout_header": "J4.15",
+        "breakout_net": "NC",
+        "host_pin": "TODO_J4_15",
+        "host_function": "explicit NC placeholder",
+        "connected_part": "none",
+        "required_state": "Confirm no connection in mating design; if routed to MCU, use analog/no-pull or another documented low-leakage state.",
+        "reason": "Schematic net is explicitly named NC."
+      },
+      {
+        "breakout_header": "J4.16",
+        "breakout_net": "LED2",
+        "host_pin": "TODO_LED2_HOST_PIN",
+        "host_function": "LED2 active-low drive",
+        "connected_part": "D2 cathode, R2 to +3.3V",
+        "required_state": "Pull-up or push-pull high for LED off; drive low for LED on.",
+        "reason": "LED is active-low from host perspective."
+      },
+      {
+        "breakout_header": "J4.17",
+        "breakout_net": "GND",
+        "host_pin": "HOST_GND",
+        "host_function": "Ground reference",
+        "connected_part": "board ground",
+        "required_state": "Connect to mating-board ground.",
+        "reason": "Common return path for all breakout signals and supplies."
+      }
+    ],
+
+    "population_options": [
+      {
+        "refs": ["R3", "R4", "R5"],
+        "default": "DNP",
+        "condition": "Populate only if STM32L432 internal pull-ups are insufficient for TMP119 SDA/SCL/RDY at the selected slow I2C clock.",
+        "connected_rail": "tmp119_pwr",
+        "notes": "These optional resistors pull to the switched TMP119 rail, not the always-on +3.3V rail."
+      }
+    ]
+  }
+}
