@@ -32,24 +32,9 @@
 *.app
 
 # Directories
-ChibiOS
-nanopb
-public
-docs/themes/docsy
-docs-dist
-software/embedded/boards/bittag-base-jlcpcb-v3
-software/embedded/boards/bittag-base-v5*
-software/embedded/boards/BitTagNG-proto
-software/embedded/tags/AccelTag
-software/embedded/tags/BitTagNG-proto
-software/embedded/tags/LuxTag
-software/embeeded/tags/NucleoTag
-hardware/AccelTag
-hardware/LuxTag
 
-software/embedded/proto-c/acceltag-proto-c
-software/embedded/proto-c/bittagng-proto-c 
-software/embedded/proto-c/luxtag-proto-c 
+public
+
 hardware/tag-breakout-template/jlcpcb/
 .vscode
 .DS_Store
