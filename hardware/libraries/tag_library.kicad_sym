@@ -170,7 +170,7 @@
 				)
 			)
 		)
-		(property "Footprint" "LGA11_1p6x1p6x0p58_AKM"
+		(property "Footprint" "tag_fp:AK09940a"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -516,7 +516,7 @@
 				)
 			)
 		)
-		(property "Footprint" "LGA-12L_LIS2DU12_STM"
+		(property "Footprint" "tag_fp:LGA-12L_LIS2DU12_STM"
 			(at -1.27 11.684 0)
 			(show_name no)
 			(do_not_autoplace no)

@@ -179,6 +179,35 @@ Filter and annotate power rails in analysis output. All patterns use fnmatch glo
 
 ---
 
+### `power_profile` (object) — v1.4
+
+Documents board-level current expectations that should calibrate trace-width, via-current, thermal, battery-life, and sleep-state review. Use this when a board is intentionally ultra-low-power, has brief current peaks, or when analyzer heuristics would otherwise overstate current-capacity risk.
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `source` | string | Where the profile came from, such as user note, datasheet estimate, or measured value |
+| `typical_current_a` | number | Typical steady-state current in amps |
+| `normal_operating_current_max_a` | number | Expected maximum normal operating current in amps, excluding transients |
+| `peak_current_a` | number | Short-duration peak current in amps |
+| `peak_condition` | string | Event that creates the peak, such as radio TX, flash write, motor start, or sensor burst |
+| `sleep_current_a` | number | Optional expected sleep current in amps |
+| `notes` | string | Human-readable context for report authors and reviewers |
+
+When present, promote the profile near the beginning of design-review reports and use it to calibrate current-capacity language. For example, a 0.10 mm trace on a board with 10 uA typical and 10 mA peak current may still be a DFM/process-selection issue, but should not be described as a current-capacity failure without additional evidence.
+
+```jsonc
+"power_profile": {
+  "source": "Measured prototype current",
+  "typical_current_a": 0.000010,
+  "normal_operating_current_max_a": 0.001,
+  "peak_current_a": 0.010,
+  "peak_condition": "Flash write",
+  "notes": "Ultra-low-power tag; narrow traces are mainly a fabrication-process concern."
+}
+```
+
+---
+
 ### `design_intent` (object)
 
 Explicit design intent overrides. When absent, each field is **auto-detected** from PCB fab notes, schematic title blocks, component MPNs, and board characteristics. See `design-intent.md` for the full auto-detection logic and per-market review priorities.
@@ -521,6 +550,11 @@ Production consumer electronics board targeting the EU market. LCSC primary supp
 | `analysis.power_rails.ignore` | array | Yes | [] | — |
 | `analysis.power_rails.flag` | array | Yes | [] | — |
 | `analysis.power_rails.voltage_overrides` | object | Yes | {} | — |
+| `power_profile.typical_current_a` | number | — | — | — |
+| `power_profile.normal_operating_current_max_a` | number | — | — | — |
+| `power_profile.peak_current_a` | number | — | — | — |
+| `power_profile.sleep_current_a` | number | — | — | — |
+| `power_profile.peak_condition` | string | — | — | — |
 | `design_intent.product_class` | string | — | `"prototype"` | Yes |
 | `design_intent.ipc_class` | int | — | 2 | Yes |
 | `design_intent.target_market` | string | — | `"hobby"` | Yes |

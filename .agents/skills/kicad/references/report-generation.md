@@ -131,6 +131,8 @@ If no prior review exists, omit this section entirely.]
 ## User / Firmware Configuration Notes
 [**Place this near the beginning of every report when applicable.** This section is for information the board user, firmware author, bring-up engineer, or assembly/configuration owner must know before reading low-level analyzer detail. Include only design contracts that affect operation, sleep current, population state, external setup, or bring-up behavior. Examples: optional/DNP pull-ups or jumpers, host-powered rails, required GPIO reset/sleep states, internal MCU pull-up/down requirements, I2C speed limits from weak pulls, solder-bridge options, boot straps, address straps, power sequencing assumptions, test pads used as configuration points, and connector pinout caveats.]
 
+[If analyzer output includes `project_config.power_profile`, read it before writing this section. Promote typical, normal maximum, sleep, peak current, peak condition, and notes into this early section. Use the profile to calibrate later trace-current, via-current, thermal, sleep-current, and battery-life language; do not describe intentionally low-current narrow traces as current-capacity failures when the documented peak current is safely small.]
+
 [If analyzer output includes `project_config.mating_design`, read it before writing this section. Promote `mating_design.notes`, `mating_design.host_pin_map`, and `mating_design.population_options` into this early section. Preserve `TODO_*` placeholders in tables rather than hiding them; they are useful open items for mating-design completion.]
 
 ### MCU / GPIO Internal Pull Configuration

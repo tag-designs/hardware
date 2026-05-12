@@ -2,5 +2,4 @@
 	(version 7)
 	(lib (name "AccelTag") (type "KiCad") (uri "${KIPRJMOD}/../kicad_libraries/lib_fp.pretty/") (options "") (descr ""))
 	(lib (name "tag_fp") (type "KiCad") (uri "${TAG_LIBRARIES}/tag_fp.pretty") (options "") (descr ""))
-	(lib (name "tag_fp") (type "KiCad") (uri "/Users/geobrown/Research/tag-designs/hardware/hardware/libraries/tag_fp.pretty") (options "") (descr ""))
 )

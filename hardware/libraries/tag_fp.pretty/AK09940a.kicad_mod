@@ -1,14 +1,14 @@
 (footprint "AK09940a"
-	(version 20240108)
+	(version 20260206)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "10.0")
 	(layer "F.Cu")
 	(tags "AK09940A ")
 	(property "Reference" "REF**"
 		(at 0.1 -1.9 0)
 		(unlocked yes)
 		(layer "F.SilkS")
-		(uuid "af45b092-da7b-4e6d-b52a-c2d419e278a9")
+		(uuid "ab10922c-7bb2-491a-8398-944ac2ee0548")
 		(effects
 			(font
 				(size 1 1)
@@ -20,22 +20,10 @@
 		(at 0 0 0)
 		(unlocked yes)
 		(layer "F.Fab")
-		(uuid "48cfc917-5792-46c0-905c-6ea8084d8728")
+		(uuid "8641cc6b-fa0e-407c-b3b5-c0537eb2c36c")
 		(effects
 			(font
 				(size 1 1)
-				(thickness 0.15)
-			)
-		)
-	)
-	(property "Footprint" ""
-		(at 0 0 0)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "436cc1df-5689-4e07-bc14-e4aea43ff148")
-		(effects
-			(font
-				(size 1.27 1.27)
 				(thickness 0.15)
 			)
 		)
@@ -44,7 +32,7 @@
 		(at 0 0 0)
 		(layer "F.Fab")
 		(hide yes)
-		(uuid "5997df43-22e7-4868-b07b-47921b72dff8")
+		(uuid "4d0e43d0-a150-429e-82d0-ca78e6d237df")
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -56,7 +44,7 @@
 		(at 0 0 0)
 		(layer "F.Fab")
 		(hide yes)
-		(uuid "873f6bb1-38b2-49f6-9f2b-5c945478da11")
+		(uuid "a2d54baf-d32e-42bb-bcb6-7c0e499a76bf")
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -65,6 +53,7 @@
 		)
 	)
 	(attr smd)
+	(duplicate_pad_numbers_are_jumpers no)
 	(fp_line
 		(start -1.0922 -1.0922)
 		(end 1.0922 -1.0922)
@@ -73,7 +62,7 @@
 			(type solid)
 		)
 		(layer "F.CrtYd")
-		(uuid "ff60ca65-afba-4dd5-8cd6-0bf81e4b2c8c")
+		(uuid "9d3c2999-bffc-4e01-bf8e-4294719b351a")
 	)
 	(fp_line
 		(start -1.0922 1.0922)
@@ -83,7 +72,7 @@
 			(type solid)
 		)
 		(layer "F.CrtYd")
-		(uuid "29e32ad3-27ef-4c8d-8802-ec5f32544424")
+		(uuid "b3a3320c-a6bc-4859-abac-513090a78450")
 	)
 	(fp_line
 		(start 1.0922 -1.0922)
@@ -93,7 +82,7 @@
 			(type solid)
 		)
 		(layer "F.CrtYd")
-		(uuid "f36c34d2-fa4d-4fc8-ad53-996f7c27a888")
+		(uuid "fbb01b28-5f9f-41ee-98fb-c14a1d640a43")
 	)
 	(fp_line
 		(start 1.0922 1.0922)
@@ -103,7 +92,7 @@
 			(type solid)
 		)
 		(layer "F.CrtYd")
-		(uuid "fbbc1f8b-60ce-408d-a563-8f14e204b0f3")
+		(uuid "b36a5d2d-3536-4811-a780-355cd0894111")
 	)
 	(fp_line
 		(start -0.8382 -0.8382)
@@ -113,7 +102,7 @@
 			(type solid)
 		)
 		(layer "F.Fab")
-		(uuid "8a97284a-f85d-4bfe-bb77-ee1dcb1cab3e")
+		(uuid "8ef9be18-2e40-4408-95a7-abb4a5eff580")
 	)
 	(fp_line
 		(start -0.8382 0.8382)
@@ -123,7 +112,7 @@
 			(type solid)
 		)
 		(layer "F.Fab")
-		(uuid "7b787a8f-1738-4c3c-b0d1-26bcbf838e10")
+		(uuid "8c26df7e-230c-4681-a1b1-7d0096da35bd")
 	)
 	(fp_line
 		(start -0.6382 -0.8382)
@@ -133,7 +122,7 @@
 			(type solid)
 		)
 		(layer "F.Fab")
-		(uuid "d9ffe3bd-7762-4cbb-9d05-5284a8836356")
+		(uuid "794a8b15-fe4d-479f-b277-2dd3f8734ec4")
 	)
 	(fp_line
 		(start 0.8382 -0.8382)
@@ -143,7 +132,7 @@
 			(type solid)
 		)
 		(layer "F.Fab")
-		(uuid "2dfe9fbf-1a58-4b0d-8b6e-17fe3dbd9e84")
+		(uuid "b8fb5728-05a8-4339-b988-1481bc3493c8")
 	)
 	(fp_line
 		(start 0.8382 0.8382)
@@ -153,13 +142,13 @@
 			(type solid)
 		)
 		(layer "F.Fab")
-		(uuid "7b2ff3a7-8e44-415e-a621-b732c9796eb8")
+		(uuid "832dd6ff-c384-4e2e-a6ca-e4dce46e99c3")
 	)
 	(fp_text user "${REFERENCE}"
 		(at 0 0 0)
 		(unlocked yes)
 		(layer "F.Fab")
-		(uuid "e53f7a09-7dcb-403f-a9a1-e6337bebc291")
+		(uuid "4636ea1d-9821-49e3-af2e-a4868f9957f4")
 		(effects
 			(font
 				(size 1 1)
@@ -170,70 +159,71 @@
 	(pad "A1" smd circle
 		(at -0.6 -0.6)
 		(size 0.2286 0.2286)
-		(layers "F.Cu" "F.Paste" "F.Mask")
-		(uuid "ac01ea30-e689-4e4c-89ee-4e3944f79531")
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "bfef90c7-934e-4156-825b-68474f494fde")
 	)
 	(pad "A2" smd circle
 		(at -0.2 -0.6)
 		(size 0.2286 0.2286)
-		(layers "F.Cu" "F.Paste" "F.Mask")
-		(uuid "57492016-6341-4142-86be-94e2125e0bb5")
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "81b3660a-7260-4bab-87bb-b73c74853e0c")
 	)
 	(pad "A3" smd circle
 		(at 0.2 -0.6)
 		(size 0.2286 0.2286)
-		(layers "F.Cu" "F.Paste" "F.Mask")
-		(uuid "5eec19d0-a945-4821-99c3-1dd81e7e3ef1")
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "9261ea1d-7905-4ed7-a306-87b86c9b2387")
 	)
 	(pad "A4" smd circle
 		(at 0.6 -0.6)
 		(size 0.2286 0.2286)
-		(layers "F.Cu" "F.Paste" "F.Mask")
-		(uuid "7145daa6-5d5d-48c0-84ff-ee0a048d60e8")
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "7ae19fad-f928-4512-902f-50fc170c61cc")
 	)
 	(pad "B1" smd circle
 		(at -0.6 -0.2)
 		(size 0.2286 0.2286)
-		(layers "F.Cu" "F.Paste" "F.Mask")
-		(uuid "6e99fcd4-8f89-434f-8fad-9271253e391e")
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "1ad3c937-6bd3-4cbc-a867-e6430c5cc3c4")
 	)
 	(pad "B4" smd circle
 		(at 0.6 -0.2)
 		(size 0.2286 0.2286)
-		(layers "F.Cu" "F.Paste" "F.Mask")
-		(uuid "adab7788-5da7-4352-964a-e9b3445f9c72")
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "10a79efa-3a65-4360-a35f-d2c55b98cb59")
 	)
 	(pad "C1" smd circle
 		(at -0.6 0.2)
 		(size 0.2286 0.2286)
-		(layers "F.Cu" "F.Paste" "F.Mask")
-		(uuid "c381d95d-5fc2-4d5a-9929-d444bd84ef40")
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "4d5fe477-92c9-41ed-98f8-e15357a0390e")
 	)
 	(pad "C4" smd circle
 		(at 0.6 0.2)
 		(size 0.2286 0.2286)
-		(layers "F.Cu" "F.Paste" "F.Mask")
-		(uuid "37c641d1-2c15-409b-800e-1dad2a24c32c")
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "80d865d0-a1e0-4a94-8040-79eac0a0e006")
 	)
 	(pad "D1" smd circle
 		(at -0.6 0.6)
 		(size 0.2286 0.2286)
-		(layers "F.Cu" "F.Paste" "F.Mask")
-		(uuid "5934e539-1f63-4559-9e09-5412d65db94c")
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "2ae32f60-a9d8-4a36-bbe1-dff4c2975bc6")
 	)
 	(pad "D2" smd circle
 		(at -0.2 0.6)
 		(size 0.2286 0.2286)
-		(layers "F.Cu" "F.Paste" "F.Mask")
-		(uuid "b7d14dcd-23ce-4228-a329-ecd92063a4fc")
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "17d8c322-97b4-4d4d-810b-86cfbdcaf7f6")
 	)
 	(pad "D4" smd circle
 		(at 0.6 0.6)
 		(size 0.2286 0.2286)
-		(layers "F.Cu" "F.Paste" "F.Mask")
-		(uuid "3ac8c42c-1385-46b5-bf0d-81d3957e7186")
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "8c0ff293-a6e0-4853-be24-528237ac5999")
 	)
-	(model "{TAG_LIBRARIES}/packages3D/AK09940a.step"
+	(embedded_fonts no)
+	(model "${TAG_LIBRARIES}/packages3D/AK09940a.step"
 		(offset
 			(xyz 0 0 0)
 		)
@@ -241,7 +231,7 @@
 			(xyz 1 1 1)
 		)
 		(rotate
-			(xyz 0 0 0)
+			(xyz -0 -0 -0)
 		)
 	)
 )

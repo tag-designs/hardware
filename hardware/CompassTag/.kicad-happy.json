@@ -1,0 +1,361 @@
+{
+  "version": 1,
+
+  "project": {
+    "name": "CompassTag",
+    "ambient_temperature_c": 25
+  },
+
+  "design_intent": {
+    "product_class": "prototype",
+    "ipc_class": 2,
+    "target_market": "hobby",
+    "expected_lifetime_years": 5,
+    "operating_temp_range": [-10, 70],
+    "preferred_passive_size": "0201",
+    "test_coverage_target": 0.0
+  },
+
+  "power_profile": {
+    "source": "User-provided design intent",
+    "typical_current_a": 0.000010,
+    "normal_operating_current_max_a": 0.001,
+    "peak_current_a": 0.010,
+    "peak_condition": "Flash write",
+    "notes": [
+      "CompassTag is a super-low-power device.",
+      "Typical current is about 10 uA.",
+      "Operating current is below 1 mA.",
+      "Peak current during flash write is about 10 mA.",
+      "Narrow 0.1016 mm traces are a fabrication/process-selection concern, not a current-capacity concern for this load profile."
+    ]
+  },
+
+  "analysis": {
+    "output_dir": "analysis",
+    "retention": 5,
+    "auto_diff": true,
+    "track_in_git": false,
+    "diff_threshold": "major",
+    "power_rails": {
+      "voltage_overrides": {
+        "+2V5": 2.5,
+        "+1V8": 1.8
+      }
+    }
+  },
+
+  "mating_design": {
+    "name": "CompassTag self-contained board",
+    "host_mcu": "STM32L432KCU6",
+    "source": "Inferred from CompassTag schematic U302 plus user-provided low-power intent.",
+    "notes": [
+      "This is a self-contained STM32L432-based tag, not a breakout with a separate mating MCU.",
+      "The board is designed for roughly 10 uA typical current, below 1 mA operating current, and about 10 mA peak current during flash write.",
+      "Several chip-select, clock, wake, reset, and power-enable nets depend on explicit STM32 reset/sleep GPIO configuration.",
+      "The AK09940A 1.8 V rail is controlled by STM32 PA9 through AK_PWR / TPS7A2018 EN.",
+      "AT25_nCS does not have an external pull-up; firmware/internal pull configuration must keep flash deselected during reset/sleep."
+    ],
+
+    "host_pin_map": [
+      {
+        "breakout_header": "U302.2",
+        "breakout_net": "clkout",
+        "host_pin": "PC14",
+        "host_function": "RTC clock input / capture",
+        "connected_part": "U501 RV-3028 CLKOUT",
+        "required_state": "Input/no-pull unless actively using clock output capture.",
+        "reason": "Avoids fighting RTC clock output; clock net is EMC-sensitive."
+      },
+      {
+        "breakout_header": "U302.3",
+        "breakout_net": "NO_CONNECT",
+        "host_pin": "PC15",
+        "host_function": "unused",
+        "connected_part": "none",
+        "required_state": "Analog/no-pull.",
+        "reason": "Lowest leakage for unused pin."
+      },
+      {
+        "breakout_header": "U302.4",
+        "breakout_net": "__unnamed_1",
+        "host_pin": "NRST",
+        "host_function": "Reset",
+        "connected_part": "C502, Q501 collector",
+        "required_state": "External reset network controls state.",
+        "reason": "Verify Q501 reset-drive polarity during programming and sleep."
+      },
+      {
+        "breakout_header": "U302.6",
+        "breakout_net": "WKUP1",
+        "host_pin": "PA0",
+        "host_function": "Wake input / LIS2DU12 INT1",
+        "connected_part": "U3 LIS2DU12 INT1 and U3 pin 5 marked NC in analyzer output",
+        "required_state": "Pull state must match accelerometer interrupt polarity.",
+        "reason": "Wake input should have a deliberate inactive state; review U3 pin 5 NC connection."
+      },
+      {
+        "breakout_header": "U302.7",
+        "breakout_net": "ACCEL_CS",
+        "host_pin": "PA1",
+        "host_function": "LIS2DU12 chip select",
+        "connected_part": "U3 LIS2DU12 CS",
+        "required_state": "Pull-up during reset/sleep/high-Z.",
+        "reason": "Keeps accelerometer deselected."
+      },
+      {
+        "breakout_header": "U302.8",
+        "breakout_net": "USART2_TX",
+        "host_pin": "PA2",
+        "host_function": "LIS2DU12 SPI/I2C data",
+        "connected_part": "U3 LIS2DU12 SDA/SDI/SDO",
+        "required_state": "Pull-down or push-pull idle appropriate to selected bus mode.",
+        "reason": "Prevents floating accelerometer data input. Net name suggests UART but part pin is SPI/I2C multiplexed."
+      },
+      {
+        "breakout_header": "U302.9",
+        "breakout_net": "USART2_RX",
+        "host_pin": "PA3",
+        "host_function": "LIS2DU12 SPI data output / address",
+        "connected_part": "U3 LIS2DU12 SDO/SA0",
+        "required_state": "Pull-down or no-pull if driven only when CS active.",
+        "reason": "Avoids floating host input and sets address/SDO behavior only if required."
+      },
+      {
+        "breakout_header": "U302.10",
+        "breakout_net": "USART2_CK",
+        "host_pin": "PA4",
+        "host_function": "LIS2DU12 clock",
+        "connected_part": "U3 LIS2DU12 SCL/SPC",
+        "required_state": "Pull-down in reset/sleep/high-Z.",
+        "reason": "Prevents spurious accelerometer clocks."
+      },
+      {
+        "breakout_header": "U302.11",
+        "breakout_net": "AK_CK",
+        "host_pin": "PA5",
+        "host_function": "AK09940A clock",
+        "connected_part": "U2 AK09940A SCL/SK",
+        "required_state": "Pull-down when magnetometer rail is enabled; no-pull/high-Z if AK domain is off.",
+        "reason": "Prevents spurious clocks and avoids back-power risk."
+      },
+      {
+        "breakout_header": "U302.12",
+        "breakout_net": "AK_MISO",
+        "host_pin": "PA6",
+        "host_function": "AK09940A SO",
+        "connected_part": "U2 AK09940A SO",
+        "required_state": "Pull-down or no-pull while AK_CS is inactive.",
+        "reason": "Avoids floating host input."
+      },
+      {
+        "breakout_header": "U302.13",
+        "breakout_net": "AK_MOSI",
+        "host_pin": "PA7",
+        "host_function": "AK09940A data input",
+        "connected_part": "U2 AK09940A SDA/SI",
+        "required_state": "Pull-down when AK domain is enabled; no-pull/high-Z if AK domain is off.",
+        "reason": "Keeps magnetometer input quiet and avoids back-power risk."
+      },
+      {
+        "breakout_header": "U302.14",
+        "breakout_net": "AK_RSTN",
+        "host_pin": "PB0",
+        "host_function": "AK09940A reset",
+        "connected_part": "U2 AK09940A RSTN",
+        "required_state": "Hold low during reset/sleep unless magnetometer is intentionally active.",
+        "reason": "Keeps magnetometer reset while power domain is off or settling."
+      },
+      {
+        "breakout_header": "U302.15",
+        "breakout_net": "AK_CS",
+        "host_pin": "PB1",
+        "host_function": "AK09940A chip select",
+        "connected_part": "U2 AK09940A CSB",
+        "required_state": "Pull-up during reset/sleep/high-Z.",
+        "reason": "Keeps magnetometer deselected."
+      },
+      {
+        "breakout_header": "U302.18",
+        "breakout_net": "NO_CONNECT",
+        "host_pin": "PA8",
+        "host_function": "unused",
+        "connected_part": "none",
+        "required_state": "Analog/no-pull.",
+        "reason": "Lowest leakage for unused pin."
+      },
+      {
+        "breakout_header": "U302.19",
+        "breakout_net": "AK_PWR",
+        "host_pin": "PA9",
+        "host_function": "AK09940A 1.8 V LDO enable",
+        "connected_part": "U4 TPS7A2018 EN",
+        "required_state": "Drive low or pull-down in sleep; drive high to enable +1V8.",
+        "reason": "Controls the magnetometer 1.8 V rail."
+      },
+      {
+        "breakout_header": "U302.20",
+        "breakout_net": "AK_DRDY",
+        "host_pin": "PA10",
+        "host_function": "AK09940A data ready / trigger",
+        "connected_part": "U2 AK09940A DRDY/TRG",
+        "required_state": "Input/no-pull or pull-down when powered; confirm against selected AK09940 output mode.",
+        "reason": "Data-ready line should not float as a wake/event source."
+      },
+      {
+        "breakout_header": "U302.21",
+        "breakout_net": "NO_CONNECT",
+        "host_pin": "PA11",
+        "host_function": "unused",
+        "connected_part": "none",
+        "required_state": "Analog/no-pull.",
+        "reason": "Lowest leakage for unused pin."
+      },
+      {
+        "breakout_header": "U302.22",
+        "breakout_net": "NO_CONNECT",
+        "host_pin": "PA12",
+        "host_function": "unused",
+        "connected_part": "none",
+        "required_state": "Analog/no-pull.",
+        "reason": "Lowest leakage for unused pin."
+      },
+      {
+        "breakout_header": "U302.23",
+        "breakout_net": "SWDIO",
+        "host_pin": "PA13",
+        "host_function": "SWDIO",
+        "connected_part": "J201 SWD header",
+        "required_state": "Preserve SWD debug function or use documented debug-disable state.",
+        "reason": "Debug access and leakage trade-off."
+      },
+      {
+        "breakout_header": "U302.24",
+        "breakout_net": "SWCLK",
+        "host_pin": "PA14",
+        "host_function": "SWCLK",
+        "connected_part": "J201 SWD header",
+        "required_state": "Preserve SWD debug function or pull-down if debug disabled.",
+        "reason": "Prevents floating clock input when not debugging."
+      },
+      {
+        "breakout_header": "U302.25",
+        "breakout_net": "AT25_nCS",
+        "host_pin": "PA15",
+        "host_function": "AT25 flash chip select",
+        "connected_part": "U1 AT25XE321D nCS",
+        "required_state": "Internal pull-up during reset/sleep/high-Z unless an external pull-up is added.",
+        "reason": "Keeps flash deselected; schematic has no external pull-up."
+      },
+      {
+        "breakout_header": "U302.26",
+        "breakout_net": "AT25_SCK",
+        "host_pin": "PB3",
+        "host_function": "AT25 flash SCK",
+        "connected_part": "U1 AT25XE321D SCK",
+        "required_state": "Pull-down during reset/sleep/high-Z.",
+        "reason": "Prevents spurious flash clocks."
+      },
+      {
+        "breakout_header": "U302.27",
+        "breakout_net": "AT25_MISO",
+        "host_pin": "PB4",
+        "host_function": "AT25 flash SO",
+        "connected_part": "U1 AT25XE321D SO",
+        "required_state": "Pull-down or no-pull while AT25_nCS is high.",
+        "reason": "Flash SO is normally tri-stated when deselected."
+      },
+      {
+        "breakout_header": "U302.28",
+        "breakout_net": "AT25_MOSI",
+        "host_pin": "PB5",
+        "host_function": "AT25 flash SI",
+        "connected_part": "U1 AT25XE321D SI",
+        "required_state": "Pull-down during reset/sleep/high-Z.",
+        "reason": "Keeps flash input quiet."
+      },
+      {
+        "breakout_header": "U302.29",
+        "breakout_net": "SDA",
+        "host_pin": "PB6",
+        "host_function": "I2C SDA for RV-3028",
+        "connected_part": "U501 RV-3028 SDA",
+        "required_state": "I2C pull-up strategy must be explicit; internal pull-up may be acceptable only at slow bus speed.",
+        "reason": "No discrete I2C pull-up was detected in the schematic analyzer output."
+      },
+      {
+        "breakout_header": "U302.30",
+        "breakout_net": "SCL",
+        "host_pin": "PB7",
+        "host_function": "I2C SCL for RV-3028",
+        "connected_part": "U501 RV-3028 SCL",
+        "required_state": "I2C pull-up strategy must be explicit; internal pull-up may be acceptable only at slow bus speed.",
+        "reason": "No discrete I2C pull-up was detected in the schematic analyzer output."
+      },
+      {
+        "breakout_header": "U302.31",
+        "breakout_net": "GND",
+        "host_pin": "BOOT0",
+        "host_function": "Boot mode strap",
+        "connected_part": "GND",
+        "required_state": "Hard low.",
+        "reason": "Normal boot from flash."
+      }
+    ],
+
+    "population_options": [
+      {
+        "refs": ["external AT25_nCS pull-up"],
+        "default": "not populated / not present",
+        "condition": "Add only if firmware/internal pull-up cannot guarantee flash deselect during reset and sleep.",
+        "connected_rail": "+2V5",
+        "notes": "Current design depends on STM32 PA15 internal pull-up/reset-state handling for AT25_nCS."
+      }
+    ]
+  },
+
+  "suppressions": [
+    {
+      "rule_id": "CC-002",
+      "reason": "Low-power design: user-provided currents are about 10 uA typical, below 1 mA operating, and about 10 mA peak during flash write. Treat 0.1016 mm traces as advanced-process DFM notes, not current-capacity concerns."
+    },
+    {
+      "rule_id": "RS-001",
+      "nets": ["+2V5"],
+      "reason": "+2V5 source is through the VBAT/D401 path and KiCad ERC is clean; keep as documented power-tree intent."
+    },
+    {
+      "rule_id": "RS-001",
+      "nets": ["VBAT"],
+      "reason": "VBAT is the external/battery input rail; KiCad ERC is clean."
+    },
+    {
+      "rule_id": "PR-002",
+      "components": ["U1"],
+      "nets": ["AT25_nCS"],
+      "reason": "AT25_nCS deselect is a firmware/reset-state contract using STM32 PA15 internal pull-up unless an external pull-up is later added."
+    },
+    {
+      "rule_id": "PU-001",
+      "components": ["U3"],
+      "reason": "LIS2DU12 interrupt/wake pull behavior is handled by STM32 GPIO configuration; review WKUP1 state in firmware."
+    },
+    {
+      "rule_id": "TE-001",
+      "reason": "CompassTag uses J201 and small connector/test features for access; explicit ICT-style test-point coverage is not the production-test target for this prototype."
+    },
+    {
+      "rule_id": "IO-001",
+      "reason": "Connectors are tag contacts/debug/test features rather than user cable interfaces; treat EMC filtering suggestions as low-priority unless used with cables."
+    },
+    {
+      "rule_id": "IO-002",
+      "components": ["J201"],
+      "reason": "J201 is a compact SWD/debug header; ground-pin ratio warning is informational for this prototype."
+    },
+    {
+      "rule_id": "SU-001",
+      "reason": "Intentional two-layer compact low-power tag. Treat as return-path/EMC caution, not a stackup blocker."
+    }
+  ]
+}
