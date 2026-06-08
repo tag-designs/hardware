@@ -1,0 +1,141 @@
+{
+  "version": 1,
+  "project": "tag-breakout-l432-u375-lipo-v1.kicad_pro",
+  "current": "2026-06-08_1720",
+  "runs": {
+    "2026-06-08_1444": {
+      "source_hashes": {
+        "tag-breakout-l432-u375-lipo-v1.kicad_sch": "sha256:0b9dfc6918800fa351df96d8494f4fb25484ae58d2093f9526e5be9072766ad1",
+        "tag-breakout-l432-u375-lipo-v1.kicad_pcb": "sha256:b23bb77ef57a34507a70b7a94c970f369bf432d2a72076dc10badaa2ea04fa9c",
+        "schematic.json": "sha256:5062a7e9a52b63096d0b734217f3096366d9ff84e8ddd662b36777ca0b57ab3b",
+        "pcb.json": "sha256:4acffb8d7400857df16be8b190036e255e86b84fbf2e86c1fb64cb402d3ae43a"
+      },
+      "outputs": {
+        "schematic": "schematic.json",
+        "pcb": "pcb.json",
+        "thermal": "thermal.json",
+        "cross_analysis": "cross_analysis.json",
+        "emc": "emc.json"
+      },
+      "scripts": {
+        "schematic": "analyze_schematic.py tag-breakout-l432-u375-lipo-v1.kicad_sch"
+      },
+      "generated": "2026-06-08T15:02:20-04:00",
+      "pinned": false
+    },
+    "2026-06-08_1614": {
+      "source_hashes": {
+        "tag-breakout-l432-u375-lipo-v1.kicad_sch": "sha256:c8c4310713a8b927c5ffaa17a5e06f9b6c6a2aba32fa68d3a8a427931950cc83"
+      },
+      "outputs": {
+        "schematic": "schematic.json",
+        "pcb": "pcb.json",
+        "thermal": "thermal.json",
+        "cross_analysis": "cross_analysis.json",
+        "emc": "emc.json"
+      },
+      "scripts": {
+        "schematic": "analyze_schematic.py tag-breakout-l432-u375-lipo-v1.kicad_sch"
+      },
+      "generated": "2026-06-08T16:14:54-04:00",
+      "pinned": false
+    },
+    "2026-06-08_1614-2": {
+      "source_hashes": {
+        "tag-breakout-l432-u375-lipo-v1.kicad_pcb": "sha256:b59a8520fd07caa0f81fdbb8d27e44052c2936c06c8c285e3f2d26850a80becc",
+        "tag-breakout-l432-u375-lipo-v1.kicad_sch": "sha256:c8c4310713a8b927c5ffaa17a5e06f9b6c6a2aba32fa68d3a8a427931950cc83"
+      },
+      "outputs": {
+        "schematic": "schematic.json",
+        "pcb": "pcb.json",
+        "thermal": "thermal.json",
+        "cross_analysis": "cross_analysis.json",
+        "emc": "emc.json"
+      },
+      "scripts": {
+        "pcb": "analyze_pcb.py tag-breakout-l432-u375-lipo-v1.kicad_pcb"
+      },
+      "generated": "2026-06-08T16:15:22-04:00",
+      "pinned": false
+    },
+    "2026-06-08_1615": {
+      "source_hashes": {
+        "schematic.json": "sha256:4cda20dde075f8379e531961ebfe0bb8f4a48bd3a3371d306f790dd1b7c9e492",
+        "pcb.json": "sha256:8a253ad5c0819afba8e851b6b006e81b2154f2fd22476ba0a6ddc894c487690c",
+        "tag-breakout-l432-u375-lipo-v1.kicad_sch": "sha256:c8c4310713a8b927c5ffaa17a5e06f9b6c6a2aba32fa68d3a8a427931950cc83",
+        "tag-breakout-l432-u375-lipo-v1.kicad_pcb": "sha256:b59a8520fd07caa0f81fdbb8d27e44052c2936c06c8c285e3f2d26850a80becc"
+      },
+      "outputs": {
+        "schematic": "schematic.json",
+        "pcb": "pcb.json",
+        "thermal": "thermal.json",
+        "cross_analysis": "cross_analysis.json",
+        "emc": "emc.json"
+      },
+      "scripts": {
+        "emc": "analyze_emc.py"
+      },
+      "generated": "2026-06-08T16:16:19-04:00",
+      "pinned": false
+    },
+    "2026-06-08_1717": {
+      "source_hashes": {
+        "tag-breakout-l432-u375-lipo-v1.kicad_sch": "sha256:f20063794f22ccd7bf3d6180db958564d4a28a220222d7edd66e1f04dabea5ef"
+      },
+      "outputs": {
+        "schematic": "schematic.json",
+        "pcb": "pcb.json",
+        "thermal": "thermal.json",
+        "cross_analysis": "cross_analysis.json",
+        "emc": "emc.json"
+      },
+      "scripts": {
+        "schematic": "analyze_schematic.py tag-breakout-l432-u375-lipo-v1.kicad_sch"
+      },
+      "generated": "2026-06-08T17:17:02-04:00",
+      "pinned": false
+    },
+    "2026-06-08_1717-2": {
+      "source_hashes": {
+        "tag-breakout-l432-u375-lipo-v1.kicad_pcb": "sha256:494c5a43e3636c37334da262f88b68ff3f91e6e6f69f92f3dbab3e5c97e9ec12"
+      },
+      "outputs": {
+        "schematic": "schematic.json",
+        "pcb": "pcb.json",
+        "thermal": "thermal.json",
+        "cross_analysis": "cross_analysis.json",
+        "emc": "emc.json"
+      },
+      "scripts": {
+        "pcb": "analyze_pcb.py tag-breakout-l432-u375-lipo-v1.kicad_pcb"
+      },
+      "generated": "2026-06-08T17:17:05-04:00",
+      "pinned": false
+    },
+    "2026-06-08_1720": {
+      "source_hashes": {
+        "tag-breakout-l432-u375-lipo-v1.kicad_sch": "sha256:f20063794f22ccd7bf3d6180db958564d4a28a220222d7edd66e1f04dabea5ef",
+        "tag-breakout-l432-u375-lipo-v1.kicad_pcb": "sha256:494c5a43e3636c37334da262f88b68ff3f91e6e6f69f92f3dbab3e5c97e9ec12",
+        "schematic.json": "sha256:aaac1544d0b1ebfb6fdb88793b1260f055339d7042b0bcc038f3129410841d66",
+        "pcb.json": "sha256:c40653bf64880d7320c4b38a6a2a533955610603a8a7407b7bef09066fb2eff1"
+      },
+      "outputs": {
+        "schematic": "schematic.json",
+        "pcb": "pcb.json",
+        "thermal": "thermal.json",
+        "cross_analysis": "cross_analysis.json",
+        "emc": "emc.json"
+      },
+      "scripts": {
+        "schematic": "analyze_schematic.py tag-breakout-l432-u375-lipo-v1.kicad_sch --output",
+        "pcb": "analyze_pcb.py tag-breakout-l432-u375-lipo-v1.kicad_pcb --full --output",
+        "cross_analysis": "cross_analysis.py --schematic schematic.json --pcb pcb.json --output",
+        "emc": "analyze_emc.py --schematic schematic.json --pcb pcb.json --output",
+        "thermal": "analyze_thermal.py --schematic schematic.json --pcb pcb.json --output",
+        "drc": "kicad-cli pcb drc tag-breakout-l432-u375-lipo-v1.kicad_pcb"
+      },
+      "generated": "2026-06-08T17:23:03-04:00",
+      "pinned": false
+    }
+  }
+}
