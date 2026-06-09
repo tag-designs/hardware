@@ -1,7 +1,7 @@
 {
   "version": 1,
   "project": "tag-breakout-l432-u375-lipo-v1.kicad_pro",
-  "current": "2026-06-08_1720",
+  "current": "2026-06-09_1028",
   "runs": {
     "2026-06-08_1444": {
       "source_hashes": {
@@ -135,6 +135,102 @@
         "drc": "kicad-cli pcb drc tag-breakout-l432-u375-lipo-v1.kicad_pcb"
       },
       "generated": "2026-06-08T17:23:03-04:00",
+      "pinned": false
+    },
+    "2026-06-09_1001": {
+      "source_hashes": {
+        "tag-breakout-l432-u375-lipo-v1.kicad_sch": "sha256:0cb23e030eac1651b15c97d9ec87fa467e661c5e8b8dcfcc3fd241a78e6f3f46",
+        "tag-breakout-l432-u375-lipo-v1.kicad_pcb": "sha256:2e72a4a1fedbfc89a09c43778dcad7c48cf080f3a51d76a2797b0abbbfdaba8f",
+        "schematic.json": "sha256:f1698862a7b8950e554d3e5f1d8ae0892798dd97f176c8862ae4a389767cc401",
+        "pcb.json": "sha256:4081211f408f319abaf2f22614c28b193d52ec6b10d14d4cbe65f53ddfc3ad8a",
+        "gerbers.json": "sha256:0a94841cd51b3218fdbac7a6571d4827cae2ee3c6312b639ebbe100437bb38f8",
+        "cross_analysis.json": "sha256:704cbf5c16e0635f713f6c6dbef9a2004135860014fecb50c0d635db592628ca",
+        "emc.json": "sha256:5b7e9d43073fb5d346a9ac463eabf373c2f36a4785ad046132c6e565501d60c2",
+        "thermal.json": "sha256:803b30daefb26ca26a5897a7c838de53cb4d976fe1c61d67f8a3c46a8530044f"
+      },
+      "outputs": {
+        "schematic": "schematic.json",
+        "pcb": "pcb.json",
+        "gerbers": "gerbers.json",
+        "thermal": "thermal.json",
+        "cross_analysis": "cross_analysis.json",
+        "emc": "emc.json",
+        "drc": "kicad-drc.rpt"
+      },
+      "scripts": {
+        "schematic": "analyze_schematic.py tag-breakout-l432-u375-lipo-v1.kicad_sch --output",
+        "pcb": "analyze_pcb.py tag-breakout-l432-u375-lipo-v1.kicad_pcb --full --output",
+        "gerbers": "analyze_gerbers.py jlcpcb/gerber --full --output",
+        "cross_analysis": "cross_analysis.py --schematic schematic.json --pcb pcb.json --output",
+        "emc": "analyze_emc.py --schematic schematic.json --pcb pcb.json --output",
+        "thermal": "analyze_thermal.py --schematic schematic.json --pcb pcb.json --output",
+        "drc": "kicad-cli pcb drc tag-breakout-l432-u375-lipo-v1.kicad_pcb"
+      },
+      "generated": "2026-06-09T10:02:23-04:00",
+      "pinned": false
+    },
+    "2026-06-09_1012": {
+      "source_hashes": {
+        "tag-breakout-l432-u375-lipo-v1.kicad_sch": "sha256:0cb23e030eac1651b15c97d9ec87fa467e661c5e8b8dcfcc3fd241a78e6f3f46",
+        "tag-breakout-l432-u375-lipo-v1.kicad_pcb": "sha256:3e1d99a3ca07e0657afdc2ff9643cb6d57580cfdcd3b88914c8e4d9d32c8553a",
+        "schematic.json": "sha256:f1698862a7b8950e554d3e5f1d8ae0892798dd97f176c8862ae4a389767cc401",
+        "pcb.json": "sha256:c60189a4ecd3115ad36ae85092418c5b0e4fde31056988e9c0bbc639af54fbac",
+        "gerbers.json": "sha256:0a94841cd51b3218fdbac7a6571d4827cae2ee3c6312b639ebbe100437bb38f8",
+        "cross_analysis.json": "sha256:e2806239b801df0b4ae2a85b1e6b74011ba32b5b803e029cd47fda6dfd67b1b1",
+        "emc.json": "sha256:51d98cd9326e182c6c8a1b7df21f4924995755752aac26c4da1aeca8b41b4b3b",
+        "thermal.json": "sha256:803b30daefb26ca26a5897a7c838de53cb4d976fe1c61d67f8a3c46a8530044f"
+      },
+      "outputs": {
+        "schematic": "schematic.json",
+        "pcb": "pcb.json",
+        "gerbers": "gerbers.json",
+        "thermal": "thermal.json",
+        "cross_analysis": "cross_analysis.json",
+        "emc": "emc.json",
+        "drc": "kicad-drc.rpt"
+      },
+      "scripts": {
+        "schematic": "analyze_schematic.py tag-breakout-l432-u375-lipo-v1.kicad_sch --output",
+        "pcb": "analyze_pcb.py tag-breakout-l432-u375-lipo-v1.kicad_pcb --full --output",
+        "gerbers": "analyze_gerbers.py jlcpcb/gerber --full --output",
+        "cross_analysis": "cross_analysis.py --schematic schematic.json --pcb pcb.json --output",
+        "emc": "analyze_emc.py --schematic schematic.json --pcb pcb.json --output",
+        "thermal": "analyze_thermal.py --schematic schematic.json --pcb pcb.json --output",
+        "drc": "kicad-cli pcb drc tag-breakout-l432-u375-lipo-v1.kicad_pcb"
+      },
+      "generated": "2026-06-09T10:12:00-04:00",
+      "pinned": false
+    },
+    "2026-06-09_1028": {
+      "source_hashes": {
+        "tag-breakout-l432-u375-lipo-v1.kicad_sch": "sha256:16a589c779056b91f1fed6ea526823c4fb14abd146663b0b6c88263c7746f387",
+        "tag-breakout-l432-u375-lipo-v1.kicad_pcb": "sha256:28c0c57f00688672a4794ac07b5b221c3ee3ed6f2325a7469fef2af5d8e590ab",
+        "schematic.json": "sha256:edb5aa2d79ce98b12c158970f96b0ae73d36d30230f80baccea7dbad49c39554",
+        "pcb.json": "sha256:850a38a2ae3df1430634808ffa627458e0644c4b6710344b640c3e7d173b4527",
+        "gerbers.json": "sha256:0300459056e23e589873428be44fc9cb79f1e0bb6109b7cd38cf3f268383d0cd",
+        "cross_analysis.json": "sha256:704cbf5c16e0635f713f6c6dbef9a2004135860014fecb50c0d635db592628ca",
+        "emc.json": "sha256:957f35865694a38c5a6cb44bc6f7f9d01da2183574cf532fa806dd91197c4002",
+        "thermal.json": "sha256:803b30daefb26ca26a5897a7c838de53cb4d976fe1c61d67f8a3c46a8530044f"
+      },
+      "outputs": {
+        "schematic": "schematic.json",
+        "pcb": "pcb.json",
+        "gerbers": "gerbers.json",
+        "thermal": "thermal.json",
+        "cross_analysis": "cross_analysis.json",
+        "emc": "emc.json",
+        "drc": "kicad-drc.rpt"
+      },
+      "scripts": {
+        "schematic": "analyze_schematic.py tag-breakout-l432-u375-lipo-v1.kicad_sch --output",
+        "pcb": "analyze_pcb.py tag-breakout-l432-u375-lipo-v1.kicad_pcb --full --output",
+        "gerbers": "analyze_gerbers.py jlcpcb/gerber --full --output",
+        "cross_analysis": "cross_analysis.py --schematic schematic.json --pcb pcb.json --output",
+        "emc": "analyze_emc.py --schematic schematic.json --pcb pcb.json --output",
+        "thermal": "analyze_thermal.py --schematic schematic.json --pcb pcb.json --output",
+        "drc": "kicad-cli pcb drc tag-breakout-l432-u375-lipo-v1.kicad_pcb"
+      },
+      "generated": "2026-06-09T10:28:00-04:00",
       "pinned": false
     }
   }
