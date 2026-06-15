@@ -5795,7 +5795,7 @@
 				)
 			)
 		)
-		(property "Datasheet" "LSM6DSV"
+		(property "Datasheet" "LSM6DSV16XTR"
 			(at 55.88 118.11 0)
 			(hide yes)
 			(show_name no)
@@ -6026,7 +6026,7 @@
 				(justify left)
 			)
 		)
-		(property "Datasheet" "https://www.st.com/resource/en/datasheet/lps22df.pdf"
+		(property "Datasheet" ""
 			(at 80.01 187.96 0)
 			(hide yes)
 			(show_name no)

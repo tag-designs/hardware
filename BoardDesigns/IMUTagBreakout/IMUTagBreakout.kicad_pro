@@ -778,7 +778,7 @@
       {
         "filename": "IMUTagBreakout.kicad_sch",
         "name": "IMUTagBreakout",
-        "uuid": "00000000-0000-0000-0000-000000000000"
+        "uuid": "dc006d87-46a7-47a2-9c65-845f7016dec0"
       }
     ],
     "used_designators": "",
@@ -787,7 +787,7 @@
   "sheets": [
     [
       "dc006d87-46a7-47a2-9c65-845f7016dec0",
-      "Root"
+      "IMUTagBreakout"
     ]
   ],
   "text_variables": {},
