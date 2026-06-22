@@ -61,7 +61,7 @@ Analyzer-estimated load is about 35 mA on `+1V8`; this is heuristic and likely h
 - KiCad DRC: 0 violations, 0 unconnected pads, 0 footprint errors.
 - KiCad ERC: 2 warnings, both unconnected wire endpoints in schematic-sheet coordinates near C1. These are schematic coordinates, not PCB-layout coordinates. Reference point: C1 is centered at `(29.21,133.35)` mm and `#PWR019 +1V8` is above it at `(29.21,125.73)` mm. The dangling stubs are the short left-facing C1 wires ending at `(22.86,129.54)` and `(22.86,137.16)` mm.
 - Gerbers: complete layer set with top/bottom copper, In1/In2 copper, mask, paste, silk, Edge.Cuts, PTH and NPTH drill files. Drill file has 64 vias and 34 plated component holes.
-- Datasheets: local shared datasheet library contains the MX25U12843G PDF. ST datasheets were checked online for LPS22HH and LSM6DSV16X. I did not find a local or online AK09940A datasheet during this run, so AK09940A pin correctness remains consistency-only.
+- Datasheets: the project-local `datasheets` link points to the shared library at `../libraries/datasheets` (`BoardDesigns/libraries/datasheets` from this workspace). That library contains the MX25U12843G PDF. ST datasheets were checked online for LPS22HH and LSM6DSV16X. I did not find a local or online AK09940A datasheet during this run, so AK09940A pin correctness remains consistency-only.
 
 ## IC Pinout Checks
 
@@ -186,6 +186,7 @@ Order/package cleanup before release:
 
 - Local analyzer outputs in `analysis/2026-06-15_1048`.
 - KiCad ERC/DRC reports in `analysis/2026-06-15_1048/kicad-erc.rpt` and `analysis/2026-06-15_1048/kicad-drc.rpt`.
+- Local shared datasheet library: `../libraries/datasheets` from the KiCad project, symlinked as `./datasheets` and located at `BoardDesigns/libraries/datasheets` in this workspace.
 - Local Macronix MX25U12843G datasheet: `../libraries/datasheets/MX25U12843G18V128Mbv11.pdf`.
 - ST LPS22HH datasheet: https://www.st.com/resource/en/datasheet/lps22hh.pdf
 - ST LSM6DSV16X datasheet: https://www.st.com/resource/en/datasheet/lsm6dsv16x.pdf

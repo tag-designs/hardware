@@ -1,0 +1,4 @@
+(sym_lib_table
+	(version 7)
+	(lib (name "Joulescope") (type "KiCad") (uri "${KIPRJMOD}/JS220_libraries/Joulescope.kicad_sym") (options "") (descr ""))
+)
