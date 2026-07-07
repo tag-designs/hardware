@@ -79,7 +79,7 @@
       ],
       "drc_exclusions": [
         [
-          "copper_edge_clearance|103350000|91625000|ea4870d7-1ba2-4bdc-aa75-c29b1cf799f3|99083d5c-435b-4fa5-8688-5faa804c4b3a",
+          "track_dangling|137275000|82525000|4fc4ceb5-ae42-4141-8f24-02bb45a99d15|00000000-0000-0000-0000-000000000000",
           ""
         ]
       ],
@@ -801,7 +801,7 @@
         "uuid": "50492272-2647-498f-ae46-f1b82759cd21"
       }
     ],
-    "used_designators": "C10-11",
+    "used_designators": "C2,C10-11",
     "variants": []
   },
   "sheets": [

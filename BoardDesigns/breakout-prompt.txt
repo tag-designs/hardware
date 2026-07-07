@@ -1,0 +1,25 @@
+I have a new breakout board which I need to develop firmware for.  This board tag-breakout-base-l432-u375-1v8 uses an stm32l432 ffor the stlink interface (the previous boards use the stm32f042 and stm32c071).  It has the following I/O pins:
+
+PA10 - TGT_RESET
+PB3 - TGT_SWCLK
+PB5 - TGT_SWDIO
+PB4 - TGT_SWDIO_IN
+PA15 - SWDIO_DIR -- high for TX, low for RX
+PA1 - EN1V8 -- this line must be enabled for communication with the tag
+PA3 - LED_GREEN -- active high
+PA9 - UART_TX
+
+Although the pins differ, this is the same basic interface as the tag-breakout-base-l432-v1 with the following exception.
+To handle voltage differences between the stlink host (stm32l432) and the tag (stm32u375), there are analog buffers.  For the
+buffers to be enabled EN1V8 must be enabled (high).  Furthermore, the SWDIO_DIR pin must be high for SWDIO transmission and low
+for SWDIO reception.
+
+The stlink interface is configurred so that SPI can be used for the stlink interface, although bitbang is the best choice for
+initial bringup.
+
+Please plan the following work:
+
+1) Create a board configuration (embedded/boards/tag-breakout-base-l432-u375-1v8)
+2) Create a base implementation (embedded/bases/tag-breakout-base-l432-u375-1v8) -- this will require a different configuration
+from the existing bases since it uses the stm32l432.  It does require the clock recovery system (see teh tag-base-c071 for an
+example.
