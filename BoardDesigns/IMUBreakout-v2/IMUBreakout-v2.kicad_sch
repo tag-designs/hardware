@@ -5,7 +5,7 @@
 	(uuid "dc006d87-46a7-47a2-9c65-845f7016dec0")
 	(paper "A")
 	(title_block
-		(title "IMU Tag Breakout (3.3v)")
+		(title "IMU Tag Breakout (1.8v)")
 		(date "2026-03-14")
 	)
 	(lib_symbols

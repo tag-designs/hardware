@@ -456,7 +456,7 @@
 			(at -4.85 1.1 0)
 			(unlocked yes)
 			(layer "B.SilkS")
-			(uuid "fb4e75fe-2cd4-4874-8c93-8bfef5916b1a")
+			(uuid "4ada228f-9974-4b62-b8bd-f99a98a7764f")
 			(effects
 				(font
 					(size 1 1)
@@ -469,7 +469,7 @@
 			(at 0 -7.8 0)
 			(unlocked yes)
 			(layer "F.Fab")
-			(uuid "16565756-d8a9-4f37-8d77-a92ee735db8d")
+			(uuid "7e99077d-32c6-4131-93fe-1c885ebd84b0")
 			(effects
 				(font
 					(size 1 1)
@@ -481,7 +481,7 @@
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "9341a2c8-6f15-4ef6-9d7f-7b5c69aa6de0")
+			(uuid "44ef65b0-44b4-4310-9b46-ce92a8f42f98")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -492,7 +492,7 @@
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "7d4883e0-6421-478c-90c9-486d9fcc1e29")
+			(uuid "d38f19ee-56f5-4314-86ec-f98f4862ecc6")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -512,12 +512,25 @@
 				)
 			)
 		)
-		(property "MPN" "TSM-103-01-S-DV-A-ND"
+		(property "MPN" "TSM-103-01-S-DV-A"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "9ec07864-651a-4b1d-bb94-ffb37888bd41")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "LCSC" "C20990825"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "75e0763b-12ff-4f7b-9fbe-1762e3aa2036")
 			(effects
 				(font
 					(size 1 1)
@@ -1997,7 +2010,7 @@
 		(embedded_fonts no)
 		(model "${TAG_LIBRARIES}/packages3D/TSM-103-01-S-DV-A.stp"
 			(offset
-				(xyz 0 -1.4 -3)
+				(xyz 0 -1.4 -4)
 			)
 			(scale
 				(xyz 1 1 1)

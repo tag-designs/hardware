@@ -1,0 +1,17 @@
+Designator,Val,Package,Mid X,Mid Y,Rotation,Layer
+C1,4.7uf,C_0805_2012Metric,131.9,-80.4,90.0,bottom
+C10,22nf,C_0402_1005Metric,156.45,-81.48,90.0,bottom
+C2,470nf,C_0805_2012Metric,124.2,-82.15,90.0,bottom
+C3,10uf,C_0805_2012Metric,129.075,-79.65,180.0,bottom
+C4,4.7uf,C_0805_2012Metric,149.2,-79.8,180.0,bottom
+C5,4.7uf,C_0805_2012Metric,148.1,-72.05,0.0,bottom
+C7,22nf,C_0402_1005Metric,163.8,-80.12,270.0,bottom
+C8,22uf,C_0805_2012Metric,154.6,-80.75,90.0,bottom
+C9,10uf,C_0805_2012Metric,165.45,-80.55,270.0,bottom
+R1,18k,R_0805_2012Metric,113.62,-78.4075,90.0,bottom
+R2,24k,R_0805_2012Metric,108.62,-78.37,90.0,bottom
+R3,33k,R_0805_2012Metric,106.22,-78.3325,90.0,bottom
+R4,1k,R_0805_2012Metric,128.2625,-85.35,180.0,bottom
+U1,LT3045xDD,DFN-10-1EP_3x3mm_P0.5mm_EP1.65x2.38mm,128.255,-82.45,270.0,bottom
+U2,XC6206PxxxMR,SOT-23-3,148.15,-76.5375,90.0,bottom
+U4,PUCC33420RAQR,VSON-FCRLF12_RAQ_TEX,160.15,-80.424999,0.0,bottom

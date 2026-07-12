@@ -5416,7 +5416,18 @@
 				)
 			)
 		)
-		(property "MPN" "TSM-103-01-S-DV-A-ND"
+		(property "MPN" "TSM-103-01-S-DV-A"
+			(at 76.2 144.78 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" "C20990825"
 			(at 76.2 144.78 0)
 			(hide yes)
 			(show_name no)
