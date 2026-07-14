@@ -302,7 +302,32 @@
     "equivalence_files": []
   },
   "erc": {
-    "erc_exclusions": [],
+    "erc_exclusions": [
+      [
+        "pin_to_pin|368300|1460500|d827e370-2812-4364-83a1-2420a6a96d71|3264635a-20b5-42f5-8984-497bc1679d62|/e44ca67a-43be-444b-8652-f54825a2eb6f|/e44ca67a-43be-444b-8652-f54825a2eb6f|/e44ca67a-43be-444b-8652-f54825a2eb6f",
+        ""
+      ],
+      [
+        "pin_to_pin|368300|1485900|88520a63-4450-47f2-8e3e-03757307112f|02d62b86-4f6f-4605-8bde-a28b132e9059|/e44ca67a-43be-444b-8652-f54825a2eb6f|/e44ca67a-43be-444b-8652-f54825a2eb6f|/e44ca67a-43be-444b-8652-f54825a2eb6f",
+        ""
+      ],
+      [
+        "pin_to_pin|596900|393700|5140d809-188e-41f5-b31a-831acd3009fe|2cead86b-43b2-4fb5-b781-ae01ae36d94d|/e44ca67a-43be-444b-8652-f54825a2eb6f|/e44ca67a-43be-444b-8652-f54825a2eb6f|/e44ca67a-43be-444b-8652-f54825a2eb6f",
+        ""
+      ],
+      [
+        "pin_to_pin|596900|419100|9679fe39-9998-4fb1-8c04-76af2e512178|2cead86b-43b2-4fb5-b781-ae01ae36d94d|/e44ca67a-43be-444b-8652-f54825a2eb6f|/e44ca67a-43be-444b-8652-f54825a2eb6f|/e44ca67a-43be-444b-8652-f54825a2eb6f",
+        ""
+      ],
+      [
+        "pin_to_pin|774700|1460500|c64a0a5a-2e05-4e81-8faa-6cd0f2d1348e|48123d42-d688-467a-967e-a751c543ef2d|/e44ca67a-43be-444b-8652-f54825a2eb6f|/e44ca67a-43be-444b-8652-f54825a2eb6f|/e44ca67a-43be-444b-8652-f54825a2eb6f",
+        ""
+      ],
+      [
+        "pin_to_pin|774700|1536700|2452e6ff-bff2-4a87-a49e-6d4daa6523d5|34ff5a3a-d75f-443c-8272-0350bb4ff090|/e44ca67a-43be-444b-8652-f54825a2eb6f|/e44ca67a-43be-444b-8652-f54825a2eb6f|/e44ca67a-43be-444b-8652-f54825a2eb6f",
+        ""
+      ]
+    ],
     "meta": {
       "version": 0
     },
@@ -766,6 +791,18 @@
           "group_by": false,
           "label": "Description",
           "name": "Description",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Sim.Pins",
+          "name": "Sim.Pins",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Sim.Device",
+          "name": "Sim.Device",
           "show": false
         }
       ],
