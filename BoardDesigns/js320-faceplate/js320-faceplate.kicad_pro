@@ -85,6 +85,18 @@
         [
           "track_dangling|137275000|82525000|4fc4ceb5-ae42-4141-8f24-02bb45a99d15|00000000-0000-0000-0000-000000000000",
           ""
+        ],
+        [
+          "unconnected_items|157750000|80100001|F.Cu|4|9df3d26b-d581-4e58-b512-fafd71afca9e|6f17d0ec-e576-4b81-9d85-f5ee3971dc65",
+          ""
+        ],
+        [
+          "unconnected_items|162550000|80099998|F.Cu|4|ec999917-287e-4cae-94f3-cf155e1cfb6e|67b3a448-3e0d-41bd-92f2-fdfa2e89f895",
+          ""
+        ],
+        [
+          "unconnected_items|162550000|81399998|F.Cu|4|9d76f561-e95c-4e6d-9848-df8039496cf6|747fda1a-89e2-4746-aab6-175092657f28",
+          ""
         ]
       ],
       "meta": {

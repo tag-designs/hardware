@@ -10905,7 +10905,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "1uf"
+		(property "Value" "10uf"
 			(at 222.885 31.75 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10916,7 +10916,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 223.2152 33.02 0)
 			(hide yes)
 			(show_name no)
@@ -10949,17 +10949,6 @@
 				)
 			)
 		)
-		(property "Macrofab" ""
-			(at 222.25 29.21 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.524 1.524)
-				)
-			)
-		)
 		(property "MFN" "Murata"
 			(at 222.25 29.21 0)
 			(hide yes)
@@ -10971,7 +10960,7 @@
 				)
 			)
 		)
-		(property "MPN" "GRM033R60J105MEA2D"
+		(property "MPN" "GRM188R61E106MA73D"
 			(at 222.25 29.21 0)
 			(hide yes)
 			(show_name no)
@@ -10982,18 +10971,7 @@
 				)
 			)
 		)
-		(property "DISTPN" "490-7229-1-ND"
-			(at 153.67 127 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "LCSC" "C76930"
+		(property "LCSC" "C91606"
 			(at 222.25 29.21 0)
 			(hide yes)
 			(show_name no)
@@ -13096,7 +13074,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "1uf"
+		(property "Value" "22uf"
 			(at 92.075 33.02 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -13107,7 +13085,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric"
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 92.4052 34.29 0)
 			(hide yes)
 			(show_name no)
@@ -13162,7 +13140,7 @@
 				)
 			)
 		)
-		(property "MPN" "GRM033R60J105MEA2D"
+		(property "MPN" "GRM188C61E226ME01D"
 			(at 91.44 30.48 0)
 			(hide yes)
 			(show_name no)
@@ -13173,18 +13151,7 @@
 				)
 			)
 		)
-		(property "DISTPN" "490-7229-1-ND"
-			(at 22.86 128.27 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "LCSC" "C76930"
+		(property "LCSC" "C29519229"
 			(at 91.44 30.48 0)
 			(hide yes)
 			(show_name no)

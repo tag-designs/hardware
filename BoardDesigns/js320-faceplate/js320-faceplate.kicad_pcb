@@ -547,7 +547,7 @@
 				(pins "6" "5" "7" "1" "2" "3" "4")
 			)
 		)
-		(attr exclude_from_pos_files exclude_from_bom dnp)
+		(attr exclude_from_pos_files exclude_from_bom)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
 			(start -35.15 -11.725)
@@ -2108,7 +2108,7 @@
 				(pins "C" "CB" "1" "2" "3" "1B" "2B" "3B")
 			)
 		)
-		(attr through_hole exclude_from_pos_files exclude_from_bom dnp)
+		(attr through_hole exclude_from_pos_files exclude_from_bom)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
 			(start -1.3208 8.9408)
@@ -2657,7 +2657,7 @@
 			(uuid "5e2dd99f-f84c-46e6-ac6a-100eddecc542")
 		)
 		(embedded_fonts no)
-		(model "/Users/geobrown/Research/tag-designs/hardware/BoardDesigns/libraries/packages3D/SS-10-23NP-LE.stp"
+		(model "${KIPRMOD}/../libraries/packages3D/SS-10-23NP-LE.stp"
 			(offset
 				(xyz 4 -4 6.5)
 			)
@@ -7244,6 +7244,18 @@
 			(justify left bottom)
 		)
 	)
+	(gr_text "C"
+		(at 111.875 81.175 0)
+		(layer "B.SilkS")
+		(uuid "ceee933a-94ed-41be-bd4c-9d7081e39706")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+			(justify left bottom mirror)
+		)
+	)
 	(gr_text "Geoffrey Brown\n6/20/26"
 		(at 138.3 90 0)
 		(layer "B.SilkS")
@@ -8480,14 +8492,6 @@
 		(uuid "f4938502-37bd-4261-a9a5-72bd192af457")
 	)
 	(segment
-		(start 162.55 82.049997)
-		(end 163.399997 82.049997)
-		(width 0.1524)
-		(layer "B.Cu")
-		(net "GNDPWR")
-		(uuid "0461ce23-78b2-4964-b7a8-0c3bdd7f6189")
-	)
-	(segment
 		(start 163.8 80.6)
 		(end 164.55 80.6)
 		(width 0.3048)
@@ -8520,12 +8524,28 @@
 		(uuid "6efdaf4c-36d1-4153-b765-72ee54701daf")
 	)
 	(segment
+		(start 162.55 82.049997)
+		(end 163.399997 82.049997)
+		(width 0.1524)
+		(layer "B.Cu")
+		(net "GNDPWR")
+		(uuid "747fda1a-89e2-4746-aab6-175092657f28")
+	)
+	(segment
 		(start 163.650003 80.749997)
 		(end 163.8 80.6)
 		(width 0.4572)
 		(layer "B.Cu")
 		(net "GNDPWR")
 		(uuid "7488e4e9-301d-4df4-8560-556c984b14e0")
+	)
+	(segment
+		(start 163.399997 82.049997)
+		(end 163.4 82.05)
+		(width 0.1524)
+		(layer "B.Cu")
+		(net "GNDPWR")
+		(uuid "7e136394-3bd7-4d9c-be55-3f4f64a88f0c")
 	)
 	(segment
 		(start 171.1 80.65)
@@ -8550,14 +8570,6 @@
 		(layer "B.Cu")
 		(net "GNDPWR")
 		(uuid "b32ae1b0-b9de-4416-96bc-abd57d3d4c3a")
-	)
-	(segment
-		(start 163.399997 82.049997)
-		(end 163.4 82.05)
-		(width 0.1524)
-		(layer "B.Cu")
-		(net "GNDPWR")
-		(uuid "bd202091-5587-40f6-9032-eddd06f86736")
 	)
 	(segment
 		(start 171.1 81.65)
