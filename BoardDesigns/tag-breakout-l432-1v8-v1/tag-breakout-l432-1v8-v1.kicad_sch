@@ -14194,7 +14194,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(in_pos_files yes)
-		(dnp yes)
+		(dnp no)
 		(uuid "f0d35ac9-7048-4505-95d3-9ced9b91541a")
 		(property "Reference" "U4"
 			(at 168.5289 143.51 0)

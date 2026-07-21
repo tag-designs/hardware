@@ -4013,6 +4013,16 @@
 		)
 		(uuid "168a7644-d155-4854-89d1-b10e1c383e4d")
 	)
+	(text "scl and sda were consistently swapped \non breakout boards!"
+		(exclude_from_sim no)
+		(at 123.444 39.624 0)
+		(effects
+			(font
+				(size 1.524 1.524)
+			)
+		)
+		(uuid "587bbf39-9690-4710-979d-06286abb5191")
+	)
 	(text "Tag Holes"
 		(exclude_from_sim no)
 		(at 24.13 194.31 0)
@@ -5613,7 +5623,7 @@
 		(uuid "089d30b7-9a1b-4f41-98fd-344b160fcbc5")
 	)
 	(label "SDA"
-		(at 120.65 53.34 90)
+		(at 118.11 53.34 90)
 		(effects
 			(font
 				(size 1.524 1.524)
@@ -5863,7 +5873,7 @@
 		(uuid "a9780999-d630-4f33-b6c7-8137fb09d212")
 	)
 	(label "SCL"
-		(at 118.11 53.34 90)
+		(at 120.65 53.34 90)
 		(effects
 			(font
 				(size 1.524 1.524)
