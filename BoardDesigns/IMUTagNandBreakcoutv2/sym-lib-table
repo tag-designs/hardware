@@ -1,0 +1,9 @@
+(sym_lib_table
+	(version 7)
+	(lib (name "tagbase-ultralight-rescue") (type "Legacy") (uri "${KIPRJMOD}/tagbase-ultralight-rescue.lib") (options "") (descr "") (disabled))
+	(lib (name "tag-breakout-steval-daughter-rescue") (type "Legacy") (uri "${KIPRJMOD}/tag-breakout-steval-daughter-rescue.lib") (options " pwr_sym_only") (descr ""))
+	(lib (name "AK09940a") (type "KiCad") (uri "${KIPRJMOD}/../kicad_libraries/lib_sch/AK09940a.kicad_sym") (options "") (descr ""))
+	(lib (name "LIS2DU12TR") (type "KiCad") (uri "${KIPRJMOD}/../kicad_libraries/lib_sch/LIS2DU12TR.kicad_sym") (options "") (descr ""))
+	(lib (name "AT25XE321") (type "KiCad") (uri "${KIPRJMOD}/../kicad_libraries/lib_sch/AT25XE321.kicad_sym") (options " pwr_sym_only") (descr ""))
+	(lib (name "libraries") (type "KiCad") (uri "${KIPRJMOD}/../libraries/tag_library.kicad_sym") (options "") (descr ""))
+)

@@ -4238,6 +4238,17 @@
 		)
 		(uuid "5d9857d2-f2d6-42e9-9a24-9718a9039188")
 	)
+	(text "NEED TO SWITCH TO 2GB"
+		(exclude_from_sim no)
+		(at 34.036 61.468 0)
+		(effects
+			(font
+				(size 1.524 1.524)
+				(color 255 51 22 1)
+			)
+		)
+		(uuid "8294a689-ae00-4494-a3f1-2aeee41b3f8f")
+	)
 	(text "Test Points"
 		(exclude_from_sim no)
 		(at 158.75 34.29 0)
@@ -9071,6 +9082,156 @@
 		)
 	)
 	(symbol
+		(lib_id "Transistor_BJT:Q_NPN_BEC")
+		(at 44.45 92.71 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "03abb82c-f62a-4f29-bab2-5b80fcac9231")
+		(property "Reference" "Q501"
+			(at 49.53 91.44 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "Q_NPN_BEC"
+			(at 49.53 93.98 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-883"
+			(at 49.53 90.17 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "file://${TAG_LIBRARIES}/datasheets/PMBT2222AMB.pdf"
+			(at 44.45 92.71 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "NPN transistor, base/emitter/collector"
+			(at 44.45 92.71 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MFN" "Nexperia"
+			(at 44.45 92.71 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+			)
+		)
+		(property "MPN" "PMBT2222AMBYL"
+			(at 44.45 92.71 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+			)
+		)
+		(property "DISTPN" "1727-PMBT2222AMBYLCT-ND"
+			(at 0 185.42 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" "C552701"
+			(at 44.45 92.71 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+			)
+		)
+		(property "Sim.Device" "NPN"
+			(at 44.45 92.71 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Sim.Pins" "1=B 2=E 3=C"
+			(at 44.45 92.71 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "11864f50-22b3-4811-be6b-1e9ebcd65ea4")
+		)
+		(pin "2"
+			(uuid "0f5fa6ff-bcd9-42eb-9304-3c1d5526ab3e")
+		)
+		(pin "3"
+			(uuid "230d54fd-11bd-4ef0-ba08-4576baf7d457")
+		)
+		(instances
+			(project "imutag-nand"
+				(path "/e44ca67a-43be-444b-8652-f54825a2eb6f"
+					(reference "Q501")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 20.32 31.75 0)
 		(unit 1)
@@ -9705,156 +9866,6 @@
 			(project "imutag-nand"
 				(path "/e44ca67a-43be-444b-8652-f54825a2eb6f"
 					(reference "U2")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Transistor_BJT:Q_NPN_BEC")
-		(at 44.45 92.71 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "2f833943-f270-4f48-9b8a-4e8f4581b39e")
-		(property "Reference" "Q501"
-			(at 49.53 91.44 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "Q_NPN_BEC"
-			(at 49.53 93.98 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-883"
-			(at 49.53 90.17 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 44.45 92.71 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "NPN transistor, base/emitter/collector"
-			(at 44.45 92.71 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "MFN" "Nexperia"
-			(at 44.45 92.71 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.524 1.524)
-				)
-			)
-		)
-		(property "MPN" "BC847AMB,315"
-			(at 44.45 92.71 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.524 1.524)
-				)
-			)
-		)
-		(property "DISTPN" "1727-2632-1-ND"
-			(at 0 185.42 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "LCSC" "C686658"
-			(at 44.45 92.71 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.524 1.524)
-				)
-			)
-		)
-		(property "Sim.Device" "NPN"
-			(at 44.45 92.71 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Sim.Pins" "1=B 2=E 3=C"
-			(at 44.45 92.71 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "edd5babe-3b59-4290-b789-98ce751bf7f3")
-		)
-		(pin "2"
-			(uuid "e76a17b5-989f-4c49-9e66-1bda5506e36c")
-		)
-		(pin "3"
-			(uuid "2fd82658-8f86-4e7e-b93b-152aa0c111a4")
-		)
-		(instances
-			(project "imutag-nand"
-				(path "/e44ca67a-43be-444b-8652-f54825a2eb6f"
-					(reference "Q501")
 					(unit 1)
 				)
 			)
@@ -12181,7 +12192,7 @@
 				)
 			)
 		)
-		(property "Value" "TPS7A0218PDQNR"
+		(property "Value" "TPS7A02185PDQNR"
 			(at 237.49 19.05 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12235,7 +12246,7 @@
 				)
 			)
 		)
-		(property "MPN" "TPS7A0218PDQNR"
+		(property "MPN" "TPS7A02185PDQNR"
 			(at 237.49 26.67 0)
 			(hide yes)
 			(show_name no)
@@ -12246,7 +12257,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C2862166"
+		(property "LCSC" "C2864496"
 			(at 237.49 26.67 0)
 			(hide yes)
 			(show_name no)
