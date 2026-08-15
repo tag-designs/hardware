@@ -3857,6 +3857,16 @@
 		)
 		(uuid "8597708c-21f2-4ff8-b8f0-20a809a2fc1e")
 	)
+	(text "scl and sda are reversed"
+		(exclude_from_sim no)
+		(at 123.19 39.116 0)
+		(effects
+			(font
+				(size 1.524 1.524)
+			)
+		)
+		(uuid "95dba9eb-3866-4e04-8da2-14b3d4401681")
+	)
 	(text "Battery"
 		(exclude_from_sim no)
 		(at 213.36 49.53 0)

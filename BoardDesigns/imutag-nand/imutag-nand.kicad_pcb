@@ -3031,7 +3031,7 @@
 				)
 			)
 		)
-		(property "Value" "0.1uf"
+		(property "Value" "1uf"
 			(at 0 1.05 0)
 			(layer "F.Fab")
 			(uuid "c07cd5b2-4360-4f0f-afe8-86056c176fc2")
@@ -3102,7 +3102,7 @@
 				)
 			)
 		)
-		(property "MPN" "GRM033C81E104KE14D"
+		(property "MPN" "GRM033R60J105MEA2D"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -3115,7 +3115,7 @@
 				)
 			)
 		)
-		(property "DISTPN" "490-10403-1-ND"
+		(property "DISTPN" "490-7229-1-ND"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -3128,7 +3128,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C181047"
+		(property "LCSC" "C76930"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -3142,7 +3142,7 @@
 			)
 		)
 		(property ki_fp_filters "C_*")
-		(path "/991359d1-76bc-42ed-a629-a70cf87f678d")
+		(path "/a75f3eba-7bcd-464c-8acb-5c67e51845f6")
 		(sheetname "/")
 		(sheetfile "imutag-nand.kicad_sch")
 		(units
@@ -4913,7 +4913,7 @@
 				)
 			)
 		)
-		(property "Value" "1uf"
+		(property "Value" "0.1uf"
 			(at 0 1.05 0)
 			(layer "F.Fab")
 			(uuid "0146f0aa-c234-4abd-bbf1-1c9b1e93c513")
@@ -4984,7 +4984,7 @@
 				)
 			)
 		)
-		(property "MPN" "GRM033R60J105MEA2D"
+		(property "MPN" "GRM033C81E104KE14D"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -4997,7 +4997,7 @@
 				)
 			)
 		)
-		(property "DISTPN" "490-7229-1-ND"
+		(property "DISTPN" "490-10403-1-ND"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -5010,7 +5010,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C76930"
+		(property "LCSC" "C181047"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -5024,7 +5024,7 @@
 			)
 		)
 		(property ki_fp_filters "C_*")
-		(path "/a75f3eba-7bcd-464c-8acb-5c67e51845f6")
+		(path "/991359d1-76bc-42ed-a629-a70cf87f678d")
 		(sheetname "/")
 		(sheetfile "imutag-nand.kicad_sch")
 		(units
@@ -10050,7 +10050,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Value" "GD5F1GQ5REYFGR"
+		(property "Value" "GD5F1GQ5REYIGR"
 			(at 0 -3.95 90)
 			(layer "B.Fab")
 			(uuid "4e4feaa0-4669-4754-9cf6-e42a4894e345")
@@ -10113,7 +10113,7 @@
 				(justify mirror)
 			)
 		)
-		(property "MPN" "GD5F1GQ5REYFGR"
+		(property "MPN" "GD5F1GQ5REYIGR"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -10127,7 +10127,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" "C2976330"
+		(property "LCSC" "C2927042"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")

@@ -320,11 +320,23 @@
         ""
       ],
       [
+        "pin_to_pin|622300|381000|50dfaa23-9708-48b3-8fbf-a23cb2359152|80236cd7-f134-476a-aafd-0822e1a8c307|/e44ca67a-43be-444b-8652-f54825a2eb6f|/e44ca67a-43be-444b-8652-f54825a2eb6f|/e44ca67a-43be-444b-8652-f54825a2eb6f",
+        ""
+      ],
+      [
         "pin_to_pin|774700|1460500|c64a0a5a-2e05-4e81-8faa-6cd0f2d1348e|48123d42-d688-467a-967e-a751c543ef2d|/e44ca67a-43be-444b-8652-f54825a2eb6f|/e44ca67a-43be-444b-8652-f54825a2eb6f|/e44ca67a-43be-444b-8652-f54825a2eb6f",
         ""
       ],
       [
         "pin_to_pin|774700|1536700|2452e6ff-bff2-4a87-a49e-6d4daa6523d5|34ff5a3a-d75f-443c-8272-0350bb4ff090|/e44ca67a-43be-444b-8652-f54825a2eb6f|/e44ca67a-43be-444b-8652-f54825a2eb6f|/e44ca67a-43be-444b-8652-f54825a2eb6f",
+        ""
+      ],
+      [
+        "pin_to_pin|812800|381000|5140d809-188e-41f5-b31a-831acd3009fe|80236cd7-f134-476a-aafd-0822e1a8c307|/e44ca67a-43be-444b-8652-f54825a2eb6f|/e44ca67a-43be-444b-8652-f54825a2eb6f|/e44ca67a-43be-444b-8652-f54825a2eb6f",
+        ""
+      ],
+      [
+        "pin_to_pin|812800|406400|9679fe39-9998-4fb1-8c04-76af2e512178|80236cd7-f134-476a-aafd-0822e1a8c307|/e44ca67a-43be-444b-8652-f54825a2eb6f|/e44ca67a-43be-444b-8652-f54825a2eb6f|/e44ca67a-43be-444b-8652-f54825a2eb6f",
         ""
       ]
     ],
@@ -872,7 +884,7 @@
         "uuid": "e44ca67a-43be-444b-8652-f54825a2eb6f"
       }
     ],
-    "used_designators": "Q502,U7,C12",
+    "used_designators": "",
     "variants": []
   },
   "sheets": [

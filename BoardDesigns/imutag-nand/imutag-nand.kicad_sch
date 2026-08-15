@@ -4283,17 +4283,6 @@
 		)
 		(uuid "9ec08a01-c427-429b-ad9c-f5f2142bcc5c")
 	)
-	(text "Switch to 1.85v regulator"
-		(exclude_from_sim no)
-		(at 182.118 49.022 0)
-		(effects
-			(font
-				(size 1.524 1.524)
-				(color 255 21 40 1)
-			)
-		)
-		(uuid "e56e88aa-13d6-4404-9352-5a8c87aa0e67")
-	)
 	(junction
 		(at 248.92 24.13)
 		(diameter 0)
@@ -9600,6 +9589,84 @@
 		)
 	)
 	(symbol
+		(lib_id "power:PWR_FLAG")
+		(at 104.14 21.59 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "27177d80-b50a-416d-b4be-5940852ffe59")
+		(property "Reference" "#FLG01"
+			(at 104.14 19.685 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "PWR_FLAG"
+			(at 104.14 16.51 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 104.14 21.59 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 104.14 21.59 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Special symbol for telling ERC where power comes from"
+			(at 104.14 21.59 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "80236cd7-f134-476a-aafd-0822e1a8c307")
+		)
+		(instances
+			(project "imutag-nand"
+				(path "/e44ca67a-43be-444b-8652-f54825a2eb6f"
+					(reference "#FLG01")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:C")
 		(at 248.92 29.21 0)
 		(unit 1)
@@ -11090,7 +11157,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "GD5F1GQ5REYFGR"
+		(property "Value" "GD5F1GQ5REYIGR"
 			(at 66.04 43.434 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11145,7 +11212,7 @@
 				)
 			)
 		)
-		(property "MPN" "GD5F1GQ5REYFGR"
+		(property "MPN" "GD5F1GQ5REYIGR"
 			(at 91.44 35.56 0)
 			(hide yes)
 			(show_name no)
@@ -11156,7 +11223,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C2976330"
+		(property "LCSC" "C2927042"
 			(at 91.44 35.56 0)
 			(hide yes)
 			(show_name no)
@@ -11755,7 +11822,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "991359d1-76bc-42ed-a629-a70cf87f678d")
-		(property "Reference" "C504"
+		(property "Reference" "C11"
 			(at 104.775 26.67 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11874,7 +11941,7 @@
 		(instances
 			(project "imutag-nand"
 				(path "/e44ca67a-43be-444b-8652-f54825a2eb6f"
-					(reference "C504")
+					(reference "C11")
 					(unit 1)
 				)
 			)
@@ -12045,7 +12112,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "a75f3eba-7bcd-464c-8acb-5c67e51845f6")
-		(property "Reference" "C11"
+		(property "Reference" "C504"
 			(at 113.665 26.67 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12164,7 +12231,7 @@
 		(instances
 			(project "imutag-nand"
 				(path "/e44ca67a-43be-444b-8652-f54825a2eb6f"
-					(reference "C11")
+					(reference "C504")
 					(unit 1)
 				)
 			)
