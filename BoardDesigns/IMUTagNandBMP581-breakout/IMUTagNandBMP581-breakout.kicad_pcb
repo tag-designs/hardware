@@ -5330,7 +5330,7 @@
 				)
 			)
 		)
-		(property "Value" "GD5F1GQ5REYIGR"
+		(property "Value" "GD5F2GM7REYIGR"
 			(at 0 3.95 0)
 			(layer "F.Fab")
 			(uuid "98538859-35aa-4136-9402-8409094f6445")
@@ -5341,7 +5341,7 @@
 				)
 			)
 		)
-		(property "Datasheet" "https://www.mouser.com/datasheet/3/1550/1/DS_00860_GD5F1GM7RE_Rev1.3.pdf"
+		(property "Datasheet" ""
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -5388,7 +5388,7 @@
 				)
 			)
 		)
-		(property "MPN" "GD5F1GQ5REYIGR"
+		(property "MPN" "GD5F2GM7REYIGR"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -5401,7 +5401,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C2927042"
+		(property "LCSC" "C23706308"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")

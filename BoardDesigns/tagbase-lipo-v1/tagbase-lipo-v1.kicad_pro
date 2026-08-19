@@ -85,6 +85,10 @@
         [
           "hole_to_hole|129540000|93345000|38068ea1-ddb8-4c59-9618-c7e9aa0dbb0d|da7d33f5-9e05-465d-837f-ba3350bef217",
           ""
+        ],
+        [
+          "lib_footprint_issues|148065000|62460000|00000000-0000-0000-0000-00005ef8d4f3|00000000-0000-0000-0000-000000000000",
+          ""
         ]
       ],
       "meta": {
@@ -856,7 +860,7 @@
         "uuid": "4d87b1cc-f1d4-4d5c-b687-12b1ff6c9e14"
       }
     ],
-    "used_designators": "",
+    "used_designators": "C6,R5,#PWR19,#PWR42-43,#PWR111,U6",
     "variants": []
   },
   "sheets": [

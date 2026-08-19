@@ -8782,7 +8782,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "GD5F1GQ5REYIGR"
+		(property "Value" "GD5F2GM7REYIGR"
 			(at 210.82 110.744 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8804,7 +8804,7 @@
 				)
 			)
 		)
-		(property "Datasheet" "https://www.mouser.com/datasheet/3/1550/1/DS_00860_GD5F1GM7RE_Rev1.3.pdf"
+		(property "Datasheet" ""
 			(at 236.22 120.396 0)
 			(hide yes)
 			(show_name no)
@@ -8837,7 +8837,7 @@
 				)
 			)
 		)
-		(property "MPN" "GD5F1GQ5REYIGR"
+		(property "MPN" "GD5F2GM7REYIGR"
 			(at 236.22 102.87 0)
 			(hide yes)
 			(show_name no)
@@ -8848,7 +8848,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C2927042"
+		(property "LCSC" "C23706308"
 			(at 236.22 102.87 0)
 			(hide yes)
 			(show_name no)
