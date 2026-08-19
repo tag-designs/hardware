@@ -7534,7 +7534,7 @@
 				)
 			)
 		)
-		(property "Value" "LED-RED"
+		(property "Value" "LED"
 			(at 55.88 120.65 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9019,7 +9019,7 @@
 				)
 			)
 		)
-		(property "Value" "LED-GREEN"
+		(property "Value" "LED"
 			(at 38.1 120.65 0)
 			(show_name no)
 			(do_not_autoplace no)
