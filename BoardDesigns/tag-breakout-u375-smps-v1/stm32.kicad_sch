@@ -8416,7 +8416,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Inductor_SMD:L_Murata_DFE201610P"
+		(property "Footprint" "project_library:IND_DFE2016_MUR"
 			(at 203.2 69.85 0)
 			(hide yes)
 			(show_name no)

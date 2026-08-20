@@ -41,7 +41,7 @@
         "pads": {
           "drill": 0.0,
           "height": 0.5,
-          "width": 0.8
+          "width": 2.3
         },
         "silk_line_width": 0.15,
         "silk_text_italic": false,
@@ -61,7 +61,7 @@
           "hatch_smoothing_level": 0,
           "hatch_smoothing_value": 0.1,
           "hatch_thickness": 1.0,
-          "min_clearance": 0.0,
+          "min_clearance": 0.508,
           "min_island_area": 10.0,
           "min_thickness": 0.25,
           "pad_connection": 1,
@@ -77,7 +77,16 @@
           "width": 0.0
         }
       ],
-      "drc_exclusions": [],
+      "drc_exclusions": [
+        [
+          "footprint_filters_mismatch|106680000|76200000|00000000-0000-0000-0000-00005f93074a|00000000-0000-0000-0000-000000000000",
+          ""
+        ],
+        [
+          "footprint_filters_mismatch|149860000|76200000|00000000-0000-0000-0000-00005f93076f|00000000-0000-0000-0000-000000000000",
+          ""
+        ]
+      ],
       "meta": {
         "filename": "board_design_settings.json",
         "version": 2
@@ -96,7 +105,7 @@
         "duplicate_footprints": "warning",
         "extra_footprint": "warning",
         "footprint": "error",
-        "footprint_filters_mismatch": "ignore",
+        "footprint_filters_mismatch": "warning",
         "footprint_symbol_field_mismatch": "warning",
         "footprint_symbol_mismatch": "warning",
         "footprint_type_mismatch": "error",
@@ -114,14 +123,14 @@
         "malformed_courtyard": "error",
         "microvia_drill_out_of_range": "error",
         "mirrored_text_on_front_layer": "warning",
-        "missing_courtyard": "ignore",
+        "missing_courtyard": "warning",
         "missing_footprint": "warning",
         "missing_tuning_profile": "warning",
         "net_conflict": "warning",
         "nonmirrored_text_on_back_layer": "warning",
-        "npth_inside_courtyard": "ignore",
+        "npth_inside_courtyard": "warning",
         "padstack": "error",
-        "pth_inside_courtyard": "ignore",
+        "pth_inside_courtyard": "warning",
         "shorting_items": "error",
         "silk_edge_clearance": "warning",
         "silk_over_copper": "warning",
@@ -136,12 +145,12 @@
         "too_many_vias": "error",
         "track_angle": "error",
         "track_dangling": "warning",
-        "track_not_centered_on_via": "ignore",
+        "track_not_centered_on_via": "warning",
         "track_on_post_machined_layer": "error",
         "track_segment_length": "error",
         "track_width": "error",
         "tracks_crossing": "error",
-        "tuning_profile_track_geometries": "ignore",
+        "tuning_profile_track_geometries": "warning",
         "unconnected_items": "error",
         "unresolved_variable": "error",
         "via_dangling": "warning",
@@ -166,10 +175,10 @@
         "min_silk_clearance": 0.0,
         "min_text_height": 0.8,
         "min_text_thickness": 0.08,
-        "min_through_hole_diameter": 0.3048,
+        "min_through_hole_diameter": 0.2794,
         "min_track_width": 0.1524,
         "min_via_annular_width": 0.05,
-        "min_via_diameter": 0.6604,
+        "min_via_diameter": 0.6,
         "solder_mask_to_copper_clearance": 0.005,
         "use_height_for_length_calcs": true
       },
@@ -219,7 +228,6 @@
       ],
       "track_widths": [
         0.0,
-        0.1524,
         0.3048
       ],
       "tuning_pattern_settings": {
@@ -286,19 +294,15 @@
   "erc": {
     "erc_exclusions": [
       [
-        "isolated_pin_label|317500|1511300|3e6d9640-6fbb-4eb4-af53-712565a38ab6|00000000-0000-0000-0000-000000000000|/2d561ecb-394a-4bb7-a154-94e4285b4f36||",
+        "pin_to_pin|927100|1739900|cbbaa25b-ed73-43e9-aa8a-15702e2ca8d9|bec73663-bca9-4f70-9a36-bc28ba81a896|/dc006d87-46a7-47a2-9c65-845f7016dec0|/dc006d87-46a7-47a2-9c65-845f7016dec0|/dc006d87-46a7-47a2-9c65-845f7016dec0",
         ""
       ],
       [
-        "lib_symbol_mismatch|355600|1206500|00000000-0000-0000-0000-00005fd203c2|00000000-0000-0000-0000-000000000000|||",
+        "power_pin_not_driven|2222500|939800|b52f8b37-a5b6-403d-9e3c-5c5c1bea465f|00000000-0000-0000-0000-000000000000|/dc006d87-46a7-47a2-9c65-845f7016dec0|/dc006d87-46a7-47a2-9c65-845f7016dec0|",
         ""
       ],
       [
-        "lib_symbol_mismatch|533400|1206500|00000000-0000-0000-0000-00005bf69467|00000000-0000-0000-0000-000000000000|||",
-        ""
-      ],
-      [
-        "pin_to_pin|266700|1905000|3da61d29-a269-4d5a-8b2c-362140654d85|1faada19-eaa9-4967-a33d-a9339f0aa4af|/2d561ecb-394a-4bb7-a154-94e4285b4f36|/2d561ecb-394a-4bb7-a154-94e4285b4f36|/2d561ecb-394a-4bb7-a154-94e4285b4f36/00000000-0000-0000-0000-00005fa00cea",
+        "power_pin_not_driven|927100|1663700|51a259fa-b4fd-42ea-97bc-3dc9a87ef783|00000000-0000-0000-0000-000000000000|/dc006d87-46a7-47a2-9c65-845f7016dec0|/dc006d87-46a7-47a2-9c65-845f7016dec0|",
         ""
       ]
     ],
@@ -489,9 +493,9 @@
       "endpoint_off_grid": "warning",
       "extra_units": "error",
       "field_name_whitespace": "warning",
-      "footprint_filter": "ignore",
-      "footprint_link_issues": "warning",
-      "four_way_junction": "ignore",
+      "footprint_filter": "warning",
+      "footprint_link_issues": "ignore",
+      "four_way_junction": "warning",
       "global_label_dangling": "warning",
       "ground_pin_not_ground": "warning",
       "hier_label_mismatch": "error",
@@ -532,14 +536,14 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "tag-breakout-u375-smps-v1.kicad_pro",
+    "filename": "UIUCBreakout.kicad_pro",
     "version": 3
   },
   "net_settings": {
     "classes": [
       {
         "bus_width": 12,
-        "clearance": 0.1524,
+        "clearance": 0.1016,
         "diff_pair_gap": 0.25,
         "diff_pair_via_gap": 0.25,
         "diff_pair_width": 0.2,
@@ -550,7 +554,43 @@
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "priority": 2147483647,
         "schematic_color": "rgba(0, 0, 0, 0.000)",
-        "track_width": 0.1524,
+        "track_width": 0.1016,
+        "tuning_profile": "",
+        "via_diameter": 0.6096,
+        "via_drill": 0.3,
+        "wire_width": 6
+      },
+      {
+        "bus_width": 12,
+        "clearance": 0.254,
+        "diff_pair_gap": 0.25,
+        "diff_pair_width": 0.2,
+        "line_style": 0,
+        "microvia_diameter": 0.6096,
+        "microvia_drill": 0.3048,
+        "name": "large",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "priority": 0,
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 0.254,
+        "tuning_profile": "",
+        "via_diameter": 0.7112,
+        "via_drill": 0.3556,
+        "wire_width": 6
+      },
+      {
+        "bus_width": 12,
+        "clearance": 0.127,
+        "diff_pair_gap": 0.25,
+        "diff_pair_width": 0.2,
+        "line_style": 0,
+        "microvia_diameter": 0.6096,
+        "microvia_drill": 0.3048,
+        "name": "small",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "priority": 1,
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 0.127,
         "tuning_profile": "",
         "via_diameter": 0.6604,
         "via_drill": 0.3048,
@@ -568,7 +608,7 @@
     "last_paths": {
       "gencad": "",
       "idf": "",
-      "netlist": "",
+      "netlist": "tag-breakout-jlcpcb.net",
       "plot": "",
       "pos_files": "",
       "specctra_dsn": "",
@@ -649,18 +689,6 @@
         },
         {
           "group_by": false,
-          "label": "Digikey",
-          "name": "Digikey",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "JLCPCB",
-          "name": "JLCPCB",
-          "show": false
-        },
-        {
-          "group_by": false,
           "label": "LCSC",
           "name": "LCSC",
           "show": true
@@ -691,128 +719,8 @@
         },
         {
           "group_by": false,
-          "label": "Sim.Device",
-          "name": "Sim.Device",
-          "show": false
-        },
-        {
-          "group_by": false,
           "label": "Sim.Pins",
           "name": "Sim.Pins",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "D_MAX",
-          "name": "D_MAX",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "D_MIN",
-          "name": "D_MIN",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "D_NOM",
-          "name": "D_NOM",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "A_MIN",
-          "name": "A_MIN",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "A_MAX",
-          "name": "A_MAX",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "DMAX",
-          "name": "DMAX",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "DMIN",
-          "name": "DMIN",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "DNOM",
-          "name": "DNOM",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "E_MAX",
-          "name": "E_MAX",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "E_MIN",
-          "name": "E_MIN",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "E_NOM",
-          "name": "E_NOM",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "EMAX",
-          "name": "EMAX",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "EMIN",
-          "name": "EMIN",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "ENOM",
-          "name": "ENOM",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "IPC",
-          "name": "IPC",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "JEDEC",
-          "name": "JEDEC",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "A_NOM",
-          "name": "A_NOM",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "ALPHA_ROWS",
-          "name": "ALPHA_ROWS",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "BALL_ROWS",
-          "name": "BALL_ROWS",
           "show": false
         },
         {
@@ -823,20 +731,8 @@
         },
         {
           "group_by": false,
-          "label": "B_NOM",
-          "name": "B_NOM",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "BALL_COLUMNS",
-          "name": "BALL_COLUMNS",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "PACKAGE_TYPE",
-          "name": "PACKAGE_TYPE",
+          "label": "NOTES",
+          "name": "NOTES",
           "show": false
         },
         {
@@ -847,74 +743,38 @@
         },
         {
           "group_by": false,
-          "label": "PIN_COLUMNS",
-          "name": "PIN_COLUMNS",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "PIN_COUNT_D",
-          "name": "PIN_COUNT_D",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "PIN_COUNT_E",
-          "name": "PIN_COUNT_E",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "PINS",
-          "name": "PINS",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "COLLAPSING_BALL",
-          "name": "COLLAPSING_BALL",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "COURTYARD_EXCESS",
-          "name": "COURTYARD_EXCESS",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "SNAPEDA_PACKAGE_ID",
-          "name": "SNAPEDA_PACKAGE_ID",
-          "show": false
-        },
-        {
-          "group_by": false,
           "label": "STANDARD",
           "name": "STANDARD",
           "show": false
         },
         {
           "group_by": false,
-          "label": "THERMAL_PAD",
-          "name": "THERMAL_PAD",
+          "label": "UNIT",
+          "name": "UNIT",
           "show": false
         },
         {
           "group_by": false,
-          "label": "VACANCIES",
-          "name": "VACANCIES",
+          "label": "VERIFIER",
+          "name": "VERIFIER",
           "show": false
         },
         {
           "group_by": false,
-          "label": "BODY_DIAMETER",
-          "name": "BODY_DIAMETER",
+          "label": "MAXIMUM_PACKAGE_HEIGHT",
+          "name": "MAXIMUM_PACKAGE_HEIGHT",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "CREATOR",
+          "name": "CREATOR",
           "show": false
         }
       ],
       "filter_string": "",
       "group_symbols": true,
-      "include_excluded_from_bom": false,
+      "include_excluded_from_bom": true,
       "name": "",
       "sort_asc": true,
       "sort_field": "Reference"
@@ -973,9 +833,9 @@
     "subpart_id_separator": 0,
     "top_level_sheets": [
       {
-        "filename": "tag-breakout-u375-smps-v1.kicad_sch",
-        "name": "tag-breakout-u375-smps-v1",
-        "uuid": "2d561ecb-394a-4bb7-a154-94e4285b4f36"
+        "filename": "UIUCBreakout.kicad_sch",
+        "name": "UIUCBreakout",
+        "uuid": "dc006d87-46a7-47a2-9c65-845f7016dec0"
       }
     ],
     "used_designators": "",
@@ -983,12 +843,8 @@
   },
   "sheets": [
     [
-      "2d561ecb-394a-4bb7-a154-94e4285b4f36",
-      "tag-breakout-u375-smps-v1"
-    ],
-    [
-      "00000000-0000-0000-0000-00005fa00cea",
-      "stm32"
+      "dc006d87-46a7-47a2-9c65-845f7016dec0",
+      "UIUCBreakout"
     ]
   ],
   "text_variables": {},

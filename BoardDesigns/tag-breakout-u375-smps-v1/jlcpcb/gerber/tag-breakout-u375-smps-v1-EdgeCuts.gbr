@@ -1,11 +1,11 @@
 %TF.GenerationSoftware,KiCad,Pcbnew,10.0.2*%
-%TF.CreationDate,2026-07-28T11:39:22-04:00*%
-%TF.ProjectId,tag-breakout-u375-v2,7461672d-6272-4656-916b-6f75742d7533,rev?*%
+%TF.CreationDate,2026-08-20T14:10:34-04:00*%
+%TF.ProjectId,tag-breakout-u375-smps-v1,7461672d-6272-4656-916b-6f75742d7533,rev?*%
 %TF.SameCoordinates,Original*%
 %TF.FileFunction,Profile,NP*%
 %FSLAX46Y46*%
 G04 Gerber Fmt 4.6, Leading zero omitted, Abs format (unit mm)*
-G04 Created by KiCad (PCBNEW 10.0.2) date 2026-07-28 11:39:22*
+G04 Created by KiCad (PCBNEW 10.0.2) date 2026-08-20 14:10:34*
 %MOMM*%
 %LPD*%
 G01*
