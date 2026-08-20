@@ -5,11 +5,10 @@
 	(uuid "e44ca67a-43be-444b-8652-f54825a2eb6f")
 	(paper "USLetter")
 	(title_block
-		(title "BitTag with External Memory and LPS27")
-		(date "2025-04-25")
+		(title "BitTag with External Memory and BMP585")
+		(date "2026-08-19")
 		(company "IUCS")
 		(comment 1 "Geoffrey Brown")
-		(comment 3 "checked pinouts 4/25/25")
 	)
 	(lib_symbols
 		(symbol "BitTagNG:RV-3028-C7-AccelTag"
