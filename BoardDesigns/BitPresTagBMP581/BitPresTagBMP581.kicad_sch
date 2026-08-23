@@ -3916,12 +3916,28 @@
 		(uuid "01c83342-fc9c-448f-b20c-64bc674c27d7")
 	)
 	(no_connect
+		(at 153.67 91.44)
+		(uuid "09834510-4c4c-4c86-a702-4bd256044735")
+	)
+	(no_connect
+		(at 153.67 93.98)
+		(uuid "20fa1121-3199-4aba-8636-1a92e82a31f4")
+	)
+	(no_connect
 		(at 40.64 157.48)
 		(uuid "67aa5a5e-cfa6-4fed-b462-9aa11ca63ff9")
 	)
 	(no_connect
 		(at 101.6 154.94)
 		(uuid "6a8eea22-77c9-4bcd-823a-69664d9459d5")
+	)
+	(no_connect
+		(at 120.65 119.38)
+		(uuid "72a5fd69-8c4c-4a3e-8f7c-0f61eb064bb4")
+	)
+	(no_connect
+		(at 153.67 88.9)
+		(uuid "c068ef1f-6fa4-4a0e-a7cc-8c8fe129e626")
 	)
 	(no_connect
 		(at 87.63 81.28)
@@ -5085,6 +5101,16 @@
 		)
 		(uuid "390bbeb6-444d-452d-b398-34bc1e7f15bc")
 	)
+	(label "lps_rdy"
+		(at 118.11 119.38 270)
+		(effects
+			(font
+				(size 1.524 1.524)
+			)
+			(justify right bottom)
+		)
+		(uuid "456d4603-9f32-4446-84da-5fdf6c5c8c5a")
+	)
 	(label "ACCEL_SCK"
 		(at 113.03 119.38 270)
 		(effects
@@ -5294,6 +5320,16 @@
 			(justify right bottom)
 		)
 		(uuid "e0f6b195-e6f2-4fbe-af5a-62c874aad937")
+	)
+	(label "lps_rdy"
+		(at 210.82 143.51 0)
+		(effects
+			(font
+				(size 1.524 1.524)
+			)
+			(justify left bottom)
+		)
+		(uuid "e427780e-c702-48dd-8b0a-a1ea17f07d44")
 	)
 	(label "LPS_CS"
 		(at 175.26 143.51 180)

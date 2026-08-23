@@ -670,7 +670,7 @@
       "method": 0,
       "sort_order": 0
     },
-    "bom_export_filename": "",
+    "bom_export_filename": "/users/geobrown/bom.csv",
     "bom_fmt_presets": [],
     "bom_fmt_settings": {
       "field_delimiter": ",",
@@ -792,6 +792,12 @@
           "label": "Digikey",
           "name": "Digikey",
           "show": false
+        },
+        {
+          "group_by": false,
+          "label": "MDN",
+          "name": "MDN",
+          "show": false
         }
       ],
       "filter_string": "",
@@ -860,7 +866,7 @@
         "uuid": "4d87b1cc-f1d4-4d5c-b687-12b1ff6c9e14"
       }
     ],
-    "used_designators": "C6,R5,#PWR19,#PWR42-43,#PWR111,U6",
+    "used_designators": "",
     "variants": []
   },
   "sheets": [
