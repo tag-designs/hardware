@@ -64,7 +64,7 @@
           "min_clearance": 0.508,
           "min_island_area": 10.0,
           "min_thickness": 0.25,
-          "pad_connection": 1,
+          "pad_connection": 0,
           "remove_islands": 0,
           "thermal_relief_gap": 0.5,
           "thermal_relief_spoke_width": 0.5
@@ -304,6 +304,42 @@
   "erc": {
     "erc_exclusions": [
       [
+        "lib_symbol_mismatch|469900|431800|cf0fae7e-784e-4b9f-b9f8-d011d4007cfa|00000000-0000-0000-0000-000000000000|||",
+        ""
+      ],
+      [
+        "multiple_net_names|1409700|228600|228c19c5-3d34-4ea3-8337-2cbe4f7f2c44|96705a97-d934-4144-b681-718c46d5266f|/e44ca67a-43be-444b-8652-f54825a2eb6f|/e44ca67a-43be-444b-8652-f54825a2eb6f|/e44ca67a-43be-444b-8652-f54825a2eb6f",
+        ""
+      ],
+      [
+        "pin_to_pin|1993900|1003300|424697b5-2fd7-4368-ab30-2194174cb270|60224c51-5b11-4471-a4fe-153ffcd714cc|/e44ca67a-43be-444b-8652-f54825a2eb6f|/e44ca67a-43be-444b-8652-f54825a2eb6f|/e44ca67a-43be-444b-8652-f54825a2eb6f",
+        ""
+      ],
+      [
+        "pin_to_pin|1993900|1028700|43d39686-3364-4181-9210-298bbc43a338|e13c572b-4144-411a-94bc-c0873bded91d|/e44ca67a-43be-444b-8652-f54825a2eb6f|/e44ca67a-43be-444b-8652-f54825a2eb6f|/e44ca67a-43be-444b-8652-f54825a2eb6f",
+        ""
+      ],
+      [
+        "pin_to_pin|1993900|1054100|6fbced1c-c7c0-4752-8140-880201fced27|e0f24a5c-a8e3-4468-a704-efc53b585043|/e44ca67a-43be-444b-8652-f54825a2eb6f|/e44ca67a-43be-444b-8652-f54825a2eb6f|/e44ca67a-43be-444b-8652-f54825a2eb6f",
+        ""
+      ],
+      [
+        "pin_to_pin|1993900|1079500|0128dd42-b90d-4424-bfdc-555f1cd862af|87c21513-289d-412c-aea4-2368ee0a9716|/e44ca67a-43be-444b-8652-f54825a2eb6f|/e44ca67a-43be-444b-8652-f54825a2eb6f|/e44ca67a-43be-444b-8652-f54825a2eb6f",
+        ""
+      ],
+      [
+        "pin_to_pin|2374900|673100|ae6b9894-3f8c-4176-93e1-5fc446404e2e|efb7f59a-6ad7-45e1-a690-6f0c5e1bf767|/e44ca67a-43be-444b-8652-f54825a2eb6f|/e44ca67a-43be-444b-8652-f54825a2eb6f|/e44ca67a-43be-444b-8652-f54825a2eb6f",
+        ""
+      ],
+      [
+        "pin_to_pin|2400300|1028700|e13c572b-4144-411a-94bc-c0873bded91d|efb7f59a-6ad7-45e1-a690-6f0c5e1bf767|/e44ca67a-43be-444b-8652-f54825a2eb6f|/e44ca67a-43be-444b-8652-f54825a2eb6f|/e44ca67a-43be-444b-8652-f54825a2eb6f",
+        ""
+      ],
+      [
+        "pin_to_pin|2400300|1079500|6e7b3b12-1d22-4fec-8930-3a464a58eba8|4b64db0d-c6eb-497a-b4e8-9799ca8afd62|/e44ca67a-43be-444b-8652-f54825a2eb6f|/e44ca67a-43be-444b-8652-f54825a2eb6f|/e44ca67a-43be-444b-8652-f54825a2eb6f",
+        ""
+      ],
+      [
         "pin_to_pin|368300|1460500|d827e370-2812-4364-83a1-2420a6a96d71|3264635a-20b5-42f5-8984-497bc1679d62|/e44ca67a-43be-444b-8652-f54825a2eb6f|/e44ca67a-43be-444b-8652-f54825a2eb6f|/e44ca67a-43be-444b-8652-f54825a2eb6f",
         ""
       ],
@@ -337,6 +373,10 @@
       ],
       [
         "pin_to_pin|812800|406400|9679fe39-9998-4fb1-8c04-76af2e512178|80236cd7-f134-476a-aafd-0822e1a8c307|/e44ca67a-43be-444b-8652-f54825a2eb6f|/e44ca67a-43be-444b-8652-f54825a2eb6f|/e44ca67a-43be-444b-8652-f54825a2eb6f",
+        ""
+      ],
+      [
+        "power_pin_not_driven|317500|381000|47f724b3-88ea-4997-b070-a816cefcac36|00000000-0000-0000-0000-000000000000|/e44ca67a-43be-444b-8652-f54825a2eb6f|/e44ca67a-43be-444b-8652-f54825a2eb6f|",
         ""
       ]
     ],
@@ -570,7 +610,7 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "imutag-nand-bmp581.kicad_pro",
+    "filename": "imutag-smps.kicad_pro",
     "version": 3
   },
   "net_settings": {
@@ -879,18 +919,18 @@
     "subpart_id_separator": 0,
     "top_level_sheets": [
       {
-        "filename": "imutag-nand-bmp581.kicad_sch",
-        "name": "imutag-nand-bmp581",
+        "filename": "imutag-smps.kicad_sch",
+        "name": "imutag-smps",
         "uuid": "e44ca67a-43be-444b-8652-f54825a2eb6f"
       }
     ],
-    "used_designators": "",
+    "used_designators": "U7",
     "variants": []
   },
   "sheets": [
     [
       "e44ca67a-43be-444b-8652-f54825a2eb6f",
-      "imutag-nand-bmp581"
+      "imutag-smps"
     ]
   ],
   "text_variables": {},

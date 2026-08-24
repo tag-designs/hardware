@@ -1,6 +1,7 @@
 $fn = 120; // steps in generating circles
 
-makelid = true;
+makelid = false;
+makelidshort = true;
 makebase = true;
 
 version_string = "IMUTagv1"; // imprinted in base and lid
@@ -13,12 +14,12 @@ eps = 0.1;
 // Board and manufacturing tolerances
 // ---------------------------------------------------------------------------
 
-board_nominal_len = 21.550;
+board_nominal_len = 21.5;
 board_nominal_width = 11.5;
 board_sweep_height = 4.0;          // vertical clearance swept by the PCB
 board_min_thickness = 0.4;         // fiberglass thickness, kept for reference
 
-board_edge_clearance = 0.001 * 25.4; // routing/board-fab tolerance per edge
+board_edge_clearance = 0.0015 * 25.4; // routing/board-fab tolerance per edge
 board_len = board_nominal_len + board_edge_clearance * 2;
 board_width = board_nominal_width + board_edge_clearance * 2;
 
@@ -41,10 +42,10 @@ under_board_cut_depth = 1.5;
 // Pogo pins, posts, and alignment features
 // ---------------------------------------------------------------------------
 
-pogo_pin_height_at_board = 6.27 - 0.9;
+pogo_pin_height_at_board = 6.27 - 0.8;
 pogo_cutout_len = 3.2;
 pogo_cutout_width = 7;
-pogo_center = [8.175, 0.0];
+pogo_center = [7.25, 0.0];
 
 post_center = [pogo_center[0] - 5.0, pogo_center[1]];
 post_spacing = 20.0;
@@ -85,9 +86,9 @@ lid_body_height = 3;
 lid_end_height = 4;
 lid_end_len = 2;
 lid_end_width = board_width - 1;
-lid_left_end_x = -board_len / 2 + 2;
-lid_body_x = -board_len / 2 + 0.1;
-lid_body_len = board_len / 2 - 0.7 + pogo_cutout_len / 2 + pogo_center[0];
+lid_left_end_x = -board_len / 2+4;
+lid_body_x = -board_len / 2 + 2.5;
+lid_body_len = board_len / 2 - 0.7 + pogo_cutout_len / 2 + pogo_center[0]-2;
 
 // Extra base support added around the post bosses.
 base_post_bridge_x = -2.5;
@@ -177,8 +178,8 @@ module crossbar_with_holes(height, end_height, hole_radius) {
 
 module reinforced_base_crossbar(height, end_height) {
     at_post_center() {
-        translate([base_post_bridge_x, 0, 0])
-            xy_centered_cube([2 * post_radius + base_post_bridge_extra_len, post_spacing, height]);
+        //translate([base_post_bridge_x, 0, 0])
+        //    #xy_centered_cube([2 * post_radius + base_post_bridge_extra_len, post_spacing, height]);
 
         mirrored_y(post_spacing / 2) {
             cylinder(r=post_radius, h=end_height);
@@ -280,7 +281,7 @@ module makeBase() {
 // Lid
 // ---------------------------------------------------------------------------
 
-module lid_solid() {
+module lid_solid(long) {
     crossbar_with_holes(lid_body_height, lid_end_height, screw_hole_radius);
 
     // End piece inset from board edge.
@@ -288,8 +289,14 @@ module lid_solid() {
         xy_centered_cube([lid_end_len, lid_end_width - 1, lid_end_height + eps]);
 
     // Centered over the pogo pins.
-    translate([pogo_center[0], pogo_center[1], -lid_end_height / 2 - 1.8])
-        xy_centered_cube([lid_end_len, lid_end_width, lid_end_height + 1.8]);
+    if (long) {
+    translate([pogo_center[0], pogo_center[1], -lid_end_height / 2 - 2.5])
+        xy_centered_cube([lid_end_len, lid_end_width, lid_end_height + 2.5]);
+    } 
+    if (!long) {
+        translate([pogo_center[0], pogo_center[1], -lid_end_height / 2 - eps])
+        xy_centered_cube([lid_end_len, lid_end_width, lid_end_height + eps]);
+    }
 
     translate([lid_body_x, -board_width / 2, 0])
         cube([lid_body_len, board_width, lid_body_height]);
@@ -306,10 +313,10 @@ module lid_engraving() {
             text(text="*", size=3, halign="center");
 }
 
-module makeLid() {
+module makeLid(long) {
     translate([0, 0, lid_preview_z])
         difference() {
-            lid_solid();
+            lid_solid(long);
             lid_engraving();
         }
 }
@@ -321,4 +328,5 @@ if (makebase) {
     }
 }
 
-if (makelid) makeLid();
+if (makelid) makeLid(true);
+if (makelidshort) makeLid(false);
