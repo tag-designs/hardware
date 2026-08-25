@@ -1,21 +1,39 @@
 $fn = 120; // steps in generating circles
 
-makelid = false;
-makelidshort = false;
+makelid = true;
 makebase = true;
 
-version_string = "IMUTagv1"; // imprinted in base and lid
+version_string = "BitPrTagv1"; // imprinted in base and lid
 
 // All dimensions are millimeters. XY coordinates are board-centered unless
 // otherwise noted; Z=0 is the nominal board underside.
 eps = 0.1;
 
+
+// ---------------------------------------------------------------------------
+// Pogo pins, posts, and alignment features
+// ---------------------------------------------------------------------------
+
+pogo_pin_height_at_board = 6.27 - 0.7;
+pogo_cutout_len = 3.2;
+pogo_cutout_width = 7;
+pogo_center = [6.4, 0.0];
+
+post_center = [pogo_center[0] - 5.0, pogo_center[1]];
+post_spacing = 20.0;
+post_radius = 3.0;
+insert_hole_radius = 1.65;         // clearance for 2-56 insert
+screw_hole_radius = 1.3;           // clearance for 2-56 screw
+
+alignment_pin_offset = [-8.5, 10];
+alignment_pin_radius = 0.75;
+
 // ---------------------------------------------------------------------------
 // Board and manufacturing tolerances
 // ---------------------------------------------------------------------------
 
-board_nominal_len = 21.5;
-board_nominal_width = 11.5;
+board_nominal_len = 18;
+board_nominal_width = 10;
 board_sweep_height = 4.0;          // vertical clearance swept by the PCB
 board_min_thickness = 0.4;         // fiberglass thickness, kept for reference
 
@@ -23,11 +41,15 @@ board_edge_clearance = 0.0015 * 25.4; // routing/board-fab tolerance per edge
 board_len = board_nominal_len + board_edge_clearance * 2;
 board_width = board_nominal_width + board_edge_clearance * 2;
 
-use_dxf_sized_board_outline = true;
-board_outline_dxf = "IMUTag-Edge_Cuts.dxf";
+use_dxf_sized_board_outline = false;
+board_outline_dxf = "BitPresTag-Edge_Cuts.dxf";
 board_dxf_center = [150.828553, -107.250];
 board_outline_offset = [-board_dxf_center[0], -board_dxf_center[1]];
 board_dxf_size = [21.542893, 11.500000];
+
+battery_diameter = 10.5;
+battery_position = [battery_diameter/2+pogo_center[0]-.2,0,board_min_thickness];
+battery_height = 3;
 
 // KiCad exports Edge.Cuts as stroked linework, not a filled region. Use the
 // measured centerline extents from the DXF to build a filled boolean cutter.
@@ -38,23 +60,7 @@ board_corner_radius = 1.0;
 under_board_ledges = 1.5;
 under_board_cut_depth = 1.5;
 
-// ---------------------------------------------------------------------------
-// Pogo pins, posts, and alignment features
-// ---------------------------------------------------------------------------
 
-pogo_pin_height_at_board = 6.27 - 0.8;
-pogo_cutout_len = 3.2;
-pogo_cutout_width = 7;
-pogo_center = [7.25, 0.0];
-
-post_center = [pogo_center[0] - 5.0, pogo_center[1]];
-post_spacing = 20.0;
-post_radius = 3.0;
-insert_hole_radius = 1.65;         // clearance for 2-56 insert
-screw_hole_radius = 1.3;           // clearance for 2-56 screw
-
-alignment_pin_offset = [-8.5, 10];
-alignment_pin_radius = 0.75;
 
 // ---------------------------------------------------------------------------
 // Case dimensions
@@ -70,10 +76,10 @@ harness_slot_width = 2.5;
 harness_slot_radius = harness_slot_width / 2;
 harness_slot_x = board_len / 2 - under_board_ledges / 2 - harness_slot_radius;
 
-base_text_pos = [-4, 0, -pogo_pin_height_at_board + 0.4];
+base_text_pos = [0, 0, -pogo_pin_height_at_board + 0.4];
 base_marker_pos = [8, 4.5, board_sweep_height / 2 - 0.4];
-lid_text_pos = [3, 0, 2.5];
-lid_marker_pos = [7, 1, 2.5];
+lid_text_pos = [1.5, 0, 2.5];
+lid_marker_pos = [5, 1, 2.5];
 text_depth_base = 0.5;
 text_depth_lid = 0.6;
 
@@ -86,9 +92,9 @@ lid_body_height = 3;
 lid_end_height = 4;
 lid_end_len = 2;
 lid_end_width = board_width - 1;
-lid_left_end_x = -board_len / 2+4;
-lid_body_x = -board_len / 2 + 2.5;
-lid_body_len = board_len / 2 - 0.7 + pogo_cutout_len / 2 + pogo_center[0]-2;
+lid_left_end_x = -board_len / 2+1.5;
+lid_body_x = -board_len / 2 + 0.5;
+lid_body_len = board_len / 2 - 0.7 + pogo_cutout_len / 2 + pogo_center[0]-.4;
 
 // Extra base support added around the post bosses.
 base_post_bridge_x = -2.5;
@@ -262,12 +268,18 @@ module base_engraving() {
             text(text="*", size=3, halign="center");
 }
 
+module battery_cutout() {
+    translate(battery_position)
+        cylinder(r=battery_diameter/2,h=battery_height);
+}
+
 module base_cutouts() {
     under_board_pocket();
     pogo_pin_cutout();
     alignment_pin_holes();
     base_insert_holes();
     base_engraving();
+    battery_cutout();
 }
 
 module makeBase() {
@@ -281,22 +293,17 @@ module makeBase() {
 // Lid
 // ---------------------------------------------------------------------------
 
-module lid_solid(long) {
+module lid_solid() {
     crossbar_with_holes(lid_body_height, lid_end_height, screw_hole_radius);
 
     // End piece inset from board edge.
-    translate([lid_left_end_x, 0, -lid_end_height / 2 - eps])
-        xy_centered_cube([lid_end_len, lid_end_width - 1, lid_end_height + eps]);
+    translate([lid_left_end_x, 0, -lid_end_height / 2 - eps-2])
+        xy_centered_cube([lid_end_len, lid_end_width - 1, lid_end_height + eps+2]);
 
     // Centered over the pogo pins.
-    if (long) {
-    translate([pogo_center[0], pogo_center[1], -lid_end_height / 2 - 2.5])
-        xy_centered_cube([lid_end_len, lid_end_width, lid_end_height + 2.5]);
-    } 
-    if (!long) {
-        translate([pogo_center[0], pogo_center[1], -lid_end_height / 2 - eps])
+   
+   translate([pogo_center[0], pogo_center[1], -lid_end_height / 2 - eps])
         xy_centered_cube([lid_end_len, lid_end_width, lid_end_height + eps]);
-    }
 
     translate([lid_body_x, -board_width / 2, 0])
         cube([lid_body_len, board_width, lid_body_height]);
@@ -313,10 +320,10 @@ module lid_engraving() {
             text(text="*", size=3, halign="center");
 }
 
-module makeLid(long) {
+module makeLid() {
     translate([0, 0, lid_preview_z])
         difference() {
-            lid_solid(long);
+            lid_solid();
             lid_engraving();
         }
 }
@@ -328,5 +335,4 @@ if (makebase) {
     }
 }
 
-if (makelid) makeLid(true);
-if (makelidshort) makeLid(false);
+if (makelid) makeLid();

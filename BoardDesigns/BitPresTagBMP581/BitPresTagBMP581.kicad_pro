@@ -642,7 +642,7 @@
       "gencad": "",
       "idf": "",
       "netlist": "",
-      "plot": "",
+      "plot": "../../Mechanical/BitPresTag/",
       "pos_files": "",
       "specctra_dsn": "",
       "step": "",
