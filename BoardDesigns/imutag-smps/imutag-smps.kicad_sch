@@ -4655,17 +4655,6 @@
 		)
 		(uuid "168a7644-d155-4854-89d1-b10e1c383e4d")
 	)
-	(text "NEED TO LOOK AT POWER\nDo we need both vin and vbat?  \nWhat is that diode for?"
-		(exclude_from_sim no)
-		(at 169.926 65.532 0)
-		(effects
-			(font
-				(size 1.524 1.524)
-				(color 255 40 67 1)
-			)
-		)
-		(uuid "278eca9c-6a98-48d6-93b4-422430190c88")
-	)
 	(text "Tag Holes"
 		(exclude_from_sim no)
 		(at 24.13 194.31 0)
@@ -4676,17 +4665,6 @@
 			(justify left bottom)
 		)
 		(uuid "5d9857d2-f2d6-42e9-9a24-9718a9039188")
-	)
-	(text "NEED TO SWITCH TO 2GB"
-		(exclude_from_sim no)
-		(at 34.036 61.468 0)
-		(effects
-			(font
-				(size 1.524 1.524)
-				(color 255 51 22 1)
-			)
-		)
-		(uuid "8294a689-ae00-4494-a3f1-2aeee41b3f8f")
 	)
 	(text "Test Points"
 		(exclude_from_sim no)

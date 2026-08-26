@@ -1,15 +1,18 @@
 # imutag-smps Design Review
 
-Review date: 2026-08-25  
+Review date: 2026-08-26  
 Project: `BoardDesigns/imutag-smps`  
 Primary design files: `imutag-smps.kicad_sch`, `imutag-smps.kicad_pcb`, `imutag-smps.kicad_pro`  
-Datasheet source used: `BoardDesigns/libraries/datasheets`
+Datasheet source used: `BoardDesigns/libraries/datasheets`  
+Current analysis run: `analysis/2026-08-26_0809`
 
 ## Verdict
 
 The design is electrically close: schematic and PCB component counts match, all nets are routed, KiCad DRC reports zero violations and zero unconnected items, and the main power topology matches the relevant datasheets. I would not treat the raw analyzer "U6 has no DC power path" and "LSM6DSV SPI pins need I2C pull-ups" reports as real electrical blockers.
 
-I would still do a focused metadata/layout cleanup before fab. The main issues are fragmented return paths for the SPI/SWD signals, U5 PCB metadata not matching the intended LSM6DSV part, the required STM32 BOOT0 option-byte programming step, and several assembly/process constraints that need an intentional fab/assembly decision. The `/clkout` net is only 32 kHz, so its plane-gap finding is low risk compared with the SPI and SWD clocks.
+I would still do a focused documentation/manufacturing cleanup before fab. The main remaining issues are the required STM32 BOOT0 option-byte programming step, the stale schematic pin-map note, and several assembly/process constraints that need an intentional fab/assembly decision. The SMPS rearrangement improves the magnetometer tradeoff: the inductor axis no longer points at the BMM350.
+
+The analyzer's "plane split", "island", and "plane gap" language has been manually downgraded. GND and +1V8 are understood to be fully connected planes. The reported "gaps" occur where vias and antipads exist at layer changes, which is expected PCB geometry rather than a plane-connectivity defect. The `/clkout` net is also only 32 kHz, so its flagged crossing is not a high-speed EMC concern.
 
 ## Review Basis
 
@@ -18,9 +21,9 @@ Tools and files checked:
 - KiCad ERC: 3 warnings, 0 errors.
 - KiCad DRC: 0 violations, 0 unconnected items.
 - Schematic analyzer: 22 findings, including 3 errors that were manually triaged against datasheets.
-- PCB analyzer: 50 findings, including 2 fiducial findings that are covered by the fab house's panel process, plus DFM warnings.
-- Cross-analysis: 11 findings, including 5 return-plane/plane-split errors.
-- EMC analyzer: 63 findings, risk score 29.5.
+- PCB analyzer: 49 findings, including 2 fiducial findings that are covered by the fab house's panel process, plus DFM warnings.
+- Cross-analysis: 10 findings after the U5 metadata fix; remaining return-plane/plane-split findings are geometry heuristics and were manually downgraded.
+- EMC analyzer: 64 findings, risk score 26.5. The plane/reference findings remain manually downgraded as geometry heuristics.
 - Thermal analyzer: 0 findings, but 0 components had power-dissipation data, so this is not a thermal proof.
 - Gerber review: not performed; no Gerber/fabrication outputs were present.
 - SPICE: not performed; no ngspice, LTspice, or Xyce executable was available.
@@ -38,56 +41,70 @@ Datasheets manually cross-checked from the shared library:
 - `PMBT2222AMB.pdf`
 - `lsm6dsv.pdf`
 
-User-confirmed design intent: U5 is `LSM6DSV`. The PCB currently calls U5 `LSM6DSV16X` / `LSM6DSV16XTR`, so this is a metadata synchronization issue rather than an unresolved part selection question.
+User-confirmed design intent: U5 is `LSM6DSV`. The PCB metadata has since been updated and now reports U5 value and MPN as `LSM6DSV`.
 
-## High Priority Findings
+## Previous Review Delta
 
-### 1. U5 PCB metadata differs from the intended LSM6DSV part
+Compared with the initial 2026-08-25 analysis:
 
-Severity: medium-high  
+- U5 metadata is fixed: PCB value and MPN now both report `LSM6DSV`.
+- L1 was rotated from 0 degrees to -90 degrees.
+- U2-to-L1 center spacing is essentially unchanged, moving from about 11.49 mm to about 11.15 mm.
+- The L1 axis is now about 89 degrees from the L1-to-U2 vector, so the inductor axis is effectively perpendicular to the direction of the BMM350.
+- U4 output-cap placement improved: C8 moved from about 3.97 mm from U4 to about 1.18 mm from U4. C7 remains close at about 1.21 mm.
+- DRC remains clean: 0 violations and 0 unconnected items.
+- ERC remains at 3 warnings, matching the earlier review.
+
+## Current Findings
+
+### 1. U5 metadata is resolved
+
+Severity: resolved  
 Confidence: high  
-Evidence: cross-analysis, schematic BOM, PCB footprint properties, shared datasheet library, user-confirmed design intent
+Evidence: raw PCB file, refreshed PCB analyzer output, shared datasheet library, user-confirmed design intent
 
-The intended part is `LSM6DSV`. The schematic/BOM identifies U5 as `LSM6DSV` with MPN `LSM6DSV`, while the PCB footprint properties identify it as `LSM6DSV16X` / `LSM6DSV16XTR`. The shared datasheet directory contains `lsm6dsv.pdf`.
+The intended part is `LSM6DSV`. The schematic/BOM and PCB footprint properties now identify U5 as `LSM6DSV`, and the shared datasheet directory contains `lsm6dsv.pdf`.
 
-Why it matters:
+Original concern:
 
-- The electrical design intent is clear, but the PCB metadata can still cause BOM/CPL ordering mistakes or review confusion.
-- If assembly data is generated from PCB fields, the wrong MPN could propagate into manufacturing files.
+- The earlier PCB metadata identified U5 as `LSM6DSV16X` / `LSM6DSV16XTR`.
+- That has been corrected in the PCB file and in the refreshed PCB analyzer output.
 
-Recommendation:
+Remaining action:
 
-- Update U5 PCB value/MPN fields to `LSM6DSV`.
-- Re-run the cross-analysis after the metadata update.
+- None for U5, other than using the refreshed manufacturing outputs.
 
-### 2. Return paths and planes are fragmented for SPI/SWD signals
+### 2. Analyzer plane-gap findings are not plane-connectivity defects
 
-Severity: medium-high for EMC and signal robustness  
-Confidence: medium-high  
-Evidence: cross-analysis and EMC analyzer; user-confirmed `/clkout` frequency; KiCad DRC is clean
+Severity: low / advisory  
+Confidence: high for the manual override; medium for any residual EMC margin concern  
+Evidence: cross-analysis and EMC analyzer, user layout review, user-confirmed `/clkout` frequency, KiCad DRC is clean
 
-The cross-check reports that several nets cross reference-plane gaps:
+The cross-check still reports several "plane gap" and "plane split" findings:
 
 - `/clkout` crosses a VBAT plane gap, but this is user-confirmed as a 32 kHz clock and is therefore low risk.
 - `SWCLK` crosses a GND plane gap.
 - `/LPS_MOSI`, `/LPS_MISO`, `/AT25_MISO`, `/AT25_SCK`, and `/AT25_MOSI` cross GND plane gaps.
 - Plane split summary: VBAT has 4 islands, GND has 18 islands, and +1V8 has 6 islands.
 
-The EMC analyzer similarly flags low reference-plane coverage on several nets, with the worst examples including `/BMM_INT`, `/AT25_MISO`, `/SCL`, `/SDA`, `/AT25_SCK`, `/AT25_MOSI`, `/LSM_TRG`, `RST`, `/clkout`, and `SWCLK`.
+Manual interpretation:
+
+- "Islands" means the analyzer found separate filled polygon/reference-sampling regions. It is not proof that GND, +1V8, or VBAT are electrically disconnected.
+- The GND and +1V8 planes are understood to be fully connected.
+- The flagged crossings occur at routing-layer changes, where via antipads necessarily create local holes in adjacent copper.
+- A perfectly continuous plane reference directly through a via transition is impossible; the practical question is whether the transition has adequate nearby return-current path for the signal edge rates.
 
 Why it matters:
 
 - These are short traces on a very small board, so the absolute loop sizes are limited.
 - The 32 kHz `/clkout` trace is not a high-speed EMC driver.
-- The affected SPI and SWD nets still have fast edges. Return-current detours can increase emissions and susceptibility, especially near the TPS62840 buck converter.
+- SPI and SWD nets can still have fast edges, so nearby return continuity is useful for EMC margin, but this is an advisory layout-quality item rather than a blocker.
 
 Recommendation:
 
-- Prioritize continuous GND reference under `/AT25_SCK`, `/AT25_MOSI`, `/AT25_MISO`, `SWCLK`, `/SCL`, and `/SDA`.
-- Treat `/clkout` as a low-priority cleanup unless it is routed off-board or used as a sensitive timing reference.
-- Add nearby GND stitching vias at layer transitions, especially for `/AT25_SCK` and `SWCLK`.
-- Avoid routing high-edge-rate signals over voids between GND islands or power pours.
-- Re-pour and re-run cross/EMC checks after layout changes.
+- Do not treat the analyzer's island counts as disconnected-plane evidence.
+- Optionally add nearby GND return vias at fast-edge signal layer transitions if EMC margin becomes important.
+- Treat `/clkout` as low priority unless it is routed off-board or used as a sensitive timing reference.
 
 ### 3. Fiducials are supplied by the fab panel, not the board
 
@@ -126,24 +143,27 @@ Recommendation:
 - Read back and log the option bytes after programming.
 - Document that PB7/BOOT0 is shared with `/SDA` and depends on that programmed configuration.
 
-### 5. Magnetometer placement should be validated against the buck converter and assembly
+### 5. Magnetometer offset is an accepted SMPS tradeoff, improved by the rearrangement
 
-Severity: medium  
-Confidence: medium  
-Evidence: PCB footprint coordinates and BMM350 datasheet role as geomagnetic sensor
+Severity: very low / validation item  
+Confidence: high  
+Evidence: PCB footprint coordinates, BMM350 datasheet role as geomagnetic sensor, user-confirmed power architecture tradeoff
 
-U2 BMM350 is placed on the right side of the board. The center-to-center spacing from U2 to the TPS62840 inductor L1 is about 11.49 mm; spacing to U4 is about 12.09 mm. That is reasonable for a 21.5 mm x 11.5 mm board, but it is still close in absolute terms for a magnetometer.
+U2 BMM350 is placed on the right side of the board. After the SMPS rearrangement, the center-to-center spacing from U2 to the TPS62840 inductor L1 is about 11.15 mm; spacing to U4 is about 12.66 mm. L1 is now rotated to -90 degrees, and the L1-to-U2 vector is almost horizontal, so the inductor axis is about 89 degrees away from pointing at the BMM350.
 
 Why it matters:
 
 - The buck inductor, battery current path, nearby ferromagnetic parts, and assembly hardware can create magnetic offset.
 - BMM350 accuracy may vary with regulator load state and mechanical mounting.
+- The alternative is using an LDO, which would carry a significant energy cost for this design.
+- The revised inductor orientation is the right direction for this tradeoff; residual error is now primarily a calibration/validation item.
 
 Recommendation:
 
+- Keep the SMPS if the energy budget requires it.
 - Measure magnetometer offsets with the buck enabled at idle and at expected peak load.
-- Keep high-current loops and magnetic materials as far from U2 as the mechanical envelope allows.
-- Treat calibration data as board- and assembly-specific.
+- Treat calibration data as assembly-specific.
+- Revisit the LDO option only if measured magnetic error cannot be calibrated out for the intended use case.
 
 ## Medium Priority Findings
 
@@ -321,7 +341,7 @@ Firmware contract:
 
 - Keep all chip selects inactive except the selected device.
 - Drive U5 CS appropriately so the IMU stays in the intended serial mode.
-- Correct the PCB metadata so it consistently names the intended LSM6DSV part.
+- U5 PCB metadata now consistently names the intended LSM6DSV part.
 
 ### KiCad ERC warnings on U6 WP/HOLD tied high
 
@@ -334,17 +354,16 @@ The flash datasheet says unused WP#/SIO2 and HOLD#/SIO3 must be driven high or p
 
 - The shared library path used for this review was `BoardDesigns/libraries/datasheets`.
 - U302's datasheet property points at an older absolute path under `hardware/libraries/datasheets/stm32u375ce.pdf`; the actual shared file is under `BoardDesigns/libraries/datasheets/stm32u375ce.pdf`.
-- U5 datasheet coverage is complete for the intended `LSM6DSV` part; PCB metadata should be updated from `LSM6DSV16XTR` to `LSM6DSV`.
+- U5 datasheet coverage is complete for the intended `LSM6DSV` part, and PCB metadata now matches.
 - No missing MPNs were reported by the schematic analyzer.
 
 ## Suggested Before-Fab Checklist
 
-1. Update U5 PCB properties to match the intended `LSM6DSV` part.
-2. Document that the fab house supplies panel fiducials for both assembled sides.
-3. Rework high-speed/clock return paths and add GND stitching near layer transitions.
-4. Add/read-back-verify the STM32 BOOT0 option-byte write in the programming flow.
-5. Update the stale schematic pin-map text note.
-6. Confirm advanced PCB process assumptions with the intended fab.
-7. Review J401 via-in-pad and exposed-pad paste/via treatment with the assembler.
-8. Add probe/test access or document connector-based test access.
-9. Run fresh ERC, DRC, cross-analysis, and EMC checks after layout edits.
+1. Add/read-back-verify the STM32 BOOT0 option-byte write in the programming flow.
+2. Update the stale schematic pin-map text note.
+3. Confirm advanced PCB process assumptions with the intended fab.
+4. Review J401 via-in-pad and exposed-pad paste/via treatment with the assembler.
+5. Document that the fab house supplies panel fiducials for both assembled sides.
+6. Add probe/test access or document connector-based test access.
+7. Treat the analyzer's return-plane findings as advisory geometry checks unless later EMC testing points back to them.
+8. Run fresh ERC, DRC, cross-analysis, and EMC checks after any further layout edits.

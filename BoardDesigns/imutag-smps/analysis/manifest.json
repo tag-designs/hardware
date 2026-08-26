@@ -1,11 +1,11 @@
 {
   "version": 1,
   "project": "BitTagNG-LIS2DU12.kicad_pcb-back.kicad_pro",
-  "current": "2026-08-25_2039",
+  "current": "2026-08-26_0809",
   "runs": {
     "2026-08-25_2039": {
       "source_hashes": {
-        "imutag-smps.kicad_sch": "sha256:3313dc4ef0444242933f13a869ee323e3042a88a536cb520c617617b46b50456",
+        "imutag-smps.kicad_sch": "sha256:f5375cb08d60e60e7c93b7a148735e8589d07f1739c1394d44c0818fb0801cf8",
         "imutag-smps.kicad_pcb": "sha256:e4f87f62f869b774fe8ab2144164b684c69d7fbf29c1d4cef75811b44560382a",
         "schematic.json": "sha256:5b4dd1c2ce18627b5262e382e279d51741872321e8882650d45d02a40b26e088",
         "pcb.json": "sha256:e2d384cbc5e3713818c3d4165d38761bb0ad5aa8d6c98399d40d244e8cdc5929"
@@ -20,7 +20,43 @@
       "scripts": {
         "schematic": "analyze_schematic.py imutag-smps.kicad_sch"
       },
-      "generated": "2026-08-25T20:40:07-04:00",
+      "generated": "2026-08-26T07:21:15-04:00",
+      "pinned": false
+    },
+    "2026-08-26_0721": {
+      "source_hashes": {
+        "imutag-smps.kicad_pcb": "sha256:e6c08f360df4ac53abd1e4ccc772cc8a6fdb8ce7f6aa31b7abfa1e37f536379b",
+        "imutag-smps.kicad_sch": "sha256:f5375cb08d60e60e7c93b7a148735e8589d07f1739c1394d44c0818fb0801cf8"
+      },
+      "outputs": {
+        "schematic": "schematic.json",
+        "pcb": "pcb.json",
+        "thermal": "thermal.json",
+        "cross_analysis": "cross_analysis.json",
+        "emc": "emc.json"
+      },
+      "scripts": {
+        "pcb": "analyze_pcb.py imutag-smps.kicad_pcb"
+      },
+      "generated": "2026-08-26T08:09:06-04:00",
+      "pinned": false
+    },
+    "2026-08-26_0809": {
+      "source_hashes": {
+        "schematic.json": "sha256:d67b273f5694cd2b4f7d97c71eb9da41f96cabfe810acca41a80fb370144b25d",
+        "pcb.json": "sha256:2c180b6ae504658987e8d19c2d3c2bb5da03909b84bc73a81fddefef8b8f5b57"
+      },
+      "outputs": {
+        "schematic": "schematic.json",
+        "pcb": "pcb.json",
+        "thermal": "thermal.json",
+        "cross_analysis": "cross_analysis.json",
+        "emc": "emc.json"
+      },
+      "scripts": {
+        "emc": "analyze_emc.py"
+      },
+      "generated": "2026-08-26T08:09:06-04:00",
       "pinned": false
     }
   }
