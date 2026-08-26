@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "project": "BitTagNG-LIS2DU12.kicad_pcb-back.kicad_pro",
+  "current": "2026-08-25_2039",
+  "runs": {
+    "2026-08-25_2039": {
+      "source_hashes": {
+        "imutag-smps.kicad_sch": "sha256:3313dc4ef0444242933f13a869ee323e3042a88a536cb520c617617b46b50456",
+        "imutag-smps.kicad_pcb": "sha256:e4f87f62f869b774fe8ab2144164b684c69d7fbf29c1d4cef75811b44560382a",
+        "schematic.json": "sha256:5b4dd1c2ce18627b5262e382e279d51741872321e8882650d45d02a40b26e088",
+        "pcb.json": "sha256:e2d384cbc5e3713818c3d4165d38761bb0ad5aa8d6c98399d40d244e8cdc5929"
+      },
+      "outputs": {
+        "schematic": "schematic.json",
+        "pcb": "pcb.json",
+        "thermal": "thermal.json",
+        "cross_analysis": "cross_analysis.json",
+        "emc": "emc.json"
+      },
+      "scripts": {
+        "schematic": "analyze_schematic.py imutag-smps.kicad_sch"
+      },
+      "generated": "2026-08-25T20:40:07-04:00",
+      "pinned": false
+    }
+  }
+}

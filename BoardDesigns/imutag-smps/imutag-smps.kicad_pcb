@@ -385,6 +385,7 @@
 		)
 		(embedded_fonts no)
 		(model "${TAG_LIBRARIES}/packages3D/lipo.step"
+			(hide yes)
 			(offset
 				(xyz 0 -1 0.5)
 			)
@@ -5926,7 +5927,7 @@
 				)
 			)
 		)
-		(property "Value" "LSM6DSV16X"
+		(property "Value" "LSM6DSV"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -5938,7 +5939,7 @@
 				)
 			)
 		)
-		(property "Datasheet" "LSM6DSV16X"
+		(property "Datasheet" "LSM6DSV"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -5962,7 +5963,7 @@
 				)
 			)
 		)
-		(property "MFN" "STMicroelectronics"
+		(property "MFN" "STM microelectronics"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -5975,7 +5976,7 @@
 				)
 			)
 		)
-		(property "MPN" "LSM6DSV16XTR"
+		(property "MPN" "LSM6DSV"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -5988,7 +5989,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C5267406"
+		(property "LCSC" "C5267399"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -6002,7 +6003,7 @@
 			)
 		)
 		(property ki_fp_filters "LGA14-L_2P59X3P1X0P5_STM LGA14-L_2P59X3P1X0P5_STM-M LGA14-L_2P59X3P1X0P5_STM-L")
-		(path "/7695f24f-ad9e-4192-90a2-529a82bd6341")
+		(path "/569d30d3-8fdd-4aa0-96aa-147206e32273")
 		(sheetname "/")
 		(sheetfile "imutag-smps.kicad_sch")
 		(units
