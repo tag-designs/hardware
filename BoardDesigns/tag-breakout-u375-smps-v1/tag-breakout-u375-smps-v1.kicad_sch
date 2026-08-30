@@ -5,8 +5,8 @@
 	(uuid "2d561ecb-394a-4bb7-a154-94e4285b4f36")
 	(paper "USLetter")
 	(title_block
-		(title "Tag  stm32u375 v2")
-		(date "2026-07-28")
+		(title "Tag  stm32u375 smps")
+		(date "2026-08-30")
 	)
 	(lib_symbols
 		(symbol "Connector:TestPoint"

@@ -1,6 +1,6 @@
 $fn = 120; // steps in generating circles
 
-makelid = false;
+makelid = true;
 makelidshort = false;
 makebase = true;
 
@@ -23,7 +23,7 @@ board_edge_clearance = 0.0015 * 25.4; // routing/board-fab tolerance per edge
 board_len = board_nominal_len + board_edge_clearance * 2;
 board_width = board_nominal_width + board_edge_clearance * 2;
 
-use_dxf_sized_board_outline = true;
+use_dxf_sized_board_outline = false;
 board_outline_dxf = "IMUTag-Edge_Cuts.dxf";
 board_dxf_center = [150.828553, -107.250];
 board_outline_offset = [-board_dxf_center[0], -board_dxf_center[1]];
@@ -45,7 +45,7 @@ under_board_cut_depth = 1.5;
 pogo_pin_height_at_board = 6.27 - 0.8;
 pogo_cutout_len = 3.2;
 pogo_cutout_width = 7;
-pogo_center = [7.25, 0.0];
+pogo_center = [8.25, 0.0];
 
 post_center = [pogo_center[0] - 5.0, pogo_center[1]];
 post_spacing = 20.0;

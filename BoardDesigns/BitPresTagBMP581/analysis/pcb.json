@@ -1,0 +1,6553 @@
+{
+  "analyzer_type": "pcb",
+  "schema_version": "1.3.0",
+  "file": "/Users/geobrown/Research/tag-designs/hardware/BoardDesigns/BitPresTagBMP581/BitPresTagBMP581.kicad_pcb",
+  "kicad_version": "10.0",
+  "file_version": "20260206",
+  "statistics": {
+    "footprint_count": 26,
+    "front_side": 17,
+    "back_side": 9,
+    "smd_count": 22,
+    "tht_count": 4,
+    "copper_layers_used": 4,
+    "copper_layer_names": [
+      "B.Cu",
+      "F.Cu",
+      "In1.Cu",
+      "In2.Cu"
+    ],
+    "track_segments": 291,
+    "via_count": 39,
+    "zone_count": 2,
+    "total_track_length_mm": 168.44,
+    "board_width_mm": 18.0,
+    "board_height_mm": 10.0,
+    "board_area_mm2": 180.0,
+    "net_count": 41,
+    "routing_complete": true,
+    "unrouted_net_count": 0
+  },
+  "layers": [
+    {
+      "number": 0,
+      "name": "F.Cu",
+      "type": "signal",
+      "alias": null
+    },
+    {
+      "number": 4,
+      "name": "In1.Cu",
+      "type": "signal",
+      "alias": null
+    },
+    {
+      "number": 6,
+      "name": "In2.Cu",
+      "type": "signal",
+      "alias": null
+    },
+    {
+      "number": 2,
+      "name": "B.Cu",
+      "type": "signal",
+      "alias": null
+    },
+    {
+      "number": 9,
+      "name": "F.Adhes",
+      "type": "user",
+      "alias": "F.Adhesive"
+    },
+    {
+      "number": 11,
+      "name": "B.Adhes",
+      "type": "user",
+      "alias": "B.Adhesive"
+    },
+    {
+      "number": 13,
+      "name": "F.Paste",
+      "type": "user",
+      "alias": null
+    },
+    {
+      "number": 15,
+      "name": "B.Paste",
+      "type": "user",
+      "alias": null
+    },
+    {
+      "number": 5,
+      "name": "F.SilkS",
+      "type": "user",
+      "alias": "F.Silkscreen"
+    },
+    {
+      "number": 7,
+      "name": "B.SilkS",
+      "type": "user",
+      "alias": "B.Silkscreen"
+    },
+    {
+      "number": 1,
+      "name": "F.Mask",
+      "type": "user",
+      "alias": null
+    },
+    {
+      "number": 3,
+      "name": "B.Mask",
+      "type": "user",
+      "alias": null
+    },
+    {
+      "number": 17,
+      "name": "Dwgs.User",
+      "type": "user",
+      "alias": "User.Drawings"
+    },
+    {
+      "number": 19,
+      "name": "Cmts.User",
+      "type": "user",
+      "alias": "User.Comments"
+    },
+    {
+      "number": 21,
+      "name": "Eco1.User",
+      "type": "user",
+      "alias": "User.Eco1"
+    },
+    {
+      "number": 23,
+      "name": "Eco2.User",
+      "type": "user",
+      "alias": "User.Eco2"
+    },
+    {
+      "number": 25,
+      "name": "Edge.Cuts",
+      "type": "user",
+      "alias": null
+    },
+    {
+      "number": 27,
+      "name": "Margin",
+      "type": "user",
+      "alias": null
+    },
+    {
+      "number": 31,
+      "name": "F.CrtYd",
+      "type": "user",
+      "alias": "F.Courtyard"
+    },
+    {
+      "number": 29,
+      "name": "B.CrtYd",
+      "type": "user",
+      "alias": "B.Courtyard"
+    },
+    {
+      "number": 35,
+      "name": "F.Fab",
+      "type": "user",
+      "alias": null
+    },
+    {
+      "number": 33,
+      "name": "B.Fab",
+      "type": "user",
+      "alias": null
+    }
+  ],
+  "setup": {
+    "board_thickness_mm": 0.4,
+    "stackup": [
+      {
+        "name": "F.SilkS",
+        "type": "Top Silk Screen",
+        "color": "White"
+      },
+      {
+        "name": "F.Paste",
+        "type": "Top Solder Paste"
+      },
+      {
+        "name": "F.Mask",
+        "type": "Top Solder Mask",
+        "color": "Black",
+        "thickness": 0.01
+      },
+      {
+        "name": "F.Cu",
+        "type": "copper",
+        "thickness": 0.035
+      },
+      {
+        "name": "dielectric 1",
+        "type": "prepreg",
+        "thickness": 0.08,
+        "material": "FR4",
+        "epsilon_r": 4.5,
+        "loss_tangent": 0.02
+      },
+      {
+        "name": "In1.Cu",
+        "type": "copper",
+        "thickness": 0.035
+      },
+      {
+        "name": "dielectric 2",
+        "type": "core",
+        "thickness": 0.08,
+        "material": "FR4",
+        "epsilon_r": 4.5,
+        "loss_tangent": 0.02
+      },
+      {
+        "name": "In2.Cu",
+        "type": "copper",
+        "thickness": 0.035
+      },
+      {
+        "name": "dielectric 3",
+        "type": "prepreg",
+        "thickness": 0.08,
+        "material": "FR4",
+        "epsilon_r": 4.5,
+        "loss_tangent": 0.02
+      },
+      {
+        "name": "B.Cu",
+        "type": "copper",
+        "thickness": 0.035
+      },
+      {
+        "name": "B.Mask",
+        "type": "Bottom Solder Mask",
+        "color": "Black",
+        "thickness": 0.01
+      },
+      {
+        "name": "B.Paste",
+        "type": "Bottom Solder Paste"
+      },
+      {
+        "name": "B.SilkS",
+        "type": "Bottom Silk Screen",
+        "color": "White"
+      }
+    ],
+    "pad_to_mask_clearance": 0.0,
+    "copper_finish": "None",
+    "dielectric_constraints": "no",
+    "legacy_teardrops": "no",
+    "allow_soldermask_bridges": "no"
+  },
+  "nets": {
+    "1": "/ACCEL_MISO",
+    "2": "/ACCEL_MOSI",
+    "3": "/ACCEL_SCK",
+    "4": "/ACCEL_nCS",
+    "5": "/AT25_MISO",
+    "6": "/AT25_MOSI",
+    "7": "/AT25_SCK",
+    "8": "/AT25_nCS",
+    "9": "/LPS_CS",
+    "10": "/LPS_MISO",
+    "11": "/LPS_MOSI",
+    "12": "/LPS_PWR",
+    "13": "/LPS_SCK",
+    "14": "/SCL",
+    "15": "/SDA",
+    "16": "/WKUP1",
+    "17": "/clkout",
+    "18": "/lps_rdy",
+    "19": "GND",
+    "20": "Net-(Q501-C)",
+    "21": "Net-(U501-VBACK)",
+    "22": "RST",
+    "23": "SWCLK",
+    "24": "SWDIO",
+    "25": "VBAT",
+    "26": "VIN",
+    "27": "unconnected-(U1-NC-PadA1)",
+    "28": "unconnected-(U1-NC-PadA5)",
+    "29": "unconnected-(U1-NC-PadG1)",
+    "30": "unconnected-(U1-NC-PadG5)",
+    "31": "unconnected-(U1-nWP-PadF4)",
+    "32": "unconnected-(U2-ADC_IN-Pad8)",
+    "33": "unconnected-(U2-INT2-Pad6)",
+    "34": "unconnected-(U2-VREG_OUT-Pad9)",
+    "35": "unconnected-(U3-L/M-Pad9)",
+    "36": "unconnected-(U302-PA10-Pad20)",
+    "37": "unconnected-(U302-PA7-Pad13)",
+    "38": "unconnected-(U302-PA8-Pad18)",
+    "39": "unconnected-(U302-PA9-Pad19)",
+    "40": "unconnected-(U302-PC15-Pad3)",
+    "41": "unconnected-(U501-~{INT}-Pad2)"
+  },
+  "net_name_to_id": {
+    "/ACCEL_MISO": 1,
+    "/ACCEL_MOSI": 2,
+    "/ACCEL_SCK": 3,
+    "/ACCEL_nCS": 4,
+    "/AT25_MISO": 5,
+    "/AT25_MOSI": 6,
+    "/AT25_SCK": 7,
+    "/AT25_nCS": 8,
+    "/LPS_CS": 9,
+    "/LPS_MISO": 10,
+    "/LPS_MOSI": 11,
+    "/LPS_PWR": 12,
+    "/LPS_SCK": 13,
+    "/SCL": 14,
+    "/SDA": 15,
+    "/WKUP1": 16,
+    "/clkout": 17,
+    "/lps_rdy": 18,
+    "GND": 19,
+    "Net-(Q501-C)": 20,
+    "Net-(U501-VBACK)": 21,
+    "RST": 22,
+    "SWCLK": 23,
+    "SWDIO": 24,
+    "VBAT": 25,
+    "VIN": 26,
+    "unconnected-(U1-NC-PadA1)": 27,
+    "unconnected-(U1-NC-PadA5)": 28,
+    "unconnected-(U1-NC-PadG1)": 29,
+    "unconnected-(U1-NC-PadG5)": 30,
+    "unconnected-(U1-nWP-PadF4)": 31,
+    "unconnected-(U2-ADC_IN-Pad8)": 32,
+    "unconnected-(U2-INT2-Pad6)": 33,
+    "unconnected-(U2-VREG_OUT-Pad9)": 34,
+    "unconnected-(U3-L/M-Pad9)": 35,
+    "unconnected-(U302-PA10-Pad20)": 36,
+    "unconnected-(U302-PA7-Pad13)": 37,
+    "unconnected-(U302-PA8-Pad18)": 38,
+    "unconnected-(U302-PA9-Pad19)": 39,
+    "unconnected-(U302-PC15-Pad3)": 40,
+    "unconnected-(U501-~{INT}-Pad2)": 41
+  },
+  "board_outline": {
+    "edge_count": 8,
+    "edges": [
+      {
+        "type": "line",
+        "start": [
+          140.0,
+          104.0
+        ],
+        "end": [
+          140.0,
+          112.0
+        ]
+      },
+      {
+        "type": "line",
+        "start": [
+          157.0,
+          103.0
+        ],
+        "end": [
+          141.0,
+          103.0
+        ]
+      },
+      {
+        "type": "line",
+        "start": [
+          157.0,
+          113.0
+        ],
+        "end": [
+          141.0,
+          113.0
+        ]
+      },
+      {
+        "type": "line",
+        "start": [
+          158.0,
+          104.0
+        ],
+        "end": [
+          158.0,
+          112.0
+        ]
+      },
+      {
+        "type": "arc",
+        "start": [
+          140.0,
+          104.0
+        ],
+        "mid": [
+          140.292893,
+          103.292893
+        ],
+        "end": [
+          141.0,
+          103.0
+        ]
+      },
+      {
+        "type": "arc",
+        "start": [
+          141.0,
+          113.0
+        ],
+        "mid": [
+          140.292893,
+          112.707107
+        ],
+        "end": [
+          140.0,
+          112.0
+        ]
+      },
+      {
+        "type": "arc",
+        "start": [
+          157.0,
+          103.0
+        ],
+        "mid": [
+          157.707107,
+          103.292893
+        ],
+        "end": [
+          158.0,
+          104.0
+        ]
+      },
+      {
+        "type": "arc",
+        "start": [
+          158.0,
+          112.0
+        ],
+        "mid": [
+          157.707107,
+          112.707107
+        ],
+        "end": [
+          157.0,
+          113.0
+        ]
+      }
+    ],
+    "bounding_box": {
+      "min_x": 139.99999999999935,
+      "min_y": 102.99999999999874,
+      "max_x": 158.00000000000028,
+      "max_y": 113.00000000000028,
+      "width": 18.0,
+      "height": 10.0
+    }
+  },
+  "component_groups": {
+    "C": {
+      "count": 12,
+      "references": [
+        "C1",
+        "C2",
+        "C3",
+        "C4",
+        "C404",
+        "C5",
+        "C501",
+        "C502",
+        "C503",
+        "C504",
+        "C6",
+        "C7"
+      ]
+    },
+    "D": {
+      "count": 1,
+      "references": [
+        "D401"
+      ]
+    },
+    "J": {
+      "count": 6,
+      "references": [
+        "J201",
+        "J301",
+        "J302",
+        "J303",
+        "J304",
+        "J401"
+      ]
+    },
+    "Q": {
+      "count": 1,
+      "references": [
+        "Q501"
+      ]
+    },
+    "R": {
+      "count": 1,
+      "references": [
+        "R1"
+      ]
+    },
+    "U": {
+      "count": 5,
+      "references": [
+        "U1",
+        "U2",
+        "U3",
+        "U302",
+        "U501"
+      ]
+    }
+  },
+  "footprints": [
+    {
+      "library": "AccelTag:taghole1.1mm",
+      "reference": "J303",
+      "value": "Conn_01x01",
+      "mpn": "",
+      "x": 141.38,
+      "y": 111.671,
+      "angle": 0.0,
+      "layer": "F.Cu",
+      "type": "through_hole",
+      "pad_count": 1,
+      "exclude_from_bom": true,
+      "sch_path": "/00000000-0000-0000-0000-00005c0f0b74",
+      "sheetname": "/",
+      "sheetfile": "BitPresTagBMP581.kicad_sch",
+      "footprint": "AccelTag:taghole1.1mm",
+      "pad_nets": {},
+      "connected_nets": []
+    },
+    {
+      "library": "AccelTag:MS621",
+      "reference": "J401",
+      "value": "CONN_01X02",
+      "mpn": "",
+      "x": 152.8,
+      "y": 108.0,
+      "angle": 180.0,
+      "layer": "F.Cu",
+      "type": "smd",
+      "pad_count": 2,
+      "exclude_from_bom": true,
+      "sch_path": "/00000000-0000-0000-0000-00005c0f4161",
+      "sheetname": "/",
+      "sheetfile": "BitPresTagBMP581.kicad_sch",
+      "models_3d": [
+        "${KISYS3DMOD}/Battery.3dshapes/BatteryHolder_Seiko_MS621F.step"
+      ],
+      "footprint": "AccelTag:MS621",
+      "pad_nets": {
+        "1": {
+          "net": "VBAT",
+          "pin": "Pin_1_1"
+        },
+        "2": {
+          "net": "GND",
+          "pin": "Pin_2_2"
+        }
+      },
+      "connected_nets": [
+        "GND",
+        "VBAT"
+      ]
+    },
+    {
+      "library": "Capacitor_SMD:C_0402_1005Metric",
+      "reference": "C404",
+      "value": "22uf",
+      "mpn": "04026D226MAT2A",
+      "x": 144.3,
+      "y": 104.9,
+      "angle": 0.0,
+      "layer": "F.Cu",
+      "type": "smd",
+      "pad_count": 2,
+      "sch_path": "/00000000-0000-0000-0000-00005c0f418b",
+      "sheetname": "/",
+      "sheetfile": "BitPresTagBMP581.kicad_sch",
+      "models_3d": [
+        "${KICAD10_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0402_1005Metric.step"
+      ],
+      "courtyard": {
+        "min_x": 143.39,
+        "min_y": 104.44,
+        "max_x": 145.21,
+        "max_y": 105.36
+      },
+      "footprint": "Capacitor_SMD:C_0402_1005Metric",
+      "pad_nets": {
+        "1": {
+          "net": "VIN"
+        },
+        "2": {
+          "net": "GND"
+        }
+      },
+      "connected_nets": [
+        "GND",
+        "VIN"
+      ]
+    },
+    {
+      "library": "libraries:RV-3028-C8",
+      "reference": "U501",
+      "value": "RV-3028-C8-32.768kHz-1PPM-TA-QC",
+      "mpn": "RV-3028-C8-32.768kHz-1PPM-TA-QC",
+      "x": 146.96,
+      "y": 110.84,
+      "angle": 90.0,
+      "layer": "F.Cu",
+      "type": "smd",
+      "pad_count": 8,
+      "sch_path": "/00000000-0000-0000-0000-00005ef60ddb",
+      "sheetname": "/",
+      "sheetfile": "BitPresTagBMP581.kicad_sch",
+      "models_3d": [
+        "${KIPRJMOD}/../libraries/packages3D/RV-3028-C8.step"
+      ],
+      "courtyard": {
+        "min_x": 145.71,
+        "min_y": 109.74,
+        "max_x": 148.21,
+        "max_y": 111.94
+      },
+      "footprint": "libraries:RV-3028-C8",
+      "pad_nets": {
+        "1": {
+          "net": "/clkout",
+          "pin": "CLKOUT_1"
+        },
+        "2": {
+          "net": "unconnected-(U501-~{INT}-Pad2)",
+          "pin": "~{INT}_2"
+        },
+        "3": {
+          "net": "/SCL",
+          "pin": "SCL_3"
+        },
+        "4": {
+          "net": "/SDA",
+          "pin": "SDA_4"
+        },
+        "5": {
+          "net": "GND",
+          "pin": "GND_5"
+        },
+        "6": {
+          "net": "Net-(U501-VBACK)",
+          "pin": "VBACK_6"
+        },
+        "7": {
+          "net": "VIN",
+          "pin": "VDD_7"
+        },
+        "8": {
+          "net": "GND",
+          "pin": "EVI_8"
+        }
+      },
+      "connected_nets": [
+        "/SCL",
+        "/SDA",
+        "/clkout",
+        "GND",
+        "Net-(U501-VBACK)",
+        "VIN",
+        "unconnected-(U501-~{INT}-Pad2)"
+      ]
+    },
+    {
+      "library": "Resistor_SMD:R_0201_0603Metric",
+      "reference": "R1",
+      "value": "10k",
+      "mpn": "RC0201FR-0710KL",
+      "x": 147.565,
+      "y": 109.31,
+      "angle": 0.0,
+      "layer": "F.Cu",
+      "type": "smd",
+      "pad_count": 4,
+      "sch_path": "/00000000-0000-0000-0000-00005ef75c00",
+      "sheetname": "/",
+      "sheetfile": "BitPresTagBMP581.kicad_sch",
+      "models_3d": [
+        "${KICAD10_3DMODEL_DIR}/Resistor_SMD.3dshapes/R_0201_0603Metric.step"
+      ],
+      "courtyard": {
+        "min_x": 146.865,
+        "min_y": 108.96,
+        "max_x": 148.265,
+        "max_y": 109.66
+      },
+      "footprint": "Resistor_SMD:R_0201_0603Metric",
+      "pad_nets": {
+        "1": {
+          "net": "Net-(U501-VBACK)"
+        },
+        "2": {
+          "net": "GND"
+        }
+      },
+      "connected_nets": [
+        "GND",
+        "Net-(U501-VBACK)"
+      ]
+    },
+    {
+      "library": "Capacitor_SMD:C_0201_0603Metric",
+      "reference": "C501",
+      "value": "0.1uf",
+      "mpn": "GRM033C81E104KE14D",
+      "x": 145.78,
+      "y": 108.33,
+      "angle": 0.0,
+      "layer": "F.Cu",
+      "type": "smd",
+      "pad_count": 4,
+      "sch_path": "/00000000-0000-0000-0000-00005b1d510e",
+      "sheetname": "/",
+      "sheetfile": "BitPresTagBMP581.kicad_sch",
+      "models_3d": [
+        "${KICAD10_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0201_0603Metric.step"
+      ],
+      "courtyard": {
+        "min_x": 145.08,
+        "min_y": 107.98,
+        "max_x": 146.48,
+        "max_y": 108.68
+      },
+      "footprint": "Capacitor_SMD:C_0201_0603Metric",
+      "pad_nets": {
+        "1": {
+          "net": "VIN"
+        },
+        "2": {
+          "net": "GND"
+        }
+      },
+      "connected_nets": [
+        "GND",
+        "VIN"
+      ]
+    },
+    {
+      "library": "Capacitor_SMD:C_0201_0603Metric",
+      "reference": "C503",
+      "value": "0.1uf",
+      "mpn": "GRM033C81E104KE14D",
+      "x": 146.095,
+      "y": 109.29,
+      "angle": 180.0,
+      "layer": "F.Cu",
+      "type": "smd",
+      "pad_count": 4,
+      "sch_path": "/00000000-0000-0000-0000-00005bbf7ec4",
+      "sheetname": "/",
+      "sheetfile": "BitPresTagBMP581.kicad_sch",
+      "models_3d": [
+        "${KICAD10_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0201_0603Metric.step"
+      ],
+      "courtyard": {
+        "min_x": 145.395,
+        "min_y": 108.94,
+        "max_x": 146.795,
+        "max_y": 109.64
+      },
+      "footprint": "Capacitor_SMD:C_0201_0603Metric",
+      "pad_nets": {
+        "1": {
+          "net": "VIN"
+        },
+        "2": {
+          "net": "GND"
+        }
+      },
+      "connected_nets": [
+        "GND",
+        "VIN"
+      ]
+    },
+    {
+      "library": "Diode_SMD:D_0402_1005Metric",
+      "reference": "D401",
+      "value": "D",
+      "mpn": "CDBQC0130L-HF",
+      "x": 151.83,
+      "y": 111.04,
+      "angle": -90.0,
+      "layer": "F.Cu",
+      "type": "smd",
+      "pad_count": 2,
+      "sch_path": "/00000000-0000-0000-0000-00005c0f416f",
+      "sheetname": "/",
+      "sheetfile": "BitPresTagBMP581.kicad_sch",
+      "models_3d": [
+        "${KIPRJMOD}/../libraries/packages3D/D_SOD-923.step"
+      ],
+      "courtyard": {
+        "min_x": 151.36,
+        "min_y": 110.11,
+        "max_x": 152.3,
+        "max_y": 111.97
+      },
+      "footprint": "Diode_SMD:D_0402_1005Metric",
+      "pad_nets": {
+        "1": {
+          "net": "VIN",
+          "pin": "K_1"
+        },
+        "2": {
+          "net": "VBAT",
+          "pin": "A_2"
+        }
+      },
+      "connected_nets": [
+        "VBAT",
+        "VIN"
+      ]
+    },
+    {
+      "library": "AccelTag:adesto_wlcsp12",
+      "reference": "U1",
+      "value": "at25ex321D-UUN",
+      "mpn": "AT25FF321A-UUN-T",
+      "x": 149.873542,
+      "y": 110.36,
+      "angle": 180.0,
+      "layer": "F.Cu",
+      "type": "smd",
+      "pad_count": 12,
+      "sch_path": "/00000000-0000-0000-0000-00005fd47223",
+      "sheetname": "/",
+      "sheetfile": "BitPresTagBMP581.kicad_sch",
+      "models_3d": [
+        "${KIPRJMOD}/packages3D/at25wlcsp.step"
+      ],
+      "courtyard": {
+        "min_x": 148.474,
+        "min_y": 108.76,
+        "max_x": 151.274,
+        "max_y": 111.96
+      },
+      "footprint": "AccelTag:adesto_wlcsp12",
+      "pad_nets": {
+        "A1": {
+          "net": "unconnected-(U1-NC-PadA1)",
+          "pin": "NC_A1"
+        },
+        "A5": {
+          "net": "unconnected-(U1-NC-PadA5)",
+          "pin": "NC_A5"
+        },
+        "B2": {
+          "net": "VIN",
+          "pin": "VCC_B2"
+        },
+        "B4": {
+          "net": "/AT25_nCS",
+          "pin": "nCS_B4"
+        },
+        "C3": {
+          "net": "GND",
+          "pin": "GND_C3"
+        },
+        "D2": {
+          "net": "VIN",
+          "pin": "~{RESET}_D2"
+        },
+        "D4": {
+          "net": "/AT25_MISO",
+          "pin": "SO_D4"
+        },
+        "E3": {
+          "net": "/AT25_MOSI",
+          "pin": "SI_E3"
+        },
+        "F2": {
+          "net": "/AT25_SCK",
+          "pin": "SCK_F2"
+        },
+        "F4": {
+          "net": "unconnected-(U1-nWP-PadF4)",
+          "pin": "nWP_F4"
+        },
+        "G1": {
+          "net": "unconnected-(U1-NC-PadG1)",
+          "pin": "NC_G1"
+        },
+        "G5": {
+          "net": "unconnected-(U1-NC-PadG5)",
+          "pin": "NC_G5"
+        }
+      },
+      "connected_nets": [
+        "/AT25_MISO",
+        "/AT25_MOSI",
+        "/AT25_SCK",
+        "/AT25_nCS",
+        "GND",
+        "VIN",
+        "unconnected-(U1-NC-PadA1)",
+        "unconnected-(U1-NC-PadA5)",
+        "unconnected-(U1-NC-PadG1)",
+        "unconnected-(U1-NC-PadG5)",
+        "unconnected-(U1-nWP-PadF4)"
+      ]
+    },
+    {
+      "library": "AccelTag:taghole1.1mm",
+      "reference": "J304",
+      "value": "Conn_01x01",
+      "mpn": "",
+      "x": 141.48,
+      "y": 104.191,
+      "angle": 0.0,
+      "layer": "F.Cu",
+      "type": "through_hole",
+      "pad_count": 1,
+      "exclude_from_bom": true,
+      "sch_path": "/00000000-0000-0000-0000-00005c0f0bc2",
+      "sheetname": "/",
+      "sheetfile": "BitPresTagBMP581.kicad_sch",
+      "footprint": "AccelTag:taghole1.1mm",
+      "pad_nets": {},
+      "connected_nets": []
+    },
+    {
+      "library": "AccelTag:taghole1.1mm",
+      "reference": "J301",
+      "value": "Conn_01x01",
+      "mpn": "",
+      "x": 154.28,
+      "y": 111.691,
+      "angle": 0.0,
+      "layer": "F.Cu",
+      "type": "through_hole",
+      "pad_count": 1,
+      "exclude_from_bom": true,
+      "sch_path": "/00000000-0000-0000-0000-00005c0ef344",
+      "sheetname": "/",
+      "sheetfile": "BitPresTagBMP581.kicad_sch",
+      "footprint": "AccelTag:taghole1.1mm",
+      "pad_nets": {},
+      "connected_nets": []
+    },
+    {
+      "library": "AccelTag:taghole1.1mm",
+      "reference": "J302",
+      "value": "Conn_01x01",
+      "mpn": "",
+      "x": 154.28,
+      "y": 104.191,
+      "angle": 0.0,
+      "layer": "F.Cu",
+      "type": "through_hole",
+      "pad_count": 1,
+      "exclude_from_bom": true,
+      "sch_path": "/00000000-0000-0000-0000-00005c0f0b10",
+      "sheetname": "/",
+      "sheetfile": "BitPresTagBMP581.kicad_sch",
+      "footprint": "AccelTag:taghole1.1mm",
+      "pad_nets": {},
+      "connected_nets": []
+    },
+    {
+      "library": "Capacitor_SMD:C_0201_0603Metric",
+      "reference": "C5",
+      "value": "0.1uf",
+      "mpn": "GRM033C81E104KE14D",
+      "x": 146.76,
+      "y": 106.6,
+      "angle": -90.0,
+      "layer": "F.Cu",
+      "type": "smd",
+      "pad_count": 4,
+      "sch_path": "/28c5454d-0c4b-4d5f-ac75-f506f8721e69",
+      "sheetname": "/",
+      "sheetfile": "BitPresTagBMP581.kicad_sch",
+      "models_3d": [
+        "${KICAD10_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0201_0603Metric.step"
+      ],
+      "courtyard": {
+        "min_x": 146.41,
+        "min_y": 105.9,
+        "max_x": 147.11,
+        "max_y": 107.3
+      },
+      "footprint": "Capacitor_SMD:C_0201_0603Metric",
+      "pad_nets": {
+        "1": {
+          "net": "/LPS_PWR"
+        },
+        "2": {
+          "net": "GND"
+        }
+      },
+      "connected_nets": [
+        "/LPS_PWR",
+        "GND"
+      ]
+    },
+    {
+      "library": "libraries:LGA9_BMP585_BOS",
+      "reference": "U3",
+      "value": "BMP585",
+      "mpn": "BMP585",
+      "x": 149.13,
+      "y": 106.715,
+      "angle": 90.0,
+      "layer": "F.Cu",
+      "type": "smd",
+      "pad_count": 9,
+      "sch_path": "/b20aeed5-4162-4a9a-85af-ec03be437051",
+      "sheetname": "/",
+      "sheetfile": "BitPresTagBMP581.kicad_sch",
+      "models_3d": [
+        "${KIPRJMOD}/../libraries/packages3D/BMP585.step"
+      ],
+      "courtyard": {
+        "min_x": 147.28,
+        "min_y": 104.865,
+        "max_x": 150.98,
+        "max_y": 108.665
+      },
+      "footprint": "libraries:LGA9_BMP585_BOS",
+      "pad_nets": {
+        "1": {
+          "net": "/LPS_SCK",
+          "pin": "SCX_1"
+        },
+        "2": {
+          "net": "/LPS_MOSI",
+          "pin": "SDX_2"
+        },
+        "3": {
+          "net": "/LPS_MISO",
+          "pin": "SDO_3"
+        },
+        "4": {
+          "net": "/LPS_PWR",
+          "pin": "VDDIO_4"
+        },
+        "5": {
+          "net": "/lps_rdy",
+          "pin": "INT_5"
+        },
+        "6": {
+          "net": "GND",
+          "pin": "VSSIO/VSS_6"
+        },
+        "7": {
+          "net": "/LPS_CS",
+          "pin": "CSB_7"
+        },
+        "8": {
+          "net": "/LPS_PWR",
+          "pin": "VDD_8"
+        },
+        "9": {
+          "net": "unconnected-(U3-L/M-Pad9)",
+          "pin": "L/M_9"
+        }
+      },
+      "connected_nets": [
+        "/LPS_CS",
+        "/LPS_MISO",
+        "/LPS_MOSI",
+        "/LPS_PWR",
+        "/LPS_SCK",
+        "/lps_rdy",
+        "GND",
+        "unconnected-(U3-L/M-Pad9)"
+      ]
+    },
+    {
+      "library": "Capacitor_SMD:C_0201_0603Metric",
+      "reference": "C504",
+      "value": "0.1uf",
+      "mpn": "GRM033C81E104KE14D",
+      "x": 145.283542,
+      "y": 111.01,
+      "angle": -90.0,
+      "layer": "F.Cu",
+      "type": "smd",
+      "pad_count": 4,
+      "sch_path": "/7c7bd3fd-0524-4c23-b7c9-619cb3cfd9e2",
+      "sheetname": "/",
+      "sheetfile": "BitPresTagBMP581.kicad_sch",
+      "models_3d": [
+        "${KICAD10_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0201_0603Metric.step"
+      ],
+      "courtyard": {
+        "min_x": 144.934,
+        "min_y": 110.31,
+        "max_x": 145.634,
+        "max_y": 111.71
+      },
+      "footprint": "Capacitor_SMD:C_0201_0603Metric",
+      "pad_nets": {
+        "1": {
+          "net": "VIN"
+        },
+        "2": {
+          "net": "GND"
+        }
+      },
+      "connected_nets": [
+        "GND",
+        "VIN"
+      ]
+    },
+    {
+      "library": "Capacitor_SMD:C_0603_1608Metric",
+      "reference": "C6",
+      "value": "47uf",
+      "mpn": "06036D476MAT2A",
+      "x": 143.7,
+      "y": 106.95,
+      "angle": -90.0,
+      "layer": "F.Cu",
+      "type": "smd",
+      "pad_count": 2,
+      "sch_path": "/940d7541-e2e1-4c90-ba2c-739cfbe2bab8",
+      "sheetname": "/",
+      "sheetfile": "BitPresTagBMP581.kicad_sch",
+      "models_3d": [
+        "${KICAD10_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0603_1608Metric.step"
+      ],
+      "courtyard": {
+        "min_x": 142.97,
+        "min_y": 105.47,
+        "max_x": 144.43,
+        "max_y": 108.43
+      },
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "pad_nets": {
+        "1": {
+          "net": "VIN"
+        },
+        "2": {
+          "net": "GND"
+        }
+      },
+      "connected_nets": [
+        "GND",
+        "VIN"
+      ]
+    },
+    {
+      "library": "Capacitor_SMD:C_0201_0603Metric",
+      "reference": "C7",
+      "value": "0.1uf",
+      "mpn": "GRM033C81E104KE14D",
+      "x": 142.6,
+      "y": 106.98,
+      "angle": -90.0,
+      "layer": "F.Cu",
+      "type": "smd",
+      "pad_count": 4,
+      "sch_path": "/2355d002-11d5-4925-b5f9-3b939a144041",
+      "sheetname": "/",
+      "sheetfile": "BitPresTagBMP581.kicad_sch",
+      "models_3d": [
+        "${KICAD10_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0201_0603Metric.step"
+      ],
+      "courtyard": {
+        "min_x": 142.25,
+        "min_y": 106.28,
+        "max_x": 142.95,
+        "max_y": 107.68
+      },
+      "footprint": "Capacitor_SMD:C_0201_0603Metric",
+      "pad_nets": {
+        "1": {
+          "net": "VIN"
+        },
+        "2": {
+          "net": "GND"
+        }
+      },
+      "connected_nets": [
+        "GND",
+        "VIN"
+      ]
+    },
+    {
+      "library": "AccelTag:tagpoints6",
+      "reference": "J201",
+      "value": "CONN_02X04",
+      "mpn": "",
+      "x": 155.4,
+      "y": 108.0,
+      "angle": 90.0,
+      "layer": "B.Cu",
+      "type": "smd",
+      "pad_count": 6,
+      "exclude_from_bom": true,
+      "sch_path": "/00000000-0000-0000-0000-00005c0ef350",
+      "sheetname": "/",
+      "sheetfile": "BitPresTagBMP581.kicad_sch",
+      "courtyard": {
+        "min_x": 154.13,
+        "min_y": 106.095,
+        "max_x": 156.67,
+        "max_y": 109.905
+      },
+      "footprint": "AccelTag:tagpoints6",
+      "pad_nets": {
+        "1": {
+          "net": "VIN",
+          "pin": "Pin_1_1"
+        },
+        "2": {
+          "net": "VBAT",
+          "pin": "Pin_2_2"
+        },
+        "3": {
+          "net": "SWDIO",
+          "pin": "Pin_3_3"
+        },
+        "4": {
+          "net": "SWCLK",
+          "pin": "Pin_4_4"
+        },
+        "5": {
+          "net": "RST",
+          "pin": "Pin_5_5"
+        },
+        "6": {
+          "net": "GND",
+          "pin": "Pin_6_6"
+        }
+      },
+      "connected_nets": [
+        "GND",
+        "RST",
+        "SWCLK",
+        "SWDIO",
+        "VBAT",
+        "VIN"
+      ]
+    },
+    {
+      "library": "Capacitor_SMD:C_0201_0603Metric",
+      "reference": "C502",
+      "value": "0.1uf",
+      "mpn": "GRM033C81E104KE14D",
+      "x": 143.92,
+      "y": 109.665,
+      "angle": -90.0,
+      "layer": "B.Cu",
+      "type": "smd",
+      "pad_count": 4,
+      "sch_path": "/00000000-0000-0000-0000-00005b0073bf",
+      "sheetname": "/",
+      "sheetfile": "BitPresTagBMP581.kicad_sch",
+      "models_3d": [
+        "${KICAD10_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0201_0603Metric.step"
+      ],
+      "courtyard": {
+        "min_x": 143.57,
+        "min_y": 108.965,
+        "max_x": 144.27,
+        "max_y": 110.365
+      },
+      "footprint": "Capacitor_SMD:C_0201_0603Metric",
+      "pad_nets": {
+        "1": {
+          "net": "Net-(Q501-C)"
+        },
+        "2": {
+          "net": "GND"
+        }
+      },
+      "connected_nets": [
+        "GND",
+        "Net-(Q501-C)"
+      ]
+    },
+    {
+      "library": "Package_DFN_QFN:QFN-32-1EP_5x5mm_P0.5mm_EP3.45x3.45mm",
+      "reference": "U302",
+      "value": "stm32l431kc",
+      "mpn": "STM32L432KCU6",
+      "x": 148.033542,
+      "y": 108.58,
+      "angle": 0.0,
+      "layer": "B.Cu",
+      "type": "smd",
+      "pad_count": 42,
+      "sch_path": "/00000000-0000-0000-0000-000058a7531d",
+      "sheetname": "/",
+      "sheetfile": "BitPresTagBMP581.kicad_sch",
+      "models_3d": [
+        "${KICAD10_3DMODEL_DIR}/Package_DFN_QFN.3dshapes/QFN-32-1EP_5x5mm_P0.5mm_EP3.45x3.45mm.step"
+      ],
+      "courtyard": {
+        "min_x": 144.904,
+        "min_y": 105.45,
+        "max_x": 151.164,
+        "max_y": 111.71
+      },
+      "footprint": "Package_DFN_QFN:QFN-32-1EP_5x5mm_P0.5mm_EP3.45x3.45mm",
+      "pad_nets": {
+        "1": {
+          "net": "VIN",
+          "pin": "VDD_1"
+        },
+        "2": {
+          "net": "/clkout",
+          "pin": "PC14_2"
+        },
+        "3": {
+          "net": "unconnected-(U302-PC15-Pad3)",
+          "pin": "PC15_3"
+        },
+        "4": {
+          "net": "Net-(Q501-C)",
+          "pin": "~{NRST}_4"
+        },
+        "5": {
+          "net": "VIN",
+          "pin": "VDDA/VREF+_5"
+        },
+        "6": {
+          "net": "/WKUP1",
+          "pin": "PA0_6"
+        },
+        "7": {
+          "net": "/ACCEL_nCS",
+          "pin": "PA1_7"
+        },
+        "8": {
+          "net": "/ACCEL_MOSI",
+          "pin": "PA2_8"
+        },
+        "9": {
+          "net": "/ACCEL_MISO",
+          "pin": "PA3_9"
+        },
+        "10": {
+          "net": "/ACCEL_SCK",
+          "pin": "PA4_10"
+        },
+        "11": {
+          "net": "/LPS_SCK",
+          "pin": "PA5_11"
+        },
+        "12": {
+          "net": "/lps_rdy",
+          "pin": "PA6_12"
+        },
+        "13": {
+          "net": "unconnected-(U302-PA7-Pad13)",
+          "pin": "PA7_13"
+        },
+        "14": {
+          "net": "/LPS_CS",
+          "pin": "PB0_14"
+        },
+        "15": {
+          "net": "/LPS_PWR",
+          "pin": "PB1_15"
+        },
+        "16": {
+          "net": "GND",
+          "pin": "VSS_16"
+        },
+        "17": {
+          "net": "VIN",
+          "pin": "VDD_17"
+        },
+        "18": {
+          "net": "unconnected-(U302-PA8-Pad18)",
+          "pin": "PA8_18"
+        },
+        "19": {
+          "net": "unconnected-(U302-PA9-Pad19)",
+          "pin": "PA9_19"
+        },
+        "20": {
+          "net": "unconnected-(U302-PA10-Pad20)",
+          "pin": "PA10_20"
+        },
+        "21": {
+          "net": "/LPS_MISO",
+          "pin": "PA11_21"
+        },
+        "22": {
+          "net": "/LPS_MOSI",
+          "pin": "PA12_22"
+        },
+        "23": {
+          "net": "SWDIO",
+          "pin": "PA13_23"
+        },
+        "24": {
+          "net": "SWCLK",
+          "pin": "PA14_24"
+        },
+        "25": {
+          "net": "/AT25_nCS",
+          "pin": "PA15_25"
+        },
+        "26": {
+          "net": "/AT25_SCK",
+          "pin": "PB3_26"
+        },
+        "27": {
+          "net": "/AT25_MISO",
+          "pin": "PB4_27"
+        },
+        "28": {
+          "net": "/AT25_MOSI",
+          "pin": "PB5_28"
+        },
+        "29": {
+          "net": "/SCL",
+          "pin": "PB6_29"
+        },
+        "30": {
+          "net": "/SDA",
+          "pin": "PB7_30"
+        },
+        "31": {
+          "net": "GND",
+          "pin": "BOOT0_31"
+        },
+        "32": {
+          "net": "GND",
+          "pin": "VSS_32"
+        },
+        "33": {
+          "net": "GND",
+          "pin": "GND_33"
+        }
+      },
+      "connected_nets": [
+        "/ACCEL_MISO",
+        "/ACCEL_MOSI",
+        "/ACCEL_SCK",
+        "/ACCEL_nCS",
+        "/AT25_MISO",
+        "/AT25_MOSI",
+        "/AT25_SCK",
+        "/AT25_nCS",
+        "/LPS_CS",
+        "/LPS_MISO",
+        "/LPS_MOSI",
+        "/LPS_PWR",
+        "/LPS_SCK",
+        "/SCL",
+        "/SDA",
+        "/WKUP1",
+        "/clkout",
+        "/lps_rdy",
+        "GND",
+        "Net-(Q501-C)",
+        "SWCLK",
+        "SWDIO",
+        "VIN",
+        "unconnected-(U302-PA10-Pad20)",
+        "unconnected-(U302-PA7-Pad13)",
+        "unconnected-(U302-PA8-Pad18)",
+        "unconnected-(U302-PA9-Pad19)",
+        "unconnected-(U302-PC15-Pad3)"
+      ]
+    },
+    {
+      "library": "Package_TO_SOT_SMD:SOT-883",
+      "reference": "Q501",
+      "value": "PMBT2222AMBYL",
+      "mpn": "PMBT2222AMBYL",
+      "x": 142.74,
+      "y": 109.54,
+      "angle": 90.0,
+      "layer": "B.Cu",
+      "type": "smd",
+      "pad_count": 3,
+      "sch_path": "/00000000-0000-0000-0000-00005b44f199",
+      "sheetname": "/",
+      "sheetfile": "BitPresTagBMP581.kicad_sch",
+      "models_3d": [
+        "${KICAD6_3DMODEL_DIR}/Package_TO_SOT_SMD.3dshapes/SOT-883.wrl",
+        "${KIPRJMOD}/packages3D/Diodes_DFN1006-3.step"
+      ],
+      "courtyard": {
+        "min_x": 142.24,
+        "min_y": 108.84,
+        "max_x": 143.24,
+        "max_y": 110.24
+      },
+      "footprint": "Package_TO_SOT_SMD:SOT-883",
+      "pad_nets": {
+        "1": {
+          "net": "RST",
+          "pin": "B_1"
+        },
+        "2": {
+          "net": "GND",
+          "pin": "E_2"
+        },
+        "3": {
+          "net": "Net-(Q501-C)",
+          "pin": "C_3"
+        }
+      },
+      "connected_nets": [
+        "GND",
+        "Net-(Q501-C)",
+        "RST"
+      ]
+    },
+    {
+      "library": "Capacitor_SMD:C_0201_0603Metric",
+      "reference": "C2",
+      "value": "0.1uf",
+      "mpn": "GRM033C81E104KE14D",
+      "x": 151.9,
+      "y": 106.15,
+      "angle": 90.0,
+      "layer": "B.Cu",
+      "type": "smd",
+      "pad_count": 4,
+      "sch_path": "/00000000-0000-0000-0000-000060cc6cfc",
+      "sheetname": "/",
+      "sheetfile": "BitPresTagBMP581.kicad_sch",
+      "models_3d": [
+        "${KICAD10_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0201_0603Metric.step"
+      ],
+      "courtyard": {
+        "min_x": 151.55,
+        "min_y": 105.45,
+        "max_x": 152.25,
+        "max_y": 106.85
+      },
+      "footprint": "Capacitor_SMD:C_0201_0603Metric",
+      "pad_nets": {
+        "1": {
+          "net": "VIN"
+        },
+        "2": {
+          "net": "GND"
+        }
+      },
+      "connected_nets": [
+        "GND",
+        "VIN"
+      ]
+    },
+    {
+      "library": "Capacitor_SMD:C_0201_0603Metric",
+      "reference": "C1",
+      "value": "0.1uf",
+      "mpn": "GRM033C81E104KE14D",
+      "x": 144.055,
+      "y": 105.02,
+      "angle": 0.0,
+      "layer": "B.Cu",
+      "type": "smd",
+      "pad_count": 4,
+      "sch_path": "/c72ce1ca-a916-467a-acd4-4b6599742859",
+      "sheetname": "/",
+      "sheetfile": "BitPresTagBMP581.kicad_sch",
+      "models_3d": [
+        "${KICAD10_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0201_0603Metric.step"
+      ],
+      "courtyard": {
+        "min_x": 143.355,
+        "min_y": 104.67,
+        "max_x": 144.755,
+        "max_y": 105.37
+      },
+      "footprint": "Capacitor_SMD:C_0201_0603Metric",
+      "pad_nets": {
+        "1": {
+          "net": "VIN"
+        },
+        "2": {
+          "net": "GND"
+        }
+      },
+      "connected_nets": [
+        "GND",
+        "VIN"
+      ]
+    },
+    {
+      "library": "Capacitor_SMD:C_0201_0603Metric",
+      "reference": "C3",
+      "value": "0.1uf",
+      "mpn": "GRM033C81E104KE14D",
+      "x": 150.3,
+      "y": 105.1,
+      "angle": 0.0,
+      "layer": "B.Cu",
+      "type": "smd",
+      "pad_count": 4,
+      "sch_path": "/556ebb51-5809-4e8d-9153-aa63998bbd91",
+      "sheetname": "/",
+      "sheetfile": "BitPresTagBMP581.kicad_sch",
+      "models_3d": [
+        "${KICAD10_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0201_0603Metric.step"
+      ],
+      "courtyard": {
+        "min_x": 149.6,
+        "min_y": 104.75,
+        "max_x": 151.0,
+        "max_y": 105.45
+      },
+      "footprint": "Capacitor_SMD:C_0201_0603Metric",
+      "pad_nets": {
+        "1": {
+          "net": "/LPS_PWR"
+        },
+        "2": {
+          "net": "GND"
+        }
+      },
+      "connected_nets": [
+        "/LPS_PWR",
+        "GND"
+      ]
+    },
+    {
+      "library": "libraries:CC-12-4_ADI",
+      "reference": "U2",
+      "value": "ADXL367BCCZ-RL7",
+      "mpn": "ADXL367BCCZ-RL7",
+      "x": 143.1936,
+      "y": 106.96,
+      "angle": 180.0,
+      "layer": "B.Cu",
+      "type": "smd",
+      "pad_count": 12,
+      "sch_path": "/a563bab0-7ddd-451c-9428-f719ebbd92d2",
+      "sheetname": "/",
+      "sheetfile": "BitPresTagBMP581.kicad_sch",
+      "models_3d": [
+        "${KIPRJMOD}/../libraries/packages3D/CC-12-4_ADI.step"
+      ],
+      "courtyard": {
+        "min_x": 141.794,
+        "min_y": 105.46,
+        "max_x": 144.594,
+        "max_y": 108.46
+      },
+      "footprint": "libraries:CC-12-4_ADI",
+      "pad_nets": {
+        "1": {
+          "net": "/ACCEL_SCK",
+          "pin": "SCLK_1"
+        },
+        "2": {
+          "net": "/ACCEL_MOSI",
+          "pin": "MOSI/SDA_2"
+        },
+        "3": {
+          "net": "/ACCEL_MISO",
+          "pin": "MISO/ASEL_3"
+        },
+        "4": {
+          "net": "/ACCEL_nCS",
+          "pin": "*CS/SCL_4"
+        },
+        "5": {
+          "net": "/WKUP1",
+          "pin": "INT1_5"
+        },
+        "6": {
+          "net": "unconnected-(U2-INT2-Pad6)",
+          "pin": "INT2_6"
+        },
+        "7": {
+          "net": "GND",
+          "pin": "GND_7"
+        },
+        "8": {
+          "net": "unconnected-(U2-ADC_IN-Pad8)",
+          "pin": "ADC_IN_8"
+        },
+        "9": {
+          "net": "unconnected-(U2-VREG_OUT-Pad9)",
+          "pin": "VREG_OUT_9"
+        },
+        "10": {
+          "net": "VIN",
+          "pin": "VS_10"
+        },
+        "11": {
+          "net": "GND",
+          "pin": "GND_11"
+        },
+        "12": {
+          "net": "VIN",
+          "pin": "VDDIO_12"
+        }
+      },
+      "connected_nets": [
+        "/ACCEL_MISO",
+        "/ACCEL_MOSI",
+        "/ACCEL_SCK",
+        "/ACCEL_nCS",
+        "/WKUP1",
+        "GND",
+        "VIN",
+        "unconnected-(U2-ADC_IN-Pad8)",
+        "unconnected-(U2-INT2-Pad6)",
+        "unconnected-(U2-VREG_OUT-Pad9)"
+      ]
+    },
+    {
+      "library": "Capacitor_SMD:C_0402_1005Metric",
+      "reference": "C4",
+      "value": "22uf",
+      "mpn": "04026D226MAT2A",
+      "x": 151.83,
+      "y": 111.04,
+      "angle": -90.0,
+      "layer": "B.Cu",
+      "type": "smd",
+      "pad_count": 2,
+      "sch_path": "/fcc9bf09-8484-43c5-bfff-f1c0faeccf22",
+      "sheetname": "/",
+      "sheetfile": "BitPresTagBMP581.kicad_sch",
+      "models_3d": [
+        "${KICAD10_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0402_1005Metric.step"
+      ],
+      "courtyard": {
+        "min_x": 151.37,
+        "min_y": 110.13,
+        "max_x": 152.29,
+        "max_y": 111.95
+      },
+      "footprint": "Capacitor_SMD:C_0402_1005Metric",
+      "pad_nets": {
+        "1": {
+          "net": "VIN"
+        },
+        "2": {
+          "net": "GND"
+        }
+      },
+      "connected_nets": [
+        "GND",
+        "VIN"
+      ]
+    }
+  ],
+  "tracks": {
+    "segment_count": 291,
+    "arc_count": 0,
+    "width_distribution": {
+      "0.1524": 29,
+      "0.1016": 258,
+      "0.2032": 4
+    },
+    "layer_distribution": {
+      "F.Cu": 147,
+      "B.Cu": 144
+    }
+  },
+  "vias": {
+    "count": 39,
+    "size_distribution": {
+      "0.4572/0.254": 39
+    },
+    "via_analysis": {
+      "type_breakdown": {
+        "through": {
+          "count": 39,
+          "size_distribution": {
+            "0.4572/0.254": 39
+          }
+        }
+      },
+      "annular_ring": {
+        "min_mm": 0.102,
+        "max_mm": 0.102,
+        "distribution": {
+          "0.102": 39
+        },
+        "below_0.125mm": 39
+      },
+      "via_in_pad": [
+        {
+          "component": "U302",
+          "pad": "",
+          "via_x": 146.96,
+          "via_y": 108.48,
+          "via_drill": 0.254,
+          "same_net": false,
+          "via_type": "through"
+        },
+        {
+          "component": "U302",
+          "pad": "",
+          "via_x": 146.92,
+          "via_y": 107.5,
+          "via_drill": 0.254,
+          "same_net": false,
+          "via_type": "through"
+        }
+      ],
+      "fanout_patterns": [
+        {
+          "component": "U302",
+          "pad_count": 42,
+          "fanout_vias": 31,
+          "unique_nets": 17,
+          "package": "Package_DFN_QFN:QFN-32-1EP_5x5mm_P0.5mm_EP3.45x3.45mm"
+        }
+      ],
+      "current_capacity": {
+        "drill_size_distribution": {
+          "0.254": 39
+        },
+        "min_drill_mm": 0.254,
+        "max_drill_mm": 0.254,
+        "total_vias": 39,
+        "ratings": [
+          {
+            "drill_mm": 0.254,
+            "count": 39,
+            "plating_area_mm2": 0.0199,
+            "approx_current_A": 6.6
+          }
+        ]
+      }
+    }
+  },
+  "zones": [
+    {
+      "net": 26,
+      "net_name": "VIN",
+      "layers": [
+        "In1.Cu"
+      ],
+      "clearance": 0.508,
+      "min_thickness": 0.25,
+      "thermal_gap": 0.5,
+      "thermal_bridge_width": 0.5,
+      "outline_points": 5,
+      "outline_area_mm2": 324.05,
+      "is_filled": true,
+      "outline_bbox": [
+        137.6,
+        100.5,
+        160.4,
+        115.1
+      ],
+      "filled_area_mm2": 121.25,
+      "fill_region_count": 1,
+      "filled_bbox": [
+        140.0,
+        103.001,
+        158.0,
+        112.999
+      ],
+      "fill_ratio": 0.374
+    },
+    {
+      "net": 19,
+      "net_name": "GND",
+      "layers": [
+        "In2.Cu"
+      ],
+      "clearance": 0.508,
+      "min_thickness": 0.25,
+      "thermal_gap": 0.5,
+      "thermal_bridge_width": 0.5,
+      "outline_points": 4,
+      "outline_area_mm2": 388.88,
+      "is_filled": true,
+      "outline_bbox": [
+        137.1,
+        99.8,
+        161.3,
+        116.6
+      ],
+      "priority": 1,
+      "filled_area_mm2": 134.42,
+      "fill_region_count": 1,
+      "filled_bbox": [
+        140.0,
+        103.001,
+        158.0,
+        112.999
+      ],
+      "fill_ratio": 0.346
+    }
+  ],
+  "keepout_zones": [],
+  "connectivity": {
+    "total_nets_with_pads": 41,
+    "routed_nets": 26,
+    "unrouted_count": 0,
+    "routing_complete": true
+  },
+  "net_lengths": [
+    {
+      "net": "GND",
+      "net_number": 19,
+      "total_length_mm": 34.909,
+      "segment_count": 68,
+      "via_count": 14,
+      "layers": {
+        "B.Cu": {
+          "length_mm": 15.162,
+          "segments": 28
+        },
+        "F.Cu": {
+          "length_mm": 19.747,
+          "segments": 40
+        }
+      }
+    },
+    {
+      "net": "VIN",
+      "net_number": 26,
+      "total_length_mm": 22.63,
+      "segment_count": 50,
+      "via_count": 7,
+      "layers": {
+        "B.Cu": {
+          "length_mm": 8.775,
+          "segments": 22
+        },
+        "F.Cu": {
+          "length_mm": 13.855,
+          "segments": 28
+        }
+      }
+    },
+    {
+      "net": "RST",
+      "net_number": 22,
+      "total_length_mm": 17.364,
+      "segment_count": 17,
+      "via_count": 2,
+      "layers": {
+        "B.Cu": {
+          "length_mm": 1.547,
+          "segments": 4
+        },
+        "F.Cu": {
+          "length_mm": 15.817,
+          "segments": 13
+        }
+      }
+    },
+    {
+      "net": "/LPS_PWR",
+      "net_number": 12,
+      "total_length_mm": 10.356,
+      "segment_count": 13,
+      "via_count": 1,
+      "layers": {
+        "B.Cu": {
+          "length_mm": 3.146,
+          "segments": 5
+        },
+        "F.Cu": {
+          "length_mm": 7.21,
+          "segments": 8
+        }
+      }
+    },
+    {
+      "net": "VBAT",
+      "net_number": 25,
+      "total_length_mm": 9.022,
+      "segment_count": 12,
+      "via_count": 1,
+      "layers": {
+        "B.Cu": {
+          "length_mm": 0.942,
+          "segments": 2
+        },
+        "F.Cu": {
+          "length_mm": 8.08,
+          "segments": 10
+        }
+      }
+    },
+    {
+      "net": "SWCLK",
+      "net_number": 23,
+      "total_length_mm": 6.529,
+      "segment_count": 4,
+      "via_count": 0,
+      "layers": {
+        "B.Cu": {
+          "length_mm": 6.529,
+          "segments": 4
+        }
+      }
+    },
+    {
+      "net": "/LPS_SCK",
+      "net_number": 13,
+      "total_length_mm": 5.988,
+      "segment_count": 8,
+      "via_count": 1,
+      "layers": {
+        "B.Cu": {
+          "length_mm": 1.555,
+          "segments": 4
+        },
+        "F.Cu": {
+          "length_mm": 4.433,
+          "segments": 4
+        }
+      }
+    },
+    {
+      "net": "/clkout",
+      "net_number": 17,
+      "total_length_mm": 5.547,
+      "segment_count": 10,
+      "via_count": 1,
+      "layers": {
+        "B.Cu": {
+          "length_mm": 4.879,
+          "segments": 8
+        },
+        "F.Cu": {
+          "length_mm": 0.668,
+          "segments": 2
+        }
+      }
+    },
+    {
+      "net": "SWDIO",
+      "net_number": 24,
+      "total_length_mm": 5.052,
+      "segment_count": 3,
+      "via_count": 0,
+      "layers": {
+        "B.Cu": {
+          "length_mm": 5.052,
+          "segments": 3
+        }
+      }
+    },
+    {
+      "net": "/lps_rdy",
+      "net_number": 18,
+      "total_length_mm": 5.051,
+      "segment_count": 7,
+      "via_count": 1,
+      "layers": {
+        "B.Cu": {
+          "length_mm": 1.434,
+          "segments": 2
+        },
+        "F.Cu": {
+          "length_mm": 3.617,
+          "segments": 5
+        }
+      }
+    },
+    {
+      "net": "/AT25_MOSI",
+      "net_number": 6,
+      "total_length_mm": 5.021,
+      "segment_count": 9,
+      "via_count": 1,
+      "layers": {
+        "B.Cu": {
+          "length_mm": 0.999,
+          "segments": 2
+        },
+        "F.Cu": {
+          "length_mm": 4.022,
+          "segments": 7
+        }
+      }
+    },
+    {
+      "net": "/AT25_SCK",
+      "net_number": 7,
+      "total_length_mm": 4.5,
+      "segment_count": 10,
+      "via_count": 1,
+      "layers": {
+        "B.Cu": {
+          "length_mm": 2.65,
+          "segments": 6
+        },
+        "F.Cu": {
+          "length_mm": 1.85,
+          "segments": 4
+        }
+      }
+    },
+    {
+      "net": "/AT25_MISO",
+      "net_number": 5,
+      "total_length_mm": 4.132,
+      "segment_count": 12,
+      "via_count": 1,
+      "layers": {
+        "B.Cu": {
+          "length_mm": 1.652,
+          "segments": 5
+        },
+        "F.Cu": {
+          "length_mm": 2.48,
+          "segments": 7
+        }
+      }
+    },
+    {
+      "net": "/LPS_MOSI",
+      "net_number": 11,
+      "total_length_mm": 3.898,
+      "segment_count": 5,
+      "via_count": 1,
+      "layers": {
+        "B.Cu": {
+          "length_mm": 1.043,
+          "segments": 2
+        },
+        "F.Cu": {
+          "length_mm": 2.855,
+          "segments": 3
+        }
+      }
+    },
+    {
+      "net": "/ACCEL_SCK",
+      "net_number": 3,
+      "total_length_mm": 3.653,
+      "segment_count": 8,
+      "via_count": 0,
+      "layers": {
+        "B.Cu": {
+          "length_mm": 3.653,
+          "segments": 8
+        }
+      }
+    },
+    {
+      "net": "/SDA",
+      "net_number": 15,
+      "total_length_mm": 3.532,
+      "segment_count": 8,
+      "via_count": 1,
+      "layers": {
+        "B.Cu": {
+          "length_mm": 2.777,
+          "segments": 6
+        },
+        "F.Cu": {
+          "length_mm": 0.755,
+          "segments": 2
+        }
+      }
+    },
+    {
+      "net": "Net-(Q501-C)",
+      "net_number": 20,
+      "total_length_mm": 3.486,
+      "segment_count": 8,
+      "via_count": 0,
+      "layers": {
+        "B.Cu": {
+          "length_mm": 3.486,
+          "segments": 8
+        }
+      }
+    },
+    {
+      "net": "/ACCEL_MISO",
+      "net_number": 1,
+      "total_length_mm": 3.112,
+      "segment_count": 8,
+      "via_count": 2,
+      "layers": {
+        "B.Cu": {
+          "length_mm": 2.084,
+          "segments": 6
+        },
+        "F.Cu": {
+          "length_mm": 1.028,
+          "segments": 2
+        }
+      }
+    },
+    {
+      "net": "/LPS_MISO",
+      "net_number": 10,
+      "total_length_mm": 2.533,
+      "segment_count": 6,
+      "via_count": 1,
+      "layers": {
+        "B.Cu": {
+          "length_mm": 1.121,
+          "segments": 2
+        },
+        "F.Cu": {
+          "length_mm": 1.412,
+          "segments": 4
+        }
+      }
+    },
+    {
+      "net": "/WKUP1",
+      "net_number": 16,
+      "total_length_mm": 2.298,
+      "segment_count": 3,
+      "via_count": 0,
+      "layers": {
+        "B.Cu": {
+          "length_mm": 2.298,
+          "segments": 3
+        }
+      }
+    },
+    {
+      "net": "/LPS_CS",
+      "net_number": 9,
+      "total_length_mm": 1.975,
+      "segment_count": 4,
+      "via_count": 1,
+      "layers": {
+        "B.Cu": {
+          "length_mm": 1.467,
+          "segments": 2
+        },
+        "F.Cu": {
+          "length_mm": 0.508,
+          "segments": 2
+        }
+      }
+    },
+    {
+      "net": "/SCL",
+      "net_number": 14,
+      "total_length_mm": 1.772,
+      "segment_count": 3,
+      "via_count": 1,
+      "layers": {
+        "B.Cu": {
+          "length_mm": 1.162,
+          "segments": 2
+        },
+        "F.Cu": {
+          "length_mm": 0.61,
+          "segments": 1
+        }
+      }
+    },
+    {
+      "net": "/ACCEL_nCS",
+      "net_number": 4,
+      "total_length_mm": 1.725,
+      "segment_count": 4,
+      "via_count": 0,
+      "layers": {
+        "B.Cu": {
+          "length_mm": 1.725,
+          "segments": 4
+        }
+      }
+    },
+    {
+      "net": "/ACCEL_MOSI",
+      "net_number": 2,
+      "total_length_mm": 1.665,
+      "segment_count": 4,
+      "via_count": 0,
+      "layers": {
+        "B.Cu": {
+          "length_mm": 1.665,
+          "segments": 4
+        }
+      }
+    },
+    {
+      "net": "/AT25_nCS",
+      "net_number": 8,
+      "total_length_mm": 1.657,
+      "segment_count": 5,
+      "via_count": 1,
+      "layers": {
+        "B.Cu": {
+          "length_mm": 0.603,
+          "segments": 2
+        },
+        "F.Cu": {
+          "length_mm": 1.054,
+          "segments": 3
+        }
+      }
+    },
+    {
+      "net": "Net-(U501-VBACK)",
+      "net_number": 21,
+      "total_length_mm": 1.036,
+      "segment_count": 2,
+      "via_count": 0,
+      "layers": {
+        "F.Cu": {
+          "length_mm": 1.036,
+          "segments": 2
+        }
+      }
+    }
+  ],
+  "power_net_routing": [
+    {
+      "net": "GND",
+      "track_count": 68,
+      "total_length_mm": 34.91,
+      "min_width_mm": 0.1016,
+      "max_width_mm": 0.1524,
+      "widths_used": [
+        0.1016,
+        0.1524
+      ]
+    },
+    {
+      "net": "VBAT",
+      "track_count": 12,
+      "total_length_mm": 9.02,
+      "min_width_mm": 0.1016,
+      "max_width_mm": 0.2032,
+      "widths_used": [
+        0.1016,
+        0.1524,
+        0.2032
+      ]
+    },
+    {
+      "net": "VIN",
+      "track_count": 50,
+      "total_length_mm": 22.63,
+      "min_width_mm": 0.1016,
+      "max_width_mm": 0.1524,
+      "widths_used": [
+        0.1016,
+        0.1524
+      ]
+    }
+  ],
+  "decoupling_placement": [
+    {
+      "ic": "U501",
+      "value": "RV-3028-C8-32.768kHz-1PPM-TA-QC",
+      "layer": "F.Cu",
+      "nearby_caps": [
+        {
+          "cap": "C504",
+          "value": "0.1uf",
+          "distance_mm": 0.93,
+          "shared_nets": [
+            "GND",
+            "VIN"
+          ],
+          "same_side": true
+        },
+        {
+          "cap": "C503",
+          "value": "0.1uf",
+          "distance_mm": 1.08,
+          "shared_nets": [
+            "GND",
+            "VIN"
+          ],
+          "same_side": true
+        },
+        {
+          "cap": "C501",
+          "value": "0.1uf",
+          "distance_mm": 2.01,
+          "shared_nets": [
+            "GND",
+            "VIN"
+          ],
+          "same_side": true
+        },
+        {
+          "cap": "C502",
+          "value": "0.1uf",
+          "distance_mm": 2.25,
+          "shared_nets": [
+            "GND"
+          ],
+          "same_side": false
+        },
+        {
+          "cap": "C5",
+          "value": "0.1uf",
+          "distance_mm": 3.43,
+          "shared_nets": [
+            "GND"
+          ],
+          "same_side": true
+        },
+        {
+          "cap": "C6",
+          "value": "47uf",
+          "distance_mm": 3.58,
+          "shared_nets": [
+            "GND",
+            "VIN"
+          ],
+          "same_side": true
+        },
+        {
+          "cap": "C4",
+          "value": "22uf",
+          "distance_mm": 4.07,
+          "shared_nets": [
+            "GND",
+            "VIN"
+          ],
+          "same_side": false
+        },
+        {
+          "cap": "C7",
+          "value": "0.1uf",
+          "distance_mm": 4.66,
+          "shared_nets": [
+            "GND",
+            "VIN"
+          ],
+          "same_side": true
+        },
+        {
+          "cap": "C1",
+          "value": "0.1uf",
+          "distance_mm": 5.6,
+          "shared_nets": [
+            "GND",
+            "VIN"
+          ],
+          "same_side": false
+        },
+        {
+          "cap": "C404",
+          "value": "22uf",
+          "distance_mm": 5.61,
+          "shared_nets": [
+            "GND",
+            "VIN"
+          ],
+          "same_side": true
+        },
+        {
+          "cap": "C2",
+          "value": "0.1uf",
+          "distance_mm": 5.64,
+          "shared_nets": [
+            "GND",
+            "VIN"
+          ],
+          "same_side": false
+        },
+        {
+          "cap": "C3",
+          "value": "0.1uf",
+          "distance_mm": 5.68,
+          "shared_nets": [
+            "GND"
+          ],
+          "same_side": false
+        }
+      ],
+      "closest_cap_mm": 0.93
+    },
+    {
+      "ic": "U1",
+      "value": "at25ex321D-UUN",
+      "layer": "F.Cu",
+      "nearby_caps": [
+        {
+          "cap": "C4",
+          "value": "22uf",
+          "distance_mm": 1.96,
+          "shared_nets": [
+            "GND",
+            "VIN"
+          ],
+          "same_side": false
+        },
+        {
+          "cap": "C503",
+          "value": "0.1uf",
+          "distance_mm": 3.66,
+          "shared_nets": [
+            "GND",
+            "VIN"
+          ],
+          "same_side": true
+        },
+        {
+          "cap": "C501",
+          "value": "0.1uf",
+          "distance_mm": 4.36,
+          "shared_nets": [
+            "GND",
+            "VIN"
+          ],
+          "same_side": true
+        },
+        {
+          "cap": "C2",
+          "value": "0.1uf",
+          "distance_mm": 4.54,
+          "shared_nets": [
+            "GND",
+            "VIN"
+          ],
+          "same_side": false
+        },
+        {
+          "cap": "C504",
+          "value": "0.1uf",
+          "distance_mm": 4.59,
+          "shared_nets": [
+            "GND",
+            "VIN"
+          ],
+          "same_side": true
+        },
+        {
+          "cap": "C5",
+          "value": "0.1uf",
+          "distance_mm": 4.77,
+          "shared_nets": [
+            "GND"
+          ],
+          "same_side": true
+        },
+        {
+          "cap": "C3",
+          "value": "0.1uf",
+          "distance_mm": 5.46,
+          "shared_nets": [
+            "GND"
+          ],
+          "same_side": false
+        },
+        {
+          "cap": "C502",
+          "value": "0.1uf",
+          "distance_mm": 5.98,
+          "shared_nets": [
+            "GND"
+          ],
+          "same_side": false
+        },
+        {
+          "cap": "C6",
+          "value": "47uf",
+          "distance_mm": 6.79,
+          "shared_nets": [
+            "GND",
+            "VIN"
+          ],
+          "same_side": true
+        },
+        {
+          "cap": "C404",
+          "value": "22uf",
+          "distance_mm": 7.61,
+          "shared_nets": [
+            "GND",
+            "VIN"
+          ],
+          "same_side": true
+        },
+        {
+          "cap": "C1",
+          "value": "0.1uf",
+          "distance_mm": 7.79,
+          "shared_nets": [
+            "GND",
+            "VIN"
+          ],
+          "same_side": false
+        },
+        {
+          "cap": "C7",
+          "value": "0.1uf",
+          "distance_mm": 7.96,
+          "shared_nets": [
+            "GND",
+            "VIN"
+          ],
+          "same_side": true
+        }
+      ],
+      "closest_cap_mm": 1.96
+    },
+    {
+      "ic": "U3",
+      "value": "BMP585",
+      "layer": "F.Cu",
+      "nearby_caps": [
+        {
+          "cap": "C3",
+          "value": "0.1uf",
+          "distance_mm": 0.92,
+          "shared_nets": [
+            "/LPS_PWR",
+            "GND"
+          ],
+          "same_side": false
+        },
+        {
+          "cap": "C5",
+          "value": "0.1uf",
+          "distance_mm": 2.49,
+          "shared_nets": [
+            "/LPS_PWR",
+            "GND"
+          ],
+          "same_side": true
+        },
+        {
+          "cap": "C2",
+          "value": "0.1uf",
+          "distance_mm": 2.79,
+          "shared_nets": [
+            "GND"
+          ],
+          "same_side": false
+        },
+        {
+          "cap": "C501",
+          "value": "0.1uf",
+          "distance_mm": 4.13,
+          "shared_nets": [
+            "GND"
+          ],
+          "same_side": true
+        },
+        {
+          "cap": "C404",
+          "value": "22uf",
+          "distance_mm": 4.39,
+          "shared_nets": [
+            "GND"
+          ],
+          "same_side": true
+        },
+        {
+          "cap": "C503",
+          "value": "0.1uf",
+          "distance_mm": 4.65,
+          "shared_nets": [
+            "GND"
+          ],
+          "same_side": true
+        },
+        {
+          "cap": "C1",
+          "value": "0.1uf",
+          "distance_mm": 4.75,
+          "shared_nets": [
+            "GND"
+          ],
+          "same_side": false
+        },
+        {
+          "cap": "C6",
+          "value": "47uf",
+          "distance_mm": 5.47,
+          "shared_nets": [
+            "GND"
+          ],
+          "same_side": true
+        },
+        {
+          "cap": "C4",
+          "value": "22uf",
+          "distance_mm": 5.74,
+          "shared_nets": [
+            "GND"
+          ],
+          "same_side": false
+        },
+        {
+          "cap": "C504",
+          "value": "0.1uf",
+          "distance_mm": 6.44,
+          "shared_nets": [
+            "GND"
+          ],
+          "same_side": true
+        },
+        {
+          "cap": "C502",
+          "value": "0.1uf",
+          "distance_mm": 6.46,
+          "shared_nets": [
+            "GND"
+          ],
+          "same_side": false
+        },
+        {
+          "cap": "C7",
+          "value": "0.1uf",
+          "distance_mm": 6.63,
+          "shared_nets": [
+            "GND"
+          ],
+          "same_side": true
+        }
+      ],
+      "closest_cap_mm": 0.92
+    },
+    {
+      "ic": "U302",
+      "value": "stm32l431kc",
+      "layer": "B.Cu",
+      "nearby_caps": [
+        {
+          "cap": "C504",
+          "value": "0.1uf",
+          "distance_mm": 1.05,
+          "shared_nets": [
+            "GND",
+            "VIN"
+          ],
+          "same_side": false
+        },
+        {
+          "cap": "C3",
+          "value": "0.1uf",
+          "distance_mm": 1.06,
+          "shared_nets": [
+            "/LPS_PWR",
+            "GND"
+          ],
+          "same_side": true
+        },
+        {
+          "cap": "C503",
+          "value": "0.1uf",
+          "distance_mm": 1.73,
+          "shared_nets": [
+            "GND",
+            "VIN"
+          ],
+          "same_side": false
+        },
+        {
+          "cap": "C501",
+          "value": "0.1uf",
+          "distance_mm": 1.92,
+          "shared_nets": [
+            "GND",
+            "VIN"
+          ],
+          "same_side": false
+        },
+        {
+          "cap": "C5",
+          "value": "0.1uf",
+          "distance_mm": 2.07,
+          "shared_nets": [
+            "/LPS_PWR",
+            "GND"
+          ],
+          "same_side": false
+        },
+        {
+          "cap": "C2",
+          "value": "0.1uf",
+          "distance_mm": 2.14,
+          "shared_nets": [
+            "GND",
+            "VIN"
+          ],
+          "same_side": true
+        },
+        {
+          "cap": "C502",
+          "value": "0.1uf",
+          "distance_mm": 2.57,
+          "shared_nets": [
+            "GND",
+            "Net-(Q501-C)"
+          ],
+          "same_side": true
+        },
+        {
+          "cap": "C6",
+          "value": "47uf",
+          "distance_mm": 4.19,
+          "shared_nets": [
+            "GND",
+            "VIN"
+          ],
+          "same_side": false
+        },
+        {
+          "cap": "C4",
+          "value": "22uf",
+          "distance_mm": 4.28,
+          "shared_nets": [
+            "GND",
+            "VIN"
+          ],
+          "same_side": true
+        },
+        {
+          "cap": "C404",
+          "value": "22uf",
+          "distance_mm": 4.91,
+          "shared_nets": [
+            "GND",
+            "VIN"
+          ],
+          "same_side": false
+        },
+        {
+          "cap": "C1",
+          "value": "0.1uf",
+          "distance_mm": 5.09,
+          "shared_nets": [
+            "GND",
+            "VIN"
+          ],
+          "same_side": true
+        },
+        {
+          "cap": "C7",
+          "value": "0.1uf",
+          "distance_mm": 5.22,
+          "shared_nets": [
+            "GND",
+            "VIN"
+          ],
+          "same_side": false
+        }
+      ],
+      "closest_cap_mm": 1.05
+    },
+    {
+      "ic": "U2",
+      "value": "ADXL367BCCZ-RL7",
+      "layer": "B.Cu",
+      "nearby_caps": [
+        {
+          "cap": "C7",
+          "value": "0.1uf",
+          "distance_mm": 0.27,
+          "shared_nets": [
+            "GND",
+            "VIN"
+          ],
+          "same_side": false
+        },
+        {
+          "cap": "C6",
+          "value": "47uf",
+          "distance_mm": 0.77,
+          "shared_nets": [
+            "GND",
+            "VIN"
+          ],
+          "same_side": false
+        },
+        {
+          "cap": "C1",
+          "value": "0.1uf",
+          "distance_mm": 1.28,
+          "shared_nets": [
+            "GND",
+            "VIN"
+          ],
+          "same_side": true
+        },
+        {
+          "cap": "C404",
+          "value": "22uf",
+          "distance_mm": 1.44,
+          "shared_nets": [
+            "GND",
+            "VIN"
+          ],
+          "same_side": false
+        },
+        {
+          "cap": "C502",
+          "value": "0.1uf",
+          "distance_mm": 2.26,
+          "shared_nets": [
+            "GND"
+          ],
+          "same_side": true
+        },
+        {
+          "cap": "C501",
+          "value": "0.1uf",
+          "distance_mm": 3.17,
+          "shared_nets": [
+            "GND",
+            "VIN"
+          ],
+          "same_side": false
+        },
+        {
+          "cap": "C503",
+          "value": "0.1uf",
+          "distance_mm": 3.77,
+          "shared_nets": [
+            "GND",
+            "VIN"
+          ],
+          "same_side": false
+        },
+        {
+          "cap": "C5",
+          "value": "0.1uf",
+          "distance_mm": 3.82,
+          "shared_nets": [
+            "GND"
+          ],
+          "same_side": false
+        },
+        {
+          "cap": "C504",
+          "value": "0.1uf",
+          "distance_mm": 4.18,
+          "shared_nets": [
+            "GND",
+            "VIN"
+          ],
+          "same_side": false
+        },
+        {
+          "cap": "C3",
+          "value": "0.1uf",
+          "distance_mm": 7.07,
+          "shared_nets": [
+            "GND"
+          ],
+          "same_side": true
+        },
+        {
+          "cap": "C2",
+          "value": "0.1uf",
+          "distance_mm": 8.96,
+          "shared_nets": [
+            "GND",
+            "VIN"
+          ],
+          "same_side": true
+        },
+        {
+          "cap": "C4",
+          "value": "22uf",
+          "distance_mm": 9.92,
+          "shared_nets": [
+            "GND",
+            "VIN"
+          ],
+          "same_side": true
+        }
+      ],
+      "closest_cap_mm": 0.27
+    }
+  ],
+  "decoupling_proximity": [
+    {
+      "ic_ref": "U501",
+      "cap_ref": "C504",
+      "distance_mm": 0.93,
+      "cap_value": "0.1uf",
+      "same_side": true,
+      "shared_nets": [
+        "GND",
+        "VIN"
+      ]
+    },
+    {
+      "ic_ref": "U501",
+      "cap_ref": "C503",
+      "distance_mm": 1.08,
+      "cap_value": "0.1uf",
+      "same_side": true,
+      "shared_nets": [
+        "GND",
+        "VIN"
+      ]
+    },
+    {
+      "ic_ref": "U501",
+      "cap_ref": "C501",
+      "distance_mm": 2.01,
+      "cap_value": "0.1uf",
+      "same_side": true,
+      "shared_nets": [
+        "GND",
+        "VIN"
+      ]
+    },
+    {
+      "ic_ref": "U501",
+      "cap_ref": "C502",
+      "distance_mm": 2.25,
+      "cap_value": "0.1uf",
+      "same_side": false,
+      "shared_nets": [
+        "GND"
+      ]
+    },
+    {
+      "ic_ref": "U501",
+      "cap_ref": "C5",
+      "distance_mm": 3.43,
+      "cap_value": "0.1uf",
+      "same_side": true,
+      "shared_nets": [
+        "GND"
+      ]
+    },
+    {
+      "ic_ref": "U501",
+      "cap_ref": "C6",
+      "distance_mm": 3.58,
+      "cap_value": "47uf",
+      "same_side": true,
+      "shared_nets": [
+        "GND",
+        "VIN"
+      ]
+    },
+    {
+      "ic_ref": "U501",
+      "cap_ref": "C4",
+      "distance_mm": 4.07,
+      "cap_value": "22uf",
+      "same_side": false,
+      "shared_nets": [
+        "GND",
+        "VIN"
+      ]
+    },
+    {
+      "ic_ref": "U501",
+      "cap_ref": "C7",
+      "distance_mm": 4.66,
+      "cap_value": "0.1uf",
+      "same_side": true,
+      "shared_nets": [
+        "GND",
+        "VIN"
+      ]
+    },
+    {
+      "ic_ref": "U501",
+      "cap_ref": "C1",
+      "distance_mm": 5.6,
+      "cap_value": "0.1uf",
+      "same_side": false,
+      "shared_nets": [
+        "GND",
+        "VIN"
+      ]
+    },
+    {
+      "ic_ref": "U501",
+      "cap_ref": "C404",
+      "distance_mm": 5.61,
+      "cap_value": "22uf",
+      "same_side": true,
+      "shared_nets": [
+        "GND",
+        "VIN"
+      ]
+    },
+    {
+      "ic_ref": "U501",
+      "cap_ref": "C2",
+      "distance_mm": 5.64,
+      "cap_value": "0.1uf",
+      "same_side": false,
+      "shared_nets": [
+        "GND",
+        "VIN"
+      ]
+    },
+    {
+      "ic_ref": "U501",
+      "cap_ref": "C3",
+      "distance_mm": 5.68,
+      "cap_value": "0.1uf",
+      "same_side": false,
+      "shared_nets": [
+        "GND"
+      ]
+    },
+    {
+      "ic_ref": "U1",
+      "cap_ref": "C4",
+      "distance_mm": 1.96,
+      "cap_value": "22uf",
+      "same_side": false,
+      "shared_nets": [
+        "GND",
+        "VIN"
+      ]
+    },
+    {
+      "ic_ref": "U1",
+      "cap_ref": "C503",
+      "distance_mm": 3.66,
+      "cap_value": "0.1uf",
+      "same_side": true,
+      "shared_nets": [
+        "GND",
+        "VIN"
+      ]
+    },
+    {
+      "ic_ref": "U1",
+      "cap_ref": "C501",
+      "distance_mm": 4.36,
+      "cap_value": "0.1uf",
+      "same_side": true,
+      "shared_nets": [
+        "GND",
+        "VIN"
+      ]
+    },
+    {
+      "ic_ref": "U1",
+      "cap_ref": "C2",
+      "distance_mm": 4.54,
+      "cap_value": "0.1uf",
+      "same_side": false,
+      "shared_nets": [
+        "GND",
+        "VIN"
+      ]
+    },
+    {
+      "ic_ref": "U1",
+      "cap_ref": "C504",
+      "distance_mm": 4.59,
+      "cap_value": "0.1uf",
+      "same_side": true,
+      "shared_nets": [
+        "GND",
+        "VIN"
+      ]
+    },
+    {
+      "ic_ref": "U1",
+      "cap_ref": "C5",
+      "distance_mm": 4.77,
+      "cap_value": "0.1uf",
+      "same_side": true,
+      "shared_nets": [
+        "GND"
+      ]
+    },
+    {
+      "ic_ref": "U1",
+      "cap_ref": "C3",
+      "distance_mm": 5.46,
+      "cap_value": "0.1uf",
+      "same_side": false,
+      "shared_nets": [
+        "GND"
+      ]
+    },
+    {
+      "ic_ref": "U1",
+      "cap_ref": "C502",
+      "distance_mm": 5.98,
+      "cap_value": "0.1uf",
+      "same_side": false,
+      "shared_nets": [
+        "GND"
+      ]
+    },
+    {
+      "ic_ref": "U1",
+      "cap_ref": "C6",
+      "distance_mm": 6.79,
+      "cap_value": "47uf",
+      "same_side": true,
+      "shared_nets": [
+        "GND",
+        "VIN"
+      ]
+    },
+    {
+      "ic_ref": "U1",
+      "cap_ref": "C404",
+      "distance_mm": 7.61,
+      "cap_value": "22uf",
+      "same_side": true,
+      "shared_nets": [
+        "GND",
+        "VIN"
+      ]
+    },
+    {
+      "ic_ref": "U1",
+      "cap_ref": "C1",
+      "distance_mm": 7.79,
+      "cap_value": "0.1uf",
+      "same_side": false,
+      "shared_nets": [
+        "GND",
+        "VIN"
+      ]
+    },
+    {
+      "ic_ref": "U1",
+      "cap_ref": "C7",
+      "distance_mm": 7.96,
+      "cap_value": "0.1uf",
+      "same_side": true,
+      "shared_nets": [
+        "GND",
+        "VIN"
+      ]
+    },
+    {
+      "ic_ref": "U3",
+      "cap_ref": "C3",
+      "distance_mm": 0.92,
+      "cap_value": "0.1uf",
+      "same_side": false,
+      "shared_nets": [
+        "/LPS_PWR",
+        "GND"
+      ]
+    },
+    {
+      "ic_ref": "U3",
+      "cap_ref": "C5",
+      "distance_mm": 2.49,
+      "cap_value": "0.1uf",
+      "same_side": true,
+      "shared_nets": [
+        "/LPS_PWR",
+        "GND"
+      ]
+    },
+    {
+      "ic_ref": "U3",
+      "cap_ref": "C2",
+      "distance_mm": 2.79,
+      "cap_value": "0.1uf",
+      "same_side": false,
+      "shared_nets": [
+        "GND"
+      ]
+    },
+    {
+      "ic_ref": "U3",
+      "cap_ref": "C501",
+      "distance_mm": 4.13,
+      "cap_value": "0.1uf",
+      "same_side": true,
+      "shared_nets": [
+        "GND"
+      ]
+    },
+    {
+      "ic_ref": "U3",
+      "cap_ref": "C404",
+      "distance_mm": 4.39,
+      "cap_value": "22uf",
+      "same_side": true,
+      "shared_nets": [
+        "GND"
+      ]
+    },
+    {
+      "ic_ref": "U3",
+      "cap_ref": "C503",
+      "distance_mm": 4.65,
+      "cap_value": "0.1uf",
+      "same_side": true,
+      "shared_nets": [
+        "GND"
+      ]
+    },
+    {
+      "ic_ref": "U3",
+      "cap_ref": "C1",
+      "distance_mm": 4.75,
+      "cap_value": "0.1uf",
+      "same_side": false,
+      "shared_nets": [
+        "GND"
+      ]
+    },
+    {
+      "ic_ref": "U3",
+      "cap_ref": "C6",
+      "distance_mm": 5.47,
+      "cap_value": "47uf",
+      "same_side": true,
+      "shared_nets": [
+        "GND"
+      ]
+    },
+    {
+      "ic_ref": "U3",
+      "cap_ref": "C4",
+      "distance_mm": 5.74,
+      "cap_value": "22uf",
+      "same_side": false,
+      "shared_nets": [
+        "GND"
+      ]
+    },
+    {
+      "ic_ref": "U3",
+      "cap_ref": "C504",
+      "distance_mm": 6.44,
+      "cap_value": "0.1uf",
+      "same_side": true,
+      "shared_nets": [
+        "GND"
+      ]
+    },
+    {
+      "ic_ref": "U3",
+      "cap_ref": "C502",
+      "distance_mm": 6.46,
+      "cap_value": "0.1uf",
+      "same_side": false,
+      "shared_nets": [
+        "GND"
+      ]
+    },
+    {
+      "ic_ref": "U3",
+      "cap_ref": "C7",
+      "distance_mm": 6.63,
+      "cap_value": "0.1uf",
+      "same_side": true,
+      "shared_nets": [
+        "GND"
+      ]
+    },
+    {
+      "ic_ref": "U302",
+      "cap_ref": "C504",
+      "distance_mm": 1.05,
+      "cap_value": "0.1uf",
+      "same_side": false,
+      "shared_nets": [
+        "GND",
+        "VIN"
+      ]
+    },
+    {
+      "ic_ref": "U302",
+      "cap_ref": "C3",
+      "distance_mm": 1.06,
+      "cap_value": "0.1uf",
+      "same_side": true,
+      "shared_nets": [
+        "/LPS_PWR",
+        "GND"
+      ]
+    },
+    {
+      "ic_ref": "U302",
+      "cap_ref": "C503",
+      "distance_mm": 1.73,
+      "cap_value": "0.1uf",
+      "same_side": false,
+      "shared_nets": [
+        "GND",
+        "VIN"
+      ]
+    },
+    {
+      "ic_ref": "U302",
+      "cap_ref": "C501",
+      "distance_mm": 1.92,
+      "cap_value": "0.1uf",
+      "same_side": false,
+      "shared_nets": [
+        "GND",
+        "VIN"
+      ]
+    },
+    {
+      "ic_ref": "U302",
+      "cap_ref": "C5",
+      "distance_mm": 2.07,
+      "cap_value": "0.1uf",
+      "same_side": false,
+      "shared_nets": [
+        "/LPS_PWR",
+        "GND"
+      ]
+    },
+    {
+      "ic_ref": "U302",
+      "cap_ref": "C2",
+      "distance_mm": 2.14,
+      "cap_value": "0.1uf",
+      "same_side": true,
+      "shared_nets": [
+        "GND",
+        "VIN"
+      ]
+    },
+    {
+      "ic_ref": "U302",
+      "cap_ref": "C502",
+      "distance_mm": 2.57,
+      "cap_value": "0.1uf",
+      "same_side": true,
+      "shared_nets": [
+        "GND",
+        "Net-(Q501-C)"
+      ]
+    },
+    {
+      "ic_ref": "U302",
+      "cap_ref": "C6",
+      "distance_mm": 4.19,
+      "cap_value": "47uf",
+      "same_side": false,
+      "shared_nets": [
+        "GND",
+        "VIN"
+      ]
+    },
+    {
+      "ic_ref": "U302",
+      "cap_ref": "C4",
+      "distance_mm": 4.28,
+      "cap_value": "22uf",
+      "same_side": true,
+      "shared_nets": [
+        "GND",
+        "VIN"
+      ]
+    },
+    {
+      "ic_ref": "U302",
+      "cap_ref": "C404",
+      "distance_mm": 4.91,
+      "cap_value": "22uf",
+      "same_side": false,
+      "shared_nets": [
+        "GND",
+        "VIN"
+      ]
+    },
+    {
+      "ic_ref": "U302",
+      "cap_ref": "C1",
+      "distance_mm": 5.09,
+      "cap_value": "0.1uf",
+      "same_side": true,
+      "shared_nets": [
+        "GND",
+        "VIN"
+      ]
+    },
+    {
+      "ic_ref": "U302",
+      "cap_ref": "C7",
+      "distance_mm": 5.22,
+      "cap_value": "0.1uf",
+      "same_side": false,
+      "shared_nets": [
+        "GND",
+        "VIN"
+      ]
+    },
+    {
+      "ic_ref": "U2",
+      "cap_ref": "C7",
+      "distance_mm": 0.27,
+      "cap_value": "0.1uf",
+      "same_side": false,
+      "shared_nets": [
+        "GND",
+        "VIN"
+      ]
+    },
+    {
+      "ic_ref": "U2",
+      "cap_ref": "C6",
+      "distance_mm": 0.77,
+      "cap_value": "47uf",
+      "same_side": false,
+      "shared_nets": [
+        "GND",
+        "VIN"
+      ]
+    },
+    {
+      "ic_ref": "U2",
+      "cap_ref": "C1",
+      "distance_mm": 1.28,
+      "cap_value": "0.1uf",
+      "same_side": true,
+      "shared_nets": [
+        "GND",
+        "VIN"
+      ]
+    },
+    {
+      "ic_ref": "U2",
+      "cap_ref": "C404",
+      "distance_mm": 1.44,
+      "cap_value": "22uf",
+      "same_side": false,
+      "shared_nets": [
+        "GND",
+        "VIN"
+      ]
+    },
+    {
+      "ic_ref": "U2",
+      "cap_ref": "C502",
+      "distance_mm": 2.26,
+      "cap_value": "0.1uf",
+      "same_side": true,
+      "shared_nets": [
+        "GND"
+      ]
+    },
+    {
+      "ic_ref": "U2",
+      "cap_ref": "C501",
+      "distance_mm": 3.17,
+      "cap_value": "0.1uf",
+      "same_side": false,
+      "shared_nets": [
+        "GND",
+        "VIN"
+      ]
+    },
+    {
+      "ic_ref": "U2",
+      "cap_ref": "C503",
+      "distance_mm": 3.77,
+      "cap_value": "0.1uf",
+      "same_side": false,
+      "shared_nets": [
+        "GND",
+        "VIN"
+      ]
+    },
+    {
+      "ic_ref": "U2",
+      "cap_ref": "C5",
+      "distance_mm": 3.82,
+      "cap_value": "0.1uf",
+      "same_side": false,
+      "shared_nets": [
+        "GND"
+      ]
+    },
+    {
+      "ic_ref": "U2",
+      "cap_ref": "C504",
+      "distance_mm": 4.18,
+      "cap_value": "0.1uf",
+      "same_side": false,
+      "shared_nets": [
+        "GND",
+        "VIN"
+      ]
+    },
+    {
+      "ic_ref": "U2",
+      "cap_ref": "C3",
+      "distance_mm": 7.07,
+      "cap_value": "0.1uf",
+      "same_side": true,
+      "shared_nets": [
+        "GND"
+      ]
+    },
+    {
+      "ic_ref": "U2",
+      "cap_ref": "C2",
+      "distance_mm": 8.96,
+      "cap_value": "0.1uf",
+      "same_side": true,
+      "shared_nets": [
+        "GND",
+        "VIN"
+      ]
+    },
+    {
+      "ic_ref": "U2",
+      "cap_ref": "C4",
+      "distance_mm": 9.92,
+      "cap_value": "22uf",
+      "same_side": true,
+      "shared_nets": [
+        "GND",
+        "VIN"
+      ]
+    }
+  ],
+  "ground_domains": {
+    "domain_count": 1,
+    "domains": [
+      {
+        "net": "GND",
+        "net_number": 19,
+        "component_count": 21,
+        "components": [
+          "C1",
+          "C2",
+          "C3",
+          "C4",
+          "C404",
+          "C5",
+          "C501",
+          "C502",
+          "C503",
+          "C504",
+          "C6",
+          "C7",
+          "J201",
+          "J401",
+          "Q501",
+          "R1",
+          "U1",
+          "U2",
+          "U3",
+          "U302",
+          "U501"
+        ],
+        "has_zone": true,
+        "zone_layers": [
+          "In2.Cu"
+        ]
+      }
+    ],
+    "multi_domain_components": []
+  },
+  "layer_transitions": [
+    {
+      "net": "/ACCEL_MISO",
+      "net_number": 1,
+      "copper_layers": [
+        "B.Cu",
+        "F.Cu"
+      ],
+      "layer_count": 2,
+      "via_count": 2,
+      "via_positions": [
+        {
+          "x": 145.1,
+          "y": 106.2,
+          "layers": [
+            "F.Cu",
+            "B.Cu"
+          ]
+        },
+        {
+          "x": 144.67,
+          "y": 107.05,
+          "layers": [
+            "F.Cu",
+            "B.Cu"
+          ]
+        }
+      ]
+    },
+    {
+      "net": "RST",
+      "net_number": 22,
+      "copper_layers": [
+        "B.Cu",
+        "F.Cu"
+      ],
+      "layer_count": 2,
+      "via_count": 2,
+      "via_positions": [
+        {
+          "x": 143.0,
+          "y": 110.3,
+          "layers": [
+            "F.Cu",
+            "B.Cu"
+          ]
+        },
+        {
+          "x": 154.3,
+          "y": 105.8,
+          "layers": [
+            "F.Cu",
+            "B.Cu"
+          ]
+        }
+      ]
+    },
+    {
+      "net": "/AT25_MISO",
+      "net_number": 5,
+      "copper_layers": [
+        "B.Cu",
+        "F.Cu"
+      ],
+      "layer_count": 2,
+      "via_count": 1,
+      "via_positions": [
+        {
+          "x": 149.2,
+          "y": 112.23,
+          "layers": [
+            "F.Cu",
+            "B.Cu"
+          ]
+        }
+      ]
+    },
+    {
+      "net": "/AT25_MOSI",
+      "net_number": 6,
+      "copper_layers": [
+        "B.Cu",
+        "F.Cu"
+      ],
+      "layer_count": 2,
+      "via_count": 1,
+      "via_positions": [
+        {
+          "x": 148.66,
+          "y": 111.86,
+          "layers": [
+            "F.Cu",
+            "B.Cu"
+          ]
+        }
+      ]
+    },
+    {
+      "net": "/AT25_SCK",
+      "net_number": 7,
+      "copper_layers": [
+        "B.Cu",
+        "F.Cu"
+      ],
+      "layer_count": 2,
+      "via_count": 1,
+      "via_positions": [
+        {
+          "x": 150.9,
+          "y": 111.53,
+          "layers": [
+            "F.Cu",
+            "B.Cu"
+          ]
+        }
+      ]
+    },
+    {
+      "net": "/AT25_nCS",
+      "net_number": 8,
+      "copper_layers": [
+        "B.Cu",
+        "F.Cu"
+      ],
+      "layer_count": 2,
+      "via_count": 1,
+      "via_positions": [
+        {
+          "x": 149.81,
+          "y": 111.61,
+          "layers": [
+            "F.Cu",
+            "B.Cu"
+          ]
+        }
+      ]
+    },
+    {
+      "net": "/LPS_CS",
+      "net_number": 9,
+      "copper_layers": [
+        "B.Cu",
+        "F.Cu"
+      ],
+      "layer_count": 2,
+      "via_count": 1,
+      "via_positions": [
+        {
+          "x": 148.0,
+          "y": 105.0,
+          "layers": [
+            "F.Cu",
+            "B.Cu"
+          ]
+        }
+      ]
+    },
+    {
+      "net": "/LPS_MISO",
+      "net_number": 10,
+      "copper_layers": [
+        "B.Cu",
+        "F.Cu"
+      ],
+      "layer_count": 2,
+      "via_count": 1,
+      "via_positions": [
+        {
+          "x": 151.36,
+          "y": 108.27,
+          "layers": [
+            "F.Cu",
+            "B.Cu"
+          ]
+        }
+      ]
+    },
+    {
+      "net": "/LPS_MOSI",
+      "net_number": 11,
+      "copper_layers": [
+        "B.Cu",
+        "F.Cu"
+      ],
+      "layer_count": 2,
+      "via_count": 1,
+      "via_positions": [
+        {
+          "x": 151.34,
+          "y": 108.91,
+          "layers": [
+            "F.Cu",
+            "B.Cu"
+          ]
+        }
+      ]
+    },
+    {
+      "net": "/LPS_PWR",
+      "net_number": 12,
+      "copper_layers": [
+        "B.Cu",
+        "F.Cu"
+      ],
+      "layer_count": 2,
+      "via_count": 1,
+      "via_positions": [
+        {
+          "x": 151.3,
+          "y": 106.2,
+          "layers": [
+            "F.Cu",
+            "B.Cu"
+          ]
+        }
+      ]
+    },
+    {
+      "net": "/LPS_SCK",
+      "net_number": 13,
+      "copper_layers": [
+        "B.Cu",
+        "F.Cu"
+      ],
+      "layer_count": 2,
+      "via_count": 1,
+      "via_positions": [
+        {
+          "x": 146.44,
+          "y": 105.06,
+          "layers": [
+            "F.Cu",
+            "B.Cu"
+          ]
+        }
+      ]
+    },
+    {
+      "net": "/SCL",
+      "net_number": 14,
+      "copper_layers": [
+        "B.Cu",
+        "F.Cu"
+      ],
+      "layer_count": 2,
+      "via_count": 1,
+      "via_positions": [
+        {
+          "x": 147.23,
+          "y": 111.95,
+          "layers": [
+            "F.Cu",
+            "B.Cu"
+          ]
+        }
+      ]
+    },
+    {
+      "net": "/SDA",
+      "net_number": 15,
+      "copper_layers": [
+        "B.Cu",
+        "F.Cu"
+      ],
+      "layer_count": 2,
+      "via_count": 1,
+      "via_positions": [
+        {
+          "x": 148.0,
+          "y": 112.0,
+          "layers": [
+            "F.Cu",
+            "B.Cu"
+          ]
+        }
+      ]
+    },
+    {
+      "net": "/clkout",
+      "net_number": 17,
+      "copper_layers": [
+        "B.Cu",
+        "F.Cu"
+      ],
+      "layer_count": 2,
+      "via_count": 1,
+      "via_positions": [
+        {
+          "x": 146.01,
+          "y": 111.95,
+          "layers": [
+            "F.Cu",
+            "B.Cu"
+          ]
+        }
+      ]
+    },
+    {
+      "net": "/lps_rdy",
+      "net_number": 18,
+      "copper_layers": [
+        "B.Cu",
+        "F.Cu"
+      ],
+      "layer_count": 2,
+      "via_count": 1,
+      "via_positions": [
+        {
+          "x": 147.2,
+          "y": 104.95,
+          "layers": [
+            "F.Cu",
+            "B.Cu"
+          ]
+        }
+      ]
+    }
+  ],
+  "silkscreen": {
+    "board_text_count": 1,
+    "refs_visible_on_silk": 26,
+    "refs_hidden_on_silk": 0,
+    "board_texts": [
+      {
+        "text": "BPrT  V2",
+        "layer": "B.SilkS",
+        "x": 157.3,
+        "y": 107.9
+      }
+    ],
+    "user_silk_texts": [
+      {
+        "footprint": "J401",
+        "text": "-"
+      },
+      {
+        "footprint": "J401",
+        "text": "+"
+      },
+      {
+        "footprint": "U3",
+        "text": "*"
+      }
+    ],
+    "documentation_warnings": [
+      {
+        "type": "missing_connector_labels",
+        "severity": "suggestion",
+        "components": [
+          "J201"
+        ],
+        "message": "Connectors (3+ pins) without silkscreen labels: ['J201']. Consider adding pin names, signal names, or connector function labels."
+      }
+    ],
+    "fab_notes_completeness": {
+      "checks": {
+        "ipc_class": false,
+        "surface_finish": false,
+        "board_thickness": false,
+        "copper_weight": false,
+        "solder_mask": false,
+        "material": false
+      },
+      "missing": [
+        "ipc class",
+        "surface finish",
+        "board thickness",
+        "copper weight",
+        "solder mask",
+        "material"
+      ],
+      "completeness_pct": 0,
+      "status": "warning"
+    },
+    "silkscreen_completeness": {
+      "checks": {
+        "revision_marking": true,
+        "board_name": true,
+        "ref_designators_visible": true,
+        "connector_labels": false,
+        "polarity_markers": true
+      },
+      "missing": [
+        "connector labels"
+      ],
+      "completeness_pct": 80,
+      "status": "warning"
+    }
+  },
+  "board_metadata": {
+    "paper": "USLetter"
+  },
+  "net_classes": [
+    {
+      "name": "Default",
+      "clearance": 0.1016,
+      "track_width": 0.1016,
+      "via_diameter": 0.4572,
+      "via_drill": 0.254,
+      "diff_pair_width": 0.2,
+      "diff_pair_gap": 0.25
+    },
+    {
+      "name": "MEDIUM",
+      "clearance": 0.1524,
+      "track_width": 0.1524,
+      "via_diameter": 0.4572,
+      "via_drill": 0.254,
+      "diff_pair_width": 0.2,
+      "diff_pair_gap": 0.25
+    },
+    {
+      "name": "MIN",
+      "clearance": 0.13,
+      "track_width": 0.13,
+      "via_diameter": 0.74,
+      "via_drill": 0.3302,
+      "diff_pair_width": 0.2,
+      "diff_pair_gap": 0.25
+    },
+    {
+      "name": "WIDE",
+      "clearance": 0.2032,
+      "track_width": 0.2032,
+      "via_diameter": 0.4572,
+      "via_drill": 0.254,
+      "diff_pair_width": 0.2,
+      "diff_pair_gap": 0.25
+    },
+    {
+      "name": "small",
+      "clearance": 0.13,
+      "track_width": 0.13,
+      "via_diameter": 0.74,
+      "via_drill": 0.3302,
+      "diff_pair_width": 0.2,
+      "diff_pair_gap": 0.25
+    }
+  ],
+  "project_settings": {
+    "source": "BitTagNG-LIS2DU12.kicad_pcb-back.kicad_pro",
+    "net_classes": [
+      {
+        "name": "Default",
+        "clearance": 0.1016,
+        "track_width": 0.1016,
+        "via_diameter": 0.4572,
+        "via_drill": 0.254,
+        "diff_pair_width": 0.2,
+        "diff_pair_gap": 0.25
+      },
+      {
+        "name": "MEDIUM",
+        "clearance": 0.1524,
+        "track_width": 0.1524,
+        "via_diameter": 0.4572,
+        "via_drill": 0.254,
+        "diff_pair_width": 0.2,
+        "diff_pair_gap": 0.25
+      },
+      {
+        "name": "MIN",
+        "clearance": 0.13,
+        "track_width": 0.13,
+        "via_diameter": 0.74,
+        "via_drill": 0.3302,
+        "diff_pair_width": 0.2,
+        "diff_pair_gap": 0.25
+      },
+      {
+        "name": "WIDE",
+        "clearance": 0.2032,
+        "track_width": 0.2032,
+        "via_diameter": 0.4572,
+        "via_drill": 0.254,
+        "diff_pair_width": 0.2,
+        "diff_pair_gap": 0.25
+      },
+      {
+        "name": "small",
+        "clearance": 0.13,
+        "track_width": 0.13,
+        "via_diameter": 0.74,
+        "via_drill": 0.3302,
+        "diff_pair_width": 0.2,
+        "diff_pair_gap": 0.25
+      }
+    ],
+    "design_rules": {
+      "min_clearance": 0.1016,
+      "min_connection": 0.0,
+      "min_copper_edge_clearance": 0.0,
+      "min_hole_clearance": 0.254,
+      "min_hole_to_hole": 0.254,
+      "min_microvia_diameter": 0.2,
+      "min_microvia_drill": 0.1,
+      "min_resolved_spokes": 2,
+      "min_silk_clearance": 0.0,
+      "min_text_height": 0.8,
+      "min_text_thickness": 0.08,
+      "min_through_hole_diameter": 0.2,
+      "min_track_width": 0.1016,
+      "min_via_annular_width": 0.1016,
+      "min_via_diameter": 0.4572
+    },
+    "footprint_libs": [
+      {
+        "name": "AccelTag",
+        "type": "KiCad",
+        "uri": "${KIPRJMOD}/../kicad_libraries/lib_fp.pretty/"
+      },
+      {
+        "name": "libraries",
+        "type": "KiCad",
+        "uri": "${KIPRJMOD}/..//libraries/tag_fp.pretty"
+      }
+    ]
+  },
+  "design_rule_compliance": {
+    "compliant": true,
+    "rules_checked": 3,
+    "rules_source": "BitTagNG-LIS2DU12.kicad_pcb-back.kicad_pro",
+    "net_class_summary": [
+      {
+        "name": "MEDIUM",
+        "track_width_mm": 0.1524,
+        "clearance_mm": 0.1524,
+        "diff_pair_width_mm": 0.2,
+        "diff_pair_gap_mm": 0.25
+      },
+      {
+        "name": "MIN",
+        "track_width_mm": 0.13,
+        "clearance_mm": 0.13,
+        "diff_pair_width_mm": 0.2,
+        "diff_pair_gap_mm": 0.25
+      },
+      {
+        "name": "WIDE",
+        "track_width_mm": 0.2032,
+        "clearance_mm": 0.2032,
+        "diff_pair_width_mm": 0.2,
+        "diff_pair_gap_mm": 0.25
+      },
+      {
+        "name": "small",
+        "track_width_mm": 0.13,
+        "clearance_mm": 0.13,
+        "diff_pair_width_mm": 0.2,
+        "diff_pair_gap_mm": 0.25
+      }
+    ]
+  },
+  "dfm_summary": {
+    "dfm_tier": "advanced",
+    "metrics": {
+      "min_track_width_mm": 0.1016,
+      "approx_min_spacing_mm": 0.1019,
+      "min_drill_mm": 0.254,
+      "min_annular_ring_mm": 0.102,
+      "board_width_mm": 18.0,
+      "board_height_mm": 10.0
+    },
+    "violation_count": 3,
+    "ipc_class_compliance": {
+      "detected_class": 2,
+      "detection_source": "default"
+    }
+  },
+  "placement_density": {
+    "board_area_cm2": 1.8,
+    "front_density_per_cm2": 9.4,
+    "back_density_per_cm2": 5.0
+  },
+  "thermal_pad_scan": [
+    {
+      "component": "U302",
+      "pad": "33",
+      "pad_size_mm": [
+        3.45,
+        3.45
+      ],
+      "pad_area_mm2": 11.9,
+      "net": "GND",
+      "nearby_thermal_vias": 7,
+      "standalone_vias": 7,
+      "footprint_via_pads": 0,
+      "layer": "B.Cu",
+      "detector": "analyze_thermal_vias",
+      "rule_id": "TP-DET",
+      "category": "thermal",
+      "severity": "info",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "Thermal pad: U302 pad 33 7 nearby vias",
+      "description": "Thermal pad on U302 pad 33: 7 nearby vias (7 standalone, 0 footprint).",
+      "components": [
+        "U302"
+      ],
+      "nets": [
+        "GND"
+      ],
+      "pins": [
+        "33"
+      ],
+      "recommendation": "",
+      "report_context": {
+        "section": "Thermal",
+        "impact": "Thermal dissipation",
+        "standard_ref": ""
+      }
+    }
+  ],
+  "board_thickness_mm": 0.4,
+  "copper_presence_summary": [
+    {
+      "opposite_layer_nets": "VIN",
+      "component_count": 13,
+      "components": [
+        "C404",
+        "C5",
+        "C501",
+        "C503",
+        "C504",
+        "C6",
+        "C7",
+        "D401",
+        "J401",
+        "R1",
+        "U1",
+        "U3",
+        "U501"
+      ]
+    },
+    {
+      "opposite_layer_nets": "GND",
+      "component_count": 8,
+      "components": [
+        "C1",
+        "C3",
+        "C4",
+        "C502",
+        "J201",
+        "Q501",
+        "U2",
+        "U302"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "net": "/ACCEL_MISO",
+      "net_number": 1,
+      "min_track_width_mm": 0.1016,
+      "max_track_width_mm": 0.1016,
+      "track_widths_used": [
+        0.1016
+      ],
+      "copper_layers": [
+        "B.Cu",
+        "F.Cu"
+      ],
+      "segment_count": 8,
+      "via_count": 2,
+      "via_drill_sizes_mm": [
+        0.254
+      ],
+      "detector": "analyze_current_capacity",
+      "rule_id": "CC-002",
+      "category": "current_capacity",
+      "severity": "warning",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "Narrow signal: /ACCEL_MISO min 0.1016mm",
+      "description": "Signal net /ACCEL_MISO has narrow traces: min 0.1016mm across 8 segments.",
+      "components": [],
+      "nets": [
+        "/ACCEL_MISO"
+      ],
+      "pins": [],
+      "recommendation": "Widen trace or verify signal integrity requirements.",
+      "report_context": {
+        "section": "Current Capacity",
+        "impact": "Signal integrity",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout",
+        "pre_fab"
+      ]
+    },
+    {
+      "net": "/ACCEL_SCK",
+      "net_number": 3,
+      "min_track_width_mm": 0.1016,
+      "max_track_width_mm": 0.1016,
+      "track_widths_used": [
+        0.1016
+      ],
+      "copper_layers": [
+        "B.Cu"
+      ],
+      "segment_count": 8,
+      "via_count": 0,
+      "detector": "analyze_current_capacity",
+      "rule_id": "CC-002",
+      "category": "current_capacity",
+      "severity": "warning",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "Narrow signal: /ACCEL_SCK min 0.1016mm",
+      "description": "Signal net /ACCEL_SCK has narrow traces: min 0.1016mm across 8 segments.",
+      "components": [],
+      "nets": [
+        "/ACCEL_SCK"
+      ],
+      "pins": [],
+      "recommendation": "Widen trace or verify signal integrity requirements.",
+      "report_context": {
+        "section": "Current Capacity",
+        "impact": "Signal integrity",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout",
+        "pre_fab"
+      ]
+    },
+    {
+      "net": "/AT25_MISO",
+      "net_number": 5,
+      "min_track_width_mm": 0.1016,
+      "max_track_width_mm": 0.1016,
+      "track_widths_used": [
+        0.1016
+      ],
+      "copper_layers": [
+        "B.Cu",
+        "F.Cu"
+      ],
+      "segment_count": 12,
+      "via_count": 1,
+      "via_drill_sizes_mm": [
+        0.254
+      ],
+      "detector": "analyze_current_capacity",
+      "rule_id": "CC-002",
+      "category": "current_capacity",
+      "severity": "warning",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "Narrow signal: /AT25_MISO min 0.1016mm",
+      "description": "Signal net /AT25_MISO has narrow traces: min 0.1016mm across 12 segments.",
+      "components": [],
+      "nets": [
+        "/AT25_MISO"
+      ],
+      "pins": [],
+      "recommendation": "Widen trace or verify signal integrity requirements.",
+      "report_context": {
+        "section": "Current Capacity",
+        "impact": "Signal integrity",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout",
+        "pre_fab"
+      ]
+    },
+    {
+      "net": "/AT25_MOSI",
+      "net_number": 6,
+      "min_track_width_mm": 0.1016,
+      "max_track_width_mm": 0.1016,
+      "track_widths_used": [
+        0.1016
+      ],
+      "copper_layers": [
+        "B.Cu",
+        "F.Cu"
+      ],
+      "segment_count": 9,
+      "via_count": 1,
+      "via_drill_sizes_mm": [
+        0.254
+      ],
+      "detector": "analyze_current_capacity",
+      "rule_id": "CC-002",
+      "category": "current_capacity",
+      "severity": "warning",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "Narrow signal: /AT25_MOSI min 0.1016mm",
+      "description": "Signal net /AT25_MOSI has narrow traces: min 0.1016mm across 9 segments.",
+      "components": [],
+      "nets": [
+        "/AT25_MOSI"
+      ],
+      "pins": [],
+      "recommendation": "Widen trace or verify signal integrity requirements.",
+      "report_context": {
+        "section": "Current Capacity",
+        "impact": "Signal integrity",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout",
+        "pre_fab"
+      ]
+    },
+    {
+      "net": "/AT25_SCK",
+      "net_number": 7,
+      "min_track_width_mm": 0.1016,
+      "max_track_width_mm": 0.1016,
+      "track_widths_used": [
+        0.1016
+      ],
+      "copper_layers": [
+        "B.Cu",
+        "F.Cu"
+      ],
+      "segment_count": 10,
+      "via_count": 1,
+      "via_drill_sizes_mm": [
+        0.254
+      ],
+      "detector": "analyze_current_capacity",
+      "rule_id": "CC-002",
+      "category": "current_capacity",
+      "severity": "warning",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "Narrow signal: /AT25_SCK min 0.1016mm",
+      "description": "Signal net /AT25_SCK has narrow traces: min 0.1016mm across 10 segments.",
+      "components": [],
+      "nets": [
+        "/AT25_SCK"
+      ],
+      "pins": [],
+      "recommendation": "Widen trace or verify signal integrity requirements.",
+      "report_context": {
+        "section": "Current Capacity",
+        "impact": "Signal integrity",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout",
+        "pre_fab"
+      ]
+    },
+    {
+      "net": "/AT25_nCS",
+      "net_number": 8,
+      "min_track_width_mm": 0.1016,
+      "max_track_width_mm": 0.1016,
+      "track_widths_used": [
+        0.1016
+      ],
+      "copper_layers": [
+        "B.Cu",
+        "F.Cu"
+      ],
+      "segment_count": 5,
+      "via_count": 1,
+      "via_drill_sizes_mm": [
+        0.254
+      ],
+      "detector": "analyze_current_capacity",
+      "rule_id": "CC-002",
+      "category": "current_capacity",
+      "severity": "warning",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "Narrow signal: /AT25_nCS min 0.1016mm",
+      "description": "Signal net /AT25_nCS has narrow traces: min 0.1016mm across 5 segments.",
+      "components": [],
+      "nets": [
+        "/AT25_nCS"
+      ],
+      "pins": [],
+      "recommendation": "Widen trace or verify signal integrity requirements.",
+      "report_context": {
+        "section": "Current Capacity",
+        "impact": "Signal integrity",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout",
+        "pre_fab"
+      ]
+    },
+    {
+      "net": "/LPS_MISO",
+      "net_number": 10,
+      "min_track_width_mm": 0.1016,
+      "max_track_width_mm": 0.1016,
+      "track_widths_used": [
+        0.1016
+      ],
+      "copper_layers": [
+        "B.Cu",
+        "F.Cu"
+      ],
+      "segment_count": 6,
+      "via_count": 1,
+      "via_drill_sizes_mm": [
+        0.254
+      ],
+      "detector": "analyze_current_capacity",
+      "rule_id": "CC-002",
+      "category": "current_capacity",
+      "severity": "warning",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "Narrow signal: /LPS_MISO min 0.1016mm",
+      "description": "Signal net /LPS_MISO has narrow traces: min 0.1016mm across 6 segments.",
+      "components": [],
+      "nets": [
+        "/LPS_MISO"
+      ],
+      "pins": [],
+      "recommendation": "Widen trace or verify signal integrity requirements.",
+      "report_context": {
+        "section": "Current Capacity",
+        "impact": "Signal integrity",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout",
+        "pre_fab"
+      ]
+    },
+    {
+      "net": "/LPS_MOSI",
+      "net_number": 11,
+      "min_track_width_mm": 0.1016,
+      "max_track_width_mm": 0.1016,
+      "track_widths_used": [
+        0.1016
+      ],
+      "copper_layers": [
+        "B.Cu",
+        "F.Cu"
+      ],
+      "segment_count": 5,
+      "via_count": 1,
+      "via_drill_sizes_mm": [
+        0.254
+      ],
+      "detector": "analyze_current_capacity",
+      "rule_id": "CC-002",
+      "category": "current_capacity",
+      "severity": "warning",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "Narrow signal: /LPS_MOSI min 0.1016mm",
+      "description": "Signal net /LPS_MOSI has narrow traces: min 0.1016mm across 5 segments.",
+      "components": [],
+      "nets": [
+        "/LPS_MOSI"
+      ],
+      "pins": [],
+      "recommendation": "Widen trace or verify signal integrity requirements.",
+      "report_context": {
+        "section": "Current Capacity",
+        "impact": "Signal integrity",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout",
+        "pre_fab"
+      ]
+    },
+    {
+      "net": "/LPS_PWR",
+      "net_number": 12,
+      "min_track_width_mm": 0.1016,
+      "max_track_width_mm": 0.1016,
+      "track_widths_used": [
+        0.1016
+      ],
+      "copper_layers": [
+        "B.Cu",
+        "F.Cu"
+      ],
+      "segment_count": 13,
+      "via_count": 1,
+      "via_drill_sizes_mm": [
+        0.254
+      ],
+      "detector": "analyze_current_capacity",
+      "rule_id": "CC-002",
+      "category": "current_capacity",
+      "severity": "warning",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "Narrow signal: /LPS_PWR min 0.1016mm",
+      "description": "Signal net /LPS_PWR has narrow traces: min 0.1016mm across 13 segments.",
+      "components": [],
+      "nets": [
+        "/LPS_PWR"
+      ],
+      "pins": [],
+      "recommendation": "Widen trace or verify signal integrity requirements.",
+      "report_context": {
+        "section": "Current Capacity",
+        "impact": "Signal integrity",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout",
+        "pre_fab"
+      ]
+    },
+    {
+      "net": "/LPS_SCK",
+      "net_number": 13,
+      "min_track_width_mm": 0.1016,
+      "max_track_width_mm": 0.1016,
+      "track_widths_used": [
+        0.1016
+      ],
+      "copper_layers": [
+        "B.Cu",
+        "F.Cu"
+      ],
+      "segment_count": 8,
+      "via_count": 1,
+      "via_drill_sizes_mm": [
+        0.254
+      ],
+      "detector": "analyze_current_capacity",
+      "rule_id": "CC-002",
+      "category": "current_capacity",
+      "severity": "warning",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "Narrow signal: /LPS_SCK min 0.1016mm",
+      "description": "Signal net /LPS_SCK has narrow traces: min 0.1016mm across 8 segments.",
+      "components": [],
+      "nets": [
+        "/LPS_SCK"
+      ],
+      "pins": [],
+      "recommendation": "Widen trace or verify signal integrity requirements.",
+      "report_context": {
+        "section": "Current Capacity",
+        "impact": "Signal integrity",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout",
+        "pre_fab"
+      ]
+    },
+    {
+      "net": "/SDA",
+      "net_number": 15,
+      "min_track_width_mm": 0.1016,
+      "max_track_width_mm": 0.1016,
+      "track_widths_used": [
+        0.1016
+      ],
+      "copper_layers": [
+        "B.Cu",
+        "F.Cu"
+      ],
+      "segment_count": 8,
+      "via_count": 1,
+      "via_drill_sizes_mm": [
+        0.254
+      ],
+      "detector": "analyze_current_capacity",
+      "rule_id": "CC-002",
+      "category": "current_capacity",
+      "severity": "warning",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "Narrow signal: /SDA min 0.1016mm",
+      "description": "Signal net /SDA has narrow traces: min 0.1016mm across 8 segments.",
+      "components": [],
+      "nets": [
+        "/SDA"
+      ],
+      "pins": [],
+      "recommendation": "Widen trace or verify signal integrity requirements.",
+      "report_context": {
+        "section": "Current Capacity",
+        "impact": "Signal integrity",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout",
+        "pre_fab"
+      ]
+    },
+    {
+      "net": "/clkout",
+      "net_number": 17,
+      "min_track_width_mm": 0.1016,
+      "max_track_width_mm": 0.1016,
+      "track_widths_used": [
+        0.1016
+      ],
+      "copper_layers": [
+        "B.Cu",
+        "F.Cu"
+      ],
+      "segment_count": 10,
+      "via_count": 1,
+      "via_drill_sizes_mm": [
+        0.254
+      ],
+      "detector": "analyze_current_capacity",
+      "rule_id": "CC-002",
+      "category": "current_capacity",
+      "severity": "warning",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "Narrow signal: /clkout min 0.1016mm",
+      "description": "Signal net /clkout has narrow traces: min 0.1016mm across 10 segments.",
+      "components": [],
+      "nets": [
+        "/clkout"
+      ],
+      "pins": [],
+      "recommendation": "Widen trace or verify signal integrity requirements.",
+      "report_context": {
+        "section": "Current Capacity",
+        "impact": "Signal integrity",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout",
+        "pre_fab"
+      ]
+    },
+    {
+      "net": "/lps_rdy",
+      "net_number": 18,
+      "min_track_width_mm": 0.1016,
+      "max_track_width_mm": 0.1016,
+      "track_widths_used": [
+        0.1016
+      ],
+      "copper_layers": [
+        "B.Cu",
+        "F.Cu"
+      ],
+      "segment_count": 7,
+      "via_count": 1,
+      "via_drill_sizes_mm": [
+        0.254
+      ],
+      "detector": "analyze_current_capacity",
+      "rule_id": "CC-002",
+      "category": "current_capacity",
+      "severity": "warning",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "Narrow signal: /lps_rdy min 0.1016mm",
+      "description": "Signal net /lps_rdy has narrow traces: min 0.1016mm across 7 segments.",
+      "components": [],
+      "nets": [
+        "/lps_rdy"
+      ],
+      "pins": [],
+      "recommendation": "Widen trace or verify signal integrity requirements.",
+      "report_context": {
+        "section": "Current Capacity",
+        "impact": "Signal integrity",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout",
+        "pre_fab"
+      ]
+    },
+    {
+      "net": "Net-(Q501-C)",
+      "net_number": 20,
+      "min_track_width_mm": 0.1016,
+      "max_track_width_mm": 0.1016,
+      "track_widths_used": [
+        0.1016
+      ],
+      "copper_layers": [
+        "B.Cu"
+      ],
+      "segment_count": 8,
+      "via_count": 0,
+      "detector": "analyze_current_capacity",
+      "rule_id": "CC-002",
+      "category": "current_capacity",
+      "severity": "warning",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "Narrow signal: Net-(Q501-C) min 0.1016mm",
+      "description": "Signal net Net-(Q501-C) has narrow traces: min 0.1016mm across 8 segments.",
+      "components": [],
+      "nets": [
+        "Net-(Q501-C)"
+      ],
+      "pins": [],
+      "recommendation": "Widen trace or verify signal integrity requirements.",
+      "report_context": {
+        "section": "Current Capacity",
+        "impact": "Signal integrity",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout",
+        "pre_fab"
+      ]
+    },
+    {
+      "net": "RST",
+      "net_number": 22,
+      "min_track_width_mm": 0.1016,
+      "max_track_width_mm": 0.1016,
+      "track_widths_used": [
+        0.1016
+      ],
+      "copper_layers": [
+        "B.Cu",
+        "F.Cu"
+      ],
+      "segment_count": 17,
+      "via_count": 2,
+      "via_drill_sizes_mm": [
+        0.254
+      ],
+      "detector": "analyze_current_capacity",
+      "rule_id": "CC-002",
+      "category": "current_capacity",
+      "severity": "warning",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "Narrow signal: RST min 0.1016mm",
+      "description": "Signal net RST has narrow traces: min 0.1016mm across 17 segments.",
+      "components": [],
+      "nets": [
+        "RST"
+      ],
+      "pins": [],
+      "recommendation": "Widen trace or verify signal integrity requirements.",
+      "report_context": {
+        "section": "Current Capacity",
+        "impact": "Signal integrity",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout",
+        "pre_fab"
+      ]
+    },
+    {
+      "net": "GND",
+      "net_number": 19,
+      "min_track_width_mm": 0.1016,
+      "max_track_width_mm": 0.1524,
+      "track_widths_used": [
+        0.1016,
+        0.1524
+      ],
+      "copper_layers": [
+        "B.Cu",
+        "F.Cu"
+      ],
+      "segment_count": 68,
+      "via_count": 14,
+      "via_drill_sizes_mm": [
+        0.254
+      ],
+      "zones": [
+        {
+          "layers": [
+            "In2.Cu"
+          ],
+          "filled_area_mm2": 134.42,
+          "min_thickness": 0.25
+        }
+      ],
+      "detector": "analyze_current_capacity",
+      "rule_id": "CC-DET",
+      "category": "current_capacity",
+      "severity": "info",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "Power net GND: 0.1016mm min trace",
+      "description": "Power/ground net GND: min trace 0.1016mm, max 0.1524mm, 68 segments.",
+      "components": [],
+      "nets": [
+        "GND"
+      ],
+      "pins": [],
+      "recommendation": "",
+      "report_context": {
+        "section": "Current Capacity",
+        "impact": "Power delivery",
+        "standard_ref": "IPC-2221"
+      },
+      "stages": [
+        "layout",
+        "pre_fab"
+      ]
+    },
+    {
+      "net": "VBAT",
+      "net_number": 25,
+      "min_track_width_mm": 0.1016,
+      "max_track_width_mm": 0.2032,
+      "track_widths_used": [
+        0.1016,
+        0.1524,
+        0.2032
+      ],
+      "copper_layers": [
+        "B.Cu",
+        "F.Cu"
+      ],
+      "segment_count": 12,
+      "via_count": 1,
+      "via_drill_sizes_mm": [
+        0.254
+      ],
+      "detector": "analyze_current_capacity",
+      "rule_id": "CC-DET",
+      "category": "current_capacity",
+      "severity": "info",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "Power net VBAT: 0.1016mm min trace",
+      "description": "Power/ground net VBAT: min trace 0.1016mm, max 0.2032mm, 12 segments.",
+      "components": [],
+      "nets": [
+        "VBAT"
+      ],
+      "pins": [],
+      "recommendation": "",
+      "report_context": {
+        "section": "Current Capacity",
+        "impact": "Power delivery",
+        "standard_ref": "IPC-2221"
+      },
+      "stages": [
+        "layout",
+        "pre_fab"
+      ]
+    },
+    {
+      "net": "VIN",
+      "net_number": 26,
+      "min_track_width_mm": 0.1016,
+      "max_track_width_mm": 0.1524,
+      "track_widths_used": [
+        0.1016,
+        0.1524
+      ],
+      "copper_layers": [
+        "B.Cu",
+        "F.Cu"
+      ],
+      "segment_count": 50,
+      "via_count": 7,
+      "via_drill_sizes_mm": [
+        0.254
+      ],
+      "zones": [
+        {
+          "layers": [
+            "In1.Cu"
+          ],
+          "filled_area_mm2": 121.25,
+          "min_thickness": 0.25
+        }
+      ],
+      "detector": "analyze_current_capacity",
+      "rule_id": "CC-DET",
+      "category": "current_capacity",
+      "severity": "info",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "Power net VIN: 0.1016mm min trace",
+      "description": "Power/ground net VIN: min trace 0.1016mm, max 0.1524mm, 50 segments.",
+      "components": [],
+      "nets": [
+        "VIN"
+      ],
+      "pins": [],
+      "recommendation": "",
+      "report_context": {
+        "section": "Current Capacity",
+        "impact": "Power delivery",
+        "standard_ref": "IPC-2221"
+      },
+      "stages": [
+        "layout",
+        "pre_fab"
+      ]
+    },
+    {
+      "component": "C2",
+      "detector": "analyze_copper_presence",
+      "rule_id": "CP-002",
+      "category": "copper_integrity",
+      "severity": "info",
+      "confidence": "deterministic",
+      "evidence_source": "geometry",
+      "summary": "No opposite-layer copper under C2",
+      "description": "Component C2 has no copper zone on the opposite layer.",
+      "components": [
+        "C2"
+      ],
+      "nets": [],
+      "pins": [],
+      "recommendation": "",
+      "report_context": {
+        "section": "Copper Integrity",
+        "impact": "Return path / shielding",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout"
+      ]
+    },
+    {
+      "component": "J301",
+      "detector": "analyze_copper_presence",
+      "rule_id": "CP-002",
+      "category": "copper_integrity",
+      "severity": "info",
+      "confidence": "deterministic",
+      "evidence_source": "geometry",
+      "summary": "No opposite-layer copper under J301",
+      "description": "Component J301 has no copper zone on the opposite layer.",
+      "components": [
+        "J301"
+      ],
+      "nets": [],
+      "pins": [],
+      "recommendation": "",
+      "report_context": {
+        "section": "Copper Integrity",
+        "impact": "Return path / shielding",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout"
+      ]
+    },
+    {
+      "component": "J302",
+      "detector": "analyze_copper_presence",
+      "rule_id": "CP-002",
+      "category": "copper_integrity",
+      "severity": "info",
+      "confidence": "deterministic",
+      "evidence_source": "geometry",
+      "summary": "No opposite-layer copper under J302",
+      "description": "Component J302 has no copper zone on the opposite layer.",
+      "components": [
+        "J302"
+      ],
+      "nets": [],
+      "pins": [],
+      "recommendation": "",
+      "report_context": {
+        "section": "Copper Integrity",
+        "impact": "Return path / shielding",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout"
+      ]
+    },
+    {
+      "component": "J303",
+      "detector": "analyze_copper_presence",
+      "rule_id": "CP-002",
+      "category": "copper_integrity",
+      "severity": "info",
+      "confidence": "deterministic",
+      "evidence_source": "geometry",
+      "summary": "No opposite-layer copper under J303",
+      "description": "Component J303 has no copper zone on the opposite layer.",
+      "components": [
+        "J303"
+      ],
+      "nets": [],
+      "pins": [],
+      "recommendation": "",
+      "report_context": {
+        "section": "Copper Integrity",
+        "impact": "Return path / shielding",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout"
+      ]
+    },
+    {
+      "component": "J304",
+      "detector": "analyze_copper_presence",
+      "rule_id": "CP-002",
+      "category": "copper_integrity",
+      "severity": "info",
+      "confidence": "deterministic",
+      "evidence_source": "geometry",
+      "summary": "No opposite-layer copper under J304",
+      "description": "Component J304 has no copper zone on the opposite layer.",
+      "components": [
+        "J304"
+      ],
+      "nets": [],
+      "pins": [],
+      "recommendation": "",
+      "report_context": {
+        "section": "Copper Integrity",
+        "impact": "Return path / shielding",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout"
+      ]
+    },
+    {
+      "parameter": "annular_ring",
+      "actual_mm": 0.102,
+      "standard_limit_mm": 0.125,
+      "advanced_limit_mm": 0.1,
+      "tier_required": "advanced",
+      "message": "Annular ring 0.102mm requires advanced process (standard: 0.125mm)",
+      "detector": "analyze_dfm",
+      "rule_id": "DFM-001",
+      "category": "dfm",
+      "severity": "warning",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "Annular ring 0.102mm requires advanced process (standard: 0.125mm)",
+      "description": "Annular ring 0.102mm is below the standard process minimum of 0.125mm, requiring an advanced fab tier.",
+      "components": [],
+      "nets": [],
+      "pins": [],
+      "recommendation": "Annular ring 0.102mm requires advanced process (standard: 0.125mm)",
+      "report_context": {
+        "section": "DFM",
+        "impact": "manufacturability",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout"
+      ]
+    },
+    {
+      "parameter": "track_spacing",
+      "actual_mm": 0.1019,
+      "standard_limit_mm": 0.127,
+      "advanced_limit_mm": 0.1,
+      "tier_required": "advanced",
+      "message": "Approximate track spacing 0.1019mm requires advanced process (standard: 0.127mm)",
+      "note": "Spacing is approximate (endpoint-to-endpoint, not full segment geometry)",
+      "detector": "analyze_dfm",
+      "rule_id": "DFM-001",
+      "category": "dfm",
+      "severity": "warning",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "Track spacing 0.1019mm requires advanced process (standard: 0.127mm)",
+      "description": "Approximate track spacing 0.1019mm requires an advanced fab tier (standard minimum: 0.127mm).",
+      "components": [],
+      "nets": [],
+      "pins": [],
+      "recommendation": "Approximate track spacing 0.1019mm requires advanced process (standard: 0.127mm)",
+      "report_context": {
+        "section": "DFM",
+        "impact": "manufacturability",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout"
+      ]
+    },
+    {
+      "parameter": "track_width",
+      "actual_mm": 0.1016,
+      "standard_limit_mm": 0.127,
+      "advanced_limit_mm": 0.1,
+      "tier_required": "advanced",
+      "message": "Track width 0.1016mm requires advanced process (standard minimum: 0.127mm)",
+      "detector": "analyze_dfm",
+      "rule_id": "DFM-001",
+      "category": "dfm",
+      "severity": "warning",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "Track width 0.1016mm requires advanced process (standard: 0.127mm)",
+      "description": "Track width 0.1016mm is below the standard process minimum of 0.127mm, requiring an advanced fab tier.",
+      "components": [],
+      "nets": [],
+      "pins": [],
+      "recommendation": "Track width 0.1016mm requires advanced process (standard minimum: 0.127mm)",
+      "report_context": {
+        "section": "DFM",
+        "impact": "manufacturability",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout"
+      ]
+    },
+    {
+      "parameter": "annular_ring_via",
+      "actual_mm": 0.102,
+      "class_minimum_mm": 0.125,
+      "ipc_class": 2,
+      "message": "Via annular ring 0.102mm below IPC Class 2 minimum 0.125mm",
+      "detector": "analyze_dfm",
+      "rule_id": "DFM-002",
+      "category": "dfm",
+      "severity": "warning",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "Via annular ring 0.102mm below IPC Class 2 minimum 0.125mm",
+      "description": "Via annular ring 0.102mm does not meet IPC Class 2 minimum of 0.125mm.",
+      "components": [],
+      "nets": [],
+      "pins": [],
+      "recommendation": "Increase via annular ring to at least 0.125mm to meet IPC Class 2 requirements",
+      "report_context": {
+        "section": "DFM",
+        "impact": "compliance",
+        "standard_ref": "IPC-6012 Class 2"
+      },
+      "stages": [
+        "layout"
+      ]
+    },
+    {
+      "side": "B.Cu",
+      "fiducial_count": 0,
+      "fiducial_refs": [],
+      "smd_component_count": 9,
+      "finest_smd_pad_dim_mm": 0.25,
+      "detector": "analyze_fiducials",
+      "rule_id": "FD-001",
+      "category": "assembly",
+      "severity": "error",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "No fiducials on B.Cu (9 SMD components) (finest pad dim 0.25mm \u2014 BGA/fine-pitch QFN present)",
+      "description": "B.Cu has 0 fiducial(s) but 9 SMD components. Assembly machines need >= 3 fiducials for accurate placement.",
+      "components": [],
+      "nets": [],
+      "pins": [],
+      "recommendation": "Add fiducial markers for pick-and-place alignment (3 per side with SMD).",
+      "report_context": {
+        "section": "Assembly",
+        "impact": "Pick-and-place alignment",
+        "standard_ref": "IPC-7351"
+      },
+      "stages": [
+        "pre_fab"
+      ]
+    },
+    {
+      "side": "F.Cu",
+      "fiducial_count": 0,
+      "fiducial_refs": [],
+      "smd_component_count": 13,
+      "finest_smd_pad_dim_mm": 0.25,
+      "detector": "analyze_fiducials",
+      "rule_id": "FD-001",
+      "category": "assembly",
+      "severity": "error",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "No fiducials on F.Cu (13 SMD components) (finest pad dim 0.25mm \u2014 BGA/fine-pitch QFN present)",
+      "description": "F.Cu has 0 fiducial(s) but 13 SMD components. Assembly machines need >= 3 fiducials for accurate placement.",
+      "components": [],
+      "nets": [],
+      "pins": [],
+      "recommendation": "Add fiducial markers for pick-and-place alignment (3 per side with SMD).",
+      "report_context": {
+        "section": "Assembly",
+        "impact": "Pick-and-place alignment",
+        "standard_ref": "IPC-7351"
+      },
+      "stages": [
+        "pre_fab"
+      ]
+    },
+    {
+      "component": "C4",
+      "value": "22uf",
+      "package": "0402",
+      "layer": "B.Cu",
+      "risk_level": "medium",
+      "pad_1_net": "VIN",
+      "pad_2_net": "GND",
+      "reasons": [
+        "pad 2 is GND (likely ground pour), other pad is signal \u2014 thermal asymmetry risk",
+        "pad 2 has 2 nearby vias vs 1 on other pad \u2014 thermal asymmetry"
+      ],
+      "detector": "analyze_tombstoning_risk",
+      "rule_id": "TB-001",
+      "category": "dfm",
+      "severity": "info",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "C4 (0402) tombstoning risk: medium",
+      "description": "C4 (0402, 22uf) has medium tombstoning risk due to thermal asymmetry between pads.",
+      "components": [
+        "C4"
+      ],
+      "nets": [],
+      "pins": [],
+      "recommendation": "pad 2 is GND (likely ground pour), other pad is signal \u2014 thermal asymmetry risk; pad 2 has 2 nearby vias vs 1 on other pad \u2014 thermal asymmetry",
+      "report_context": {
+        "section": "DFM",
+        "impact": "assembly",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout"
+      ]
+    },
+    {
+      "component": "C404",
+      "value": "22uf",
+      "package": "0402",
+      "layer": "F.Cu",
+      "risk_level": "medium",
+      "pad_1_net": "VIN",
+      "pad_2_net": "GND",
+      "reasons": [
+        "pad 2 is GND (likely ground pour), other pad is signal \u2014 thermal asymmetry risk",
+        "pad 1 has 2 nearby vias vs 1 on other pad \u2014 thermal asymmetry"
+      ],
+      "detector": "analyze_tombstoning_risk",
+      "rule_id": "TB-001",
+      "category": "dfm",
+      "severity": "info",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "C404 (0402) tombstoning risk: medium",
+      "description": "C404 (0402, 22uf) has medium tombstoning risk due to thermal asymmetry between pads.",
+      "components": [
+        "C404"
+      ],
+      "nets": [],
+      "pins": [],
+      "recommendation": "pad 2 is GND (likely ground pour), other pad is signal \u2014 thermal asymmetry risk; pad 1 has 2 nearby vias vs 1 on other pad \u2014 thermal asymmetry",
+      "report_context": {
+        "section": "DFM",
+        "impact": "assembly",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout"
+      ]
+    },
+    {
+      "total_signal_nets": 40,
+      "nets_with_test_points": 0,
+      "coverage_pct": 0.0,
+      "test_point_count": 0,
+      "detector": "analyze_test_point_coverage",
+      "rule_id": "TE-001",
+      "category": "testability",
+      "severity": "warning",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "Test point coverage: 0/40 nets (0%)",
+      "description": "0 of 40 signal nets have test points (0% coverage).",
+      "components": [],
+      "nets": [],
+      "pins": [],
+      "recommendation": "Add test points to improve ICT/flying probe coverage.",
+      "report_context": {
+        "section": "Testability",
+        "impact": "ICT accessibility",
+        "standard_ref": ""
+      },
+      "stages": [
+        "pre_fab"
+      ]
+    },
+    {
+      "net": "GND",
+      "zone_layers": [
+        "In2.Cu"
+      ],
+      "zone_area_mm2": 388.9,
+      "via_count": 14,
+      "via_density_per_cm2": 3.6,
+      "drill_sizes_mm": [
+        0.254
+      ],
+      "detector": "analyze_thermal_vias",
+      "rule_id": "TS-DET",
+      "category": "thermal",
+      "severity": "info",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "Zone stitching: GND 14 vias",
+      "description": "Zone stitching on net GND: 14 vias across layers ['In2.Cu'].",
+      "components": [],
+      "nets": [
+        "GND"
+      ],
+      "pins": [],
+      "recommendation": "",
+      "report_context": {
+        "section": "Thermal",
+        "impact": "Thermal/ground plane connectivity",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout"
+      ]
+    },
+    {
+      "net": "VIN",
+      "zone_layers": [
+        "In1.Cu"
+      ],
+      "zone_area_mm2": 324.1,
+      "via_count": 7,
+      "via_density_per_cm2": 2.2,
+      "drill_sizes_mm": [
+        0.254
+      ],
+      "detector": "analyze_thermal_vias",
+      "rule_id": "TS-DET",
+      "category": "thermal",
+      "severity": "info",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "Zone stitching: VIN 7 vias",
+      "description": "Zone stitching on net VIN: 7 vias across layers ['In1.Cu'].",
+      "components": [],
+      "nets": [
+        "VIN"
+      ],
+      "pins": [],
+      "recommendation": "",
+      "report_context": {
+        "section": "Thermal",
+        "impact": "Thermal/ground plane connectivity",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout"
+      ]
+    },
+    {
+      "component": "U302",
+      "value": "stm32l431kc",
+      "library": "Package_DFN_QFN:QFN-32-1EP_5x5mm_P0.5mm_EP3.45x3.45mm",
+      "layer": "B.Cu",
+      "pad_number": "33",
+      "pad_size_mm": [
+        3.45,
+        3.45
+      ],
+      "pad_area_mm2": 11.9,
+      "net": "GND",
+      "via_count": 2,
+      "effective_via_count": 1.4,
+      "standalone_vias": 2,
+      "footprint_via_pads": 0,
+      "nearby_verified_vias": 0,
+      "nearby_unverified_vias": 0,
+      "nearby_search_radius_mm": 8.9,
+      "total_verified_via_count": 2,
+      "total_effective_verified_vias": 1.4,
+      "adequacy_source": "in_pad",
+      "via_density_per_mm2": 0.12,
+      "vias_tented": 0,
+      "vias_untented": 2,
+      "recommended_min_vias": 9,
+      "recommended_ideal_vias": 16,
+      "adequacy": "insufficient",
+      "raw_adequacy": "insufficient",
+      "tenting_note": "2 via(s) are not tented \u2014 solder may wick through during reflow, creating voids under the thermal pad",
+      "detector": "analyze_thermal_pad_vias",
+      "rule_id": "TV-001",
+      "category": "thermal",
+      "severity": "warning",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "Thermal vias: U302 insufficient (2/9 min)",
+      "description": "Thermal pad on U302 pad 33: insufficient (2 vias, 9 recommended).",
+      "components": [
+        "U302"
+      ],
+      "nets": [
+        "GND"
+      ],
+      "pins": [],
+      "recommendation": "Add thermal vias under U302 (need 9, have 2). 2 via(s) are not tented \u2014 solder may wick through during reflow, creating voids under the thermal pad",
+      "report_context": {
+        "section": "Thermal",
+        "impact": "Thermal dissipation",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout"
+      ]
+    }
+  ],
+  "trust_summary": {
+    "total_findings": 35,
+    "trust_level": "high",
+    "by_confidence": {
+      "deterministic": 35,
+      "heuristic": 0,
+      "datasheet-backed": 0
+    },
+    "by_evidence_source": {
+      "datasheet": 0,
+      "topology": 30,
+      "heuristic_rule": 0,
+      "symbol_footprint": 0,
+      "bom": 0,
+      "geometry": 5,
+      "api_lookup": 0
+    },
+    "provenance_coverage_pct": 0.0
+  },
+  "summary": {
+    "total_findings": 35,
+    "by_severity": {
+      "error": 2,
+      "warning": 21,
+      "info": 12
+    }
+  },
+  "project_config": {
+    "preferred_suppliers": [],
+    "version": 1,
+    "power_profile": {
+      "source": "User-provided design intent",
+      "typical_current_a": 1e-05,
+      "normal_operating_current_max_a": 0.001,
+      "peak_current_a": 0.01,
+      "peak_condition": "Flash write",
+      "notes": [
+        "BitPresTagBMP581 is a low-power pressure sensing tag.",
+        "Typical current is about 10 uA.",
+        "Operating current is below 1 mA.",
+        "Peak current during flash write is about 10 mA."
+      ]
+    },
+    "project": {
+      "ambient_temperature_c": 25,
+      "name": "BitPresTagBMP581"
+    },
+    "suppressions": [
+      {
+        "rule_id": "CC-002",
+        "reason": "Low-power design: user-provided currents are about 10 uA typical, below 1 mA operating, and about 10 mA peak during flash write. Treat 0.1016 mm traces as advanced-process DFM notes, not current-capacity concerns."
+      },
+      {
+        "rule_id": "RS-001",
+        "nets": [
+          "+3V3"
+        ],
+        "reason": "+3V3 source is the main supply rail; KiCad ERC is clean."
+      },
+      {
+        "rule_id": "RS-001",
+        "nets": [
+          "VBAT"
+        ],
+        "reason": "VBAT is the external/battery input rail; KiCad ERC is clean."
+      },
+      {
+        "rule_id": "PR-002",
+        "components": [
+          "U1"
+        ],
+        "nets": [
+          "AT25_nCS"
+        ],
+        "reason": "AT25_nCS deselect is a firmware/reset-state contract using STM32 PA15 internal pull-up unless an external pull-up is later added."
+      }
+    ],
+    "design_intent": {
+      "product_class": "prototype",
+      "ipc_class": 2,
+      "target_market": "hobby",
+      "expected_lifetime_years": 5,
+      "operating_temp_range": [
+        -10,
+        70
+      ],
+      "preferred_passive_size": "0201",
+      "test_coverage_target": 0
+    },
+    "bom": {},
+    "analysis": {
+      "retention": 5,
+      "auto_diff": true,
+      "diff_threshold": "major",
+      "track_in_git": false,
+      "power_rails": {
+        "voltage_overrides": {
+          "+3V3": 3.3,
+          "+2V5": 2.5,
+          "+1V8": 1.8
+        }
+      },
+      "output_dir": "analysis"
+    },
+    "mating_design": {
+      "name": "BitPresTagBMP581 self-contained board",
+      "host_mcu": "STM32L432KCU6",
+      "source": "Inferred from BitPresTagBMP581 schematic and similar to PresTag design.",
+      "notes": [
+        "This is a self-contained STM32L432-based pressure sensing tag.",
+        "Features BMP581 pressure sensor and RV-3028-C7 RTC.",
+        "Multiple chip-select, clock, wake, reset, and power-enable nets depend on explicit STM32 reset/sleep GPIO configuration.",
+        "BMP581 1.8 V rail may be controlled by STM32 pin through LDO enable.",
+        "AT25_nCS does not have an external pull-up; firmware/internal pull configuration must keep flash deselected during reset/sleep."
+      ],
+      "host_pin_map": [
+        {
+          "breakout_header": "U302.2",
+          "breakout_net": "clkout",
+          "host_pin": "PC14",
+          "host_function": "RTC clock input / capture",
+          "connected_part": "U501 RV-3028 CLKOUT",
+          "required_state": "Input/no-pull unless actively using clock output capture.",
+          "reason": "Avoids fighting RTC clock output; clock net is EMC-sensitive."
+        },
+        {
+          "breakout_header": "U302.3",
+          "breakout_net": "NO_CONNECT",
+          "host_pin": "PC15",
+          "host_function": "unused",
+          "connected_part": "none",
+          "required_state": "Analog/no-pull.",
+          "reason": "Lowest leakage for unused pin."
+        },
+        {
+          "breakout_header": "U302.4",
+          "breakout_net": "__unnamed_1",
+          "host_pin": "NRST",
+          "host_function": "Reset",
+          "connected_part": "C502, Q501 collector",
+          "required_state": "External reset network controls state.",
+          "reason": "Verify Q501 reset-drive polarity during programming and sleep."
+        },
+        {
+          "breakout_header": "U302.6",
+          "breakout_net": "WKUP1",
+          "host_pin": "PA0",
+          "host_function": "Wake input / BMP581 INT1",
+          "connected_part": "U3 BMP581 INT1",
+          "required_state": "Pull state must match pressure sensor interrupt polarity.",
+          "reason": "Wake input should have a deliberate inactive state."
+        },
+        {
+          "breakout_header": "U302.7",
+          "breakout_net": "BMP_CS",
+          "host_pin": "PA1",
+          "host_function": "BMP581 chip select",
+          "connected_part": "U3 BMP581 CS",
+          "required_state": "Pull-up during reset/sleep/high-Z.",
+          "reason": "Keeps pressure sensor deselected."
+        },
+        {
+          "breakout_header": "U302.8",
+          "breakout_net": "USART2_TX",
+          "host_pin": "PA2",
+          "host_function": "BMP581 SPI/I2C data",
+          "connected_part": "U3 BMP581 SDA/SDI/SDO",
+          "required_state": "Pull-down or push-pull idle appropriate to selected bus mode.",
+          "reason": "Prevents floating pressure sensor data input."
+        },
+        {
+          "breakout_header": "U302.9",
+          "breakout_net": "USART2_RX",
+          "host_pin": "PA3",
+          "host_function": "BMP581 SPI data output",
+          "connected_part": "U3 BMP581 SDO",
+          "required_state": "Pull-down or no-pull while BMP_CS is inactive.",
+          "reason": "Avoids floating host input."
+        },
+        {
+          "breakout_header": "U302.10",
+          "breakout_net": "USART2_CK",
+          "host_pin": "PA4",
+          "host_function": "BMP581 clock",
+          "connected_part": "U3 BMP581 SCL/SPC",
+          "required_state": "Pull-down in reset/sleep/high-Z.",
+          "reason": "Prevents spurious pressure sensor clocks."
+        },
+        {
+          "breakout_header": "U302.11",
+          "breakout_net": "AK_CK",
+          "host_pin": "PA5",
+          "host_function": "AK09940A clock",
+          "connected_part": "U2 AK09940A SCL/SK",
+          "required_state": "Pull-down when magnetometer rail is enabled; no-pull/high-Z if AK domain is off.",
+          "reason": "Prevents spurious clocks and avoids back-power risk."
+        },
+        {
+          "breakout_header": "U302.12",
+          "breakout_net": "AK_MISO",
+          "host_pin": "PA6",
+          "host_function": "AK09940A SO",
+          "connected_part": "U2 AK09940A SO",
+          "required_state": "Pull-down or no-pull while AK_CS is inactive.",
+          "reason": "Avoids floating host input."
+        },
+        {
+          "breakout_header": "U302.13",
+          "breakout_net": "AK_MOSI",
+          "host_pin": "PA7",
+          "host_function": "AK09940A data input",
+          "connected_part": "U2 AK09940A SDA/SI",
+          "required_state": "Pull-down when AK domain is enabled; no-pull/high-Z if AK domain is off.",
+          "reason": "Keeps magnetometer input quiet and avoids back-power risk."
+        },
+        {
+          "breakout_header": "U302.14",
+          "breakout_net": "AK_RSTN",
+          "host_pin": "PB0",
+          "host_function": "AK09940A reset",
+          "connected_part": "U2 AK09940A RSTN",
+          "required_state": "Hold low during reset/sleep unless magnetometer is intentionally active.",
+          "reason": "Keeps magnetometer reset while power domain is off or settling."
+        },
+        {
+          "breakout_header": "U302.15",
+          "breakout_net": "AK_CS",
+          "host_pin": "PB1",
+          "host_function": "AK09940A chip select",
+          "connected_part": "U2 AK09940A CSB",
+          "required_state": "Pull-up during reset/sleep/high-Z.",
+          "reason": "Keeps magnetometer deselected."
+        },
+        {
+          "breakout_header": "U302.18",
+          "breakout_net": "NO_CONNECT",
+          "host_pin": "PA8",
+          "host_function": "unused",
+          "connected_part": "none",
+          "required_state": "Analog/no-pull.",
+          "reason": "Lowest leakage for unused pin."
+        },
+        {
+          "breakout_header": "U302.19",
+          "breakout_net": "AK_PWR",
+          "host_pin": "PA9",
+          "host_function": "AK09940A 1.8 V LDO enable",
+          "connected_part": "U4 TPS7A2018 EN",
+          "required_state": "Drive low or pull-down in sleep; drive high to enable +1V8.",
+          "reason": "Controls the magnetometer 1.8 V rail."
+        },
+        {
+          "breakout_header": "U302.20",
+          "breakout_net": "AK_DRDY",
+          "host_pin": "PA10",
+          "host_function": "AK09940A data ready / trigger",
+          "connected_part": "U2 AK09940A DRDY/TRG",
+          "required_state": "Input/no-pull or pull-down when powered; confirm against selected AK09940 output mode.",
+          "reason": "Data-ready line should not float as a wake/event source."
+        },
+        {
+          "breakout_header": "U302.21",
+          "breakout_net": "NO_CONNECT",
+          "host_pin": "PA11",
+          "host_function": "unused",
+          "connected_part": "none",
+          "required_state": "Analog/no-pull.",
+          "reason": "Lowest leakage for unused pin."
+        },
+        {
+          "breakout_header": "U302.22",
+          "breakout_net": "NO_CONNECT",
+          "host_pin": "PA12",
+          "host_function": "unused",
+          "connected_part": "none",
+          "required_state": "Analog/no-pull.",
+          "reason": "Lowest leakage for unused pin."
+        },
+        {
+          "breakout_header": "U302.23",
+          "breakout_net": "SWDIO",
+          "host_pin": "PA13",
+          "host_function": "SWDIO",
+          "connected_part": "J201 SWD header",
+          "required_state": "Preserve SWD debug function or use documented debug-disable state.",
+          "reason": "Debug access and leakage trade-off."
+        },
+        {
+          "breakout_header": "U302.24",
+          "breakout_net": "SWCLK",
+          "host_pin": "PA14",
+          "host_function": "SWCLK",
+          "connected_part": "J201 SWD header",
+          "required_state": "Preserve SWD debug function or pull-down if debug disabled.",
+          "reason": "Prevents floating clock input when not debugging."
+        },
+        {
+          "breakout_header": "U302.25",
+          "breakout_net": "AT25_nCS",
+          "host_pin": "PA15",
+          "host_function": "AT25 flash chip select",
+          "connected_part": "U1 AT25XE321D nCS",
+          "required_state": "Internal pull-up during reset/sleep/high-Z unless an external pull-up is added.",
+          "reason": "Keeps flash deselected; schematic has no external pull-up."
+        },
+        {
+          "breakout_header": "U302.26",
+          "breakout_net": "AT25_SCK",
+          "host_pin": "PB3",
+          "host_function": "AT25 flash SCK",
+          "connected_part": "U1 AT25XE321D SCK",
+          "required_state": "Pull-down during reset/sleep/high-Z.",
+          "reason": "Prevents spurious flash clocks."
+        },
+        {
+          "breakout_header": "U302.27",
+          "breakout_net": "AT25_MISO",
+          "host_pin": "PB4",
+          "host_function": "AT25 flash SO",
+          "connected_part": "U1 AT25XE321D SO",
+          "required_state": "Pull-down or no-pull while AT25_nCS is high.",
+          "reason": "Flash SO is normally tri-stated when deselected."
+        },
+        {
+          "breakout_header": "U302.28",
+          "breakout_net": "AT25_MOSI",
+          "host_pin": "PB5",
+          "host_function": "AT25 flash SI",
+          "connected_part": "U1 AT25XE321D SI",
+          "required_state": "Pull-down during reset/sleep/high-Z.",
+          "reason": "Keeps flash input quiet."
+        },
+        {
+          "breakout_header": "U302.29",
+          "breakout_net": "SDA",
+          "host_pin": "PB6",
+          "host_function": "I2C SDA for RV-3028",
+          "connected_part": "U501 RV-3028 SDA",
+          "required_state": "I2C pull-up strategy must be explicit; internal pull-up may be acceptable only at slow bus speed.",
+          "reason": "No discrete I2C pull-up was detected in the schematic analyzer output."
+        },
+        {
+          "breakout_header": "U302.30",
+          "breakout_net": "SCL",
+          "host_pin": "PB7",
+          "host_function": "I2C SCL for RV-3028",
+          "connected_part": "U501 RV-3028 SCL",
+          "required_state": "I2C pull-up strategy must be explicit; internal pull-up may be acceptable only at slow bus speed.",
+          "reason": "No discrete I2C pull-up was detected in the schematic analyzer output."
+        },
+        {
+          "breakout_header": "U302.31",
+          "breakout_net": "GND",
+          "host_pin": "BOOT0",
+          "host_function": "Boot mode strap",
+          "connected_part": "GND",
+          "required_state": "Hard low.",
+          "reason": "Normal boot from flash."
+        }
+      ],
+      "population_options": [
+        {
+          "refs": [
+            "external AT25_nCS pull-up"
+          ],
+          "default": "not populated / not present",
+          "condition": "Add only if firmware/internal pull-up cannot guarantee flash deselect during reset and sleep.",
+          "connected_rail": "+3V3",
+          "notes": "Current design depends on STM32 PA15 internal pull-up/reset-state handling for AT25_nCS."
+        }
+      ]
+    }
+  },
+  "project": {
+    "ambient_temperature_c": 25,
+    "name": "BitPresTagBMP581"
+  },
+  "design_intent": {
+    "product_class": "prototype",
+    "ipc_class": 2,
+    "target_market": "hobby",
+    "expected_lifetime_years": 5,
+    "operating_temp_range": [
+      -10,
+      70
+    ],
+    "preferred_passive_size": "0201",
+    "test_coverage_target": 0,
+    "approved_manufacturers": [],
+    "confidence": 0.3,
+    "detection_signals": [
+      "IPC class 2 from config",
+      "Product class \"prototype\" from config",
+      "Target market \"hobby\" from config"
+    ],
+    "source": {
+      "ipc_class": "config",
+      "product_class": "config",
+      "target_market": "config",
+      "expected_lifetime_years": "config",
+      "operating_temp_range": "config",
+      "preferred_passive_size": "config",
+      "test_coverage_target": "config",
+      "approved_manufacturers": "auto"
+    }
+  },
+  "audience_summary": {
+    "designer": {
+      "total_findings": 35,
+      "by_severity": {
+        "error": 2,
+        "warning": 21,
+        "info": 12
+      },
+      "by_category": {
+        "current_capacity": 18,
+        "copper_integrity": 5,
+        "dfm": 6,
+        "assembly": 2,
+        "testability": 1,
+        "thermal": 3
+      },
+      "top_issues": [
+        {
+          "side": "B.Cu",
+          "fiducial_count": 0,
+          "fiducial_refs": [],
+          "smd_component_count": 9,
+          "finest_smd_pad_dim_mm": 0.25,
+          "detector": "analyze_fiducials",
+          "rule_id": "FD-001",
+          "category": "assembly",
+          "severity": "error",
+          "confidence": "deterministic",
+          "evidence_source": "topology",
+          "summary": "No fiducials on B.Cu (9 SMD components) (finest pad dim 0.25mm \u2014 BGA/fine-pitch QFN present)",
+          "description": "B.Cu has 0 fiducial(s) but 9 SMD components. Assembly machines need >= 3 fiducials for accurate placement.",
+          "components": [],
+          "nets": [],
+          "pins": [],
+          "recommendation": "Add fiducial markers for pick-and-place alignment (3 per side with SMD).",
+          "report_context": {
+            "section": "Assembly",
+            "impact": "Pick-and-place alignment",
+            "standard_ref": "IPC-7351"
+          },
+          "stages": [
+            "pre_fab"
+          ]
+        },
+        {
+          "side": "F.Cu",
+          "fiducial_count": 0,
+          "fiducial_refs": [],
+          "smd_component_count": 13,
+          "finest_smd_pad_dim_mm": 0.25,
+          "detector": "analyze_fiducials",
+          "rule_id": "FD-001",
+          "category": "assembly",
+          "severity": "error",
+          "confidence": "deterministic",
+          "evidence_source": "topology",
+          "summary": "No fiducials on F.Cu (13 SMD components) (finest pad dim 0.25mm \u2014 BGA/fine-pitch QFN present)",
+          "description": "F.Cu has 0 fiducial(s) but 13 SMD components. Assembly machines need >= 3 fiducials for accurate placement.",
+          "components": [],
+          "nets": [],
+          "pins": [],
+          "recommendation": "Add fiducial markers for pick-and-place alignment (3 per side with SMD).",
+          "report_context": {
+            "section": "Assembly",
+            "impact": "Pick-and-place alignment",
+            "standard_ref": "IPC-7351"
+          },
+          "stages": [
+            "pre_fab"
+          ]
+        },
+        {
+          "net": "/ACCEL_MISO",
+          "net_number": 1,
+          "min_track_width_mm": 0.1016,
+          "max_track_width_mm": 0.1016,
+          "track_widths_used": [
+            0.1016
+          ],
+          "copper_layers": [
+            "B.Cu",
+            "F.Cu"
+          ],
+          "segment_count": 8,
+          "via_count": 2,
+          "via_drill_sizes_mm": [
+            0.254
+          ],
+          "detector": "analyze_current_capacity",
+          "rule_id": "CC-002",
+          "category": "current_capacity",
+          "severity": "warning",
+          "confidence": "deterministic",
+          "evidence_source": "topology",
+          "summary": "Narrow signal: /ACCEL_MISO min 0.1016mm",
+          "description": "Signal net /ACCEL_MISO has narrow traces: min 0.1016mm across 8 segments.",
+          "components": [],
+          "nets": [
+            "/ACCEL_MISO"
+          ],
+          "pins": [],
+          "recommendation": "Widen trace or verify signal integrity requirements.",
+          "report_context": {
+            "section": "Current Capacity",
+            "impact": "Signal integrity",
+            "standard_ref": ""
+          },
+          "stages": [
+            "layout",
+            "pre_fab"
+          ]
+        },
+        {
+          "net": "/ACCEL_SCK",
+          "net_number": 3,
+          "min_track_width_mm": 0.1016,
+          "max_track_width_mm": 0.1016,
+          "track_widths_used": [
+            0.1016
+          ],
+          "copper_layers": [
+            "B.Cu"
+          ],
+          "segment_count": 8,
+          "via_count": 0,
+          "detector": "analyze_current_capacity",
+          "rule_id": "CC-002",
+          "category": "current_capacity",
+          "severity": "warning",
+          "confidence": "deterministic",
+          "evidence_source": "topology",
+          "summary": "Narrow signal: /ACCEL_SCK min 0.1016mm",
+          "description": "Signal net /ACCEL_SCK has narrow traces: min 0.1016mm across 8 segments.",
+          "components": [],
+          "nets": [
+            "/ACCEL_SCK"
+          ],
+          "pins": [],
+          "recommendation": "Widen trace or verify signal integrity requirements.",
+          "report_context": {
+            "section": "Current Capacity",
+            "impact": "Signal integrity",
+            "standard_ref": ""
+          },
+          "stages": [
+            "layout",
+            "pre_fab"
+          ]
+        },
+        {
+          "net": "/AT25_MISO",
+          "net_number": 5,
+          "min_track_width_mm": 0.1016,
+          "max_track_width_mm": 0.1016,
+          "track_widths_used": [
+            0.1016
+          ],
+          "copper_layers": [
+            "B.Cu",
+            "F.Cu"
+          ],
+          "segment_count": 12,
+          "via_count": 1,
+          "via_drill_sizes_mm": [
+            0.254
+          ],
+          "detector": "analyze_current_capacity",
+          "rule_id": "CC-002",
+          "category": "current_capacity",
+          "severity": "warning",
+          "confidence": "deterministic",
+          "evidence_source": "topology",
+          "summary": "Narrow signal: /AT25_MISO min 0.1016mm",
+          "description": "Signal net /AT25_MISO has narrow traces: min 0.1016mm across 12 segments.",
+          "components": [],
+          "nets": [
+            "/AT25_MISO"
+          ],
+          "pins": [],
+          "recommendation": "Widen trace or verify signal integrity requirements.",
+          "report_context": {
+            "section": "Current Capacity",
+            "impact": "Signal integrity",
+            "standard_ref": ""
+          },
+          "stages": [
+            "layout",
+            "pre_fab"
+          ]
+        },
+        {
+          "net": "/AT25_MOSI",
+          "net_number": 6,
+          "min_track_width_mm": 0.1016,
+          "max_track_width_mm": 0.1016,
+          "track_widths_used": [
+            0.1016
+          ],
+          "copper_layers": [
+            "B.Cu",
+            "F.Cu"
+          ],
+          "segment_count": 9,
+          "via_count": 1,
+          "via_drill_sizes_mm": [
+            0.254
+          ],
+          "detector": "analyze_current_capacity",
+          "rule_id": "CC-002",
+          "category": "current_capacity",
+          "severity": "warning",
+          "confidence": "deterministic",
+          "evidence_source": "topology",
+          "summary": "Narrow signal: /AT25_MOSI min 0.1016mm",
+          "description": "Signal net /AT25_MOSI has narrow traces: min 0.1016mm across 9 segments.",
+          "components": [],
+          "nets": [
+            "/AT25_MOSI"
+          ],
+          "pins": [],
+          "recommendation": "Widen trace or verify signal integrity requirements.",
+          "report_context": {
+            "section": "Current Capacity",
+            "impact": "Signal integrity",
+            "standard_ref": ""
+          },
+          "stages": [
+            "layout",
+            "pre_fab"
+          ]
+        },
+        {
+          "net": "/AT25_SCK",
+          "net_number": 7,
+          "min_track_width_mm": 0.1016,
+          "max_track_width_mm": 0.1016,
+          "track_widths_used": [
+            0.1016
+          ],
+          "copper_layers": [
+            "B.Cu",
+            "F.Cu"
+          ],
+          "segment_count": 10,
+          "via_count": 1,
+          "via_drill_sizes_mm": [
+            0.254
+          ],
+          "detector": "analyze_current_capacity",
+          "rule_id": "CC-002",
+          "category": "current_capacity",
+          "severity": "warning",
+          "confidence": "deterministic",
+          "evidence_source": "topology",
+          "summary": "Narrow signal: /AT25_SCK min 0.1016mm",
+          "description": "Signal net /AT25_SCK has narrow traces: min 0.1016mm across 10 segments.",
+          "components": [],
+          "nets": [
+            "/AT25_SCK"
+          ],
+          "pins": [],
+          "recommendation": "Widen trace or verify signal integrity requirements.",
+          "report_context": {
+            "section": "Current Capacity",
+            "impact": "Signal integrity",
+            "standard_ref": ""
+          },
+          "stages": [
+            "layout",
+            "pre_fab"
+          ]
+        },
+        {
+          "net": "/AT25_nCS",
+          "net_number": 8,
+          "min_track_width_mm": 0.1016,
+          "max_track_width_mm": 0.1016,
+          "track_widths_used": [
+            0.1016
+          ],
+          "copper_layers": [
+            "B.Cu",
+            "F.Cu"
+          ],
+          "segment_count": 5,
+          "via_count": 1,
+          "via_drill_sizes_mm": [
+            0.254
+          ],
+          "detector": "analyze_current_capacity",
+          "rule_id": "CC-002",
+          "category": "current_capacity",
+          "severity": "warning",
+          "confidence": "deterministic",
+          "evidence_source": "topology",
+          "summary": "Narrow signal: /AT25_nCS min 0.1016mm",
+          "description": "Signal net /AT25_nCS has narrow traces: min 0.1016mm across 5 segments.",
+          "components": [],
+          "nets": [
+            "/AT25_nCS"
+          ],
+          "pins": [],
+          "recommendation": "Widen trace or verify signal integrity requirements.",
+          "report_context": {
+            "section": "Current Capacity",
+            "impact": "Signal integrity",
+            "standard_ref": ""
+          },
+          "stages": [
+            "layout",
+            "pre_fab"
+          ]
+        },
+        {
+          "net": "/LPS_MISO",
+          "net_number": 10,
+          "min_track_width_mm": 0.1016,
+          "max_track_width_mm": 0.1016,
+          "track_widths_used": [
+            0.1016
+          ],
+          "copper_layers": [
+            "B.Cu",
+            "F.Cu"
+          ],
+          "segment_count": 6,
+          "via_count": 1,
+          "via_drill_sizes_mm": [
+            0.254
+          ],
+          "detector": "analyze_current_capacity",
+          "rule_id": "CC-002",
+          "category": "current_capacity",
+          "severity": "warning",
+          "confidence": "deterministic",
+          "evidence_source": "topology",
+          "summary": "Narrow signal: /LPS_MISO min 0.1016mm",
+          "description": "Signal net /LPS_MISO has narrow traces: min 0.1016mm across 6 segments.",
+          "components": [],
+          "nets": [
+            "/LPS_MISO"
+          ],
+          "pins": [],
+          "recommendation": "Widen trace or verify signal integrity requirements.",
+          "report_context": {
+            "section": "Current Capacity",
+            "impact": "Signal integrity",
+            "standard_ref": ""
+          },
+          "stages": [
+            "layout",
+            "pre_fab"
+          ]
+        },
+        {
+          "net": "/LPS_MOSI",
+          "net_number": 11,
+          "min_track_width_mm": 0.1016,
+          "max_track_width_mm": 0.1016,
+          "track_widths_used": [
+            0.1016
+          ],
+          "copper_layers": [
+            "B.Cu",
+            "F.Cu"
+          ],
+          "segment_count": 5,
+          "via_count": 1,
+          "via_drill_sizes_mm": [
+            0.254
+          ],
+          "detector": "analyze_current_capacity",
+          "rule_id": "CC-002",
+          "category": "current_capacity",
+          "severity": "warning",
+          "confidence": "deterministic",
+          "evidence_source": "topology",
+          "summary": "Narrow signal: /LPS_MOSI min 0.1016mm",
+          "description": "Signal net /LPS_MOSI has narrow traces: min 0.1016mm across 5 segments.",
+          "components": [],
+          "nets": [
+            "/LPS_MOSI"
+          ],
+          "pins": [],
+          "recommendation": "Widen trace or verify signal integrity requirements.",
+          "report_context": {
+            "section": "Current Capacity",
+            "impact": "Signal integrity",
+            "standard_ref": ""
+          },
+          "stages": [
+            "layout",
+            "pre_fab"
+          ]
+        }
+      ]
+    },
+    "reviewer": {
+      "total_findings": 23,
+      "by_category": {
+        "current_capacity": 15,
+        "dfm": 4,
+        "assembly": 2,
+        "testability": 1,
+        "thermal": 1
+      },
+      "top_issues": [
+        {
+          "rule_id": "FD-001",
+          "severity": "error",
+          "summary": "No fiducials on B.Cu (9 SMD components) (finest pad dim 0.25mm \u2014 BGA/fine-pitch QFN present)",
+          "recommendation": "Add fiducial markers for pick-and-place alignment (3 per side with SMD).",
+          "category": "assembly"
+        },
+        {
+          "rule_id": "FD-001",
+          "severity": "error",
+          "summary": "No fiducials on F.Cu (13 SMD components) (finest pad dim 0.25mm \u2014 BGA/fine-pitch QFN present)",
+          "recommendation": "Add fiducial markers for pick-and-place alignment (3 per side with SMD).",
+          "category": "assembly"
+        },
+        {
+          "rule_id": "CC-002",
+          "severity": "warning",
+          "summary": "Narrow signal: /ACCEL_MISO min 0.1016mm",
+          "recommendation": "Widen trace or verify signal integrity requirements.",
+          "category": "current_capacity"
+        },
+        {
+          "rule_id": "CC-002",
+          "severity": "warning",
+          "summary": "Narrow signal: /ACCEL_SCK min 0.1016mm",
+          "recommendation": "Widen trace or verify signal integrity requirements.",
+          "category": "current_capacity"
+        },
+        {
+          "rule_id": "CC-002",
+          "severity": "warning",
+          "summary": "Narrow signal: /AT25_MISO min 0.1016mm",
+          "recommendation": "Widen trace or verify signal integrity requirements.",
+          "category": "current_capacity"
+        },
+        {
+          "rule_id": "CC-002",
+          "severity": "warning",
+          "summary": "Narrow signal: /AT25_MOSI min 0.1016mm",
+          "recommendation": "Widen trace or verify signal integrity requirements.",
+          "category": "current_capacity"
+        },
+        {
+          "rule_id": "CC-002",
+          "severity": "warning",
+          "summary": "Narrow signal: /AT25_SCK min 0.1016mm",
+          "recommendation": "Widen trace or verify signal integrity requirements.",
+          "category": "current_capacity"
+        },
+        {
+          "rule_id": "CC-002",
+          "severity": "warning",
+          "summary": "Narrow signal: /AT25_nCS min 0.1016mm",
+          "recommendation": "Widen trace or verify signal integrity requirements.",
+          "category": "current_capacity"
+        },
+        {
+          "rule_id": "CC-002",
+          "severity": "warning",
+          "summary": "Narrow signal: /LPS_MISO min 0.1016mm",
+          "recommendation": "Widen trace or verify signal integrity requirements.",
+          "category": "current_capacity"
+        },
+        {
+          "rule_id": "CC-002",
+          "severity": "warning",
+          "summary": "Narrow signal: /LPS_MOSI min 0.1016mm",
+          "recommendation": "Widen trace or verify signal integrity requirements.",
+          "category": "current_capacity"
+        },
+        {
+          "rule_id": "CC-002",
+          "severity": "warning",
+          "summary": "Narrow signal: /LPS_PWR min 0.1016mm",
+          "recommendation": "Widen trace or verify signal integrity requirements.",
+          "category": "current_capacity"
+        },
+        {
+          "rule_id": "CC-002",
+          "severity": "warning",
+          "summary": "Narrow signal: /LPS_SCK min 0.1016mm",
+          "recommendation": "Widen trace or verify signal integrity requirements.",
+          "category": "current_capacity"
+        },
+        {
+          "rule_id": "CC-002",
+          "severity": "warning",
+          "summary": "Narrow signal: /SDA min 0.1016mm",
+          "recommendation": "Widen trace or verify signal integrity requirements.",
+          "category": "current_capacity"
+        },
+        {
+          "rule_id": "CC-002",
+          "severity": "warning",
+          "summary": "Narrow signal: /clkout min 0.1016mm",
+          "recommendation": "Widen trace or verify signal integrity requirements.",
+          "category": "current_capacity"
+        },
+        {
+          "rule_id": "CC-002",
+          "severity": "warning",
+          "summary": "Narrow signal: /lps_rdy min 0.1016mm",
+          "recommendation": "Widen trace or verify signal integrity requirements.",
+          "category": "current_capacity"
+        },
+        {
+          "rule_id": "CC-002",
+          "severity": "warning",
+          "summary": "Narrow signal: Net-(Q501-C) min 0.1016mm",
+          "recommendation": "Widen trace or verify signal integrity requirements.",
+          "category": "current_capacity"
+        },
+        {
+          "rule_id": "CC-002",
+          "severity": "warning",
+          "summary": "Narrow signal: RST min 0.1016mm",
+          "recommendation": "Widen trace or verify signal integrity requirements.",
+          "category": "current_capacity"
+        },
+        {
+          "rule_id": "DFM-001",
+          "severity": "warning",
+          "summary": "Annular ring 0.102mm requires advanced process (standard: 0.125mm)",
+          "recommendation": "Annular ring 0.102mm requires advanced process (standard: 0.125mm)",
+          "category": "dfm"
+        },
+        {
+          "rule_id": "DFM-001",
+          "severity": "warning",
+          "summary": "Track spacing 0.1019mm requires advanced process (standard: 0.127mm)",
+          "recommendation": "Approximate track spacing 0.1019mm requires advanced process (standard: 0.127mm)",
+          "category": "dfm"
+        },
+        {
+          "rule_id": "DFM-001",
+          "severity": "warning",
+          "summary": "Track width 0.1016mm requires advanced process (standard: 0.127mm)",
+          "recommendation": "Track width 0.1016mm requires advanced process (standard minimum: 0.127mm)",
+          "category": "dfm"
+        },
+        {
+          "rule_id": "DFM-002",
+          "severity": "warning",
+          "summary": "Via annular ring 0.102mm below IPC Class 2 minimum 0.125mm",
+          "recommendation": "Increase via annular ring to at least 0.125mm to meet IPC Class 2 requirements",
+          "category": "dfm"
+        },
+        {
+          "rule_id": "TE-001",
+          "severity": "warning",
+          "summary": "Test point coverage: 0/40 nets (0%)",
+          "recommendation": "Add test points to improve ICT/flying probe coverage.",
+          "category": "testability"
+        },
+        {
+          "rule_id": "TV-001",
+          "severity": "warning",
+          "summary": "Thermal vias: U302 insufficient (2/9 min)",
+          "recommendation": "Add thermal vias under U302 (need 9, have 2). 2 via(s) are not tented \u2014 solder may wick through during reflow, creating voids under the thermal pad",
+          "category": "thermal"
+        }
+      ]
+    },
+    "manager": {
+      "risk_level": "moderate",
+      "blocker_count": 2,
+      "warning_count": 21,
+      "stage_readiness": {
+        "schematic": "pass",
+        "layout": "needs_review",
+        "pre_fab": "needs_work",
+        "bring_up": "pass"
+      },
+      "one_liner": "2 errors, 21 warnings across 5 categories. Pre-fab stage has blockers."
+    }
+  }
+}
