@@ -88,9 +88,12 @@ checking whether the board's config already accepts them.
   those runs was measured against the wrong rule set. The selection rule is
   neither alphabetical nor newest-first; do not try to predict it. **Check
   `project_settings.source` and `design_rule_compliance.rules_source` in
-  `pcb.json` before trusting any rule-derived finding.** The BitTagNG copies
-  were swept 2026-09-01, but `panel-copy.kicad_pro` — an orphan with no matching
-  board — still sits in 13 directories.
+  `pcb.json` before trusting any rule-derived finding.** Both offenders were
+  swept on 2026-09-01: the BitTagNG copies, and `panel-copy.kicad_pro` — an
+  artifact of copying a previous design as the starting point for a new one,
+  left in 13 directories with no matching board or schematic. Re-run any
+  analysis whose `rules_source` names something other than the board's own
+  `.kicad_pro`.
 
 ## Running DRC
 
