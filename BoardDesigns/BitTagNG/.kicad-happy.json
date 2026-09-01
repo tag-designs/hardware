@@ -50,13 +50,14 @@
     "output_dir": "analysis",
     "retention": 5,
     "auto_diff": true,
-    "track_in_git": false,
+    "track_in_git": true,
     "diff_threshold": "major",
     "power_rails": {
       "voltage_overrides": {
         "+2V5": 2.5
       }
-    }
+    },
+    "_track_in_git_note": "Analyzer JSON and deep_review.json are tracked: they are slow to recreate and compress to about 57 kB per run in git. Keep analysis/.gitignore deleted -- analysis_cache.py only recreates it when track_in_git is false AND the file is absent."
   },
   "suppressions": [
     {

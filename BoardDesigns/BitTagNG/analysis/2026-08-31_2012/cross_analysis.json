@@ -1,0 +1,215 @@
+{
+  "analyzer_type": "cross_analysis",
+  "schema_version": "1.4.0",
+  "inputs": {
+    "source_files": [
+      "analysis/2026-08-31_2012/schematic.json",
+      "analysis/2026-08-31_2012/pcb.json"
+    ],
+    "source_hashes": {
+      "analysis/2026-08-31_2012/schematic.json": "84c12c948cd5d85c910242ca1d6ed47da6da373cf3b94b2db27e06a1e5f95524",
+      "analysis/2026-08-31_2012/pcb.json": "6ff1fa4a6dc6231752671d4041305c49d3c2d94031f67756296849805404c5ad"
+    },
+    "run_id": "20260901T001217Z-99b44f",
+    "config_hash": null,
+    "upstream_artifacts": {
+      "schematic": {
+        "path": "analysis/2026-08-31_2012/schematic.json",
+        "sha256": "84c12c948cd5d85c910242ca1d6ed47da6da373cf3b94b2db27e06a1e5f95524",
+        "schema_version": "1.4.0",
+        "run_id": "20260901T001217Z-99b44f"
+      },
+      "pcb": {
+        "path": "analysis/2026-08-31_2012/pcb.json",
+        "sha256": "6ff1fa4a6dc6231752671d4041305c49d3c2d94031f67756296849805404c5ad",
+        "schema_version": "1.4.0",
+        "run_id": "20260901T001217Z-99b44f"
+      }
+    }
+  },
+  "compat": {
+    "minimum_consumer_version": "1.4.0",
+    "deprecated_fields": [],
+    "experimental_fields": []
+  },
+  "elapsed_s": 0.006,
+  "summary": {
+    "total_findings": 3,
+    "by_severity": {
+      "error": 0,
+      "warning": 1,
+      "info": 2
+    }
+  },
+  "findings": [
+    {
+      "detector": "check_return_path_enhanced",
+      "rule_id": "RP-002",
+      "category": "return_path",
+      "summary": "spi net /AT25_MISO crosses GND plane gap",
+      "description": "spi signal /AT25_MISO crosses a gap in GND plane on layer F.Cu.",
+      "components": [],
+      "nets": [
+        "/AT25_MISO",
+        "GND"
+      ],
+      "pins": [],
+      "severity": "warning",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "recommendation": "Re-route /AT25_MISO to avoid the GND plane gap, or bridge with a stitching capacitor.",
+      "report_context": {
+        "section": "Return Path",
+        "impact": "Increased EMI from enlarged return path loop",
+        "standard_ref": ""
+      },
+      "finding_id": "cross_analysis:RP-002:/at25_miso",
+      "stages": [
+        "layout"
+      ]
+    },
+    {
+      "detector": "check_plane_splits",
+      "rule_id": "PS-002",
+      "category": "plane_integrity",
+      "summary": "GND plane split: 4 islands",
+      "description": "GND plane has 4 disconnected islands.",
+      "components": [],
+      "nets": [
+        "GND"
+      ],
+      "pins": [],
+      "severity": "info",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "recommendation": "Bridge the plane gap with copper pour or stitching vias. If zones were modified after the last fill, run KiCad Edit \u2192 Fill All Zones (B) and re-run the analyzer first \u2014 stale zone fills are a common cause of apparent plane splits.",
+      "report_context": {
+        "section": "Plane Integrity",
+        "impact": "Return path discontinuity increases EMI",
+        "standard_ref": ""
+      },
+      "finding_id": "cross_analysis:PS-002:gnd",
+      "stages": [
+        "layout"
+      ]
+    },
+    {
+      "detector": "check_plane_splits",
+      "rule_id": "PS-002",
+      "category": "plane_integrity",
+      "summary": "VIN plane split: 5 islands",
+      "description": "VIN plane has 5 disconnected islands.",
+      "components": [],
+      "nets": [
+        "VIN"
+      ],
+      "pins": [],
+      "severity": "info",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "recommendation": "Bridge the plane gap with copper pour or stitching vias. If zones were modified after the last fill, run KiCad Edit \u2192 Fill All Zones (B) and re-run the analyzer first \u2014 stale zone fills are a common cause of apparent plane splits.",
+      "report_context": {
+        "section": "Plane Integrity",
+        "impact": "Return path discontinuity increases EMI",
+        "standard_ref": ""
+      },
+      "finding_id": "cross_analysis:PS-002:vin",
+      "stages": [
+        "layout"
+      ]
+    }
+  ],
+  "assessments": [],
+  "trust_summary": {
+    "total_findings": 3,
+    "trust_level": "high",
+    "by_confidence": {
+      "deterministic": 3,
+      "heuristic": 0,
+      "datasheet_backed": 0
+    },
+    "by_evidence_source": {
+      "datasheet": 0,
+      "topology": 3,
+      "heuristic_rule": 0,
+      "symbol_footprint": 0,
+      "bom": 0,
+      "geometry": 0,
+      "api_lookup": 0
+    },
+    "provenance_coverage_pct": 0.0
+  },
+  "audience_summary": {
+    "designer": {
+      "total_findings": 3,
+      "by_severity": {
+        "error": 0,
+        "warning": 1,
+        "info": 2
+      },
+      "by_category": {
+        "return_path": 1,
+        "plane_integrity": 2
+      },
+      "top_issues": [
+        {
+          "detector": "check_return_path_enhanced",
+          "rule_id": "RP-002",
+          "category": "return_path",
+          "summary": "spi net /AT25_MISO crosses GND plane gap",
+          "description": "spi signal /AT25_MISO crosses a gap in GND plane on layer F.Cu.",
+          "components": [],
+          "nets": [
+            "/AT25_MISO",
+            "GND"
+          ],
+          "pins": [],
+          "severity": "warning",
+          "confidence": "deterministic",
+          "evidence_source": "topology",
+          "recommendation": "Re-route /AT25_MISO to avoid the GND plane gap, or bridge with a stitching capacitor.",
+          "report_context": {
+            "section": "Return Path",
+            "impact": "Increased EMI from enlarged return path loop",
+            "standard_ref": ""
+          },
+          "finding_id": "cross_analysis:RP-002:/at25_miso",
+          "stages": [
+            "layout"
+          ]
+        }
+      ]
+    },
+    "reviewer": {
+      "total_findings": 1,
+      "by_category": {
+        "return_path": 1
+      },
+      "top_issues": [
+        {
+          "rule_id": "RP-002",
+          "severity": "warning",
+          "summary": "spi net /AT25_MISO crosses GND plane gap",
+          "recommendation": "Re-route /AT25_MISO to avoid the GND plane gap, or bridge with a stitching capacitor.",
+          "category": "return_path"
+        }
+      ]
+    },
+    "manager": {
+      "risk_level": "low",
+      "blocker_count": 0,
+      "warning_count": 1,
+      "stage_readiness": {
+        "schematic": "pass",
+        "layout": "needs_review",
+        "pre_fab": "pass",
+        "bring_up": "pass"
+      },
+      "one_liner": "1 warning across 1 category."
+    }
+  },
+  "capability_mode_ref": {
+    "source": "analysis/capability_mode.json",
+    "run_id": "20260901T001217Z-99b44f"
+  }
+}

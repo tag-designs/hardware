@@ -101,7 +101,7 @@ separate times:
 
 The bus therefore works only if firmware enables the STM32's internal weak pull-ups (R<sub>PU</sub>
 = 25/40/55 kΩ, DS11451 Rev 4, p.107). Quantifying that
-(`analysis/helpers/i2c_risetime.py`) — traces are only 1.7 mm, so C<sub>bus</sub> ≈ 15.7 pF:
+(`../kicad-helpers/i2c_risetime.py`) — traces are only 1.7 mm, so C<sub>bus</sub> ≈ 15.7 pF:
 
 | R<sub>PU</sub> | t<sub>r</sub> | 100 kHz (≤1000 ns) | 400 kHz (≤300 ns) |
 |---|---|---|---|
@@ -125,7 +125,7 @@ Net `RST` contains exactly two pins: `J201.5` and `Q501.1` (base). Q501's collec
 - **What's actually needed:** Q501 only has to sink the STM32's internal NRST pull-up — about
   0.6–1.0 µA of base current. A 10 kΩ series resistor supplies 250 µA, over 1000× margin.
 
-Add a 10 kΩ series resistor and a 100 kΩ base-emitter pull-down. (`analysis/helpers/base_drive.py`)
+Add a 10 kΩ series resistor and a 100 kΩ base-emitter pull-down. (`../kicad-helpers/base_drive.py`)
 
 ### 3. Value/MPN mismatches — *raw-file verified* — **downgraded to cleanup, see above**
 
@@ -200,7 +200,7 @@ Analyzer output was cross-checked against raw files and datasheets rather than t
 
 - **Component count:** 23 in schematic (excl. power symbols) = 23 PCB footprints ✓
 - **Pin-to-net cross-check:** every schematic pin-net compared against every PCB pad-net across
-  all 23 footprints — **0 mismatches** (`analysis/helpers/padnet_crosscheck.py`). Schematic and
+  all 23 footprints — **0 mismatches** (`../kicad-helpers/padnet_crosscheck.py`). Schematic and
   layout are perfectly in sync.
 - **KiCad native DRC** (v10.0.2, run on a copy with the project's own rules): **0 unconnected
   items**, 0 clearance/width/annular-ring errors. 25 violations, all library-metadata bookkeeping
@@ -463,4 +463,4 @@ Worth recording, because these are the things that usually go wrong and did not:
 
 *Analyzers run: `analyze_schematic.py`, `analyze_pcb.py --full --proximity`, `cross_analysis.py`,
 `analyze_emc.py`, `analyze_thermal.py`, `deep_review_gate.py` (15/15 findings verified, 0
-quarantined), plus KiCad 10.0.2 native DRC. Helper scripts under `analysis/helpers/`.*
+quarantined), plus KiCad 10.0.2 native DRC. Helper scripts under `../kicad-helpers/`.*

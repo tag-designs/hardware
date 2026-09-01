@@ -1,0 +1,686 @@
+{
+  "schema_version": "1.0",
+  "produced_for_run_id": "2026-08-31_2012",
+  "produced_at": "2026-09-01T00:32:23Z",
+  "findings": [
+    {
+      "detector": "deep_review",
+      "category": "bom",
+      "severity": "error",
+      "confidence": "high",
+      "summary": "U302 and U1 Value fields name different parts than their MPN fields",
+      "description": "U302 Value is 'stm32l431kc' while its MPN is 'STM32L432KCU6'; U1 Value is 'at25ex321D-UUN' while its MPN is 'AT25FF321A-UUN-T'. STM32L431KC and STM32L432KC are different devices, and AT25XE321D and AT25FF321A are different flash families. BOM and assembly consume the MPN, so the board would be built with parts the schematic does not name.",
+      "recommendation": "Decide which part is intended for each and make Value and MPN agree before generating a BOM or ordering.",
+      "evidence": {
+        "components": [
+          "U302",
+          "U1"
+        ],
+        "computation": {
+          "description": "Compare the alphanumeric part-number core of each IC's Value field against its MPN field",
+          "script": "analysis/helpers/bom_value_mpn.py",
+          "result": "U302 value=stm32l431kc mpn=STM32L432KCU6 MISMATCH; U1 value=at25ex321D-UUN mpn=AT25FF321A-UUN-T MISMATCH"
+        }
+      },
+      "evidence_checked": "full",
+      "components": [
+        "U302",
+        "U1"
+      ],
+      "finding_id": "deep_review:8de9cd882a27"
+    },
+    {
+      "detector": "deep_review",
+      "category": "decoupling",
+      "severity": "info",
+      "confidence": "high",
+      "summary": "Decoupling is well placed: every IC has a 100 nF within 2 mm and bulk within 4 mm",
+      "description": "Nearest 100 nF is 0.90 mm for U302, 0.84 mm for U2, 0.98 mm for U501 and 1.84 mm for U1, each sharing both VIN and GND. Bulk capacitance totals about 91 uF across C6 47 uF, C4 and C404 22 uF.",
+      "recommendation": "No change. Note that 22 uF in 0402 and 47 uF in 0603 at 6.3 V lose substantial capacitance to DC bias at 3 V, so effective bulk is well below the nameplate 91 uF - fine here, but do not rely on the nominal figure.",
+      "evidence": {
+        "components": [
+          "U302",
+          "U2",
+          "U501",
+          "U1",
+          "C6",
+          "C4",
+          "C404"
+        ],
+        "nets": [
+          "VIN"
+        ],
+        "computation": {
+          "description": "Nearest VIN-rail bypass cap to each IC, split by value class",
+          "script": "analysis/helpers/decoupling_per_rail.py",
+          "result": "U501 C2@0.98mm; U1 C501@1.84mm; U2 C1@0.84mm; U302 C5@0.90mm; bulk within 0.67-3.69 mm"
+        }
+      },
+      "evidence_checked": "full",
+      "components": [
+        "U302",
+        "U2",
+        "U501",
+        "U1",
+        "C6",
+        "C4",
+        "C404"
+      ],
+      "nets": [
+        "VIN"
+      ],
+      "finding_id": "deep_review:8e9897e5b17e"
+    },
+    {
+      "detector": "deep_review",
+      "category": "design_intent",
+      "severity": "info",
+      "confidence": "high",
+      "summary": "RTC support circuit reproduces the datasheet's no-backup reference design exactly",
+      "description": "R1 10k from VBACKUP to VSS, EVI tied low, INT left open and CLKOUT driving the MCU LSE input together reproduce the 'no backup source / event input not used' reference circuit, the 45 nA configuration. CLKOUT is enabled at 32.768 kHz by default on delivery, so the low-speed clock works with no EEPROM configuration.",
+      "recommendation": "No change. Confirm firmware configures LSE in bypass mode rather than crystal-drive mode.",
+      "evidence": {
+        "components": [
+          "U501",
+          "R1",
+          "U302"
+        ],
+        "nets": [
+          "clkout"
+        ],
+        "pins": [
+          "U501.1",
+          "U501.6",
+          "U501.8",
+          "U302.2"
+        ],
+        "datasheet": [
+          {
+            "mpn": "RV-3028-C7",
+            "page": 103,
+            "quote": "Connection to VSS through a 10 k"
+          },
+          {
+            "mpn": "RV-3028-C7",
+            "page": 103,
+            "quote": "is enabled by default (default value on delivery)"
+          },
+          {
+            "mpn": "RV-3028-C7",
+            "page": 103,
+            "quote": "pin is an open-drain output, which can be left open when not used"
+          }
+        ]
+      },
+      "evidence_checked": "partial",
+      "components": [
+        "U501",
+        "R1",
+        "U302"
+      ],
+      "nets": [
+        "clkout"
+      ],
+      "pins": [
+        "U501.1",
+        "U501.6",
+        "U501.8",
+        "U302.2"
+      ],
+      "finding_id": "deep_review:5f7670f31de3"
+    },
+    {
+      "detector": "deep_review",
+      "category": "dfm",
+      "severity": "warning",
+      "confidence": "medium",
+      "summary": "C6, C4 and D401 sit close to the routed board edge (C6 within about 0.27 mm)",
+      "description": "On a 17.25 x 9.0 mm tag edge area is scarce, so this is likely deliberate, but parts this close to a routed edge are exposed to mechanical stress during depanelisation.",
+      "recommendation": "Confirm the assembler's depanel method tolerates a 0.27 mm component-to-edge gap.",
+      "evidence": {
+        "components": [
+          "C6",
+          "C4",
+          "D401"
+        ],
+        "computation": {
+          "description": "Component-to-board-outline clearances reported by the PCB analyzer",
+          "script": "analysis/helpers/edge_clearance.py",
+          "result": "C6 0.27 mm (error), C4 0.64 mm, D401 0.82 mm on a 17.25 x 9.0 mm board"
+        }
+      },
+      "evidence_checked": "full",
+      "components": [
+        "C6",
+        "C4",
+        "D401"
+      ],
+      "finding_id": "deep_review:9881498e7f53"
+    },
+    {
+      "detector": "deep_review",
+      "category": "dfm",
+      "severity": "warning",
+      "confidence": "high",
+      "summary": "Advanced fabrication class required: 0.102 mm annular ring is below the IPC Class 2 minimum",
+      "description": "All 25 vias are 0.4572 mm pad on 0.254 mm drill for a 0.102 mm annular ring, below the IPC-6012 Class 2 minimum of 0.125 mm; minimum track width is 0.1016 mm. This is deliberate - the project design rules set both to 0.1016 mm and DRC passes cleanly - but it restricts which fabricators can build the board and at what price.",
+      "recommendation": "Confirm the fabricator quotes this as an advanced class, or grow via pads to 0.5 mm where space allows.",
+      "evidence": {
+        "nets": [
+          "GND"
+        ],
+        "components": [
+          "U302"
+        ],
+        "computation": {
+          "description": "Compare via annular ring against the IPC-6012 Class 2 minimum",
+          "script": "analysis/helpers/via_annular.py",
+          "result": "25 of 25 vias at 0.102 mm annular ring, below the 0.125 mm Class 2 minimum; track widths 0.1016 and 0.1524 mm"
+        }
+      },
+      "evidence_checked": "full",
+      "components": [
+        "U302"
+      ],
+      "nets": [
+        "GND"
+      ],
+      "finding_id": "deep_review:ee4c31d4b5fb"
+    },
+    {
+      "detector": "deep_review",
+      "category": "firmware_constraint",
+      "severity": "warning",
+      "confidence": "high",
+      "summary": "Both SPI devices share SPI1 on two pin mappings; firmware must not enable both MISO pins simultaneously",
+      "description": "The ADXL367 uses PA5/PA6/PA7 and the AT25 flash uses PB3/PA11/PA12. On STM32L4 both groups are SPI1 alternate functions. SCK and MOSI can be driven on both sets harmlessly, but muxing PA6 and PA11 to SPI1_MISO at the same time feeds two inputs into one internal signal, which is undefined.",
+      "recommendation": "Remux SPI1_MISO between PA6 and PA11 when switching devices, or leave the inactive pin as a plain input.",
+      "evidence": {
+        "components": [
+          "U302",
+          "U1",
+          "U2"
+        ],
+        "nets": [
+          "ACCEL_MISO",
+          "AT25_MISO"
+        ],
+        "pins": [
+          "U302.12",
+          "U302.21"
+        ],
+        "computation": {
+          "description": "List both SPI pin groups from the schematic netlist",
+          "script": "analysis/helpers/spi_pinmap.py",
+          "result": "ACCEL: PA5 SCK / PA6 MISO / PA7 MOSI; AT25: PB3 SCK / PA11 MISO / PA12 MOSI - both SPI1 AF5"
+        }
+      },
+      "evidence_checked": "full",
+      "components": [
+        "U302",
+        "U1",
+        "U2"
+      ],
+      "nets": [
+        "ACCEL_MISO",
+        "AT25_MISO"
+      ],
+      "pins": [
+        "U302.12",
+        "U302.21"
+      ],
+      "finding_id": "deep_review:0c12738c5692"
+    },
+    {
+      "detector": "deep_review",
+      "category": "gpio",
+      "severity": "warning",
+      "confidence": "high",
+      "summary": "PA3 (U302 pin 9), a general-purpose I/O, is hard-tied to GND with no series resistor",
+      "description": "Pin 9 is PA3 per the STM32L432KC UFQFPN32 pinout, and both schematic and PCB place it on GND. STM32L4 GPIOs reset to analog mode so this is safe out of reset, but any firmware that configures PA3 as a push-pull output and drives it high creates a direct VDD-to-GND path through the output driver - on a coin cell that is fatal.",
+      "recommendation": "If PA3 is deliberately used as an anchor, add a 0-ohm/1k series resistor and mark PA3 reserved in the firmware pin map.",
+      "evidence": {
+        "components": [
+          "U302"
+        ],
+        "nets": [
+          "GND"
+        ],
+        "pins": [
+          "U302.9"
+        ],
+        "datasheet": [
+          {
+            "mpn": "STM32L432KC",
+            "page": 51,
+            "quote": "Figure 5. STM32L432Kx UFQFPN32 pinout"
+          }
+        ],
+        "computation": {
+          "description": "Cross-check every schematic pin-net against the PCB pad-net across all footprints",
+          "script": "analysis/helpers/padnet_crosscheck.py",
+          "result": "23 footprints checked, 0 mismatches; U302 pad 9 = {'net': 'GND', 'pin': 'PA3'}"
+        }
+      },
+      "evidence_checked": "full",
+      "components": [
+        "U302"
+      ],
+      "nets": [
+        "GND"
+      ],
+      "pins": [
+        "U302.9"
+      ],
+      "finding_id": "deep_review:e3f421821ef6"
+    },
+    {
+      "detector": "deep_review",
+      "category": "layout",
+      "severity": "warning",
+      "confidence": "high",
+      "summary": "No copper zones anywhere; GND and VIN are routed entirely as narrow traces",
+      "description": "zone_count is 0. GND is 77 segments totalling 51.1 mm and VIN 78 segments totalling 50.6 mm, all at 0.102-0.152 mm width. Return paths are long and undefined and the PDN impedance is set by trace inductance rather than plane capacitance. Connectivity itself is sound - KiCad DRC reports 0 unconnected items.",
+      "recommendation": "Add GND pours on F.Cu and B.Cu with stitching vias; on an already-routed 2-layer board this is nearly free.",
+      "evidence": {
+        "nets": [
+          "GND",
+          "VIN"
+        ],
+        "components": [
+          "U302"
+        ],
+        "computation": {
+          "description": "Report zone count and how each power net is actually routed",
+          "script": "analysis/helpers/zone_and_power_routing.py",
+          "result": "zone_count 0; GND 77 tracks 51.08 mm; VIN 78 tracks 50.60 mm; widths 0.1016-0.1524 mm"
+        }
+      },
+      "evidence_checked": "full",
+      "components": [
+        "U302"
+      ],
+      "nets": [
+        "GND",
+        "VIN"
+      ],
+      "finding_id": "deep_review:27a96a9b086d"
+    },
+    {
+      "detector": "deep_review",
+      "category": "power",
+      "severity": "warning",
+      "confidence": "medium",
+      "summary": "VBAT is exposed on programming header J201.2 with no charge control, and the cell is a rechargeable MS621",
+      "description": "J401 uses the MS621 footprint, a 3 V rechargeable lithium coin cell, and VBAT reaches J201 pin 2 upstream of the D401 reverse-polarity diode. That permits charging through the programming header, but there is no current limit and no overcharge protection on the board.",
+      "recommendation": "Document the required charge voltage and current at J201.2, or add a series resistor so an unregulated supply cannot overcharge the cell.",
+      "evidence": {
+        "components": [
+          "J401",
+          "J201",
+          "D401"
+        ],
+        "nets": [
+          "VBAT"
+        ],
+        "pins": [
+          "J201.2",
+          "J401.1",
+          "D401.2"
+        ],
+        "computation": {
+          "description": "Trace VBAT and VIN membership and identify the battery footprint",
+          "script": "analysis/helpers/vbat_path.py",
+          "result": "VBAT pins J201.2, J401.1, D401.2 (anode); J401 footprint AccelTag:MS621; no resistor or protection on VBAT"
+        }
+      },
+      "evidence_checked": "full",
+      "components": [
+        "J401",
+        "J201",
+        "D401"
+      ],
+      "nets": [
+        "VBAT"
+      ],
+      "pins": [
+        "J201.2",
+        "J401.1",
+        "D401.2"
+      ],
+      "finding_id": "deep_review:047ec2921ccc"
+    },
+    {
+      "detector": "deep_review",
+      "category": "power",
+      "severity": "info",
+      "confidence": "high",
+      "summary": "The single unregulated rail sits inside every device's operating window for a 3 V coin cell",
+      "description": "There is no regulator: VIN is VBAT minus one Schottky drop, so roughly 2.8 V from an MS621. Operating windows are STM32L432KC 1.71-3.6 V, ADXL367 1.1-3.6 V and RV-3028-C7 1.2-5.5 V, so 3.6 V binds and the rail has adequate margin. Absolute maximum is 4.0 V for both the MCU and the accelerometer.",
+      "recommendation": "No change for a 3 V cell. Do not substitute a 3.7 V LiPo: at 4.2 V charged, VIN would reach about 4.0 V, the absolute maximum of U302 and U2.",
+      "evidence": {
+        "components": [
+          "U302",
+          "U2",
+          "U501",
+          "D401"
+        ],
+        "nets": [
+          "VIN",
+          "VBAT"
+        ],
+        "datasheet": [
+          {
+            "mpn": "STM32L432KC",
+            "page": 65,
+            "quote": "External main supply voltage"
+          },
+          {
+            "mpn": "STM32L432KC",
+            "page": 1,
+            "quote": "1.71 V to 3.6 V"
+          },
+          {
+            "mpn": "ADXL367",
+            "page": 5,
+            "quote": "Operating Voltage Range (V"
+          },
+          {
+            "mpn": "ADXL367",
+            "page": 12,
+            "quote": "VDDIO"
+          },
+          {
+            "mpn": "RV-3028-C7",
+            "page": 6,
+            "quote": "Wide interface operating voltage"
+          }
+        ]
+      },
+      "evidence_checked": "partial",
+      "components": [
+        "U302",
+        "U2",
+        "U501",
+        "D401"
+      ],
+      "nets": [
+        "VIN",
+        "VBAT"
+      ],
+      "finding_id": "deep_review:5204d44a3e4c"
+    },
+    {
+      "detector": "deep_review",
+      "category": "protocol",
+      "severity": "error",
+      "confidence": "high",
+      "summary": "I2C bus has no external pull-up resistors, which the RV-3028-C7 datasheet explicitly requires",
+      "description": "SCL (U302.30/PB7 to U501.3) and SDA (U302.29/PB6 to U501.4) are two-pin nets. R1 is the only resistor on the board and it is the RTC VBACKUP 10k. The bus therefore depends entirely on the STM32L432 internal weak pull-ups being enabled in firmware, which is outside the RTC vendor's specified operating conditions.",
+      "recommendation": "Add 2x 10k (0201) from SCL and SDA to VIN. If board space forbids that, the link is usable at 100 kHz only and firmware MUST enable the internal pull-ups on PB6/PB7; 400 kHz is not achievable either way.",
+      "evidence": {
+        "components": [
+          "U501",
+          "U302"
+        ],
+        "nets": [
+          "SCL",
+          "SDA"
+        ],
+        "pins": [
+          "U501.3",
+          "U501.4",
+          "U302.29",
+          "U302.30"
+        ],
+        "datasheet": [
+          {
+            "mpn": "RV-3028-C7",
+            "page": 9,
+            "quote": "I2C Serial Clock Input; requires pull-up resistor"
+          },
+          {
+            "mpn": "RV-3028-C7",
+            "page": 9,
+            "quote": "open-drain; requires pull-up resistor"
+          },
+          {
+            "mpn": "RV-3028-C7",
+            "page": 103,
+            "quote": "I2C lines SCL, SDA are open-drain and require pull-up resistors to VDD"
+          },
+          {
+            "mpn": "STM32L432KC",
+            "page": 107,
+            "quote": "Weak pull-up"
+          }
+        ],
+        "computation": {
+          "description": "I2C rise time tr = 0.8473*R*C using only the STM32 internal pull-up (RPU 25/40/55k), Cbus = 5 pF MCU + 10 pF RTC + 0.4 pF/mm over a 1.7 mm trace",
+          "script": "analysis/helpers/i2c_risetime.py",
+          "result": "Cbus 15.7 pF; tr 332/531/730 ns. Worst case 730 ns PASSES the 1000 ns standard-mode limit and FAILS the 300 ns fast-mode limit."
+        }
+      },
+      "evidence_checked": "partial",
+      "components": [
+        "U501",
+        "U302"
+      ],
+      "nets": [
+        "SCL",
+        "SDA"
+      ],
+      "pins": [
+        "U501.3",
+        "U501.4",
+        "U302.29",
+        "U302.30"
+      ],
+      "finding_id": "deep_review:aa7c549ed748"
+    },
+    {
+      "detector": "deep_review",
+      "category": "protocol",
+      "severity": "warning",
+      "confidence": "high",
+      "summary": "Neither SPI chip-select has a pull-up, so both float while the MCU is in reset",
+      "description": "AT25_nCS (U302.20/PA10 to U1.B4) and ACCEL_CS (U302.10/PA4 to U2.4) are two-pin nets with no pull-up. STM32L4 GPIOs are high-impedance out of reset, so both active-low chip selects float until firmware drives them, which can spuriously select a device.",
+      "recommendation": "Add 100k pull-ups to VIN on both CS nets, or drive both high as the first GPIO action after reset.",
+      "evidence": {
+        "components": [
+          "U1",
+          "U2",
+          "U302"
+        ],
+        "nets": [
+          "AT25_nCS",
+          "ACCEL_CS"
+        ],
+        "pins": [
+          "U1.B4",
+          "U2.4",
+          "U302.20",
+          "U302.10"
+        ],
+        "computation": {
+          "description": "List pins on each chip-select and I2C net and check for any resistor",
+          "script": "analysis/helpers/cs_pullup_check.py",
+          "result": "Only resistor on the board is R1; AT25_nCS, ACCEL_CS, SCL and SDA all report resistor: NONE"
+        }
+      },
+      "evidence_checked": "full",
+      "components": [
+        "U1",
+        "U2",
+        "U302"
+      ],
+      "nets": [
+        "AT25_nCS",
+        "ACCEL_CS"
+      ],
+      "pins": [
+        "U1.B4",
+        "U2.4",
+        "U302.20",
+        "U302.10"
+      ],
+      "finding_id": "deep_review:afeb6cab136c"
+    },
+    {
+      "detector": "deep_review",
+      "category": "reset",
+      "severity": "error",
+      "confidence": "high",
+      "summary": "Q501 reset transistor base is driven straight from header J201.5 with no series or pull-down resistor",
+      "description": "Net RST has exactly two pins, J201.5 and Q501.1 (base); Q501's collector drives U302 NRST. With no series resistor, a push-pull debug adapter driving the base sees only its own output impedance because VBE clamps near 0.8 V. With no adapter attached the base is left as an open high-impedance node.",
+      "recommendation": "Add a ~10k series resistor from J201.5 to the base and a ~100k base-emitter pull-down. Q501 only has to sink the STM32 NRST internal pull-up, so 10k still gives over 1000x the required base current.",
+      "evidence": {
+        "components": [
+          "Q501",
+          "J201",
+          "U302"
+        ],
+        "nets": [
+          "RST"
+        ],
+        "pins": [
+          "Q501.1",
+          "Q501.3",
+          "J201.5",
+          "U302.4"
+        ],
+        "datasheet": [
+          {
+            "mpn": "BC847AMB",
+            "page": 3,
+            "quote": "peak base current"
+          },
+          {
+            "mpn": "BC847AMB",
+            "page": 2,
+            "quote": "Table 3."
+          }
+        ],
+        "computation": {
+          "description": "Base current with no series resistor from a 3.3 V push-pull driver of 25-50 ohm output impedance versus the base current actually required to hold NRST low",
+          "script": "analysis/helpers/base_drive.py",
+          "result": "50-100 mA drive current versus a 0.6-1.0 uA requirement; 100 mA equals the BC847AMB IBM rating, which is itself only valid for pulses under 1 ms."
+        }
+      },
+      "evidence_checked": "partial",
+      "components": [
+        "Q501",
+        "J201",
+        "U302"
+      ],
+      "nets": [
+        "RST"
+      ],
+      "pins": [
+        "Q501.1",
+        "Q501.3",
+        "J201.5",
+        "U302.4"
+      ],
+      "finding_id": "deep_review:7b2837f64591"
+    },
+    {
+      "detector": "deep_review",
+      "category": "test",
+      "severity": "info",
+      "confidence": "high",
+      "summary": "No test points and no fiducials on the board itself",
+      "description": "0 test points across 36 nets and no fiducials on either side. For a 17.25 x 9.0 mm tag both are defensible - J201 carries VIN, GND, SWDIO, SWCLK, RST and VBAT, which covers bring-up - but the WLCSP flash, QFN-32 and eight 0201s do need fiducials for placement accuracy.",
+      "recommendation": "Confirm the assembly panel carries fiducials on its rails; panel-copy.kicad_pro suggests a panel already exists.",
+      "evidence": {
+        "components": [
+          "J201",
+          "U1",
+          "U302"
+        ],
+        "computation": {
+          "description": "Test point and fiducial coverage from the PCB analyzer",
+          "script": "analysis/helpers/testpoint_fiducial.py",
+          "result": "0 test points over 36 nets; 0 fiducials on F.Cu (17 SMD) and B.Cu (2 SMD); finest pad 0.25 mm"
+        }
+      },
+      "evidence_checked": "full",
+      "components": [
+        "J201",
+        "U1",
+        "U302"
+      ],
+      "finding_id": "deep_review:ae6d551dc9ac"
+    },
+    {
+      "detector": "deep_review",
+      "category": "verification",
+      "severity": "info",
+      "confidence": "high",
+      "summary": "All five active devices' pinouts verified against manufacturer datasheets with no errors",
+      "description": "U302 STM32L432KCU6: 32 pins plus exposed pad match the UFQFPN32 figure. U501 RV-3028-C7: 8 pins match the pin description, and the land pattern matches the package drawing despite the footprint being named RV-8803-C7. U2 ADXL367: 12 pins match Table 9, ADC_IN to GND is sanctioned, and C3's 0.22 uF satisfies the required 0.2 uF on VREG_OUT. Q501 BC847AMB: pins 1/2/3 are base/emitter/collector, matching the Q_NPN_BEC symbol. U1: all 12 WLCSP balls match the AT25 family map and a floating WP is explicitly permitted.",
+      "recommendation": "No action.",
+      "evidence": {
+        "components": [
+          "U302",
+          "U501",
+          "U2",
+          "Q501",
+          "U1"
+        ],
+        "datasheet": [
+          {
+            "mpn": "STM32L432KC",
+            "page": 51,
+            "quote": "Figure 5. STM32L432Kx UFQFPN32 pinout"
+          },
+          {
+            "mpn": "ADXL367",
+            "page": 13,
+            "quote": "Table 9. Pin Function Descriptions"
+          },
+          {
+            "mpn": "ADXL367",
+            "page": 13,
+            "quote": "ADC Input Pin. Can be left unconnected"
+          },
+          {
+            "mpn": "ADXL367",
+            "page": 13,
+            "quote": "an external 0.2"
+          },
+          {
+            "mpn": "BC847AMB",
+            "page": 2,
+            "quote": "Table 3."
+          },
+          {
+            "mpn": "AT25XE321D",
+            "page": 8,
+            "quote": "12-ball WLCSP Package"
+          },
+          {
+            "mpn": "AT25XE321D",
+            "page": 9,
+            "quote": "The WP pin is internally pulled high and can be left floating if not used"
+          }
+        ],
+        "computation": {
+          "description": "Cross-verify every schematic pin-net against the PCB pad-net",
+          "script": "analysis/helpers/padnet_crosscheck.py",
+          "result": "23 footprints checked, 0 mismatches"
+        }
+      },
+      "evidence_checked": "partial",
+      "components": [
+        "U302",
+        "U501",
+        "U2",
+        "Q501",
+        "U1"
+      ],
+      "finding_id": "deep_review:ce0de031c4db"
+    }
+  ],
+  "quarantined": []
+}

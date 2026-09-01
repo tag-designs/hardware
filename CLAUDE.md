@@ -124,5 +124,13 @@ capacitance, driver impedance). Read the docstring before quoting a number.
 - Record the designer's responses to findings in the report *and* fold the
   durable ones into the board's `.kicad-happy.json`, so the next review starts
   from the settled position instead of re-raising them.
-- `analysis/` is gitignored by default (`track_in_git: false`); the manifest is
-  tracked. Keep `analysis/deep_review.json` — the next review diffs against it.
+- `analysis/` is gitignored by default (`track_in_git: false`), which keeps only
+  the manifest. Prefer setting `"track_in_git": true` and deleting
+  `analysis/.gitignore`: the analyzer JSON is slow to regenerate and
+  `deep_review.json` — the hand-authored, evidence-gated findings the next
+  review diffs against — is not regenerable at all. Git stores a full run in
+  about 57 kB compressed. `analysis_cache.py` only recreates that `.gitignore`
+  when `track_in_git` is false *and* the file is absent, so the deletion sticks.
+- Helpers live once, in `BoardDesigns/kicad-helpers/`. Cite them from
+  `deep_review.json` as `../kicad-helpers/<name>.py`; the gate checks the path
+  resolves, so a stale citation quarantines the finding.
