@@ -1,1 +1,1 @@
-add_pcb_outputs(BitTagNG)
+add_pcb_outputs(imutag-nand-bmp581)

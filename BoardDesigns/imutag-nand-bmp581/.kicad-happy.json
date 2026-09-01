@@ -1,0 +1,226 @@
+{
+  "version": 1,
+  "project": {
+    "name": "imutag-nand-bmp581",
+    "ambient_temperature_c": 25
+  },
+  "design_intent": {
+    "product_class": "prototype",
+    "ipc_class": 2,
+    "target_market": "research",
+    "expected_lifetime_years": 5,
+    "operating_temp_range": [
+      -10,
+      70
+    ],
+    "preferred_passive_size": "0201",
+    "test_coverage_target": 0.0,
+    "notes": [
+      "Magnetometer-first architecture. This is the LDO variant of imutag-smps, chosen deliberately: no local SMPS inductor or switching node near the BMM350. Forced-mode SMPS efficiency is essentially LDO-like, so the LDO trades battery energy for magnetic/noise cleanliness.",
+      "Board is 21.5 x 11.5 mm, 4 layers, In1.Cu = +1V8 plane, In2.Cu = GND plane.",
+      "Stackup declares ~0.38 mm finished thickness (0.035 mm copper, 0.08 mm dielectrics). This is NOT a fab default and must be stated explicitly on every order."
+    ]
+  },
+  "power_profile": {
+    "source": "User-provided design intent, 2026-08-26 review",
+    "typical_current_a": 0.001,
+    "normal_operating_current_max_a": 0.0022,
+    "peak_current_a": 0.4,
+    "peak_condition": "BMM350 flux-guide reset pulse from the CRST capacitor, <1 us, every ODR tick",
+    "notes": [
+      "Expected average current is 1-2.2 mA depending on sampling rate. Use that range for battery-life and average LDO power calculations.",
+      "Average LDO dissipation is (VBAT - 1.85 V) * I_LOAD: roughly 0.35-5.2 mW across a 2.2-4.2 V battery. Thermally negligible.",
+      "Analyzer heuristic power budgets (20 mA MCU + 10 mA per peripheral) and the generic 100 uA LDO Iq are placeholders and meaningless here; TPS7A02 Iq is far lower.",
+      "The 400 mA CRST peak is a sub-microsecond pulse local to C4/U2 and is not a rail-level current."
+    ]
+  },
+  "analysis": {
+    "power_rails": {
+      "voltage_overrides": {
+        "+1V8": 1.8,
+        "/Flash 1V8": 1.8,
+        "VBAT": 3.7
+      }
+    }
+  },
+  "mating_design": {
+    "name": "imutag-nand-bmp581 self-contained tag",
+    "host_mcu": "STM32U375KGU6",
+    "source": "Schematic U302 plus user-provided design intent.",
+    "notes": [
+      "Self-contained LiPo-powered tag, not a breakout with a separate mating MCU.",
+      "VBAT and VIN are deliberately the same net. The joined pins are inherited from a fixed interface that previously supported coin cells with separate charging/feed paths; that separation is not needed for this LiPo design. KiCad reports one multiple_net_names warning and uses VBAT in the netlist. This is accepted.",
+      "D401 has been fully removed from both schematic and PCB.",
+      "J201 is a 6-pad programming/contact structure on B.Cu, not a cable connector. J301-J304 are 1.1 mm NPTH mounting holes. J401 is a 2-pad battery wire land. All six are correctly excluded from BOM and position files.",
+      "No external I2C pull-ups: the RV-3028 RTC is driven by a slow bit-banged software I2C driver on the STM32 internal pull-ups. This does not survive a move to the hardware I2C peripheral or 400 kHz.",
+      "No external chip-select pull-ups: flash and sensor deselect is a firmware/reset-state contract using STM32 internal pull-ups. Firmware drives CS high as its first GPIO action.",
+      "STM32 PB7/BOOT0 is shared with /SDA, which carries a 10 kOhm pull-up to +1V8. Production programming MUST write and read back the option bytes so the pull-up does not force the wrong boot path.",
+      "U5 LSM6DSV is used in SPI mode. Its dual-function pin names make analyzers misread AT25_MOSI/AT25_SCK as an I2C bus."
+    ]
+  },
+  "suppressions": [
+    {
+      "rule_id": "CC-002",
+      "reason": "Low-power design: 1-2.2 mA average. The 0.1016 mm (4 mil) minimum trace and 0.1016 mm annular ring are deliberate on this dense tag and are a fabrication process-selection concern, never a current-capacity one."
+    },
+    {
+      "rule_id": "PP-001",
+      "components": [
+        "U6"
+      ],
+      "nets": [
+        "/Flash 1V8"
+      ],
+      "reason": "/Flash 1V8 is intentionally sourced through U1 TPS22916 load switch VOUT. The analyzer's own power-sequencing section recognises U1 as a load-switch source; the missing-DC-path error is a rail-source modeling limitation."
+    },
+    {
+      "rule_id": "PR-001",
+      "components": [
+        "U5"
+      ],
+      "nets": [
+        "AT25_MOSI",
+        "AT25_SCK"
+      ],
+      "reason": "U5 LSM6DSV is used in SPI mode, not I2C. The analyzer mistakes its dual-function pin names for an I2C bus and asks for pull-ups that must not be fitted."
+    },
+    {
+      "rule_id": "PR-002",
+      "reason": "Chip-select deselect is a firmware/reset-state contract using STM32 internal pull-ups. Firmware drives CS high as its first GPIO action."
+    },
+    {
+      "rule_id": "PU-001",
+      "components": [
+        "U2"
+      ],
+      "reason": "BMM350 CRST is not a pull-up net. C4 = 2.2 uF from CRST to GND near U2 is the correct datasheet implementation; the missing-pull-up warning is a false positive."
+    },
+    {
+      "rule_id": "RS-001",
+      "nets": [
+        "VBAT",
+        "VIN"
+      ],
+      "reason": "VBAT is the external LiPo input rail and VIN is the same net by design. KiCad ERC is otherwise clean."
+    },
+    {
+      "rule_id": "TE-001",
+      "reason": "J201 tag contacts are the production-test access method. Dedicated ICT test points are not the target for this prototype."
+    },
+    {
+      "rule_id": "IO-001",
+      "reason": "Connectors here are tag contacts, battery lands and mounting holes rather than user cable interfaces. EMC filtering suggestions are low priority unless cables are attached."
+    },
+    {
+      "rule_id": "IO-002",
+      "components": [
+        "J201",
+        "J301",
+        "J302",
+        "J303",
+        "J304",
+        "J401"
+      ],
+      "reason": "J3xx are 1.1 mm mounting holes, not I/O. J401 is a battery land and J201 is a contact pad array. Ground-pin-ratio findings against them are noise."
+    },
+    {
+      "rule_id": "CK-003",
+      "nets": [
+        "/clkout"
+      ],
+      "reason": "/clkout is a 32 kHz RTC output, low risk. Clock-near-connector findings that cite mounting holes are noise."
+    },
+    {
+      "rule_id": "SU-001",
+      "reason": "Intentional compact 4-layer tag with In1.Cu = +1V8 and In2.Cu = GND. Treat as a return-path/EMC caution, not a stackup blocker."
+    },
+    {
+      "rule_id": "DS-002",
+      "reason": "This board has no local datasheets/ directory by design; it uses the shared store at BoardDesigns/libraries/datasheets."
+    },
+    {
+      "rule_id": "FD-001",
+      "reason": "Fab-house panel fiducials are accepted for this manufacturing flow. Board-level fiducial findings are not blockers."
+    },
+    {
+      "rule_id": "SM-001",
+      "components": [
+        "U2"
+      ],
+      "reason": "Zero solder mask expansion is the KiCad default and the fab applies its own (~0.05 mm/side), giving NSMD lands. The UltraLibrarian BMM350 footprint intentionally inherits mask margin. Proven in several successful builds."
+    },
+    {
+      "rule_id": "VP-001",
+      "components": [
+        "U302",
+        "U6"
+      ],
+      "reason": "GND vias inside GND exposed pads are the deliberate house pattern across the imutag family and have been built repeatedly. EP paste is 63%, and PCBWay tents vias by default at 0.4 mm."
+    }
+  ],
+  "reviewer_notes": {
+    "analyzer_false_positives": [
+      "GND/+1V8 'split into N islands' and 'crosses a plane gap': the analyzer's union-find over copper does not merge islands the way KiCad's connectivity engine does. KiCad DRC on this board is 0 violations / 0 unconnected. Treat as local reference-continuity geometry advisories, never as disconnected planes.",
+      "'Vias not tented': neither mask layer contains a 0.4064 or 0.4572 mm circular aperture, so vias ARE tented everywhere except inside the two exposed pads, where the EP mask opening is a single full rectangle.",
+      "'Via in pad, same_net false' under U302 and U6: verified GND-on-GND. U302 pad 33 and U6 pad 9 are both GND, and all four vias inside them are GND.",
+      "Thermal analyzer reports 0 findings but also 0 components with power-dissipation data. That is not a thermal proof.",
+      "Exposed-pad 'insufficient thermal vias' uses a generic 9-via threshold; U302 has 7 and U6 has 8. Not a thermal blocker at this power level.",
+      "Zero solder mask expansion (pad_to_mask_clearance 0) is NOT a defect and must not be re-raised. It is the KiCad default - 29 of 30 boards in this repo carry it - and fab CAM applies its own expansion (~0.05 mm/side), so the delivered board is NSMD as Bosch section 5.1 sanctions. The UltraLibrarian BGA9_BMM350_BOS footprint correctly leaves solder_mask_margin = inherit, since expansion is a fab/process choice rather than a land-pattern property. The designer has built this footprint successfully several times. Raised in error in Review 2 and withdrawn.",
+      "Vias inside the U302/U6 exposed pads are the house pattern, not a defect: imutag-nand (5), imutag-smps (5), imutag-4layer (3), imutag (3), imutag-nand-bmp581 (4). GND-on-GND into a GND exposed pad, four of those boards built. PCBWay also tents vias by default on 0.4 mm boards. Raised in error in Review 2 and withdrawn.",
+      "MEASUREMENT TRAP: a Gerber RoundRect aperture macro's corner coordinates are the CENTRES of the corner circles, not the aperture's outer extents - the rounding radius extends a further r beyond them on every side. Reading them as extents under-reports area badly (it produced a bogus 25% exposed-pad paste figure in Review 2 where the true value is 63%). Always add 2r to width and height.",
+      "A missing .gbrjob is not a defect for this flow. CompassTag was fabbed without one (both its PCBWay and JLCPCB packages lack it) and the PCBWay KiCad plugin never emits one. Layer filenames are unambiguous and thickness/finish go on the order form. Raised in error in Review 2 and withdrawn."
+    ],
+    "verified_correct_2026_09_01": [
+      "KiCad DRC run in the project directory: 0 violations, 0 unconnected, 0 schematic parity. Running DRC on a copy without fp-lib-table produces 13 spurious library warnings - always run in place.",
+      "PCBWay Gerbers dated 2026-09-01 were plotted from the current board, confirmed by locating the refilled In1.Cu zone vertex in In1_Cu.gbr.",
+      "Drill reconciles exactly: PTH 3 x 0.2032 mm + 41 x 0.254 mm = 44 vias; NPTH 4 x 1.1 mm = J301-J304.",
+      "BOM/CPL complete: 30 placed parts, 16 BOM lines, every line has MPN and LCSC.",
+      "Position-file frame is correct for PCBWay: origin at board lower-left, Y up, bottom parts not mirrored.",
+      "Exposed-pad paste is window-paned 2x2 on both U302 and U6 (63.2% and 63.4% coverage).",
+      "Paste is correctly withheld from J401 battery lands and J201 contact pads.",
+      "The C,0.010000 aperture in F_Paste and C,0.000000 in F_SilkS are KiCad stroking custom-pad and pin-1-marker polygon outlines alongside G36 regions. Not defects.",
+      "FINAL STATE 2026-09-01 10:01: all 44 vias 0.5048/0.20 = 0.1524 mm (6.00 mil) annular, single drill tool; inner copper 0.3005 mm from the profile; DRC 0 violations / 0 unconnected; ERC 1 accepted VBAT/VIN warning; PTH 44 holes = via count, NPTH 4 = J301-J304; 15 BOM lines / 30 placements matching the CPL exactly, every line with MPN and LCSC; C4 = GRM155Z71A225KE01D. Export pcbway_production/2026-09-01-10-01-52 verified to match the board."
+    ],
+    "open_items_2026_09_01": [
+      "FIXED 2026-09-01: min_copper_edge_clearance set to 0.2 mm and zones refilled; In1/In2 now 0.2005 mm from the profile, DRC clean. STILL DO: PCBWay's own guidance is >=0.3 mm, so raise the rule to 0.3 and refill before ordering.",
+      "Surface finish is unspecified (copper_finish None). The BMM350 BGA argues for ENIG, but ENIG nickel would sit 0.62 mm from the magnetometer under J201. Decide explicitly on the order form.",
+      "FIXED 2026-09-01: C4 is now GRM155Z71A225KE01D (2.2 uF 10 V X7R 0402, LCSC C2997286) in schematic, PCB and BOM, on the unchanged C_0402_1005Metric land. C4 is boxed in with 0.070-0.130 mm courtyard gaps to R2/R3/C506, so 0603/0805 remain impossible without moving neighbours.",
+      "U6 footprint description and 3D model path still reference a GD5F1 part string. Cosmetic/provenance only; Value and MPN are correct.",
+      "COSMETIC, accepted by designer: 27 silk strokes remain under the 0.15 mm fab minimum at 0.12 mm (U302 x9, U6 x7, Q501 x3, C12 x2 on B.SilkS; C4 x2, C7 x2, U4 x2 on F.SilkS). All are KiCad stock footprints, so fix board-side via Edit > Edit Text and Graphics Properties rather than editing stock libraries. libraries:RV-3028-C8 was fixed to 0.15 mm on 2026-09-01. Designer has accepted the rest.",
+      "MINOR FOOT-GUN: the predefined via-size dropdown still lists 0.4064/0.2032 and 0.4572/0.254, both 4.00 mil annular. Net classes and min_via_annular_width are correct (6.00 mil), so DRC will catch a mistake, but picking one of those presets by hand reintroduces a sub-spec via."
+    ],
+    "house_conventions": [
+      "Value vs MPN mismatches do not break a build - fab and assembly consume MPN - but they mislead human and automated review. Real cleanup, not a blocker.",
+      "Always confirm analyzer connectivity claims with KiCad's own DRC, run in the project directory so fp-lib-table and the project rules resolve.",
+      "Report name convention: imutag-nand-bmp581-design-review.md in this directory."
+    ],
+    "pcbway_order_2026_09_01": [
+      "Intent: fabricate 4-layer at 0.4 mm finished thickness.",
+      "Clears PCBWay 4-layer limits: trace 0.1016 mm vs 0.09 min; spacing ~0.1052 vs 0.09; via drill 0.2032/0.254 vs 0.15 min; board 21.5 x 11.5 vs 3 x 3 min; 0.4 mm within their 0.2-3.2 mm range.",
+      "Must be set explicitly (none are defaults): 4 layers; 0.4 mm thickness (their default is 1.6 mm); surface finish; copper weight for a thin 4-layer stack; via plugging choice.",
+      "SURFACE FINISH: PCBWay offers immersion silver, immersion tin and OSP as well as ENIG/ENEPIG. Immersion silver resolves the ENIG-nickel-vs-BGA tension - flat and fine-pitch friendly with no nickel 0.62 mm from the BMM350 under J201. Trade-off is tarnish/shelf life; fine if assembled soon after arrival.",
+      "If ordering assembly: min 5 boards; turnkey sources by MPN and all 15 BOM lines have MPN+LCSC; PCBWay's BOM wants Line#/Qty/Designator/MPN/Manufacturer/Description/Package/Type so the plugin export needs reformatting; include an assembly drawing given the 0.4 mm-pitch BGA and 0201s; assembly is manually quoted over 1-2 business days.",
+      "PCBWay tents vias by default on 0.4 mm boards, so no via-protection action is needed for this design.",
+      "ANNULAR RING FIX (verified by DRC with --refill-zones, 0 violations): set the 41 standard vias to 0.5048 mm pad / 0.20 mm drill and the 3 small vias to 0.4548 / 0.15. Both give exactly 0.1524 mm (6.00 mil) annular, meeting PCBWay's minimum, with drills at or above their 0.15 mm floor. Larger pads fail: 0.51/0.20 and 0.55/0.20 both produce 4 clearance violations, 0.50/0.20 single-size produces 1. Shrinking the drill is what buys the annular ring here, not growing the pad. Zones MUST be refilled after the change - without a refill DRC reports up to 71 phantom clearance violations against the stale fill.",
+      "ANNULAR RING FIXED 2026-09-01: 41 vias at 0.5048/0.20 and 3 at 0.4548/0.15, both exactly 0.1524 mm (6.00 mil), meeting PCBWay's minimum. DRC clean, zones refilled, edge clearance still 0.3005 mm. Net classes Default/MEDIUM/WIDE and the predefined via sizes were updated to match, and min_via_annular_width is now 0.1524. Historical note: CompassTag shipped to PCBWay at 4.00 mil with the identical 0.4572/0.254 via, so 4 mil was workable - this change buys margin, it did not fix a defect."
+    ],
+    "footprint_provenance": [
+      "The custom footprints are UltraLibrarian or vendor-supplied and have been built successfully several times: BGA9_BMM350_BOS, QFN10_BMP581_BOS, LGA14-L_2P59X3P1X0P5_STM, IC_TPS22916BYFPR, RV-3028-C8.",
+      "Treat their land geometry, mask and paste definitions as validated. Do not re-derive them against IPC or datasheet land patterns, and do not raise findings about their pad/mask/paste ratios.",
+      "U302 and U6 use KiCad stock library footprints (Package_DFN_QFN, Package_SON), whose window-paned exposed-pad paste is also correct as shipped."
+    ],
+    "tooling_gotchas": [
+      "Do NOT edit .kicad_pro (or .kicad_pcb) while KiCad has the project open. KiCad holds project settings in memory and rewrites the file on save, silently reverting external edits. This happened on 2026-09-01: net-class and constraint edits were wiped and 4 replacement vias were then placed at the reverted 4 mil default. Make design-rule changes in Board Setup, or close KiCad first.",
+      "Always run kicad-cli pcb drc from the board's own directory. Running on a scratchpad copy without fp-lib-table produces 11 phantom lib_footprint_issues plus 2 nonmirrored_text warnings.",
+      "Always pass --refill-zones when DRC-testing a via or track resize. Stale zone fill produced up to 71 phantom clearance violations and made workable options look impossible.",
+      "Gerber RoundRect aperture macro corner coordinates are circle CENTRES; add 2r to get true extents."
+    ]
+  },
+  "_comment": [
+    "Board-specific config for imutag-nand-bmp581.",
+    "Workspace defaults (track_in_git, retention, auto_diff, diff_threshold) are",
+    "inherited from BoardDesigns/.kicad-happy.json; only board-specific intent,",
+    "power profile, rail voltages, suppressions and reviewer notes live here.",
+    "Suppressions concatenate across layers rather than replace."
+  ]
+}
