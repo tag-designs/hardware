@@ -38,3 +38,5 @@ production/*
 *-back
 *-bak
 tmp*.rpt
+# review helper bytecode
+kicad-helpers/__pycache__/

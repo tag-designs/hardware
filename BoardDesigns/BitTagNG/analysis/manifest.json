@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "project": "panel-copy.kicad_pro",
+  "current": "2026-08-31_2012",
+  "runs": {
+    "2026-08-31_2012": {
+      "source_hashes": {
+        "BitTagNG.kicad_sch": "sha256:52569f90c47cfab82c7c7828e98f2fbb008bc0f361d79959dbdbd9ce1b0aed46",
+        "BitTagNG.kicad_pcb": "sha256:ae28805a5ddd7976672752137b7c09fbd7cea15228da7198bb816808c2ce6759",
+        "schematic.json": "sha256:84c12c948cd5d85c910242ca1d6ed47da6da373cf3b94b2db27e06a1e5f95524",
+        "pcb.json": "sha256:6ff1fa4a6dc6231752671d4041305c49d3c2d94031f67756296849805404c5ad"
+      },
+      "outputs": {
+        "schematic": "schematic.json",
+        "pcb": "pcb.json",
+        "cross_analysis": "cross_analysis.json",
+        "emc": "emc.json",
+        "thermal": "thermal.json"
+      },
+      "scripts": {
+        "schematic": "analyze_schematic.py BitTagNG.kicad_sch"
+      },
+      "generated": "2026-08-31T20:45:31-04:00",
+      "pinned": false
+    }
+  }
+}

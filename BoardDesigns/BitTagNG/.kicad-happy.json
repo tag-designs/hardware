@@ -1,0 +1,134 @@
+{
+  "version": 1,
+  "project": {
+    "name": "BitTagNG",
+    "ambient_temperature_c": 25
+  },
+  "design_intent": {
+    "product_class": "prototype",
+    "ipc_class": 2,
+    "target_market": "research",
+    "expected_lifetime_years": 5,
+    "operating_temp_range": [
+      -10,
+      70
+    ],
+    "preferred_passive_size": "0201",
+    "test_coverage_target": 0.0
+  },
+  "power_profile": {
+    "source": "Same low-power tag family as CompassTag; VIN is VBAT less one Schottky drop, no regulator.",
+    "typical_current_a": 1e-05,
+    "normal_operating_current_max_a": 0.001,
+    "peak_current_a": 0.01,
+    "peak_condition": "Flash write",
+    "notes": [
+      "BitTagNG is a super-low-power device; typical current is about 10 uA.",
+      "J401 is an MS621 3 V rechargeable coin cell. VIN is roughly 2.8 V.",
+      "Binding supply limit is 3.6 V (STM32L432KC and ADXL367). Absolute max is 4.0 V for both.",
+      "Do not substitute a 3.7 V LiPo: at 4.2 V charged, VIN reaches about 4.0 V, at the absolute maximum.",
+      "Narrow 0.1016 mm traces are a fabrication/process-selection concern, not a current-capacity concern for this load profile."
+    ]
+  },
+  "mating_design": {
+    "name": "BitTagNG tag on external baseboard",
+    "host_mcu": "STM32L432KCU6",
+    "source": "Designer response during the 2026-08-31 design review.",
+    "notes": [
+      "This tag is driven by an external baseboard through J201.",
+      "Q501's base series resistor is on the baseboard, NOT on this board. Net RST reaching Q501.1 with no series resistor is intentional. Any new baseboard must supply it.",
+      "SCL/SDA have no external pull-ups by design. Firmware uses a slow bit-banged software I2C driver on the STM32 internal pull-ups (RPU 25/40/55 kOhm). Measured worst-case rise time is 730 ns against the 1000 ns standard-mode limit.",
+      "Do not move to the hardware I2C peripheral or 400 kHz without adding external pull-ups first.",
+      "AT25_nCS and ACCEL_CS have no external pull-ups; firmware must drive both high as the first GPIO action after reset.",
+      "Both SPI devices share SPI1 on two pin mappings (ADXL367 on PA5/PA6/PA7, AT25 on PB3/PA11/PA12). PA6 and PA11 must never be muxed to SPI1_MISO simultaneously.",
+      "U302 PA3 (pin 9) is hard-tied to GND. Never configure PA3 as an output.",
+      "WKUP4 ties U2 INT1 to both PA0 and PA2; neither may be configured as an output.",
+      "RV-3028 CLKOUT drives PC14/OSC32_IN. The MCU must run LSE in bypass mode, not crystal-drive mode."
+    ]
+  },
+  "analysis": {
+    "output_dir": "analysis",
+    "retention": 5,
+    "auto_diff": true,
+    "track_in_git": false,
+    "diff_threshold": "major",
+    "power_rails": {
+      "voltage_overrides": {
+        "+2V5": 2.5
+      }
+    }
+  },
+  "suppressions": [
+    {
+      "rule_id": "CC-002",
+      "reason": "Low-power design: about 10 uA typical, below 1 mA operating, about 10 mA peak during flash write. Treat 0.1016 mm traces as advanced-process DFM notes, not current-capacity concerns."
+    },
+    {
+      "rule_id": "RS-001",
+      "nets": [
+        "VBAT"
+      ],
+      "reason": "VBAT is the external battery input rail sourced at J401; KiCad ERC is clean. Analyzer wants a PWR_FLAG."
+    },
+    {
+      "rule_id": "PR-002",
+      "components": [
+        "U1"
+      ],
+      "nets": [
+        "AT25_nCS"
+      ],
+      "reason": "Flash deselect is a firmware/reset-state contract using STM32 internal pull-up configuration, matching the CompassTag convention. No external pull-up by design."
+    },
+    {
+      "rule_id": "PU-001",
+      "components": [
+        "U2"
+      ],
+      "reason": "ADXL367 INT2 is a push-pull output (datasheet Rev B Table 9 p.13), not an open-drain line needing a pull-up. An unused output may float."
+    },
+    {
+      "rule_id": "TE-001",
+      "reason": "17.25 x 9.0 mm tag; J201 provides VIN, GND, SWDIO, SWCLK, RST and VBAT for bring-up. ICT-style test-point coverage is not the production-test target."
+    },
+    {
+      "rule_id": "IO-001",
+      "reason": "J301-J304 are 1.1 mm mounting holes modelled as one-pin connectors, not cable I/O. EMC filtering suggestions do not apply."
+    },
+    {
+      "rule_id": "IO-002",
+      "components": [
+        "J201"
+      ],
+      "reason": "J201 is a compact SWD/debug header; the ground-pin ratio warning is informational for this prototype."
+    },
+    {
+      "rule_id": "CK-003",
+      "reason": "Clock-near-connector findings cite the J301-J304 mounting holes. SWCLK is active only during debug and clkout is 32.768 kHz."
+    },
+    {
+      "rule_id": "SU-001",
+      "reason": "Intentional two-layer compact low-power tag. Treat as a return-path/EMC caution, not a stackup blocker."
+    },
+    {
+      "rule_id": "FD-001",
+      "reason": "Fiducials belong on the assembly panel rails, not on a 17 x 9 mm tag. See panel-copy.kicad_pro. Confirm the panel carries them."
+    }
+  ],
+  "reviewer_notes": {
+    "known_false_positives": [
+      "PS-002 / RP-002 GND island splits: the analyzer union-find does not merge copper the way KiCad does. KiCad DRC reports 0 unconnected items. Verify with kicad-cli before believing any island finding.",
+      "TV-001 'vias not tented': the PCB sets (viasonmask false), which means vias ARE tented.",
+      "via_in_pad at U302 with same_net false: all three vias inside the exposed pad are on GND. Confirmed by computing via positions against the pad-33 rectangle.",
+      "TB-001 tombstoning rationale cites a ground pour; this board has no zones at all."
+    ],
+    "open_items": [
+      "No copper zones anywhere. GND/VIN are trace-routed only. Adding GND pours on both layers with stitching vias is the highest-value layout improvement available.",
+      "U302 Value says stm32l431kc but MPN is STM32L432KCU6; U1 Value says at25ex321D-UUN but MPN is AT25FF321A-UUN-T. Correct at the next schematic edit.",
+      "C6 sits about 0.27 mm from the routed board edge; confirm the depanel method.",
+      "VBAT is exposed on J201.2 with no charge control and the MS621 is rechargeable; document charge voltage and current.",
+      "0.102 mm annular ring is below IPC Class 2; confirm the fab quotes an advanced class."
+    ],
+    "suppression_scope": "VERIFIED 2026-08-31: only analyze_emc.py and analyze_thermal.py apply these suppressions. analyze_schematic.py and analyze_pcb.py load this config but do not filter their findings, so PR-002, PU-001, RS-001, CC-002, TE-001 and FD-001 below will still appear as active findings. Measured effect on this board: 19 of 35 EMC findings suppressed, 0 schematic/PCB findings. Treat the schematic/PCB entries as reviewer guidance to apply by hand."
+  }
+}

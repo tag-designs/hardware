@@ -1,0 +1,35 @@
+# kicad-happy review helpers
+
+Small, board-agnostic probes over `kicad` skill analyzer JSON. Each answers one
+question a design review keeps needing, so the answer is reproducible and
+citable instead of being re-derived by hand every time.
+
+Run them **from a board directory** that has an `analysis/` folder — they read
+the newest run via `analysis/*/schematic.json` and `analysis/*/pcb.json`:
+
+```bash
+cd BoardDesigns/<board>
+python3 <skill-path>/scripts/analyze_schematic.py <board>.kicad_sch --analysis-dir analysis/
+python3 <skill-path>/scripts/analyze_pcb.py <board>.kicad_pcb --analysis-dir analysis/ --full
+
+PYTHONPATH=../kicad-helpers python3 ../kicad-helpers/padnet_crosscheck.py
+```
+
+| Script | Answers |
+|--------|---------|
+| `padnet_crosscheck.py` | Does every schematic pin-net match the PCB pad-net? **Run this on every review** — a mismatch is invisible to DRC/ERC and kills the board. |
+| `bom_value_mpn.py` | Does any IC's `Value` field name a different part than its `MPN`? |
+| `cs_pullup_check.py` | Do the chip-select and I²C nets have any resistor on them? |
+| `i2c_risetime.py` | I²C rise-time budget on MCU internal pull-ups vs the 100/400 kHz limits. |
+| `base_drive.py` | Transistor base drive current with no series resistor vs what the load actually needs. |
+| `decoupling_per_rail.py` | Nearest bypass cap to each IC, split by value class. |
+| `zone_and_power_routing.py` | Copper zone count and how the power nets are really routed. |
+| `via_annular.py` | Via annular ring vs the IPC-6012 Class 2 minimum. |
+| `edge_clearance.py` | Component-to-board-edge clearances. |
+| `spi_pinmap.py` | Which MCU pins each SPI device actually uses. |
+| `vbat_path.py` | Battery/power path membership and the battery footprint. |
+| `testpoint_fiducial.py` | Test point and fiducial coverage. |
+
+Several carry board-specific constants in their docstrings (pin capacitance,
+driver impedance, ambient). Read the docstring before quoting a number — adjust
+the constants for the board under review rather than assuming they transfer.
