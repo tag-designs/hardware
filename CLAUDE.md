@@ -59,6 +59,15 @@ checking whether the board's config already accepts them.
   one at ~10 µA typical.
 - **`J3xx` one-pin "connectors"** are usually 1.1 mm mounting holes, not I/O.
   Any EMC-filtering or clock-near-connector finding that cites them is noise.
+- **Custom footprints are UltraLibrarian or vendor-supplied and have shipped.**
+  `BGA9_BMM350_BOS`, `QFN10_BMP581_BOS`, `LGA14-L_2P59X3P1X0P5_STM`,
+  `IC_TPS22916BYFPR`, `RV-3028-C8` and friends. Treat their land, mask and paste
+  geometry as validated; do not re-derive it against IPC or a datasheet land
+  pattern. U302/U6 use KiCad stock footprints, also correct as shipped.
+- **Zero solder mask expansion.** `pad_to_mask_clearance 0` is in 29 of the 30
+  boards here — it is KiCad's default, not a decision, and fabs apply their own
+  expansion (~0.05 mm/side) regardless, so the delivered lands are NSMD. Not a
+  finding, even under a fine-pitch BGA.
 
 ## Analyzer false positives seen repeatedly
 
@@ -72,6 +81,16 @@ checking whether the board's config already accepts them.
   every time so far.
 - **Heuristic power budgets** (e.g. "20 mA MCU + 10 mA per peripheral") are
   placeholders and meaningless for a coin-cell tag. Ignore them.
+- **Stray `.kicad_pro` files poison the analyzer.** It can pick up any project
+  file in the board directory, not the board's own. Verified twice:
+  `imutag-smps` was analyzed against `BitTagNG-LIS2DU12...kicad_pro`, and
+  `BitTagNG` against `panel-copy.kicad_pro` — so every rule-derived number in
+  those runs was measured against the wrong rule set. The selection rule is
+  neither alphabetical nor newest-first; do not try to predict it. **Check
+  `project_settings.source` and `design_rule_compliance.rules_source` in
+  `pcb.json` before trusting any rule-derived finding.** The BitTagNG copies
+  were swept 2026-09-01, but `panel-copy.kicad_pro` — an orphan with no matching
+  board — still sits in 13 directories.
 
 ## Running DRC
 
@@ -88,6 +107,20 @@ clearance violations against these intentionally tight rules — on BitTagNG,
 
 `kicad-cli` is not on `PATH`; it is at
 `/Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli`.
+
+Three traps that cost real time on 2026-09-01:
+
+- **Run DRC from the board's own directory.** Even with the `.kicad_pro` copied,
+  a scratch copy without `fp-lib-table` reports 11 phantom `lib_footprint_issues`
+  plus 2 nonmirrored-text warnings. In place: clean.
+- **Pass `--refill-zones` whenever you DRC-test a via or track resize.** Stale
+  zone fill produced up to 71 phantom clearance violations and made the option
+  that actually worked look impossible. Add `--save-board` to keep the refill.
+- **Never edit `.kicad_pro` or `.kicad_pcb` while KiCad has the project open.**
+  KiCad holds project settings in memory and rewrites the file on save, silently
+  reverting external edits. This wiped a set of net-class and constraint changes,
+  after which new vias were placed at the reverted defaults. Check for
+  `~*.lck` files first, or make design-rule changes in Board Setup instead.
 
 ## Datasheets
 
@@ -134,3 +167,40 @@ capacitance, driver impedance). Read the docstring before quoting a number.
 - Helpers live once, in `BoardDesigns/kicad-helpers/`. Cite them from
   `deep_review.json` as `../kicad-helpers/<name>.py`; the gate checks the path
   resolves, so a stale citation quarantines the finding.
+
+## Closing out a review — commit, tag, fab package
+
+- **Tag a completed review** `review/<board>-<YYYY-MM-DD>`, annotated, with the
+  closing state in the message (edge clearance, annular ring, DRC/ERC, drill
+  reconciliation, BOM/CPL, and the order spec). The `review/` namespace keeps
+  these clear of the repo-wide release tags (`v1.2` … `v2.1`). First one:
+  `review/imutag-nand-bmp581-2026-09-01`.
+- **Commit the fab package, and force-add the gerber archive.**
+  `BoardDesigns/.gitignore` excludes `*.zip`, so a plain `git add` captures the
+  BOM, CPL and netlist but *not* the gerbers — the thing actually sent. Plugin
+  output is not byte-identical to a `kicad-cli` re-plot (different aperture
+  macros, X2 attributes, file extensions), so the committed board file alone does
+  not pin down what was fabricated. Use `git add -f <run>/*_gerber.zip`; it is
+  about 46 kB.
+- **Keep only the export that was ordered**, and check the report for references
+  to pruned run directories before deleting them.
+- **Verify the committed state**, not just the working tree: re-run DRC and ERC
+  after committing.
+
+## Reviewing well — what went wrong last time
+
+On 2026-09-01, three of ten findings were withdrawn as raised in error: mask
+expansion, exposed-pad vias and paste, and a missing `.gbrjob`. All three came
+from trusting a derivation from the files over the fact that **these boards have
+been built and shipped**. Before raising anything about land geometry, paste,
+mask, or a house-standard via:
+
+- Ask whether this footprint or pattern has been fabricated before, and check
+  sibling boards for the same pattern — it is usually a house convention.
+- Check the fab outputs of boards that *were* built (`pcbway_production/`,
+  `jlcpcb/`) rather than reasoning only from the current board file. Only
+  BitTagNG, PresTag, CompassTag and BitTag have been fabbed.
+- **Gerber `RoundRect` aperture macro corner coordinates are the centres of the
+  corner circles, not the outer extents** — add 2r to width and height. Reading
+  them as extents produced a bogus 25% exposed-pad paste figure where the true
+  value is 63%, and nearly cost a working design a redesign.
