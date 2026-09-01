@@ -1,0 +1,15 @@
+** Drc report for IMUBreakout-v2.kicad_pcb **
+** Created on 2026-06-15T10:47:51 **
+** Report includes: Errors, Warnings **
+
+** Found 0 DRC violations **
+
+** Found 0 unconnected pads **
+
+** Found 0 Footprint errors **
+
+** Ignored checks **
+    - Track endpoint not centered on via
+    - Tuning profile track geometries
+
+** End of Report **

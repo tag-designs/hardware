@@ -1,0 +1,2193 @@
+{
+  "analyzer_type": "gerber",
+  "schema_version": "1.3.0",
+  "directory": "BoardDesigns/tag-breakout-l432-u375-lipo-v1/jlcpcb/gerber",
+  "generator": "KiCad,Pcbnew,10.0.2",
+  "layer_count": 4,
+  "board_dimensions": {
+    "width_mm": 53.34,
+    "height_mm": 73.66,
+    "area_mm2": 3929.0,
+    "source": "edge_cuts_extents"
+  },
+  "statistics": {
+    "gerber_files": 11,
+    "drill_files": 2,
+    "total_holes": 139,
+    "total_flashes": 1529,
+    "total_draws": 25257
+  },
+  "completeness": {
+    "found_layers": [
+      "B.Cu",
+      "B.Mask",
+      "B.Paste",
+      "B.SilkS",
+      "Edge.Cuts",
+      "F.Cu",
+      "F.Mask",
+      "F.Paste",
+      "F.SilkS",
+      "In1.Cu",
+      "In2.Cu"
+    ],
+    "missing_required": [],
+    "missing_recommended": [],
+    "has_pth_drill": true,
+    "has_npth_drill": true,
+    "complete": true,
+    "source": "defaults"
+  },
+  "alignment": {
+    "aligned": true,
+    "issues": [],
+    "layer_extents": {
+      "B.Cu": {
+        "width": 53.189,
+        "height": 73.509
+      },
+      "In1.Cu": {
+        "width": 53.189,
+        "height": 73.509
+      },
+      "In2.Cu": {
+        "width": 53.189,
+        "height": 72.476
+      },
+      "F.Cu": {
+        "width": 53.189,
+        "height": 73.509
+      },
+      "Edge.Cuts": {
+        "width": 53.34,
+        "height": 73.66
+      },
+      "B.Mask": {
+        "width": 45.307,
+        "height": 60.015
+      },
+      "F.Mask": {
+        "width": 43.434,
+        "height": 64.424
+      },
+      "B.Paste": {
+        "width": 0,
+        "height": 0
+      },
+      "F.Paste": {
+        "width": 28.315,
+        "height": 49.118
+      },
+      "B.SilkS": {
+        "width": 45.307,
+        "height": 64.798
+      },
+      "F.SilkS": {
+        "width": 48.02,
+        "height": 71.895
+      },
+      "drill_NPTH": {
+        "width": 26.485,
+        "height": 10.815
+      },
+      "drill_PTH": {
+        "width": 43.434,
+        "height": 64.933
+      }
+    }
+  },
+  "drill_classification": {
+    "vias": {
+      "count": 86,
+      "tools": [
+        {
+          "diameter_mm": 0.3048,
+          "count": 86
+        }
+      ]
+    },
+    "component_holes": {
+      "count": 53,
+      "tools": [
+        {
+          "diameter_mm": 0.635,
+          "count": 10
+        },
+        {
+          "diameter_mm": 0.95,
+          "count": 4
+        },
+        {
+          "diameter_mm": 1.0008,
+          "count": 2,
+          "type": "NPTH"
+        },
+        {
+          "diameter_mm": 1.0008,
+          "count": 36
+        },
+        {
+          "diameter_mm": 1.1989,
+          "count": 1,
+          "type": "NPTH"
+        }
+      ]
+    },
+    "mounting_holes": {
+      "count": 0,
+      "tools": []
+    },
+    "classification_method": "x2_attributes"
+  },
+  "pad_summary": {
+    "smd_apertures": 187,
+    "via_apertures": 344,
+    "heatsink_apertures": 2,
+    "tht_holes": 53,
+    "smd_source": "x2_aperture_function",
+    "smd_ratio": 0.78
+  },
+  "trace_widths": {
+    "unique_widths_mm": [
+      0.1524,
+      0.2,
+      0.3048
+    ],
+    "min_trace_mm": 0.1524,
+    "max_trace_mm": 0.3048,
+    "width_count": 3,
+    "min_feature_mm": 0.125
+  },
+  "component_analysis": {
+    "total_unique": 52,
+    "front_side": 50,
+    "back_side": 2,
+    "component_refs": [
+      "C1",
+      "C101",
+      "C102",
+      "C103",
+      "C104",
+      "C105",
+      "C106",
+      "C107",
+      "C108",
+      "C109",
+      "C11",
+      "C110",
+      "C111",
+      "C12",
+      "C2",
+      "C3",
+      "C5",
+      "C6",
+      "C7",
+      "C8",
+      "C9",
+      "D1",
+      "D105",
+      "D4",
+      "J1",
+      "J102",
+      "J104",
+      "J2",
+      "J3",
+      "J4",
+      "Q1",
+      "R1",
+      "R104",
+      "R105",
+      "R106",
+      "R107",
+      "R2",
+      "R3",
+      "R7",
+      "TP1",
+      "TP2",
+      "U1",
+      "U10",
+      "U105",
+      "U11",
+      "U2",
+      "U3",
+      "U4",
+      "U5",
+      "U6",
+      "U7",
+      "U8"
+    ],
+    "has_x2_data": true,
+    "pads_per_component": {
+      "C1": 2,
+      "C101": 2,
+      "C102": 2,
+      "C103": 2,
+      "C104": 2,
+      "C105": 2,
+      "C106": 2,
+      "C107": 2,
+      "C108": 2,
+      "C109": 2,
+      "C11": 2,
+      "C110": 2,
+      "C111": 2,
+      "C12": 2,
+      "C2": 2,
+      "C3": 2,
+      "C5": 2,
+      "C6": 2,
+      "C7": 2,
+      "C8": 2,
+      "C9": 2,
+      "D1": 2,
+      "D105": 2,
+      "D4": 2,
+      "J1": 5,
+      "J102": 10,
+      "J104": 11,
+      "J2": 2,
+      "J3": 17,
+      "J4": 17,
+      "Q1": 3,
+      "R1": 2,
+      "R104": 2,
+      "R105": 2,
+      "R106": 2,
+      "R107": 2,
+      "R2": 2,
+      "R3": 2,
+      "R7": 2,
+      "TP1": 1,
+      "TP2": 1,
+      "U1": 3,
+      "U10": 5,
+      "U105": 4,
+      "U11": 5,
+      "U2": 6,
+      "U3": 36,
+      "U4": 6,
+      "U5": 36,
+      "U6": 8,
+      "U7": 6,
+      "U8": 6
+    },
+    "total_pads": 252
+  },
+  "net_analysis": {
+    "total_unique": 85,
+    "named_nets": 55,
+    "unnamed_nets": 30,
+    "power_nets": [
+      "+1V8",
+      "+3V3",
+      "GND"
+    ],
+    "signal_nets": [
+      "/DM",
+      "/DP",
+      "/LED_GREEN",
+      "/NRST",
+      "/SCLK",
+      "/SWDIO",
+      "/UART_TX",
+      "/USB_DM",
+      "/USB_DP",
+      "/boot0",
+      "/en1.8v",
+      "/stm32/NRST",
+      "/stm32/PA0",
+      "/stm32/PA1",
+      "/stm32/PA10",
+      "/stm32/PA11",
+      "/stm32/PA12",
+      "/stm32/PA15",
+      "/stm32/PA2",
+      "/stm32/PA3",
+      "/stm32/PA4",
+      "/stm32/PA5",
+      "/stm32/PA6",
+      "/stm32/PA7",
+      "/stm32/PA8",
+      "/stm32/PA9",
+      "/stm32/PB0",
+      "/stm32/PB1",
+      "/stm32/PB10",
+      "/stm32/PB11",
+      "/stm32/PB12",
+      "/stm32/PB13",
+      "/stm32/PB14",
+      "/stm32/PB15",
+      "/stm32/PB2",
+      "/stm32/PB3",
+      "/stm32/PB4",
+      "/stm32/PB5",
+      "/stm32/PB8",
+      "/stm32/PB9",
+      "/stm32/VBACK",
+      "/stm32/clkout",
+      "/stm32/rtc_scl",
+      "/stm32/rtc_sda",
+      "PWR_IN",
+      "PWR_IN_MIRROR",
+      "TAG_1V8",
+      "TAG_3V3",
+      "TAG_RESET",
+      "TAG_SCK",
+      "TAG_SWDIO",
+      "VUSB"
+    ],
+    "total_pins": 238
+  },
+  "gerbers": [
+    {
+      "filename": "tag-breakout-l432-u375-lipo-v1-CuBottom.gbr",
+      "layer_type": "B.Cu",
+      "units": "mm",
+      "aperture_count": 9,
+      "flash_count": 138,
+      "draw_count": 4160,
+      "region_count": 2,
+      "x2_attributes": {
+        "GenerationSoftware": "KiCad,Pcbnew,10.0.2",
+        "CreationDate": "2026-06-09T14:50:08-04:00",
+        "ProjectId": "tag-breakout-l432-u375-lipo-v1,7461672d-6272-4656-916b-6f75742d6c34,rev?",
+        "SameCoordinates": "Original",
+        "FileFunction": "Copper,L4,Bot",
+        "FilePolarity": "Positive"
+      },
+      "aperture_analysis": {
+        "by_function": {
+          "ComponentPad": 6,
+          "SMDPad": 1,
+          "ViaPad": 1,
+          "Conductor": 1
+        },
+        "by_function_flashes": {
+          "ComponentPad": 50,
+          "SMDPad": 2,
+          "ViaPad": 86,
+          "Conductor": 0
+        },
+        "conductor_widths_mm": [
+          0.1524
+        ],
+        "min_feature_mm": 0.1524
+      },
+      "x2_component_count": 0,
+      "x2_net_count": 49,
+      "x2_pin_count": 52
+    },
+    {
+      "filename": "tag-breakout-l432-u375-lipo-v1-CuIn1.gbr",
+      "layer_type": "In1.Cu",
+      "units": "mm",
+      "aperture_count": 7,
+      "flash_count": 136,
+      "draw_count": 4276,
+      "region_count": 1,
+      "x2_attributes": {
+        "GenerationSoftware": "KiCad,Pcbnew,10.0.2",
+        "CreationDate": "2026-06-09T14:50:08-04:00",
+        "ProjectId": "tag-breakout-l432-u375-lipo-v1,7461672d-6272-4656-916b-6f75742d6c34,rev?",
+        "SameCoordinates": "Original",
+        "FileFunction": "Copper,L2,Inr",
+        "FilePolarity": "Positive"
+      },
+      "aperture_analysis": {
+        "by_function": {
+          "ComponentPad": 6,
+          "ViaPad": 1
+        },
+        "by_function_flashes": {
+          "ComponentPad": 50,
+          "ViaPad": 86
+        },
+        "min_feature_mm": 0.5
+      },
+      "x2_component_count": 5,
+      "x2_net_count": 49,
+      "x2_pin_count": 0
+    },
+    {
+      "filename": "tag-breakout-l432-u375-lipo-v1-CuIn2.gbr",
+      "layer_type": "In2.Cu",
+      "units": "mm",
+      "aperture_count": 7,
+      "flash_count": 136,
+      "draw_count": 6941,
+      "region_count": 2,
+      "x2_attributes": {
+        "GenerationSoftware": "KiCad,Pcbnew,10.0.2",
+        "CreationDate": "2026-06-09T14:50:08-04:00",
+        "ProjectId": "tag-breakout-l432-u375-lipo-v1,7461672d-6272-4656-916b-6f75742d6c34,rev?",
+        "SameCoordinates": "Original",
+        "FileFunction": "Copper,L3,Inr",
+        "FilePolarity": "Positive"
+      },
+      "aperture_analysis": {
+        "by_function": {
+          "ComponentPad": 6,
+          "ViaPad": 1
+        },
+        "by_function_flashes": {
+          "ComponentPad": 50,
+          "ViaPad": 86
+        },
+        "min_feature_mm": 0.5
+      },
+      "x2_component_count": 5,
+      "x2_net_count": 49,
+      "x2_pin_count": 0
+    },
+    {
+      "filename": "tag-breakout-l432-u375-lipo-v1-CuTop.gbr",
+      "layer_type": "F.Cu",
+      "units": "mm",
+      "aperture_count": 41,
+      "flash_count": 327,
+      "draw_count": 6775,
+      "region_count": 21,
+      "x2_attributes": {
+        "GenerationSoftware": "KiCad,Pcbnew,10.0.2",
+        "CreationDate": "2026-06-09T14:50:08-04:00",
+        "ProjectId": "tag-breakout-l432-u375-lipo-v1,7461672d-6272-4656-916b-6f75742d6c34,rev?",
+        "SameCoordinates": "Original",
+        "FileFunction": "Copper,L1,Top",
+        "FilePolarity": "Positive"
+      },
+      "aperture_analysis": {
+        "by_function": {
+          "Conductor": 3,
+          "ComponentPad": 6,
+          "SMDPad": 26,
+          "HeatsinkPad": 1,
+          "ViaPad": 1
+        },
+        "by_function_flashes": {
+          "Conductor": 0,
+          "ComponentPad": 50,
+          "SMDPad": 185,
+          "HeatsinkPad": 2,
+          "ViaPad": 86
+        },
+        "conductor_widths_mm": [
+          0.1524,
+          0.2,
+          0.3048
+        ],
+        "min_feature_mm": 0.125
+      },
+      "x2_component_count": 0,
+      "x2_net_count": 85,
+      "x2_pin_count": 236
+    },
+    {
+      "filename": "tag-breakout-l432-u375-lipo-v1-EdgeCuts.gbr",
+      "layer_type": "Edge.Cuts",
+      "units": "mm",
+      "aperture_count": 1,
+      "flash_count": 0,
+      "draw_count": 8,
+      "region_count": 0,
+      "x2_attributes": {
+        "GenerationSoftware": "KiCad,Pcbnew,10.0.2",
+        "CreationDate": "2026-06-09T14:50:08-04:00",
+        "ProjectId": "tag-breakout-l432-u375-lipo-v1,7461672d-6272-4656-916b-6f75742d6c34,rev?",
+        "SameCoordinates": "Original",
+        "FileFunction": "Profile,NP"
+      },
+      "aperture_analysis": {
+        "by_function": {
+          "Profile": 1
+        },
+        "by_function_flashes": {
+          "Profile": 0
+        },
+        "min_feature_mm": 0.15
+      }
+    },
+    {
+      "filename": "tag-breakout-l432-u375-lipo-v1-MaskBottom.gbr",
+      "layer_type": "B.Mask",
+      "units": "mm",
+      "aperture_count": 9,
+      "flash_count": 55,
+      "draw_count": 0,
+      "region_count": 0,
+      "x2_attributes": {
+        "GenerationSoftware": "KiCad,Pcbnew,10.0.2",
+        "CreationDate": "2026-06-09T14:50:08-04:00",
+        "ProjectId": "tag-breakout-l432-u375-lipo-v1,7461672d-6272-4656-916b-6f75742d6c34,rev?",
+        "SameCoordinates": "Original",
+        "FileFunction": "Soldermask,Bot",
+        "FilePolarity": "Negative"
+      },
+      "aperture_analysis": {
+        "min_feature_mm": 0.5
+      },
+      "x2_component_count": 8,
+      "x2_net_count": 0,
+      "x2_pin_count": 0
+    },
+    {
+      "filename": "tag-breakout-l432-u375-lipo-v1-MaskTop.gbr",
+      "layer_type": "F.Mask",
+      "units": "mm",
+      "aperture_count": 37,
+      "flash_count": 241,
+      "draw_count": 0,
+      "region_count": 0,
+      "x2_attributes": {
+        "GenerationSoftware": "KiCad,Pcbnew,10.0.2",
+        "CreationDate": "2026-06-09T14:50:08-04:00",
+        "ProjectId": "tag-breakout-l432-u375-lipo-v1,7461672d-6272-4656-916b-6f75742d6c34,rev?",
+        "SameCoordinates": "Original",
+        "FileFunction": "Soldermask,Top",
+        "FilePolarity": "Negative"
+      },
+      "aperture_analysis": {
+        "min_feature_mm": 0.125
+      },
+      "x2_component_count": 50,
+      "x2_net_count": 0,
+      "x2_pin_count": 0
+    },
+    {
+      "filename": "tag-breakout-l432-u375-lipo-v1-PasteBottom.gbr",
+      "layer_type": "B.Paste",
+      "units": "mm",
+      "aperture_count": 0,
+      "flash_count": 0,
+      "draw_count": 0,
+      "region_count": 0,
+      "x2_attributes": {
+        "GenerationSoftware": "KiCad,Pcbnew,10.0.2",
+        "CreationDate": "2026-06-09T14:50:08-04:00",
+        "ProjectId": "tag-breakout-l432-u375-lipo-v1,7461672d-6272-4656-916b-6f75742d6c34,rev?",
+        "SameCoordinates": "Original",
+        "FileFunction": "Paste,Bot",
+        "FilePolarity": "Positive"
+      }
+    },
+    {
+      "filename": "tag-breakout-l432-u375-lipo-v1-PasteTop.gbr",
+      "layer_type": "F.Paste",
+      "units": "mm",
+      "aperture_count": 32,
+      "flash_count": 197,
+      "draw_count": 0,
+      "region_count": 0,
+      "x2_attributes": {
+        "GenerationSoftware": "KiCad,Pcbnew,10.0.2",
+        "CreationDate": "2026-06-09T14:50:08-04:00",
+        "ProjectId": "tag-breakout-l432-u375-lipo-v1,7461672d-6272-4656-916b-6f75742d6c34,rev?",
+        "SameCoordinates": "Original",
+        "FileFunction": "Paste,Top",
+        "FilePolarity": "Positive"
+      },
+      "aperture_analysis": {
+        "min_feature_mm": 0.125
+      },
+      "x2_component_count": 45,
+      "x2_net_count": 0,
+      "x2_pin_count": 0
+    },
+    {
+      "filename": "tag-breakout-l432-u375-lipo-v1-SilkBottom.gbr",
+      "layer_type": "B.SilkS",
+      "units": "mm",
+      "aperture_count": 12,
+      "flash_count": 55,
+      "draw_count": 1388,
+      "region_count": 0,
+      "x2_attributes": {
+        "GenerationSoftware": "KiCad,Pcbnew,10.0.2",
+        "CreationDate": "2026-06-09T14:50:08-04:00",
+        "ProjectId": "tag-breakout-l432-u375-lipo-v1,7461672d-6272-4656-916b-6f75742d6c34,rev?",
+        "SameCoordinates": "Original",
+        "FileFunction": "Legend,Bot",
+        "FilePolarity": "Positive"
+      },
+      "aperture_analysis": {
+        "min_feature_mm": 0.12
+      },
+      "x2_component_count": 8,
+      "x2_net_count": 0,
+      "x2_pin_count": 0
+    },
+    {
+      "filename": "tag-breakout-l432-u375-lipo-v1-SilkTop.gbr",
+      "layer_type": "F.SilkS",
+      "units": "mm",
+      "aperture_count": 44,
+      "flash_count": 244,
+      "draw_count": 1709,
+      "region_count": 9,
+      "x2_attributes": {
+        "GenerationSoftware": "KiCad,Pcbnew,10.0.2",
+        "CreationDate": "2026-06-09T14:50:08-04:00",
+        "ProjectId": "tag-breakout-l432-u375-lipo-v1,7461672d-6272-4656-916b-6f75742d6c34,rev?",
+        "SameCoordinates": "Original",
+        "FileFunction": "Legend,Top",
+        "FilePolarity": "Positive"
+      },
+      "aperture_analysis": {
+        "min_feature_mm": 0.12
+      },
+      "x2_component_count": 50,
+      "x2_net_count": 0,
+      "x2_pin_count": 0
+    }
+  ],
+  "drills": [
+    {
+      "filename": "tag-breakout-l432-u375-lipo-v1-NPTH.drl",
+      "type": "NPTH",
+      "units": "inch",
+      "hole_count": 3,
+      "tools": {
+        "T1": {
+          "diameter_mm": 1.0008,
+          "hole_count": 2,
+          "aper_function": "NonPlated,NPTH,ComponentDrill"
+        },
+        "T2": {
+          "diameter_mm": 1.1989,
+          "hole_count": 1,
+          "aper_function": "NonPlated,NPTH,ComponentDrill"
+        }
+      },
+      "layer_span": [
+        1,
+        4
+      ],
+      "x2_attributes": {
+        "CreationDate": "2026-06-09T14:50:08-04:00",
+        "GenerationSoftware": "Kicad,Pcbnew,10.0.2",
+        "FileFunction": "NonPlated,1,4,NPTH"
+      }
+    },
+    {
+      "filename": "tag-breakout-l432-u375-lipo-v1-PTH.drl",
+      "type": "PTH",
+      "units": "inch",
+      "hole_count": 136,
+      "tools": {
+        "T1": {
+          "diameter_mm": 0.3048,
+          "hole_count": 86,
+          "aper_function": "Plated,PTH,ViaDrill"
+        },
+        "T2": {
+          "diameter_mm": 0.635,
+          "hole_count": 10,
+          "aper_function": "Plated,PTH,ComponentDrill"
+        },
+        "T3": {
+          "diameter_mm": 0.95,
+          "hole_count": 4,
+          "aper_function": "Plated,PTH,ComponentDrill"
+        },
+        "T4": {
+          "diameter_mm": 1.0008,
+          "hole_count": 36,
+          "aper_function": "Plated,PTH,ComponentDrill"
+        }
+      },
+      "layer_span": [
+        1,
+        4
+      ],
+      "x2_attributes": {
+        "CreationDate": "2026-06-09T14:50:08-04:00",
+        "GenerationSoftware": "Kicad,Pcbnew,10.0.2",
+        "FileFunction": "Plated,1,4,PTH"
+      }
+    }
+  ],
+  "drill_tools": {
+    "1.0008mm": {
+      "diameter_mm": 1.0008,
+      "count": 38,
+      "type": "NPTH"
+    },
+    "1.1989mm": {
+      "diameter_mm": 1.1989,
+      "count": 1,
+      "type": "NPTH"
+    },
+    "0.3048mm": {
+      "diameter_mm": 0.3048,
+      "count": 86,
+      "type": "PTH"
+    },
+    "0.635mm": {
+      "diameter_mm": 0.635,
+      "count": 10,
+      "type": "PTH"
+    },
+    "0.95mm": {
+      "diameter_mm": 0.95,
+      "count": 4,
+      "type": "PTH"
+    }
+  },
+  "findings": [],
+  "summary": {
+    "total_findings": 0,
+    "by_severity": {
+      "error": 0,
+      "warning": 0,
+      "info": 0
+    }
+  },
+  "trust_summary": {
+    "total_findings": 0,
+    "trust_level": "high",
+    "by_confidence": {
+      "deterministic": 0,
+      "heuristic": 0,
+      "datasheet-backed": 0
+    },
+    "by_evidence_source": {
+      "datasheet": 0,
+      "topology": 0,
+      "heuristic_rule": 0,
+      "symbol_footprint": 0,
+      "bom": 0,
+      "geometry": 0,
+      "api_lookup": 0
+    },
+    "provenance_coverage_pct": null
+  },
+  "connectivity": [
+    {
+      "ref": "C1",
+      "pin": "1",
+      "pin_name": "",
+      "net": ""
+    },
+    {
+      "ref": "C1",
+      "pin": "2",
+      "pin_name": "",
+      "net": "VUSB"
+    },
+    {
+      "ref": "C101",
+      "pin": "1",
+      "pin_name": "",
+      "net": ""
+    },
+    {
+      "ref": "C101",
+      "pin": "2",
+      "pin_name": "",
+      "net": "/NRST"
+    },
+    {
+      "ref": "C102",
+      "pin": "1",
+      "pin_name": "",
+      "net": ""
+    },
+    {
+      "ref": "C102",
+      "pin": "2",
+      "pin_name": "",
+      "net": "VUSB"
+    },
+    {
+      "ref": "C103",
+      "pin": "1",
+      "pin_name": "",
+      "net": ""
+    },
+    {
+      "ref": "C103",
+      "pin": "2",
+      "pin_name": "",
+      "net": "+1V8"
+    },
+    {
+      "ref": "C104",
+      "pin": "1",
+      "pin_name": "",
+      "net": ""
+    },
+    {
+      "ref": "C104",
+      "pin": "2",
+      "pin_name": "",
+      "net": "+3V3"
+    },
+    {
+      "ref": "C105",
+      "pin": "1",
+      "pin_name": "",
+      "net": ""
+    },
+    {
+      "ref": "C105",
+      "pin": "2",
+      "pin_name": "",
+      "net": "+1V8"
+    },
+    {
+      "ref": "C106",
+      "pin": "1",
+      "pin_name": "",
+      "net": ""
+    },
+    {
+      "ref": "C106",
+      "pin": "2",
+      "pin_name": "",
+      "net": "TAG_1V8"
+    },
+    {
+      "ref": "C107",
+      "pin": "1",
+      "pin_name": "",
+      "net": ""
+    },
+    {
+      "ref": "C107",
+      "pin": "2",
+      "pin_name": "",
+      "net": "+3V3"
+    },
+    {
+      "ref": "C108",
+      "pin": "1",
+      "pin_name": "",
+      "net": ""
+    },
+    {
+      "ref": "C108",
+      "pin": "2",
+      "pin_name": "",
+      "net": "TAG_3V3"
+    },
+    {
+      "ref": "C109",
+      "pin": "1",
+      "pin_name": "",
+      "net": ""
+    },
+    {
+      "ref": "C109",
+      "pin": "2",
+      "pin_name": "",
+      "net": "+1V8"
+    },
+    {
+      "ref": "C11",
+      "pin": "1",
+      "pin_name": "",
+      "net": ""
+    },
+    {
+      "ref": "C11",
+      "pin": "2",
+      "pin_name": "",
+      "net": "+3V3"
+    },
+    {
+      "ref": "C110",
+      "pin": "1",
+      "pin_name": "",
+      "net": ""
+    },
+    {
+      "ref": "C110",
+      "pin": "2",
+      "pin_name": "",
+      "net": "+3V3"
+    },
+    {
+      "ref": "C111",
+      "pin": "1",
+      "pin_name": "",
+      "net": ""
+    },
+    {
+      "ref": "C111",
+      "pin": "2",
+      "pin_name": "",
+      "net": "+3V3"
+    },
+    {
+      "ref": "C12",
+      "pin": "1",
+      "pin_name": "",
+      "net": ""
+    },
+    {
+      "ref": "C12",
+      "pin": "2",
+      "pin_name": "",
+      "net": "+3V3"
+    },
+    {
+      "ref": "C2",
+      "pin": "1",
+      "pin_name": "",
+      "net": ""
+    },
+    {
+      "ref": "C2",
+      "pin": "2",
+      "pin_name": "",
+      "net": "+3V3"
+    },
+    {
+      "ref": "C3",
+      "pin": "1",
+      "pin_name": "",
+      "net": ""
+    },
+    {
+      "ref": "C3",
+      "pin": "2",
+      "pin_name": "",
+      "net": "TAG_1V8"
+    },
+    {
+      "ref": "C5",
+      "pin": "1",
+      "pin_name": "",
+      "net": ""
+    },
+    {
+      "ref": "C5",
+      "pin": "2",
+      "pin_name": "",
+      "net": "/stm32/NRST"
+    },
+    {
+      "ref": "C6",
+      "pin": "1",
+      "pin_name": "",
+      "net": ""
+    },
+    {
+      "ref": "C6",
+      "pin": "2",
+      "pin_name": "",
+      "net": "TAG_1V8"
+    },
+    {
+      "ref": "C7",
+      "pin": "1",
+      "pin_name": "",
+      "net": ""
+    },
+    {
+      "ref": "C7",
+      "pin": "2",
+      "pin_name": "",
+      "net": "TAG_1V8"
+    },
+    {
+      "ref": "C8",
+      "pin": "1",
+      "pin_name": "",
+      "net": ""
+    },
+    {
+      "ref": "C8",
+      "pin": "2",
+      "pin_name": "",
+      "net": "Net-(U3-VCAP)"
+    },
+    {
+      "ref": "C9",
+      "pin": "1",
+      "pin_name": "",
+      "net": ""
+    },
+    {
+      "ref": "C9",
+      "pin": "2",
+      "pin_name": "",
+      "net": "TAG_1V8"
+    },
+    {
+      "ref": "D1",
+      "pin": "1",
+      "pin_name": "K_1",
+      "net": ""
+    },
+    {
+      "ref": "D1",
+      "pin": "2",
+      "pin_name": "A_2",
+      "net": "Net-(D1-K)"
+    },
+    {
+      "ref": "D105",
+      "pin": "1",
+      "pin_name": "K_1",
+      "net": ""
+    },
+    {
+      "ref": "D105",
+      "pin": "2",
+      "pin_name": "A_2",
+      "net": "Net-(D105-K)"
+    },
+    {
+      "ref": "D4",
+      "pin": "1",
+      "pin_name": "K_1",
+      "net": ""
+    },
+    {
+      "ref": "D4",
+      "pin": "2",
+      "pin_name": "A_2",
+      "net": "TAG_3V3"
+    },
+    {
+      "ref": "J1",
+      "pin": "1",
+      "pin_name": "Pin_1_1",
+      "net": ""
+    },
+    {
+      "ref": "J1",
+      "pin": "2",
+      "pin_name": "Pin_2_2",
+      "net": "PWR_IN_MIRROR"
+    },
+    {
+      "ref": "J1",
+      "pin": "3",
+      "pin_name": "Pin_3_3",
+      "net": "PWR_IN"
+    },
+    {
+      "ref": "J1",
+      "pin": "4",
+      "pin_name": "Pin_4_4",
+      "net": "unconnected-(J1-Pin_3-Pad3)"
+    },
+    {
+      "ref": "J102",
+      "pin": "1",
+      "pin_name": "Pin_1_1",
+      "net": ""
+    },
+    {
+      "ref": "J102",
+      "pin": "10",
+      "pin_name": "Pin_10_10",
+      "net": "GND"
+    },
+    {
+      "ref": "J102",
+      "pin": "2",
+      "pin_name": "Pin_2_2",
+      "net": "+3V3"
+    },
+    {
+      "ref": "J102",
+      "pin": "3",
+      "pin_name": "Pin_3_3",
+      "net": "/SWDIO"
+    },
+    {
+      "ref": "J102",
+      "pin": "4",
+      "pin_name": "Pin_4_4",
+      "net": "GND"
+    },
+    {
+      "ref": "J102",
+      "pin": "5",
+      "pin_name": "Pin_5_5",
+      "net": "/SCLK"
+    },
+    {
+      "ref": "J102",
+      "pin": "6",
+      "pin_name": "Pin_6_6",
+      "net": "GND"
+    },
+    {
+      "ref": "J102",
+      "pin": "7",
+      "pin_name": "Pin_7_7",
+      "net": "unconnected-(J102-Pin_6-Pad6)"
+    },
+    {
+      "ref": "J102",
+      "pin": "8",
+      "pin_name": "Pin_8_8",
+      "net": "unconnected-(J102-Pin_7-Pad7)"
+    },
+    {
+      "ref": "J102",
+      "pin": "9",
+      "pin_name": "Pin_9_9",
+      "net": "unconnected-(J102-Pin_8-Pad8)"
+    },
+    {
+      "ref": "J104",
+      "pin": "1",
+      "pin_name": "VBUS_1",
+      "net": ""
+    },
+    {
+      "ref": "J104",
+      "pin": "2",
+      "pin_name": "D-_2",
+      "net": "VUSB"
+    },
+    {
+      "ref": "J104",
+      "pin": "3",
+      "pin_name": "D+_3",
+      "net": "/DM"
+    },
+    {
+      "ref": "J104",
+      "pin": "4",
+      "pin_name": "ID_4",
+      "net": "/DP"
+    },
+    {
+      "ref": "J104",
+      "pin": "5",
+      "pin_name": "GND_5",
+      "net": "GND"
+    },
+    {
+      "ref": "J104",
+      "pin": "SH",
+      "pin_name": "Shield_SH",
+      "net": "GND"
+    },
+    {
+      "ref": "J2",
+      "pin": "1",
+      "pin_name": "Pin_1_1",
+      "net": ""
+    },
+    {
+      "ref": "J2",
+      "pin": "2",
+      "pin_name": "Pin_2_2",
+      "net": "/UART_TX"
+    },
+    {
+      "ref": "J3",
+      "pin": "1",
+      "pin_name": "Pin_1_1",
+      "net": ""
+    },
+    {
+      "ref": "J3",
+      "pin": "10",
+      "pin_name": "Pin_10_10",
+      "net": "/stm32/PA1"
+    },
+    {
+      "ref": "J3",
+      "pin": "11",
+      "pin_name": "Pin_11_11",
+      "net": "/stm32/PA2"
+    },
+    {
+      "ref": "J3",
+      "pin": "12",
+      "pin_name": "Pin_12_12",
+      "net": "/stm32/PA3"
+    },
+    {
+      "ref": "J3",
+      "pin": "13",
+      "pin_name": "Pin_13_13",
+      "net": "/stm32/PA4"
+    },
+    {
+      "ref": "J3",
+      "pin": "14",
+      "pin_name": "Pin_14_14",
+      "net": "/stm32/PA5"
+    },
+    {
+      "ref": "J3",
+      "pin": "15",
+      "pin_name": "Pin_15_15",
+      "net": "/stm32/PA6"
+    },
+    {
+      "ref": "J3",
+      "pin": "16",
+      "pin_name": "Pin_16_16",
+      "net": "/stm32/PA7"
+    },
+    {
+      "ref": "J3",
+      "pin": "17",
+      "pin_name": "Pin_17_17",
+      "net": "/stm32/PB0"
+    },
+    {
+      "ref": "J3",
+      "pin": "2",
+      "pin_name": "Pin_2_2",
+      "net": "/stm32/PB4"
+    },
+    {
+      "ref": "J3",
+      "pin": "3",
+      "pin_name": "Pin_3_3",
+      "net": "/stm32/PB5"
+    },
+    {
+      "ref": "J3",
+      "pin": "4",
+      "pin_name": "Pin_4_4",
+      "net": "/stm32/rtc_scl"
+    },
+    {
+      "ref": "J3",
+      "pin": "5",
+      "pin_name": "Pin_5_5",
+      "net": "/stm32/rtc_sda"
+    },
+    {
+      "ref": "J3",
+      "pin": "6",
+      "pin_name": "Pin_6_6",
+      "net": "/stm32/PB8"
+    },
+    {
+      "ref": "J3",
+      "pin": "7",
+      "pin_name": "Pin_7_7",
+      "net": "/stm32/PB9"
+    },
+    {
+      "ref": "J3",
+      "pin": "8",
+      "pin_name": "Pin_8_8",
+      "net": "TAG_1V8"
+    },
+    {
+      "ref": "J3",
+      "pin": "9",
+      "pin_name": "Pin_9_9",
+      "net": "/stm32/PA0"
+    },
+    {
+      "ref": "J4",
+      "pin": "1",
+      "pin_name": "Pin_1_1",
+      "net": ""
+    },
+    {
+      "ref": "J4",
+      "pin": "10",
+      "pin_name": "Pin_10_10",
+      "net": "/stm32/PB15"
+    },
+    {
+      "ref": "J4",
+      "pin": "11",
+      "pin_name": "Pin_11_11",
+      "net": "/stm32/PB14"
+    },
+    {
+      "ref": "J4",
+      "pin": "12",
+      "pin_name": "Pin_12_12",
+      "net": "/stm32/PB13"
+    },
+    {
+      "ref": "J4",
+      "pin": "13",
+      "pin_name": "Pin_13_13",
+      "net": "/stm32/PB12"
+    },
+    {
+      "ref": "J4",
+      "pin": "14",
+      "pin_name": "Pin_14_14",
+      "net": "/stm32/PB11"
+    },
+    {
+      "ref": "J4",
+      "pin": "15",
+      "pin_name": "Pin_15_15",
+      "net": "/stm32/PB10"
+    },
+    {
+      "ref": "J4",
+      "pin": "16",
+      "pin_name": "Pin_16_16",
+      "net": "/stm32/PB2"
+    },
+    {
+      "ref": "J4",
+      "pin": "17",
+      "pin_name": "Pin_17_17",
+      "net": "/stm32/PB1"
+    },
+    {
+      "ref": "J4",
+      "pin": "2",
+      "pin_name": "Pin_2_2",
+      "net": "TAG_1V8"
+    },
+    {
+      "ref": "J4",
+      "pin": "3",
+      "pin_name": "Pin_3_3",
+      "net": "/stm32/PB3"
+    },
+    {
+      "ref": "J4",
+      "pin": "4",
+      "pin_name": "Pin_4_4",
+      "net": "/stm32/PA15"
+    },
+    {
+      "ref": "J4",
+      "pin": "5",
+      "pin_name": "Pin_5_5",
+      "net": "/stm32/PA12"
+    },
+    {
+      "ref": "J4",
+      "pin": "6",
+      "pin_name": "Pin_6_6",
+      "net": "/stm32/PA11"
+    },
+    {
+      "ref": "J4",
+      "pin": "7",
+      "pin_name": "Pin_7_7",
+      "net": "/stm32/PA10"
+    },
+    {
+      "ref": "J4",
+      "pin": "8",
+      "pin_name": "Pin_8_8",
+      "net": "/stm32/PA9"
+    },
+    {
+      "ref": "J4",
+      "pin": "9",
+      "pin_name": "Pin_9_9",
+      "net": "/stm32/PA8"
+    },
+    {
+      "ref": "Q1",
+      "pin": "1",
+      "pin_name": "B_1",
+      "net": ""
+    },
+    {
+      "ref": "Q1",
+      "pin": "2",
+      "pin_name": "E_2",
+      "net": "TAG_RESET"
+    },
+    {
+      "ref": "Q1",
+      "pin": "3",
+      "pin_name": "C_3",
+      "net": "GND"
+    },
+    {
+      "ref": "R1",
+      "pin": "1",
+      "pin_name": "",
+      "net": ""
+    },
+    {
+      "ref": "R1",
+      "pin": "2",
+      "pin_name": "",
+      "net": "Net-(D1-K)"
+    },
+    {
+      "ref": "R104",
+      "pin": "1",
+      "pin_name": "",
+      "net": ""
+    },
+    {
+      "ref": "R104",
+      "pin": "2",
+      "pin_name": "",
+      "net": "Net-(U5-PA10)"
+    },
+    {
+      "ref": "R105",
+      "pin": "1",
+      "pin_name": "",
+      "net": ""
+    },
+    {
+      "ref": "R105",
+      "pin": "2",
+      "pin_name": "",
+      "net": "GND"
+    },
+    {
+      "ref": "R106",
+      "pin": "1",
+      "pin_name": "",
+      "net": ""
+    },
+    {
+      "ref": "R106",
+      "pin": "2",
+      "pin_name": "",
+      "net": "Net-(U8-B)"
+    },
+    {
+      "ref": "R107",
+      "pin": "1",
+      "pin_name": "",
+      "net": ""
+    },
+    {
+      "ref": "R107",
+      "pin": "2",
+      "pin_name": "",
+      "net": "Net-(D105-K)"
+    },
+    {
+      "ref": "R2",
+      "pin": "1",
+      "pin_name": "",
+      "net": ""
+    },
+    {
+      "ref": "R2",
+      "pin": "2",
+      "pin_name": "",
+      "net": "Net-(U5-PB5)"
+    },
+    {
+      "ref": "R3",
+      "pin": "1",
+      "pin_name": "",
+      "net": ""
+    },
+    {
+      "ref": "R3",
+      "pin": "2",
+      "pin_name": "",
+      "net": "GND"
+    },
+    {
+      "ref": "R7",
+      "pin": "1",
+      "pin_name": "",
+      "net": ""
+    },
+    {
+      "ref": "R7",
+      "pin": "2",
+      "pin_name": "",
+      "net": "PWR_IN_MIRROR"
+    },
+    {
+      "ref": "TP1",
+      "pin": "1",
+      "pin_name": "1_1",
+      "net": ""
+    },
+    {
+      "ref": "TP2",
+      "pin": "1",
+      "pin_name": "1_1",
+      "net": ""
+    },
+    {
+      "ref": "U1",
+      "pin": "1",
+      "pin_name": "GND_1",
+      "net": ""
+    },
+    {
+      "ref": "U1",
+      "pin": "2",
+      "pin_name": "VO_2",
+      "net": "GND"
+    },
+    {
+      "ref": "U1",
+      "pin": "3",
+      "pin_name": "VI_3",
+      "net": "+3V3"
+    },
+    {
+      "ref": "U10",
+      "pin": "1",
+      "pin_name": "VIN_1",
+      "net": ""
+    },
+    {
+      "ref": "U10",
+      "pin": "2",
+      "pin_name": "GND_2",
+      "net": "+3V3"
+    },
+    {
+      "ref": "U10",
+      "pin": "3",
+      "pin_name": "EN_3",
+      "net": "GND"
+    },
+    {
+      "ref": "U10",
+      "pin": "4",
+      "pin_name": "NC_4",
+      "net": "/en1.8v"
+    },
+    {
+      "ref": "U10",
+      "pin": "5",
+      "pin_name": "VOUT_5",
+      "net": "unconnected-(U10-NC-Pad4)"
+    },
+    {
+      "ref": "U105",
+      "pin": "1",
+      "pin_name": "A_1",
+      "net": ""
+    },
+    {
+      "ref": "U105",
+      "pin": "2",
+      "pin_name": "B_2",
+      "net": "/boot0"
+    },
+    {
+      "ref": "U11",
+      "pin": "1",
+      "pin_name": "OUT_1",
+      "net": ""
+    },
+    {
+      "ref": "U11",
+      "pin": "2",
+      "pin_name": "GND_2",
+      "net": "TAG_1V8"
+    },
+    {
+      "ref": "U11",
+      "pin": "3",
+      "pin_name": "EN_3",
+      "net": "GND"
+    },
+    {
+      "ref": "U11",
+      "pin": "4",
+      "pin_name": "IN_4",
+      "net": "TAG_3V3"
+    },
+    {
+      "ref": "U11",
+      "pin": "5",
+      "pin_name": "Thermal_PAD_5",
+      "net": "TAG_3V3"
+    },
+    {
+      "ref": "U2",
+      "pin": "1",
+      "pin_name": "OUT_1",
+      "net": ""
+    },
+    {
+      "ref": "U2",
+      "pin": "2",
+      "pin_name": "GND_2",
+      "net": "TAG_3V3"
+    },
+    {
+      "ref": "U2",
+      "pin": "3",
+      "pin_name": "~{ON}_3",
+      "net": "GND"
+    },
+    {
+      "ref": "U2",
+      "pin": "4",
+      "pin_name": "IN_4",
+      "net": "PWR_IN_MIRROR"
+    },
+    {
+      "ref": "U2",
+      "pin": "5",
+      "pin_name": "GND_5",
+      "net": "+3V3"
+    },
+    {
+      "ref": "U2",
+      "pin": "6",
+      "pin_name": "NC_6",
+      "net": "GND"
+    },
+    {
+      "ref": "U3",
+      "pin": "1",
+      "pin_name": "VDD_1",
+      "net": ""
+    },
+    {
+      "ref": "U3",
+      "pin": "10",
+      "pin_name": "PA4_10",
+      "net": "/stm32/PA3"
+    },
+    {
+      "ref": "U3",
+      "pin": "11",
+      "pin_name": "PA5_11",
+      "net": "/stm32/PA4"
+    },
+    {
+      "ref": "U3",
+      "pin": "12",
+      "pin_name": "PA6_12",
+      "net": "/stm32/PA5"
+    },
+    {
+      "ref": "U3",
+      "pin": "13",
+      "pin_name": "PA7_13",
+      "net": "/stm32/PA6"
+    },
+    {
+      "ref": "U3",
+      "pin": "14",
+      "pin_name": "PB0_14",
+      "net": "/stm32/PA7"
+    },
+    {
+      "ref": "U3",
+      "pin": "15",
+      "pin_name": "PB1_15",
+      "net": "/stm32/PB0"
+    },
+    {
+      "ref": "U3",
+      "pin": "16",
+      "pin_name": "VSS_16",
+      "net": "/stm32/PB1"
+    },
+    {
+      "ref": "U3",
+      "pin": "17",
+      "pin_name": "VDD_17",
+      "net": "GND"
+    },
+    {
+      "ref": "U3",
+      "pin": "18",
+      "pin_name": "PA8_18",
+      "net": "TAG_1V8"
+    },
+    {
+      "ref": "U3",
+      "pin": "19",
+      "pin_name": "PA9_19",
+      "net": "/stm32/PA8"
+    },
+    {
+      "ref": "U3",
+      "pin": "2",
+      "pin_name": "PC14_2",
+      "net": "TAG_1V8"
+    },
+    {
+      "ref": "U3",
+      "pin": "20",
+      "pin_name": "PA10_20",
+      "net": "/stm32/PA9"
+    },
+    {
+      "ref": "U3",
+      "pin": "21",
+      "pin_name": "PA11_21",
+      "net": "/stm32/PA10"
+    },
+    {
+      "ref": "U3",
+      "pin": "22",
+      "pin_name": "PA12_22",
+      "net": "/stm32/PA11"
+    },
+    {
+      "ref": "U3",
+      "pin": "23",
+      "pin_name": "PA13_23",
+      "net": "/stm32/PA12"
+    },
+    {
+      "ref": "U3",
+      "pin": "24",
+      "pin_name": "PA14_24",
+      "net": "TAG_SWDIO"
+    },
+    {
+      "ref": "U3",
+      "pin": "25",
+      "pin_name": "PA15_25",
+      "net": "TAG_SCK"
+    },
+    {
+      "ref": "U3",
+      "pin": "26",
+      "pin_name": "PB3_26",
+      "net": "/stm32/PA15"
+    },
+    {
+      "ref": "U3",
+      "pin": "27",
+      "pin_name": "PB4_27",
+      "net": "/stm32/PB3"
+    },
+    {
+      "ref": "U3",
+      "pin": "28",
+      "pin_name": "PB5_28",
+      "net": "/stm32/PB4"
+    },
+    {
+      "ref": "U3",
+      "pin": "29",
+      "pin_name": "PB6_29",
+      "net": "/stm32/PB5"
+    },
+    {
+      "ref": "U3",
+      "pin": "3",
+      "pin_name": "PC15_3",
+      "net": "/stm32/clkout"
+    },
+    {
+      "ref": "U3",
+      "pin": "30",
+      "pin_name": "BOOT0-PB7_30",
+      "net": "/stm32/rtc_sda"
+    },
+    {
+      "ref": "U3",
+      "pin": "31",
+      "pin_name": "VCAP_31",
+      "net": "/stm32/rtc_scl"
+    },
+    {
+      "ref": "U3",
+      "pin": "32",
+      "pin_name": "VSS_32",
+      "net": "Net-(U3-VCAP)"
+    },
+    {
+      "ref": "U3",
+      "pin": "33",
+      "pin_name": "GND_33",
+      "net": "GND"
+    },
+    {
+      "ref": "U3",
+      "pin": "4",
+      "pin_name": "~{NRST}_4",
+      "net": "unconnected-(U3-PC15-Pad3)"
+    },
+    {
+      "ref": "U3",
+      "pin": "5",
+      "pin_name": "VDDA/VREF+_5",
+      "net": "/stm32/NRST"
+    },
+    {
+      "ref": "U3",
+      "pin": "6",
+      "pin_name": "PA0_6",
+      "net": "TAG_1V8"
+    },
+    {
+      "ref": "U3",
+      "pin": "7",
+      "pin_name": "PA1_7",
+      "net": "/stm32/PA0"
+    },
+    {
+      "ref": "U3",
+      "pin": "8",
+      "pin_name": "PA2_8",
+      "net": "/stm32/PA1"
+    },
+    {
+      "ref": "U3",
+      "pin": "9",
+      "pin_name": "PA3_9",
+      "net": "/stm32/PA2"
+    },
+    {
+      "ref": "U4",
+      "pin": "1",
+      "pin_name": "I/O1_1",
+      "net": ""
+    },
+    {
+      "ref": "U4",
+      "pin": "2",
+      "pin_name": "GND_2",
+      "net": "/USB_DP"
+    },
+    {
+      "ref": "U4",
+      "pin": "3",
+      "pin_name": "I/O2_3",
+      "net": "GND"
+    },
+    {
+      "ref": "U4",
+      "pin": "4",
+      "pin_name": "I/O2_4",
+      "net": "/USB_DM"
+    },
+    {
+      "ref": "U4",
+      "pin": "5",
+      "pin_name": "VBUS_5",
+      "net": "/DM"
+    },
+    {
+      "ref": "U4",
+      "pin": "6",
+      "pin_name": "I/O1_6",
+      "net": "VUSB"
+    },
+    {
+      "ref": "U5",
+      "pin": "1",
+      "pin_name": "VDD_1",
+      "net": ""
+    },
+    {
+      "ref": "U5",
+      "pin": "10",
+      "pin_name": "PA4_10",
+      "net": "/LED_GREEN"
+    },
+    {
+      "ref": "U5",
+      "pin": "11",
+      "pin_name": "PA5_11",
+      "net": "unconnected-(U5-PA4-Pad10)"
+    },
+    {
+      "ref": "U5",
+      "pin": "12",
+      "pin_name": "PA6_12",
+      "net": "unconnected-(U5-PA5-Pad11)"
+    },
+    {
+      "ref": "U5",
+      "pin": "13",
+      "pin_name": "PA7_13",
+      "net": "unconnected-(U5-PA6-Pad12)"
+    },
+    {
+      "ref": "U5",
+      "pin": "14",
+      "pin_name": "PB0_14",
+      "net": "unconnected-(U5-PA7-Pad13)"
+    },
+    {
+      "ref": "U5",
+      "pin": "15",
+      "pin_name": "PB1_15",
+      "net": "unconnected-(U5-PB0-Pad14)"
+    },
+    {
+      "ref": "U5",
+      "pin": "16",
+      "pin_name": "VSS_16",
+      "net": "unconnected-(U5-PB1-Pad15)"
+    },
+    {
+      "ref": "U5",
+      "pin": "17",
+      "pin_name": "VDD_17",
+      "net": "GND"
+    },
+    {
+      "ref": "U5",
+      "pin": "18",
+      "pin_name": "PA8_18",
+      "net": "+3V3"
+    },
+    {
+      "ref": "U5",
+      "pin": "19",
+      "pin_name": "PA9_19",
+      "net": "unconnected-(U5-PA8-Pad18)"
+    },
+    {
+      "ref": "U5",
+      "pin": "2",
+      "pin_name": "PC14_2",
+      "net": "+3V3"
+    },
+    {
+      "ref": "U5",
+      "pin": "20",
+      "pin_name": "PA10_20",
+      "net": "/UART_TX"
+    },
+    {
+      "ref": "U5",
+      "pin": "21",
+      "pin_name": "PA11_21",
+      "net": "Net-(U5-PA10)"
+    },
+    {
+      "ref": "U5",
+      "pin": "22",
+      "pin_name": "PA12_22",
+      "net": "/USB_DM"
+    },
+    {
+      "ref": "U5",
+      "pin": "23",
+      "pin_name": "PA13_23",
+      "net": "/USB_DP"
+    },
+    {
+      "ref": "U5",
+      "pin": "24",
+      "pin_name": "PA14_24",
+      "net": "/SWDIO"
+    },
+    {
+      "ref": "U5",
+      "pin": "25",
+      "pin_name": "PA15_25",
+      "net": "/SCLK"
+    },
+    {
+      "ref": "U5",
+      "pin": "26",
+      "pin_name": "PB3_26",
+      "net": "Net-(U5-PA15)"
+    },
+    {
+      "ref": "U5",
+      "pin": "27",
+      "pin_name": "PB4_27",
+      "net": "Net-(U5-PB3)"
+    },
+    {
+      "ref": "U5",
+      "pin": "28",
+      "pin_name": "PB5_28",
+      "net": "Net-(U5-PB4)"
+    },
+    {
+      "ref": "U5",
+      "pin": "29",
+      "pin_name": "PB6_29",
+      "net": "Net-(U5-PB5)"
+    },
+    {
+      "ref": "U5",
+      "pin": "3",
+      "pin_name": "PC15_3",
+      "net": "unconnected-(U5-PC14-Pad2)"
+    },
+    {
+      "ref": "U5",
+      "pin": "30",
+      "pin_name": "PB7_30",
+      "net": "unconnected-(U5-PB6-Pad29)"
+    },
+    {
+      "ref": "U5",
+      "pin": "31",
+      "pin_name": "BOOT0_31",
+      "net": "unconnected-(U5-PB7-Pad30)"
+    },
+    {
+      "ref": "U5",
+      "pin": "32",
+      "pin_name": "VSS_32",
+      "net": "/boot0"
+    },
+    {
+      "ref": "U5",
+      "pin": "33",
+      "pin_name": "GND_33",
+      "net": "GND"
+    },
+    {
+      "ref": "U5",
+      "pin": "4",
+      "pin_name": "~{NRST}_4",
+      "net": "unconnected-(U5-PC15-Pad3)"
+    },
+    {
+      "ref": "U5",
+      "pin": "5",
+      "pin_name": "VDDA/VREF+_5",
+      "net": "/NRST"
+    },
+    {
+      "ref": "U5",
+      "pin": "6",
+      "pin_name": "PA0_6",
+      "net": "+3V3"
+    },
+    {
+      "ref": "U5",
+      "pin": "7",
+      "pin_name": "PA1_7",
+      "net": "unconnected-(U5-PA0-Pad6)"
+    },
+    {
+      "ref": "U5",
+      "pin": "8",
+      "pin_name": "PA2_8",
+      "net": "/en1.8v"
+    },
+    {
+      "ref": "U5",
+      "pin": "9",
+      "pin_name": "PA3_9",
+      "net": "unconnected-(U5-PA2-Pad8)"
+    },
+    {
+      "ref": "U6",
+      "pin": "1",
+      "pin_name": "CLKOUT_1",
+      "net": ""
+    },
+    {
+      "ref": "U6",
+      "pin": "2",
+      "pin_name": "~{INT}_2",
+      "net": "/stm32/clkout"
+    },
+    {
+      "ref": "U6",
+      "pin": "3",
+      "pin_name": "SCL_3",
+      "net": "unconnected-(U6-~{INT}-Pad2)"
+    },
+    {
+      "ref": "U6",
+      "pin": "4",
+      "pin_name": "SDA_4",
+      "net": "/stm32/rtc_scl"
+    },
+    {
+      "ref": "U6",
+      "pin": "5",
+      "pin_name": "GND_5",
+      "net": "/stm32/rtc_sda"
+    },
+    {
+      "ref": "U6",
+      "pin": "6",
+      "pin_name": "VBACK_6",
+      "net": "GND"
+    },
+    {
+      "ref": "U6",
+      "pin": "7",
+      "pin_name": "VDD_7",
+      "net": "/stm32/VBACK"
+    },
+    {
+      "ref": "U6",
+      "pin": "8",
+      "pin_name": "EVI_8",
+      "net": "TAG_1V8"
+    },
+    {
+      "ref": "U7",
+      "pin": "1",
+      "pin_name": "VCCA_1",
+      "net": ""
+    },
+    {
+      "ref": "U7",
+      "pin": "2",
+      "pin_name": "GND_2",
+      "net": "+3V3"
+    },
+    {
+      "ref": "U7",
+      "pin": "3",
+      "pin_name": "A_3",
+      "net": "GND"
+    },
+    {
+      "ref": "U7",
+      "pin": "4",
+      "pin_name": "B_4",
+      "net": "Net-(U5-PB3)"
+    },
+    {
+      "ref": "U7",
+      "pin": "5",
+      "pin_name": "DIR_5",
+      "net": "TAG_SCK"
+    },
+    {
+      "ref": "U7",
+      "pin": "6",
+      "pin_name": "VCCB_6",
+      "net": "+3V3"
+    },
+    {
+      "ref": "U8",
+      "pin": "1",
+      "pin_name": "VCCA_1",
+      "net": ""
+    },
+    {
+      "ref": "U8",
+      "pin": "2",
+      "pin_name": "GND_2",
+      "net": "+3V3"
+    },
+    {
+      "ref": "U8",
+      "pin": "3",
+      "pin_name": "A_3",
+      "net": "GND"
+    },
+    {
+      "ref": "U8",
+      "pin": "4",
+      "pin_name": "B_4",
+      "net": "Net-(U5-PB4)"
+    },
+    {
+      "ref": "U8",
+      "pin": "5",
+      "pin_name": "DIR_5",
+      "net": "Net-(U8-B)"
+    },
+    {
+      "ref": "U8",
+      "pin": "6",
+      "pin_name": "VCCB_6",
+      "net": "Net-(U5-PA15)"
+    }
+  ]
+}

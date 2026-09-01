@@ -1,0 +1,106 @@
+{
+    "$schema": "https://schemas.kicad.org/erc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-08-26T08:09:37",
+    "ignored_checks": [
+        {
+            "description": "Global label only appears once in the schematic",
+            "key": "single_global_label"
+        },
+        {
+            "description": "Four connection points are joined together",
+            "key": "four_way_junction"
+        },
+        {
+            "description": "SPICE model issue",
+            "key": "simulation_model_issue"
+        },
+        {
+            "description": "Assigned footprint doesn't match footprint filters",
+            "key": "footprint_filter"
+        }
+    ],
+    "included_severities": [
+        "error",
+        "warning"
+    ],
+    "kicad_version": "10.0.2",
+    "sheets": [
+        {
+            "path": "/",
+            "uuid_path": "/e44ca67a-43be-444b-8652-f54825a2eb6f",
+            "violations": [
+                {
+                    "description": "Pins of type Bidirectional and Power output are connected",
+                    "items": [
+                        {
+                            "description": "Symbol U6 Pin 3 [~{WP}/SIO2, Bidirectional, Line]",
+                            "pos": {
+                                "x": 0.8128,
+                                "y": 0.381
+                            },
+                            "uuid": "e303b2d9-d63e-454f-8331-ec99ed9ce5df"
+                        },
+                        {
+                            "description": "Symbol #FLG01 Pin 1 [Power output, Line]",
+                            "pos": {
+                                "x": 1.0414,
+                                "y": 0.2159
+                            },
+                            "uuid": "80236cd7-f134-476a-aafd-0822e1a8c307"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "pin_to_pin"
+                },
+                {
+                    "description": "Pins of type Bidirectional and Power output are connected",
+                    "items": [
+                        {
+                            "description": "Symbol U6 Pin 7 [~{HOLD}/SIO3, Bidirectional, Line]",
+                            "pos": {
+                                "x": 0.8128,
+                                "y": 0.4064
+                            },
+                            "uuid": "72b4629c-9d24-405e-afc3-26df89f7eaea"
+                        },
+                        {
+                            "description": "Symbol #FLG01 Pin 1 [Power output, Line]",
+                            "pos": {
+                                "x": 1.0414,
+                                "y": 0.2159
+                            },
+                            "uuid": "80236cd7-f134-476a-aafd-0822e1a8c307"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "pin_to_pin"
+                },
+                {
+                    "description": "Both VBAT and VIN are attached to the same items; VBAT will be used in the netlist",
+                    "items": [
+                        {
+                            "description": "Global Label 'VBAT'",
+                            "pos": {
+                                "x": 1.9431,
+                                "y": 0.2667
+                            },
+                            "uuid": "228c19c5-3d34-4ea3-8337-2cbe4f7f2c44"
+                        },
+                        {
+                            "description": "Global Label 'VIN'",
+                            "pos": {
+                                "x": 1.9431,
+                                "y": 0.2286
+                            },
+                            "uuid": "3a2f6d1f-ae3e-4575-bb63-f8afcf053656"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "multiple_net_names"
+                }
+            ]
+        }
+    ],
+    "source": "imutag-smps.kicad_sch"
+}

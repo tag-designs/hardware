@@ -1,0 +1,225 @@
+{
+  "analyzer_type": "lifecycle",
+  "schema_version": "1.3.0",
+  "audit_date": "2026-06-15T10:49:24-04:00",
+  "components_checked": 6,
+  "components_with_mpn": 6,
+  "components_without_mpn": 0,
+  "sources_available": [],
+  "findings": [
+    {
+      "mpn": "AK09940A",
+      "references": [
+        "U3"
+      ],
+      "status": "unknown",
+      "sources": {},
+      "detector": "audit_bom",
+      "rule_id": "LC-004",
+      "category": "lifecycle",
+      "severity": "info",
+      "confidence": "deterministic",
+      "evidence_source": "api_lookup",
+      "summary": "AK09940A: unknown (1 ref(s))",
+      "description": "Component AK09940A is unknown.",
+      "components": [
+        "U3"
+      ],
+      "nets": [],
+      "pins": [],
+      "recommendation": "Replace AK09940A \u2014 part is unknown.",
+      "report_context": {
+        "section": "Lifecycle",
+        "impact": "Supply chain risk",
+        "standard_ref": ""
+      }
+    },
+    {
+      "mpn": "CC0603KRX7R9BB104",
+      "references": [
+        "C1",
+        "C10",
+        "C2",
+        "C6",
+        "C7",
+        "C8",
+        "C9"
+      ],
+      "status": "unknown",
+      "sources": {},
+      "detector": "audit_bom",
+      "rule_id": "LC-004",
+      "category": "lifecycle",
+      "severity": "info",
+      "confidence": "deterministic",
+      "evidence_source": "api_lookup",
+      "summary": "CC0603KRX7R9BB104: unknown (7 ref(s))",
+      "description": "Component CC0603KRX7R9BB104 is unknown.",
+      "components": [
+        "C1",
+        "C10",
+        "C2",
+        "C6",
+        "C7",
+        "C8",
+        "C9"
+      ],
+      "nets": [],
+      "pins": [],
+      "recommendation": "Replace CC0603KRX7R9BB104 \u2014 part is unknown.",
+      "report_context": {
+        "section": "Lifecycle",
+        "impact": "Supply chain risk",
+        "standard_ref": ""
+      }
+    },
+    {
+      "mpn": "CL10A475KO8NNNC",
+      "references": [
+        "C3",
+        "C4"
+      ],
+      "status": "unknown",
+      "sources": {},
+      "detector": "audit_bom",
+      "rule_id": "LC-004",
+      "category": "lifecycle",
+      "severity": "info",
+      "confidence": "deterministic",
+      "evidence_source": "api_lookup",
+      "summary": "CL10A475KO8NNNC: unknown (2 ref(s))",
+      "description": "Component CL10A475KO8NNNC is unknown.",
+      "components": [
+        "C3",
+        "C4"
+      ],
+      "nets": [],
+      "pins": [],
+      "recommendation": "Replace CL10A475KO8NNNC \u2014 part is unknown.",
+      "report_context": {
+        "section": "Lifecycle",
+        "impact": "Supply chain risk",
+        "standard_ref": ""
+      }
+    },
+    {
+      "mpn": "LPS22HH",
+      "references": [
+        "U5"
+      ],
+      "status": "unknown",
+      "sources": {},
+      "detector": "audit_bom",
+      "rule_id": "LC-004",
+      "category": "lifecycle",
+      "severity": "info",
+      "confidence": "deterministic",
+      "evidence_source": "api_lookup",
+      "summary": "LPS22HH: unknown (1 ref(s))",
+      "description": "Component LPS22HH is unknown.",
+      "components": [
+        "U5"
+      ],
+      "nets": [],
+      "pins": [],
+      "recommendation": "Replace LPS22HH \u2014 part is unknown.",
+      "report_context": {
+        "section": "Lifecycle",
+        "impact": "Supply chain risk",
+        "standard_ref": ""
+      }
+    },
+    {
+      "mpn": "LSM6DSV",
+      "references": [
+        "U4"
+      ],
+      "status": "unknown",
+      "sources": {},
+      "detector": "audit_bom",
+      "rule_id": "LC-004",
+      "category": "lifecycle",
+      "severity": "info",
+      "confidence": "deterministic",
+      "evidence_source": "api_lookup",
+      "summary": "LSM6DSV: unknown (1 ref(s))",
+      "description": "Component LSM6DSV is unknown.",
+      "components": [
+        "U4"
+      ],
+      "nets": [],
+      "pins": [],
+      "recommendation": "Replace LSM6DSV \u2014 part is unknown.",
+      "report_context": {
+        "section": "Lifecycle",
+        "impact": "Supply chain risk",
+        "standard_ref": ""
+      }
+    },
+    {
+      "mpn": "MX25U12843GBBI00",
+      "references": [
+        "U2"
+      ],
+      "status": "unknown",
+      "sources": {},
+      "detector": "audit_bom",
+      "rule_id": "LC-004",
+      "category": "lifecycle",
+      "severity": "info",
+      "confidence": "deterministic",
+      "evidence_source": "api_lookup",
+      "summary": "MX25U12843GBBI00: unknown (1 ref(s))",
+      "description": "Component MX25U12843GBBI00 is unknown.",
+      "components": [
+        "U2"
+      ],
+      "nets": [],
+      "pins": [],
+      "recommendation": "Replace MX25U12843GBBI00 \u2014 part is unknown.",
+      "report_context": {
+        "section": "Lifecycle",
+        "impact": "Supply chain risk",
+        "standard_ref": ""
+      }
+    }
+  ],
+  "lifecycle_summary": {
+    "active": 0,
+    "nrnd": 0,
+    "last_time_buy": 0,
+    "obsolete": 0,
+    "discontinued": 0,
+    "unknown": 6
+  },
+  "summary": {
+    "total_findings": 6,
+    "by_severity": {
+      "error": 0,
+      "warning": 0,
+      "info": 6
+    },
+    "components_checked": 6,
+    "lifecycle_issues": 6,
+    "temperature_issues": 0
+  },
+  "trust_summary": {
+    "total_findings": 6,
+    "trust_level": "high",
+    "by_confidence": {
+      "deterministic": 6,
+      "heuristic": 0,
+      "datasheet-backed": 0
+    },
+    "by_evidence_source": {
+      "datasheet": 0,
+      "topology": 0,
+      "heuristic_rule": 0,
+      "symbol_footprint": 0,
+      "bom": 0,
+      "geometry": 0,
+      "api_lookup": 6
+    },
+    "provenance_coverage_pct": 0.0
+  }
+}

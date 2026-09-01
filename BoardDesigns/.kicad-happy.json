@@ -1,0 +1,38 @@
+{
+  "version": 1,
+
+  "_comment": [
+    "Workspace-level defaults for every board under BoardDesigns/.",
+    "The kicad-happy config loader walks upward from each board directory and",
+    "merges what it finds, closest-wins, so a board's own .kicad-happy.json",
+    "overrides anything here. Suppressions are the exception: they are",
+    "concatenated across layers rather than replaced.",
+    "",
+    "Deliberately minimal. Board-specific design intent, power profiles,",
+    "mating-baseboard contracts and suppressions belong in the board's own",
+    "config, written from an actual review rather than guessed. See",
+    "BitTagNG/.kicad-happy.json and CompassTag/.kicad-happy.json."
+  ],
+
+  "analysis": {
+    "track_in_git": true,
+    "retention": 5,
+    "auto_diff": true,
+    "diff_threshold": "major"
+  },
+
+  "_track_in_git_note": [
+    "Analyzer JSON is slow to regenerate and deep_review.json -- the",
+    "hand-authored, evidence-gated review findings -- is not regenerable at",
+    "all. A full run costs roughly 57 kB in git once compressed.",
+    "",
+    "analysis_cache.py writes analysis/.gitignore only when track_in_git is",
+    "false AND that file is absent. Setting it true here, and deleting the",
+    "per-board analysis/.gitignore files, stops them coming back.",
+    "",
+    "retention 5 is the tool default and is enforced on each new run via",
+    "prune_runs(). Five boards had accumulated 15 runs each because they had",
+    "no config for it to read; those were pruned to the current run on",
+    "2026-08-31 (129 MB -> 12 MB)."
+  ]
+}

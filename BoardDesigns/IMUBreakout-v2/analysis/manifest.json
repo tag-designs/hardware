@@ -3,26 +3,6 @@
   "project": "",
   "current": "2026-06-15_1048",
   "runs": {
-    "2026-06-15_1003": {
-      "source_hashes": {
-        "IMUBreakout-v2.kicad_sch": "sha256:c2dee07b5de1a37d70030d1c12f6c2b5a98509958f8799037928d0473887ab05",
-        "IMUBreakout-v2.kicad_pcb": "sha256:242b19f9eceaadee687078f8acf428cf277fec2382b786e14ef61fe7233ee434",
-        "schematic.json": "sha256:04f539d5d66a69210ee5e6fe88d9eca17ea3c7d3ae4bb727765bdefd5bce73ab",
-        "pcb.json": "sha256:a8e9702c94664f04d6c0937fe67353916589feb789bff918e06bbe033b865ab8"
-      },
-      "outputs": {
-        "gerber": "gerber.json",
-        "schematic": "schematic.json",
-        "pcb": "pcb.json",
-        "cross_analysis": "cross_analysis.json",
-        "thermal": "thermal.json",
-        "emc": "emc.json",
-        "lifecycle": "lifecycle.json"
-      },
-      "scripts": {},
-      "generated": "2026-06-15T10:48:03-04:00",
-      "pinned": false
-    },
     "2026-06-15_1048": {
       "source_hashes": {
         "schematic.json": "sha256:037f1b626242be29d4b29c5021de46a2c0d718235a4523c04f1221f58e52291d",

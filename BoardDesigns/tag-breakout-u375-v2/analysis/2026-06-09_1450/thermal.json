@@ -1,0 +1,128 @@
+{
+  "analyzer_type": "thermal",
+  "schema_version": "1.3.0",
+  "summary": {
+    "total_findings": 1,
+    "components_assessed": 1,
+    "active": 1,
+    "suppressed": 0,
+    "by_severity": {
+      "error": 0,
+      "warning": 0,
+      "info": 1
+    },
+    "thermal_score": 100,
+    "total_board_dissipation_w": 0.018,
+    "hottest_component": {
+      "ref": "U10",
+      "tj_estimated_c": 29.5
+    },
+    "components_analyzed": 1,
+    "components_above_85c": 0,
+    "components_above_tjmax": 0,
+    "ambient_c": 25.0
+  },
+  "findings": [
+    {
+      "ref": "U10",
+      "value": "AP2112K-1.8",
+      "component_type": "ldo",
+      "pdiss_w": 0.018,
+      "pdiss_source": "(3.3V - 1.8V) \u00d7 0.012A",
+      "pdiss_confidence": "heuristic",
+      "package": "SOT-23",
+      "rtheta_ja_raw": 250.0,
+      "rtheta_ja_source": "package_table",
+      "pcb_correction": 1.0,
+      "pcb_correction_notes": [],
+      "rtheta_ja_effective": 250.0,
+      "ambient_c": 25.0,
+      "tj_estimated_c": 29.5,
+      "tj_max_c": 125.0,
+      "tj_max_source": "default_125",
+      "margin_c": 95.5,
+      "position": {
+        "x": 140.213,
+        "y": 65.8452
+      },
+      "detector": "analyze_thermal",
+      "rule_id": "TH-DET",
+      "category": "thermal",
+      "severity": "info",
+      "confidence": "deterministic",
+      "evidence_source": "datasheet",
+      "summary": "Thermal: U10 Tj=29.5C (margin 95.5C)",
+      "description": "Component U10 in SOT-23 package: Tj=29.5C, margin 95.5C to Tj_max (125.0C).",
+      "components": [
+        "U10"
+      ],
+      "nets": [],
+      "pins": [],
+      "recommendation": "",
+      "report_context": {
+        "section": "Thermal",
+        "impact": "",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout"
+      ]
+    }
+  ],
+  "elapsed_s": 0.0,
+  "missing_info": {
+    "default_tj_max": [
+      "U10"
+    ]
+  },
+  "trust_summary": {
+    "total_findings": 1,
+    "trust_level": "high",
+    "by_confidence": {
+      "deterministic": 1,
+      "heuristic": 0,
+      "datasheet-backed": 0
+    },
+    "by_evidence_source": {
+      "datasheet": 1,
+      "topology": 0,
+      "heuristic_rule": 0,
+      "symbol_footprint": 0,
+      "bom": 0,
+      "geometry": 0,
+      "api_lookup": 0
+    },
+    "provenance_coverage_pct": 0.0
+  },
+  "audience_summary": {
+    "designer": {
+      "total_findings": 1,
+      "by_severity": {
+        "error": 0,
+        "warning": 0,
+        "info": 1
+      },
+      "by_category": {
+        "thermal": 1
+      },
+      "top_issues": []
+    },
+    "reviewer": {
+      "total_findings": 0,
+      "by_category": {},
+      "top_issues": []
+    },
+    "manager": {
+      "risk_level": "none",
+      "blocker_count": 0,
+      "warning_count": 0,
+      "stage_readiness": {
+        "schematic": "pass",
+        "layout": "pass",
+        "pre_fab": "pass",
+        "bring_up": "pass"
+      },
+      "one_liner": "No errors or warnings \u2014 all stages ready."
+    }
+  }
+}

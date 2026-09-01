@@ -1,0 +1,273 @@
+{
+  "analyzer_type": "cross_analysis",
+  "schema_version": "1.3.0",
+  "elapsed_s": 0.021,
+  "summary": {
+    "total_findings": 4,
+    "by_severity": {
+      "error": 3,
+      "warning": 0,
+      "info": 1
+    }
+  },
+  "findings": [
+    {
+      "detector": "check_return_path_enhanced",
+      "rule_id": "RP-002",
+      "category": "return_path",
+      "summary": "clock net /SCLK crosses +3V3 plane gap",
+      "description": "clock signal /SCLK crosses a gap in +3V3 plane on layer B.Cu.",
+      "components": [],
+      "nets": [
+        "/SCLK",
+        "+3V3"
+      ],
+      "pins": [],
+      "severity": "error",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "recommendation": "Re-route /SCLK to avoid the +3V3 plane gap, or bridge with a stitching capacitor.",
+      "report_context": {
+        "section": "Return Path",
+        "impact": "Increased EMI from enlarged return path loop",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout"
+      ]
+    },
+    {
+      "detector": "check_plane_splits",
+      "rule_id": "PS-002",
+      "category": "plane_integrity",
+      "summary": "+3V3 plane split: 11 islands, 3 signals crossing",
+      "description": "+3V3 plane has 11 disconnected islands. Signals crossing: /SWDIO, /SCLK, /UART_TX.",
+      "components": [],
+      "nets": [
+        "+3V3",
+        "/SWDIO",
+        "/SCLK",
+        "/UART_TX"
+      ],
+      "pins": [],
+      "severity": "error",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "recommendation": "Bridge the plane gap with copper pour or stitching vias.",
+      "report_context": {
+        "section": "Plane Integrity",
+        "impact": "Return path discontinuity increases EMI",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout"
+      ]
+    },
+    {
+      "detector": "check_plane_splits",
+      "rule_id": "PS-002",
+      "category": "plane_integrity",
+      "summary": "GND plane split: 3 islands, 3 signals crossing",
+      "description": "GND plane has 3 disconnected islands. Signals crossing: /SWDIO, /SCLK, /UART_TX.",
+      "components": [],
+      "nets": [
+        "GND",
+        "/SWDIO",
+        "/SCLK",
+        "/UART_TX"
+      ],
+      "pins": [],
+      "severity": "error",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "recommendation": "Bridge the plane gap with copper pour or stitching vias.",
+      "report_context": {
+        "section": "Plane Integrity",
+        "impact": "Return path discontinuity increases EMI",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout"
+      ]
+    },
+    {
+      "detector": "check_via_stitching_density",
+      "rule_id": "VS-002",
+      "category": "via_stitching",
+      "summary": "Via stitching sparse: 50% of board lacks ground vias",
+      "description": "50% of board area (at 73.2mm grid) has no ground stitching vias. For 100MHz, lambda/20 = 73.2mm.",
+      "components": [],
+      "nets": [],
+      "pins": [],
+      "severity": "info",
+      "confidence": "heuristic",
+      "evidence_source": "topology",
+      "recommendation": "Add ground stitching vias at <= 73mm intervals.",
+      "report_context": {
+        "section": "Via Stitching",
+        "impact": "Degraded ground plane connectivity at high frequencies",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout"
+      ]
+    }
+  ],
+  "trust_summary": {
+    "total_findings": 4,
+    "trust_level": "mixed",
+    "by_confidence": {
+      "deterministic": 3,
+      "heuristic": 1,
+      "datasheet-backed": 0
+    },
+    "by_evidence_source": {
+      "datasheet": 0,
+      "topology": 4,
+      "heuristic_rule": 0,
+      "symbol_footprint": 0,
+      "bom": 0,
+      "geometry": 0,
+      "api_lookup": 0
+    },
+    "provenance_coverage_pct": 0.0
+  },
+  "audience_summary": {
+    "designer": {
+      "total_findings": 4,
+      "by_severity": {
+        "error": 3,
+        "warning": 0,
+        "info": 1
+      },
+      "by_category": {
+        "return_path": 1,
+        "plane_integrity": 2,
+        "via_stitching": 1
+      },
+      "top_issues": [
+        {
+          "detector": "check_return_path_enhanced",
+          "rule_id": "RP-002",
+          "category": "return_path",
+          "summary": "clock net /SCLK crosses +3V3 plane gap",
+          "description": "clock signal /SCLK crosses a gap in +3V3 plane on layer B.Cu.",
+          "components": [],
+          "nets": [
+            "/SCLK",
+            "+3V3"
+          ],
+          "pins": [],
+          "severity": "error",
+          "confidence": "deterministic",
+          "evidence_source": "topology",
+          "recommendation": "Re-route /SCLK to avoid the +3V3 plane gap, or bridge with a stitching capacitor.",
+          "report_context": {
+            "section": "Return Path",
+            "impact": "Increased EMI from enlarged return path loop",
+            "standard_ref": ""
+          },
+          "stages": [
+            "layout"
+          ]
+        },
+        {
+          "detector": "check_plane_splits",
+          "rule_id": "PS-002",
+          "category": "plane_integrity",
+          "summary": "+3V3 plane split: 11 islands, 3 signals crossing",
+          "description": "+3V3 plane has 11 disconnected islands. Signals crossing: /SWDIO, /SCLK, /UART_TX.",
+          "components": [],
+          "nets": [
+            "+3V3",
+            "/SWDIO",
+            "/SCLK",
+            "/UART_TX"
+          ],
+          "pins": [],
+          "severity": "error",
+          "confidence": "deterministic",
+          "evidence_source": "topology",
+          "recommendation": "Bridge the plane gap with copper pour or stitching vias.",
+          "report_context": {
+            "section": "Plane Integrity",
+            "impact": "Return path discontinuity increases EMI",
+            "standard_ref": ""
+          },
+          "stages": [
+            "layout"
+          ]
+        },
+        {
+          "detector": "check_plane_splits",
+          "rule_id": "PS-002",
+          "category": "plane_integrity",
+          "summary": "GND plane split: 3 islands, 3 signals crossing",
+          "description": "GND plane has 3 disconnected islands. Signals crossing: /SWDIO, /SCLK, /UART_TX.",
+          "components": [],
+          "nets": [
+            "GND",
+            "/SWDIO",
+            "/SCLK",
+            "/UART_TX"
+          ],
+          "pins": [],
+          "severity": "error",
+          "confidence": "deterministic",
+          "evidence_source": "topology",
+          "recommendation": "Bridge the plane gap with copper pour or stitching vias.",
+          "report_context": {
+            "section": "Plane Integrity",
+            "impact": "Return path discontinuity increases EMI",
+            "standard_ref": ""
+          },
+          "stages": [
+            "layout"
+          ]
+        }
+      ]
+    },
+    "reviewer": {
+      "total_findings": 3,
+      "by_category": {
+        "return_path": 1,
+        "plane_integrity": 2
+      },
+      "top_issues": [
+        {
+          "rule_id": "RP-002",
+          "severity": "error",
+          "summary": "clock net /SCLK crosses +3V3 plane gap",
+          "recommendation": "Re-route /SCLK to avoid the +3V3 plane gap, or bridge with a stitching capacitor.",
+          "category": "return_path"
+        },
+        {
+          "rule_id": "PS-002",
+          "severity": "error",
+          "summary": "+3V3 plane split: 11 islands, 3 signals crossing",
+          "recommendation": "Bridge the plane gap with copper pour or stitching vias.",
+          "category": "plane_integrity"
+        },
+        {
+          "rule_id": "PS-002",
+          "severity": "error",
+          "summary": "GND plane split: 3 islands, 3 signals crossing",
+          "recommendation": "Bridge the plane gap with copper pour or stitching vias.",
+          "category": "plane_integrity"
+        }
+      ]
+    },
+    "manager": {
+      "risk_level": "moderate",
+      "blocker_count": 3,
+      "warning_count": 0,
+      "stage_readiness": {
+        "schematic": "pass",
+        "layout": "needs_work",
+        "pre_fab": "pass",
+        "bring_up": "pass"
+      },
+      "one_liner": "3 errors across 2 categories. Layout stage has blockers."
+    }
+  }
+}
