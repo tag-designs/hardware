@@ -170,25 +170,77 @@ capacitance, driver impedance). Read the docstring before quoting a number.
 - Helpers live once, in `BoardDesigns/kicad-helpers/`. Cite them from
   `deep_review.json` as `../kicad-helpers/<name>.py`; the gate checks the path
   resolves, so a stale citation quarantines the finding.
+- **Every review of a board with an STM32-family part gets a pin-map table.**
+  Generate it with `stm32_pinmap.py` and put the full table in the report — pin,
+  port, net, what it connects to, function. It is the artefact firmware actually
+  needs, and three things fall out of it every time:
+  shared SPI buses (deselect becomes a firmware contract when two devices share
+  SCK/MISO/MOSI with separate selects), BOOT0 straps carrying a pulled-up signal
+  (needs an explicit option-byte write *and* read-back), and unused GPIOs (set
+  analog/no-pull for lowest leakage; PA15 has a default pull-up and is worth
+  setting explicitly). Mirror it into the board's `.kicad-happy.json` as
+  `mating_design.host_pin_map` so firmware can consume it without re-deriving
+  from the schematic — see `imutag-smps` and `CompassTag` for the shape.
 
-## Closing out a review — commit, tag, fab package
+  ```bash
+  cd BoardDesigns/<board>
+  PYTHONPATH=../kicad-helpers python3 ../kicad-helpers/stm32_pinmap.py
+  ```
 
-- **Tag a completed review** `review/<board>-<YYYY-MM-DD>`, annotated, with the
-  closing state in the message (edge clearance, annular ring, DRC/ERC, drill
-  reconciliation, BOM/CPL, and the order spec). The `review/` namespace keeps
-  these clear of the repo-wide release tags (`v1.2` … `v2.1`). First one:
-  `review/imutag-nand-bmp581-2026-09-01`.
-- **Commit the fab package, and force-add the gerber archive.**
-  `BoardDesigns/.gitignore` excludes `*.zip`, so a plain `git add` captures the
-  BOM, CPL and netlist but *not* the gerbers — the thing actually sent. Plugin
-  output is not byte-identical to a `kicad-cli` re-plot (different aperture
-  macros, X2 attributes, file extensions), so the committed board file alone does
-  not pin down what was fabricated. Use `git add -f <run>/*_gerber.zip`; it is
-  about 46 kB.
-- **Keep only the export that was ordered**, and check the report for references
-  to pruned run directories before deleting them.
-- **Verify the committed state**, not just the working tree: re-run DRC and ERC
-  after committing.
+  **Include the alternate-function number for every peripheral signal**, and flag
+  anything that cannot work. `stm32_pinmap.py` does this from
+  `kicad-helpers/af_tables/<family>.json`, which is **generated from the
+  `STM32_open_pin_data` submodule** — ST's own machine-readable pin data, the same
+  source STM32CubeMX uses:
+
+  ```bash
+  git submodule update --init STM32_open_pin_data
+  python3 BoardDesigns/kicad-helpers/af_tables/generate.py STM32U375KGUx
+  ```
+
+  `stm32u375.json` and `stm32l432.json` exist. Generate others as boards need them;
+  the helper says so rather than guessing when a table is missing. The generator
+  resolves ST's bracket filenames (`STM32L432K(B-C)Ux.xml`) and reads the GPIO IP
+  modes file the part actually references.
+
+  **Do not read AF tables out of the datasheet PDF.** A layout-text parse of the
+  U375's Tables 22–23 scores 9/11 on spot checks — cells that wrap to a second line
+  shift every column after them, so PB3 silently reads `SPI3_SCK` where the
+  datasheet says `SPI1_SCK`. The XML has no such failure mode. (For the record, a
+  careful by-hand read of the PDF did agree with ST's data on 48/54 entries, the six
+  differences being label style only — `DEBUG_JTMS-SWDIO` vs `JTMS/SWDIO`. It is
+  doable, just not worth doing.)
+
+  Three checks come out of it, all silent failures that DRC and ERC pass:
+
+  - **Peripheral-signal collisions** — two nets needing the same signal, which an
+    STM32 routes to one pin at a time. On `imutag-smps` this found that the `/LPS_*`
+    group is not a second SPI bus: PA11/PA12/PB3 need the same
+    `SPI1_MISO`/`MOSI`/`SCK` as PA6/PA7/PA5, so firmware must remap at runtime or
+    bit-bang one.
+  - **Pin-number errors** — the symbol's pin numbering against the real package.
+    This is the automated form of the "verify pinouts against the manufacturer,
+    never the symbol" rule above; a wrong-pinout symbol passes DRC and ERC silently.
+  - **What each pin gives up** — a pin whose AF0 is a `DEBUG_*` function forfeits it
+    (PB3 loses TRACESWO, PB4 loses NJTRST).
+
+  **Read additional functions, not just alternate functions.** The datasheet
+  separates them: alternate functions are selected through `GPIOx_AFR`, additional
+  functions through peripheral registers. `generate.py` captures both. Ignoring the
+  second kind produced two wrong findings on `imutag-smps`: PC14 was called a plain
+  GPIO that "costs you the LSE" when ST lists `RCC_OSC32_IN` on it — the RV-3028's
+  32.768 kHz CLKOUT drives the **LSE in bypass mode**, giving a 1 PPM timebase with
+  no crystal on the board, which LPTIM1 then divides onto PB4 (`LPTIM1_CH2`) to
+  trigger the IMU in hardware while the CPU is stopped. A pin showing "no AF" is not
+  a pin with no use.
+
+  **The net name does not reveal intent.** Suffixes like `_SCK` or `_MISO` identify
+  bus signals, but a net called `/LSM_TRG` driven by `LPTIM1_CH2` looks like a GPIO.
+  The helper lists candidate peripheral functions for such pins under "confirm
+  intent" — ask the designer rather than assuming. Better still, have the symbol
+  declare KiCad **pin alternates** (the stock `MCU_ST_STM32*` libraries carry tens of
+  thousands; the local `stm32u375` symbol has none) so the chosen function is
+  recorded in the schematic and needs no guessing.
 
 ## Reviewing well — what went wrong last time
 

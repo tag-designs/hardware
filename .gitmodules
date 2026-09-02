@@ -1,0 +1,3 @@
+[submodule "STM32_open_pin_data"]
+	path = STM32_open_pin_data
+	url = https://github.com/STMicroelectronics/STM32_open_pin_data/

@@ -1,0 +1,350 @@
+{
+ "_generated_by": "af_tables/generate.py \u2014 do not hand-edit; regenerate instead",
+ "_matched_xml": "STM32L432K(B-C)Ux",
+ "_part": "STM32L432KCUx",
+ "_source": "STM32_open_pin_data (STM32CubeMX-DB), mcu/STM32L432KCUx.xml + mcu/IP/GPIO-STM32L43x_gpio_v1_0_Modes.xml",
+ "additional": {
+  "PA0": [
+   "ADC1_IN5",
+   "COMP1_INM",
+   "OPAMP1_VINP",
+   "RCC_CK_IN",
+   "RTC_TAMP2",
+   "SYS_WKUP1"
+  ],
+  "PA1": [
+   "ADC1_IN6",
+   "COMP1_INP",
+   "OPAMP1_VINM",
+   "USART2_DE"
+  ],
+  "PA11": [
+   "ADC1_EXTI11"
+  ],
+  "PA12": [
+   "USART1_DE"
+  ],
+  "PA15": [
+   "ADC1_EXTI15"
+  ],
+  "PA2": [
+   "ADC1_IN7",
+   "COMP2_INM",
+   "RCC_LSCO",
+   "SYS_WKUP4"
+  ],
+  "PA3": [
+   "ADC1_IN8",
+   "COMP2_INP",
+   "OPAMP1_VOUT"
+  ],
+  "PA4": [
+   "ADC1_IN9",
+   "COMP1_INM",
+   "COMP2_INM",
+   "DAC1_OUT1"
+  ],
+  "PA5": [
+   "ADC1_IN10",
+   "COMP1_INM",
+   "COMP2_INM",
+   "DAC1_OUT2"
+  ],
+  "PA6": [
+   "ADC1_IN11"
+  ],
+  "PA7": [
+   "ADC1_IN12"
+  ],
+  "PA9": [
+   "DAC1_EXTI9"
+  ],
+  "PB0": [
+   "ADC1_IN15"
+  ],
+  "PB1": [
+   "ADC1_IN16",
+   "COMP1_INM",
+   "LPUART1_DE"
+  ],
+  "PB3": [
+   "COMP2_INM",
+   "USART1_DE"
+  ],
+  "PB4": [
+   "COMP2_INP"
+  ],
+  "PB6": [
+   "COMP2_INP"
+  ],
+  "PB7": [
+   "COMP2_INM",
+   "SYS_PVD_IN"
+  ],
+  "PC14": [
+   "RCC_OSC32_IN"
+  ],
+  "PC15": [
+   "ADC1_EXTI15",
+   "RCC_OSC32_OUT"
+  ]
+ },
+ "af": {
+  "PA0": {
+   "1": "TIM2_CH1",
+   "12": "COMP1_OUT",
+   "13": "SAI1_EXTCLK",
+   "14": "TIM2_ETR",
+   "15": "EVENTOUT",
+   "7": "USART2_CTS"
+  },
+  "PA1": {
+   "1": "TIM2_CH2",
+   "11": "LCD_SEG0",
+   "14": "TIM15_CH1N",
+   "15": "EVENTOUT",
+   "4": "I2C1_SMBA",
+   "5": "SPI1_SCK",
+   "7": "USART2_RTS"
+  },
+  "PA10": {
+   "1": "TIM1_CH3",
+   "10": "CRS_SYNC",
+   "11": "LCD_COM2",
+   "13": "SAI1_SD_A",
+   "15": "EVENTOUT",
+   "4": "I2C1_SDA",
+   "7": "USART1_RX"
+  },
+  "PA11": {
+   "1": "TIM1_CH4",
+   "10": "USB_DM",
+   "12": "TIM1_BKIN2_COMP1",
+   "15": "EVENTOUT",
+   "2": "TIM1_BKIN2",
+   "5": "SPI1_MISO",
+   "6": "COMP1_OUT",
+   "7": "USART1_CTS",
+   "9": "CAN1_RX"
+  },
+  "PA12": {
+   "1": "TIM1_ETR",
+   "10": "USB_DP",
+   "15": "EVENTOUT",
+   "5": "SPI1_MOSI",
+   "7": "USART1_RTS",
+   "9": "CAN1_TX"
+  },
+  "PA13": {
+   "0": "SYS_JTMS-SWDIO",
+   "1": "IR_OUT",
+   "10": "USB_NOE",
+   "12": "SWPMI1_TX",
+   "13": "SAI1_SD_B",
+   "15": "EVENTOUT"
+  },
+  "PA14": {
+   "0": "SYS_JTCK-SWCLK",
+   "1": "LPTIM1_OUT",
+   "12": "SWPMI1_RX",
+   "13": "SAI1_FS_B",
+   "15": "EVENTOUT",
+   "4": "I2C1_SMBA"
+  },
+  "PA15": {
+   "0": "SYS_JTDI",
+   "1": "TIM2_CH1",
+   "11": "LCD_SEG17",
+   "12": "SWPMI1_SUSPEND",
+   "15": "EVENTOUT",
+   "2": "TIM2_ETR",
+   "3": "USART2_RX",
+   "5": "SPI1_NSS",
+   "6": "SPI3_NSS",
+   "7": "USART3_RTS",
+   "9": "TSC_G3_IO1"
+  },
+  "PA2": {
+   "1": "TIM2_CH3",
+   "10": "QUADSPI_BK1_NCS",
+   "11": "LCD_SEG1",
+   "12": "COMP2_OUT",
+   "14": "TIM15_CH1",
+   "15": "EVENTOUT",
+   "7": "USART2_TX",
+   "8": "LPUART1_TX"
+  },
+  "PA3": {
+   "1": "TIM2_CH4",
+   "10": "QUADSPI_CLK",
+   "11": "LCD_SEG2",
+   "13": "SAI1_MCLK_A",
+   "14": "TIM15_CH2",
+   "15": "EVENTOUT",
+   "7": "USART2_RX",
+   "8": "LPUART1_RX"
+  },
+  "PA4": {
+   "13": "SAI1_FS_B",
+   "14": "LPTIM2_OUT",
+   "15": "EVENTOUT",
+   "5": "SPI1_NSS",
+   "6": "SPI3_NSS",
+   "7": "USART2_CK"
+  },
+  "PA5": {
+   "1": "TIM2_CH1",
+   "14": "LPTIM2_ETR",
+   "15": "EVENTOUT",
+   "2": "TIM2_ETR",
+   "5": "SPI1_SCK"
+  },
+  "PA6": {
+   "1": "TIM1_BKIN",
+   "10": "QUADSPI_BK1_IO3",
+   "11": "LCD_SEG3",
+   "12": "TIM1_BKIN_COMP2",
+   "14": "TIM16_CH1",
+   "15": "EVENTOUT",
+   "5": "SPI1_MISO",
+   "6": "COMP1_OUT",
+   "7": "USART3_CTS",
+   "8": "LPUART1_CTS"
+  },
+  "PA7": {
+   "1": "TIM1_CH1N",
+   "10": "QUADSPI_BK1_IO2",
+   "11": "LCD_SEG4",
+   "12": "COMP2_OUT",
+   "15": "EVENTOUT",
+   "4": "I2C3_SCL",
+   "5": "SPI1_MOSI"
+  },
+  "PA8": {
+   "0": "RCC_MCO",
+   "1": "TIM1_CH1",
+   "11": "LCD_COM0",
+   "12": "SWPMI1_IO",
+   "13": "SAI1_SCK_A",
+   "14": "LPTIM2_OUT",
+   "15": "EVENTOUT",
+   "7": "USART1_CK"
+  },
+  "PA9": {
+   "1": "TIM1_CH2",
+   "11": "LCD_COM1",
+   "13": "SAI1_FS_A",
+   "14": "TIM15_BKIN",
+   "15": "EVENTOUT",
+   "4": "I2C1_SCL",
+   "7": "USART1_TX"
+  },
+  "PB0": {
+   "1": "TIM1_CH2N",
+   "10": "QUADSPI_BK1_IO1",
+   "11": "LCD_SEG5",
+   "12": "COMP1_OUT",
+   "13": "SAI1_EXTCLK",
+   "15": "EVENTOUT",
+   "5": "SPI1_NSS",
+   "7": "USART3_CK"
+  },
+  "PB1": {
+   "1": "TIM1_CH3N",
+   "10": "QUADSPI_BK1_IO0",
+   "11": "LCD_SEG6",
+   "14": "LPTIM2_IN1",
+   "15": "EVENTOUT",
+   "7": "USART3_RTS",
+   "8": "LPUART1_RTS"
+  },
+  "PB3": {
+   "0": "SYS_JTDO-SWO",
+   "1": "TIM2_CH2",
+   "11": "LCD_SEG7",
+   "13": "SAI1_SCK_B",
+   "15": "EVENTOUT",
+   "5": "SPI1_SCK",
+   "6": "SPI3_SCK",
+   "7": "USART1_RTS"
+  },
+  "PB4": {
+   "0": "SYS_JTRST",
+   "11": "LCD_SEG8",
+   "13": "SAI1_MCLK_B",
+   "15": "EVENTOUT",
+   "4": "I2C3_SDA",
+   "5": "SPI1_MISO",
+   "6": "SPI3_MISO",
+   "7": "USART1_CTS",
+   "9": "TSC_G2_IO1"
+  },
+  "PB5": {
+   "1": "LPTIM1_IN1",
+   "11": "LCD_SEG9",
+   "12": "COMP2_OUT",
+   "13": "SAI1_SD_B",
+   "14": "TIM16_BKIN",
+   "15": "EVENTOUT",
+   "4": "I2C1_SMBA",
+   "5": "SPI1_MOSI",
+   "6": "SPI3_MOSI",
+   "7": "USART1_CK",
+   "9": "TSC_G2_IO2"
+  },
+  "PB6": {
+   "1": "LPTIM1_ETR",
+   "13": "SAI1_FS_B",
+   "14": "TIM16_CH1N",
+   "15": "EVENTOUT",
+   "4": "I2C1_SCL",
+   "7": "USART1_TX",
+   "9": "TSC_G2_IO3"
+  },
+  "PB7": {
+   "1": "LPTIM1_IN2",
+   "11": "LCD_SEG21",
+   "15": "EVENTOUT",
+   "4": "I2C1_SDA",
+   "7": "USART1_RX",
+   "9": "TSC_G2_IO4"
+  },
+  "PC14": {
+   "15": "EVENTOUT"
+  },
+  "PC15": {
+   "15": "EVENTOUT"
+  },
+  "PH3": {
+   "15": "EVENTOUT"
+  }
+ },
+ "positions": {
+  "PA0": "6",
+  "PA1": "7",
+  "PA10": "20",
+  "PA11": "21",
+  "PA12": "22",
+  "PA13": "23",
+  "PA14": "24",
+  "PA15": "25",
+  "PA2": "8",
+  "PA3": "9",
+  "PA4": "10",
+  "PA5": "11",
+  "PA6": "12",
+  "PA7": "13",
+  "PA8": "18",
+  "PA9": "19",
+  "PB0": "14",
+  "PB1": "15",
+  "PB3": "26",
+  "PB4": "27",
+  "PB5": "28",
+  "PB6": "29",
+  "PB7": "30",
+  "PC14": "2",
+  "PC15": "3",
+  "PH3": "31"
+ }
+}

@@ -1,0 +1,404 @@
+{
+ "_generated_by": "af_tables/generate.py \u2014 do not hand-edit; regenerate instead",
+ "_matched_xml": "STM32U375KGUx",
+ "_part": "STM32U375KGUx",
+ "_source": "STM32_open_pin_data (STM32CubeMX-DB), mcu/STM32U375KGUx.xml + mcu/IP/GPIO-STM32U375x_gpio_v1_0_Modes.xml",
+ "additional": {
+  "PA0": [
+   "ADC1_IN3",
+   "OPAMP1_VINP",
+   "PWR_WKUP1",
+   "TAMP_IN2"
+  ],
+  "PA1": [
+   "ADC1_IN4",
+   "OPAMP1_VINM",
+   "PWR_WKUP3",
+   "TAMP_IN5"
+  ],
+  "PA11": [
+   "ADC1_EXTI11",
+   "ADC2_EXTI11",
+   "USART1_CTS",
+   "USB_DM"
+  ],
+  "PA12": [
+   "USART1_DE",
+   "USB_DP"
+  ],
+  "PA15": [
+   "ADC1_EXTI15",
+   "ADC2_EXTI15",
+   "UART4_DE",
+   "USART3_DE"
+  ],
+  "PA2": [
+   "ADC1_IN5",
+   "COMP1_INP",
+   "PWR_WKUP4",
+   "RCC_LSCO"
+  ],
+  "PA3": [
+   "ADC1_IN6",
+   "COMP1_INP",
+   "OPAMP1_VOUT",
+   "PWR_WKUP5"
+  ],
+  "PA4": [
+   "ADC1_IN7",
+   "ADC2_IN3",
+   "DAC1_OUT1",
+   "PWR_WKUP2"
+  ],
+  "PA5": [
+   "ADC1_IN8",
+   "ADC2_IN4",
+   "DAC1_OUT2",
+   "PWR_WKUP6"
+  ],
+  "PA6": [
+   "ADC1_IN9",
+   "ADC2_IN5",
+   "OPAMP2_VINP",
+   "PWR_WKUP7",
+   "USART3_CTS"
+  ],
+  "PA7": [
+   "ADC1_IN10",
+   "ADC2_IN6",
+   "OPAMP2_VINM",
+   "PWR_WKUP8"
+  ],
+  "PA8": [
+   "DEBUG_TRACECLK"
+  ],
+  "PA9": [
+   "DAC1_EXTI9"
+  ],
+  "PB0": [
+   "ADC1_IN13",
+   "ADC2_IN9",
+   "OPAMP2_VOUT"
+  ],
+  "PB1": [
+   "ADC1_IN14",
+   "ADC2_IN10",
+   "COMP1_INM",
+   "LPUART1_DE",
+   "PWR_WKUP4",
+   "USART3_DE"
+  ],
+  "PB3": [
+   "COMP2_INM",
+   "USART1_DE"
+  ],
+  "PB4": [
+   "COMP2_INP",
+   "USART1_CTS"
+  ],
+  "PB5": [
+   "PWR_WKUP6"
+  ],
+  "PB6": [
+   "COMP2_INP",
+   "PWR_WKUP3"
+  ],
+  "PB7": [
+   "COMP2_INM",
+   "PWR_PVD_IN",
+   "PWR_WKUP4"
+  ],
+  "PC14": [
+   "RCC_OSC32_IN"
+  ],
+  "PC15": [
+   "ADC1_EXTI15",
+   "ADC2_EXTI15",
+   "RCC_OSC32_OUT"
+  ]
+ },
+ "af": {
+  "PA0": {
+   "1": "TIM2_CH1",
+   "13": "AUDIOCLK",
+   "14": "TIM2_ETR",
+   "15": "EVENTOUT",
+   "6": "SPI3_RDY",
+   "8": "UART4_TX"
+  },
+  "PA1": {
+   "0": "LPTIM1_CH2",
+   "1": "TIM2_CH2",
+   "10": "OCTOSPI1_DQS",
+   "14": "TIM15_CH1N",
+   "15": "EVENTOUT",
+   "3": "I2C2_SMBA",
+   "4": "I2C1_SMBA",
+   "5": "SPI1_SCK",
+   "6": "I3C1_SDA",
+   "8": "UART4_RX"
+  },
+  "PA10": {
+   "0": "CRS_SYNC",
+   "1": "TIM1_CH3",
+   "11": "RCC_MCO2",
+   "13": "SAI1_SD_A",
+   "14": "TIM17_BKIN",
+   "15": "EVENTOUT",
+   "2": "LPTIM2_IN2",
+   "3": "SAI1_D1",
+   "7": "USART1_RX",
+   "8": "LPUART1_RX"
+  },
+  "PA11": {
+   "1": "TIM1_CH4",
+   "15": "EVENTOUT",
+   "2": "TIM1_BKIN2",
+   "5": "SPI1_MISO",
+   "7": "USART1_NSS",
+   "9": "FDCAN1_RX"
+  },
+  "PA12": {
+   "1": "TIM1_ETR",
+   "15": "EVENTOUT",
+   "2": "TIM4_ETR",
+   "5": "SPI1_MOSI",
+   "7": "USART1_RTS",
+   "9": "FDCAN1_TX"
+  },
+  "PA13": {
+   "0": "DEBUG_JTMS-SWDIO",
+   "1": "IR_OUT",
+   "10": "USB_NOE",
+   "13": "SAI1_SD_B",
+   "15": "EVENTOUT"
+  },
+  "PA14": {
+   "0": "DEBUG_JTCK-SWCLK",
+   "1": "LPTIM1_CH1",
+   "10": "USB_SOF",
+   "13": "SAI1_FS_B",
+   "15": "EVENTOUT",
+   "3": "I2C2_SMBA",
+   "4": "I2C1_SMBA",
+   "5": "I2C3_SMBA"
+  },
+  "PA15": {
+   "0": "DEBUG_JTDI",
+   "1": "TIM2_CH1",
+   "15": "EVENTOUT",
+   "2": "TIM2_ETR",
+   "3": "SAI1_D2",
+   "5": "SPI1_NSS",
+   "6": "SPI3_NSS",
+   "7": "USART3_RTS",
+   "8": "UART4_RTS",
+   "9": "TSC_G3_IO1"
+  },
+  "PA2": {
+   "1": "TIM2_CH3",
+   "10": "OCTOSPI1_NCS",
+   "14": "TIM15_CH1",
+   "15": "EVENTOUT",
+   "5": "SPI1_RDY",
+   "8": "LPUART1_TX"
+  },
+  "PA3": {
+   "1": "TIM2_CH4",
+   "10": "OCTOSPI1_CLK",
+   "13": "SAI1_MCLK_A",
+   "14": "TIM15_CH2",
+   "15": "EVENTOUT",
+   "3": "SAI1_CK1",
+   "8": "LPUART1_RX"
+  },
+  "PA4": {
+   "13": "SAI1_FS_B",
+   "14": "LPTIM2_CH1",
+   "15": "EVENTOUT",
+   "3": "OCTOSPI1_NCS",
+   "5": "SPI1_NSS",
+   "6": "SPI3_NSS"
+  },
+  "PA5": {
+   "0": "PWR_CSLEEP",
+   "1": "TIM2_CH1",
+   "14": "LPTIM2_ETR",
+   "15": "EVENTOUT",
+   "2": "TIM2_ETR",
+   "5": "SPI1_SCK",
+   "7": "USART3_RX"
+  },
+  "PA6": {
+   "1": "TIM1_BKIN",
+   "10": "OCTOSPI1_IO3",
+   "14": "TIM16_CH1",
+   "15": "EVENTOUT",
+   "2": "TIM3_CH1",
+   "3": "I3C2_SDA",
+   "4": "I2C2_SDA",
+   "5": "SPI1_MISO",
+   "6": "I3C1_SDA",
+   "7": "USART3_NSS",
+   "8": "LPUART1_CTS"
+  },
+  "PA7": {
+   "0": "PWR_CSTOP",
+   "1": "TIM1_CH1N",
+   "10": "OCTOSPI1_IO2",
+   "13": "LPTIM2_CH2",
+   "14": "TIM17_CH1",
+   "15": "EVENTOUT",
+   "2": "TIM3_CH2",
+   "4": "I2C3_SCL",
+   "5": "SPI1_MOSI",
+   "6": "I3C1_SCL",
+   "7": "USART3_TX"
+  },
+  "PA8": {
+   "0": "RCC_MCO",
+   "1": "TIM1_CH1",
+   "10": "USB_SOF",
+   "11": "RCC_MCO2",
+   "12": "TRACECLK",
+   "13": "SAI1_SCK_A",
+   "14": "LPTIM2_CH1",
+   "15": "EVENTOUT",
+   "3": "SAI1_CK2",
+   "5": "SPI1_RDY",
+   "7": "USART1_CK"
+  },
+  "PA9": {
+   "0": "RCC_MCO",
+   "1": "TIM1_CH2",
+   "13": "SAI1_FS_A",
+   "14": "TIM15_BKIN",
+   "15": "EVENTOUT",
+   "3": "SPI2_SCK",
+   "7": "USART1_TX",
+   "8": "LPUART1_TX"
+  },
+  "PB0": {
+   "1": "TIM1_CH2N",
+   "10": "OCTOSPI1_IO1",
+   "12": "COMP1_OUT",
+   "13": "AUDIOCLK",
+   "15": "EVENTOUT",
+   "2": "TIM3_CH3",
+   "4": "LPTIM3_CH1",
+   "5": "SPI1_NSS",
+   "7": "USART3_CK"
+  },
+  "PB1": {
+   "1": "TIM1_CH3N",
+   "10": "OCTOSPI1_IO0",
+   "14": "LPTIM2_IN1",
+   "15": "EVENTOUT",
+   "2": "TIM3_CH4",
+   "4": "LPTIM3_CH2",
+   "7": "USART3_RTS",
+   "8": "LPUART1_RTS"
+  },
+  "PB3": {
+   "0": "DEBUG_JTDO-SWO",
+   "1": "TIM2_CH2",
+   "10": "CRS_SYNC",
+   "13": "SAI1_SCK_B",
+   "15": "EVENTOUT",
+   "2": "LPTIM1_CH1",
+   "3": "ADF1_CCK0",
+   "4": "I2C1_SDA",
+   "5": "SPI1_SCK",
+   "6": "SPI3_SCK",
+   "7": "USART1_RTS"
+  },
+  "PB4": {
+   "0": "DEBUG_NJTRST",
+   "1": "LPTIM1_CH2",
+   "10": "OCTOSPI1_IO4",
+   "13": "SAI1_MCLK_B",
+   "14": "TIM17_BKIN",
+   "15": "EVENTOUT",
+   "2": "TIM3_CH1",
+   "3": "ADF1_SDI0",
+   "4": "I2C3_SDA",
+   "5": "SPI1_MISO",
+   "6": "SPI3_MISO",
+   "7": "USART1_NSS",
+   "8": "UART5_RTS",
+   "9": "TSC_G2_IO1"
+  },
+  "PB5": {
+   "1": "LPTIM1_IN1",
+   "12": "COMP2_OUT",
+   "13": "SAI1_SD_B",
+   "14": "TIM16_BKIN",
+   "15": "EVENTOUT",
+   "2": "TIM3_CH2",
+   "3": "OCTOSPI1_NCLK",
+   "4": "I2C1_SMBA",
+   "5": "SPI1_MOSI",
+   "6": "SPI3_MOSI",
+   "7": "USART1_CK",
+   "8": "UART5_CTS",
+   "9": "TSC_G2_IO2"
+  },
+  "PB6": {
+   "1": "LPTIM1_ETR",
+   "10": "OCTOSPI1_IO5",
+   "13": "SAI1_FS_B",
+   "14": "TIM16_CH1N",
+   "15": "EVENTOUT",
+   "2": "TIM4_CH1",
+   "4": "I2C1_SCL",
+   "5": "I3C1_SCL",
+   "6": "I3C2_SCL",
+   "7": "USART1_TX",
+   "9": "TSC_G2_IO3"
+  },
+  "PB7": {
+   "1": "LPTIM1_IN2",
+   "10": "OCTOSPI1_IO6",
+   "14": "TIM17_CH1N",
+   "15": "EVENTOUT",
+   "2": "TIM4_CH2",
+   "4": "I2C1_SDA",
+   "7": "USART1_RX",
+   "8": "UART4_CTS",
+   "9": "TSC_G2_IO4"
+  },
+  "PC14": {
+   "15": "EVENTOUT"
+  },
+  "PC15": {
+   "15": "EVENTOUT"
+  }
+ },
+ "positions": {
+  "PA0": "6",
+  "PA1": "7",
+  "PA10": "20",
+  "PA11": "21",
+  "PA12": "22",
+  "PA13": "23",
+  "PA14": "24",
+  "PA15": "25",
+  "PA2": "8",
+  "PA3": "9",
+  "PA4": "10",
+  "PA5": "11",
+  "PA6": "12",
+  "PA7": "13",
+  "PA8": "18",
+  "PA9": "19",
+  "PB0": "14",
+  "PB1": "15",
+  "PB3": "26",
+  "PB4": "27",
+  "PB5": "28",
+  "PB6": "29",
+  "PB7": "30",
+  "PC14": "2",
+  "PC15": "3"
+ }
+}
