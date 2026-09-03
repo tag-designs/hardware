@@ -15,11 +15,14 @@ per MCU pin, then the three things the map reliably surfaces on these tags:
   * pin-number errors    - the symbol's pin numbering checked against the real
                            package, catching a wrong-pinout symbol that DRC and
                            ERC both pass silently
-  * peripheral options   - for pins whose net name gives no hint, the peripheral
-                           functions the pin CAN do. Net names only reveal bus
-                           signals (_SCK, _MISO); a net like /LSM_TRG driven by
-                           LPTIM1_CH2 is invisible without asking, so the map
-                           lists the candidates instead of assuming GPIO.
+  * declared intent      - the KiCad pin alternate chosen on the schematic, if
+                           any. That is the designer SAYING what a pin does, so
+                           it beats inference: /LSM_TRG announces itself as
+                           LPTIM1_CH2 instead of looking like a GPIO. Generate
+                           the alternates with af_tables/add_pin_alternates.py.
+  * peripheral options   - for pins with no chosen alternate and no bus role in
+                           the net name, the peripheral functions the pin CAN do,
+                           so intent gets confirmed rather than assumed.
 
 The last two need af_tables/<family>.json, generated from ST's own pin data:
 
@@ -28,6 +31,7 @@ The last two need af_tables/<family>.json, generated from ST's own pin data:
 Detects the MCU from the BOM, so it needs no per-board configuration. Pass a
 reference (e.g. U302) to force a particular part.
 """
+import glob
 import json
 import os
 import re
@@ -48,6 +52,36 @@ def af_table(part):
     return json.load(open(path)) if os.path.exists(path) else None
 
 sch = load('schematic')
+
+
+def chosen_alternates(ref):
+    """Pin -> alternate function the designer selected on the schematic.
+
+    The analyzer's schematic.json carries only component/pin_number/pin_name/
+    pin_type, so the selection is read from the .kicad_sch itself.
+    """
+    files = [f for f in glob.glob('*.kicad_sch')
+             if 'panel' not in f and '-back' not in f]
+    if not files:
+        return {}
+    src = open(files[0]).read()
+    out = {}
+    for m in re.finditer(r'\(property "Reference" "%s"' % re.escape(ref), src):
+        i = src.rfind('(symbol', 0, m.start())
+        d = 0
+        j = i
+        while True:
+            if src[j] == '(':
+                d += 1
+            elif src[j] == ')':
+                d -= 1
+                if d == 0:
+                    break
+            j += 1
+        for pm in re.finditer(r'\(pin "([^"]+)"(?:(?!\(pin ").)*?\(alternate "([^"]+)"',
+                              src[i:j + 1], re.S):
+            out[pm.group(1)] = pm.group(2)
+    return out
 
 # --- find the STM32 -----------------------------------------------------------
 want = sys.argv[1] if len(sys.argv) > 1 else None
@@ -74,6 +108,10 @@ for ref, part in mcus:
             pins[p['pin_number']] = (p.get('pin_name', ''), p.get('pin_type', ''),
                                      net.get('display_name') or net_name, others)
 
+    picked = chosen_alternates(ref)
+    if picked:
+        print(f"   {len(picked)} pin alternate(s) chosen on the schematic - "
+              f"declared intent, not inferred")
     print(f"=== {ref}  {part}   {len(pins)} pins ===\n")
     print(f"{'Pin':>4}  {'Port':<14} {'Net':<22} Connected to")
     print('-' * 96)
@@ -88,7 +126,8 @@ for ref, part in mcus:
             continue
         # a rail fans out to everything; a count is more use than the list
         shown = f"rail — {len(others)} nodes" if len(others) > 8 else (', '.join(others) or '—')
-        print(f"{num:>4}  {name:<14} {net:<22} {shown}")
+        alt = f"   [{picked[num]}]" if num in picked else ''
+        print(f"{num:>4}  {name:<14} {net:<22} {shown}{alt}")
         if 'BOOT0' in name.upper():
             boot0.append((num, name, net, others))
         m = re.match(r'^/?(.+?)_(SCK|CK|CLK|MISO|MOSI|CS|nCS)$', net)
@@ -175,6 +214,8 @@ for ref, part in mcus:
             m = re.match(r'(P[A-H]\d{1,2})', name or '')
             if not m or m.group(1) not in af or (num, name) in unused:
                 continue
+            if num in picked:
+                continue                       # designer declared it; nothing to ask
             if re.search(r'(SCK|CK|CLK|MISO|MOSI|SCL|SDA)$', net, re.I):
                 continue                       # already resolved as a bus signal
             dbg0 = af[m.group(1)].get('0', '')

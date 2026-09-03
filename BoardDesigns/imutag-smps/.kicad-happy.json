@@ -3,10 +3,10 @@
   "_comment": [
     "Board-specific config for imutag-smps, the switching-converter sibling of",
     "imutag-nand-bmp581. Workspace defaults (track_in_git, retention, auto_diff,",
-    "diff_threshold) are inherited from BoardDesigns/.kicad-happy.json.",
     "This board is electrically identical to imutag-nand-bmp581 apart from the",
     "power stage, so its settled positions apply here unchanged; see",
-    "imutag-nand-bmp581/.kicad-happy.json for the full set."
+    "imutag-nand-bmp581/.kicad-happy.json for the full set.",
+    "analysis.track_in_git must be set here (it does not inherit), AND analysis/.gitignore must be left in place as a no-op file - analyze_pcb.py recreates an ignore-everything .gitignore whenever it is absent, without checking track_in_git."
   ],
   "project": {
     "name": "imutag-smps",
@@ -45,25 +45,16 @@
     "power_rails": {
       "voltage_overrides": {
         "+1V8": 1.8,
-        "/Flash 1V8": 1.8,
         "VBAT": 3.7
       }
-    }
+    },
+    "track_in_git": true,
+    "retention": 5
   },
   "suppressions": [
     {
       "rule_id": "CC-002",
       "reason": "Low-power design at 1-2.2 mA average. 0.1016 mm traces are a fabrication process-selection concern, never a current-capacity one."
-    },
-    {
-      "rule_id": "PP-001",
-      "components": [
-        "U6"
-      ],
-      "nets": [
-        "/Flash 1V8"
-      ],
-      "reason": "/Flash 1V8 is intentionally sourced through the U1 TPS22916 load switch. Rail-source modeling limitation."
     },
     {
       "rule_id": "PR-001",
@@ -164,8 +155,9 @@
       "LOW-SEVERITY OBSERVATION, improved by the 2026-09-02 reroute: /AT25_MOSI on B.Cu moved 1.13 -> 1.38 mm from L1's centre and is now clear of the 1.6 x 2.0 mm body outline; /AT25_SCK B.Cu 1.57 -> 1.69 mm, F.Cu unchanged at 1.59 mm. The seven vias within 3 mm did not move. The In2 GND plane sits between, giving real eddy-current shielding at 1.8 MHz, and flash traffic is intermittent. Not worth re-routing, but it is the first place to look if flash behaviour is marginal during heavy write bursts."
     ],
     "analysis_integrity": [
-      "analysis/2026-08-26_0809/pcb.json was POISONED: project_settings.source and design_rule_compliance.rules_source both name BitTagNG-LIS2DU12.kicad_pcb-back.kicad_pro, not this board. Review 1 findings 7 and 8 (advanced process, edge clearance) derive from it and must not be trusted as stated. The stale file was removed repo-wide on 2026-09-01.",
-      "Re-run the analyzer and confirm project_settings.source names imutag-smps.kicad_pro before relying on any rule-derived number."
+      "The 2026-08-26_0809 run was POISONED: its pcb.json named BitTagNG-LIS2DU12.kicad_pcb-back.kicad_pro as both project_settings.source and design_rule_compliance.rules_source, so Review 1's findings 7 and 8 (advanced process, edge clearance) were measured against another board's rules. That run has been PRUNED - the fact is recorded here so the finding is not re-derived from a file that no longer exists.",
+      "Caching propagates poison: a 2026-09-03_0646 run created by analyze_schematic.py alone carried the old pcb.json forward unchanged, still naming BitTagNG. Only a fresh analyze_pcb.py run (2026-09-03_0650) picked up imutag-smps.kicad_pro. After removing a stale project file, re-run the PCB analyzer explicitly - a schematic-only run will not clear it.",
+      "Current run 2026-09-03_0650 is correctly sourced to imutag-smps.kicad_pro and is the only one retained."
     ],
     "verified_correct_2026_09_02": [
       "KiCad DRC in the project directory: 0 violations, 0 unconnected, 0 parity.",
@@ -178,19 +170,22 @@
       "copper_finish is None. Immersion silver reasoning from the sibling applies here with more force, since this board also has an inductor."
     ],
     "production_package_2026_09_02": [
-      "Current export: pcbway_production/2026-09-02-08-21-06. Verified against the board: 300/300 sampled In1.Cu and In2.Cu fill vertices match, 412/412 F.Cu+B.Cu segment starts present, copper-to-edge 0.3005 mm, PTH 47 holes = 47 vias on a single 0.20 mm tool, NPTH 4 x 1.1 mm, BOM 17 lines / 30 placements matching the CPL exactly with MPN and LCSC on every line. DRC 0 violations; ERC 0 violations.",
-      "Every export so far has been plotted seconds BEFORE the final board save. Each one has nevertheless matched - but check the geometry rather than assuming, since the mtimes alone suggest staleness.",
-      "Three exports retained. Prune to the ordered one and force-add its gerber zip past the repo-wide *.zip ignore rule, per CLAUDE.md.",
+      "Current export: pcbway_production/2026-09-03-07-51-02, verified against the board: 300/300 sampled fill vertices on both inner planes, 392/392 F.Cu+B.Cu segment starts, copper-to-edge 0.3005 mm, PTH 44 holes = 44 vias on a single 0.20 mm tool, BOM 16 lines / 27 placements matching the CPL exactly.",
+      "EXPORTS ALWAYS LOOK STALE - this is KiCad behaviour, not a problem. Exporting marks the board dirty, so it must be saved afterwards, which puts the .kicad_pcb mtime AFTER the export it produced. Every export in this board's history is seconds older than the board and every one matched. mtime carries no information here; verify by sampling zone-fill vertices and track-segment starts from the shipped Gerbers against the board file.",
       "NOT ORDERED. The architectural question in finding 1 (PFM-only operation) is still undecided."
     ],
     "resolved_2026_09_02": [
       "BMP581 symbol updated from library: VSS pins 3/8/9 now power_in, matching libraries:BMP581. lib_symbol_mismatch cleared.",
       "That update exposed power_pin_not_driven on U1 pin B1 (GND) - the same latent bug as RV-3028-C7-AccelTag on imutag-nand-bmp581, where a mistyped ground pin had been silently driving the GND net. The board's only PWR_FLAG was on a wire at (104.14, 21.59), not GND. Resolved by adding #FLG02 coincident with the GND symbol at (20.32, 66.04).",
       "L1 reroute: /AT25_MOSI B.Cu moved 1.13 -> 1.38 mm from L1 centre, now clear of the 1.6 x 2.0 mm body outline.",
-      "The GND fix is real: with all ERC exclusions cleared, the U1 Pin B1 [GND] power_pin_not_driven error is gone."
+      "The GND fix is real: with all ERC exclusions cleared, the U1 Pin B1 [GND] power_pin_not_driven error is gone.",
+      "2026-09-03 load-switch removal verified: DRC 0 violations; ERC 0 errors with all 24 exclusions cleared; 33 footprints / 27 placements; 44 vias all at 6.00 mil; copper-to-edge 0.3005 mm; verified against the export current at the time (since pruned); the retained export is 2026-09-03-07-51-02."
     ],
     "review_process_traps": [
-      "DO NOT simulate an ERC or DRC change on a copy of the project - verify in the board's own directory. On 2026-09-02 a BMP581 symbol update was reported as 'verified safe' from a copy whose symbol libraries did not resolve; applying it for real produced a power_pin_not_driven error. The tell was that lib_symbol_mismatch persisted in the test even after the symbols were made to match, which meant the comparison was not running. The same trap already applies to DRC, where a copy without fp-lib-table yields phantom lib_footprint_issues."
+      "DO NOT simulate an ERC or DRC change on a copy of the project - verify in the board's own directory. On 2026-09-02 a BMP581 symbol update was reported as 'verified safe' from a copy whose symbol libraries did not resolve; applying it for real produced a power_pin_not_driven error. The tell was that lib_symbol_mismatch persisted in the test even after the symbols were made to match, which meant the comparison was not running. The same trap already applies to DRC, where a copy without fp-lib-table yields phantom lib_footprint_issues.",
+      "The helpers read analysis/*/schematic.json, which is a SNAPSHOT. On 2026-09-03 the newest run was 190 hours old and still contained the removed load switch, so stm32_pinmap.py would have reported the previous revision and looked entirely plausible. _common.load now warns loudly when the analysis predates the design file. Re-run analyze_schematic.py after any schematic change.",
+      "analysis/.gitignore is recreated by analysis_cache.py whenever the BOARD's .kicad-happy.json has track_in_git false or ABSENT. It does not inherit from BoardDesigns/.kicad-happy.json. Trimming a board config to 'inherit' that setting silently re-ignores the analysis directory on the next analyzer run - which happened here on 2026-09-03. Set analysis.track_in_git explicitly in every board config.",
+      "Check every lib_id prefix a schematic uses appears in that project's own sym-lib-table. A prefix resolved only by the user-level table (~/Library/Preferences/kicad/<ver>/sym-lib-table) works on the authoring machine and fails on a fresh clone, while ERC stays clean because the cached lib_symbols entry hides it. Found on imutag-smps 2026-09-03 with tag_library:RV-3028-C7."
     ],
     "erc_exclusions_2026_09_02": [
       "ERC reports 0 violations with 24 erc_exclusions in .kicad_pro (20 pin_to_pin, 2 multiple_net_names, 1 lib_symbol_mismatch, 1 power_pin_not_driven). They live in .kicad_pro, not the gitignored .kicad_prl, so they travel with the repo.",
@@ -204,6 +199,18 @@
       "ST's pin positions independently confirm the KiCad symbol's pin numbering: all 25 GPIO positions match the netlist. That is the automated form of 'verify pinouts against the manufacturer, never the symbol'.",
       "Derived from the same data: PC14 has no peripheral AF at all (only EVENTOUT) so using it costs the LSE; PB3 forfeits JTDO-SWO and PB4 forfeits NJTRST on AF0.",
       "CORRECTION: an earlier pass called PC14 a plain GPIO that 'costs you the LSE' and claimed the accurate 32 kHz could not reach LPTIM1. Both wrong, same root cause - the check read only ALTERNATE functions and ignored ADDITIONAL functions, so RCC_OSC32_IN was invisible. The clock reaches LPTIM1 via the RCC tree, not an LPTIM input pin. generate.py now captures an 'additional' map and the helper reports it."
+    ],
+    "resolved_2026_09_03": [
+      "All 12 U302 pin alternates declared on the schematic, including PC14 -> RCC_OSC32_IN. stm32_pinmap.py reads them from the .kicad_sch, so pin intent is stated by the design rather than inferred.",
+      "RV-3028 CLKOUT retyped input -> output in tag_library and the schematic cache. Correct direction (the RTC drives) and required for coherence with PC14 declaring RCC_OSC32_IN.",
+      "TPS22916BYFPR lib_symbol_mismatch is moot - U1 went with the load switch, no orphan lib_symbols entry remains.",
+      "U501 repointed tag_library:RV-3028-C7 -> libraries:RV-3028-C7. 'tag_library' is not in this project's sym-lib-table and resolved only via the user-level table, so the reference was machine-local. Connectivity verified unchanged: 37 nets, 138 pin connections.",
+      "ERC exclusions 24 -> 17 (seven retired with the load switch); 0 errors with all cleared.",
+      "DRC rule severities tightened: npth_inside_courtyard and pth_inside_courtyard ignore -> warning, and track_not_centered_on_via ignore -> ERROR. Board passes with them active. The third matters here because the design was moved to a 6.00 mil annular ring for margin, and an off-centre track endpoint would give some of that back silently.",
+      "BMP581 symbol updated from library and now in sync - pin maps identical, VSS pins 3/8/9 power_in."
+    ],
+    "known_false_positives": [
+      "missing_courtyard is set to ignore deliberately. Promoting it yields exactly five hits - J301-J304 (1.1 mm mounting holes) and J401 (battery lands) - none of which are placed components with spacing constraints. Verified in place 2026-09-03; the setting conceals no real overlap risk."
     ]
   },
   "mating_design": {
@@ -215,10 +222,10 @@
       "Two separate SPI buses: U5 LSM6DSV and U6 NAND share /AT25_SCK, /AT25_MISO, /AT25_MOSI on PA5-PA7 with independent selects (PA4 = /AT25_nCS for the NAND, PB1 = /LSM_CS for the IMU). U3 BMP581 has its own bus, /LPS_* on PA9-PA12 and PB3. No external pull-ups on either, so deselect is a reset-state and first-GPIO-action firmware contract.",
       "PB7 is BOOT0 and carries /SDA with a 10 kOhm pull-up to +1V8, so the strap is high at reset. Production programming MUST write and read back the option bytes.",
       "Six GPIOs unused - PC15, PA1, PA2, PA3, PB0, PA15. Configure analog/no-pull for lowest leakage. PA15 has a default pull-up on STM32 and is the one most worth setting explicitly.",
-      "PA8 /FLASH_PWR drives the TPS22916 enable, gating the NAND's /Flash 1V8 rail.",
       "NRST is transistor-driven via Q501 collector with C502.",
       "PB3 AF0 is JTDO/TRACESWO, given up for /LPS_CK - so no SWO trace. SWD on PA13/PA14 unaffected. PB4 AF0 is NJTRST, given up for /LSM_TRG, irrelevant under SWD.",
-      "32 kHz TIMEBASE CHAIN: U501 RV-3028 CLKOUT (32.768 kHz, 1 PPM) -> PC14/OSC32_IN with the LSE in BYPASS mode -> LPTIM1 -> divided -> PB4/LPTIM1_CH2 (AF1) -> U5 LSM6DSV trigger. The LSM samples on a hardware schedule while the CPU is stopped, and the interval inherits the RTC's 1 PPM accuracy. No crystal anywhere on the tag. PC14 has no ALTERNATE functions but ST lists RCC_OSC32_IN as an ADDITIONAL function (peripheral registers, not GPIOx_AFR). PB4 is NOT a GPIO. The alternative LPTIM1_CH2 pin is PA1, unused, so nothing is contended."
+      "32 kHz TIMEBASE CHAIN: U501 RV-3028 CLKOUT (32.768 kHz, 1 PPM) -> PC14/OSC32_IN with the LSE in BYPASS mode -> LPTIM1 -> divided -> PB4/LPTIM1_CH2 (AF1) -> U5 LSM6DSV trigger. The LSM samples on a hardware schedule while the CPU is stopped, and the interval inherits the RTC's 1 PPM accuracy. No crystal anywhere on the tag. PC14 has no ALTERNATE functions but ST lists RCC_OSC32_IN as an ADDITIONAL function (peripheral registers, not GPIOx_AFR). PB4 is NOT a GPIO. The alternative LPTIM1_CH2 pin is PA1, unused, so nothing is contended.",
+      "2026-09-03: the TPS22916 load switch (U1) and its decoupling (C10, C507) were REMOVED - measured benefit was negligible. U6 NAND VCC now sits directly on +1V8; the /Flash 1V8 and /FLASH_PWR nets no longer exist; PA8 is unconnected and is now the seventh unused GPIO. The NAND's standby current is drawn continuously, which is the measured trade - do not re-add a load switch on theory. Re-measure if the deployment duty cycle changes."
     ],
     "host_pin_map": [
       {
@@ -284,14 +291,6 @@
         "connected": "U5.12",
         "function": "LSM6DSV chip select",
         "af": "no SPI AF exists - GPIO is correct"
-      },
-      {
-        "pin": "18",
-        "port": "PA8",
-        "net": "/FLASH_PWR",
-        "connected": "U1.B2",
-        "function": "TPS22916 enable",
-        "af": ""
       },
       {
         "pin": "19",
@@ -390,11 +389,11 @@
         "af": ""
       },
       {
-        "pin": "3,7,8,9,14,25",
-        "port": "PC15, PA1, PA2, PA3, PB0, PA15",
+        "pin": "3,7,8,9,14,18,25",
+        "port": "PC15, PA1, PA2, PA3, PB0, PA8, PA15",
         "net": "unconnected",
         "connected": "none",
-        "function": "UNUSED - set analog/no-pull for lowest leakage",
+        "function": "UNUSED (7) - set analog/no-pull for lowest leakage; PA8 freed by the load-switch removal",
         "af": ""
       }
     ]

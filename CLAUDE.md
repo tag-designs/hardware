@@ -165,8 +165,31 @@ capacitance, driver impedance). Read the docstring before quoting a number.
   `analysis/.gitignore`: the analyzer JSON is slow to regenerate and
   `deep_review.json` — the hand-authored, evidence-gated findings the next
   review diffs against — is not regenerable at all. Git stores a full run in
-  about 57 kB compressed. `analysis_cache.py` only recreates that `.gitignore`
-  when `track_in_git` is false *and* the file is absent, so the deletion sticks.
+  about 57 kB compressed.
+- **Deleting `analysis/.gitignore` does not stick — `analyze_pcb.py` recreates it
+  unconditionally.** The three entry points disagree, verified 2026-09-03:
+  `analysis_cache.ensure_analysis_dir` and `analyze_schematic.py` both guard on
+  `track_in_git`, but `analyze_pcb.py` has its own copy of the block with no such
+  check (`if not os.path.isfile(gitignore_path)`). So a PCB run silently re-ignores
+  the whole directory however the config is set.
+  **Leave a no-op `.gitignore` in place instead** — one containing only comments.
+  All three writers only create the file when it is *absent*, so a harmless one
+  survives and the analysis output stays tracked. `imutag-smps` and
+  `imutag-nand-bmp581` both carry one.
+- **Set `analysis.track_in_git` in the board's own `.kicad-happy.json` anyway.** It
+  does not inherit from `BoardDesigns/.kicad-happy.json`; `analyze_schematic.py`
+  reads the board config only.
+- **Set `analysis.track_in_git` in every board's own `.kicad-happy.json`. It does
+  not inherit.** `analysis_cache.py` reads the board config only; the workspace
+  `BoardDesigns/.kicad-happy.json` does not reach it. A board config trimmed to
+  "inherit" that setting silently gets `analysis/.gitignore` recreated on the next
+  analyzer run, re-ignoring the directory — which happened on `imutag-smps`,
+  2026-09-03.
+- **Caching propagates a poisoned run.** After removing a stale `.kicad_pro`,
+  re-run `analyze_pcb.py` explicitly. A schematic-only re-run carries the previous
+  `pcb.json` forward unchanged, so `rules_source` still names the wrong project and
+  the run looks fresh. Check `project_settings.source` on the run you intend to use,
+  not on the newest directory.
 - Helpers live once, in `BoardDesigns/kicad-helpers/`. Cite them from
   `deep_review.json` as `../kicad-helpers/<name>.py`; the gate checks the path
   resolves, so a stale citation quarantines the finding.
@@ -236,11 +259,57 @@ capacitance, driver impedance). Read the docstring before quoting a number.
 
   **The net name does not reveal intent.** Suffixes like `_SCK` or `_MISO` identify
   bus signals, but a net called `/LSM_TRG` driven by `LPTIM1_CH2` looks like a GPIO.
-  The helper lists candidate peripheral functions for such pins under "confirm
-  intent" — ask the designer rather than assuming. Better still, have the symbol
-  declare KiCad **pin alternates** (the stock `MCU_ST_STM32*` libraries carry tens of
-  thousands; the local `stm32u375` symbol has none) so the chosen function is
-  recorded in the schematic and needs no guessing.
+  Ask rather than assume — the helper lists candidate peripheral functions for such
+  pins under "confirm intent".
+
+  **The durable fix is KiCad pin alternates.** A symbol declares each pin's possible
+  functions; the designer picks one per instance (right-click a pin → Alternate Pin
+  Function) and the choice lands in the `.kicad_sch`, where `stm32_pinmap.py` reads
+  it and prints it in brackets. That is declared intent, not inference.
+
+  The stock `MCU_ST_STM32*` libraries carry tens of thousands of alternates, but
+  **there is no STM32U3 symbol upstream at all** — stock has U0 and U5 only — so the
+  hand-drawn `stm32u375` symbol had to grow its own:
+
+  ```bash
+  cd BoardDesigns/kicad-helpers/af_tables
+  python3 add_pin_alternates.py ../../libraries/tag_library.kicad_sym stm32u375 --table stm32u375.json
+  ```
+
+  Done for `stm32u375` (248 alternates) and `stm32l432` (194). Pins are matched by
+  **package position**, not name, so `BOOT0-PB7` resolves correctly; re-running is
+  idempotent. Additional functions are included as alternates too — that is how
+  `RCC_OSC32_IN` becomes selectable on PC14.
+
+## Closing out a review — commit, tag, fab package
+
+- **Tag a completed review** `review/<board>-<YYYY-MM-DD>`, annotated, with the
+  closing state in the message (edge clearance, annular ring, DRC/ERC, drill
+  reconciliation, BOM/CPL, and the order spec). The `review/` namespace keeps
+  these clear of the repo-wide release tags (`v1.2` … `v2.1`). First one:
+  `review/imutag-nand-bmp581-2026-09-01`.
+- **Commit the fab package, and force-add the gerber archive.**
+  `BoardDesigns/.gitignore` excludes `*.zip`, so a plain `git add` captures the
+  BOM, CPL and netlist but *not* the gerbers — the thing actually sent. Plugin
+  output is not byte-identical to a `kicad-cli` re-plot (different aperture
+  macros, X2 attributes, file extensions), so the committed board file alone does
+  not pin down what was fabricated. Use `git add -f <run>/*_gerber.zip`; it is
+  about 46 kB.
+- **Keep only the export that was ordered**, and check the report for references
+  to pruned run directories before deleting them.
+- **Verify the committed state**, not just the working tree: re-run DRC and ERC
+  after committing.
+- **An export always looks stale. Ignore the mtimes and check the geometry.**
+  Exporting marks the board dirty in KiCad, so it has to be saved afterwards — the
+  `.kicad_pcb` mtime therefore lands *after* the export it produced, every time.
+  Every export in `imutag-smps`'s history is seconds older than the board and every
+  one matched. mtime carries no information here. Verify by sampling zone-fill
+  vertices and track-segment starts from the shipped Gerbers against the board file:
+
+  ```python
+  gx, gy = round((x - X0) * 1e6), round((Y0 - y) * 1e6)   # board mm -> gerber units
+  assert f'X{gx}Y{gy}' in gerber_text
+  ```
 
 ## Reviewing well — what went wrong last time
 

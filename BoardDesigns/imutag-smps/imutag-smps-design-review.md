@@ -1,10 +1,11 @@
 # imutag-smps Design Review
 
-## Review 2 — 2026-09-02: switching converter and magnetics
+## Review 2 — 2026-09-02, updated 2026-09-03: switching converter, magnetics, load-switch removal
 
 Scope: the SMPS power stage and the current state of the board, following the
-2026-08-26 review. Updated 2026-09-02 after the L1 reroute and the first PCBWay
-export. This board has **not** been fabricated.
+2026-08-26 review. Updated 2026-09-03 after the L1 reroute, the symbol and PWR_FLAG
+fixes, and the removal of the flash load switch. This board has **not** been
+fabricated.
 
 Datasheets: `BoardDesigns/libraries/datasheets`.
 
@@ -19,11 +20,12 @@ already applied here: inner copper 0.3005 mm from the profile, all 47 vias at
 Two things are worth your attention, neither of them a layout defect.
 
 **First, the previous review's rule-derived findings were measured against the
-wrong rules.** `analysis/2026-08-26_0809/pcb.json` records
+wrong rules.** The 2026-08-26 analysis run recorded
 `rules_source: BitTagNG-LIS2DU12.kicad_pcb-back.kicad_pro`. Findings 7 and 8 of
 Review 1 — the advanced-process and edge-clearance items — came from that run and
 should not be trusted as stated. They are moot now anyway, since the rules and
-geometry have both moved.
+geometry have both moved, and **that run has been pruned**; the current run,
+`analysis/2026-09-03_0650`, is correctly sourced to `imutag-smps.kicad_pro`.
 
 **Second, and more substantive: this package cannot be forced into PWM mode.**
 The TPS62840 datasheet §8.3.3 says the MODE pin "is not available in the YBG
@@ -57,6 +59,49 @@ min_via_annular_width       0.1016 -> 0.1524
 net class Default via       0.4572/0.254 -> 0.5048/0.20
 vias on board               47, all 0.1524 mm (6.00 mil), single drill size
 ```
+
+### Load switch removed — 2026-09-03
+
+U1 (TPS22916), C10 (1 µF) and C507 (0.1 µF) are gone. Power measurements showed the
+switched rail's benefit was negligible, so the NAND now sits directly on `+1V8`.
+
+```text
+before                                after
++1V8 -> U1 TPS22916 -> /Flash 1V8     +1V8 -> U6 VCC directly
+        EN <- PA8 /FLASH_PWR          PA8 unconnected
+36 footprints, 30 placements          33 footprints, 27 placements
+47 vias, 412 track segments           44 vias, 405 track segments
+```
+
+Verified after the change:
+
+| Check | Result |
+|---|---|
+| KiCad DRC | 0 violations, 0 unconnected, 0 parity |
+| KiCad ERC | 0 errors with all 24 exclusions cleared (8 warnings) |
+| U6 power | pin 8 VCC on `+1V8`; pins 3 and 7 (`WP`/`HOLD`) tied to `+1V8` |
+| Nets removed | `/Flash 1V8` and `/FLASH_PWR` are both gone |
+| Vias | 44, all still 0.1524 mm (6.00 mil), single 0.20 mm drill |
+| Copper to edge | 0.3005 mm on both inner planes |
+| Export `2026-09-03-07-51-02` | 300/300 fill vertices, 391/391 track starts, PTH 44 = 44 vias, NPTH 4 |
+| BOM / CPL | 16 lines, 27 placements, exact match, every line with MPN and LCSC |
+
+Three consequences worth carrying:
+
+**PA8 is now a seventh unused GPIO.** It joins PC15, PA1, PA2, PA3, PB0 and PA15 —
+set analog/no-pull for lowest leakage. Nothing else changed in the pin map, and the
+SPI1 collisions are unaffected.
+
+**Two review positions are now obsolete**, not just superseded. Review 1's `PP-001`
+suppression — "`/Flash 1V8` is intentionally sourced through U1, so the analyzer's
+missing-DC-path finding is a modeling limitation" — describes a rail that no longer
+exists. Likewise the firmware note that PA8 gates the NAND rail. Both are removed
+from `.kicad-happy.json` rather than left to mislead the next review.
+
+**The NAND's standby current is now always drawn.** That is the measured trade you
+made deliberately, and the note is here only so nobody re-adds a load switch on
+theory. If the deployment duty cycle ever changes materially, it is worth
+re-measuring rather than re-assuming.
 
 ### Findings
 
@@ -286,8 +331,13 @@ it lacks — and let you drop two of the 22 exclusions rather than carrying them
 have not verified this, so treat it as a proposal to test in place rather than a
 result.
 
-Separately, `TPS22916BYFPR` now shows a `lib_symbol_mismatch` of its own, currently
-excluded. Same class as the BMP581 drift in finding 4 and worth the same treatment.
+~~Separately, `TPS22916BYFPR` shows a `lib_symbol_mismatch` of its own.~~ **Moot as of
+2026-09-03** — U1 went with the load switch, and the schematic carries no orphan
+`lib_symbols` entry for it, so the mismatch left with the part. Noted only so the
+finding is not re-raised from an older reading of this report.
+
+**Exclusion count is down to 17**, from 24: seven retired with the load switch. With
+all of them cleared the board shows **0 errors and 8 warnings**.
 
 ### STM32U375KGU6 pin map
 
@@ -296,41 +346,66 @@ each signal needs, cross-checked against the **`STM32_open_pin_data` submodule**
 ST's own machine-readable pin data, `mcu/STM32U375KGUx.xml` plus
 `mcu/IP/GPIO-STM32U375x_gpio_v1_0_Modes.xml`.
 
-| Pin | Port | Net | Needs | AF | Check |
-|---|---|---|---|---|---|
-| 1 | VDD | `+1V8` | supply | — | ok |
-| 2 | PC14 | `/clkout` | RCC_OSC32_IN | additional fn | ok — LSE bypass |
-| 3 | PC15 | — | — | — | unused |
-| 4 | NRST | `Net-(Q501-C)` | reset | — | ok |
-| 5 | VDDA/VREF+ | `+1V8` | analog supply | — | ok |
-| 6 | PA0 | `/WKUP1` | WKUP1 | additional fn | ok |
-| 7 | PA1 | — | — | — | unused |
-| 8 | PA2 | — | — | — | unused |
-| 9 | PA3 | — | — | — | unused |
-| 10 | PA4 | `/AT25_nCS` | GPIO out | AF5 = SPI1_NSS avail. | ok |
-| 11 | PA5 | `/AT25_SCK` | SPI1_SCK | **AF5** | ok |
-| 12 | PA6 | `/AT25_MISO` | SPI1_MISO | **AF5** | ok |
-| 13 | PA7 | `/AT25_MOSI` | SPI1_MOSI | **AF5** | ok |
-| 14 | PB0 | — | — | — | unused |
-| 15 | PB1 | `/LSM_CS` | GPIO out | no SPI AF exists | ok — must be GPIO |
-| 16 | VSS | `GND` | ground | — | ok |
-| 17 | VDD | `+1V8` | supply | — | ok |
-| 18 | PA8 | `/FLASH_PWR` | GPIO out | — | ok |
-| 19 | PA9 | `/LPS_DRDY` | GPIO in | AF3 = SPI2_SCK unused | ok |
-| 20 | PA10 | `/LPS_CS` | GPIO out | no SPI NSS exists | ok — must be GPIO |
-| 21 | PA11 | `/LPS_MISO` | SPI1_MISO | **AF5** | ⚠ **collides with PA6** |
-| 22 | PA12 | `/LPS_MOSI` | SPI1_MOSI | **AF5** | ⚠ **collides with PA7** |
-| 23 | PA13 | `SWDIO` | JTMS/SWDIO | **AF0** | ok |
-| 24 | PA14 | `SWCLK` | JTCK/SWCLK | **AF0** | ok |
-| 25 | PA15 | — | — | — | unused |
-| 26 | PB3 | `/LPS_CK` | SPI1_SCK | **AF5** (AF6 = SPI3_SCK) | ⚠ **collides with PA5** |
-| 27 | PB4 | `/LSM_TRG` | **LPTIM1_CH2** | **AF1** | ok — forfeits NJTRST |
-| 28 | PB5 | `/BMM_INT` | GPIO in | — | ok |
-| 29 | PB6 | `/SCL` | I2C1_SCL | **AF4** | ok |
-| 30 | **PB7 / BOOT0** | `/SDA` | I2C1_SDA | **AF4** | ok — strap, see below |
-| 31 | VCAP | `Net-(U302-VCAP)` | regulator cap | — | ok |
-| 32 | VSS | `GND` | ground | — | ok |
-| 33 | GND | `GND` | exposed pad | — | ok |
+| Pin | Port | Net | Needs | AF | Declared | Check |
+|---|---|---|---|---|---|---|
+| 1 | VDD | `+1V8` | supply | — | — | ok |
+| 2 | PC14 | `/clkout` | RCC_OSC32_IN | additional fn | **`RCC_OSC32_IN`** | ok |
+| 3 | PC15 | — | — | — | — | unused |
+| 4 | NRST | `Net-(Q501-C)` | reset | — | — | ok |
+| 5 | VDDA/VREF+ | `+1V8` | analog supply | — | — | ok |
+| 6 | PA0 | `/WKUP1` | WKUP1 | additional fn | — | ok |
+| 7 | PA1 | — | — | — | — | unused |
+| 8 | PA2 | — | — | — | — | unused |
+| 9 | PA3 | — | — | — | — | unused |
+| 10 | PA4 | `/AT25_nCS` | GPIO out | AF5 avail. | — | ok |
+| 11 | PA5 | `/AT25_SCK` | SPI1_SCK | **AF5** | **`SPI1_SCK`** | ok |
+| 12 | PA6 | `/AT25_MISO` | SPI1_MISO | **AF5** | **`SPI1_MISO`** | ok |
+| 13 | PA7 | `/AT25_MOSI` | SPI1_MOSI | **AF5** | **`SPI1_MOSI`** | ok |
+| 14 | PB0 | — | — | — | — | unused |
+| 15 | PB1 | `/LSM_CS` | GPIO out | no SPI AF | — | ok — must be GPIO |
+| 16 | VSS | `GND` | ground | — | — | ok |
+| 17 | VDD | `+1V8` | supply | — | — | ok |
+| 18 | PA8 | — | — | — | — | unused *(was `/FLASH_PWR`)* |
+| 19 | PA9 | `/LPS_DRDY` | GPIO in | AF3 unused | — | ok |
+| 20 | PA10 | `/LPS_CS` | GPIO out | no SPI_NSS | — | ok — must be GPIO |
+| 21 | PA11 | `/LPS_MISO` | SPI1_MISO | **AF5** | **`SPI1_MISO`** | ⚠ shares SPI1 with PA6 |
+| 22 | PA12 | `/LPS_MOSI` | SPI1_MOSI | **AF5** | **`SPI1_MOSI`** | ⚠ shares SPI1 with PA7 |
+| 23 | PA13 | `SWDIO` | JTMS/SWDIO | **AF0** | **`DEBUG_JTMS-SWDIO`** | ok |
+| 24 | PA14 | `SWCLK` | JTCK/SWCLK | **AF0** | **`DEBUG_JTCK-SWCLK`** | ok |
+| 25 | PA15 | — | — | — | — | unused |
+| 26 | PB3 | `/LPS_CK` | SPI1_SCK | **AF5** | **`SPI1_SCK`** | ⚠ shares SPI1 with PA5 |
+| 27 | PB4 | `/LSM_TRG` | **LPTIM1_CH2** | **AF1** | **`LPTIM1_CH2`** | ok — forfeits NJTRST |
+| 28 | PB5 | `/BMM_INT` | GPIO in | — | — | ok |
+| 29 | PB6 | `/SCL` | I2C1_SCL | **AF4** | **`I2C1_SCL`** | ok |
+| 30 | **PB7 / BOOT0** | `/SDA` | I2C1_SDA | **AF4** | **`I2C1_SDA`** | ok — strap |
+| 31 | VCAP | `Net-(U302-VCAP)` | regulator cap | — | — | ok |
+| 32 | VSS | `GND` | ground | — | — | ok |
+| 33 | GND | `GND` | exposed pad | — | — | ok |
+
+The **Declared** column is the KiCad pin alternate selected on the schematic — the
+designer stating what a pin does, rather than the reviewer inferring it from a net
+name. Eleven are set. They are read straight from the `.kicad_sch`, so this table is
+no longer guesswork.
+
+Two things that follow from having them:
+
+**The SPI1 sharing is now explicit and intentional.** PA6 and PA11 are *both*
+declared `SPI1_MISO`, PA7 and PA12 both `SPI1_MOSI`, PA5 and PB3 both `SPI1_SCK`.
+That is the design saying out loud that one peripheral serves two device groups by
+remapping, not an oversight — which is exactly what the collision check flags, and
+what firmware has to implement.
+
+**PC14 is now declared too**, so all twelve are set. Its absence from the AF map is
+precisely what led an earlier pass of this review to call it a plain GPIO that "costs
+you the LSE", when it in fact *supplies* the LSE in bypass mode. With the alternate
+selected, the 32 kHz timebase chain is on the record where the next reader — human or
+tool — will see it rather than having to reconstruct it.
+
+Declaring it required a matching correction at the other end: **the RV-3028 symbol's
+`CLKOUT` pin was typed `input` and is now `output`**, in both `tag_library` and the
+schematic's cached copy. That is the correct direction — the RTC drives the clock and
+the MCU receives it on `OSC32_IN` — and it makes the pair coherent to ERC as well as
+to a reader.
 
 #### The AF check finds one real constraint: both SPI groups are SPI1
 
@@ -428,28 +503,87 @@ pull-ups, keeping both inactive is a reset-state and first-GPIO-action contract.
 back the option bytes. Unchanged from Review 1 and still the most important
 firmware-side item on the board.
 
-**Six GPIOs are unused** — PC15, PA1, PA2, PA3, PB0, PA15. Configure them
+**Seven GPIOs are unused** — PC15, PA1, PA2, PA3, PB0, **PA8** and PA15. PA8 became free when the load switch went. Configure them
 analog/no-pull for lowest leakage. PA15 is the one to be deliberate about, being the
 only unused pin with a default pull-up on STM32.
 
-### Production package — 2026-09-02-08-29-52
+### Symbol library hygiene — 2026-09-03
+
+Two symbol-side items settled alongside the pin-alternate work.
+
+**`CLKOUT` on the RV-3028 was typed `input`; it is now `output`.** Necessary once
+PC14 declares `RCC_OSC32_IN`, and correct on its own terms — the RTC is the driver.
+Library and schematic cache agree.
+
+**U501's library reference was machine-local.** It pointed at
+`tag_library:RV-3028-C7`, but `tag_library` is not in this project's `sym-lib-table`
+— it resolved only through the user-level table at
+`~/Library/Preferences/kicad/10.0/sym-lib-table`. The schematic would therefore fail
+to resolve that symbol on a fresh clone, while looking perfectly healthy here, because
+the cached `lib_symbols` entry keeps ERC quiet.
+
+The project table already carries **`libraries`** pointing at the *same file*, and
+every other symbol on this board uses that name, as does `imutag-nand-bmp581`. U501 is
+now repointed to `libraries:RV-3028-C7` — one instance `lib_id`, one cached symbol.
+Connectivity verified identical: **37 nets, 138 pin connections**, ERC still 0.
+
+Same class as the BitTagNG symbol cleanup: a reference that works on the machine it
+was authored on and nowhere else. Worth checking on any board whose `lib_id` prefixes
+do not all appear in its own `sym-lib-table`.
+
+### DRC rule severities tightened — 2026-09-03
+
+Three checks that had been set to `ignore` are now active, and the board passes with
+them on:
+
+```text
+npth_inside_courtyard       ignore -> warning
+pth_inside_courtyard        ignore -> warning
+track_not_centered_on_via   ignore -> ERROR
+```
+
+The third is the substantive one. A track meeting a via off-centre eats into the
+effective annular contact, which matters more here than usual — the whole board was
+just moved to a 6.00 mil ring precisely to buy margin at the pad. Promoting it to
+*error* means that margin cannot be quietly given back by a stray track endpoint.
+
+**What the remaining `ignore` rules hide: nothing of consequence.** Promoting every
+remaining `ignore` and re-running in the project directory gives exactly five hits,
+all `missing_courtyard`:
+
+```text
+J301  J302  J303  J304    1.1 mm mounting holes
+J401                      battery lands
+```
+
+Those are the parts where a courtyard means least — holes and hand-solder pads, not
+placed components with spacing constraints. `missing_courtyard: ignore` is a
+reasonable house setting and is not concealing a real overlap risk.
+
+Also verified this round: **the BMP581 symbol is now in sync** — pin maps identical
+to `libraries:BMP581`, VSS on pins 3/8/9 correctly `power_in`. Netlist connectivity
+unchanged through all of it: 37 nets, 138 pin connections.
+
+### Production package — 2026-09-03-07-51-02
 
 Current PCBWay export, verified against the board on disk.
 
 | Check | Result |
 |---|---|
 | Inner-plane fill vs board | **300/300** sampled vertices match on both In1.Cu and In2.Cu |
-| Track geometry | **412/412** F.Cu + B.Cu segment starts present |
+| Track geometry | **392/392** F.Cu + B.Cu segment starts present |
 | Superseded exports | pruned — only the current one is kept |
 | Copper to board edge | **0.3005 mm** on both inner planes |
-| Drill reconciliation | PTH **47 holes = 47 vias**, single 0.20 mm tool; NPTH **4 × 1.1 mm** |
-| BOM / CPL | 17 lines, **30 placements**, exact CPL match, every line with MPN and LCSC |
+| Drill reconciliation | PTH **44 holes = 44 vias**, single 0.20 mm tool; NPTH **4 × 1.1 mm** |
+| BOM / CPL | 16 lines, **27 placements**, exact CPL match, every line with MPN and LCSC |
 | KiCad DRC | 0 violations, 0 unconnected, 0 parity |
 | KiCad ERC | 0 violations with 24 exclusions; **0 errors with exclusions cleared** — finding 5 |
 
-The board was saved 5 seconds *after* the export ran; the geometry match confirms the
-export is current, so that gap was just the save landing after the plot. Same pattern
-as the previous two exports — worth checking each time rather than assuming.
+The board is saved *after* the export, so its mtime always lands later. That is
+KiCad's behaviour, not a staleness signal: **exporting marks the board dirty**, so it
+has to be saved before closing. Every export this board has produced is seconds older
+than the `.kicad_pcb` and every one has matched. The mtime carries no information —
+the geometry sampling above is the check that does.
 
 Three exports are now retained. Per `CLAUDE.md`, prune to the one actually ordered
 once that decision is made, and force-add its gerber archive past the repo-wide
@@ -474,8 +608,8 @@ Checked and fine — recorded so the next review does not redo them.
   all 47 vias at 6.00 mil, single drill size.
 - **Plane structure is the house standard** — In1.Cu `+1V8`, In2.Cu `GND`, with a
   local F.Cu GND pour at the converter and an F.Cu keepout under L1.
-- **The two ERC `pin_to_pin` warnings** on U6 `WP`/`HOLD` against a power flag are
-  the accepted pattern from Review 1, unchanged.
+- **The ERC `pin_to_pin` warnings** on U6 `WP`/`HOLD`, now tied straight to `+1V8`,
+  are the accepted pattern from Review 1.
 - **`VBAT`/`VIN` on one net** is the deliberate fixed-interface inheritance, same
   as the sibling.
 
@@ -488,11 +622,13 @@ pull-ups, panel fiducials, and `/clkout` as a low-risk 32 kHz net.
 ### Corrections to Review 1
 
 - **Findings 7 and 8 were derived from a poisoned analysis run.**
-  `analysis/2026-08-26_0809/pcb.json` has
+  the 2026-08-26 run had
   `project_settings.source = BitTagNG-LIS2DU12.kicad_pcb-back.kicad_pro`, so its
-  DFM thresholds and rule comparisons are against BitTagNG's project, not this
-  board's. The stale file was removed repo-wide on 2026-09-01; re-run the analyzer
-  before relying on any rule-derived number here.
+  DFM thresholds and rule comparisons were against BitTagNG's project, not this
+  board's. The stale project file was removed repo-wide on 2026-09-01 and the
+  poisoned run itself has now been pruned. **Caching propagates the poison**: a
+  schematic-only re-run carried the old `pcb.json` forward unchanged and still named
+  BitTagNG. Only an explicit `analyze_pcb.py` run cleared it.
 - **Finding 5's premise needs the qualifier in finding 1.** "Keep the SMPS if the
   energy budget requires it" is still the right call, but the energy advantage is
   larger than a forced-PWM comparison implies, and the noise is less controllable.
@@ -528,7 +664,7 @@ Review date: 2026-08-26
 Project: `BoardDesigns/imutag-smps`  
 Primary design files: `imutag-smps.kicad_sch`, `imutag-smps.kicad_pcb`, `imutag-smps.kicad_pro`  
 Datasheet source used: `BoardDesigns/libraries/datasheets`  
-Current analysis run: `analysis/2026-08-26_0809`
+Current analysis run at the time: `analysis/2026-08-26_0809` *(pruned 2026-09-03 — it was sourced to BitTagNG's project)*
 
 ### Verdict
 

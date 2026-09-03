@@ -41,7 +41,9 @@
         "/Flash 1V8": 1.8,
         "VBAT": 3.7
       }
-    }
+    },
+    "track_in_git": true,
+    "retention": 5
   },
   "mating_design": {
     "name": "imutag-nand-bmp581 self-contained tag",
@@ -219,8 +221,8 @@
   "_comment": [
     "Board-specific config for imutag-nand-bmp581.",
     "Workspace defaults (track_in_git, retention, auto_diff, diff_threshold) are",
-    "inherited from BoardDesigns/.kicad-happy.json; only board-specific intent,",
     "power profile, rail voltages, suppressions and reviewer notes live here.",
-    "Suppressions concatenate across layers rather than replace."
+    "Suppressions concatenate across layers rather than replace.",
+    "analysis.track_in_git must be set here (it does not inherit), AND analysis/.gitignore must be left in place as a no-op file - analyze_pcb.py recreates an ignore-everything .gitignore whenever it is absent, without checking track_in_git."
   ]
 }

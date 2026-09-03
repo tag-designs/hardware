@@ -1,0 +1,6 @@
+# Intentionally ignores nothing. track_in_git is true for this board.
+#
+# Do not delete: analyze_pcb.py recreates a .gitignore that ignores the whole
+# directory whenever this file is ABSENT, without checking track_in_git the way
+# analyze_schematic.py and analysis_cache.ensure_analysis_dir both do. Leaving a
+# harmless file here is what keeps analysis output tracked.
