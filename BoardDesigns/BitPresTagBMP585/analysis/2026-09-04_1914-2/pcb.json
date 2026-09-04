@@ -946,7 +946,7 @@
     {
       "library": "AccelTag:adesto_wlcsp12",
       "reference": "U1",
-      "value": "at25ex321D-UUN",
+      "value": "724-AT25FF321A-UUN-T",
       "mpn": "AT25FF321A-UUN-T",
       "x": 149.873542,
       "y": 110.36,
@@ -8935,7 +8935,7 @@
     },
     {
       "ic": "U1",
-      "value": "at25ex321D-UUN",
+      "value": "724-AT25FF321A-UUN-T",
       "layer": "F.Cu",
       "nearby_caps": [
         {
@@ -11012,8 +11012,8 @@
       ],
       "disconnected_pads": [
         [
-          "D401:2",
-          "J201:2"
+          "J201:2",
+          "J401:1"
         ]
       ]
     },
@@ -11144,8 +11144,8 @@
       ],
       "disconnected_pads": [
         [
-          "U501:5",
-          "U302:16"
+          "Q501:2",
+          "U302:33"
         ]
       ]
     },
@@ -11261,7 +11261,7 @@
       ],
       "disconnected_pads": [
         [
-          "C2:1",
+          "J201:1",
           "U2:12"
         ]
       ]
@@ -13029,10 +13029,10 @@
       "/Users/geobrown/Research/tag-designs/hardware/BoardDesigns/BitPresTagBMP585/BitPresTagBMP585.kicad_pcb"
     ],
     "source_hashes": {
-      "/Users/geobrown/Research/tag-designs/hardware/BoardDesigns/BitPresTagBMP585/BitPresTagBMP585.kicad_pcb": "b93e910f35629c525a021ec4f6fa20bd86aae42e194b2ffea777e3d728862d85"
+      "/Users/geobrown/Research/tag-designs/hardware/BoardDesigns/BitPresTagBMP585/BitPresTagBMP585.kicad_pcb": "9af08d99cc75d155190efe8c43867f3bd1966ab9cc28367f10072a61b2567e8a"
     },
     "run_id": "20260904T224331Z-b7fc8f",
-    "config_hash": "3b60f37b141d27f0c5cd5cd4725f18755273e1b2c8223a02a7622f34e77aa489",
+    "config_hash": "ed56eb4a95cde5199344e551a0535312844c5a4dea95c8a1c03a4aa3614267a5",
     "upstream_artifacts": {}
   },
   "compat": {
@@ -13041,9 +13041,9 @@
     "experimental_fields": []
   },
   "project_config": {
-    "ambient_temperature_c": 25,
+    "notes": "Renamed from BitPresTagBMP581 to BitPresTagBMP585 on 2026-09-04 to match the part actually fitted: U3 is a BMP585 (8-pin metal-lid LGA plus L/M pad, footprint LGA9_BMP585_BOS), not the 10-pin BMP581. Directory, all project files and every internal reference were renamed together; archive/ was deliberately left under the old name as a historical snapshot.",
     "name": "BitPresTagBMP585",
-    "notes": "Project name says BMP581 but U3 is a BMP585 (9-pin LGA, footprint LGA9_BMP585_BOS). Reviewed 2026-09-04."
+    "ambient_temperature_c": 25
   },
   "design_intent": {
     "product_class": "prototype",

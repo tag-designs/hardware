@@ -5,6 +5,51 @@
   "findings": [
     {
       "detector": "deep_review",
+      "category": "accepted_by_design",
+      "severity": "info",
+      "confidence": "high",
+      "summary": "Q501 base series resistor lives on the external connecting board - confirmed by the designer, house convention",
+      "description": "Net RST contains only Q501 base (pin 1) and J201 pin 5, with no series resistor on this board. CONFIRMED 2026-09-04 by the designer: the resistor is on the connecting board that mates through J201, matching the documented house convention and BitTagNG, whose config records the same contract. This review raised it because the board's .kicad-happy.json described the board as 'self-contained' -- inherited from the same copied config that got the device list wrong.",
+      "recommendation": "No change to this board. mating_design.baseboard_contract now records the obligation: any new connecting board must supply a ~4.7-10 kOhm base series resistor between its reset driver and J201.5, and must drive J201.5 high to assert reset.",
+      "evidence": {
+        "components": [
+          "Q501",
+          "J201"
+        ],
+        "nets": [
+          "RST"
+        ],
+        "pins": [
+          "Q501.1",
+          "J201.5"
+        ],
+        "datasheet": [
+          {
+            "mpn": "PMBT2222AMBYL",
+            "quote": "peak base current"
+          }
+        ],
+        "computation": {
+          "description": "Net RST membership from schematic.json, and base current estimate for a 3.3 V driver into Vbe = 0.8 V through an assumed 30 ohm driver impedance",
+          "result": "RST has exactly 2 pins (Q501.1 base, J201.5) and no resistor; I_B ~ (3.3-0.8)/30 = 83 mA, below the 200 mA peak base rating but well above any sane drive level"
+        }
+      },
+      "evidence_checked": "partial",
+      "components": [
+        "Q501",
+        "J201"
+      ],
+      "nets": [
+        "RST"
+      ],
+      "pins": [
+        "Q501.1",
+        "J201.5"
+      ],
+      "finding_id": "deep_review:431fe97f46c7"
+    },
+    {
+      "detector": "deep_review",
       "category": "documentation_defect",
       "severity": "error",
       "confidence": "high",
@@ -110,9 +155,10 @@
       "evidence_checked": "partial",
       "components": [
         "U1",
-        "U302"
+        "U302",
+        "U3"
       ],
-      "finding_id": "deep_review:c0eabec7acf7"
+      "finding_id": "deep_review:84cb538420c0"
     },
     {
       "detector": "deep_review",
@@ -264,51 +310,6 @@
         "U302.25"
       ],
       "finding_id": "deep_review:cf15b16632c7"
-    },
-    {
-      "detector": "deep_review",
-      "category": "reset_network",
-      "severity": "warning",
-      "confidence": "medium",
-      "summary": "Q501 reset transistor base is driven straight from header pin J201.5 with no series resistor",
-      "description": "Net RST contains only Q501 base (pin 1) and J201 pin 5. An external programmer asserting RST therefore drives a forward-biased base-emitter junction with no current limiting on the board; current is set only by the driver's own output impedance. The house convention is that this base resistor lives on the mating baseboard, but this board's config describes it as self-contained and J201 is a 6-pin SWD/programming header, so it is not clear anything upstream provides the resistor. The transistor itself tolerates it (200 mA peak base rating), so the risk is to the programmer's output driver rather than to the tag.",
-      "recommendation": "Confirm whether the programming adapter that mates with J201 carries the base series resistor. If it does, record that in mating_design so this stops being re-raised. If it does not, add a resistor of roughly 4.7-10 kOhm in series with Q501's base - at these currents it costs nothing and the pull-down behaviour is unchanged.",
-      "evidence": {
-        "components": [
-          "Q501",
-          "J201"
-        ],
-        "nets": [
-          "RST"
-        ],
-        "pins": [
-          "Q501.1",
-          "J201.5"
-        ],
-        "datasheet": [
-          {
-            "mpn": "PMBT2222AMBYL",
-            "quote": "peak base current"
-          }
-        ],
-        "computation": {
-          "description": "Net RST membership from schematic.json, and base current estimate for a 3.3 V driver into Vbe = 0.8 V through an assumed 30 ohm driver impedance",
-          "result": "RST has exactly 2 pins (Q501.1 base, J201.5) and no resistor; I_B ~ (3.3-0.8)/30 = 83 mA, below the 200 mA peak base rating but well above any sane drive level"
-        }
-      },
-      "evidence_checked": "partial",
-      "components": [
-        "Q501",
-        "J201"
-      ],
-      "nets": [
-        "RST"
-      ],
-      "pins": [
-        "Q501.1",
-        "J201.5"
-      ],
-      "finding_id": "deep_review:d01750605d9b"
     },
     {
       "detector": "deep_review",

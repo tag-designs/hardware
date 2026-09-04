@@ -8619,7 +8619,7 @@
 				)
 			)
 		)
-		(property "Value" "at25ex321D-UUN"
+		(property "Value" "724-AT25FF321A-UUN-T"
 			(at 58.42 26.0604 0)
 			(show_name no)
 			(do_not_autoplace no)

@@ -335,7 +335,7 @@
     {
       "category": "reset_pin",
       "component": "U1",
-      "value": "at25ex321D-UUN",
+      "value": "724-AT25FF321A-UUN-T",
       "pin": "~{RESET}",
       "net": "VIN",
       "has_pullup": false,
@@ -622,7 +622,7 @@
     },
     {
       "memory_reference": "U1",
-      "memory_value": "at25ex321D-UUN",
+      "memory_value": "724-AT25FF321A-UUN-T",
       "memory_lib_id": "BitTagNG:at25ex321D-UUN-AccelTag",
       "connected_processors": [
         {
@@ -638,7 +638,7 @@
       "severity": "info",
       "confidence": "deterministic",
       "evidence_source": "topology",
-      "summary": "Memory U1 (at25ex321D-UUN) connected to 1 processor(s)",
+      "summary": "Memory U1 (724-AT25FF321A-UUN-T) connected to 1 processor(s)",
       "description": "Detected memory IC U1 paired with processor(s).",
       "components": [
         "U1",
@@ -800,7 +800,7 @@
       "rule_id": "PR-002",
       "category": "protocol_integrity",
       "summary": "SPI device U1: CS pin (AT25_nCS) missing pull-up",
-      "description": "SPI CS on U1 (at25ex321D-UUN) net AT25_nCS has no pull-up. Device may be inadvertently selected during reset.",
+      "description": "SPI CS on U1 (724-AT25FF321A-UUN-T) net AT25_nCS has no pull-up. Device may be inadvertently selected during reset.",
       "components": [
         "U1"
       ],
@@ -904,12 +904,12 @@
         "ohms": 10.0
       },
       "capacitor": {
-        "ref": "C3",
+        "ref": "C5",
         "value": "2 caps parallel",
         "farads": 2e-07,
         "parallel_caps": [
-          "C3",
-          "C5"
+          "C5",
+          "C3"
         ],
         "package": "0201",
         "esr_ohm": 0.5,
@@ -927,10 +927,10 @@
       "severity": "info",
       "confidence": "deterministic",
       "evidence_source": "topology",
-      "summary": "RC filter R2/C3 at 159154.94Hz",
+      "summary": "RC filter R2/C5 at 159154.94Hz",
       "description": "low-pass RC filter",
       "components": [
-        "C3",
+        "C5",
         "R2"
       ],
       "nets": [],
@@ -946,16 +946,16 @@
         "confidence": "deterministic",
         "claimed_components": [
           "R2",
-          "C3"
+          "C5"
         ],
         "excluded_by": [],
         "suppressed_candidates": []
       },
-      "detection_id": "rc_filters:1895490a68ec",
+      "detection_id": "rc_filters:d458f92a1744",
       "stages": [
         "schematic"
       ],
-      "finding_id": "schematic:rc_filters-1895490a68ec"
+      "finding_id": "schematic:rc_filters-d458f92a1744"
     },
     {
       "detector": "audit_rail_sources",
@@ -1323,7 +1323,7 @@
       "type": "resistor"
     },
     {
-      "value": "at25ex321D-UUN",
+      "value": "724-AT25FF321A-UUN-T",
       "footprint": "AccelTag:adesto_wlcsp12",
       "mpn": "AT25FF321A-UUN-T",
       "manufacturer": "",
@@ -2050,7 +2050,7 @@
     },
     {
       "reference": "U1",
-      "value": "at25ex321D-UUN",
+      "value": "724-AT25FF321A-UUN-T",
       "lib_id": "BitTagNG:at25ex321D-UUN-AccelTag",
       "lib_name": "",
       "footprint": "AccelTag:adesto_wlcsp12",
@@ -3962,7 +3962,7 @@
         },
         {
           "ref": "U1",
-          "value": "at25ex321D-UUN",
+          "value": "724-AT25FF321A-UUN-T",
           "type": "ic"
         },
         {
@@ -4004,7 +4004,7 @@
     },
     {
       "center_ic": "U1",
-      "ic_value": "at25ex321D-UUN",
+      "ic_value": "724-AT25FF321A-UUN-T",
       "ic_mpn": "AT25FF321A-UUN-T",
       "ic_lib_id": "BitTagNG:at25ex321D-UUN-AccelTag",
       "neighbor_components": [
@@ -4128,14 +4128,14 @@
             },
             {
               "ref": "U1",
-              "value": "at25ex321D-UUN",
+              "value": "724-AT25FF321A-UUN-T",
               "type": "ic",
               "pin": "B2",
               "pin_name": "VCC"
             },
             {
               "ref": "U1",
-              "value": "at25ex321D-UUN",
+              "value": "724-AT25FF321A-UUN-T",
               "type": "ic",
               "pin": "D2",
               "pin_name": "~{RESET}"
@@ -4331,14 +4331,14 @@
             },
             {
               "ref": "U1",
-              "value": "at25ex321D-UUN",
+              "value": "724-AT25FF321A-UUN-T",
               "type": "ic",
               "pin": "B2",
               "pin_name": "VCC"
             },
             {
               "ref": "U1",
-              "value": "at25ex321D-UUN",
+              "value": "724-AT25FF321A-UUN-T",
               "type": "ic",
               "pin": "D2",
               "pin_name": "~{RESET}"
@@ -4668,7 +4668,7 @@
             },
             {
               "ref": "U1",
-              "value": "at25ex321D-UUN",
+              "value": "724-AT25FF321A-UUN-T",
               "type": "ic",
               "pin": "C3",
               "pin_name": "GND"
@@ -4812,14 +4812,14 @@
             },
             {
               "ref": "U1",
-              "value": "at25ex321D-UUN",
+              "value": "724-AT25FF321A-UUN-T",
               "type": "ic",
               "pin": "B2",
               "pin_name": "VCC"
             },
             {
               "ref": "U1",
-              "value": "at25ex321D-UUN",
+              "value": "724-AT25FF321A-UUN-T",
               "type": "ic",
               "pin": "D2",
               "pin_name": "~{RESET}"
@@ -5010,7 +5010,7 @@
           "connected_to": [
             {
               "ref": "U1",
-              "value": "at25ex321D-UUN",
+              "value": "724-AT25FF321A-UUN-T",
               "type": "ic",
               "pin": "B4",
               "pin_name": "nCS"
@@ -5025,7 +5025,7 @@
           "connected_to": [
             {
               "ref": "U1",
-              "value": "at25ex321D-UUN",
+              "value": "724-AT25FF321A-UUN-T",
               "type": "ic",
               "pin": "F2",
               "pin_name": "SCK"
@@ -5040,7 +5040,7 @@
           "connected_to": [
             {
               "ref": "U1",
-              "value": "at25ex321D-UUN",
+              "value": "724-AT25FF321A-UUN-T",
               "type": "ic",
               "pin": "D4",
               "pin_name": "SO"
@@ -5055,7 +5055,7 @@
           "connected_to": [
             {
               "ref": "U1",
-              "value": "at25ex321D-UUN",
+              "value": "724-AT25FF321A-UUN-T",
               "type": "ic",
               "pin": "E3",
               "pin_name": "SI"
@@ -5170,7 +5170,7 @@
             },
             {
               "ref": "U1",
-              "value": "at25ex321D-UUN",
+              "value": "724-AT25FF321A-UUN-T",
               "type": "ic",
               "pin": "C3",
               "pin_name": "GND"
@@ -5342,7 +5342,7 @@
             },
             {
               "ref": "U1",
-              "value": "at25ex321D-UUN",
+              "value": "724-AT25FF321A-UUN-T",
               "type": "ic",
               "pin": "C3",
               "pin_name": "GND"
@@ -5514,7 +5514,7 @@
             },
             {
               "ref": "U1",
-              "value": "at25ex321D-UUN",
+              "value": "724-AT25FF321A-UUN-T",
               "type": "ic",
               "pin": "C3",
               "pin_name": "GND"
@@ -5660,14 +5660,14 @@
             },
             {
               "ref": "U1",
-              "value": "at25ex321D-UUN",
+              "value": "724-AT25FF321A-UUN-T",
               "type": "ic",
               "pin": "B2",
               "pin_name": "VCC"
             },
             {
               "ref": "U1",
-              "value": "at25ex321D-UUN",
+              "value": "724-AT25FF321A-UUN-T",
               "type": "ic",
               "pin": "D2",
               "pin_name": "~{RESET}"
@@ -5819,14 +5819,14 @@
             },
             {
               "ref": "U1",
-              "value": "at25ex321D-UUN",
+              "value": "724-AT25FF321A-UUN-T",
               "type": "ic",
               "pin": "B2",
               "pin_name": "VCC"
             },
             {
               "ref": "U1",
-              "value": "at25ex321D-UUN",
+              "value": "724-AT25FF321A-UUN-T",
               "type": "ic",
               "pin": "D2",
               "pin_name": "~{RESET}"
@@ -6006,7 +6006,7 @@
             },
             {
               "ref": "U1",
-              "value": "at25ex321D-UUN",
+              "value": "724-AT25FF321A-UUN-T",
               "type": "ic",
               "pin": "C3",
               "pin_name": "GND"
@@ -6150,14 +6150,14 @@
             },
             {
               "ref": "U1",
-              "value": "at25ex321D-UUN",
+              "value": "724-AT25FF321A-UUN-T",
               "type": "ic",
               "pin": "B2",
               "pin_name": "VCC"
             },
             {
               "ref": "U1",
-              "value": "at25ex321D-UUN",
+              "value": "724-AT25FF321A-UUN-T",
               "type": "ic",
               "pin": "D2",
               "pin_name": "~{RESET}"
@@ -6337,7 +6337,7 @@
             },
             {
               "ref": "U1",
-              "value": "at25ex321D-UUN",
+              "value": "724-AT25FF321A-UUN-T",
               "type": "ic",
               "pin": "C3",
               "pin_name": "GND"
@@ -6509,7 +6509,7 @@
             },
             {
               "ref": "U1",
-              "value": "at25ex321D-UUN",
+              "value": "724-AT25FF321A-UUN-T",
               "type": "ic",
               "pin": "C3",
               "pin_name": "GND"
@@ -6681,7 +6681,7 @@
             },
             {
               "ref": "U1",
-              "value": "at25ex321D-UUN",
+              "value": "724-AT25FF321A-UUN-T",
               "type": "ic",
               "pin": "C3",
               "pin_name": "GND"
@@ -7060,7 +7060,7 @@
           "connected_to": [
             {
               "ref": "U1",
-              "value": "at25ex321D-UUN",
+              "value": "724-AT25FF321A-UUN-T",
               "type": "ic",
               "pin": "B4",
               "pin_name": "nCS"
@@ -7075,7 +7075,7 @@
           "connected_to": [
             {
               "ref": "U1",
-              "value": "at25ex321D-UUN",
+              "value": "724-AT25FF321A-UUN-T",
               "type": "ic",
               "pin": "F2",
               "pin_name": "SCK"
@@ -7090,7 +7090,7 @@
           "connected_to": [
             {
               "ref": "U1",
-              "value": "at25ex321D-UUN",
+              "value": "724-AT25FF321A-UUN-T",
               "type": "ic",
               "pin": "D4",
               "pin_name": "SO"
@@ -7105,7 +7105,7 @@
           "connected_to": [
             {
               "ref": "U1",
-              "value": "at25ex321D-UUN",
+              "value": "724-AT25FF321A-UUN-T",
               "type": "ic",
               "pin": "E3",
               "pin_name": "SI"
@@ -7276,14 +7276,14 @@
             },
             {
               "ref": "U1",
-              "value": "at25ex321D-UUN",
+              "value": "724-AT25FF321A-UUN-T",
               "type": "ic",
               "pin": "B2",
               "pin_name": "VCC"
             },
             {
               "ref": "U1",
-              "value": "at25ex321D-UUN",
+              "value": "724-AT25FF321A-UUN-T",
               "type": "ic",
               "pin": "D2",
               "pin_name": "~{RESET}"
@@ -7512,7 +7512,7 @@
             },
             {
               "ref": "U1",
-              "value": "at25ex321D-UUN",
+              "value": "724-AT25FF321A-UUN-T",
               "type": "ic",
               "pin": "C3",
               "pin_name": "GND"
@@ -7707,7 +7707,7 @@
             },
             {
               "ref": "U1",
-              "value": "at25ex321D-UUN",
+              "value": "724-AT25FF321A-UUN-T",
               "type": "ic",
               "pin": "C3",
               "pin_name": "GND"
@@ -7867,14 +7867,14 @@
             },
             {
               "ref": "U1",
-              "value": "at25ex321D-UUN",
+              "value": "724-AT25FF321A-UUN-T",
               "type": "ic",
               "pin": "B2",
               "pin_name": "VCC"
             },
             {
               "ref": "U1",
-              "value": "at25ex321D-UUN",
+              "value": "724-AT25FF321A-UUN-T",
               "type": "ic",
               "pin": "D2",
               "pin_name": "~{RESET}"
@@ -8188,7 +8188,7 @@
             },
             {
               "ref": "U1",
-              "value": "at25ex321D-UUN",
+              "value": "724-AT25FF321A-UUN-T",
               "type": "ic",
               "pin": "C3",
               "pin_name": "GND"
@@ -8383,7 +8383,7 @@
             },
             {
               "ref": "U1",
-              "value": "at25ex321D-UUN",
+              "value": "724-AT25FF321A-UUN-T",
               "type": "ic",
               "pin": "C3",
               "pin_name": "GND"
@@ -8660,7 +8660,7 @@
             },
             {
               "ref": "U1",
-              "value": "at25ex321D-UUN",
+              "value": "724-AT25FF321A-UUN-T",
               "type": "ic",
               "pin": "C3",
               "pin_name": "GND"
@@ -8841,14 +8841,14 @@
             },
             {
               "ref": "U1",
-              "value": "at25ex321D-UUN",
+              "value": "724-AT25FF321A-UUN-T",
               "type": "ic",
               "pin": "B2",
               "pin_name": "VCC"
             },
             {
               "ref": "U1",
-              "value": "at25ex321D-UUN",
+              "value": "724-AT25FF321A-UUN-T",
               "type": "ic",
               "pin": "D2",
               "pin_name": "~{RESET}"
@@ -9042,7 +9042,7 @@
             },
             {
               "ref": "U1",
-              "value": "at25ex321D-UUN",
+              "value": "724-AT25FF321A-UUN-T",
               "type": "ic",
               "pin": "C3",
               "pin_name": "GND"
@@ -9230,7 +9230,7 @@
             },
             {
               "ref": "U1",
-              "value": "at25ex321D-UUN",
+              "value": "724-AT25FF321A-UUN-T",
               "type": "ic",
               "pin": "C3",
               "pin_name": "GND"
@@ -9388,14 +9388,14 @@
             },
             {
               "ref": "U1",
-              "value": "at25ex321D-UUN",
+              "value": "724-AT25FF321A-UUN-T",
               "type": "ic",
               "pin": "B2",
               "pin_name": "VCC"
             },
             {
               "ref": "U1",
-              "value": "at25ex321D-UUN",
+              "value": "724-AT25FF321A-UUN-T",
               "type": "ic",
               "pin": "D2",
               "pin_name": "~{RESET}"
@@ -9589,7 +9589,7 @@
             },
             {
               "ref": "U1",
-              "value": "at25ex321D-UUN",
+              "value": "724-AT25FF321A-UUN-T",
               "type": "ic",
               "pin": "C3",
               "pin_name": "GND"
@@ -9804,7 +9804,7 @@
     },
     {
       "reference": "U1",
-      "value": "at25ex321D-UUN",
+      "value": "724-AT25FF321A-UUN-T",
       "type": "ic",
       "lib_id": "BitTagNG:at25ex321D-UUN-AccelTag",
       "mpn": "AT25FF321A-UUN-T",
@@ -11222,7 +11222,7 @@
             },
             {
               "ref": "U1",
-              "value": "at25ex321D-UUN",
+              "value": "724-AT25FF321A-UUN-T",
               "type": "ic",
               "pin": "C3",
               "pin_name": "GND"
@@ -11395,14 +11395,14 @@
             },
             {
               "ref": "U1",
-              "value": "at25ex321D-UUN",
+              "value": "724-AT25FF321A-UUN-T",
               "type": "ic",
               "pin": "B2",
               "pin_name": "VCC"
             },
             {
               "ref": "U1",
-              "value": "at25ex321D-UUN",
+              "value": "724-AT25FF321A-UUN-T",
               "type": "ic",
               "pin": "D2",
               "pin_name": "~{RESET}"
@@ -11596,7 +11596,7 @@
             },
             {
               "ref": "U1",
-              "value": "at25ex321D-UUN",
+              "value": "724-AT25FF321A-UUN-T",
               "type": "ic",
               "pin": "C3",
               "pin_name": "GND"
@@ -11747,14 +11747,14 @@
             },
             {
               "ref": "U1",
-              "value": "at25ex321D-UUN",
+              "value": "724-AT25FF321A-UUN-T",
               "type": "ic",
               "pin": "B2",
               "pin_name": "VCC"
             },
             {
               "ref": "U1",
-              "value": "at25ex321D-UUN",
+              "value": "724-AT25FF321A-UUN-T",
               "type": "ic",
               "pin": "D2",
               "pin_name": "~{RESET}"
@@ -11950,7 +11950,7 @@
             },
             {
               "ref": "U1",
-              "value": "at25ex321D-UUN",
+              "value": "724-AT25FF321A-UUN-T",
               "type": "ic",
               "pin": "C3",
               "pin_name": "GND"
@@ -12136,7 +12136,7 @@
             },
             {
               "ref": "U1",
-              "value": "at25ex321D-UUN",
+              "value": "724-AT25FF321A-UUN-T",
               "type": "ic",
               "pin": "C3",
               "pin_name": "GND"
@@ -12287,14 +12287,14 @@
             },
             {
               "ref": "U1",
-              "value": "at25ex321D-UUN",
+              "value": "724-AT25FF321A-UUN-T",
               "type": "ic",
               "pin": "B2",
               "pin_name": "VCC"
             },
             {
               "ref": "U1",
-              "value": "at25ex321D-UUN",
+              "value": "724-AT25FF321A-UUN-T",
               "type": "ic",
               "pin": "D2",
               "pin_name": "~{RESET}"
@@ -12453,14 +12453,14 @@
             },
             {
               "ref": "U1",
-              "value": "at25ex321D-UUN",
+              "value": "724-AT25FF321A-UUN-T",
               "type": "ic",
               "pin": "B2",
               "pin_name": "VCC"
             },
             {
               "ref": "U1",
-              "value": "at25ex321D-UUN",
+              "value": "724-AT25FF321A-UUN-T",
               "type": "ic",
               "pin": "D2",
               "pin_name": "~{RESET}"
@@ -12914,7 +12914,7 @@
             },
             {
               "ref": "U1",
-              "value": "at25ex321D-UUN",
+              "value": "724-AT25FF321A-UUN-T",
               "type": "ic",
               "pin": "C3",
               "pin_name": "GND"
@@ -13211,7 +13211,7 @@
             },
             {
               "ref": "U1",
-              "value": "at25ex321D-UUN",
+              "value": "724-AT25FF321A-UUN-T",
               "type": "ic",
               "pin": "C3",
               "pin_name": "GND"
@@ -13564,7 +13564,7 @@
             },
             {
               "ref": "U1",
-              "value": "at25ex321D-UUN",
+              "value": "724-AT25FF321A-UUN-T",
               "type": "ic",
               "pin": "C3",
               "pin_name": "GND"
@@ -13781,7 +13781,7 @@
             },
             {
               "ref": "U1",
-              "value": "at25ex321D-UUN",
+              "value": "724-AT25FF321A-UUN-T",
               "type": "ic",
               "pin": "C3",
               "pin_name": "GND"
@@ -13980,7 +13980,7 @@
           "io_rails": null
         },
         "U1": {
-          "value": "at25ex321D-UUN",
+          "value": "724-AT25FF321A-UUN-T",
           "power_rails": [
             "VIN"
           ],
@@ -14300,7 +14300,7 @@
           "devices": [
             {
               "ref": "U1",
-              "value": "at25ex321D-UUN",
+              "value": "724-AT25FF321A-UUN-T",
               "lib_id": "BitTagNG:at25ex321D-UUN-AccelTag"
             },
             {
@@ -15835,7 +15835,7 @@
           },
           {
             "ref": "U1",
-            "value": "at25ex321D-UUN",
+            "value": "724-AT25FF321A-UUN-T",
             "estimated_mA": 10
           },
           {
@@ -15960,7 +15960,7 @@
     "fine_pitch_components": [
       {
         "ref": "U1",
-        "value": "at25ex321D-UUN",
+        "value": "724-AT25FF321A-UUN-T",
         "footprint": "AccelTag:adesto_wlcsp12",
         "pitch_mm": null,
         "note": "BGA/WLCSP \u2014 likely fine pitch"
@@ -16076,10 +16076,10 @@
       "/Users/geobrown/Research/tag-designs/hardware/BoardDesigns/BitPresTagBMP585/BitPresTagBMP585.kicad_sch"
     ],
     "source_hashes": {
-      "/Users/geobrown/Research/tag-designs/hardware/BoardDesigns/BitPresTagBMP585/BitPresTagBMP585.kicad_sch": "4921c1ee623afddba5a519a2340db723c6dea76d56bc2b9b1f3dabdab3b2a334"
+      "/Users/geobrown/Research/tag-designs/hardware/BoardDesigns/BitPresTagBMP585/BitPresTagBMP585.kicad_sch": "19804c4c8d36c6b95c9ce7a6e593a519a6cae8feb9c52758120b56cb86b7543c"
     },
     "run_id": "20260904T224331Z-b7fc8f",
-    "config_hash": "3b60f37b141d27f0c5cd5cd4725f18755273e1b2c8223a02a7622f34e77aa489",
+    "config_hash": "ed56eb4a95cde5199344e551a0535312844c5a4dea95c8a1c03a4aa3614267a5",
     "upstream_artifacts": {}
   },
   "compat": {
@@ -16088,8 +16088,8 @@
     "experimental_fields": []
   },
   "project_config": {
-    "notes": "Project name says BMP581 but U3 is a BMP585 (9-pin LGA, footprint LGA9_BMP585_BOS). Reviewed 2026-09-04.",
     "ambient_temperature_c": 25,
+    "notes": "Renamed from BitPresTagBMP581 to BitPresTagBMP585 on 2026-09-04 to match the part actually fitted: U3 is a BMP585 (8-pin metal-lid LGA plus L/M pad, footprint LGA9_BMP585_BOS), not the 10-pin BMP581. Directory, all project files and every internal reference were renamed together; archive/ was deliberately left under the old name as a historical snapshot.",
     "name": "BitPresTagBMP585"
   },
   "design_intent": {
@@ -16239,7 +16239,7 @@
           "rule_id": "PR-002",
           "category": "protocol_integrity",
           "summary": "SPI device U1: CS pin (AT25_nCS) missing pull-up",
-          "description": "SPI CS on U1 (at25ex321D-UUN) net AT25_nCS has no pull-up. Device may be inadvertently selected during reset.",
+          "description": "SPI CS on U1 (724-AT25FF321A-UUN-T) net AT25_nCS has no pull-up. Device may be inadvertently selected during reset.",
           "components": [
             "U1"
           ],

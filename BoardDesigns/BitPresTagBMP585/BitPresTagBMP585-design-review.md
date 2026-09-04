@@ -47,6 +47,43 @@ labels kept is a better answer than either of the options I offered:
   workaround: it documents a deliberate alias. It should be kept, not "fixed" by deleting one
   of the names.
 
+## Production package — `pcbway_production/2026-09-04-19-11-58`
+
+Verified against the current board **by geometry, not mtime**. (Exporting marks the board dirty
+in KiCad, so the `.kicad_pcb` is always saved *after* the export it produced — mtime carries no
+information here.)
+
+| Check | Result |
+|---|---|
+| Sampled track endpoints (F.Cu + B.Cu) present in shipped gerbers | **60 / 60** |
+| Vias reconciled against the PTH drill file | **40 / 40** at 0.2007 mm |
+| Annular ring, every via | **0.1524 mm** — the tightened rule holds |
+| NPTH holes | 4 at 1.0998 mm (the mounting holes) |
+| Board outline | exactly **18.0 × 10.0 mm** |
+| Edge clearance | inner planes 17.399 × 9.399 mm = **0.3 mm inset**, as specified |
+| Layer completeness | all 11 gerbers + both PTH and NPTH drills |
+| BOM vs CPL | **22 designators = 22 placements**, both including C8 and R2 |
+| DRC / ERC / pad-net | **0 / 0 / 28 footprints, 0 mismatches** |
+
+**The 6 footprints absent from BOM and CPL are correctly absent:** `J201` is a 6-pad solder
+tagpoint array (no part to place), `J301`–`J304` are 1.1 mm NPTH mounting holes, and `J401` is
+the MS621 cell footprint, fitted by hand rather than machine-placed.
+
+The only gerber-analyzer finding is `GR-002` "width varies by 3.5 mm across copper/edge layers",
+which is the known false positive — copper is *inset* from the board edge, not misaligned, and
+the 17.399 × 9.399 mm figure is precisely the 0.3 mm clearance working as intended.
+
+### One firmware consequence of the U1 choice
+
+U1 is settled as **AT25FF321A** (`Value` now matches `MPN`; the `724-` prefix is a Mouser SKU,
+harmless since the fab reads `MPN`). Worth carrying forward: **the AT25FF321A has no 256-byte
+page erase** — its smallest erase is a **4 kByte block**, where the AT25XE321D offered page
+erase at 256 B. If the logger rewrites small records in place, firmware must read-modify-write a
+4 kB block. Append-only logging with 4 kB-aligned erases is unaffected. Everything else about the
+two parts is identical, including the pinout and the 26 µA / 7 µA / 5–7 nA power figures.
+
+---
+
 **Project rename.** The board is now `BitPresTagBMP585`, matching the BMP585 actually fitted.
 The directory, all project files and every internal reference moved together — 51 `(project ...)`
 entries in the schematic, 28 footprint `sheetfile` properties in the PCB, and 4 entries in the
@@ -77,10 +114,9 @@ re-enabled `track_not_centered_on_via`, KiCad ERC is clean (0 violations, down f
 pinout checked against a manufacturer PDF is correct — including the three most dangerous
 (the transistor, the 12-ball WLCSP flash, and the BMP585).
 
-What remains is **documentation and hygiene, not electrical**: an unnamed switched-supply net,
-two `Value`/`MPN` disagreements, and one open question about where the reset transistor's base
-resistor lives. The rail-label defect is fixed — the schematic no longer claims a voltage the
-rail does not have.
+What remains is **documentation and hygiene only — nothing that requires a board change**: an
+unnamed switched-supply net and two `Value`/`MPN` disagreements. The rail-label defect is fixed,
+the reset network is confirmed correct by design, and the two flash candidates are pin-identical.
 The board's `.kicad-happy.json` — which had described a completely different board — has been
 rewritten, and the pin map it now carries records the firmware contracts: all three serial
 buses have hardware support, but on three *different* peripherals (USART2 synchronous mode,
@@ -112,9 +148,9 @@ should be committed.
 | 2 | ✅ **Fixed** | Schematic-wide | Rail was drawn as `+2V5`; **now `VCC`**, with `VIN` kept as the environment-facing alias |
 | 3 | Info | U302 / U2 | ADXL367 runs on **USART2 synchronous mode**, not an SPI peripheral — firmware config note |
 | 4 | ✅ **Fixed** / ⚠️ | U3 / PB1 | Inrush: **R2 = 10 Ω added**. Back-power sequencing remains a firmware contract |
-| 5 | ◐ **De-risked** | U1, U302 | `Value` vs `MPN` disagree; **both flash candidates are pin-identical** — a BOM choice, not a board risk |
+| 5 | ✅ **Fixed (U1)** | U1, U302 | **U1 settled on AT25FF321A**, `Value` now matches; U302 `L431` label still stale |
 | 6 | ✅ **Fixed** | U3 pin 9 | `L/M` is a lasermarking pad; **no-connect flag added** |
-| 7 | ❓ **Question** | Q501 | Reset transistor base has no series resistor, and this board has no baseboard |
+| 7 | ✅ **Not a defect** | Q501 | Base series resistor lives on the connecting board — confirmed, house convention |
 | 8 | Info | U1 | CS relies on PA15 internal pull-up; datasheet suggests 10 kΩ for the ramp window |
 | 9 | ◐ **Partly fixed** | U2, U501, Q501 | **U2 GND pin types fixed**; U501 CLKOUT/SDA/GND types and the unmapped `Device` library remain |
 | 10 | ⚠️ **New** | U3 supply node | The switched sensor rail (PB1 → R2 → U3) is an **unnamed net** |
@@ -392,7 +428,7 @@ f<sub>SPI</sub> max is **12 MHz** at VDDIO ≥ 1.62 V (7 MHz below that).
 
 ---
 
-### 7. **Warning** — Q501's base has no series resistor, and there is no baseboard here
+### 7. ✅ **Not a defect** — Q501's base resistor lives on the connecting board
 
 Net `RST` contains exactly two pins: **Q501 base (pin 1)** and **J201 pin 5**. Nothing else.
 
@@ -401,14 +437,26 @@ with no current limiting on the board. Current is set only by the driver's own o
 impedance — roughly (3.3 − 0.8) / 30 Ω ≈ **83 mA**. The transistor survives that (200 mA peak
 base rating per the PMBT2222AMB datasheet); the risk is to the *programmer's* output driver.
 
-The house convention is that this base resistor lives on the mating baseboard. But this board's
-config describes it as self-contained, and **J201 is a 6-pin SWD/programming header**
-(VIN, VBAT, SWDIO, SWCLK, RST, GND), so it is not clear that anything upstream provides it.
+**✅ Confirmed 2026-09-04 — the resistor is on the connecting board.** This is the documented
+house convention, and the same arrangement BitTagNG uses; its config records the identical
+contract: *"Q501's base series resistor is on the baseboard, NOT on this board. Net RST reaching
+Q501.1 with no series resistor is intentional."*
 
-**Please confirm:** does the programming adapter that mates with J201 carry the base resistor?
-If yes, that should be recorded in `mating_design` so this stops being re-raised on every
-review. If no, add ~4.7–10 kΩ in series with Q501's base — at these currents the pull-down
-behaviour is unchanged.
+**The error was mine, and it is worth naming.** I raised this because the board's
+`.kicad-happy.json` described it as a *self-contained* board, so I read J201 as a bare
+programming header with nothing upstream. That description came from the same
+copied-from-CompassTag config that got the device list wrong — I corrected the devices but took
+"self-contained" at face value instead of questioning it too, and then repeated it in my own
+rewrite of the config. The tag is driven by an external connecting board through J201.
+
+`mating_design` now records the contract, so this is not re-raised:
+
+| Connecting-board obligation | Detail |
+|---|---|
+| **Base series resistor** | ~4.7–10 kΩ between the reset driver and `J201.5`. Q501 tolerates the unlimited case (200 mA peak base rating) — the exposure is to the *driver*. |
+| **Reset polarity** | Drive `J201.5` **high** to assert reset. Q501 is an NPN (base = RST, emitter = GND, collector = NRST), so high on RST pulls NRST low. |
+| **Power pins** | `J201.1` VIN (post-diode rail, drawn `VCC`); `J201.2` VBAT (raw battery, shared with J401 — do not back-drive with a cell fitted). |
+| **Debug** | `J201.3/4` SWDIO/SWCLK, no series termination on the tag. |
 
 ---
 
@@ -644,7 +692,7 @@ as suppressions in `.kicad-happy.json` (which cut the EMC set from 54 active to 
 | `PU-001` | "U2 pin INT2 missing pull-up" | `INT2` is an interrupt **output** and is unused. Outputs need no pull-up. |
 | `TE-001` | "Test point coverage 0/40 nets" | No room on an 18 × 10 mm tag; J201 SWD plus the flash are the bring-up path. |
 | `RP-001` ×14, `CK-001` ×5 | stitching vias / clocks on outer layers | Accepted for a 4-layer tag over solid inner planes; return paths are millimetres and emissions at 10 µA and ≤1 MHz SPI are not a compliance risk. |
-| `EP-AUD` | "ESD audit J201: none" | J201 is an internal programming header inside a sealed tag, not an exposed port. |
+| `EP-AUD` | "ESD audit J201: none" | J201 is the board-to-board connector to the connecting board — internal to the assembled tag, not an exposed external port. |
 
 **Important process note:** the pre-existing `analysis/` run (2026-08-29) was **poisoned** —
 `project_settings.source` read `BitTagNG-LIS2DU12.kicad_pcb-back.kicad_pro`, so every
@@ -691,11 +739,12 @@ and its violation fixed.
 
 **Still open — electrical / sourcing:**
 
-1. **Pick one flash and make `Value` match `MPN`** (finding 5). No longer a board risk — the two
-   candidates are pin-identical — but the BOM currently names two different parts.
-   `AT25XE321D` recommended; the only real difference is its 256-byte page erase.
-2. **Confirm the Q501 base resistor** lives in the programming adapter (finding 7). This is now
-   the only open item whose answer could require a board change.
+*(U1 is settled — **AT25FF321A**, `Value` now matches `MPN`. One firmware consequence, below.)*
+
+1. **U302's `Value` still reads `stm32l431kc`** while `MPN` is `STM32L432KCU6` (finding 5). Worth
+   correcting — the L431 has a different peripheral set, so this is not a harmless label quirk.
+*(The Q501 base-resistor question is closed — see finding 7. **No remaining open item requires a
+board change.**)*
 
 **Still open — schematic hygiene, no copper change:**
 

@@ -1907,7 +1907,7 @@
 				)
 			)
 		)
-		(property "Value" "at25ex321D-UUN"
+		(property "Value" "724-AT25FF321A-UUN-T"
 			(at 0 2.76 0)
 			(layer "F.Fab")
 			(hide yes)
