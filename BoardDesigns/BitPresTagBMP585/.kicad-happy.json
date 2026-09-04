@@ -16,7 +16,8 @@
     ],
     "preferred_passive_size": "0201",
     "test_coverage_target": 0,
-    "operating_temp_range_note": "operating_temp_range is currently [-10, 70]. In service the tag sits against a 38 C bird and is exposed to ambient air on the other side. Every part is rated -40...+85 C, so 38 C is comfortably inside all of them; confirm whether the stated range is meant to be the environmental extreme or the tag's own operating range."
+    "operating_temp_range_note": "NOT A DECISION -- this is the kicad-happy tool's built-in commercial default. project_config.py line 586 sets operating_temp_range = [-10, 70] for any target_market that is not industrial/medical, automotive or aerospace; both 'hobby' and 'research' fall through to it. The value was written by the tool, never chosen, and the identical [-10, 70] appears in all six board configs in this repo. It is also currently INERT: no analyzer reads it. Its only real consumer is lifecycle_audit.py --temp-range (rule LT-001), which needs distributor API credentials that are not configured. Replace it with the real deployment envelope when that is known.",
+    "part_temperature_limits": "Every part on this board is rated -40...+85 C, verified against the manufacturer datasheets: STM32L432KC, BMP585, ADXL367, AT25FF321A, RV-3028-C8. D401 CDBQC0130L-HF is Tj -40...+125 C. So the silicon does not constrain the deployment envelope anywhere near [-10, 70]; the binding constraint is the cell and the current budget, not the parts."
   },
   "power_profile": {
     "source": "User-provided design intent",
