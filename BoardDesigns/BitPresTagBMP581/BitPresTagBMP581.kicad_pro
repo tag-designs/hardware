@@ -136,7 +136,7 @@
         "too_many_vias": "error",
         "track_angle": "error",
         "track_dangling": "warning",
-        "track_not_centered_on_via": "ignore",
+        "track_not_centered_on_via": "error",
         "track_on_post_machined_layer": "error",
         "track_segment_length": "error",
         "track_width": "error",
@@ -156,7 +156,7 @@
         "max_error": 0.005,
         "min_clearance": 0.1016,
         "min_connection": 0.0,
-        "min_copper_edge_clearance": 0.0,
+        "min_copper_edge_clearance": 0.3,
         "min_groove_width": 0.0,
         "min_hole_clearance": 0.254,
         "min_hole_to_hole": 0.254,
@@ -168,8 +168,8 @@
         "min_text_thickness": 0.08,
         "min_through_hole_diameter": 0.2,
         "min_track_width": 0.1016,
-        "min_via_annular_width": 0.1016,
-        "min_via_diameter": 0.4572,
+        "min_via_annular_width": 0.1524,
+        "min_via_diameter": 0.5048,
         "solder_mask_to_copper_clearance": 0.0,
         "use_height_for_length_calcs": true
       },
@@ -260,12 +260,8 @@
           "drill": 0.0
         },
         {
-          "diameter": 0.4064,
-          "drill": 0.2032
-        },
-        {
-          "diameter": 0.4572,
-          "drill": 0.254
+          "diameter": 0.5048,
+          "drill": 0.2
         },
         {
           "diameter": 0.61,
@@ -302,7 +298,16 @@
     "equivalence_files": []
   },
   "erc": {
-    "erc_exclusions": [],
+    "erc_exclusions": [
+      [
+        "lib_symbol_issues|444500|927100|00000000-0000-0000-0000-00005b44f199|00000000-0000-0000-0000-000000000000|||",
+        ""
+      ],
+      [
+        "multiple_net_names|825500|736600|8c72ed56-c31b-40e1-811e-fadfefa85caf|229f8cc5-a9e9-4e49-9286-ba7863e32f48|/e44ca67a-43be-444b-8652-f54825a2eb6f|/e44ca67a-43be-444b-8652-f54825a2eb6f|/e44ca67a-43be-444b-8652-f54825a2eb6f",
+        ""
+      ]
+    ],
     "meta": {
       "version": 0
     },
@@ -518,7 +523,7 @@
       "similar_labels": "warning",
       "similar_power": "warning",
       "simulation_model_issue": "ignore",
-      "single_global_label": "ignore",
+      "single_global_label": "warning",
       "stacked_pin_name": "warning",
       "unannotated": "error",
       "unconnected_wire_endpoint": "warning",
@@ -553,8 +558,8 @@
         "schematic_color": "rgba(0, 0, 0, 0.000)",
         "track_width": 0.1016,
         "tuning_profile": "",
-        "via_diameter": 0.4572,
-        "via_drill": 0.254,
+        "via_diameter": 0.5048,
+        "via_drill": 0.2,
         "wire_width": 6
       },
       {
@@ -571,8 +576,8 @@
         "schematic_color": "rgba(0, 0, 0, 0.000)",
         "track_width": 0.1524,
         "tuning_profile": "",
-        "via_diameter": 0.4572,
-        "via_drill": 0.254,
+        "via_diameter": 0.5048,
+        "via_drill": 0.2,
         "wire_width": 6
       },
       {
@@ -607,8 +612,8 @@
         "schematic_color": "rgba(0, 0, 0, 0.000)",
         "track_width": 0.2032,
         "tuning_profile": "",
-        "via_diameter": 0.4572,
-        "via_drill": 0.254,
+        "via_diameter": 0.5048,
+        "via_drill": 0.2,
         "wire_width": 6
       },
       {

@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "project": "BitPresTagBMP581.kicad_pro",
+  "current": "2026-09-04_1822-2",
+  "runs": {
+    "2026-09-04_0738": {
+      "source_hashes": {
+        "BitPresTagBMP581.kicad_sch": "sha256:cdbe765c1c503f096b0e6713fb1d9e3f7284f7e95cdad279d700e7bcfa7fea94",
+        "BitPresTagBMP581.kicad_pcb": "sha256:06773732d29f329cfc53c03d1b3270286ca922200ef792ff1708f8192fe68684",
+        "schematic.json": "sha256:2ffb380043973d12be0763b7fa02992a68ddc42901b4bea33f2b23b37a597bfb",
+        "pcb.json": "sha256:96c0dc70854b48c87c70ad146517bf399dc0fd2284d13fec595e30277132d534"
+      },
+      "outputs": {
+        "schematic": "schematic.json",
+        "pcb": "pcb.json",
+        "cross_analysis": "cross_analysis.json",
+        "emc": "emc.json",
+        "thermal": "thermal.json",
+        "gerber": "gerber.json"
+      },
+      "scripts": {
+        "schematic": "analyze_schematic.py BitPresTagBMP581.kicad_sch"
+      },
+      "generated": "2026-09-04T07:54:05-04:00",
+      "pinned": false
+    },
+    "2026-09-04_1900": {
+      "source_hashes": {
+        "BitPresTagBMP581.kicad_pcb": "sha256:1b2f264c230d1e8600d35df6eccb3a39a8ab749ac7ca2b5775a64c8f98b89486",
+        "BitPresTagBMP581.kicad_sch": "sha256:5e8caab744e565de5ef2ae6b0b79621b3a298da000292f70940d9a04f471dfa6"
+      },
+      "outputs": {
+        "schematic": "schematic.json",
+        "pcb": "pcb.json",
+        "cross_analysis": "cross_analysis.json",
+        "emc": "emc.json",
+        "thermal": "thermal.json",
+        "gerber": "gerber.json"
+      },
+      "scripts": {
+        "pcb": "analyze_pcb.py BitPresTagBMP581.kicad_pcb"
+      },
+      "generated": "2026-09-04T18:36:45-04:00",
+      "pinned": false
+    }
+  }
+}

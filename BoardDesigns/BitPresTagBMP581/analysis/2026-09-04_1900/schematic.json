@@ -1,41 +1,40 @@
 {
   "analyzer_type": "schematic",
-  "schema_version": "1.3.0",
+  "schema_version": "1.4.0",
   "summary": {
-    "total_findings": 21,
+    "total_findings": 19,
     "by_severity": {
       "error": 2,
-      "warning": 6,
-      "info": 13
+      "warning": 3,
+      "info": 14
     }
   },
   "trust_summary": {
-    "total_findings": 21,
+    "total_findings": 19,
     "trust_level": "mixed",
     "by_confidence": {
-      "deterministic": 13,
+      "deterministic": 11,
       "heuristic": 8,
-      "datasheet-backed": 0
+      "datasheet_backed": 0
     },
     "by_evidence_source": {
       "datasheet": 0,
-      "topology": 20,
+      "topology": 19,
       "heuristic_rule": 0,
       "symbol_footprint": 0,
-      "bom": 1,
+      "bom": 0,
       "geometry": 0,
       "api_lookup": 0
     },
-    "provenance_coverage_pct": 90.5,
+    "provenance_coverage_pct": 94.7,
     "bom_coverage": {
-      "total_components": 11,
-      "with_mpn": 11,
+      "total_components": 13,
+      "with_mpn": 13,
       "with_datasheet": 1,
       "mpn_pct": 100.0,
-      "datasheet_pct": 9.1
+      "datasheet_pct": 7.7
     }
   },
-  "file": "/Users/geobrown/Research/tag-designs/hardware/BoardDesigns/BitPresTagBMP581/BitPresTagBMP581.kicad_sch",
   "kicad_version": "10.0",
   "file_version": "20260306",
   "title_block": {
@@ -45,40 +44,36 @@
     "comment_1": "Geoffrey Brown"
   },
   "statistics": {
-    "total_components": 26,
-    "unique_parts": 11,
+    "total_components": 28,
+    "unique_parts": 13,
     "dnp_parts": 0,
-    "total_nets": 41,
-    "total_wires": 107,
+    "total_nets": 42,
+    "total_wires": 111,
     "total_no_connects": 10,
     "component_types": {
       "ic": 5,
-      "capacitor": 12,
+      "capacitor": 13,
       "transistor": 1,
       "connector": 6,
       "diode": 1,
-      "resistor": 1
+      "resistor": 2
     },
     "power_rails": [
-      {
-        "name": "+2V5",
-        "voltage": 2.5
-      },
       {
         "name": "GND",
         "voltage": null
       },
       {
-        "name": "PWR_FLAG",
-        "voltage": null
+        "name": "VBAT",
+        "voltage": 3.0
       },
       {
-        "name": "VBAT",
+        "name": "VCC",
         "voltage": null
       },
       {
         "name": "VIN",
-        "voltage": null
+        "voltage": 2.85
       }
     ],
     "missing_mpn": [],
@@ -220,7 +215,8 @@
       "stages": [
         "schematic",
         "layout"
-      ]
+      ],
+      "finding_id": "schematic:decoupling_analysis-9a1adf60f6b2"
     },
     {
       "connector_ref": "J201",
@@ -276,7 +272,8 @@
       "stages": [
         "schematic",
         "bring_up"
-      ]
+      ],
+      "finding_id": "schematic:debug_interfaces-0c329f183b3a"
     },
     {
       "category": "decoupling_coverage",
@@ -332,7 +329,8 @@
       "detection_id": "",
       "stages": [
         "schematic"
-      ]
+      ],
+      "finding_id": "schematic:DO-DET-c1"
     },
     {
       "category": "reset_pin",
@@ -470,7 +468,8 @@
       "detection_id": "",
       "stages": [
         "schematic"
-      ]
+      ],
+      "finding_id": "schematic:DO-DET-u1"
     },
     {
       "category": "i2c_bus",
@@ -515,7 +514,8 @@
       "detection_id": "",
       "stages": [
         "schematic"
-      ]
+      ],
+      "finding_id": "schematic:DO-DET-u302"
     },
     {
       "category": "i2c_bus",
@@ -560,53 +560,8 @@
       "detection_id": "",
       "stages": [
         "schematic"
-      ]
-    },
-    {
-      "detector": "audit_datasheet_coverage",
-      "rule_id": "DS-002",
-      "severity": "warning",
-      "confidence": "deterministic",
-      "evidence_source": "bom",
-      "category": "verification",
-      "summary": "No datasheets directory found (20/20 parts have MPNs). Sync datasheets before making pin-level claims.",
-      "components": [
-        "C1",
-        "C2",
-        "C3",
-        "C4",
-        "C404",
-        "C5",
-        "C501",
-        "C502",
-        "C503",
-        "C504",
-        "C6",
-        "C7",
-        "D401",
-        "Q501",
-        "R1",
-        "U1",
-        "U2",
-        "U3",
-        "U302",
-        "U501"
       ],
-      "nets": [],
-      "pins": [],
-      "datasheets_dir": null,
-      "datasheet_file_count": 0,
-      "bom_size": 20,
-      "mpn_coverage_percent": 100.0,
-      "recommendation": "Run datasheet sync via the digikey / mouser / lcsc / element14 skill (which one depends on the user's distributor access and API credentials). A ./datasheets/ directory with PDFs and a manifest.json enables pin-level verification in the next analyzer run.",
-      "report_context": {
-        "section": "Datasheet Coverage",
-        "impact": "Review claims must stay at consistency level until datasheets land.",
-        "standard_ref": ""
-      },
-      "stages": [
-        "schematic"
-      ]
+      "finding_id": "schematic:DO-DET-u302#1"
     },
     {
       "connector_ref": "J201",
@@ -662,7 +617,8 @@
       "detection_id": "",
       "stages": [
         "schematic"
-      ]
+      ],
+      "finding_id": "schematic:EP-AUD-j201"
     },
     {
       "memory_reference": "U1",
@@ -708,38 +664,8 @@
       "detection_id": "memory_interfaces:bcfad251af24",
       "stages": [
         "schematic"
-      ]
-    },
-    {
-      "detector": "analyze_connectivity",
-      "rule_id": "NT-001",
-      "severity": "info",
-      "confidence": "deterministic",
-      "evidence_source": "topology",
-      "category": "connectivity",
-      "summary": "Single-pin net: U3.L/M only connects to U3.9 (L/M) (passive)",
-      "description": "Net '__unnamed_16' has exactly one pin: U3.9 (L/M), pin_type='passive'. Verify the intended target \u2014 if this pin should connect somewhere, the wire/label is missing.",
-      "components": [
-        "U3"
       ],
-      "nets": [
-        "__unnamed_16"
-      ],
-      "pins": [
-        "U3.9"
-      ],
-      "net_display_name": "U3.L/M",
-      "pin_type": "passive",
-      "pin_name": "L/M",
-      "recommendation": "Check the schematic at the referenced pin \u2014 add the missing wire or place a no-connect marker if the pin is intentionally floating.",
-      "report_context": {
-        "section": "Connectivity",
-        "impact": "Passive or unclassified pin lonely on its own net.",
-        "standard_ref": ""
-      },
-      "stages": [
-        "schematic"
-      ]
+      "finding_id": "schematic:memory_interfaces-bcfad251af24"
     },
     {
       "ref": "D401",
@@ -778,7 +704,8 @@
       "detection_id": "protection_devices:01e657d23322",
       "stages": [
         "schematic"
-      ]
+      ],
+      "finding_id": "schematic:protection_devices-01e657d23322"
     },
     {
       "detector": "audit_power_pin_dc_paths",
@@ -787,20 +714,20 @@
       "confidence": "heuristic",
       "evidence_source": "topology",
       "category": "power",
-      "summary": "IC power pin U3.4 (VDDIO) has no DC path to a power rail (net 'LPS_PWR')",
-      "description": "Pin U3.4 (VDDIO) is type=power_in on net 'LPS_PWR'. Graph walk (\u22642 hops, rejecting capacitor edges, accepting resistors\u22641\u03a9, inductors, ferrite beads, bridged solder jumpers) did not reach a named power rail. The pin is likely AC-coupled to ground only \u2014 the IC will not power up reliably.",
+      "summary": "IC power pin U3.4 (VDDIO) has no DC path to a power rail (net '__unnamed_13')",
+      "description": "Pin U3.4 (VDDIO) is type=power_in on net '__unnamed_13'. Graph walk (\u22642 hops, rejecting capacitor edges, accepting resistors\u22641\u03a9, inductors, ferrite beads, bridged solder jumpers) did not reach a named power rail. The pin is likely AC-coupled to ground only \u2014 the IC will not power up reliably.",
       "components": [
         "U3"
       ],
       "nets": [
-        "LPS_PWR"
+        "__unnamed_13"
       ],
       "pins": [
         "U3.4 (VDDIO)"
       ],
-      "start_net": "LPS_PWR",
+      "start_net": "__unnamed_13",
       "visited_nets": [
-        "LPS_PWR"
+        "__unnamed_13"
       ],
       "source_path": "none",
       "recommendation": "Verify the schematic for this pin: the DC route must go through a conducting element (direct wire, 0\u03a9 resistor, inductor, ferrite bead, or bridged solder jumper) \u2014 not a capacitor. If the intent was to tie VCC through an LC filter, add the missing inductor or 0\u03a9 in series.",
@@ -821,7 +748,8 @@
       "detection_id": "",
       "stages": [
         "schematic"
-      ]
+      ],
+      "finding_id": "schematic:PP-001:u3"
     },
     {
       "detector": "audit_power_pin_dc_paths",
@@ -830,20 +758,20 @@
       "confidence": "heuristic",
       "evidence_source": "topology",
       "category": "power",
-      "summary": "IC power pin U3.8 (VDD) has no DC path to a power rail (net 'LPS_PWR')",
-      "description": "Pin U3.8 (VDD) is type=power_in on net 'LPS_PWR'. Graph walk (\u22642 hops, rejecting capacitor edges, accepting resistors\u22641\u03a9, inductors, ferrite beads, bridged solder jumpers) did not reach a named power rail. The pin is likely AC-coupled to ground only \u2014 the IC will not power up reliably.",
+      "summary": "IC power pin U3.8 (VDD) has no DC path to a power rail (net '__unnamed_13')",
+      "description": "Pin U3.8 (VDD) is type=power_in on net '__unnamed_13'. Graph walk (\u22642 hops, rejecting capacitor edges, accepting resistors\u22641\u03a9, inductors, ferrite beads, bridged solder jumpers) did not reach a named power rail. The pin is likely AC-coupled to ground only \u2014 the IC will not power up reliably.",
       "components": [
         "U3"
       ],
       "nets": [
-        "LPS_PWR"
+        "__unnamed_13"
       ],
       "pins": [
         "U3.8 (VDD)"
       ],
-      "start_net": "LPS_PWR",
+      "start_net": "__unnamed_13",
       "visited_nets": [
-        "LPS_PWR"
+        "__unnamed_13"
       ],
       "source_path": "none",
       "recommendation": "Verify the schematic for this pin: the DC route must go through a conducting element (direct wire, 0\u03a9 resistor, inductor, ferrite bead, or bridged solder jumper) \u2014 not a capacitor. If the intent was to tie VCC through an LC filter, add the missing inductor or 0\u03a9 in series.",
@@ -864,7 +792,8 @@
       "detection_id": "",
       "stages": [
         "schematic"
-      ]
+      ],
+      "finding_id": "schematic:PP-001:u3#1"
     },
     {
       "detector": "validate_spi_bus",
@@ -907,6 +836,7 @@
         "excluded_by": [],
         "suppressed_candidates": []
       },
+      "finding_id": "schematic:validation_findings-ea4a20c18231",
       "detection_id": "validation_findings:ea4a20c18231",
       "stages": [
         "schematic"
@@ -916,13 +846,13 @@
       "detector": "validate_pullups",
       "rule_id": "PU-001",
       "category": "signal_integrity",
-      "summary": "U2 pin INT2 (__unnamed_13) missing pull-up resistor",
-      "description": "Pin INT2 on U2 (ADXL367BCCZ-RL7) is connected to net __unnamed_13 but has no pull-up resistor. This pin type typically requires an external pull-up to a power rail for correct operation.",
+      "summary": "U2 pin INT2 (__unnamed_15) missing pull-up resistor",
+      "description": "Pin INT2 on U2 (ADXL367BCCZ-RL7) is connected to net __unnamed_15 but has no pull-up resistor. This pin type typically requires an external pull-up to a power rail for correct operation.",
       "components": [
         "U2"
       ],
       "nets": [
-        "__unnamed_13"
+        "__unnamed_15"
       ],
       "pins": [
         {
@@ -934,14 +864,14 @@
       "severity": "warning",
       "confidence": "heuristic",
       "evidence_source": "topology",
-      "recommendation": "Add a 4.7k-10k pull-up resistor from __unnamed_13 to the appropriate power rail.",
+      "recommendation": "Add a 4.7k-10k pull-up resistor from __unnamed_15 to the appropriate power rail.",
       "fix_params": {
         "type": "add_component",
         "components": [
           {
             "type": "resistor",
             "value": "10k",
-            "net_from": "__unnamed_13",
+            "net_from": "__unnamed_15",
             "net_to": "<power_rail>"
           }
         ],
@@ -959,46 +889,73 @@
         "excluded_by": [],
         "suppressed_candidates": []
       },
+      "schema_era": "v1.4",
+      "finding_id": "schematic:validation_findings-5eda6fb399bf",
       "detection_id": "validation_findings:5eda6fb399bf",
       "stages": [
         "schematic"
       ]
     },
     {
-      "detector": "audit_rail_sources",
-      "rule_id": "RS-001",
-      "severity": "warning",
+      "type": "low-pass",
+      "resistor": {
+        "ref": "R2",
+        "value": "10",
+        "ohms": 10.0
+      },
+      "capacitor": {
+        "ref": "C5",
+        "value": "2 caps parallel",
+        "farads": 2e-07,
+        "parallel_caps": [
+          "C5",
+          "C3"
+        ],
+        "package": "0201",
+        "esr_ohm": 0.5,
+        "dielectric": "X7R"
+      },
+      "cutoff_hz": 79577.47,
+      "time_constant_s": 2e-06,
+      "input_net": "LPS_PWR",
+      "output_net": "__unnamed_13",
+      "ground_net": "GND",
+      "cutoff_formatted": "79.58 kHz",
+      "detector": "detect_rc_filters",
+      "rule_id": "RC-DET",
+      "category": "passive_filters",
+      "severity": "info",
       "confidence": "deterministic",
       "evidence_source": "topology",
-      "category": "power",
-      "summary": "LPS_PWR has no declared source",
-      "description": "Net LPS_PWR carries power_in pins but has no power_out pin, no PWR_FLAG, no regulator output mapping, and no bridged solder jumper path to a sourced net.",
-      "components": [],
-      "nets": [
-        "LPS_PWR"
+      "summary": "RC filter R2/C5 at 159154.94Hz",
+      "description": "low-pass RC filter",
+      "components": [
+        "C5",
+        "R2"
       ],
-      "pins": [
-        "U3.4",
-        "U3.8"
-      ],
-      "source_path": "none",
-      "recommendation": "Add a PWR_FLAG to declare the rail as externally powered (e.g. from a connector) or trace the rail back to a regulator output. If the source lives on another sheet, promote the net name to a global label.",
+      "nets": [],
+      "pins": [],
+      "recommendation": "",
       "report_context": {
-        "section": "Power \u2014 Rail Sources",
-        "impact": "Rail has no source visible to the analyser; likely a wiring gap or missing PWR_FLAG.",
+        "section": "Passive Filters",
+        "impact": "",
         "standard_ref": ""
       },
       "provenance": {
-        "evidence": "rs_rail_audit",
+        "evidence": "rc_topology",
         "confidence": "deterministic",
-        "claimed_components": [],
+        "claimed_components": [
+          "R2",
+          "C5"
+        ],
         "excluded_by": [],
         "suppressed_candidates": []
       },
-      "detection_id": "",
+      "detection_id": "rc_filters:d458f92a1744",
       "stages": [
         "schematic"
-      ]
+      ],
+      "finding_id": "schematic:rc_filters-d458f92a1744"
     },
     {
       "detector": "audit_rail_sources",
@@ -1031,51 +988,8 @@
       "detection_id": "",
       "stages": [
         "schematic"
-      ]
-    },
-    {
-      "detector": "audit_rail_sources",
-      "rule_id": "RS-001",
-      "severity": "warning",
-      "confidence": "deterministic",
-      "evidence_source": "topology",
-      "category": "power",
-      "summary": "VIN has no declared source",
-      "description": "Net VIN carries power_in pins but has no power_out pin, no PWR_FLAG, no regulator output mapping, and no bridged solder jumper path to a sourced net.",
-      "components": [],
-      "nets": [
-        "VIN"
       ],
-      "pins": [
-        "#PWR0105.1",
-        "#PWR0107.1",
-        "#PWR0108.1",
-        "#PWR0114.1",
-        "#PWR0115.1",
-        "#PWR8.1",
-        "U1.B2",
-        "U302.1",
-        "U302.17",
-        "U302.5"
-      ],
-      "source_path": "none",
-      "recommendation": "Add a PWR_FLAG to declare the rail as externally powered (e.g. from a connector) or trace the rail back to a regulator output. If the source lives on another sheet, promote the net name to a global label.",
-      "report_context": {
-        "section": "Power \u2014 Rail Sources",
-        "impact": "Rail has no source visible to the analyser; likely a wiring gap or missing PWR_FLAG.",
-        "standard_ref": ""
-      },
-      "provenance": {
-        "evidence": "rs_rail_audit",
-        "confidence": "deterministic",
-        "claimed_components": [],
-        "excluded_by": [],
-        "suppressed_candidates": []
-      },
-      "detection_id": "",
-      "stages": [
-        "schematic"
-      ]
+      "finding_id": "schematic:RS-001:vbat"
     },
     {
       "ref": "U2",
@@ -1090,7 +1004,7 @@
         },
         {
           "pin": "INT2",
-          "net": "__unnamed_13",
+          "net": "__unnamed_15",
           "connected_to_ic": null
         }
       ],
@@ -1128,7 +1042,8 @@
       "detection_id": "sensor_interfaces:ef00a0fef42c",
       "stages": [
         "schematic"
-      ]
+      ],
+      "finding_id": "schematic:sensor_interfaces-ef00a0fef42c"
     },
     {
       "ref": "U3",
@@ -1176,7 +1091,8 @@
       "detection_id": "sensor_interfaces:5dec77f089eb",
       "stages": [
         "schematic"
-      ]
+      ],
+      "finding_id": "schematic:sensor_interfaces-5dec77f089eb"
     },
     {
       "reference": "Q501",
@@ -1224,9 +1140,34 @@
       "detection_id": "transistor_circuits:b9e62df22e58",
       "stages": [
         "schematic"
-      ]
+      ],
+      "finding_id": "schematic:transistor_circuits-b9e62df22e58"
+    },
+    {
+      "detector": "audit_lifecycle_skipped",
+      "rule_id": "LC-007",
+      "severity": "info",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "category": "lifecycle",
+      "summary": "Lifecycle audit not run \u2014 --lifecycle flag not passed",
+      "description": "Component lifecycle / obsolescence audit was not run this session. Reason: --lifecycle flag not passed (run with --lifecycle to query DigiKey / Mouser / LCSC / element14 for obsolescence + operating-temp coverage; requires network + API keys). The review cannot report active / NRND / EOL / obsolete status, last-time-buy windows, or operating-temperature coverage for any BOM part. Treat the lifecycle section of the report as 'not performed'.",
+      "components": [],
+      "nets": [],
+      "pins": [],
+      "recommendation": "Run with --lifecycle (requires DIGIKEY_CLIENT_ID / MOUSER_SEARCH_API_KEY / ELEMENT14_API_KEY env vars; LCSC needs no auth) to populate this section. If intentionally skipped, note it explicitly in the report's 'Not Performed' section.",
+      "report_context": {
+        "section": "Component Lifecycle",
+        "impact": "No obsolescence / temperature-grade evidence available.",
+        "standard_ref": ""
+      },
+      "stages": [
+        "schematic"
+      ],
+      "finding_id": "schematic:LC-007:8ddf539c9727"
     }
   ],
+  "assessments": [],
   "bom": [
     {
       "value": "22uf",
@@ -1292,6 +1233,24 @@
       "type": "capacitor"
     },
     {
+      "value": "220nf",
+      "footprint": "AccelTag:C_0201_0603Metric",
+      "mpn": "GRM033R60J224ME15D",
+      "manufacturer": "",
+      "digikey": "",
+      "mouser": "",
+      "lcsc": "C76932",
+      "element14": "",
+      "datasheet": "",
+      "description": "Unpolarized capacitor",
+      "references": [
+        "C8"
+      ],
+      "quantity": 1,
+      "dnp": false,
+      "type": "capacitor"
+    },
+    {
       "value": "D",
       "footprint": "Diode_SMD:D_0402_1005Metric",
       "mpn": "CDBQC0130L-HF",
@@ -1340,6 +1299,24 @@
       "description": "",
       "references": [
         "R1"
+      ],
+      "quantity": 1,
+      "dnp": false,
+      "type": "resistor"
+    },
+    {
+      "value": "10",
+      "footprint": "AccelTag:R_0201_0603Metric",
+      "mpn": "RC0201FR-0710RL",
+      "manufacturer": "",
+      "digikey": "",
+      "mouser": "",
+      "lcsc": "C106226",
+      "element14": "",
+      "datasheet": "",
+      "description": "Resistor",
+      "references": [
+        "R2"
       ],
       "quantity": 1,
       "dnp": false,
@@ -2168,6 +2145,44 @@
       }
     },
     {
+      "reference": "R2",
+      "value": "10",
+      "lib_id": "Device:R",
+      "lib_name": "",
+      "footprint": "AccelTag:R_0201_0603Metric",
+      "datasheet": "",
+      "description": "Resistor",
+      "mpn": "RC0201FR-0710RL",
+      "manufacturer": "",
+      "digikey": "",
+      "mouser": "",
+      "lcsc": "C106226",
+      "element14": "",
+      "x": 237.49,
+      "y": 135.89,
+      "angle": 90.0,
+      "mirror_x": false,
+      "mirror_y": false,
+      "unit": 1,
+      "uuid": "019fb521-871c-406b-9801-79c198715891",
+      "in_bom": true,
+      "dnp": false,
+      "on_board": true,
+      "pin_uuids": {
+        "2": "02b032c2-fd37-49c9-8baf-fb942326752c",
+        "1": "418ef46d-2217-4717-abfe-c68b84cada6e"
+      },
+      "type": "resistor",
+      "keywords": "R res resistor",
+      "_sheet": 0,
+      "category": "resistor",
+      "parsed_value": 10.0,
+      "pin_nets": {
+        "2": "LPS_PWR",
+        "1": "__unnamed_13"
+      }
+    },
+    {
       "reference": "C7",
       "value": "0.1uf",
       "lib_id": "Device:C",
@@ -2181,7 +2196,7 @@
       "mouser": "",
       "lcsc": "C181047",
       "element14": "",
-      "x": 123.19,
+      "x": 134.62,
       "y": 160.02,
       "angle": 0.0,
       "mirror_x": false,
@@ -2239,8 +2254,8 @@
       "category": "capacitor",
       "parsed_value": 1e-07,
       "pin_nets": {
-        "1": "LPS_PWR",
-        "2": "GND"
+        "2": "GND",
+        "1": "__unnamed_13"
       }
     },
     {
@@ -2277,8 +2292,46 @@
       "category": "capacitor",
       "parsed_value": 1e-07,
       "pin_nets": {
-        "1": "LPS_PWR",
-        "2": "GND"
+        "2": "GND",
+        "1": "__unnamed_13"
+      }
+    },
+    {
+      "reference": "C8",
+      "value": "220nf",
+      "lib_id": "Device:C",
+      "lib_name": "",
+      "footprint": "AccelTag:C_0201_0603Metric",
+      "datasheet": "",
+      "description": "Unpolarized capacitor",
+      "mpn": "GRM033R60J224ME15D",
+      "manufacturer": "",
+      "digikey": "",
+      "mouser": "",
+      "lcsc": "C76932",
+      "element14": "",
+      "x": 115.57,
+      "y": 160.02,
+      "angle": 0.0,
+      "mirror_x": false,
+      "mirror_y": false,
+      "unit": 1,
+      "uuid": "7b4b872b-7641-4220-8d1b-a9e28b3fa3db",
+      "in_bom": true,
+      "dnp": false,
+      "on_board": true,
+      "pin_uuids": {
+        "2": "a1625da9-f11e-45fa-a238-8c446cb78b97",
+        "1": "87dc03ee-58d1-4a62-9612-31bdd7d07cfb"
+      },
+      "type": "capacitor",
+      "keywords": "cap capacitor",
+      "_sheet": 0,
+      "category": "capacitor",
+      "parsed_value": 2.2e-07,
+      "pin_nets": {
+        "2": "GND",
+        "1": "__unnamed_14"
       }
     },
     {
@@ -2410,9 +2463,9 @@
         "1": "ACCEL_SCK",
         "7": "GND",
         "11": "GND",
-        "6": "__unnamed_13",
-        "8": "__unnamed_14",
-        "9": "__unnamed_15"
+        "9": "__unnamed_14",
+        "6": "__unnamed_15",
+        "8": "__unnamed_16"
       }
     },
     {
@@ -2459,12 +2512,12 @@
         "1": "LPS_SCK",
         "5": "lps_rdy",
         "7": "LPS_CS",
-        "4": "LPS_PWR",
-        "8": "LPS_PWR",
         "6": "GND",
         "3": "LPS_MISO",
         "2": "LPS_MOSI",
-        "9": "__unnamed_16"
+        "4": "__unnamed_13",
+        "8": "__unnamed_13",
+        "9": "__unnamed_17"
       }
     },
     {
@@ -2481,7 +2534,7 @@
       "mouser": "",
       "lcsc": "C181047",
       "element14": "",
-      "x": 114.3,
+      "x": 125.73,
       "y": 160.02,
       "angle": 0.0,
       "mirror_x": false,
@@ -2707,6 +2760,7 @@
       ],
       "point_count": 42,
       "no_connect": false,
+      "has_pwr_flag": true,
       "labels": [
         {
           "name": "VIN",
@@ -2732,6 +2786,7 @@
       ],
       "point_count": 3,
       "no_connect": false,
+      "has_pwr_flag": false,
       "labels": [
         {
           "name": "clkout",
@@ -2751,6 +2806,7 @@
       ],
       "point_count": 1,
       "no_connect": true,
+      "has_pwr_flag": false,
       "labels": [],
       "display_name": "U302.PC15"
     },
@@ -2778,6 +2834,7 @@
       ],
       "point_count": 5,
       "no_connect": false,
+      "has_pwr_flag": false,
       "labels": [],
       "display_name": "U302.~{NRST}"
     },
@@ -2799,6 +2856,7 @@
       ],
       "point_count": 2,
       "no_connect": false,
+      "has_pwr_flag": false,
       "labels": [
         {
           "name": "WKUP1",
@@ -2824,6 +2882,7 @@
       ],
       "point_count": 2,
       "no_connect": false,
+      "has_pwr_flag": false,
       "labels": [
         {
           "name": "ACCEL_nCS",
@@ -2849,6 +2908,7 @@
       ],
       "point_count": 2,
       "no_connect": false,
+      "has_pwr_flag": false,
       "labels": [
         {
           "name": "ACCEL_MOSI",
@@ -2874,6 +2934,7 @@
       ],
       "point_count": 2,
       "no_connect": false,
+      "has_pwr_flag": false,
       "labels": [
         {
           "name": "ACCEL_MISO",
@@ -2899,6 +2960,7 @@
       ],
       "point_count": 2,
       "no_connect": false,
+      "has_pwr_flag": false,
       "labels": [
         {
           "name": "ACCEL_SCK",
@@ -2924,6 +2986,7 @@
       ],
       "point_count": 2,
       "no_connect": false,
+      "has_pwr_flag": false,
       "labels": [
         {
           "name": "LPS_SCK",
@@ -2949,6 +3012,7 @@
       ],
       "point_count": 2,
       "no_connect": false,
+      "has_pwr_flag": false,
       "labels": [
         {
           "name": "lps_rdy",
@@ -2968,6 +3032,7 @@
       ],
       "point_count": 1,
       "no_connect": true,
+      "has_pwr_flag": false,
       "labels": [],
       "display_name": "U302.PA7"
     },
@@ -2989,6 +3054,7 @@
       ],
       "point_count": 2,
       "no_connect": false,
+      "has_pwr_flag": false,
       "labels": [
         {
           "name": "LPS_CS",
@@ -3006,32 +3072,15 @@
           "pin_type": "bidirectional"
         },
         {
-          "component": "C5",
-          "pin_number": "1",
+          "component": "R2",
+          "pin_number": "2",
           "pin_name": "",
           "pin_type": "passive"
-        },
-        {
-          "component": "C3",
-          "pin_number": "1",
-          "pin_name": "",
-          "pin_type": "passive"
-        },
-        {
-          "component": "U3",
-          "pin_number": "4",
-          "pin_name": "VDDIO",
-          "pin_type": "power_in"
-        },
-        {
-          "component": "U3",
-          "pin_number": "8",
-          "pin_name": "VDD",
-          "pin_type": "power_in"
         }
       ],
-      "point_count": 10,
+      "point_count": 2,
       "no_connect": false,
+      "has_pwr_flag": false,
       "labels": [
         {
           "name": "LPS_PWR",
@@ -3223,6 +3272,12 @@
           "pin_type": "passive"
         },
         {
+          "component": "C8",
+          "pin_number": "2",
+          "pin_name": "",
+          "pin_type": "passive"
+        },
+        {
           "component": "C6",
           "pin_number": "2",
           "pin_name": "",
@@ -3244,13 +3299,13 @@
           "component": "U2",
           "pin_number": "7",
           "pin_name": "GND",
-          "pin_type": "power_out"
+          "pin_type": "power_in"
         },
         {
           "component": "U2",
           "pin_number": "11",
           "pin_name": "GND",
-          "pin_type": "power_out"
+          "pin_type": "power_in"
         },
         {
           "component": "U3",
@@ -3283,8 +3338,9 @@
           "pin_type": "passive"
         }
       ],
-      "point_count": 59,
+      "point_count": 61,
       "no_connect": false,
+      "has_pwr_flag": false,
       "labels": []
     },
     "__unnamed_3": {
@@ -3299,6 +3355,7 @@
       ],
       "point_count": 1,
       "no_connect": true,
+      "has_pwr_flag": false,
       "labels": [],
       "display_name": "U302.PA8"
     },
@@ -3314,6 +3371,7 @@
       ],
       "point_count": 1,
       "no_connect": true,
+      "has_pwr_flag": false,
       "labels": [],
       "display_name": "U302.PA9"
     },
@@ -3329,6 +3387,7 @@
       ],
       "point_count": 1,
       "no_connect": true,
+      "has_pwr_flag": false,
       "labels": [],
       "display_name": "U302.PA10"
     },
@@ -3350,6 +3409,7 @@
       ],
       "point_count": 2,
       "no_connect": false,
+      "has_pwr_flag": false,
       "labels": [
         {
           "name": "LPS_MISO",
@@ -3375,6 +3435,7 @@
       ],
       "point_count": 2,
       "no_connect": false,
+      "has_pwr_flag": false,
       "labels": [
         {
           "name": "LPS_MOSI",
@@ -3400,6 +3461,7 @@
       ],
       "point_count": 6,
       "no_connect": false,
+      "has_pwr_flag": false,
       "labels": [
         {
           "name": "SWDIO",
@@ -3425,6 +3487,7 @@
       ],
       "point_count": 5,
       "no_connect": false,
+      "has_pwr_flag": false,
       "labels": [
         {
           "name": "SWCLK",
@@ -3450,6 +3513,7 @@
       ],
       "point_count": 3,
       "no_connect": false,
+      "has_pwr_flag": false,
       "labels": [
         {
           "name": "AT25_nCS",
@@ -3475,6 +3539,7 @@
       ],
       "point_count": 2,
       "no_connect": false,
+      "has_pwr_flag": false,
       "labels": [
         {
           "name": "AT25_SCK",
@@ -3500,6 +3565,7 @@
       ],
       "point_count": 2,
       "no_connect": false,
+      "has_pwr_flag": false,
       "labels": [
         {
           "name": "AT25_MISO",
@@ -3525,6 +3591,7 @@
       ],
       "point_count": 2,
       "no_connect": false,
+      "has_pwr_flag": false,
       "labels": [
         {
           "name": "AT25_MOSI",
@@ -3550,6 +3617,7 @@
       ],
       "point_count": 2,
       "no_connect": false,
+      "has_pwr_flag": false,
       "labels": [
         {
           "name": "SCL",
@@ -3575,6 +3643,7 @@
       ],
       "point_count": 2,
       "no_connect": false,
+      "has_pwr_flag": false,
       "labels": [
         {
           "name": "SDA",
@@ -3600,6 +3669,7 @@
       ],
       "point_count": 4,
       "no_connect": false,
+      "has_pwr_flag": false,
       "labels": [
         {
           "name": "RST",
@@ -3631,6 +3701,7 @@
       ],
       "point_count": 5,
       "no_connect": false,
+      "has_pwr_flag": false,
       "labels": [
         {
           "name": "VBAT",
@@ -3650,6 +3721,7 @@
       ],
       "point_count": 1,
       "no_connect": true,
+      "has_pwr_flag": false,
       "labels": [],
       "display_name": "U501.~{INT}"
     },
@@ -3671,6 +3743,7 @@
       ],
       "point_count": 3,
       "no_connect": false,
+      "has_pwr_flag": false,
       "labels": [],
       "display_name": "U501.VBACK"
     },
@@ -3686,6 +3759,7 @@
       ],
       "point_count": 1,
       "no_connect": true,
+      "has_pwr_flag": false,
       "labels": []
     },
     "__unnamed_9": {
@@ -3700,6 +3774,7 @@
       ],
       "point_count": 1,
       "no_connect": true,
+      "has_pwr_flag": false,
       "labels": []
     },
     "__unnamed_10": {
@@ -3714,6 +3789,7 @@
       ],
       "point_count": 1,
       "no_connect": true,
+      "has_pwr_flag": false,
       "labels": [],
       "display_name": "U1.nWP"
     },
@@ -3729,6 +3805,7 @@
       ],
       "point_count": 1,
       "no_connect": true,
+      "has_pwr_flag": false,
       "labels": []
     },
     "__unnamed_12": {
@@ -3743,10 +3820,72 @@
       ],
       "point_count": 1,
       "no_connect": true,
+      "has_pwr_flag": false,
       "labels": []
     },
     "__unnamed_13": {
       "name": "__unnamed_13",
+      "pins": [
+        {
+          "component": "R2",
+          "pin_number": "1",
+          "pin_name": "",
+          "pin_type": "passive"
+        },
+        {
+          "component": "C5",
+          "pin_number": "1",
+          "pin_name": "",
+          "pin_type": "passive"
+        },
+        {
+          "component": "C3",
+          "pin_number": "1",
+          "pin_name": "",
+          "pin_type": "passive"
+        },
+        {
+          "component": "U3",
+          "pin_number": "4",
+          "pin_name": "VDDIO",
+          "pin_type": "power_in"
+        },
+        {
+          "component": "U3",
+          "pin_number": "8",
+          "pin_name": "VDD",
+          "pin_type": "power_in"
+        }
+      ],
+      "point_count": 9,
+      "no_connect": false,
+      "has_pwr_flag": true,
+      "labels": []
+    },
+    "__unnamed_14": {
+      "name": "__unnamed_14",
+      "pins": [
+        {
+          "component": "C8",
+          "pin_number": "1",
+          "pin_name": "",
+          "pin_type": "passive"
+        },
+        {
+          "component": "U2",
+          "pin_number": "9",
+          "pin_name": "VREG_OUT",
+          "pin_type": "output"
+        }
+      ],
+      "point_count": 3,
+      "no_connect": false,
+      "has_pwr_flag": false,
+      "labels": [],
+      "display_name": "U2.VREG_OUT"
+    },
+    "__unnamed_15": {
+      "name": "__unnamed_15",
       "pins": [
         {
           "component": "U2",
@@ -3757,11 +3896,12 @@
       ],
       "point_count": 1,
       "no_connect": true,
+      "has_pwr_flag": false,
       "labels": [],
       "display_name": "U2.INT2"
     },
-    "__unnamed_14": {
-      "name": "__unnamed_14",
+    "__unnamed_16": {
+      "name": "__unnamed_16",
       "pins": [
         {
           "component": "U2",
@@ -3772,26 +3912,12 @@
       ],
       "point_count": 1,
       "no_connect": true,
+      "has_pwr_flag": false,
       "labels": [],
       "display_name": "U2.ADC_IN"
     },
-    "__unnamed_15": {
-      "name": "__unnamed_15",
-      "pins": [
-        {
-          "component": "U2",
-          "pin_number": "9",
-          "pin_name": "VREG_OUT",
-          "pin_type": "output"
-        }
-      ],
-      "point_count": 1,
-      "no_connect": true,
-      "labels": [],
-      "display_name": "U2.VREG_OUT"
-    },
-    "__unnamed_16": {
-      "name": "__unnamed_16",
+    "__unnamed_17": {
+      "name": "__unnamed_17",
       "pins": [
         {
           "component": "U3",
@@ -3801,7 +3927,8 @@
         }
       ],
       "point_count": 1,
-      "no_connect": false,
+      "no_connect": true,
+      "has_pwr_flag": false,
       "labels": [],
       "display_name": "U3.L/M"
     }
@@ -3813,16 +3940,6 @@
       "ic_mpn": "STM32L432KCU6",
       "ic_lib_id": "BitTagNG:stm32l432-AccelTag",
       "neighbor_components": [
-        {
-          "ref": "C3",
-          "value": "0.1uf",
-          "type": "capacitor"
-        },
-        {
-          "ref": "C5",
-          "value": "0.1uf",
-          "type": "capacitor"
-        },
         {
           "ref": "C502",
           "value": "0.1uf",
@@ -3837,6 +3954,11 @@
           "ref": "Q501",
           "value": "PMBT2222AMBYL",
           "type": "transistor"
+        },
+        {
+          "ref": "R2",
+          "value": "10",
+          "type": "resistor"
         },
         {
           "ref": "U1",
@@ -3901,6 +4023,11 @@
       "ic_lib_id": "tag_library:ADXL367BCCZ-RL7",
       "neighbor_components": [
         {
+          "ref": "C8",
+          "value": "220nf",
+          "type": "capacitor"
+        },
+        {
           "ref": "U302",
           "value": "stm32l431kc",
           "type": "ic"
@@ -3923,6 +4050,11 @@
           "ref": "C5",
           "value": "0.1uf",
           "type": "capacitor"
+        },
+        {
+          "ref": "R2",
+          "value": "10",
+          "type": "resistor"
         },
         {
           "ref": "U302",
@@ -4442,32 +4574,19 @@
           "net": "LPS_PWR",
           "connected_to": [
             {
-              "ref": "C5",
-              "value": "0.1uf",
-              "type": "capacitor",
-              "pin": "1",
+              "ref": "R2",
+              "value": "10",
+              "type": "resistor",
+              "pin": "2",
               "pin_name": ""
-            },
+            }
+          ],
+          "resistors": [
             {
-              "ref": "C3",
-              "value": "0.1uf",
-              "type": "capacitor",
-              "pin": "1",
-              "pin_name": ""
-            },
-            {
-              "ref": "U3",
-              "value": "BMP585",
-              "type": "ic",
-              "pin": "4",
-              "pin_name": "VDDIO"
-            },
-            {
-              "ref": "U3",
-              "value": "BMP585",
-              "type": "ic",
-              "pin": "8",
-              "pin_name": "VDD"
+              "ref": "R2",
+              "value": "10",
+              "direction": "series",
+              "to_net": "__unnamed_13"
             }
           ]
         },
@@ -4585,6 +4704,13 @@
             {
               "ref": "C3",
               "value": "0.1uf",
+              "type": "capacitor",
+              "pin": "2",
+              "pin_name": ""
+            },
+            {
+              "ref": "C8",
+              "value": "220nf",
               "type": "capacitor",
               "pin": "2",
               "pin_name": ""
@@ -5085,6 +5211,13 @@
               "pin_name": ""
             },
             {
+              "ref": "C8",
+              "value": "220nf",
+              "type": "capacitor",
+              "pin": "2",
+              "pin_name": ""
+            },
+            {
               "ref": "C6",
               "value": "47uf",
               "type": "capacitor",
@@ -5250,6 +5383,13 @@
               "pin_name": ""
             },
             {
+              "ref": "C8",
+              "value": "220nf",
+              "type": "capacitor",
+              "pin": "2",
+              "pin_name": ""
+            },
+            {
               "ref": "C6",
               "value": "47uf",
               "type": "capacitor",
@@ -5410,6 +5550,13 @@
             {
               "ref": "C3",
               "value": "0.1uf",
+              "type": "capacitor",
+              "pin": "2",
+              "pin_name": ""
+            },
+            {
+              "ref": "C8",
+              "value": "220nf",
               "type": "capacitor",
               "pin": "2",
               "pin_name": ""
@@ -5900,6 +6047,13 @@
               "pin_name": ""
             },
             {
+              "ref": "C8",
+              "value": "220nf",
+              "type": "capacitor",
+              "pin": "2",
+              "pin_name": ""
+            },
+            {
               "ref": "C6",
               "value": "47uf",
               "type": "capacitor",
@@ -6224,6 +6378,13 @@
               "pin_name": ""
             },
             {
+              "ref": "C8",
+              "value": "220nf",
+              "type": "capacitor",
+              "pin": "2",
+              "pin_name": ""
+            },
+            {
               "ref": "C6",
               "value": "47uf",
               "type": "capacitor",
@@ -6389,6 +6550,13 @@
               "pin_name": ""
             },
             {
+              "ref": "C8",
+              "value": "220nf",
+              "type": "capacitor",
+              "pin": "2",
+              "pin_name": ""
+            },
+            {
               "ref": "C6",
               "value": "47uf",
               "type": "capacitor",
@@ -6549,6 +6717,13 @@
             {
               "ref": "C3",
               "value": "0.1uf",
+              "type": "capacitor",
+              "pin": "2",
+              "pin_name": ""
+            },
+            {
+              "ref": "C8",
+              "value": "220nf",
               "type": "capacitor",
               "pin": "2",
               "pin_name": ""
@@ -6780,32 +6955,19 @@
           "net": "LPS_PWR",
           "connected_to": [
             {
-              "ref": "C5",
-              "value": "0.1uf",
-              "type": "capacitor",
-              "pin": "1",
+              "ref": "R2",
+              "value": "10",
+              "type": "resistor",
+              "pin": "2",
               "pin_name": ""
-            },
+            }
+          ],
+          "resistors": [
             {
-              "ref": "C3",
-              "value": "0.1uf",
-              "type": "capacitor",
-              "pin": "1",
-              "pin_name": ""
-            },
-            {
-              "ref": "U3",
-              "value": "BMP585",
-              "type": "ic",
-              "pin": "4",
-              "pin_name": "VDDIO"
-            },
-            {
-              "ref": "U3",
-              "value": "BMP585",
-              "type": "ic",
-              "pin": "8",
-              "pin_name": "VDD"
+              "ref": "R2",
+              "value": "10",
+              "direction": "series",
+              "to_net": "__unnamed_13"
             }
           ]
         },
@@ -7391,6 +7553,13 @@
               "pin_name": ""
             },
             {
+              "ref": "C8",
+              "value": "220nf",
+              "type": "capacitor",
+              "pin": "2",
+              "pin_name": ""
+            },
+            {
               "ref": "C6",
               "value": "47uf",
               "type": "capacitor",
@@ -7574,6 +7743,13 @@
             {
               "ref": "C3",
               "value": "0.1uf",
+              "type": "capacitor",
+              "pin": "2",
+              "pin_name": ""
+            },
+            {
+              "ref": "C8",
+              "value": "220nf",
               "type": "capacitor",
               "pin": "2",
               "pin_name": ""
@@ -8053,6 +8229,13 @@
               "pin_name": ""
             },
             {
+              "ref": "C8",
+              "value": "220nf",
+              "type": "capacitor",
+              "pin": "2",
+              "pin_name": ""
+            },
+            {
               "ref": "C6",
               "value": "47uf",
               "type": "capacitor",
@@ -8236,6 +8419,13 @@
             {
               "ref": "C3",
               "value": "0.1uf",
+              "type": "capacitor",
+              "pin": "2",
+              "pin_name": ""
+            },
+            {
+              "ref": "C8",
+              "value": "220nf",
               "type": "capacitor",
               "pin": "2",
               "pin_name": ""
@@ -8506,6 +8696,13 @@
             {
               "ref": "C3",
               "value": "0.1uf",
+              "type": "capacitor",
+              "pin": "2",
+              "pin_name": ""
+            },
+            {
+              "ref": "C8",
+              "value": "220nf",
               "type": "capacitor",
               "pin": "2",
               "pin_name": ""
@@ -8886,6 +9083,13 @@
               "pin_name": ""
             },
             {
+              "ref": "C8",
+              "value": "220nf",
+              "type": "capacitor",
+              "pin": "2",
+              "pin_name": ""
+            },
+            {
               "ref": "C6",
               "value": "47uf",
               "type": "capacitor",
@@ -9062,6 +9266,13 @@
             {
               "ref": "C3",
               "value": "0.1uf",
+              "type": "capacitor",
+              "pin": "2",
+              "pin_name": ""
+            },
+            {
+              "ref": "C8",
+              "value": "220nf",
               "type": "capacitor",
               "pin": "2",
               "pin_name": ""
@@ -9414,6 +9625,13 @@
             {
               "ref": "C3",
               "value": "0.1uf",
+              "type": "capacitor",
+              "pin": "2",
+              "pin_name": ""
+            },
+            {
+              "ref": "C8",
+              "value": "220nf",
               "type": "capacitor",
               "pin": "2",
               "pin_name": ""
@@ -9931,6 +10149,13 @@
               "pin_name": ""
             },
             {
+              "ref": "C8",
+              "value": "220nf",
+              "type": "capacitor",
+              "pin": "2",
+              "pin_name": ""
+            },
+            {
               "ref": "C6",
               "value": "47uf",
               "type": "capacitor",
@@ -10478,6 +10703,13 @@
               "pin_name": ""
             },
             {
+              "ref": "C8",
+              "value": "220nf",
+              "type": "capacitor",
+              "pin": "2",
+              "pin_name": ""
+            },
+            {
               "ref": "C6",
               "value": "47uf",
               "type": "capacitor",
@@ -10887,7 +11119,7 @@
         {
           "pin_number": "7",
           "pin_name": "GND",
-          "pin_type": "power_out",
+          "pin_type": "power_in",
           "net": "GND",
           "connected_to": [
             {
@@ -11031,6 +11263,13 @@
               "pin_name": ""
             },
             {
+              "ref": "C8",
+              "value": "220nf",
+              "type": "capacitor",
+              "pin": "2",
+              "pin_name": ""
+            },
+            {
               "ref": "C6",
               "value": "47uf",
               "type": "capacitor",
@@ -11074,8 +11313,16 @@
           "pin_number": "9",
           "pin_name": "VREG_OUT",
           "pin_type": "output",
-          "net": "NO_CONNECT",
-          "connected_to": []
+          "net": "__unnamed_14",
+          "connected_to": [
+            {
+              "ref": "C8",
+              "value": "220nf",
+              "type": "capacitor",
+              "pin": "1",
+              "pin_name": ""
+            }
+          ]
         },
         {
           "pin_number": "10",
@@ -11246,7 +11493,7 @@
         {
           "pin_number": "11",
           "pin_name": "GND",
-          "pin_type": "power_out",
+          "pin_type": "power_in",
           "net": "GND",
           "connected_to": [
             {
@@ -11385,6 +11632,13 @@
             {
               "ref": "C3",
               "value": "0.1uf",
+              "type": "capacitor",
+              "pin": "2",
+              "pin_name": ""
+            },
+            {
+              "ref": "C8",
+              "value": "220nf",
               "type": "capacitor",
               "pin": "2",
               "pin_name": ""
@@ -11593,7 +11847,7 @@
         {
           "pin_number": "7",
           "pin_name": "GND",
-          "pin_type": "power_out",
+          "pin_type": "power_in",
           "net": "GND",
           "connected_to": [
             {
@@ -11732,6 +11986,199 @@
             {
               "ref": "C3",
               "value": "0.1uf",
+              "type": "capacitor",
+              "pin": "2",
+              "pin_name": ""
+            },
+            {
+              "ref": "C8",
+              "value": "220nf",
+              "type": "capacitor",
+              "pin": "2",
+              "pin_name": ""
+            },
+            {
+              "ref": "C6",
+              "value": "47uf",
+              "type": "capacitor",
+              "pin": "2",
+              "pin_name": ""
+            },
+            {
+              "ref": "U3",
+              "value": "BMP585",
+              "type": "ic",
+              "pin": "6",
+              "pin_name": "VSSIO/VSS"
+            },
+            {
+              "ref": "C1",
+              "value": "0.1uf",
+              "type": "capacitor",
+              "pin": "2",
+              "pin_name": ""
+            },
+            {
+              "ref": "C4",
+              "value": "22uf",
+              "type": "capacitor",
+              "pin": "2",
+              "pin_name": ""
+            }
+          ],
+          "has_decoupling_cap": true,
+          "decoupling_caps": [],
+          "note": "Ground net \u2014 decoupling caps listed on VCC/VDD pins"
+        },
+        {
+          "pin_number": "11",
+          "pin_name": "GND",
+          "pin_type": "power_in",
+          "net": "GND",
+          "connected_to": [
+            {
+              "ref": "U302",
+              "value": "stm32l431kc",
+              "type": "ic",
+              "pin": "16",
+              "pin_name": "VSS"
+            },
+            {
+              "ref": "U302",
+              "value": "stm32l431kc",
+              "type": "ic",
+              "pin": "31",
+              "pin_name": "BOOT0"
+            },
+            {
+              "ref": "U302",
+              "value": "stm32l431kc",
+              "type": "ic",
+              "pin": "32",
+              "pin_name": "VSS"
+            },
+            {
+              "ref": "U302",
+              "value": "stm32l431kc",
+              "type": "ic",
+              "pin": "33",
+              "pin_name": "GND"
+            },
+            {
+              "ref": "C502",
+              "value": "0.1uf",
+              "type": "capacitor",
+              "pin": "2",
+              "pin_name": ""
+            },
+            {
+              "ref": "C501",
+              "value": "0.1uf",
+              "type": "capacitor",
+              "pin": "2",
+              "pin_name": ""
+            },
+            {
+              "ref": "Q501",
+              "value": "PMBT2222AMBYL",
+              "type": "transistor",
+              "pin": "2",
+              "pin_name": "E"
+            },
+            {
+              "ref": "C503",
+              "value": "0.1uf",
+              "type": "capacitor",
+              "pin": "2",
+              "pin_name": ""
+            },
+            {
+              "ref": "J201",
+              "value": "CONN_02X04",
+              "type": "connector",
+              "pin": "6",
+              "pin_name": "Pin_6"
+            },
+            {
+              "ref": "J401",
+              "value": "CONN_01X02",
+              "type": "connector",
+              "pin": "2",
+              "pin_name": "Pin_2"
+            },
+            {
+              "ref": "C404",
+              "value": "22uf",
+              "type": "capacitor",
+              "pin": "2",
+              "pin_name": ""
+            },
+            {
+              "ref": "U501",
+              "value": "RV-3028-C8-32.768kHz-1PPM-TA-QC",
+              "type": "ic",
+              "pin": "5",
+              "pin_name": "GND"
+            },
+            {
+              "ref": "U501",
+              "value": "RV-3028-C8-32.768kHz-1PPM-TA-QC",
+              "type": "ic",
+              "pin": "8",
+              "pin_name": "EVI"
+            },
+            {
+              "ref": "R1",
+              "value": "10k",
+              "type": "resistor",
+              "pin": "2",
+              "pin_name": ""
+            },
+            {
+              "ref": "U1",
+              "value": "at25ex321D-UUN",
+              "type": "ic",
+              "pin": "C3",
+              "pin_name": "GND"
+            },
+            {
+              "ref": "C2",
+              "value": "0.1uf",
+              "type": "capacitor",
+              "pin": "2",
+              "pin_name": ""
+            },
+            {
+              "ref": "C7",
+              "value": "0.1uf",
+              "type": "capacitor",
+              "pin": "2",
+              "pin_name": ""
+            },
+            {
+              "ref": "C5",
+              "value": "0.1uf",
+              "type": "capacitor",
+              "pin": "2",
+              "pin_name": ""
+            },
+            {
+              "ref": "C504",
+              "value": "0.1uf",
+              "type": "capacitor",
+              "pin": "2",
+              "pin_name": ""
+            },
+            {
+              "ref": "C3",
+              "value": "0.1uf",
+              "type": "capacitor",
+              "pin": "2",
+              "pin_name": ""
+            },
+            {
+              "ref": "C8",
+              "value": "220nf",
               "type": "capacitor",
               "pin": "2",
               "pin_name": ""
@@ -11934,185 +12381,6 @@
               "value": "22uf"
             }
           ]
-        },
-        {
-          "pin_number": "11",
-          "pin_name": "GND",
-          "pin_type": "power_out",
-          "net": "GND",
-          "connected_to": [
-            {
-              "ref": "U302",
-              "value": "stm32l431kc",
-              "type": "ic",
-              "pin": "16",
-              "pin_name": "VSS"
-            },
-            {
-              "ref": "U302",
-              "value": "stm32l431kc",
-              "type": "ic",
-              "pin": "31",
-              "pin_name": "BOOT0"
-            },
-            {
-              "ref": "U302",
-              "value": "stm32l431kc",
-              "type": "ic",
-              "pin": "32",
-              "pin_name": "VSS"
-            },
-            {
-              "ref": "U302",
-              "value": "stm32l431kc",
-              "type": "ic",
-              "pin": "33",
-              "pin_name": "GND"
-            },
-            {
-              "ref": "C502",
-              "value": "0.1uf",
-              "type": "capacitor",
-              "pin": "2",
-              "pin_name": ""
-            },
-            {
-              "ref": "C501",
-              "value": "0.1uf",
-              "type": "capacitor",
-              "pin": "2",
-              "pin_name": ""
-            },
-            {
-              "ref": "Q501",
-              "value": "PMBT2222AMBYL",
-              "type": "transistor",
-              "pin": "2",
-              "pin_name": "E"
-            },
-            {
-              "ref": "C503",
-              "value": "0.1uf",
-              "type": "capacitor",
-              "pin": "2",
-              "pin_name": ""
-            },
-            {
-              "ref": "J201",
-              "value": "CONN_02X04",
-              "type": "connector",
-              "pin": "6",
-              "pin_name": "Pin_6"
-            },
-            {
-              "ref": "J401",
-              "value": "CONN_01X02",
-              "type": "connector",
-              "pin": "2",
-              "pin_name": "Pin_2"
-            },
-            {
-              "ref": "C404",
-              "value": "22uf",
-              "type": "capacitor",
-              "pin": "2",
-              "pin_name": ""
-            },
-            {
-              "ref": "U501",
-              "value": "RV-3028-C8-32.768kHz-1PPM-TA-QC",
-              "type": "ic",
-              "pin": "5",
-              "pin_name": "GND"
-            },
-            {
-              "ref": "U501",
-              "value": "RV-3028-C8-32.768kHz-1PPM-TA-QC",
-              "type": "ic",
-              "pin": "8",
-              "pin_name": "EVI"
-            },
-            {
-              "ref": "R1",
-              "value": "10k",
-              "type": "resistor",
-              "pin": "2",
-              "pin_name": ""
-            },
-            {
-              "ref": "U1",
-              "value": "at25ex321D-UUN",
-              "type": "ic",
-              "pin": "C3",
-              "pin_name": "GND"
-            },
-            {
-              "ref": "C2",
-              "value": "0.1uf",
-              "type": "capacitor",
-              "pin": "2",
-              "pin_name": ""
-            },
-            {
-              "ref": "C7",
-              "value": "0.1uf",
-              "type": "capacitor",
-              "pin": "2",
-              "pin_name": ""
-            },
-            {
-              "ref": "C5",
-              "value": "0.1uf",
-              "type": "capacitor",
-              "pin": "2",
-              "pin_name": ""
-            },
-            {
-              "ref": "C504",
-              "value": "0.1uf",
-              "type": "capacitor",
-              "pin": "2",
-              "pin_name": ""
-            },
-            {
-              "ref": "C3",
-              "value": "0.1uf",
-              "type": "capacitor",
-              "pin": "2",
-              "pin_name": ""
-            },
-            {
-              "ref": "C6",
-              "value": "47uf",
-              "type": "capacitor",
-              "pin": "2",
-              "pin_name": ""
-            },
-            {
-              "ref": "U3",
-              "value": "BMP585",
-              "type": "ic",
-              "pin": "6",
-              "pin_name": "VSSIO/VSS"
-            },
-            {
-              "ref": "C1",
-              "value": "0.1uf",
-              "type": "capacitor",
-              "pin": "2",
-              "pin_name": ""
-            },
-            {
-              "ref": "C4",
-              "value": "22uf",
-              "type": "capacitor",
-              "pin": "2",
-              "pin_name": ""
-            }
-          ],
-          "has_decoupling_cap": true,
-          "decoupling_caps": [],
-          "note": "Ground net \u2014 decoupling caps listed on VCC/VDD pins"
         },
         {
           "pin_number": "12",
@@ -12375,8 +12643,16 @@
           "pin_number": "9",
           "pin_name": "VREG_OUT",
           "pin_type": "output",
-          "net": "NO_CONNECT",
-          "connected_to": []
+          "net": "__unnamed_14",
+          "connected_to": [
+            {
+              "ref": "C8",
+              "value": "220nf",
+              "type": "capacitor",
+              "pin": "1",
+              "pin_name": ""
+            }
+          ]
         }
       ],
       "decoupling_caps_by_rail": {
@@ -12481,14 +12757,14 @@
           "pin_number": "4",
           "pin_name": "VDDIO",
           "pin_type": "power_in",
-          "net": "LPS_PWR",
+          "net": "__unnamed_13",
           "connected_to": [
             {
-              "ref": "U302",
-              "value": "stm32l431kc",
-              "type": "ic",
-              "pin": "15",
-              "pin_name": "PB1"
+              "ref": "R2",
+              "value": "10",
+              "type": "resistor",
+              "pin": "1",
+              "pin_name": ""
             },
             {
               "ref": "C5",
@@ -12679,6 +12955,13 @@
               "pin_name": ""
             },
             {
+              "ref": "C8",
+              "value": "220nf",
+              "type": "capacitor",
+              "pin": "2",
+              "pin_name": ""
+            },
+            {
               "ref": "C6",
               "value": "47uf",
               "type": "capacitor",
@@ -12737,14 +13020,14 @@
           "pin_number": "8",
           "pin_name": "VDD",
           "pin_type": "power_in",
-          "net": "LPS_PWR",
+          "net": "__unnamed_13",
           "connected_to": [
             {
-              "ref": "U302",
-              "value": "stm32l431kc",
-              "type": "ic",
-              "pin": "15",
-              "pin_name": "PB1"
+              "ref": "R2",
+              "value": "10",
+              "type": "resistor",
+              "pin": "1",
+              "pin_name": ""
             },
             {
               "ref": "C5",
@@ -12777,7 +13060,7 @@
           "pin_number": "9",
           "pin_name": "L/M",
           "pin_type": "passive",
-          "net": "__unnamed_16",
+          "net": "NO_CONNECT",
           "connected_to": []
         }
       ],
@@ -12786,14 +13069,14 @@
           "pin_number": "4",
           "pin_name": "VDDIO",
           "pin_type": "power_in",
-          "net": "LPS_PWR",
+          "net": "__unnamed_13",
           "connected_to": [
             {
-              "ref": "U302",
-              "value": "stm32l431kc",
-              "type": "ic",
-              "pin": "15",
-              "pin_name": "PB1"
+              "ref": "R2",
+              "value": "10",
+              "type": "resistor",
+              "pin": "1",
+              "pin_name": ""
             },
             {
               "ref": "C5",
@@ -12969,6 +13252,13 @@
               "pin_name": ""
             },
             {
+              "ref": "C8",
+              "value": "220nf",
+              "type": "capacitor",
+              "pin": "2",
+              "pin_name": ""
+            },
+            {
               "ref": "C6",
               "value": "47uf",
               "type": "capacitor",
@@ -13012,14 +13302,14 @@
           "pin_number": "8",
           "pin_name": "VDD",
           "pin_type": "power_in",
-          "net": "LPS_PWR",
+          "net": "__unnamed_13",
           "connected_to": [
             {
-              "ref": "U302",
-              "value": "stm32l431kc",
-              "type": "ic",
-              "pin": "15",
-              "pin_name": "PB1"
+              "ref": "R2",
+              "value": "10",
+              "type": "resistor",
+              "pin": "1",
+              "pin_name": ""
             },
             {
               "ref": "C5",
@@ -13129,12 +13419,12 @@
           "pin_number": "9",
           "pin_name": "L/M",
           "pin_type": "passive",
-          "net": "__unnamed_16",
+          "net": "NO_CONNECT",
           "connected_to": []
         }
       ],
       "decoupling_caps_by_rail": {
-        "LPS_PWR": [
+        "__unnamed_13": [
           {
             "ref": "C5",
             "value": "0.1uf"
@@ -13145,6 +13435,487 @@
           }
         ]
       }
+    }
+  ],
+  "transistor_pin_analysis": [
+    {
+      "reference": "Q501",
+      "value": "PMBT2222AMBYL",
+      "type": "transistor",
+      "lib_id": "Device:Q_NPN_BEC",
+      "mpn": "PMBT2222AMBYL",
+      "description": "",
+      "datasheet": "",
+      "function": "",
+      "total_pins": 3,
+      "unconnected_pins": 0,
+      "pins": [
+        {
+          "pin_number": "1",
+          "pin_name": "B",
+          "pin_type": "input",
+          "net": "RST",
+          "connected_to": [
+            {
+              "ref": "J201",
+              "value": "CONN_02X04",
+              "type": "connector",
+              "pin": "5",
+              "pin_name": "Pin_5"
+            }
+          ]
+        },
+        {
+          "pin_number": "2",
+          "pin_name": "E",
+          "pin_type": "passive",
+          "net": "GND",
+          "connected_to": [
+            {
+              "ref": "U302",
+              "value": "stm32l431kc",
+              "type": "ic",
+              "pin": "16",
+              "pin_name": "VSS"
+            },
+            {
+              "ref": "U302",
+              "value": "stm32l431kc",
+              "type": "ic",
+              "pin": "31",
+              "pin_name": "BOOT0"
+            },
+            {
+              "ref": "U302",
+              "value": "stm32l431kc",
+              "type": "ic",
+              "pin": "32",
+              "pin_name": "VSS"
+            },
+            {
+              "ref": "U302",
+              "value": "stm32l431kc",
+              "type": "ic",
+              "pin": "33",
+              "pin_name": "GND"
+            },
+            {
+              "ref": "C502",
+              "value": "0.1uf",
+              "type": "capacitor",
+              "pin": "2",
+              "pin_name": ""
+            },
+            {
+              "ref": "C501",
+              "value": "0.1uf",
+              "type": "capacitor",
+              "pin": "2",
+              "pin_name": ""
+            },
+            {
+              "ref": "C503",
+              "value": "0.1uf",
+              "type": "capacitor",
+              "pin": "2",
+              "pin_name": ""
+            },
+            {
+              "ref": "J201",
+              "value": "CONN_02X04",
+              "type": "connector",
+              "pin": "6",
+              "pin_name": "Pin_6"
+            },
+            {
+              "ref": "J401",
+              "value": "CONN_01X02",
+              "type": "connector",
+              "pin": "2",
+              "pin_name": "Pin_2"
+            },
+            {
+              "ref": "C404",
+              "value": "22uf",
+              "type": "capacitor",
+              "pin": "2",
+              "pin_name": ""
+            },
+            {
+              "ref": "U501",
+              "value": "RV-3028-C8-32.768kHz-1PPM-TA-QC",
+              "type": "ic",
+              "pin": "5",
+              "pin_name": "GND"
+            },
+            {
+              "ref": "U501",
+              "value": "RV-3028-C8-32.768kHz-1PPM-TA-QC",
+              "type": "ic",
+              "pin": "8",
+              "pin_name": "EVI"
+            },
+            {
+              "ref": "R1",
+              "value": "10k",
+              "type": "resistor",
+              "pin": "2",
+              "pin_name": ""
+            },
+            {
+              "ref": "U1",
+              "value": "at25ex321D-UUN",
+              "type": "ic",
+              "pin": "C3",
+              "pin_name": "GND"
+            },
+            {
+              "ref": "C2",
+              "value": "0.1uf",
+              "type": "capacitor",
+              "pin": "2",
+              "pin_name": ""
+            },
+            {
+              "ref": "C7",
+              "value": "0.1uf",
+              "type": "capacitor",
+              "pin": "2",
+              "pin_name": ""
+            },
+            {
+              "ref": "C5",
+              "value": "0.1uf",
+              "type": "capacitor",
+              "pin": "2",
+              "pin_name": ""
+            },
+            {
+              "ref": "C504",
+              "value": "0.1uf",
+              "type": "capacitor",
+              "pin": "2",
+              "pin_name": ""
+            },
+            {
+              "ref": "C3",
+              "value": "0.1uf",
+              "type": "capacitor",
+              "pin": "2",
+              "pin_name": ""
+            },
+            {
+              "ref": "C8",
+              "value": "220nf",
+              "type": "capacitor",
+              "pin": "2",
+              "pin_name": ""
+            },
+            {
+              "ref": "C6",
+              "value": "47uf",
+              "type": "capacitor",
+              "pin": "2",
+              "pin_name": ""
+            },
+            {
+              "ref": "U2",
+              "value": "ADXL367BCCZ-RL7",
+              "type": "ic",
+              "pin": "7",
+              "pin_name": "GND"
+            },
+            {
+              "ref": "U2",
+              "value": "ADXL367BCCZ-RL7",
+              "type": "ic",
+              "pin": "11",
+              "pin_name": "GND"
+            },
+            {
+              "ref": "U3",
+              "value": "BMP585",
+              "type": "ic",
+              "pin": "6",
+              "pin_name": "VSSIO/VSS"
+            },
+            {
+              "ref": "C1",
+              "value": "0.1uf",
+              "type": "capacitor",
+              "pin": "2",
+              "pin_name": ""
+            },
+            {
+              "ref": "C4",
+              "value": "22uf",
+              "type": "capacitor",
+              "pin": "2",
+              "pin_name": ""
+            }
+          ],
+          "has_decoupling_cap": true,
+          "decoupling_caps": [],
+          "note": "Ground net \u2014 decoupling caps listed on VCC/VDD pins"
+        },
+        {
+          "pin_number": "3",
+          "pin_name": "C",
+          "pin_type": "passive",
+          "net": "__unnamed_1",
+          "connected_to": [
+            {
+              "ref": "U302",
+              "value": "stm32l431kc",
+              "type": "ic",
+              "pin": "4",
+              "pin_name": "~{NRST}"
+            },
+            {
+              "ref": "C502",
+              "value": "0.1uf",
+              "type": "capacitor",
+              "pin": "1",
+              "pin_name": ""
+            }
+          ]
+        }
+      ],
+      "power_pins": [
+        {
+          "pin_number": "2",
+          "pin_name": "E",
+          "pin_type": "passive",
+          "net": "GND",
+          "connected_to": [
+            {
+              "ref": "U302",
+              "value": "stm32l431kc",
+              "type": "ic",
+              "pin": "16",
+              "pin_name": "VSS"
+            },
+            {
+              "ref": "U302",
+              "value": "stm32l431kc",
+              "type": "ic",
+              "pin": "31",
+              "pin_name": "BOOT0"
+            },
+            {
+              "ref": "U302",
+              "value": "stm32l431kc",
+              "type": "ic",
+              "pin": "32",
+              "pin_name": "VSS"
+            },
+            {
+              "ref": "U302",
+              "value": "stm32l431kc",
+              "type": "ic",
+              "pin": "33",
+              "pin_name": "GND"
+            },
+            {
+              "ref": "C502",
+              "value": "0.1uf",
+              "type": "capacitor",
+              "pin": "2",
+              "pin_name": ""
+            },
+            {
+              "ref": "C501",
+              "value": "0.1uf",
+              "type": "capacitor",
+              "pin": "2",
+              "pin_name": ""
+            },
+            {
+              "ref": "C503",
+              "value": "0.1uf",
+              "type": "capacitor",
+              "pin": "2",
+              "pin_name": ""
+            },
+            {
+              "ref": "J201",
+              "value": "CONN_02X04",
+              "type": "connector",
+              "pin": "6",
+              "pin_name": "Pin_6"
+            },
+            {
+              "ref": "J401",
+              "value": "CONN_01X02",
+              "type": "connector",
+              "pin": "2",
+              "pin_name": "Pin_2"
+            },
+            {
+              "ref": "C404",
+              "value": "22uf",
+              "type": "capacitor",
+              "pin": "2",
+              "pin_name": ""
+            },
+            {
+              "ref": "U501",
+              "value": "RV-3028-C8-32.768kHz-1PPM-TA-QC",
+              "type": "ic",
+              "pin": "5",
+              "pin_name": "GND"
+            },
+            {
+              "ref": "U501",
+              "value": "RV-3028-C8-32.768kHz-1PPM-TA-QC",
+              "type": "ic",
+              "pin": "8",
+              "pin_name": "EVI"
+            },
+            {
+              "ref": "R1",
+              "value": "10k",
+              "type": "resistor",
+              "pin": "2",
+              "pin_name": ""
+            },
+            {
+              "ref": "U1",
+              "value": "at25ex321D-UUN",
+              "type": "ic",
+              "pin": "C3",
+              "pin_name": "GND"
+            },
+            {
+              "ref": "C2",
+              "value": "0.1uf",
+              "type": "capacitor",
+              "pin": "2",
+              "pin_name": ""
+            },
+            {
+              "ref": "C7",
+              "value": "0.1uf",
+              "type": "capacitor",
+              "pin": "2",
+              "pin_name": ""
+            },
+            {
+              "ref": "C5",
+              "value": "0.1uf",
+              "type": "capacitor",
+              "pin": "2",
+              "pin_name": ""
+            },
+            {
+              "ref": "C504",
+              "value": "0.1uf",
+              "type": "capacitor",
+              "pin": "2",
+              "pin_name": ""
+            },
+            {
+              "ref": "C3",
+              "value": "0.1uf",
+              "type": "capacitor",
+              "pin": "2",
+              "pin_name": ""
+            },
+            {
+              "ref": "C8",
+              "value": "220nf",
+              "type": "capacitor",
+              "pin": "2",
+              "pin_name": ""
+            },
+            {
+              "ref": "C6",
+              "value": "47uf",
+              "type": "capacitor",
+              "pin": "2",
+              "pin_name": ""
+            },
+            {
+              "ref": "U2",
+              "value": "ADXL367BCCZ-RL7",
+              "type": "ic",
+              "pin": "7",
+              "pin_name": "GND"
+            },
+            {
+              "ref": "U2",
+              "value": "ADXL367BCCZ-RL7",
+              "type": "ic",
+              "pin": "11",
+              "pin_name": "GND"
+            },
+            {
+              "ref": "U3",
+              "value": "BMP585",
+              "type": "ic",
+              "pin": "6",
+              "pin_name": "VSSIO/VSS"
+            },
+            {
+              "ref": "C1",
+              "value": "0.1uf",
+              "type": "capacitor",
+              "pin": "2",
+              "pin_name": ""
+            },
+            {
+              "ref": "C4",
+              "value": "22uf",
+              "type": "capacitor",
+              "pin": "2",
+              "pin_name": ""
+            }
+          ],
+          "has_decoupling_cap": true,
+          "decoupling_caps": [],
+          "note": "Ground net \u2014 decoupling caps listed on VCC/VDD pins"
+        }
+      ],
+      "signal_pins": [
+        {
+          "pin_number": "1",
+          "pin_name": "B",
+          "pin_type": "input",
+          "net": "RST",
+          "connected_to": [
+            {
+              "ref": "J201",
+              "value": "CONN_02X04",
+              "type": "connector",
+              "pin": "5",
+              "pin_name": "Pin_5"
+            }
+          ]
+        },
+        {
+          "pin_number": "3",
+          "pin_name": "C",
+          "pin_type": "passive",
+          "net": "__unnamed_1",
+          "connected_to": [
+            {
+              "ref": "U302",
+              "value": "stm32l431kc",
+              "type": "ic",
+              "pin": "4",
+              "pin_name": "~{NRST}"
+            },
+            {
+              "ref": "C502",
+              "value": "0.1uf",
+              "type": "capacitor",
+              "pin": "1",
+              "pin_name": ""
+            }
+          ]
+        }
+      ],
+      "decoupling_caps_by_rail": {}
     }
   ],
   "design_analysis": {
@@ -13186,10 +13957,11 @@
       "__unnamed_10": "signal",
       "__unnamed_11": "signal",
       "__unnamed_12": "signal",
-      "__unnamed_13": "signal",
+      "__unnamed_13": "power_internal",
       "__unnamed_14": "signal",
       "__unnamed_15": "signal",
-      "__unnamed_16": "signal"
+      "__unnamed_16": "signal",
+      "__unnamed_17": "signal"
     },
     "power_domains": {
       "ic_power_rails": {
@@ -13226,10 +13998,10 @@
         "U3": {
           "value": "BMP585",
           "power_rails": [
-            "LPS_PWR"
+            "__unnamed_13"
           ],
           "io_rails": [
-            "LPS_PWR"
+            "__unnamed_13"
           ]
         }
       },
@@ -13240,7 +14012,7 @@
           "U1",
           "U2"
         ],
-        "LPS_PWR": [
+        "__unnamed_13": [
           "U3"
         ]
       }
@@ -13253,8 +14025,8 @@
           "U302"
         ],
         "power_domains": [
-          "LPS_PWR",
-          "VIN"
+          "VIN",
+          "__unnamed_13"
         ],
         "needs_level_shifter": true
       },
@@ -13265,8 +14037,8 @@
           "U302"
         ],
         "power_domains": [
-          "LPS_PWR",
-          "VIN"
+          "VIN",
+          "__unnamed_13"
         ],
         "needs_level_shifter": true
       },
@@ -13277,20 +14049,8 @@
           "U302"
         ],
         "power_domains": [
-          "LPS_PWR",
-          "VIN"
-        ],
-        "needs_level_shifter": true
-      },
-      {
-        "net": "LPS_PWR",
-        "ics": [
-          "U3",
-          "U302"
-        ],
-        "power_domains": [
-          "LPS_PWR",
-          "VIN"
+          "VIN",
+          "__unnamed_13"
         ],
         "needs_level_shifter": true
       },
@@ -13301,8 +14061,8 @@
           "U302"
         ],
         "power_domains": [
-          "LPS_PWR",
-          "VIN"
+          "VIN",
+          "__unnamed_13"
         ],
         "needs_level_shifter": true
       },
@@ -13313,8 +14073,8 @@
           "U302"
         ],
         "power_domains": [
-          "LPS_PWR",
-          "VIN"
+          "VIN",
+          "__unnamed_13"
         ],
         "needs_level_shifter": true
       }
@@ -13582,64 +14342,8 @@
   "connectivity_issues": {
     "unconnected_pins": [],
     "single_pin_nets": [],
-    "single_pin_net_findings": [
-      {
-        "detector": "analyze_connectivity",
-        "rule_id": "NT-001",
-        "severity": "info",
-        "confidence": "deterministic",
-        "evidence_source": "topology",
-        "category": "connectivity",
-        "summary": "Single-pin net: U3.L/M only connects to U3.9 (L/M) (passive)",
-        "description": "Net '__unnamed_16' has exactly one pin: U3.9 (L/M), pin_type='passive'. Verify the intended target \u2014 if this pin should connect somewhere, the wire/label is missing.",
-        "components": [
-          "U3"
-        ],
-        "nets": [
-          "__unnamed_16"
-        ],
-        "pins": [
-          "U3.9"
-        ],
-        "net_display_name": "U3.L/M",
-        "pin_type": "passive",
-        "pin_name": "L/M",
-        "recommendation": "Check the schematic at the referenced pin \u2014 add the missing wire or place a no-connect marker if the pin is intentionally floating.",
-        "report_context": {
-          "section": "Connectivity",
-          "impact": "Passive or unclassified pin lonely on its own net.",
-          "standard_ref": ""
-        },
-        "stages": [
-          "schematic"
-        ]
-      }
-    ],
-    "multi_driver_nets": [
-      {
-        "net": "GND",
-        "drivers": [
-          {
-            "component": "U501",
-            "pin_number": "5",
-            "pin_name": "GND",
-            "pin_type": "power_out"
-          },
-          {
-            "component": "U2",
-            "pin_number": "7",
-            "pin_name": "GND",
-            "pin_type": "power_out"
-          },
-          {
-            "component": "U2",
-            "pin_number": "11",
-            "pin_name": "GND",
-            "pin_type": "power_out"
-          }
-        ]
-      }
-    ],
+    "single_pin_net_findings": [],
+    "multi_driver_nets": [],
     "power_net_summary": {
       "VIN": {
         "pin_count": 19,
@@ -13661,17 +14365,8 @@
           "U501"
         ]
       },
-      "LPS_PWR": {
-        "pin_count": 5,
-        "components": [
-          "C3",
-          "C5",
-          "U3",
-          "U302"
-        ]
-      },
       "GND": {
-        "pin_count": 26,
+        "pin_count": 27,
         "components": [
           "C1",
           "C2",
@@ -13685,6 +14380,7 @@
           "C504",
           "C6",
           "C7",
+          "C8",
           "J201",
           "J401",
           "Q501",
@@ -13758,7 +14454,7 @@
     {
       "name": "LPS_PWR",
       "type": "label",
-      "x": 233.68,
+      "x": 241.3,
       "y": 135.89,
       "angle": 0.0,
       "_sheet": 0
@@ -14090,6 +14786,11 @@
       "_sheet": 0
     },
     {
+      "x": 210.82,
+      "y": 158.75,
+      "_sheet": 0
+    },
+    {
       "x": 153.67,
       "y": 93.98,
       "_sheet": 0
@@ -14117,11 +14818,6 @@
     {
       "x": 87.63,
       "y": 81.28,
-      "_sheet": 0
-    },
-    {
-      "x": 101.6,
-      "y": 152.4,
       "_sheet": 0
     },
     {
@@ -14156,18 +14852,18 @@
       "_power_scope": "global"
     },
     {
-      "net_name": "+2V5",
+      "net_name": "VCC",
       "x": 82.55,
       "y": 73.66,
-      "lib_id": "power:+2V5",
+      "lib_id": "power:VCC",
       "_sheet": 0,
       "_power_scope": "global"
     },
     {
-      "net_name": "+2V5",
+      "net_name": "VCC",
       "x": 179.07,
       "y": 95.25,
-      "lib_id": "power:+2V5",
+      "lib_id": "power:VCC",
       "_sheet": 0,
       "_power_scope": "global"
     },
@@ -14196,18 +14892,18 @@
       "_power_scope": "global"
     },
     {
-      "net_name": "+2V5",
+      "net_name": "VCC",
       "x": 254.0,
       "y": 72.39,
-      "lib_id": "power:+2V5",
+      "lib_id": "power:VCC",
       "_sheet": 0,
       "_power_scope": "global"
     },
     {
-      "net_name": "+2V5",
+      "net_name": "VCC",
       "x": 245.11,
       "y": 22.86,
-      "lib_id": "power:+2V5",
+      "lib_id": "power:VCC",
       "_sheet": 0,
       "_power_scope": "global"
     },
@@ -14228,10 +14924,10 @@
       "_power_scope": "global"
     },
     {
-      "net_name": "+2V5",
+      "net_name": "VCC",
       "x": 74.93,
       "y": 29.21,
-      "lib_id": "power:+2V5",
+      "lib_id": "power:VCC",
       "_sheet": 0,
       "_power_scope": "global"
     },
@@ -14252,10 +14948,10 @@
       "_power_scope": "global"
     },
     {
-      "net_name": "+2V5",
-      "x": 114.3,
+      "net_name": "VCC",
+      "x": 125.73,
       "y": 143.51,
-      "lib_id": "power:+2V5",
+      "lib_id": "power:VCC",
       "_sheet": 0,
       "_power_scope": "global"
     },
@@ -14277,17 +14973,17 @@
     },
     {
       "net_name": "GND",
-      "x": 114.3,
+      "x": 125.73,
       "y": 166.37,
       "lib_id": "power:GND",
       "_sheet": 0,
       "_power_scope": "global"
     },
     {
-      "net_name": "+2V5",
+      "net_name": "VCC",
       "x": 62.23,
       "y": 68.58,
-      "lib_id": "power:+2V5",
+      "lib_id": "power:VCC",
       "_sheet": 0,
       "_power_scope": "global"
     },
@@ -14304,6 +15000,14 @@
       "x": 241.3,
       "y": 90.17,
       "lib_id": "power:GND",
+      "_sheet": 0,
+      "_power_scope": "global"
+    },
+    {
+      "net_name": "PWR_FLAG",
+      "x": 213.36,
+      "y": 135.89,
+      "lib_id": "power:PWR_FLAG",
       "_sheet": 0,
       "_power_scope": "global"
     }
@@ -14326,17 +15030,7 @@
       "message": "Net 'RST' has input-shaped label(s) but no driver pins on the net"
     }
   ],
-  "pwr_flag_warnings": [
-    {
-      "net": "VIN",
-      "message": "Power rail 'VIN' has power_in pins but no power_out or PWR_FLAG \u2014 ERC will flag this",
-      "pin_types": [
-        "input",
-        "passive",
-        "power_in"
-      ]
-    }
-  ],
+  "pwr_flag_warnings": [],
   "footprint_filter_warnings": [
     {
       "component": "J301",
@@ -14394,8 +15088,8 @@
     }
   ],
   "sourcing_audit": {
-    "total_bom_components": 20,
-    "mpn_coverage": "20/20",
+    "total_bom_components": 22,
+    "mpn_coverage": "22/22",
     "missing_digikey": [
       "C1",
       "C2",
@@ -14409,9 +15103,11 @@
       "C504",
       "C6",
       "C7",
+      "C8",
       "D401",
       "Q501",
       "R1",
+      "R2",
       "U1",
       "U2",
       "U3",
@@ -14424,7 +15120,7 @@
     "ground_nets": {
       "GND": {
         "domain": "signal",
-        "connections": 26,
+        "connections": 27,
         "components": [
           "C1",
           "C2",
@@ -14438,6 +15134,7 @@
           "C504",
           "C6",
           "C7",
+          "C8",
           "J201",
           "J401",
           "Q501",
@@ -14454,16 +15151,17 @@
   },
   "bus_topology": {
     "bus_wire_count": 0,
-    "bus_entry_count": 0
+    "bus_entry_count": 0,
+    "unresolved": []
   },
   "wire_geometry": {
-    "total_wires": 107,
-    "total_length_mm": 590.6,
-    "avg_length_mm": 5.5
+    "total_wires": 111,
+    "total_length_mm": 642.6,
+    "avg_length_mm": 5.8
   },
   "simulation_readiness": {
-    "total_components": 26,
-    "likely_simulatable": 15,
+    "total_components": 28,
+    "likely_simulatable": 17,
     "needs_model": 11,
     "components_without_model": [
       "J201",
@@ -14478,7 +15176,7 @@
       "U302",
       "U501"
     ],
-    "simulatable_percent": 57.7
+    "simulatable_percent": 60.7
   },
   "property_issues": {},
   "placement_analysis": {
@@ -14597,13 +15295,15 @@
       },
       {
         "region": "row2_col3",
-        "component_count": 2,
+        "component_count": 3,
         "types": {
+          "resistor": 1,
           "capacitor": 2
         },
         "references": [
           "C3",
-          "C5"
+          "C5",
+          "R2"
         ]
       },
       {
@@ -14621,13 +15321,14 @@
       },
       {
         "region": "row3_col1",
-        "component_count": 2,
+        "component_count": 3,
         "types": {
-          "capacitor": 2
+          "capacitor": 3
         },
         "references": [
           "C1",
-          "C7"
+          "C7",
+          "C8"
         ]
       }
     ],
@@ -15149,11 +15850,11 @@
   },
   "bom_optimization": {
     "unique_value_counts": {
-      "resistor": 1,
-      "capacitor": 3
+      "resistor": 2,
+      "capacitor": 4
     },
-    "total_unique_footprints": 14,
-    "single_use_passive_values": 2
+    "total_unique_footprints": 16,
+    "single_use_passive_values": 4
   },
   "test_coverage": {
     "test_points": [],
@@ -15238,17 +15939,17 @@
     ]
   },
   "assembly_complexity": {
-    "total_components": 26,
-    "smd_count": 26,
+    "total_components": 28,
+    "smd_count": 28,
     "tht_count": 0,
-    "complexity_score": 63,
+    "complexity_score": 64,
     "difficulty_breakdown": {
-      "hard": 15,
+      "hard": 17,
       "medium": 11,
       "easy": 0
     },
     "package_breakdown": {
-      "0201": 10,
+      "0201": 12,
       "other_SMD": 10,
       "0402": 3,
       "QFN": 1,
@@ -15266,8 +15967,8 @@
       }
     ],
     "observations": [
-      "Moderate assembly complexity (score 63/100)",
-      "15 hard-to-solder component(s) (0201/0402/BGA/QFN)",
+      "Moderate assembly complexity (score 64/100)",
+      "17 hard-to-solder component(s) (0201/0402/BGA/QFN)",
       "1 fine-pitch component(s) requiring stencil/reflow"
     ]
   },
@@ -15350,9 +16051,11 @@
       "C504",
       "C6",
       "C7",
+      "C8",
       "D401",
       "Q501",
       "R1",
+      "R2",
       "U1",
       "U3",
       "U302",
@@ -15360,361 +16063,32 @@
     ]
   },
   "bom_lock": {
-    "total_bom_components": 20,
-    "components_with_mpn": 20,
+    "total_bom_components": 22,
+    "components_with_mpn": 22,
     "missing_mpn": [],
     "missing_mpn_count": 0,
     "generic_values": [],
     "lock_pct": 100,
     "status": "pass"
   },
-  "project_config": {
-    "preferred_suppliers": [],
-    "bom": {},
-    "power_profile": {
-      "source": "User-provided design intent",
-      "typical_current_a": 1e-05,
-      "normal_operating_current_max_a": 0.001,
-      "peak_current_a": 0.01,
-      "peak_condition": "Flash write",
-      "notes": [
-        "BitPresTagBMP581 is a low-power pressure sensing tag.",
-        "Typical current is about 10 uA.",
-        "Operating current is below 1 mA.",
-        "Peak current during flash write is about 10 mA."
-      ]
-    },
-    "suppressions": [
-      {
-        "rule_id": "CC-002",
-        "reason": "Low-power design: user-provided currents are about 10 uA typical, below 1 mA operating, and about 10 mA peak during flash write. Treat 0.1016 mm traces as advanced-process DFM notes, not current-capacity concerns."
-      },
-      {
-        "rule_id": "RS-001",
-        "nets": [
-          "+3V3"
-        ],
-        "reason": "+3V3 source is the main supply rail; KiCad ERC is clean."
-      },
-      {
-        "rule_id": "RS-001",
-        "nets": [
-          "VBAT"
-        ],
-        "reason": "VBAT is the external/battery input rail; KiCad ERC is clean."
-      },
-      {
-        "rule_id": "PR-002",
-        "components": [
-          "U1"
-        ],
-        "nets": [
-          "AT25_nCS"
-        ],
-        "reason": "AT25_nCS deselect is a firmware/reset-state contract using STM32 PA15 internal pull-up unless an external pull-up is later added."
-      }
+  "inputs": {
+    "source_files": [
+      "/Users/geobrown/Research/tag-designs/hardware/BoardDesigns/BitPresTagBMP581/BitPresTagBMP581.kicad_sch"
     ],
-    "mating_design": {
-      "name": "BitPresTagBMP581 self-contained board",
-      "host_mcu": "STM32L432KCU6",
-      "source": "Inferred from BitPresTagBMP581 schematic and similar to PresTag design.",
-      "notes": [
-        "This is a self-contained STM32L432-based pressure sensing tag.",
-        "Features BMP581 pressure sensor and RV-3028-C7 RTC.",
-        "Multiple chip-select, clock, wake, reset, and power-enable nets depend on explicit STM32 reset/sleep GPIO configuration.",
-        "BMP581 1.8 V rail may be controlled by STM32 pin through LDO enable.",
-        "AT25_nCS does not have an external pull-up; firmware/internal pull configuration must keep flash deselected during reset/sleep."
-      ],
-      "host_pin_map": [
-        {
-          "breakout_header": "U302.2",
-          "breakout_net": "clkout",
-          "host_pin": "PC14",
-          "host_function": "RTC clock input / capture",
-          "connected_part": "U501 RV-3028 CLKOUT",
-          "required_state": "Input/no-pull unless actively using clock output capture.",
-          "reason": "Avoids fighting RTC clock output; clock net is EMC-sensitive."
-        },
-        {
-          "breakout_header": "U302.3",
-          "breakout_net": "NO_CONNECT",
-          "host_pin": "PC15",
-          "host_function": "unused",
-          "connected_part": "none",
-          "required_state": "Analog/no-pull.",
-          "reason": "Lowest leakage for unused pin."
-        },
-        {
-          "breakout_header": "U302.4",
-          "breakout_net": "__unnamed_1",
-          "host_pin": "NRST",
-          "host_function": "Reset",
-          "connected_part": "C502, Q501 collector",
-          "required_state": "External reset network controls state.",
-          "reason": "Verify Q501 reset-drive polarity during programming and sleep."
-        },
-        {
-          "breakout_header": "U302.6",
-          "breakout_net": "WKUP1",
-          "host_pin": "PA0",
-          "host_function": "Wake input / BMP581 INT1",
-          "connected_part": "U3 BMP581 INT1",
-          "required_state": "Pull state must match pressure sensor interrupt polarity.",
-          "reason": "Wake input should have a deliberate inactive state."
-        },
-        {
-          "breakout_header": "U302.7",
-          "breakout_net": "BMP_CS",
-          "host_pin": "PA1",
-          "host_function": "BMP581 chip select",
-          "connected_part": "U3 BMP581 CS",
-          "required_state": "Pull-up during reset/sleep/high-Z.",
-          "reason": "Keeps pressure sensor deselected."
-        },
-        {
-          "breakout_header": "U302.8",
-          "breakout_net": "USART2_TX",
-          "host_pin": "PA2",
-          "host_function": "BMP581 SPI/I2C data",
-          "connected_part": "U3 BMP581 SDA/SDI/SDO",
-          "required_state": "Pull-down or push-pull idle appropriate to selected bus mode.",
-          "reason": "Prevents floating pressure sensor data input."
-        },
-        {
-          "breakout_header": "U302.9",
-          "breakout_net": "USART2_RX",
-          "host_pin": "PA3",
-          "host_function": "BMP581 SPI data output",
-          "connected_part": "U3 BMP581 SDO",
-          "required_state": "Pull-down or no-pull while BMP_CS is inactive.",
-          "reason": "Avoids floating host input."
-        },
-        {
-          "breakout_header": "U302.10",
-          "breakout_net": "USART2_CK",
-          "host_pin": "PA4",
-          "host_function": "BMP581 clock",
-          "connected_part": "U3 BMP581 SCL/SPC",
-          "required_state": "Pull-down in reset/sleep/high-Z.",
-          "reason": "Prevents spurious pressure sensor clocks."
-        },
-        {
-          "breakout_header": "U302.11",
-          "breakout_net": "AK_CK",
-          "host_pin": "PA5",
-          "host_function": "AK09940A clock",
-          "connected_part": "U2 AK09940A SCL/SK",
-          "required_state": "Pull-down when magnetometer rail is enabled; no-pull/high-Z if AK domain is off.",
-          "reason": "Prevents spurious clocks and avoids back-power risk."
-        },
-        {
-          "breakout_header": "U302.12",
-          "breakout_net": "AK_MISO",
-          "host_pin": "PA6",
-          "host_function": "AK09940A SO",
-          "connected_part": "U2 AK09940A SO",
-          "required_state": "Pull-down or no-pull while AK_CS is inactive.",
-          "reason": "Avoids floating host input."
-        },
-        {
-          "breakout_header": "U302.13",
-          "breakout_net": "AK_MOSI",
-          "host_pin": "PA7",
-          "host_function": "AK09940A data input",
-          "connected_part": "U2 AK09940A SDA/SI",
-          "required_state": "Pull-down when AK domain is enabled; no-pull/high-Z if AK domain is off.",
-          "reason": "Keeps magnetometer input quiet and avoids back-power risk."
-        },
-        {
-          "breakout_header": "U302.14",
-          "breakout_net": "AK_RSTN",
-          "host_pin": "PB0",
-          "host_function": "AK09940A reset",
-          "connected_part": "U2 AK09940A RSTN",
-          "required_state": "Hold low during reset/sleep unless magnetometer is intentionally active.",
-          "reason": "Keeps magnetometer reset while power domain is off or settling."
-        },
-        {
-          "breakout_header": "U302.15",
-          "breakout_net": "AK_CS",
-          "host_pin": "PB1",
-          "host_function": "AK09940A chip select",
-          "connected_part": "U2 AK09940A CSB",
-          "required_state": "Pull-up during reset/sleep/high-Z.",
-          "reason": "Keeps magnetometer deselected."
-        },
-        {
-          "breakout_header": "U302.18",
-          "breakout_net": "NO_CONNECT",
-          "host_pin": "PA8",
-          "host_function": "unused",
-          "connected_part": "none",
-          "required_state": "Analog/no-pull.",
-          "reason": "Lowest leakage for unused pin."
-        },
-        {
-          "breakout_header": "U302.19",
-          "breakout_net": "AK_PWR",
-          "host_pin": "PA9",
-          "host_function": "AK09940A 1.8 V LDO enable",
-          "connected_part": "U4 TPS7A2018 EN",
-          "required_state": "Drive low or pull-down in sleep; drive high to enable +1V8.",
-          "reason": "Controls the magnetometer 1.8 V rail."
-        },
-        {
-          "breakout_header": "U302.20",
-          "breakout_net": "AK_DRDY",
-          "host_pin": "PA10",
-          "host_function": "AK09940A data ready / trigger",
-          "connected_part": "U2 AK09940A DRDY/TRG",
-          "required_state": "Input/no-pull or pull-down when powered; confirm against selected AK09940 output mode.",
-          "reason": "Data-ready line should not float as a wake/event source."
-        },
-        {
-          "breakout_header": "U302.21",
-          "breakout_net": "NO_CONNECT",
-          "host_pin": "PA11",
-          "host_function": "unused",
-          "connected_part": "none",
-          "required_state": "Analog/no-pull.",
-          "reason": "Lowest leakage for unused pin."
-        },
-        {
-          "breakout_header": "U302.22",
-          "breakout_net": "NO_CONNECT",
-          "host_pin": "PA12",
-          "host_function": "unused",
-          "connected_part": "none",
-          "required_state": "Analog/no-pull.",
-          "reason": "Lowest leakage for unused pin."
-        },
-        {
-          "breakout_header": "U302.23",
-          "breakout_net": "SWDIO",
-          "host_pin": "PA13",
-          "host_function": "SWDIO",
-          "connected_part": "J201 SWD header",
-          "required_state": "Preserve SWD debug function or use documented debug-disable state.",
-          "reason": "Debug access and leakage trade-off."
-        },
-        {
-          "breakout_header": "U302.24",
-          "breakout_net": "SWCLK",
-          "host_pin": "PA14",
-          "host_function": "SWCLK",
-          "connected_part": "J201 SWD header",
-          "required_state": "Preserve SWD debug function or pull-down if debug disabled.",
-          "reason": "Prevents floating clock input when not debugging."
-        },
-        {
-          "breakout_header": "U302.25",
-          "breakout_net": "AT25_nCS",
-          "host_pin": "PA15",
-          "host_function": "AT25 flash chip select",
-          "connected_part": "U1 AT25XE321D nCS",
-          "required_state": "Internal pull-up during reset/sleep/high-Z unless an external pull-up is added.",
-          "reason": "Keeps flash deselected; schematic has no external pull-up."
-        },
-        {
-          "breakout_header": "U302.26",
-          "breakout_net": "AT25_SCK",
-          "host_pin": "PB3",
-          "host_function": "AT25 flash SCK",
-          "connected_part": "U1 AT25XE321D SCK",
-          "required_state": "Pull-down during reset/sleep/high-Z.",
-          "reason": "Prevents spurious flash clocks."
-        },
-        {
-          "breakout_header": "U302.27",
-          "breakout_net": "AT25_MISO",
-          "host_pin": "PB4",
-          "host_function": "AT25 flash SO",
-          "connected_part": "U1 AT25XE321D SO",
-          "required_state": "Pull-down or no-pull while AT25_nCS is high.",
-          "reason": "Flash SO is normally tri-stated when deselected."
-        },
-        {
-          "breakout_header": "U302.28",
-          "breakout_net": "AT25_MOSI",
-          "host_pin": "PB5",
-          "host_function": "AT25 flash SI",
-          "connected_part": "U1 AT25XE321D SI",
-          "required_state": "Pull-down during reset/sleep/high-Z.",
-          "reason": "Keeps flash input quiet."
-        },
-        {
-          "breakout_header": "U302.29",
-          "breakout_net": "SDA",
-          "host_pin": "PB6",
-          "host_function": "I2C SDA for RV-3028",
-          "connected_part": "U501 RV-3028 SDA",
-          "required_state": "I2C pull-up strategy must be explicit; internal pull-up may be acceptable only at slow bus speed.",
-          "reason": "No discrete I2C pull-up was detected in the schematic analyzer output."
-        },
-        {
-          "breakout_header": "U302.30",
-          "breakout_net": "SCL",
-          "host_pin": "PB7",
-          "host_function": "I2C SCL for RV-3028",
-          "connected_part": "U501 RV-3028 SCL",
-          "required_state": "I2C pull-up strategy must be explicit; internal pull-up may be acceptable only at slow bus speed.",
-          "reason": "No discrete I2C pull-up was detected in the schematic analyzer output."
-        },
-        {
-          "breakout_header": "U302.31",
-          "breakout_net": "GND",
-          "host_pin": "BOOT0",
-          "host_function": "Boot mode strap",
-          "connected_part": "GND",
-          "required_state": "Hard low.",
-          "reason": "Normal boot from flash."
-        }
-      ],
-      "population_options": [
-        {
-          "refs": [
-            "external AT25_nCS pull-up"
-          ],
-          "default": "not populated / not present",
-          "condition": "Add only if firmware/internal pull-up cannot guarantee flash deselect during reset and sleep.",
-          "connected_rail": "+3V3",
-          "notes": "Current design depends on STM32 PA15 internal pull-up/reset-state handling for AT25_nCS."
-        }
-      ]
+    "source_hashes": {
+      "/Users/geobrown/Research/tag-designs/hardware/BoardDesigns/BitPresTagBMP581/BitPresTagBMP581.kicad_sch": "5e8caab744e565de5ef2ae6b0b79621b3a298da000292f70940d9a04f471dfa6"
     },
-    "project": {
-      "name": "BitPresTagBMP581",
-      "ambient_temperature_c": 25
-    },
-    "analysis": {
-      "output_dir": "analysis",
-      "power_rails": {
-        "voltage_overrides": {
-          "+3V3": 3.3,
-          "+2V5": 2.5,
-          "+1V8": 1.8
-        }
-      },
-      "track_in_git": false,
-      "diff_threshold": "major",
-      "retention": 5,
-      "auto_diff": true
-    },
-    "version": 1,
-    "design_intent": {
-      "product_class": "prototype",
-      "ipc_class": 2,
-      "target_market": "hobby",
-      "expected_lifetime_years": 5,
-      "operating_temp_range": [
-        -10,
-        70
-      ],
-      "preferred_passive_size": "0201",
-      "test_coverage_target": 0
-    }
+    "run_id": "20260904T113834Z-9f9a3f",
+    "config_hash": "63f8ba7c6ed4c7a6724782658ffb97023aa948be4baa5486747e44532acd56f6",
+    "upstream_artifacts": {}
   },
-  "project": {
+  "compat": {
+    "minimum_consumer_version": "1.4.0",
+    "deprecated_fields": [],
+    "experimental_fields": []
+  },
+  "project_config": {
+    "notes": "Project name says BMP581 but U3 is a BMP585 (9-pin LGA, footprint LGA9_BMP585_BOS). Reviewed 2026-09-04.",
     "name": "BitPresTagBMP581",
     "ambient_temperature_c": 25
   },
@@ -15749,11 +16123,11 @@
   },
   "audience_summary": {
     "designer": {
-      "total_findings": 21,
+      "total_findings": 19,
       "by_severity": {
         "error": 2,
-        "warning": 6,
-        "info": 13
+        "warning": 3,
+        "info": 14
       },
       "by_category": {
         "decoupling": 1,
@@ -15761,15 +16135,15 @@
         "decoupling_coverage": 1,
         "reset_pin": 1,
         "i2c_bus": 2,
-        "verification": 1,
         "protection": 2,
         "memory": 1,
-        "connectivity": 1,
-        "power": 5,
+        "power": 3,
         "protocol_integrity": 1,
         "signal_integrity": 1,
+        "passive_filters": 1,
         "sensors": 2,
-        "discrete_semiconductors": 1
+        "discrete_semiconductors": 1,
+        "lifecycle": 1
       },
       "top_issues": [
         {
@@ -15779,20 +16153,20 @@
           "confidence": "heuristic",
           "evidence_source": "topology",
           "category": "power",
-          "summary": "IC power pin U3.4 (VDDIO) has no DC path to a power rail (net 'LPS_PWR')",
-          "description": "Pin U3.4 (VDDIO) is type=power_in on net 'LPS_PWR'. Graph walk (\u22642 hops, rejecting capacitor edges, accepting resistors\u22641\u03a9, inductors, ferrite beads, bridged solder jumpers) did not reach a named power rail. The pin is likely AC-coupled to ground only \u2014 the IC will not power up reliably.",
+          "summary": "IC power pin U3.4 (VDDIO) has no DC path to a power rail (net '__unnamed_13')",
+          "description": "Pin U3.4 (VDDIO) is type=power_in on net '__unnamed_13'. Graph walk (\u22642 hops, rejecting capacitor edges, accepting resistors\u22641\u03a9, inductors, ferrite beads, bridged solder jumpers) did not reach a named power rail. The pin is likely AC-coupled to ground only \u2014 the IC will not power up reliably.",
           "components": [
             "U3"
           ],
           "nets": [
-            "LPS_PWR"
+            "__unnamed_13"
           ],
           "pins": [
             "U3.4 (VDDIO)"
           ],
-          "start_net": "LPS_PWR",
+          "start_net": "__unnamed_13",
           "visited_nets": [
-            "LPS_PWR"
+            "__unnamed_13"
           ],
           "source_path": "none",
           "recommendation": "Verify the schematic for this pin: the DC route must go through a conducting element (direct wire, 0\u03a9 resistor, inductor, ferrite bead, or bridged solder jumper) \u2014 not a capacitor. If the intent was to tie VCC through an LC filter, add the missing inductor or 0\u03a9 in series.",
@@ -15813,7 +16187,8 @@
           "detection_id": "",
           "stages": [
             "schematic"
-          ]
+          ],
+          "finding_id": "schematic:PP-001:u3"
         },
         {
           "detector": "audit_power_pin_dc_paths",
@@ -15822,20 +16197,20 @@
           "confidence": "heuristic",
           "evidence_source": "topology",
           "category": "power",
-          "summary": "IC power pin U3.8 (VDD) has no DC path to a power rail (net 'LPS_PWR')",
-          "description": "Pin U3.8 (VDD) is type=power_in on net 'LPS_PWR'. Graph walk (\u22642 hops, rejecting capacitor edges, accepting resistors\u22641\u03a9, inductors, ferrite beads, bridged solder jumpers) did not reach a named power rail. The pin is likely AC-coupled to ground only \u2014 the IC will not power up reliably.",
+          "summary": "IC power pin U3.8 (VDD) has no DC path to a power rail (net '__unnamed_13')",
+          "description": "Pin U3.8 (VDD) is type=power_in on net '__unnamed_13'. Graph walk (\u22642 hops, rejecting capacitor edges, accepting resistors\u22641\u03a9, inductors, ferrite beads, bridged solder jumpers) did not reach a named power rail. The pin is likely AC-coupled to ground only \u2014 the IC will not power up reliably.",
           "components": [
             "U3"
           ],
           "nets": [
-            "LPS_PWR"
+            "__unnamed_13"
           ],
           "pins": [
             "U3.8 (VDD)"
           ],
-          "start_net": "LPS_PWR",
+          "start_net": "__unnamed_13",
           "visited_nets": [
-            "LPS_PWR"
+            "__unnamed_13"
           ],
           "source_path": "none",
           "recommendation": "Verify the schematic for this pin: the DC route must go through a conducting element (direct wire, 0\u03a9 resistor, inductor, ferrite bead, or bridged solder jumper) \u2014 not a capacitor. If the intent was to tie VCC through an LC filter, add the missing inductor or 0\u03a9 in series.",
@@ -15856,53 +16231,8 @@
           "detection_id": "",
           "stages": [
             "schematic"
-          ]
-        },
-        {
-          "detector": "audit_datasheet_coverage",
-          "rule_id": "DS-002",
-          "severity": "warning",
-          "confidence": "deterministic",
-          "evidence_source": "bom",
-          "category": "verification",
-          "summary": "No datasheets directory found (20/20 parts have MPNs). Sync datasheets before making pin-level claims.",
-          "components": [
-            "C1",
-            "C2",
-            "C3",
-            "C4",
-            "C404",
-            "C5",
-            "C501",
-            "C502",
-            "C503",
-            "C504",
-            "C6",
-            "C7",
-            "D401",
-            "Q501",
-            "R1",
-            "U1",
-            "U2",
-            "U3",
-            "U302",
-            "U501"
           ],
-          "nets": [],
-          "pins": [],
-          "datasheets_dir": null,
-          "datasheet_file_count": 0,
-          "bom_size": 20,
-          "mpn_coverage_percent": 100.0,
-          "recommendation": "Run datasheet sync via the digikey / mouser / lcsc / element14 skill (which one depends on the user's distributor access and API credentials). A ./datasheets/ directory with PDFs and a manifest.json enables pin-level verification in the next analyzer run.",
-          "report_context": {
-            "section": "Datasheet Coverage",
-            "impact": "Review claims must stay at consistency level until datasheets land.",
-            "standard_ref": ""
-          },
-          "stages": [
-            "schematic"
-          ]
+          "finding_id": "schematic:PP-001:u3#1"
         },
         {
           "detector": "validate_spi_bus",
@@ -15945,6 +16275,7 @@
             "excluded_by": [],
             "suppressed_candidates": []
           },
+          "finding_id": "schematic:validation_findings-ea4a20c18231",
           "detection_id": "validation_findings:ea4a20c18231",
           "stages": [
             "schematic"
@@ -15954,13 +16285,13 @@
           "detector": "validate_pullups",
           "rule_id": "PU-001",
           "category": "signal_integrity",
-          "summary": "U2 pin INT2 (__unnamed_13) missing pull-up resistor",
-          "description": "Pin INT2 on U2 (ADXL367BCCZ-RL7) is connected to net __unnamed_13 but has no pull-up resistor. This pin type typically requires an external pull-up to a power rail for correct operation.",
+          "summary": "U2 pin INT2 (__unnamed_15) missing pull-up resistor",
+          "description": "Pin INT2 on U2 (ADXL367BCCZ-RL7) is connected to net __unnamed_15 but has no pull-up resistor. This pin type typically requires an external pull-up to a power rail for correct operation.",
           "components": [
             "U2"
           ],
           "nets": [
-            "__unnamed_13"
+            "__unnamed_15"
           ],
           "pins": [
             {
@@ -15972,14 +16303,14 @@
           "severity": "warning",
           "confidence": "heuristic",
           "evidence_source": "topology",
-          "recommendation": "Add a 4.7k-10k pull-up resistor from __unnamed_13 to the appropriate power rail.",
+          "recommendation": "Add a 4.7k-10k pull-up resistor from __unnamed_15 to the appropriate power rail.",
           "fix_params": {
             "type": "add_component",
             "components": [
               {
                 "type": "resistor",
                 "value": "10k",
-                "net_from": "__unnamed_13",
+                "net_from": "__unnamed_15",
                 "net_to": "<power_rail>"
               }
             ],
@@ -15997,43 +16328,9 @@
             "excluded_by": [],
             "suppressed_candidates": []
           },
+          "schema_era": "v1.4",
+          "finding_id": "schematic:validation_findings-5eda6fb399bf",
           "detection_id": "validation_findings:5eda6fb399bf",
-          "stages": [
-            "schematic"
-          ]
-        },
-        {
-          "detector": "audit_rail_sources",
-          "rule_id": "RS-001",
-          "severity": "warning",
-          "confidence": "deterministic",
-          "evidence_source": "topology",
-          "category": "power",
-          "summary": "LPS_PWR has no declared source",
-          "description": "Net LPS_PWR carries power_in pins but has no power_out pin, no PWR_FLAG, no regulator output mapping, and no bridged solder jumper path to a sourced net.",
-          "components": [],
-          "nets": [
-            "LPS_PWR"
-          ],
-          "pins": [
-            "U3.4",
-            "U3.8"
-          ],
-          "source_path": "none",
-          "recommendation": "Add a PWR_FLAG to declare the rail as externally powered (e.g. from a connector) or trace the rail back to a regulator output. If the source lives on another sheet, promote the net name to a global label.",
-          "report_context": {
-            "section": "Power \u2014 Rail Sources",
-            "impact": "Rail has no source visible to the analyser; likely a wiring gap or missing PWR_FLAG.",
-            "standard_ref": ""
-          },
-          "provenance": {
-            "evidence": "rs_rail_audit",
-            "confidence": "deterministic",
-            "claimed_components": [],
-            "excluded_by": [],
-            "suppressed_candidates": []
-          },
-          "detection_id": "",
           "stages": [
             "schematic"
           ]
@@ -16069,59 +16366,15 @@
           "detection_id": "",
           "stages": [
             "schematic"
-          ]
-        },
-        {
-          "detector": "audit_rail_sources",
-          "rule_id": "RS-001",
-          "severity": "warning",
-          "confidence": "deterministic",
-          "evidence_source": "topology",
-          "category": "power",
-          "summary": "VIN has no declared source",
-          "description": "Net VIN carries power_in pins but has no power_out pin, no PWR_FLAG, no regulator output mapping, and no bridged solder jumper path to a sourced net.",
-          "components": [],
-          "nets": [
-            "VIN"
           ],
-          "pins": [
-            "#PWR0105.1",
-            "#PWR0107.1",
-            "#PWR0108.1",
-            "#PWR0114.1",
-            "#PWR0115.1",
-            "#PWR8.1",
-            "U1.B2",
-            "U302.1",
-            "U302.17",
-            "U302.5"
-          ],
-          "source_path": "none",
-          "recommendation": "Add a PWR_FLAG to declare the rail as externally powered (e.g. from a connector) or trace the rail back to a regulator output. If the source lives on another sheet, promote the net name to a global label.",
-          "report_context": {
-            "section": "Power \u2014 Rail Sources",
-            "impact": "Rail has no source visible to the analyser; likely a wiring gap or missing PWR_FLAG.",
-            "standard_ref": ""
-          },
-          "provenance": {
-            "evidence": "rs_rail_audit",
-            "confidence": "deterministic",
-            "claimed_components": [],
-            "excluded_by": [],
-            "suppressed_candidates": []
-          },
-          "detection_id": "",
-          "stages": [
-            "schematic"
-          ]
+          "finding_id": "schematic:RS-001:vbat"
         }
       ]
     },
     "reviewer": {
-      "total_findings": 8,
+      "total_findings": 5,
       "by_category": {
-        "verification": 1,
-        "power": 5,
+        "power": 3,
         "protocol_integrity": 1,
         "signal_integrity": 1
       },
@@ -16129,23 +16382,16 @@
         {
           "rule_id": "PP-001",
           "severity": "error",
-          "summary": "IC power pin U3.4 (VDDIO) has no DC path to a power rail (net 'LPS_PWR')",
+          "summary": "IC power pin U3.4 (VDDIO) has no DC path to a power rail (net '__unnamed_13')",
           "recommendation": "Verify the schematic for this pin: the DC route must go through a conducting element (direct wire, 0\u03a9 resistor, inductor, ferrite bead, or bridged solder jumper) \u2014 not a capacitor. If the intent was to tie VCC through an LC filter, add the missing inductor or 0\u03a9 in series.",
           "category": "power"
         },
         {
           "rule_id": "PP-001",
           "severity": "error",
-          "summary": "IC power pin U3.8 (VDD) has no DC path to a power rail (net 'LPS_PWR')",
+          "summary": "IC power pin U3.8 (VDD) has no DC path to a power rail (net '__unnamed_13')",
           "recommendation": "Verify the schematic for this pin: the DC route must go through a conducting element (direct wire, 0\u03a9 resistor, inductor, ferrite bead, or bridged solder jumper) \u2014 not a capacitor. If the intent was to tie VCC through an LC filter, add the missing inductor or 0\u03a9 in series.",
           "category": "power"
-        },
-        {
-          "rule_id": "DS-002",
-          "severity": "warning",
-          "summary": "No datasheets directory found (20/20 parts have MPNs). Sync datasheets before making pin-level claims.",
-          "recommendation": "Run datasheet sync via the digikey / mouser / lcsc / element14 skill (which one depends on the user's distributor access and API credentials). A ./datasheets/ directory with PDFs and a manifest.json enables pin-level verification in the next analyzer run.",
-          "category": "verification"
         },
         {
           "rule_id": "PR-002",
@@ -16157,28 +16403,14 @@
         {
           "rule_id": "PU-001",
           "severity": "warning",
-          "summary": "U2 pin INT2 (__unnamed_13) missing pull-up resistor",
-          "recommendation": "Add a 4.7k-10k pull-up resistor from __unnamed_13 to the appropriate power rail.",
+          "summary": "U2 pin INT2 (__unnamed_15) missing pull-up resistor",
+          "recommendation": "Add a 4.7k-10k pull-up resistor from __unnamed_15 to the appropriate power rail.",
           "category": "signal_integrity"
         },
         {
           "rule_id": "RS-001",
           "severity": "warning",
-          "summary": "LPS_PWR has no declared source",
-          "recommendation": "Add a PWR_FLAG to declare the rail as externally powered (e.g. from a connector) or trace the rail back to a regulator output. If the source lives on another sheet, promote the net name to a global label.",
-          "category": "power"
-        },
-        {
-          "rule_id": "RS-001",
-          "severity": "warning",
           "summary": "VBAT has no declared source",
-          "recommendation": "Add a PWR_FLAG to declare the rail as externally powered (e.g. from a connector) or trace the rail back to a regulator output. If the source lives on another sheet, promote the net name to a global label.",
-          "category": "power"
-        },
-        {
-          "rule_id": "RS-001",
-          "severity": "warning",
-          "summary": "VIN has no declared source",
           "recommendation": "Add a PWR_FLAG to declare the rail as externally powered (e.g. from a connector) or trace the rail back to a regulator output. If the source lives on another sheet, promote the net name to a global label.",
           "category": "power"
         }
@@ -16187,14 +16419,18 @@
     "manager": {
       "risk_level": "moderate",
       "blocker_count": 2,
-      "warning_count": 6,
+      "warning_count": 3,
       "stage_readiness": {
         "schematic": "needs_work",
         "layout": "pass",
         "pre_fab": "pass",
         "bring_up": "pass"
       },
-      "one_liner": "2 errors, 6 warnings across 4 categories. Schematic stage has blockers."
+      "one_liner": "2 errors, 3 warnings across 3 categories. Schematic stage has blockers."
     }
+  },
+  "capability_mode_ref": {
+    "source": "analysis/capability_mode.json",
+    "run_id": "20260904T113834Z-9f9a3f"
   }
 }

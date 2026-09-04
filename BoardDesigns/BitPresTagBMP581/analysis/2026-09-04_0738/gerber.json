@@ -1,0 +1,816 @@
+{
+  "analyzer_type": "gerber",
+  "schema_version": "1.4.0",
+  "directory": "/private/tmp/claude-503/-Users-geobrown-Research-tag-designs-hardware/e130b1de-5005-4c5b-a3f6-d7c6c33dd985/scratchpad/gerb",
+  "generator": "KiCad,Pcbnew,10.0.2",
+  "layer_count": 4,
+  "board_dimensions": {
+    "width_mm": 18.0,
+    "height_mm": 10.0,
+    "area_mm2": 180.0,
+    "source": "edge_cuts_extents"
+  },
+  "statistics": {
+    "gerber_files": 12,
+    "drill_files": 2,
+    "total_holes": 43,
+    "total_flashes": 624,
+    "total_draws": 3498
+  },
+  "completeness": {
+    "found_layers": [
+      "B.Cu",
+      "B.Mask",
+      "B.Paste",
+      "B.SilkS",
+      "Edge.Cuts",
+      "F.Cu",
+      "F.Mask",
+      "F.Paste",
+      "F.SilkS",
+      "In1.Cu",
+      "In2.Cu"
+    ],
+    "expected_layers": [],
+    "missing_required": [],
+    "missing_recommended": [],
+    "has_pth_drill": true,
+    "has_npth_drill": true,
+    "complete": true,
+    "source": "defaults"
+  },
+  "alignment": {
+    "aligned": false,
+    "issues": [
+      "Width varies by 3.6mm across copper/edge layers",
+      "Height varies by 2.1mm across copper/edge layers"
+    ],
+    "layer_extents": {
+      "B.Cu": {
+        "width": 14.38,
+        "height": 7.982
+      },
+      "B.Mask": {
+        "width": 14.655,
+        "height": 7.5
+      },
+      "B.Paste": {
+        "width": 9.57,
+        "height": 6.5
+      },
+      "B.SilkS": {
+        "width": 16.284,
+        "height": 7.5
+      },
+      "Edge.Cuts": {
+        "width": 18.0,
+        "height": 10.0
+      },
+      "F.Cu": {
+        "width": 14.38,
+        "height": 7.865
+      },
+      "F.Mask": {
+        "width": 12.9,
+        "height": 7.5
+      },
+      "F.Paste": {
+        "width": 9.23,
+        "height": 6.625
+      },
+      "F.SilkS": {
+        "width": 12.9,
+        "height": 7.749
+      },
+      "In1.Cu": {
+        "width": 17.399,
+        "height": 9.399
+      },
+      "In2.Cu": {
+        "width": 17.399,
+        "height": 9.399
+      },
+      "drill_NPTH": {
+        "width": 12.901,
+        "height": 7.501
+      },
+      "drill_PTH": {
+        "width": 14.381,
+        "height": 7.831
+      }
+    }
+  },
+  "drill_classification": {
+    "vias": {
+      "count": 39,
+      "tools": [
+        {
+          "diameter_mm": 0.2007,
+          "count": 39
+        }
+      ]
+    },
+    "component_holes": {
+      "count": 4,
+      "tools": [
+        {
+          "diameter_mm": 1.0998,
+          "count": 4,
+          "type": "NPTH"
+        }
+      ]
+    },
+    "mounting_holes": {
+      "count": 0,
+      "tools": []
+    },
+    "classification_method": "diameter_heuristic"
+  },
+  "pad_summary": {
+    "smd_apertures": 112,
+    "via_apertures": 156,
+    "heatsink_apertures": 1,
+    "tht_holes": 4,
+    "smd_source": "x2_aperture_function",
+    "smd_ratio": 0.97
+  },
+  "trace_widths": {
+    "unique_widths_mm": [
+      0.1016,
+      0.1524,
+      0.2032
+    ],
+    "min_trace_mm": 0.1016,
+    "max_trace_mm": 0.2032,
+    "width_count": 3,
+    "min_feature_mm": 0.1
+  },
+  "component_analysis": {
+    "total_unique": 26,
+    "front_side": 17,
+    "back_side": 9,
+    "component_refs": [
+      "C1",
+      "C2",
+      "C3",
+      "C4",
+      "C404",
+      "C5",
+      "C501",
+      "C502",
+      "C503",
+      "C504",
+      "C6",
+      "C7",
+      "D401",
+      "J201",
+      "J301",
+      "J302",
+      "J303",
+      "J304",
+      "J401",
+      "Q501",
+      "R1",
+      "U1",
+      "U2",
+      "U3",
+      "U302",
+      "U501"
+    ],
+    "has_x2_data": true,
+    "pads_per_component": {
+      "C1": 2,
+      "C2": 2,
+      "C3": 2,
+      "C4": 2,
+      "C404": 2,
+      "C5": 2,
+      "C501": 2,
+      "C502": 2,
+      "C503": 2,
+      "C504": 2,
+      "C6": 2,
+      "C7": 2,
+      "D401": 2,
+      "J201": 6,
+      "J301": 1,
+      "J302": 1,
+      "J303": 1,
+      "J304": 1,
+      "J401": 2,
+      "Q501": 3,
+      "R1": 2,
+      "U1": 12,
+      "U2": 12,
+      "U3": 9,
+      "U302": 41,
+      "U501": 8
+    },
+    "total_pads": 125
+  },
+  "net_analysis": {
+    "total_unique": 41,
+    "named_nets": 24,
+    "unnamed_nets": 17,
+    "power_nets": [
+      "GND",
+      "VBAT",
+      "VIN"
+    ],
+    "signal_nets": [
+      "/ACCEL_MISO",
+      "/ACCEL_MOSI",
+      "/ACCEL_SCK",
+      "/ACCEL_nCS",
+      "/AT25_MISO",
+      "/AT25_MOSI",
+      "/AT25_SCK",
+      "/AT25_nCS",
+      "/LPS_CS",
+      "/LPS_MISO",
+      "/LPS_MOSI",
+      "/LPS_PWR",
+      "/LPS_SCK",
+      "/SCL",
+      "/SDA",
+      "/WKUP1",
+      "/clkout",
+      "/lps_rdy",
+      "RST",
+      "SWCLK",
+      "SWDIO"
+    ],
+    "total_pins": 113
+  },
+  "gerbers": [
+    {
+      "filename": "BitPresTagBMP581-B_Cu.gbr",
+      "layer_type": "B.Cu",
+      "units": "mm",
+      "aperture_count": 15,
+      "flash_count": 103,
+      "draw_count": 144,
+      "region_count": 0,
+      "x2_attributes": {
+        "GenerationSoftware": "KiCad,Pcbnew,10.0.2",
+        "CreationDate": "2026-09-04T07:36:32-04:00",
+        "ProjectId": "BitPresTagBMP581,42697450-7265-4735-9461-67424d503538,rev?",
+        "SameCoordinates": "Original",
+        "FileFunction": "Copper,L4,Bot",
+        "FilePolarity": "Positive"
+      },
+      "aperture_analysis": {
+        "by_function": {
+          "SMDPad": 11,
+          "HeatsinkPad": 1,
+          "ViaPad": 1,
+          "Conductor": 2
+        },
+        "by_function_flashes": {
+          "SMDPad": 63,
+          "HeatsinkPad": 1,
+          "ViaPad": 39,
+          "Conductor": 0
+        },
+        "conductor_widths_mm": [
+          0.1016,
+          0.1524
+        ],
+        "min_feature_mm": 0.1
+      },
+      "x2_component_count": 0,
+      "x2_net_count": 33,
+      "x2_pin_count": 64
+    },
+    {
+      "filename": "BitPresTagBMP581-B_Mask.gbr",
+      "layer_type": "B.Mask",
+      "units": "mm",
+      "aperture_count": 13,
+      "flash_count": 68,
+      "draw_count": 0,
+      "region_count": 0,
+      "x2_attributes": {
+        "GenerationSoftware": "KiCad,Pcbnew,10.0.2",
+        "CreationDate": "2026-09-04T07:36:32-04:00",
+        "ProjectId": "BitPresTagBMP581,42697450-7265-4735-9461-67424d503538,rev?",
+        "SameCoordinates": "Original",
+        "FileFunction": "Soldermask,Bot",
+        "FilePolarity": "Negative"
+      },
+      "aperture_analysis": {
+        "min_feature_mm": 0.1
+      },
+      "x2_component_count": 13,
+      "x2_net_count": 0,
+      "x2_pin_count": 0
+    },
+    {
+      "filename": "BitPresTagBMP581-B_Paste.gbr",
+      "layer_type": "B.Paste",
+      "units": "mm",
+      "aperture_count": 11,
+      "flash_count": 66,
+      "draw_count": 0,
+      "region_count": 0,
+      "x2_attributes": {
+        "GenerationSoftware": "KiCad,Pcbnew,10.0.2",
+        "CreationDate": "2026-09-04T07:36:32-04:00",
+        "ProjectId": "BitPresTagBMP581,42697450-7265-4735-9461-67424d503538,rev?",
+        "SameCoordinates": "Original",
+        "FileFunction": "Paste,Bot",
+        "FilePolarity": "Positive"
+      },
+      "aperture_analysis": {
+        "min_feature_mm": 0.1
+      },
+      "x2_component_count": 8,
+      "x2_net_count": 0,
+      "x2_pin_count": 0
+    },
+    {
+      "filename": "BitPresTagBMP581-B_SilkS.gbr",
+      "layer_type": "B.SilkS",
+      "units": "mm",
+      "aperture_count": 16,
+      "flash_count": 68,
+      "draw_count": 71,
+      "region_count": 1,
+      "x2_attributes": {
+        "GenerationSoftware": "KiCad,Pcbnew,10.0.2",
+        "CreationDate": "2026-09-04T07:36:32-04:00",
+        "ProjectId": "BitPresTagBMP581,42697450-7265-4735-9461-67424d503538,rev?",
+        "SameCoordinates": "Original",
+        "FileFunction": "Legend,Bot",
+        "FilePolarity": "Positive"
+      },
+      "aperture_analysis": {
+        "min_feature_mm": 0.1
+      },
+      "x2_component_count": 13,
+      "x2_net_count": 0,
+      "x2_pin_count": 0
+    },
+    {
+      "filename": "BitPresTagBMP581-Edge_Cuts.gbr",
+      "layer_type": "Edge.Cuts",
+      "units": "mm",
+      "aperture_count": 1,
+      "flash_count": 0,
+      "draw_count": 8,
+      "region_count": 0,
+      "x2_attributes": {
+        "GenerationSoftware": "KiCad,Pcbnew,10.0.2",
+        "CreationDate": "2026-09-04T07:36:32-04:00",
+        "ProjectId": "BitPresTagBMP581,42697450-7265-4735-9461-67424d503538,rev?",
+        "SameCoordinates": "Original",
+        "FileFunction": "Profile,NP"
+      },
+      "aperture_analysis": {
+        "by_function": {
+          "Profile": 1
+        },
+        "by_function_flashes": {
+          "Profile": 0
+        },
+        "min_feature_mm": 0.15
+      }
+    },
+    {
+      "filename": "BitPresTagBMP581-F_Cu.gbr",
+      "layer_type": "F.Cu",
+      "units": "mm",
+      "aperture_count": 16,
+      "flash_count": 88,
+      "draw_count": 147,
+      "region_count": 0,
+      "x2_attributes": {
+        "GenerationSoftware": "KiCad,Pcbnew,10.0.2",
+        "CreationDate": "2026-09-04T07:36:32-04:00",
+        "ProjectId": "BitPresTagBMP581,42697450-7265-4735-9461-67424d503538,rev?",
+        "SameCoordinates": "Original",
+        "FileFunction": "Copper,L1,Top",
+        "FilePolarity": "Positive"
+      },
+      "aperture_analysis": {
+        "by_function": {
+          "SMDPad": 12,
+          "ViaPad": 1,
+          "Conductor": 3
+        },
+        "by_function_flashes": {
+          "SMDPad": 49,
+          "ViaPad": 39,
+          "Conductor": 0
+        },
+        "conductor_widths_mm": [
+          0.1016,
+          0.1524,
+          0.2032
+        ],
+        "min_feature_mm": 0.1016
+      },
+      "x2_component_count": 0,
+      "x2_net_count": 26,
+      "x2_pin_count": 49
+    },
+    {
+      "filename": "BitPresTagBMP581-F_Mask.gbr",
+      "layer_type": "F.Mask",
+      "units": "mm",
+      "aperture_count": 13,
+      "flash_count": 53,
+      "draw_count": 0,
+      "region_count": 0,
+      "x2_attributes": {
+        "GenerationSoftware": "KiCad,Pcbnew,10.0.2",
+        "CreationDate": "2026-09-04T07:36:32-04:00",
+        "ProjectId": "BitPresTagBMP581,42697450-7265-4735-9461-67424d503538,rev?",
+        "SameCoordinates": "Original",
+        "FileFunction": "Soldermask,Top",
+        "FilePolarity": "Negative"
+      },
+      "aperture_analysis": {
+        "min_feature_mm": 0.2
+      },
+      "x2_component_count": 17,
+      "x2_net_count": 0,
+      "x2_pin_count": 0
+    },
+    {
+      "filename": "BitPresTagBMP581-F_Paste.gbr",
+      "layer_type": "F.Paste",
+      "units": "mm",
+      "aperture_count": 11,
+      "flash_count": 47,
+      "draw_count": 0,
+      "region_count": 0,
+      "x2_attributes": {
+        "GenerationSoftware": "KiCad,Pcbnew,10.0.2",
+        "CreationDate": "2026-09-04T07:36:32-04:00",
+        "ProjectId": "BitPresTagBMP581,42697450-7265-4735-9461-67424d503538,rev?",
+        "SameCoordinates": "Original",
+        "FileFunction": "Paste,Top",
+        "FilePolarity": "Positive"
+      },
+      "aperture_analysis": {
+        "min_feature_mm": 0.159
+      },
+      "x2_component_count": 12,
+      "x2_net_count": 0,
+      "x2_pin_count": 0
+    },
+    {
+      "filename": "BitPresTagBMP581-F_SilkS.gbr",
+      "layer_type": "F.SilkS",
+      "units": "mm",
+      "aperture_count": 16,
+      "flash_count": 53,
+      "draw_count": 25,
+      "region_count": 0,
+      "x2_attributes": {
+        "GenerationSoftware": "KiCad,Pcbnew,10.0.2",
+        "CreationDate": "2026-09-04T07:36:32-04:00",
+        "ProjectId": "BitPresTagBMP581,42697450-7265-4735-9461-67424d503538,rev?",
+        "SameCoordinates": "Original",
+        "FileFunction": "Legend,Top",
+        "FilePolarity": "Positive"
+      },
+      "aperture_analysis": {
+        "min_feature_mm": 0.1
+      },
+      "x2_component_count": 17,
+      "x2_net_count": 0,
+      "x2_pin_count": 0
+    },
+    {
+      "filename": "BitPresTagBMP581-In1_Cu.gbr",
+      "layer_type": "In1.Cu",
+      "units": "mm",
+      "aperture_count": 1,
+      "flash_count": 39,
+      "draw_count": 1687,
+      "region_count": 1,
+      "x2_attributes": {
+        "GenerationSoftware": "KiCad,Pcbnew,10.0.2",
+        "CreationDate": "2026-09-04T07:36:32-04:00",
+        "ProjectId": "BitPresTagBMP581,42697450-7265-4735-9461-67424d503538,rev?",
+        "SameCoordinates": "Original",
+        "FileFunction": "Copper,L2,Inr",
+        "FilePolarity": "Positive"
+      },
+      "aperture_analysis": {
+        "by_function": {
+          "ViaPad": 1
+        },
+        "by_function_flashes": {
+          "ViaPad": 39
+        },
+        "min_feature_mm": 0.5048
+      },
+      "x2_component_count": 0,
+      "x2_net_count": 18,
+      "x2_pin_count": 0
+    },
+    {
+      "filename": "BitPresTagBMP581-In2_Cu.gbr",
+      "layer_type": "In2.Cu",
+      "units": "mm",
+      "aperture_count": 1,
+      "flash_count": 39,
+      "draw_count": 1416,
+      "region_count": 1,
+      "x2_attributes": {
+        "GenerationSoftware": "KiCad,Pcbnew,10.0.2",
+        "CreationDate": "2026-09-04T07:36:32-04:00",
+        "ProjectId": "BitPresTagBMP581,42697450-7265-4735-9461-67424d503538,rev?",
+        "SameCoordinates": "Original",
+        "FileFunction": "Copper,L3,Inr",
+        "FilePolarity": "Positive"
+      },
+      "aperture_analysis": {
+        "by_function": {
+          "ViaPad": 1
+        },
+        "by_function_flashes": {
+          "ViaPad": 39
+        },
+        "min_feature_mm": 0.5048
+      },
+      "x2_component_count": 0,
+      "x2_net_count": 18,
+      "x2_pin_count": 0
+    },
+    {
+      "filename": "BitPresTagBMP581-User_Comments.gbr",
+      "layer_type": "unknown",
+      "units": "mm",
+      "aperture_count": 0,
+      "flash_count": 0,
+      "draw_count": 0,
+      "region_count": 0,
+      "x2_attributes": {
+        "GenerationSoftware": "KiCad,Pcbnew,10.0.2",
+        "CreationDate": "2026-09-04T07:36:32-04:00",
+        "ProjectId": "BitPresTagBMP581,42697450-7265-4735-9461-67424d503538,rev?",
+        "SameCoordinates": "Original",
+        "FileFunction": "Other,Comment"
+      }
+    }
+  ],
+  "drills": [
+    {
+      "filename": "BitPresTagBMP581-NPTH.drl",
+      "type": "NPTH",
+      "units": "inch",
+      "hole_count": 4,
+      "tools": {
+        "T1": {
+          "diameter_mm": 1.0998,
+          "hole_count": 4
+        }
+      }
+    },
+    {
+      "filename": "BitPresTagBMP581-PTH.drl",
+      "type": "PTH",
+      "units": "inch",
+      "hole_count": 39,
+      "tools": {
+        "T1": {
+          "diameter_mm": 0.2007,
+          "hole_count": 39
+        }
+      }
+    }
+  ],
+  "drill_tools": {
+    "1.0998mm": {
+      "diameter_mm": 1.0998,
+      "count": 4,
+      "type": "NPTH"
+    },
+    "0.2007mm": {
+      "diameter_mm": 0.2007,
+      "count": 39,
+      "type": "PTH"
+    }
+  },
+  "findings": [
+    {
+      "detector": "analyze_gerbers",
+      "rule_id": "GR-002",
+      "category": "gerber_alignment",
+      "severity": "warning",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "Alignment: Width varies by 3.6mm across copper/edge layers",
+      "description": "Layer alignment issue: Width varies by 3.6mm across copper/edge layers",
+      "components": [],
+      "nets": [],
+      "pins": [],
+      "recommendation": "Re-export gerbers to ensure consistent layer alignment.",
+      "report_context": {
+        "section": "Gerber Alignment",
+        "impact": "Layer misregistration",
+        "standard_ref": ""
+      },
+      "stages": [
+        "pre_fab"
+      ],
+      "finding_id": "gerber:GR-002:7bcf2bb483e6"
+    },
+    {
+      "detector": "analyze_gerbers",
+      "rule_id": "GR-002",
+      "category": "gerber_alignment",
+      "severity": "warning",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "Alignment: Height varies by 2.1mm across copper/edge layers",
+      "description": "Layer alignment issue: Height varies by 2.1mm across copper/edge layers",
+      "components": [],
+      "nets": [],
+      "pins": [],
+      "recommendation": "Re-export gerbers to ensure consistent layer alignment.",
+      "report_context": {
+        "section": "Gerber Alignment",
+        "impact": "Layer misregistration",
+        "standard_ref": ""
+      },
+      "stages": [
+        "pre_fab"
+      ],
+      "finding_id": "gerber:GR-002:509fde5c882d"
+    }
+  ],
+  "assessments": [],
+  "summary": {
+    "total_findings": 2,
+    "by_severity": {
+      "error": 0,
+      "warning": 2,
+      "info": 0
+    }
+  },
+  "trust_summary": {
+    "total_findings": 2,
+    "trust_level": "high",
+    "by_confidence": {
+      "deterministic": 2,
+      "heuristic": 0,
+      "datasheet_backed": 0
+    },
+    "by_evidence_source": {
+      "datasheet": 0,
+      "topology": 2,
+      "heuristic_rule": 0,
+      "symbol_footprint": 0,
+      "bom": 0,
+      "geometry": 0,
+      "api_lookup": 0
+    },
+    "provenance_coverage_pct": 0.0
+  },
+  "inputs": {
+    "source_files": [
+      "/private/tmp/claude-503/-Users-geobrown-Research-tag-designs-hardware/e130b1de-5005-4c5b-a3f6-d7c6c33dd985/scratchpad/gerb/BitPresTagBMP581-B_Cu.gbr",
+      "/private/tmp/claude-503/-Users-geobrown-Research-tag-designs-hardware/e130b1de-5005-4c5b-a3f6-d7c6c33dd985/scratchpad/gerb/BitPresTagBMP581-B_Mask.gbr",
+      "/private/tmp/claude-503/-Users-geobrown-Research-tag-designs-hardware/e130b1de-5005-4c5b-a3f6-d7c6c33dd985/scratchpad/gerb/BitPresTagBMP581-B_Paste.gbr",
+      "/private/tmp/claude-503/-Users-geobrown-Research-tag-designs-hardware/e130b1de-5005-4c5b-a3f6-d7c6c33dd985/scratchpad/gerb/BitPresTagBMP581-B_SilkS.gbr",
+      "/private/tmp/claude-503/-Users-geobrown-Research-tag-designs-hardware/e130b1de-5005-4c5b-a3f6-d7c6c33dd985/scratchpad/gerb/BitPresTagBMP581-Edge_Cuts.gbr",
+      "/private/tmp/claude-503/-Users-geobrown-Research-tag-designs-hardware/e130b1de-5005-4c5b-a3f6-d7c6c33dd985/scratchpad/gerb/BitPresTagBMP581-F_Cu.gbr",
+      "/private/tmp/claude-503/-Users-geobrown-Research-tag-designs-hardware/e130b1de-5005-4c5b-a3f6-d7c6c33dd985/scratchpad/gerb/BitPresTagBMP581-F_Mask.gbr",
+      "/private/tmp/claude-503/-Users-geobrown-Research-tag-designs-hardware/e130b1de-5005-4c5b-a3f6-d7c6c33dd985/scratchpad/gerb/BitPresTagBMP581-F_Paste.gbr",
+      "/private/tmp/claude-503/-Users-geobrown-Research-tag-designs-hardware/e130b1de-5005-4c5b-a3f6-d7c6c33dd985/scratchpad/gerb/BitPresTagBMP581-F_SilkS.gbr",
+      "/private/tmp/claude-503/-Users-geobrown-Research-tag-designs-hardware/e130b1de-5005-4c5b-a3f6-d7c6c33dd985/scratchpad/gerb/BitPresTagBMP581-In1_Cu.gbr",
+      "/private/tmp/claude-503/-Users-geobrown-Research-tag-designs-hardware/e130b1de-5005-4c5b-a3f6-d7c6c33dd985/scratchpad/gerb/BitPresTagBMP581-In2_Cu.gbr",
+      "/private/tmp/claude-503/-Users-geobrown-Research-tag-designs-hardware/e130b1de-5005-4c5b-a3f6-d7c6c33dd985/scratchpad/gerb/BitPresTagBMP581-NPTH.drl",
+      "/private/tmp/claude-503/-Users-geobrown-Research-tag-designs-hardware/e130b1de-5005-4c5b-a3f6-d7c6c33dd985/scratchpad/gerb/BitPresTagBMP581-PTH.drl",
+      "/private/tmp/claude-503/-Users-geobrown-Research-tag-designs-hardware/e130b1de-5005-4c5b-a3f6-d7c6c33dd985/scratchpad/gerb/BitPresTagBMP581-User_Comments.gbr"
+    ],
+    "source_hashes": {
+      "/private/tmp/claude-503/-Users-geobrown-Research-tag-designs-hardware/e130b1de-5005-4c5b-a3f6-d7c6c33dd985/scratchpad/gerb/BitPresTagBMP581-B_Cu.gbr": "4f3416d83c2da9edfddb25712b18cb4e9b3eda637ce2ceceed87cea072d571a1",
+      "/private/tmp/claude-503/-Users-geobrown-Research-tag-designs-hardware/e130b1de-5005-4c5b-a3f6-d7c6c33dd985/scratchpad/gerb/BitPresTagBMP581-B_Mask.gbr": "b85125cdd52710e7c8ebc47596bd2ad9551cb36f6d6928ba474711614b0f99a6",
+      "/private/tmp/claude-503/-Users-geobrown-Research-tag-designs-hardware/e130b1de-5005-4c5b-a3f6-d7c6c33dd985/scratchpad/gerb/BitPresTagBMP581-B_Paste.gbr": "b3e1d1c2a2a5f54e6a02d15b6e62bb34b161b48fdde611a4608ba461ade5c31d",
+      "/private/tmp/claude-503/-Users-geobrown-Research-tag-designs-hardware/e130b1de-5005-4c5b-a3f6-d7c6c33dd985/scratchpad/gerb/BitPresTagBMP581-B_SilkS.gbr": "83cbae83eaf31706efbf0ffba47ab0134fb8866e2b8ffd7ca51535380ad71b68",
+      "/private/tmp/claude-503/-Users-geobrown-Research-tag-designs-hardware/e130b1de-5005-4c5b-a3f6-d7c6c33dd985/scratchpad/gerb/BitPresTagBMP581-Edge_Cuts.gbr": "a3e6058b64a059df71411140d4f237c7a9e6ca0e415fe9a1db98e9c379b4611e",
+      "/private/tmp/claude-503/-Users-geobrown-Research-tag-designs-hardware/e130b1de-5005-4c5b-a3f6-d7c6c33dd985/scratchpad/gerb/BitPresTagBMP581-F_Cu.gbr": "4f2fc98bfd5a39355eb46790f95890d7620fe13d8db04e0b31a95f181ba8432b",
+      "/private/tmp/claude-503/-Users-geobrown-Research-tag-designs-hardware/e130b1de-5005-4c5b-a3f6-d7c6c33dd985/scratchpad/gerb/BitPresTagBMP581-F_Mask.gbr": "07e90a052b58ad277b077fcba36c340f7e0d1abd7129860b82c6ee253e390d59",
+      "/private/tmp/claude-503/-Users-geobrown-Research-tag-designs-hardware/e130b1de-5005-4c5b-a3f6-d7c6c33dd985/scratchpad/gerb/BitPresTagBMP581-F_Paste.gbr": "d7e12166ad5b2e81dd7670f7097f49bf8491996b874e8d1703540341fb40203e",
+      "/private/tmp/claude-503/-Users-geobrown-Research-tag-designs-hardware/e130b1de-5005-4c5b-a3f6-d7c6c33dd985/scratchpad/gerb/BitPresTagBMP581-F_SilkS.gbr": "da41e6b9cce504fdcbeeb7c2e0f34a93c888f688ab83ca7f6a555d2e65cc338c",
+      "/private/tmp/claude-503/-Users-geobrown-Research-tag-designs-hardware/e130b1de-5005-4c5b-a3f6-d7c6c33dd985/scratchpad/gerb/BitPresTagBMP581-In1_Cu.gbr": "1798671af9678345015282dc2e7bee083131fae1ecaeeab2e70d6e0e13d97591",
+      "/private/tmp/claude-503/-Users-geobrown-Research-tag-designs-hardware/e130b1de-5005-4c5b-a3f6-d7c6c33dd985/scratchpad/gerb/BitPresTagBMP581-In2_Cu.gbr": "9d4e17f0c56fe389854e1a106d477a6d614b0964adb6c8b627559cc3b00e3719",
+      "/private/tmp/claude-503/-Users-geobrown-Research-tag-designs-hardware/e130b1de-5005-4c5b-a3f6-d7c6c33dd985/scratchpad/gerb/BitPresTagBMP581-NPTH.drl": "d9a9504eea4ac270535d7e1c92ca84182e48d207bdc6dd57d6fd8f86cc3f1265",
+      "/private/tmp/claude-503/-Users-geobrown-Research-tag-designs-hardware/e130b1de-5005-4c5b-a3f6-d7c6c33dd985/scratchpad/gerb/BitPresTagBMP581-PTH.drl": "974cd4b215611864e963abb82c96d72629532d48bfb1b37e873430fa3eff12ce",
+      "/private/tmp/claude-503/-Users-geobrown-Research-tag-designs-hardware/e130b1de-5005-4c5b-a3f6-d7c6c33dd985/scratchpad/gerb/BitPresTagBMP581-User_Comments.gbr": "354b3fa04aa88d84180a00ea91bb1c9e269d1ff6d2f1c9707b48b5ad30f76004"
+    },
+    "run_id": "20260904T113834Z-9f9a3f",
+    "config_hash": null,
+    "upstream_artifacts": {}
+  },
+  "compat": {
+    "minimum_consumer_version": "1.4.0",
+    "deprecated_fields": [],
+    "experimental_fields": []
+  },
+  "audience_summary": {
+    "designer": {
+      "total_findings": 2,
+      "by_severity": {
+        "error": 0,
+        "warning": 2,
+        "info": 0
+      },
+      "by_category": {
+        "gerber_alignment": 2
+      },
+      "top_issues": [
+        {
+          "detector": "analyze_gerbers",
+          "rule_id": "GR-002",
+          "category": "gerber_alignment",
+          "severity": "warning",
+          "confidence": "deterministic",
+          "evidence_source": "topology",
+          "summary": "Alignment: Width varies by 3.6mm across copper/edge layers",
+          "description": "Layer alignment issue: Width varies by 3.6mm across copper/edge layers",
+          "components": [],
+          "nets": [],
+          "pins": [],
+          "recommendation": "Re-export gerbers to ensure consistent layer alignment.",
+          "report_context": {
+            "section": "Gerber Alignment",
+            "impact": "Layer misregistration",
+            "standard_ref": ""
+          },
+          "stages": [
+            "pre_fab"
+          ],
+          "finding_id": "gerber:GR-002:7bcf2bb483e6"
+        },
+        {
+          "detector": "analyze_gerbers",
+          "rule_id": "GR-002",
+          "category": "gerber_alignment",
+          "severity": "warning",
+          "confidence": "deterministic",
+          "evidence_source": "topology",
+          "summary": "Alignment: Height varies by 2.1mm across copper/edge layers",
+          "description": "Layer alignment issue: Height varies by 2.1mm across copper/edge layers",
+          "components": [],
+          "nets": [],
+          "pins": [],
+          "recommendation": "Re-export gerbers to ensure consistent layer alignment.",
+          "report_context": {
+            "section": "Gerber Alignment",
+            "impact": "Layer misregistration",
+            "standard_ref": ""
+          },
+          "stages": [
+            "pre_fab"
+          ],
+          "finding_id": "gerber:GR-002:509fde5c882d"
+        }
+      ]
+    },
+    "reviewer": {
+      "total_findings": 2,
+      "by_category": {
+        "gerber_alignment": 2
+      },
+      "top_issues": [
+        {
+          "rule_id": "GR-002",
+          "severity": "warning",
+          "summary": "Alignment: Width varies by 3.6mm across copper/edge layers",
+          "recommendation": "Re-export gerbers to ensure consistent layer alignment.",
+          "category": "gerber_alignment"
+        },
+        {
+          "rule_id": "GR-002",
+          "severity": "warning",
+          "summary": "Alignment: Height varies by 2.1mm across copper/edge layers",
+          "recommendation": "Re-export gerbers to ensure consistent layer alignment.",
+          "category": "gerber_alignment"
+        }
+      ]
+    },
+    "manager": {
+      "risk_level": "low",
+      "blocker_count": 0,
+      "warning_count": 2,
+      "stage_readiness": {
+        "schematic": "pass",
+        "layout": "pass",
+        "pre_fab": "needs_review",
+        "bring_up": "pass"
+      },
+      "one_liner": "2 warnings across 1 category."
+    }
+  },
+  "capability_mode_ref": {
+    "source": "analysis/capability_mode.json",
+    "run_id": "20260904T113834Z-9f9a3f"
+  }
+}

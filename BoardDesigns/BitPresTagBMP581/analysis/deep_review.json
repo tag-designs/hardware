@@ -1,0 +1,450 @@
+{
+  "schema_version": "1.0",
+  "produced_for_run_id": "2026-09-04_0738",
+  "produced_at": "2026-09-04T08:40:00Z",
+  "findings": [
+    {
+      "detector": "deep_review",
+      "category": "documentation_defect",
+      "severity": "error",
+      "confidence": "high",
+      "summary": "Main supply rail is drawn as +2V5 in all 7 power symbols, but no 2.5 V regulator exists; the real rail is VBAT minus a Schottky drop",
+      "description": "The schematic contains 7 power:+2V5 symbols and zero power:VIN symbols. The net resolves to VIN in the netlist only because of 2 global labels, so KiCad reports 'Both VIN and +2V5 are attached to the same items; VIN will be used'. There is no regulator in the BOM: the rail is J401 battery -> D401 Schottky -> VIN, so it tracks the cell (roughly 2.7-2.9 V fresh, falling toward ~1.9 V at end of life), never a regulated 2.5 V. The mislabel already propagated into .kicad-happy.json as a +2V5 = 2.5 V rail voltage override, which would silently corrupt any derating, PDN or EMC computation keyed on rail voltage.",
+      "recommendation": "Replace the 7 power:+2V5 symbols with a VIN power symbol so the drawn rail name matches the netlist, and delete the +2V5 voltage override from .kicad-happy.json. Electrically nothing changes - the nets are already merged - this is purely a correctness-of-documentation fix.",
+      "evidence": {
+        "components": [
+          "D401",
+          "J401"
+        ],
+        "nets": [
+          "VIN",
+          "VBAT"
+        ],
+        "computation": {
+          "description": "Counted power symbol lib_ids in BitPresTagBMP581.kicad_sch and cross-checked against KiCad ERC output",
+          "result": "7 x power:+2V5, 0 x power:VIN, 2 x global_label VIN; ERC warning multiple_net_names confirms the merge. No regulator in the 11-line BOM."
+        }
+      },
+      "evidence_checked": "full",
+      "components": [
+        "D401",
+        "J401"
+      ],
+      "nets": [
+        "VIN",
+        "VBAT"
+      ],
+      "finding_id": "deep_review:d31ce580c4cf"
+    },
+    {
+      "detector": "deep_review",
+      "category": "missing_required_external",
+      "severity": "error",
+      "confidence": "high",
+      "summary": "U2 ADXL367 VREG_OUT (pin 9) has no decoupling capacitor; datasheet requires an external 0.2 uF",
+      "description": "ADXL367 pin 9 VREG_OUT is the internal-regulator supply decoupling pin. In this schematic it is a single-pin net (__unnamed_15) with nothing attached. Every other IC supply pin on the board has local 0.1 uF decoupling; this required cap was omitted.",
+      "recommendation": "Add a 0.2 uF (or 2x0.1 uF) capacitor from U2 pin 9 to GND, placed as close to the package as the 0201 pattern allows. Without it the internal LDO is unbypassed, degrading the PSRR the part relies on and risking noise on the accelerometer output.",
+      "evidence": {
+        "components": [
+          "U2"
+        ],
+        "nets": [
+          "__unnamed_15"
+        ],
+        "pins": [
+          "U2.9"
+        ],
+        "datasheet": [
+          {
+            "mpn": "ADXL367BCCZ-RL7",
+            "quote": "VREG_OUT ... Internally Regulated Voltage. This pin is used as an internal supply decoupling pin, an external 0.2 uF capacitor is needed."
+          }
+        ],
+        "computation": {
+          "description": "Net pin count for U2.9 from schematic.json nets map",
+          "result": "net __unnamed_15 has exactly 1 pin (U2.9 VREG_OUT); no capacitor present"
+        }
+      },
+      "evidence_checked": "partial",
+      "components": [
+        "U2"
+      ],
+      "nets": [
+        "__unnamed_15"
+      ],
+      "pins": [
+        "U2.9"
+      ],
+      "finding_id": "deep_review:00c1ad56423d"
+    },
+    {
+      "detector": "deep_review",
+      "category": "part_identity",
+      "severity": "warning",
+      "confidence": "high",
+      "summary": "Three parts carry a Value that names a different device than the MPN the fab will order (U1 flash, U302 MCU, U3 pressure sensor vs project name)",
+      "description": "U1 Value 'at25ex321D-UUN' (AT25XE321D) vs MPN 'AT25FF321A-UUN-T' - two different Renesas families, and only the AT25XE321D datasheet is on hand. U302 Value 'stm32l431kc' vs MPN 'STM32L432KCU6' - the L431 has no USB and a different peripheral set, so the label is not a harmless typo. U3 Value and MPN both say BMP585 with footprint LGA9_BMP585_BOS, while the project, the config and the only available datasheet all say BMP581 - BMP581 is a 10-pin metal-lid LGA, BMP585 a 9-pin part, so the board is built for BMP585 and the project name is stale - now confirmed, since bst-bmp585-ds003.pdf describes an 8-pin metal-lid LGA plus an L/M pad, matching LGA9_BMP585_BOS. Fab and assembly consume MPN, so none of these breaks a build, but each one misleads human and automated review.",
+      "recommendation": "Confirm which flash is intended and make Value match MPN on all three parts. If AT25FF321A is correct, add its datasheet; if AT25XE321D is correct, fix the MPN before the BOM is used to order. The BMP585 datasheet has since been supplied and its pinout is verified. Either rename the project or note in the config that BitPresTagBMP581 carries a BMP585.",
+      "evidence": {
+        "components": [
+          "U1",
+          "U302",
+          "U3"
+        ],
+        "datasheet": [
+          {
+            "mpn": "AT25XE321D",
+            "page": 8,
+            "quote": "AT25XE321D 32-Mbit 1.65 V - 3.6 V Range SPI Serial Flash Memory with Multi I/O Support ... 12-ball WLCSP Package (3 x 2 x 3 ball matrix)"
+          },
+          {
+            "mpn": "BMP581",
+            "quote": "Compact 10-pin metal-lid LGA package with a footprint of only 2.0 x 2.0 mm2 and max 0.8 mm package height."
+          }
+        ],
+        "computation": {
+          "description": "Compared Value against MPN for every BOM line in schematic.json",
+          "result": "3 of 11 BOM lines name a different device in Value than in MPN; footprint LGA9_BMP585_BOS has 9 pins vs BMP581's 10"
+        }
+      },
+      "evidence_checked": "partial",
+      "components": [
+        "U1",
+        "U302",
+        "U3"
+      ],
+      "finding_id": "deep_review:c0eabec7acf7"
+    },
+    {
+      "detector": "deep_review",
+      "category": "peripheral_mapping",
+      "severity": "info",
+      "confidence": "high",
+      "summary": "ADXL367 runs on USART2 synchronous mode (AF7), not an SPI peripheral - hardware-capable, no bit-banging",
+      "description": "CORRECTED 2026-09-04: an earlier pass of this review claimed PA2/PA3/PA4 had no hardware serial option and the bus had to be bit-banged. That was wrong - the AF table was searched only for function names containing 'SPI'. PA2/PA3/PA4 are USART2_TX / USART2_RX / USART2_CK, all on AF7, and the STM32L432 datasheet Table 11 confirms USART2 supports synchronous mode, described in the text as 'SPI-like communication capability', DMA-served, up to 10 Mbit/s. PA1 (the chip select) also carries USART2_RTS/USART2_DE, so all four pins belong to one coherent USART2 group. This also resolves the SPI1 collisions the pin-map helper reports: accelerometer on USART2, BMP585 on SPI1 (AF5), flash on SPI3 (AF6) - all three buses can be live simultaneously. Sibling board BitTagNG instead puts its accelerometer on PA5/PA6/PA7 (true SPI1); neither board bit-bangs the part.",
+      "recommendation": "No board change. Firmware must configure USART2 in synchronous master mode: CR2.MSBFIRST (the ADXL367 is MSB-first, a USART defaults LSB-first), CPOL/CPHA for SPI mode 0, and CR2.LBCL so the last data bit's clock pulse is emitted. Verify clock gating around start/stop bits against RM0394. Drive PA4 actively - the ADXL367 selects I2C if SCLK is low.",
+      "evidence": {
+        "components": [
+          "U302",
+          "U2"
+        ],
+        "nets": [
+          "ACCEL_SCK",
+          "ACCEL_MOSI",
+          "ACCEL_MISO"
+        ],
+        "pins": [
+          "U302.8",
+          "U302.9",
+          "U302.10"
+        ],
+        "computation": {
+          "description": "Full alternate-function list per pin from kicad-helpers/af_tables/stm32l432.json, generated from ST STM32_open_pin_data",
+          "script": "../kicad-helpers/stm32_pinmap.py",
+          "result": "PA2 -> AF7 USART2_TX; PA3 -> AF7 USART2_RX; PA4 -> AF7 USART2_CK; PA1 -> AF7 USART2_RTS (+ USART2_DE additional). PB3/PB4/PB5 each carry SPI1 (AF5) and SPI3 (AF6), so flash on SPI3 + BMP585 on SPI1 + accel on USART2 has zero contention."
+        },
+        "datasheet": [
+          {
+            "mpn": "STM32L432KCU6",
+            "quote": "USART1 and USART2 also provide Smart Card mode (ISO 7816 compliant) and SPI-like communication capability. ... Table 11: Synchronous mode - USART2 supported."
+          }
+        ]
+      },
+      "evidence_checked": "partial",
+      "components": [
+        "U302",
+        "U2"
+      ],
+      "nets": [
+        "ACCEL_SCK",
+        "ACCEL_MOSI",
+        "ACCEL_MISO"
+      ],
+      "pins": [
+        "U302.8",
+        "U302.9",
+        "U302.10"
+      ],
+      "finding_id": "deep_review:05fe45996a6d"
+    },
+    {
+      "detector": "deep_review",
+      "category": "power_gating",
+      "severity": "warning",
+      "confidence": "high",
+      "summary": "BMP585 is powered from GPIO PB1 with no series resistor; the 10 us minimum supply ramp is a normative datasheet requirement met only by 1.1-2.2x, and back-powering is a firmware contract",
+      "description": "U3 VDD and VDDIO are both fed directly from STM32 PB1 (net LPS_PWR) with C3+C5 = 0.2 uF local decoupling and no series resistance. Two consequences. (1) Inrush: the BMP585 datasheet makes this a normative footnote to the electrical characteristics table - 'For supply ramps < 0.01 ms, a 10 Ohm resistor must be connected in series to the power supply' - with t_VDDramp min 0.01 ms, specifically calling out repeated power cycles - which is exactly this design's duty cycle. The GPIO's own output impedance (roughly 25-50 ohm inferred from the STM32L432 VOH spec) already gives a 10-90% ramp of about 11-22 us, so the requirement is probably met, but the margin is thin and shrinks if firmware selects a high-speed output drive. (2) Back-powering: when PB1 is low the SPI lines LPS_SCK/LPS_MOSI/LPS_CS are still driven from the VIN domain and will inject current through the sensor's ESD diodes into its unpowered VDDIO. Sensor peak draw is only 260 uA, so PB1 has ample drive.",
+      "recommendation": "Fit a 10 ohm series resistor in LPS_PWR on the next respin: it costs 2.6 mV at the 260 uA peak and satisfies the requirement by construction rather than by calculation. Until then keep PB1 on the lowest GPIO output-speed setting and treat that as a hard constraint. Separately, document the firmware contract: before pulling PB1 low, drive LPS_SCK, LPS_MOSI and LPS_CS low (or analog/high-Z), and keep PA6 (lps_rdy) an input with no pull-up.",
+      "evidence": {
+        "components": [
+          "U3",
+          "U302",
+          "C3",
+          "C5"
+        ],
+        "nets": [
+          "LPS_PWR"
+        ],
+        "pins": [
+          "U302.15",
+          "U3.4",
+          "U3.8"
+        ],
+        "datasheet": [
+          {
+            "mpn": "BMP585",
+            "page": 12,
+            "quote": "Table 4 footnote a: For supply ramps < 0.01 ms, a 10 Ohm resistor must be connected in series to the power supply (see 6.2.5). t_VDDramp & t_VDDIOramp, 10% to 90% of target voltage: min 0.01 ms, max 10 ms."
+          },
+          {
+            "mpn": "BMP585",
+            "page": 13,
+            "quote": "Peak current i_peak maximum DC current 260 uA"
+          }
+        ],
+        "computation": {
+          "description": "RC ramp estimate for LPS_PWR: R = STM32L432 GPIO output impedance inferred from VOH >= VDD-0.4 V at 8 mA (50 ohm worst case, ~25 ohm typical); C = C3 + C5 = 0.2 uF; 10-90% rise = 2.2*R*C",
+          "result": "t_ramp = 11 us (25 ohm) to 22 us (50 ohm), both above the 10 us datasheet threshold; a 10 ohm series resistor would drop 2.6 mV at the 260 uA peak"
+        }
+      },
+      "evidence_checked": "partial",
+      "components": [
+        "U3",
+        "U302",
+        "C3",
+        "C5"
+      ],
+      "nets": [
+        "LPS_PWR"
+      ],
+      "pins": [
+        "U302.15",
+        "U3.4",
+        "U3.8"
+      ],
+      "finding_id": "deep_review:6623f2770869"
+    },
+    {
+      "detector": "deep_review",
+      "category": "power_up_sequencing",
+      "severity": "info",
+      "confidence": "high",
+      "summary": "AT25 flash CS relies on the STM32 PA15 internal pull-up; the datasheet recommends a 10 kOhm external pull-up for the VCC ramp window",
+      "description": "This is the documented house convention (no external chip-select pull-ups; firmware drives CS high as its first GPIO action) and PA15's reset state does include a pull-up, which helps. The residual gap is narrower than the general convention suggests: during the VIN ramp, before the STM32's own POR completes, PA15 is high-Z, so CS floats for that window while the flash is also powering up on the same rail.",
+      "recommendation": "Accept as house convention, but if a future respin has room, the datasheet's 10 kOhm from CS to VCC removes the ramp-window ambiguity for one 0201. Keep PA15's reset pull-up explicitly configured rather than relying on the default.",
+      "evidence": {
+        "components": [
+          "U1",
+          "U302"
+        ],
+        "nets": [
+          "AT25_nCS"
+        ],
+        "pins": [
+          "U1.B4",
+          "U302.25"
+        ],
+        "datasheet": [
+          {
+            "mpn": "AT25XE321D",
+            "page": 8,
+            "quote": "To ensure correct power-up sequencing, it is recommended to add a 10k Ohm pull-up resistor from CS to VCC. This ensures CS ramps together with VCC during power-up."
+          }
+        ]
+      },
+      "evidence_checked": "partial",
+      "components": [
+        "U1",
+        "U302"
+      ],
+      "nets": [
+        "AT25_nCS"
+      ],
+      "pins": [
+        "U1.B4",
+        "U302.25"
+      ],
+      "finding_id": "deep_review:cf15b16632c7"
+    },
+    {
+      "detector": "deep_review",
+      "category": "reset_network",
+      "severity": "warning",
+      "confidence": "medium",
+      "summary": "Q501 reset transistor base is driven straight from header pin J201.5 with no series resistor",
+      "description": "Net RST contains only Q501 base (pin 1) and J201 pin 5. An external programmer asserting RST therefore drives a forward-biased base-emitter junction with no current limiting on the board; current is set only by the driver's own output impedance. The house convention is that this base resistor lives on the mating baseboard, but this board's config describes it as self-contained and J201 is a 6-pin SWD/programming header, so it is not clear anything upstream provides the resistor. The transistor itself tolerates it (200 mA peak base rating), so the risk is to the programmer's output driver rather than to the tag.",
+      "recommendation": "Confirm whether the programming adapter that mates with J201 carries the base series resistor. If it does, record that in mating_design so this stops being re-raised. If it does not, add a resistor of roughly 4.7-10 kOhm in series with Q501's base - at these currents it costs nothing and the pull-down behaviour is unchanged.",
+      "evidence": {
+        "components": [
+          "Q501",
+          "J201"
+        ],
+        "nets": [
+          "RST"
+        ],
+        "pins": [
+          "Q501.1",
+          "J201.5"
+        ],
+        "datasheet": [
+          {
+            "mpn": "PMBT2222AMBYL",
+            "quote": "peak base current"
+          }
+        ],
+        "computation": {
+          "description": "Net RST membership from schematic.json, and base current estimate for a 3.3 V driver into Vbe = 0.8 V through an assumed 30 ohm driver impedance",
+          "result": "RST has exactly 2 pins (Q501.1 base, J201.5) and no resistor; I_B ~ (3.3-0.8)/30 = 83 mA, below the 200 mA peak base rating but well above any sane drive level"
+        }
+      },
+      "evidence_checked": "partial",
+      "components": [
+        "Q501",
+        "J201"
+      ],
+      "nets": [
+        "RST"
+      ],
+      "pins": [
+        "Q501.1",
+        "J201.5"
+      ],
+      "finding_id": "deep_review:d01750605d9b"
+    },
+    {
+      "detector": "deep_review",
+      "category": "symbol_hygiene",
+      "severity": "info",
+      "confidence": "high",
+      "summary": "Pin electrical types are wrong on several library symbols, producing 4 of the 6 ERC errors and masking real ones",
+      "description": "U2 pins 7 and 11 (GND) and U501 pin 5 (GND) are declared Power output rather than Power input or passive, which is what produces the two pin_to_pin 'Power output and Power output are connected' errors. U501 pin 1 CLKOUT is declared an input when it is the RTC's clock output, and U501 pins 3/4 (SCL/SDA) are declared inputs when SDA is bidirectional open-drain. Separately, Q501's symbol Q_NPN_BEC is not resolvable - the sym-lib-table has no Device library entry - so it renders from the schematic's embedded cache only.",
+      "recommendation": "Fix the pin types in the library symbols so ERC output is meaningful, and add the stock Device library to sym-lib-table so Q501's symbol resolves. Its pinout is correct as cached (verified below), but an unresolvable symbol is fragile if anyone re-links libraries, since SOT-23/SOT-883 NPNs exist in several pin orderings.",
+      "evidence": {
+        "components": [
+          "U2",
+          "U501",
+          "Q501"
+        ],
+        "pins": [
+          "U2.7",
+          "U2.11",
+          "U501.5",
+          "U501.1"
+        ],
+        "computation": {
+          "description": "KiCad ERC on BitPresTagBMP581.kicad_sch, cross-referenced against pin_type in schematic.json and the lib entries in sym-lib-table",
+          "result": "6 ERC violations, of which 2 pin_to_pin and 1 power_pin_not_driven trace to declared pin types; sym-lib-table lists 5 libraries, none named Device"
+        }
+      },
+      "evidence_checked": "full",
+      "components": [
+        "U2",
+        "U501",
+        "Q501"
+      ],
+      "pins": [
+        "U2.7",
+        "U2.11",
+        "U501.5",
+        "U501.1"
+      ],
+      "finding_id": "deep_review:2be4de36ca16"
+    },
+    {
+      "detector": "deep_review",
+      "category": "unconnected_pin",
+      "severity": "info",
+      "confidence": "medium",
+      "summary": "U3 pin 9 (L/M) is the lasermarking pad; no external connection is possible, so it is correct unwired and needs only a no-connect flag",
+      "description": "CORRECTED 2026-09-04 against bst-bmp585-ds003.pdf, supplied during the review. An earlier pass guessed L/M was a metal-lid connection and recommended tying it to GND - that would have been wrong and in fact unbuildable. The BMP585 pin table lists pin 9 as 'L/M Pad', type '---', description 'Lasermarking', and under 'Connect to' states 'No external connection possible due to S/R coverage'. The pad is under solder resist. Leaving it unwired is the only option.",
+      "recommendation": "Add an explicit no-connect flag on U3 pin 9 to clear the KiCad ERC pin_not_connected error and record the intent. No copper change.",
+      "evidence": {
+        "components": [
+          "U3"
+        ],
+        "nets": [
+          "__unnamed_16"
+        ],
+        "pins": [
+          "U3.9"
+        ],
+        "computation": {
+          "description": "KiCad ERC on BitPresTagBMP581.kicad_sch, plus net pin count from schematic.json",
+          "result": "ERC error pin_not_connected at Symbol U3 Pin 9 [L/M, Passive]; net __unnamed_16 has 1 pin"
+        },
+        "datasheet": [
+          {
+            "mpn": "BMP585",
+            "quote": "9 | L/M Pad | Lasermarking | Connect to: No external connection possible due to S/R coverage"
+          }
+        ]
+      },
+      "evidence_checked": "partial",
+      "components": [
+        "U3"
+      ],
+      "nets": [
+        "__unnamed_16"
+      ],
+      "pins": [
+        "U3.9"
+      ],
+      "finding_id": "deep_review:74e0fe2f8460"
+    },
+    {
+      "detector": "deep_review",
+      "category": "verified_correct",
+      "severity": "info",
+      "confidence": "high",
+      "summary": "Pinouts verified against manufacturer PDFs: PMBT2222AMBYL, AT25XE321D 12-ball WLCSP, ADXL367, BMP585 (all 9 pads), and the RV-3028 backup network",
+      "description": "Q501's Q_NPN_BEC symbol assumes pin 1 = base, 2 = emitter, 3 = collector, which matches the PMBT2222AMB datasheet pinning table exactly, and the schematic wires it as a correct NPN reset inverter (base to RST, emitter to GND, collector to NRST). U1's ball assignment matches the AT25XE321D 12-ball WLCSP bottom-view figure ball for ball (B2 VCC, B4 CS, C3 GND, D2 HOLD/RESET, D4 SO, E3 SI, F2 SCK, F4 WP, A1/A5/G1/G5 NC). U2's 12 pins match the ADXL367 pin-description table in order. U501's VBACKUP is tied to VSS through R1 = 10 kOhm and EVI is tied to GND, which is precisely the datasheet's no-backup-source configuration. U1's WP pin is left floating, which the datasheet explicitly permits. U3's BMP585 pinout matches bst-bmp585-ds003.pdf across all nine pads (SCX, SDX, SDO, VDDIO, INT, VSS, CSB, VDD, L/M), and its decoupling matches the datasheet's connection diagrams of 100 nF per supply pin.",
+      "recommendation": "No action. Recorded so the next review does not re-derive these.",
+      "evidence": {
+        "components": [
+          "Q501",
+          "U1",
+          "U2",
+          "U501"
+        ],
+        "datasheet": [
+          {
+            "mpn": "PMBT2222AMBYL",
+            "quote": "Table 2. Pinning information: Pin 1 B base; Pin 2 E emitter; Pin 3 C collector"
+          },
+          {
+            "mpn": "AT25XE321D",
+            "page": 8,
+            "quote": "12-ball WLCSP Package (3 x 2 x 3 ball matrix) (Bottom view): A5 NC, A1 NC, B4 CS, B2 VCC, C3 GND, D4 SO IO1, D2 H/R IO3, E3 SI IO0, F4 WP IO2, F2 SCK, G5 NC, G1 NC"
+          },
+          {
+            "mpn": "AT25XE321D",
+            "quote": "The WP pin is internally pulled high and can be left floating if not used."
+          },
+          {
+            "mpn": "RV-3028-C8",
+            "page": 9,
+            "quote": "Backup Supply Voltage. When the backup switchover function is not needed, VBACKUP must be tied to VSS with a 10 kOhm resistor."
+          },
+          {
+            "mpn": "BMP585",
+            "quote": "1 SCX, 2 SDX, 3 SDO, 4 VDDIO, 5 INT, 6 VSS, 7 CSB, 8 VDD, 9 L/M Pad"
+          }
+        ],
+        "computation": {
+          "description": "padnet_crosscheck.py compared every schematic pin-net against every PCB pad-net",
+          "script": "../kicad-helpers/padnet_crosscheck.py",
+          "result": "footprints checked: 26, mismatches: 0"
+        }
+      },
+      "evidence_checked": "partial",
+      "components": [
+        "Q501",
+        "U1",
+        "U2",
+        "U501"
+      ],
+      "finding_id": "deep_review:4c76539e8bfc"
+    }
+  ],
+  "quarantined": []
+}
