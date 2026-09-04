@@ -532,19 +532,19 @@
       "Fab package pcbway_production/2026-09-04-07-36-32 verified against the board file by geometry, not mtime: 50/50 sampled F.Cu and B.Cu track endpoints match, 39/39 vias at 0.2007 mm, 4 NPTH at 1.0998 mm, outline 18.0 x 10.0 mm. Every via measures a 0.1524 mm annular ring, confirming the export postdates the rule change.",
       "U3 BMP585 pinout verified against bst-bmp585-ds003.pdf (all 9 pads: SCX, SDX, SDO, VDDIO, INT, VSS, CSB, VDD, L/M). Decoupling matches the datasheet connection diagrams (100 nF per supply pin; C3+C5 on the shared LPS_PWR node).",
       "U3 pin 9 L/M is the LASERMARKING pad, and the datasheet states 'No external connection possible due to S/R coverage'. Leaving it unwired is the ONLY option and is correct -- it is NOT a metal lid and must not be tied to GND. It needs only a no-connect flag.",
-      "PA2/PA3/PA4 = USART2_TX/USART2_RX/USART2_CK (AF7). The ADXL367 runs on hardware USART2 synchronous mode; it does NOT need bit-banging. Confirmed against STM32L432 DS Table 11."
+      "PA2/PA3/PA4 = USART2_TX/USART2_RX/USART2_CK (AF7). The ADXL367 runs on hardware USART2 synchronous mode; it does NOT need bit-banging. Confirmed against STM32L432 DS Table 11.",
+      "U1 flash: AT25XE321D and AT25FF321A are PIN-IDENTICAL in the 12-ball WLCSP (verified against the rendered Figure 2 of both datasheets) and match this schematic's ball assignment. Same density, voltage range, SPI modes 0/3, 133 MHz, and identical 26 uA / 7 uA / 5-7 nA standby/DPD/UDPD figures. The MPN ambiguity therefore cannot produce a non-working board."
     ],
     "open_items": [
       "The switched sensor-supply node (PB1 -> R2 -> U3) is an UNNAMED net (__unnamed_13). Give it a label such as LPS_VDD: it is the actual switched rail, and the PP-001 suppression keyed to an unnamed net number is fragile.",
       "Q501 base has no series resistor and this board has no baseboard -- confirm the programming adapter provides it.",
-      "Value vs MPN disagree on U1 (AT25XE321D vs AT25FF321A) and U302 (L431 vs L432). U1 is the one open item that could yield the wrong physical part, since the fab orders by MPN. (U3/project-name mismatch resolved by the 2026-09-04 rename.)",
+      "Value vs MPN disagree on U1 (Value AT25XE321D vs MPN AT25FF321A) and U302 (Value stm32l431kc vs MPN STM32L432KCU6). De-risked 2026-09-04: the two flash candidates are pin-identical, so this is a BOM-consistency matter, not a board risk. The ONLY functional difference is erase granularity -- AT25XE321D has 256-byte page erase (81h/DBh), AT25FF321A's smallest erase is 4 kByte. Recommend AT25XE321D (functional superset, and what Value already says); a firmware decision if small-record rewrites are used.",
       "Residual symbol pin-type errors, latent now that ERC is clean: U501 pin 1 CLKOUT declared 'input' (it is the RTC clock output), U501 pins 3/4 SCL/SDA declared 'input' (SDA is bidirectional open-drain), U501 pin 5 GND declared 'power_out' -- the last no longer errors only because U2's GND is now power_in, so a second power_out anywhere would resurrect it.",
       "sym-lib-table still has no Device library, so Q501's Q_NPN_BEC resolves only from the embedded cache (pinout verified correct against PMBT2222AMB). The lib_symbol_issues ERC exclusion covers this; worth fixing since a mis-resolved transistor symbol passes DRC and ERC.",
       "Three poisoned analyzer JSONs are still committed at analysis/{pcb,schematic,cross_analysis}.json (rules_source = BitTagNG-LIS2DU12...). Recommend git rm."
     ],
     "datasheet_gaps": [
-      "AT25FF321A -- not on hand; only AT25XE321D. Resolve the MPN question first.",
-      "CDBQC0130L-HF (D401) -- not on hand; forward-drop and hence VIN headroom unverified."
+      "CDBQC0130L-HF (D401) -- not on hand; forward-drop and hence VIN/VCC headroom unverified."
     ],
     "analyzer_traps": [
       "The 2026-08-29 analysis run was poisoned: project_settings.source was BitTagNG-LIS2DU12.kicad_pcb-back.kicad_pro, so every rule-derived number in it was measured against the wrong rule set. That stray file has since been swept. Always check project_settings.source before trusting a run."

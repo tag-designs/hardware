@@ -112,7 +112,7 @@ should be committed.
 | 2 | ✅ **Fixed** | Schematic-wide | Rail was drawn as `+2V5`; **now `VCC`**, with `VIN` kept as the environment-facing alias |
 | 3 | Info | U302 / U2 | ADXL367 runs on **USART2 synchronous mode**, not an SPI peripheral — firmware config note |
 | 4 | ✅ **Fixed** / ⚠️ | U3 / PB1 | Inrush: **R2 = 10 Ω added**. Back-power sequencing remains a firmware contract |
-| 5 | ◐ **Partly fixed** | U1, U302 | `Value` vs `MPN` still disagree on two parts; **U3/project name resolved by rename** |
+| 5 | ◐ **De-risked** | U1, U302 | `Value` vs `MPN` disagree; **both flash candidates are pin-identical** — a BOM choice, not a board risk |
 | 6 | ✅ **Fixed** | U3 pin 9 | `L/M` is a lasermarking pad; **no-connect flag added** |
 | 7 | ❓ **Question** | Q501 | Reset transistor base has no series resistor, and this board has no baseboard |
 | 8 | Info | U1 | CS relies on PA15 internal pull-up; datasheet suggests 10 kΩ for the ramp window |
@@ -316,9 +316,35 @@ On U3: the footprint is `LGA9_BMP585_BOS` (9 pins), while BMP581 is a *10-pin* m
 ("Compact 10-pin metal-lid LGA package … 2.0 × 2.0 mm²"). **The board is built for a BMP585
 and the project was misnamed** — resolved by the 2026-09-04 rename to `BitPresTagBMP585`.
 
-**Fix:** make `Value` match `MPN` on all three. Settle the U1 question before the BOM is used
-to order — if AT25FF321A is correct, its datasheet needs to be added to the shared store; if
-AT25XE321D is correct, the MPN is wrong and the fab would receive the wrong part number.
+**✅ U3 resolved by the 2026-09-04 rename** to `BitPresTagBMP585`.
+
+**✅ U1 de-risked 2026-09-04** — the AT25FF321A datasheet was supplied, and the two candidates
+turn out to be **pin-identical and electrically equivalent in this design**, so neither choice
+can produce a non-working board:
+
+| | AT25XE321D | AT25FF321A |
+|---|---|---|
+| 12-ball WLCSP ball map | B2 Vcc, B4 CS, C3 GND, D2 HOLD/RESET, D4 SO, E3 SI, F2 SCK, F4 WP, A1/A5/G1/G5 NC | **identical** |
+| Density / voltage | 32 Mbit, 1.65–3.6 V | 32 Mbit, 1.65–3.6 V |
+| SPI modes / max clock | 0 and 3, 133 MHz | 0 and 3, 133 MHz |
+| Standby / DPD / UDPD | 26 µA / 7 µA / 5–7 nA | 26 µA / 7 µA / 5–7 nA |
+| **Smallest erase** | **256-byte page erase** (81h/DBh) | **4 kByte block** — no page erase |
+
+Both verified against the rendered Figure 2 in each datasheet, not the text layer.
+
+**The one difference that matters is erase granularity.** For a data-logging tag this is a
+firmware question: if firmware rewrites small records in place, the AT25XE321D's 256-byte page
+erase avoids read-modify-write of a 4 kB block and the write amplification that comes with it.
+If logging is append-only with 4 kB-aligned erases, the two are interchangeable.
+
+**Recommendation: settle on AT25XE321D** unless there is a sourcing reason to prefer the other.
+It is a functional superset here — same pinout, same power, plus the finer erase — and it is what
+the schematic's `Value` field and the original design intent both name. Then set `MPN` to match
+so the fab orders it. Whichever you pick, **make `Value` and `MPN` agree**; today they name
+different parts, and the fab reads `MPN`.
+
+**U302 remains:** `Value` says `stm32l431kc`, `MPN` says `STM32L432KCU6`. The L431 has a
+different peripheral set, so this one is worth correcting rather than leaving as a label quirk.
 
 ---
 
@@ -665,9 +691,11 @@ and its violation fixed.
 
 **Still open — electrical / sourcing:**
 
-1. **Settle U1's identity** — AT25XE321D or AT25FF321A? (finding 5) The fab orders by MPN, so
-   this is the one open item that could produce the wrong physical board.
-2. **Confirm the Q501 base resistor** lives in the programming adapter (finding 7).
+1. **Pick one flash and make `Value` match `MPN`** (finding 5). No longer a board risk — the two
+   candidates are pin-identical — but the BOM currently names two different parts.
+   `AT25XE321D` recommended; the only real difference is its 256-byte page erase.
+2. **Confirm the Q501 base resistor** lives in the programming adapter (finding 7). This is now
+   the only open item whose answer could require a board change.
 
 **Still open — schematic hygiene, no copper change:**
 
