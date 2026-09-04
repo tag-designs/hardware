@@ -679,6 +679,65 @@ flash-write pulses from a coin cell.
 
 ---
 
+## Supply headroom and the 38 °C operating point
+
+Two late inputs closed the last open questions: the `CDBQC0130L-HF` datasheet, and the fact that
+**these tags are worn by birds — so the thermal ambient is body temperature, 38 °C, not 25 °C.**
+The board's config carried 25 °C; it now says 38 °C.
+
+### D401 — verified, and generous
+
+| Parameter | Value |
+|---|---|
+| V<sub>F</sub> at I<sub>F</sub> = 10 mA, 25 °C | **0.25 V typ / 0.30 V max** |
+| I<sub>O</sub> average forward | 100 mA (vs a 10 mA peak here — 10× margin) |
+| V<sub>R</sub> / I<sub>FSM</sub> | 30 V / 3 A |
+| Rθ<sub>JA</sub> / T<sub>j</sub> | 200 °C/W / −40…+125 °C |
+
+Schottky V<sub>F</sub> falls about 65 mV per decade of current, so the drop at the operating
+points is much smaller than the 10 mA spec figure:
+
+| Operating point | V<sub>F</sub> typ | V<sub>F</sub> max |
+|---|---|---|
+| 10 mA — flash-write peak | 0.250 V | 0.300 V |
+| 1 mA — operating max | 0.185 V | 0.235 V |
+| **10 µA — typical** | **0.056 V** | **0.106 V** |
+
+**The headroom is comfortable.** At the 10 µA typical point the rail sits essentially at the cell
+voltage. The 10 mA flash-write pulse is supplied by the **91 µF of bulk** on `VCC`
+(C4 22 µF + C404 22 µF + C6 47 µF), not carried through the diode, so the 0.25 V figure never
+appears as a standing drop. The binding floor is **1.71 V** — the STM32L432's power-on BOR level,
+which the BMP585's V<sub>DD</sub> minimum happens to match exactly.
+
+D401's thermals are a non-issue: 10 mA × 0.25 V = 2.5 mW into 200 °C/W is a **0.5 °C rise**, so
+T<sub>j</sub> ≈ 38.5 °C against a 125 °C limit.
+
+### 38 °C changes the current budget, not the thermal safety
+
+Every part on the board is rated **−40…+85 °C** — BMP585, ADXL367, AT25, RV-3028, STM32L432 — so
+38 °C is comfortably inside all of them, and the thermal analyzer still reports nothing (total
+board dissipation is microwatts). Nothing is at risk.
+
+What *does* change is **standby current**, because the sleep terms are leakage-dominated and the
+~10 µA budget in the config is a room-temperature figure. The BMP585's datasheet gives two
+explicit points that make the slope concrete:
+
+| BMP585 | 25 °C | 55 °C | **38 °C (fitted)** | Doubles every |
+|---|---|---|---|---|
+| Standby | 1.0 µA | 3.5 µA | **1.72 µA** | 16.6 °C |
+| Deep standby | 0.55 µA | 1.5 µA | **0.85 µA** | 20.7 °C |
+
+STM32L432 stop-mode leakage behaves similarly, roughly doubling every 10 °C, and it is likely the
+dominant term once the BMP585 is gated off. **Battery-life estimates built on the 25 °C budget
+will be optimistic** — they should be re-derived at 38 °C. This is a firmware and
+mission-planning input, not a board change.
+
+**One question worth settling:** `design_intent.operating_temp_range` still reads `[-10, 70]`. In
+service the tag sits against a 38 °C bird on one side and ambient air on the other. Is that range
+meant as the environmental extreme, or as the tag's own operating range?
+
+---
+
 ## Analyzer findings triaged as false positives
 
 The raw analyzers produced 32 PCB + 54 EMC + 7 cross-domain findings. Most are artefacts.
@@ -723,9 +782,9 @@ since been swept from the directory. All results in this review come from a fres
     pinout is now fully verified and findings 4 and 6 have been corrected against it rather
     than against BMP581 text.
   - **AT25FF321A** — not on hand; only AT25XE321D. Resolve the MPN question (finding 5) first.
-  - **CDBQC0130L-HF (D401)** — not on hand. Forward drop, and hence exact VIN headroom at
-    end of cell life, is unverified. VIN ≈ 1.9 V at a 2.0 V cell still clears the STM32's
-    1.71 V limit, so the margin is adequate on reasonable assumptions.
+  - ~~**CDBQC0130L-HF (D401)**~~ — **resolved 2026-09-04**; datasheet supplied. See
+    *Supply headroom* below. **No datasheet gaps remain** — every part on the board is now
+    verified against its manufacturer datasheet.
 - **Previous-review delta — none available.** This is the first review of this board; there is
   no prior `deep_review.json` to diff, and the one earlier analyzer run was poisoned (above),
   so diffing against it would be misleading rather than informative.

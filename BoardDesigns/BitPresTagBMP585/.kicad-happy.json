@@ -2,8 +2,8 @@
   "version": 1,
   "project": {
     "name": "BitPresTagBMP585",
-    "ambient_temperature_c": 25,
-    "notes": "Renamed from BitPresTagBMP581 to BitPresTagBMP585 on 2026-09-04 to match the part actually fitted: U3 is a BMP585 (8-pin metal-lid LGA plus L/M pad, footprint LGA9_BMP585_BOS), not the 10-pin BMP581. Directory, all project files and every internal reference were renamed together; archive/ was deliberately left under the old name as a historical snapshot."
+    "ambient_temperature_c": 38,
+    "notes": "Renamed from BitPresTagBMP581 to BitPresTagBMP585 on 2026-09-04 to match the part actually fitted: U3 is a BMP585 (8-pin metal-lid LGA plus L/M pad, footprint LGA9_BMP585_BOS), not the 10-pin BMP581. Directory, all project files and every internal reference were renamed together; archive/ was deliberately left under the old name as a historical snapshot. DEPLOYMENT: these tags are worn by birds, so the thermal ambient is body temperature, 38 C, not 25 C. Set 2026-09-04."
   },
   "design_intent": {
     "product_class": "prototype",
@@ -15,7 +15,8 @@
       70
     ],
     "preferred_passive_size": "0201",
-    "test_coverage_target": 0
+    "test_coverage_target": 0,
+    "operating_temp_range_note": "operating_temp_range is currently [-10, 70]. In service the tag sits against a 38 C bird and is exposed to ambient air on the other side. Every part is rated -40...+85 C, so 38 C is comfortably inside all of them; confirm whether the stated range is meant to be the environmental extreme or the tag's own operating range."
   },
   "power_profile": {
     "source": "User-provided design intent",
@@ -27,8 +28,12 @@
       "BitPresTagBMP585 is a low-power pressure/motion sensing tag on a coin cell.",
       "Typical current about 10 uA; operating current below 1 mA; peak about 10 mA on flash write.",
       "U3 BMP585 peak draw is 260 uA max DC (BMP581 DS p.12), power-gated from PB1.",
-      "Bulk on VIN is C4 22uF + C404 22uF + C6 47uF plus six 0.1uF, sized for flash-write pulses."
-    ]
+      "Bulk on VIN is C4 22uF + C404 22uF + C6 47uF plus six 0.1uF, sized for flash-write pulses.",
+      "TEMPERATURE: the ~10 uA typical figure is a room-temperature number. In service the tag runs at 38 C body temperature, and the standby terms are leakage-dominated. The BMP585 datasheet gives standby 1.0 uA at 25 C and 3.5 uA at 55 C, which fits a doubling every ~16.6 C and puts it at ~1.7 uA at 38 C; deep standby 0.55 -> 0.85 uA. STM32L432 stop-mode leakage roughly doubles every 10 C. Battery-life estimates built on the 25 C budget will be optimistic - re-derive them at 38 C.",
+      "D401 (CDBQC0130L-HF) verified 2026-09-04: Vf typ 0.25 V / max 0.30 V at IF = 10 mA, 25 C; Io = 100 mA; VR = 30 V; IFSM 3 A; RthJA 200 C/W; Tj -40...+125 C. Schottky Vf falls ~65 mV/decade, so at the 10 uA typical point the drop is only ~0.06 V and the rail sits essentially at the cell voltage. The 10 mA flash-write pulse is supplied by the 91 uF of bulk on VCC, not carried by the diode.",
+      "D401 thermal is a non-issue: 10 mA x 0.25 V = 2.5 mW into 200 C/W is a 0.5 C rise, so Tj ~ 38.5 C against a 125 C limit. Io = 100 mA against a 10 mA peak is 10x margin."
+    ],
+    "ambient_c": 38
   },
   "analysis": {
     "output_dir": "analysis",
@@ -547,10 +552,11 @@
       "None blocking. The board is ready to order.",
       "Optional hygiene: U501 pin 1 CLKOUT is declared 'input' though it is the RTC clock output, pins 3/4 SCL/SDA are declared 'input' though SDA is bidirectional open-drain, and pin 5 GND is 'power_out' -- latent, since ERC is clean only because U2's GND is now power_in.",
       "Optional hygiene: sym-lib-table has no Device library, so Q501's Q_NPN_BEC resolves from the embedded cache only. Pinout verified correct against PMBT2222AMB; worth fixing because a mis-resolved transistor symbol passes DRC and ERC.",
-      "Three poisoned analyzer JSONs were removed from git during this review; do not restore them."
+      "Three poisoned analyzer JSONs were removed from git during this review; do not restore them.",
+      "Re-derive battery life at 38 C rather than 25 C. Confirm whether design_intent.operating_temp_range [-10, 70] is meant as the environmental extreme."
     ],
     "datasheet_gaps": [
-      "CDBQC0130L-HF (D401) -- not on hand; forward-drop and hence VIN/VCC headroom unverified."
+      "None. CDBQC0130L-HF supplied 2026-09-04; every part on the board is now verified against its manufacturer datasheet."
     ],
     "analyzer_traps": [
       "The 2026-08-29 analysis run was poisoned: project_settings.source was BitTagNG-LIS2DU12.kicad_pcb-back.kicad_pro, so every rule-derived number in it was measured against the wrong rule set. That stray file has since been swept. Always check project_settings.source before trusting a run."
@@ -575,7 +581,9 @@
       "J201, J301-J304 and J401 are correctly absent from BOM and CPL: J201 is a 6-pad solder tagpoint array (no part to place), J301-J304 are 1.1 mm NPTH mounting holes, and J401 is the MS621 cell footprint, fitted by hand rather than machine-placed.",
       "U302 Value corrected stm32l431kc -> STM32L432KCU6; schematic and PCB agree and match the MPN. All Value/MPN disagreements are now closed.",
       "The switched sensor-supply node is labelled LPS_VDD (was the unnamed net __unnamed_13). LPS_PWR now names only the PB1->R2 stub. The PP-001 suppression is re-keyed to LPS_VDD and is no longer fragile against schematic edits.",
-      "Fab package regenerated as pcbway_production/2026-09-04-19-26-51 and VERIFIED: U302 Value now reads STM32L432KCU6, the netlist carries LPS_VDD, BOM 22 designators == CPL 22 placements with an exact designator match and no stale Values. Geometry checked EXHAUSTIVELY this time: all 305 outer-layer track endpoints present in the shipped gerbers, 40 vias reconciled with 40 PTH holes at 0.2007 mm, 4 NPTH at 1.0998 mm, outline 18.0 x 10.0 mm, 12 gerbers plus 2 drill files. The superseded 19-11-58 export was removed so only one package remains."
+      "Fab package regenerated as pcbway_production/2026-09-04-19-26-51 and VERIFIED: U302 Value now reads STM32L432KCU6, the netlist carries LPS_VDD, BOM 22 designators == CPL 22 placements with an exact designator match and no stale Values. Geometry checked EXHAUSTIVELY this time: all 305 outer-layer track endpoints present in the shipped gerbers, 40 vias reconciled with 40 PTH holes at 0.2007 mm, 4 NPTH at 1.0998 mm, outline 18.0 x 10.0 mm, 12 gerbers plus 2 drill files. The superseded 19-11-58 export was removed so only one package remains.",
+      "D401 CDBQC0130L-HF datasheet supplied; the last datasheet gap is closed. Vf typ 0.25 V / max 0.30 V at 10 mA, Io 100 mA, VR 30 V. Rail headroom is comfortable: at the 10 uA typical point Vf is ~0.06 V, so VCC sits essentially at the cell voltage, well clear of the 1.71 V binding floor (STM32L432 BOR and BMP585 VDD min).",
+      "Ambient corrected 25 C -> 38 C: the tags are worn by birds. All parts are rated -40...+85 C so nothing is out of range, and the thermal analyzer still reports nothing (board dissipation is microwatts). The consequence is to the CURRENT budget, not to thermal safety - see power_profile.notes."
     ]
   }
 }
