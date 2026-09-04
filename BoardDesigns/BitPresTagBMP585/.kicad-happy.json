@@ -544,7 +544,7 @@
       "U1 flash: AT25XE321D and AT25FF321A are PIN-IDENTICAL in the 12-ball WLCSP (verified against the rendered Figure 2 of both datasheets) and match this schematic's ball assignment. Same density, voltage range, SPI modes 0/3, 133 MHz, and identical 26 uA / 7 uA / 5-7 nA standby/DPD/UDPD figures. The MPN ambiguity therefore cannot produce a non-working board."
     ],
     "open_items": [
-      "Regenerate the fab package before ordering. pcbway_production/2026-09-04-19-11-58 predates the U302 Value fix and the LPS_VDD net label. VERIFIED 2026-09-04 that the copper is unaffected -- all 305 outer-layer track endpoints still match the board, 40 vias, 18x10 mm - and the BOM's MPN column is correct (STM32L432KCU6), so nothing is functionally wrong. Stale only in the cosmetic BOM Value column (reads stm32l431kc) and the netlist.ipc net labels. Regenerate anyway so assembly review is not reading a wrong part name.",
+      "None blocking. The board is ready to order.",
       "Optional hygiene: U501 pin 1 CLKOUT is declared 'input' though it is the RTC clock output, pins 3/4 SCL/SDA are declared 'input' though SDA is bidirectional open-drain, and pin 5 GND is 'power_out' -- latent, since ERC is clean only because U2's GND is now power_in.",
       "Optional hygiene: sym-lib-table has no Device library, so Q501's Q_NPN_BEC resolves from the embedded cache only. Pinout verified correct against PMBT2222AMB; worth fixing because a mis-resolved transistor symbol passes DRC and ERC.",
       "Three poisoned analyzer JSONs were removed from git during this review; do not restore them."
@@ -574,7 +574,8 @@
       "Production package pcbway_production/2026-09-04-19-11-58 VERIFIED against the current board by geometry, not mtime: 60/60 sampled F.Cu/B.Cu track endpoints present in the shipped gerbers; 40/40 vias reconciled with the PTH drill file at 0.2007 mm, every one measuring a 0.1524 mm annular ring; 4 NPTH at 1.0998 mm; outline exactly 18.0 x 10.0 mm; all 11 gerber layers plus both drill files present; inner planes 17.399 x 9.399 mm confirming the 0.3 mm edge clearance. BOM 22 designators == CPL 22 placements, and both include C8 and R2.",
       "J201, J301-J304 and J401 are correctly absent from BOM and CPL: J201 is a 6-pad solder tagpoint array (no part to place), J301-J304 are 1.1 mm NPTH mounting holes, and J401 is the MS621 cell footprint, fitted by hand rather than machine-placed.",
       "U302 Value corrected stm32l431kc -> STM32L432KCU6; schematic and PCB agree and match the MPN. All Value/MPN disagreements are now closed.",
-      "The switched sensor-supply node is labelled LPS_VDD (was the unnamed net __unnamed_13). LPS_PWR now names only the PB1->R2 stub. The PP-001 suppression is re-keyed to LPS_VDD and is no longer fragile against schematic edits."
+      "The switched sensor-supply node is labelled LPS_VDD (was the unnamed net __unnamed_13). LPS_PWR now names only the PB1->R2 stub. The PP-001 suppression is re-keyed to LPS_VDD and is no longer fragile against schematic edits.",
+      "Fab package regenerated as pcbway_production/2026-09-04-19-26-51 and VERIFIED: U302 Value now reads STM32L432KCU6, the netlist carries LPS_VDD, BOM 22 designators == CPL 22 placements with an exact designator match and no stale Values. Geometry checked EXHAUSTIVELY this time: all 305 outer-layer track endpoints present in the shipped gerbers, 40 vias reconciled with 40 PTH holes at 0.2007 mm, 4 NPTH at 1.0998 mm, outline 18.0 x 10.0 mm, 12 gerbers plus 2 drill files. The superseded 19-11-58 export was removed so only one package remains."
     ]
   }
 }

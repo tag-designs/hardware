@@ -7,21 +7,21 @@
       "analysis/2026-09-04_1914-2/pcb.json"
     ],
     "source_hashes": {
-      "analysis/2026-09-04_1914-2/schematic.json": "55de151d5b4c0bc963bda926af519afb401f41fa39b85051966723c99a18b781",
-      "analysis/2026-09-04_1914-2/pcb.json": "0ae2d8598477a503722cbe314db7a4f83dba30ef80aa84363b184a3ac58755ad"
+      "analysis/2026-09-04_1914-2/schematic.json": "ebfa88ffe398563a78eea6c3cb31a536f4ce54021deac1af3e8238a76807afd8",
+      "analysis/2026-09-04_1914-2/pcb.json": "05e5f2121d13b2edbe8418e95bbe97fc33541e11062cde097a0f3888ec383470"
     },
-    "run_id": "20260904T232321Z-9bd8bc",
+    "run_id": "20260904T232751Z-09467c",
     "config_hash": null,
     "upstream_artifacts": {
       "schematic": {
         "path": "analysis/2026-09-04_1914-2/schematic.json",
-        "sha256": "55de151d5b4c0bc963bda926af519afb401f41fa39b85051966723c99a18b781",
+        "sha256": "ebfa88ffe398563a78eea6c3cb31a536f4ce54021deac1af3e8238a76807afd8",
         "schema_version": "1.4.0",
         "run_id": "20260904T224331Z-b7fc8f"
       },
       "pcb": {
         "path": "analysis/2026-09-04_1914-2/pcb.json",
-        "sha256": "0ae2d8598477a503722cbe314db7a4f83dba30ef80aa84363b184a3ac58755ad",
+        "sha256": "05e5f2121d13b2edbe8418e95bbe97fc33541e11062cde097a0f3888ec383470",
         "schema_version": "1.4.0",
         "run_id": "20260904T224331Z-b7fc8f"
       }
@@ -32,7 +32,7 @@
     "deprecated_fields": [],
     "experimental_fields": []
   },
-  "elapsed_s": 0.007,
+  "elapsed_s": 0.008,
   "summary": {
     "total_findings": 11,
     "by_severity": {
@@ -310,15 +310,15 @@
       "rule_id": "PS-002",
       "category": "plane_integrity",
       "summary": "VIN plane split: 4 islands, 10 signals crossing",
-      "description": "VIN plane has 4 disconnected islands. Signals crossing: /LPS_SCK, /LPS_MOSI, /LPS_MISO, /lps_rdy, /LPS_CS.",
+      "description": "VIN plane has 4 disconnected islands. Signals crossing: /LPS_VDD, /LPS_SCK, /LPS_MOSI, /LPS_MISO, /lps_rdy.",
       "components": [],
       "nets": [
         "VIN",
+        "/LPS_VDD",
         "/LPS_SCK",
         "/LPS_MOSI",
         "/LPS_MISO",
-        "/lps_rdy",
-        "/LPS_CS"
+        "/lps_rdy"
       ],
       "pins": [],
       "severity": "warning",
@@ -612,15 +612,15 @@
           "rule_id": "PS-002",
           "category": "plane_integrity",
           "summary": "VIN plane split: 4 islands, 10 signals crossing",
-          "description": "VIN plane has 4 disconnected islands. Signals crossing: /LPS_SCK, /LPS_MOSI, /LPS_MISO, /lps_rdy, /LPS_CS.",
+          "description": "VIN plane has 4 disconnected islands. Signals crossing: /LPS_VDD, /LPS_SCK, /LPS_MOSI, /LPS_MISO, /lps_rdy.",
           "components": [],
           "nets": [
             "VIN",
+            "/LPS_VDD",
             "/LPS_SCK",
             "/LPS_MOSI",
             "/LPS_MISO",
-            "/lps_rdy",
-            "/LPS_CS"
+            "/lps_rdy"
           ],
           "pins": [],
           "severity": "warning",
@@ -733,6 +733,6 @@
   },
   "capability_mode_ref": {
     "source": "analysis/capability_mode.json",
-    "run_id": "20260904T232321Z-9bd8bc"
+    "run_id": "20260904T232751Z-09467c"
   }
 }

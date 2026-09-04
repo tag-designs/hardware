@@ -4090,6 +4090,132 @@
         "net": 7
       },
       {
+        "x1": 150.3492,
+        "y1": 106.715,
+        "x2": 150.785,
+        "y2": 106.715,
+        "width": 0.1016,
+        "layer": "F.Cu",
+        "net": 14
+      },
+      {
+        "x1": 150.1,
+        "y1": 106.0292,
+        "x2": 147.0108,
+        "y2": 106.0292,
+        "width": 0.1016,
+        "layer": "F.Cu",
+        "net": 14
+      },
+      {
+        "x1": 150.785,
+        "y1": 106.715,
+        "x2": 151.3,
+        "y2": 106.2,
+        "width": 0.1016,
+        "layer": "F.Cu",
+        "net": 14
+      },
+      {
+        "x1": 147.4758,
+        "y1": 106.28,
+        "x2": 147.9108,
+        "y2": 106.715,
+        "width": 0.1016,
+        "layer": "F.Cu",
+        "net": 14
+      },
+      {
+        "x1": 147.0108,
+        "y1": 106.0292,
+        "x2": 146.76,
+        "y2": 106.28,
+        "width": 0.1016,
+        "layer": "F.Cu",
+        "net": 14
+      },
+      {
+        "x1": 151.3,
+        "y1": 106.2,
+        "x2": 151.1292,
+        "y2": 106.0292,
+        "width": 0.1016,
+        "layer": "F.Cu",
+        "net": 14
+      },
+      {
+        "x1": 146.76,
+        "y1": 106.28,
+        "x2": 147.4758,
+        "y2": 106.28,
+        "width": 0.1016,
+        "layer": "F.Cu",
+        "net": 14
+      },
+      {
+        "x1": 151.1292,
+        "y1": 106.0292,
+        "x2": 150.1,
+        "y2": 106.0292,
+        "width": 0.1016,
+        "layer": "F.Cu",
+        "net": 14
+      },
+      {
+        "x1": 151.3,
+        "y1": 106.2,
+        "x2": 150.925,
+        "y2": 105.825,
+        "width": 0.1016,
+        "layer": "B.Cu",
+        "net": 14
+      },
+      {
+        "x1": 150.925,
+        "y1": 105.825,
+        "x2": 150.925,
+        "y2": 105.425,
+        "width": 0.1016,
+        "layer": "B.Cu",
+        "net": 14
+      },
+      {
+        "x1": 150.375,
+        "y1": 104.875,
+        "x2": 150.375,
+        "y2": 104.425,
+        "width": 0.1016,
+        "layer": "B.Cu",
+        "net": 14
+      },
+      {
+        "x1": 150.375,
+        "y1": 104.425,
+        "x2": 151.18,
+        "y2": 104.425,
+        "width": 0.1016,
+        "layer": "B.Cu",
+        "net": 14
+      },
+      {
+        "x1": 150.925,
+        "y1": 105.425,
+        "x2": 150.375,
+        "y2": 104.875,
+        "width": 0.1016,
+        "layer": "B.Cu",
+        "net": 14
+      },
+      {
+        "x1": 151.3,
+        "y1": 106.2,
+        "x2": 151.08,
+        "y2": 106.2,
+        "width": 0.1016,
+        "layer": "B.Cu",
+        "net": 14
+      },
+      {
         "x1": 148.03,
         "y1": 107.9342,
         "x2": 148.0094,
@@ -4988,132 +5114,6 @@
         "width": 0.1016,
         "layer": "B.Cu",
         "net": 12
-      },
-      {
-        "x1": 150.3492,
-        "y1": 106.715,
-        "x2": 150.785,
-        "y2": 106.715,
-        "width": 0.1016,
-        "layer": "F.Cu",
-        "net": 14
-      },
-      {
-        "x1": 150.1,
-        "y1": 106.0292,
-        "x2": 147.0108,
-        "y2": 106.0292,
-        "width": 0.1016,
-        "layer": "F.Cu",
-        "net": 14
-      },
-      {
-        "x1": 150.785,
-        "y1": 106.715,
-        "x2": 151.3,
-        "y2": 106.2,
-        "width": 0.1016,
-        "layer": "F.Cu",
-        "net": 14
-      },
-      {
-        "x1": 147.4758,
-        "y1": 106.28,
-        "x2": 147.9108,
-        "y2": 106.715,
-        "width": 0.1016,
-        "layer": "F.Cu",
-        "net": 14
-      },
-      {
-        "x1": 147.0108,
-        "y1": 106.0292,
-        "x2": 146.76,
-        "y2": 106.28,
-        "width": 0.1016,
-        "layer": "F.Cu",
-        "net": 14
-      },
-      {
-        "x1": 151.3,
-        "y1": 106.2,
-        "x2": 151.1292,
-        "y2": 106.0292,
-        "width": 0.1016,
-        "layer": "F.Cu",
-        "net": 14
-      },
-      {
-        "x1": 146.76,
-        "y1": 106.28,
-        "x2": 147.4758,
-        "y2": 106.28,
-        "width": 0.1016,
-        "layer": "F.Cu",
-        "net": 14
-      },
-      {
-        "x1": 151.1292,
-        "y1": 106.0292,
-        "x2": 150.1,
-        "y2": 106.0292,
-        "width": 0.1016,
-        "layer": "F.Cu",
-        "net": 14
-      },
-      {
-        "x1": 151.3,
-        "y1": 106.2,
-        "x2": 150.925,
-        "y2": 105.825,
-        "width": 0.1016,
-        "layer": "B.Cu",
-        "net": 14
-      },
-      {
-        "x1": 150.925,
-        "y1": 105.825,
-        "x2": 150.925,
-        "y2": 105.425,
-        "width": 0.1016,
-        "layer": "B.Cu",
-        "net": 14
-      },
-      {
-        "x1": 150.375,
-        "y1": 104.875,
-        "x2": 150.375,
-        "y2": 104.425,
-        "width": 0.1016,
-        "layer": "B.Cu",
-        "net": 14
-      },
-      {
-        "x1": 150.375,
-        "y1": 104.425,
-        "x2": 151.18,
-        "y2": 104.425,
-        "width": 0.1016,
-        "layer": "B.Cu",
-        "net": 14
-      },
-      {
-        "x1": 150.925,
-        "y1": 105.425,
-        "x2": 150.375,
-        "y2": 104.875,
-        "width": 0.1016,
-        "layer": "B.Cu",
-        "net": 14
-      },
-      {
-        "x1": 151.3,
-        "y1": 106.2,
-        "x2": 151.08,
-        "y2": 106.2,
-        "width": 0.1016,
-        "layer": "B.Cu",
-        "net": 14
       }
     ],
     "arcs": []
@@ -5535,6 +5535,18 @@
         ]
       },
       {
+        "x": 151.3,
+        "y": 106.2,
+        "size": 0.5048,
+        "drill": 0.2,
+        "net": 14,
+        "type": "through",
+        "layers": [
+          "F.Cu",
+          "B.Cu"
+        ]
+      },
+      {
         "x": 146.44,
         "y": 105.06,
         "size": 0.5048,
@@ -5648,18 +5660,6 @@
         "size": 0.5048,
         "drill": 0.2,
         "net": 1,
-        "type": "through",
-        "layers": [
-          "F.Cu",
-          "B.Cu"
-        ]
-      },
-      {
-        "x": 151.3,
-        "y": 106.2,
-        "size": 0.5048,
-        "drill": 0.2,
-        "net": 14,
         "type": "through",
         "layers": [
           "F.Cu",
@@ -10881,6 +10881,14 @@
       "gap_note": "4 of 14 sample points lack reference plane on opposite layer"
     },
     {
+      "net": "/LPS_VDD",
+      "total_trace_mm": 10.4,
+      "samples_checked": 28,
+      "samples_with_reference_plane": 21,
+      "reference_plane_coverage_pct": 75.0,
+      "gap_note": "7 of 28 sample points lack reference plane on opposite layer"
+    },
+    {
       "net": "/LPS_MISO",
       "total_trace_mm": 2.5,
       "samples_checked": 8,
@@ -10895,14 +10903,6 @@
       "samples_with_reference_plane": 6,
       "reference_plane_coverage_pct": 75.0,
       "gap_note": "2 of 8 sample points lack reference plane on opposite layer"
-    },
-    {
-      "net": "/LPS_VDD",
-      "total_trace_mm": 10.4,
-      "samples_checked": 28,
-      "samples_with_reference_plane": 21,
-      "reference_plane_coverage_pct": 75.0,
-      "gap_note": "7 of 28 sample points lack reference plane on opposite layer"
     },
     {
       "net": "/clkout",
@@ -11012,8 +11012,8 @@
       ],
       "disconnected_pads": [
         [
-          "J401:1",
-          "J201:2"
+          "J201:2",
+          "J401:1"
         ]
       ]
     },
@@ -11144,8 +11144,8 @@
       ],
       "disconnected_pads": [
         [
-          "C501:2",
-          "U302:33"
+          "C502:2",
+          "U302:16"
         ]
       ]
     },
@@ -11261,7 +11261,7 @@
       ],
       "disconnected_pads": [
         [
-          "C2:1",
+          "C6:1",
           "U2:12"
         ]
       ]
@@ -11401,7 +11401,7 @@
         "R2:1": 0,
         "U3:4": 0,
         "U3:8": 0,
-        "via_39": 0
+        "via_29": 0
       },
       "gaps": [],
       "disconnected_pads": []
@@ -11411,7 +11411,7 @@
       "components": {
         "U302:11": 0,
         "U3:1": 0,
-        "via_29": 0
+        "via_30": 0
       },
       "gaps": [],
       "disconnected_pads": []
@@ -11421,7 +11421,7 @@
       "components": {
         "U302:22": 0,
         "U3:2": 0,
-        "via_30": 0
+        "via_31": 0
       },
       "gaps": [],
       "disconnected_pads": []
@@ -11431,7 +11431,7 @@
       "components": {
         "U302:21": 0,
         "U3:3": 0,
-        "via_31": 0
+        "via_32": 0
       },
       "gaps": [],
       "disconnected_pads": []
@@ -11441,7 +11441,7 @@
       "components": {
         "U302:12": 0,
         "U3:5": 0,
-        "via_32": 0
+        "via_33": 0
       },
       "gaps": [],
       "disconnected_pads": []
@@ -11451,7 +11451,7 @@
       "components": {
         "U302:14": 0,
         "U3:7": 0,
-        "via_33": 0
+        "via_34": 0
       },
       "gaps": [],
       "disconnected_pads": []
@@ -11469,7 +11469,7 @@
       "components": {
         "C8:1": 0,
         "U2:9": 0,
-        "via_34": 0
+        "via_35": 0
       },
       "gaps": [],
       "disconnected_pads": []
@@ -11497,8 +11497,8 @@
       "components": {
         "J201:5": 0,
         "Q501:1": 0,
-        "via_35": 0,
-        "via_36": 0
+        "via_36": 0,
+        "via_37": 0
       },
       "gaps": [],
       "disconnected_pads": []
@@ -11572,8 +11572,8 @@
       "components": {
         "U2:3": 0,
         "U302:9": 0,
-        "via_37": 0,
-        "via_38": 0
+        "via_38": 0,
+        "via_39": 0
       },
       "gaps": [],
       "disconnected_pads": []
@@ -13029,10 +13029,10 @@
       "/Users/geobrown/Research/tag-designs/hardware/BoardDesigns/BitPresTagBMP585/BitPresTagBMP585.kicad_pcb"
     ],
     "source_hashes": {
-      "/Users/geobrown/Research/tag-designs/hardware/BoardDesigns/BitPresTagBMP585/BitPresTagBMP585.kicad_pcb": "c1d80952c142f1750238d8990440e41f9b67aa74dbaf83df7e53dc4256b35a01"
+      "/Users/geobrown/Research/tag-designs/hardware/BoardDesigns/BitPresTagBMP585/BitPresTagBMP585.kicad_pcb": "b71b0c6de62fc51ef9ca55e3c2ee83394f939e8618602a624f76ab19826283d3"
     },
     "run_id": "20260904T224331Z-b7fc8f",
-    "config_hash": "f61a8ee4d66864ca5917745a2ba8533b09f3dc6175e769c2d7a250d947f68f44",
+    "config_hash": "fc48496cbb7331da984be86b1f6c1b8cc4f13eaf4b1903f8d3daeab71da1a35e",
     "upstream_artifacts": {}
   },
   "compat": {
@@ -13041,9 +13041,9 @@
     "experimental_fields": []
   },
   "project_config": {
-    "name": "BitPresTagBMP585",
     "notes": "Renamed from BitPresTagBMP581 to BitPresTagBMP585 on 2026-09-04 to match the part actually fitted: U3 is a BMP585 (8-pin metal-lid LGA plus L/M pad, footprint LGA9_BMP585_BOS), not the 10-pin BMP581. Directory, all project files and every internal reference were renamed together; archive/ was deliberately left under the old name as a historical snapshot.",
-    "ambient_temperature_c": 25
+    "ambient_temperature_c": 25,
+    "name": "BitPresTagBMP585"
   },
   "design_intent": {
     "product_class": "prototype",

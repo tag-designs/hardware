@@ -47,7 +47,7 @@ labels kept is a better answer than either of the options I offered:
   workaround: it documents a deliberate alias. It should be kept, not "fixed" by deleting one
   of the names.
 
-## Production package — `pcbway_production/2026-09-04-19-11-58`
+## Production package — `pcbway_production/2026-09-04-19-26-51`
 
 Verified against the current board **by geometry, not mtime**. (Exporting marks the board dirty
 in KiCad, so the `.kicad_pcb` is always saved *after* the export it produced — mtime carries no
@@ -55,7 +55,7 @@ information here.)
 
 | Check | Result |
 |---|---|
-| Sampled track endpoints (F.Cu + B.Cu) present in shipped gerbers | **60 / 60** |
+| Outer-layer track endpoints present in shipped gerbers (**exhaustive**, not sampled) | **305 / 305** |
 | Vias reconciled against the PTH drill file | **40 / 40** at 0.2007 mm |
 | Annular ring, every via | **0.1524 mm** — the tightened rule holds |
 | NPTH holes | 4 at 1.0998 mm (the mounting holes) |
@@ -742,14 +742,11 @@ since been swept from the directory. All results in this review come from a fres
 no-connect (finding 6), U2 GND pin types (finding 9), `track_not_centered_on_via` re-enabled
 and its violation fixed.
 
-**Everything this review raised is now closed.** The only action left is a mechanical one:
+**Everything this review raised is closed, and the fab package is current and verified.**
+No action outstanding — the board is ready to order.
 
-1. **Regenerate the fab package before ordering.** `pcbway_production/2026-09-04-19-11-58`
-   predates the U302 `Value` fix and the `LPS_VDD` label. I verified the **copper is unaffected** —
-   all 305 outer-layer track endpoints still match the board, 40 vias, 18 × 10 mm — and the BOM's
-   `MPN` column is correct, so nothing is functionally wrong. It is stale only in the cosmetic
-   BOM `Value` column (still reads `stm32l431kc`) and the `netlist.ipc` net labels. Regenerate
-   anyway, so nobody reviewing the assembly package reads a wrong part name.
+The superseded export `2026-09-04-19-11-58` was removed so only one package remains, per the
+house convention of keeping only the export that gets ordered.
 *(The Q501 base-resistor question is closed — see finding 7. **No remaining open item requires a
 board change.**)*
 

@@ -7,21 +7,21 @@
       "analysis/2026-09-04_1914-2/pcb.json"
     ],
     "source_hashes": {
-      "analysis/2026-09-04_1914-2/schematic.json": "55de151d5b4c0bc963bda926af519afb401f41fa39b85051966723c99a18b781",
-      "analysis/2026-09-04_1914-2/pcb.json": "0ae2d8598477a503722cbe314db7a4f83dba30ef80aa84363b184a3ac58755ad"
+      "analysis/2026-09-04_1914-2/schematic.json": "ebfa88ffe398563a78eea6c3cb31a536f4ce54021deac1af3e8238a76807afd8",
+      "analysis/2026-09-04_1914-2/pcb.json": "05e5f2121d13b2edbe8418e95bbe97fc33541e11062cde097a0f3888ec383470"
     },
-    "run_id": "20260904T232321Z-9bd8bc",
+    "run_id": "20260904T232751Z-09467c",
     "config_hash": null,
     "upstream_artifacts": {
       "schematic": {
         "path": "analysis/2026-09-04_1914-2/schematic.json",
-        "sha256": "55de151d5b4c0bc963bda926af519afb401f41fa39b85051966723c99a18b781",
+        "sha256": "ebfa88ffe398563a78eea6c3cb31a536f4ce54021deac1af3e8238a76807afd8",
         "schema_version": "1.4.0",
         "run_id": "20260904T224331Z-b7fc8f"
       },
       "pcb": {
         "path": "analysis/2026-09-04_1914-2/pcb.json",
-        "sha256": "0ae2d8598477a503722cbe314db7a4f83dba30ef80aa84363b184a3ac58755ad",
+        "sha256": "05e5f2121d13b2edbe8418e95bbe97fc33541e11062cde097a0f3888ec383470",
         "schema_version": "1.4.0",
         "run_id": "20260904T224331Z-b7fc8f"
       }
@@ -436,6 +436,38 @@
       "rule_id": "GP-001",
       "confidence": "heuristic",
       "title": "Signal has significant reference plane gap",
+      "description": "Net /LPS_VDD has 75% reference plane coverage over 10.4mm of routing. Return current must detour around the gap, creating a loop antenna.",
+      "components": [],
+      "nets": [
+        "/LPS_VDD"
+      ],
+      "recommendation": "Route this signal to avoid ground plane gaps, or fill the void. If a split is intentional, add a bridge capacitor across the gap.",
+      "detector": "emc_ground_plane",
+      "summary": "Signal has significant reference plane gap",
+      "pins": [],
+      "evidence_source": "heuristic_rule",
+      "report_context": {
+        "section": "Ground Plane",
+        "impact": "",
+        "standard_ref": ""
+      },
+      "signal_net": "/LPS_VDD",
+      "coverage_pct": 75.0,
+      "trace_mm": 10.4,
+      "is_high_speed_or_clock": false,
+      "suppressed": true,
+      "suppression_reason": "FALSE POSITIVE, same root cause as PS-002/GP-004. In1.Cu is a solid VIN plane and In2.Cu a solid GND plane, each a single fill region under the whole board.",
+      "stages": [
+        "layout"
+      ],
+      "finding_id": "emc:GP-001:/lps_vdd"
+    },
+    {
+      "category": "ground_plane",
+      "severity": "error",
+      "rule_id": "GP-001",
+      "confidence": "heuristic",
+      "title": "Signal has significant reference plane gap",
       "description": "Net /LPS_MISO has 75% reference plane coverage over 2.5mm of routing. Return current must detour around the gap, creating a loop antenna.",
       "components": [],
       "nets": [
@@ -493,38 +525,6 @@
         "layout"
       ],
       "finding_id": "emc:GP-001:/accel_mosi"
-    },
-    {
-      "category": "ground_plane",
-      "severity": "error",
-      "rule_id": "GP-001",
-      "confidence": "heuristic",
-      "title": "Signal has significant reference plane gap",
-      "description": "Net /LPS_VDD has 75% reference plane coverage over 10.4mm of routing. Return current must detour around the gap, creating a loop antenna.",
-      "components": [],
-      "nets": [
-        "/LPS_VDD"
-      ],
-      "recommendation": "Route this signal to avoid ground plane gaps, or fill the void. If a split is intentional, add a bridge capacitor across the gap.",
-      "detector": "emc_ground_plane",
-      "summary": "Signal has significant reference plane gap",
-      "pins": [],
-      "evidence_source": "heuristic_rule",
-      "report_context": {
-        "section": "Ground Plane",
-        "impact": "",
-        "standard_ref": ""
-      },
-      "signal_net": "/LPS_VDD",
-      "coverage_pct": 75.0,
-      "trace_mm": 10.4,
-      "is_high_speed_or_clock": false,
-      "suppressed": true,
-      "suppression_reason": "FALSE POSITIVE, same root cause as PS-002/GP-004. In1.Cu is a solid VIN plane and In2.Cu a solid GND plane, each a single fill region under the whole board.",
-      "stages": [
-        "layout"
-      ],
-      "finding_id": "emc:GP-001:/lps_vdd"
     },
     {
       "category": "ground_plane",
@@ -874,15 +874,15 @@
       "severity": "warning",
       "rule_id": "CK-001",
       "confidence": "deterministic",
-      "title": "Clock /ACCEL_SCK on outer layer",
-      "description": "Clock net /ACCEL_SCK is 100% routed on outer layers (microstrip). Inner stripline layers provide better shielding from radiation.",
+      "title": "Clock /AT25_SCK on outer layer",
+      "description": "Clock net /AT25_SCK is 100% routed on outer layers (microstrip). Inner stripline layers provide better shielding from radiation.",
       "components": [],
       "nets": [
-        "/ACCEL_SCK"
+        "/AT25_SCK"
       ],
       "recommendation": "Route clock signals on inner layers (stripline) when possible.",
       "detector": "emc_clock_routing",
-      "summary": "Clock /ACCEL_SCK on outer layer",
+      "summary": "Clock /AT25_SCK on outer layer",
       "pins": [],
       "evidence_source": "topology",
       "report_context": {
@@ -895,63 +895,7 @@
       "stages": [
         "layout"
       ],
-      "finding_id": "emc:CK-001:/accel_sck"
-    },
-    {
-      "category": "clock_routing",
-      "severity": "warning",
-      "rule_id": "CK-001",
-      "confidence": "deterministic",
-      "title": "Clock SWCLK on outer layer",
-      "description": "Clock net SWCLK is 100% routed on outer layers (microstrip). Inner stripline layers provide better shielding from radiation.",
-      "components": [],
-      "nets": [
-        "SWCLK"
-      ],
-      "recommendation": "Route clock signals on inner layers (stripline) when possible.",
-      "detector": "emc_clock_routing",
-      "summary": "Clock SWCLK on outer layer",
-      "pins": [],
-      "evidence_source": "topology",
-      "report_context": {
-        "section": "Clock Routing",
-        "impact": "",
-        "standard_ref": ""
-      },
-      "suppressed": true,
-      "suppression_reason": "Accepted: a 4-layer 0.4 mm tag routes SPI and the 32.768 kHz clock on outer layers over solid inner planes. Emissions at 10 uA and <=1 MHz SPI are not a compliance risk for an animal-borne tag.",
-      "stages": [
-        "layout"
-      ],
-      "finding_id": "emc:CK-001:swclk"
-    },
-    {
-      "category": "clock_routing",
-      "severity": "warning",
-      "rule_id": "CK-001",
-      "confidence": "deterministic",
-      "title": "Clock /clkout on outer layer",
-      "description": "Clock net /clkout is 100% routed on outer layers (microstrip). Inner stripline layers provide better shielding from radiation.",
-      "components": [],
-      "nets": [
-        "/clkout"
-      ],
-      "recommendation": "Route clock signals on inner layers (stripline) when possible.",
-      "detector": "emc_clock_routing",
-      "summary": "Clock /clkout on outer layer",
-      "pins": [],
-      "evidence_source": "topology",
-      "report_context": {
-        "section": "Clock Routing",
-        "impact": "",
-        "standard_ref": ""
-      },
-      "suppressed": true,
-      "suppression_reason": "Accepted: a 4-layer 0.4 mm tag routes SPI and the 32.768 kHz clock on outer layers over solid inner planes. Emissions at 10 uA and <=1 MHz SPI are not a compliance risk for an animal-borne tag.",
-      "stages": [
-        "layout"
-      ],
-      "finding_id": "emc:CK-001:/clkout"
+      "finding_id": "emc:CK-001:/at25_sck"
     },
     {
       "category": "clock_routing",
@@ -986,15 +930,15 @@
       "severity": "warning",
       "rule_id": "CK-001",
       "confidence": "deterministic",
-      "title": "Clock /AT25_SCK on outer layer",
-      "description": "Clock net /AT25_SCK is 100% routed on outer layers (microstrip). Inner stripline layers provide better shielding from radiation.",
+      "title": "Clock /ACCEL_SCK on outer layer",
+      "description": "Clock net /ACCEL_SCK is 100% routed on outer layers (microstrip). Inner stripline layers provide better shielding from radiation.",
       "components": [],
       "nets": [
-        "/AT25_SCK"
+        "/ACCEL_SCK"
       ],
       "recommendation": "Route clock signals on inner layers (stripline) when possible.",
       "detector": "emc_clock_routing",
-      "summary": "Clock /AT25_SCK on outer layer",
+      "summary": "Clock /ACCEL_SCK on outer layer",
       "pins": [],
       "evidence_source": "topology",
       "report_context": {
@@ -1007,7 +951,63 @@
       "stages": [
         "layout"
       ],
-      "finding_id": "emc:CK-001:/at25_sck"
+      "finding_id": "emc:CK-001:/accel_sck"
+    },
+    {
+      "category": "clock_routing",
+      "severity": "warning",
+      "rule_id": "CK-001",
+      "confidence": "deterministic",
+      "title": "Clock /clkout on outer layer",
+      "description": "Clock net /clkout is 100% routed on outer layers (microstrip). Inner stripline layers provide better shielding from radiation.",
+      "components": [],
+      "nets": [
+        "/clkout"
+      ],
+      "recommendation": "Route clock signals on inner layers (stripline) when possible.",
+      "detector": "emc_clock_routing",
+      "summary": "Clock /clkout on outer layer",
+      "pins": [],
+      "evidence_source": "topology",
+      "report_context": {
+        "section": "Clock Routing",
+        "impact": "",
+        "standard_ref": ""
+      },
+      "suppressed": true,
+      "suppression_reason": "Accepted: a 4-layer 0.4 mm tag routes SPI and the 32.768 kHz clock on outer layers over solid inner planes. Emissions at 10 uA and <=1 MHz SPI are not a compliance risk for an animal-borne tag.",
+      "stages": [
+        "layout"
+      ],
+      "finding_id": "emc:CK-001:/clkout"
+    },
+    {
+      "category": "clock_routing",
+      "severity": "warning",
+      "rule_id": "CK-001",
+      "confidence": "deterministic",
+      "title": "Clock SWCLK on outer layer",
+      "description": "Clock net SWCLK is 100% routed on outer layers (microstrip). Inner stripline layers provide better shielding from radiation.",
+      "components": [],
+      "nets": [
+        "SWCLK"
+      ],
+      "recommendation": "Route clock signals on inner layers (stripline) when possible.",
+      "detector": "emc_clock_routing",
+      "summary": "Clock SWCLK on outer layer",
+      "pins": [],
+      "evidence_source": "topology",
+      "report_context": {
+        "section": "Clock Routing",
+        "impact": "",
+        "standard_ref": ""
+      },
+      "suppressed": true,
+      "suppression_reason": "Accepted: a 4-layer 0.4 mm tag routes SPI and the 32.768 kHz clock on outer layers over solid inner planes. Emissions at 10 uA and <=1 MHz SPI are not a compliance risk for an animal-borne tag.",
+      "stages": [
+        "layout"
+      ],
+      "finding_id": "emc:CK-001:swclk"
     },
     {
       "category": "clock_routing",
@@ -2446,21 +2446,7 @@
         {
           "rule_id": "CK-001",
           "severity": "warning",
-          "summary": "Clock /ACCEL_SCK on outer layer",
-          "recommendation": "Route clock signals on inner layers (stripline) when possible.",
-          "category": "clock_routing"
-        },
-        {
-          "rule_id": "CK-001",
-          "severity": "warning",
-          "summary": "Clock SWCLK on outer layer",
-          "recommendation": "Route clock signals on inner layers (stripline) when possible.",
-          "category": "clock_routing"
-        },
-        {
-          "rule_id": "CK-001",
-          "severity": "warning",
-          "summary": "Clock /clkout on outer layer",
+          "summary": "Clock /AT25_SCK on outer layer",
           "recommendation": "Route clock signals on inner layers (stripline) when possible.",
           "category": "clock_routing"
         },
@@ -2474,7 +2460,21 @@
         {
           "rule_id": "CK-001",
           "severity": "warning",
-          "summary": "Clock /AT25_SCK on outer layer",
+          "summary": "Clock /ACCEL_SCK on outer layer",
+          "recommendation": "Route clock signals on inner layers (stripline) when possible.",
+          "category": "clock_routing"
+        },
+        {
+          "rule_id": "CK-001",
+          "severity": "warning",
+          "summary": "Clock /clkout on outer layer",
+          "recommendation": "Route clock signals on inner layers (stripline) when possible.",
+          "category": "clock_routing"
+        },
+        {
+          "rule_id": "CK-001",
+          "severity": "warning",
+          "summary": "Clock SWCLK on outer layer",
           "recommendation": "Route clock signals on inner layers (stripline) when possible.",
           "category": "clock_routing"
         },
@@ -2668,6 +2668,6 @@
   },
   "capability_mode_ref": {
     "source": "analysis/capability_mode.json",
-    "run_id": "20260904T232321Z-9bd8bc"
+    "run_id": "20260904T232751Z-09467c"
   }
 }
