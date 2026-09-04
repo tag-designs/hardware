@@ -538,7 +538,7 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "BitPresTagBMP581.kicad_pro",
+    "filename": "BitPresTagBMP585.kicad_pro",
     "version": 3
   },
   "net_settings": {
@@ -883,8 +883,8 @@
     "subpart_id_separator": 0,
     "top_level_sheets": [
       {
-        "filename": "BitPresTagBMP581.kicad_sch",
-        "name": "BitPresTagBMP581",
+        "filename": "BitPresTagBMP585.kicad_sch",
+        "name": "BitPresTagBMP585",
         "uuid": "e44ca67a-43be-444b-8652-f54825a2eb6f"
       }
     ],
@@ -894,7 +894,7 @@
   "sheets": [
     [
       "e44ca67a-43be-444b-8652-f54825a2eb6f",
-      "BitPresTagBMP581"
+      "BitPresTagBMP585"
     ]
   ],
   "text_variables": {},

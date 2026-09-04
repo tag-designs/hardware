@@ -383,7 +383,7 @@ wired to the GND symbol at 243.84, 115.57), restoring ERC to its single accepted
 warning. That is a latent modeling error fixed, not a workaround.
 
 **This is repo-wide.** The same stale `BitTagNG-LIS2DU12.kicad_pcb-back.kicad_pro` sits in
-about ten other board directories — BitPresTagBMP581, CompassTag, CompassTagMMC5603, imutag,
+about ten other board directories — BitPresTagBMP585, CompassTag, CompassTagMMC5603, imutag,
 imutag-smps, imutag-4layer, imutag-nand, BitPresTag, TorporTag. Any analyzer run in those
 directories is liable to pick it up as the project file the same way, so their rule-derived
 findings deserve the same scepticism until the file is removed.

@@ -69,7 +69,7 @@
       },
       {
         "name": "VCC",
-        "voltage": null
+        "voltage": 2.85
       },
       {
         "name": "VIN",
@@ -904,12 +904,12 @@
         "ohms": 10.0
       },
       "capacitor": {
-        "ref": "C5",
+        "ref": "C3",
         "value": "2 caps parallel",
         "farads": 2e-07,
         "parallel_caps": [
-          "C5",
-          "C3"
+          "C3",
+          "C5"
         ],
         "package": "0201",
         "esr_ohm": 0.5,
@@ -927,10 +927,10 @@
       "severity": "info",
       "confidence": "deterministic",
       "evidence_source": "topology",
-      "summary": "RC filter R2/C5 at 159154.94Hz",
+      "summary": "RC filter R2/C3 at 159154.94Hz",
       "description": "low-pass RC filter",
       "components": [
-        "C5",
+        "C3",
         "R2"
       ],
       "nets": [],
@@ -946,16 +946,16 @@
         "confidence": "deterministic",
         "claimed_components": [
           "R2",
-          "C5"
+          "C3"
         ],
         "excluded_by": [],
         "suppressed_candidates": []
       },
-      "detection_id": "rc_filters:d458f92a1744",
+      "detection_id": "rc_filters:1895490a68ec",
       "stages": [
         "schematic"
       ],
-      "finding_id": "schematic:rc_filters-d458f92a1744"
+      "finding_id": "schematic:rc_filters-1895490a68ec"
     },
     {
       "detector": "audit_rail_sources",
@@ -16073,13 +16073,13 @@
   },
   "inputs": {
     "source_files": [
-      "/Users/geobrown/Research/tag-designs/hardware/BoardDesigns/BitPresTagBMP581/BitPresTagBMP581.kicad_sch"
+      "/Users/geobrown/Research/tag-designs/hardware/BoardDesigns/BitPresTagBMP585/BitPresTagBMP585.kicad_sch"
     ],
     "source_hashes": {
-      "/Users/geobrown/Research/tag-designs/hardware/BoardDesigns/BitPresTagBMP581/BitPresTagBMP581.kicad_sch": "5e8caab744e565de5ef2ae6b0b79621b3a298da000292f70940d9a04f471dfa6"
+      "/Users/geobrown/Research/tag-designs/hardware/BoardDesigns/BitPresTagBMP585/BitPresTagBMP585.kicad_sch": "4921c1ee623afddba5a519a2340db723c6dea76d56bc2b9b1f3dabdab3b2a334"
     },
-    "run_id": "20260904T113834Z-9f9a3f",
-    "config_hash": "63f8ba7c6ed4c7a6724782658ffb97023aa948be4baa5486747e44532acd56f6",
+    "run_id": "20260904T224331Z-b7fc8f",
+    "config_hash": "3b60f37b141d27f0c5cd5cd4725f18755273e1b2c8223a02a7622f34e77aa489",
     "upstream_artifacts": {}
   },
   "compat": {
@@ -16089,8 +16089,8 @@
   },
   "project_config": {
     "notes": "Project name says BMP581 but U3 is a BMP585 (9-pin LGA, footprint LGA9_BMP585_BOS). Reviewed 2026-09-04.",
-    "name": "BitPresTagBMP581",
-    "ambient_temperature_c": 25
+    "ambient_temperature_c": 25,
+    "name": "BitPresTagBMP585"
   },
   "design_intent": {
     "product_class": "prototype",
@@ -16431,6 +16431,6 @@
   },
   "capability_mode_ref": {
     "source": "analysis/capability_mode.json",
-    "run_id": "20260904T113834Z-9f9a3f"
+    "run_id": "20260904T224331Z-b7fc8f"
   }
 }

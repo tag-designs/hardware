@@ -1,8 +1,10 @@
-# BitPresTagBMP581 — Design Review
+# BitPresTagBMP585 — Design Review
 
-**Date:** 2026-09-04 (re-verified after design update)
+> Formerly `BitPresTagBMP581`. Renamed 2026-09-04 to match the part actually fitted.
+
+**Date:** 2026-09-04 (re-verified after design update and project rename)
 **Reviewer:** automated review via `kicad-happy` suite + datasheet verification
-**Analysis run:** `analysis/2026-09-04_1900` (initial review: `analysis/2026-09-04_0738`)
+**Analysis run:** `analysis/2026-09-04_1843` (regenerated under the new project name)
 **Board:** 18.0 × 10.0 mm, 4-layer, 0.4 mm thick, 28 footprints, 42 nets
 **Prior review:** none (first review of this board)
 
@@ -21,6 +23,7 @@ The designer acted on the review. Re-ran the full pipeline against the updated f
 | **`track_not_centered_on_via`** re-enabled `ignore` → `error`, violation fixed | ✅ DRC clean under the stricter rule |
 | **`single_global_label`** `ignore` → `warning` | ✅ |
 | **7 `power:+2V5` symbols → `power:VCC`**, `VIN` global labels retained | ✅ Closes finding 2 — see below |
+| **Project renamed `BitPresTagBMP581` → `BitPresTagBMP585`** | ✅ Closes the U3 half of finding 5 |
 
 **Result: KiCad DRC 0 violations / 0 unconnected. KiCad ERC 0 violations (was 6).
 `padnet_crosscheck`: 28 footprints, 0 mismatches.**
@@ -43,6 +46,20 @@ labels kept is a better answer than either of the options I offered:
   makes the retained `multiple_net_names` ERC exclusion the *correct* tool rather than a
   workaround: it documents a deliberate alias. It should be kept, not "fixed" by deleting one
   of the names.
+
+**Project rename.** The board is now `BitPresTagBMP585`, matching the BMP585 actually fitted.
+The directory, all project files and every internal reference moved together — 51 `(project ...)`
+entries in the schematic, 28 footprint `sheetfile` properties in the PCB, and 4 entries in the
+project file. `archive/` was deliberately left under the old name as a historical snapshot of the
+KiCad 5 design, and `Mechanical/BitPresTag/tag-board.step` still carries the old product names
+(it is a generated export, best regenerated from KiCad if it matters).
+
+Re-verified after the rename: **DRC 0 violations / 0 unconnected / 0 schematic-parity /
+0 lib-footprint issues, ERC 0 violations, `padnet_crosscheck` 28 footprints / 0 mismatches**, and
+the analyzer's `rules_source` correctly reads `BitPresTagBMP585.kicad_pro`.
+
+The stale `pcbway_production/` export was deleted rather than renamed: it predated R2 and C8, so
+it no longer matched the board and would have been misleading carried forward under a new name.
 
 **One item remains open from this revision:** the switched sensor-supply node is an unnamed net
 (`__unnamed_13`) — see finding 10.
@@ -95,7 +112,7 @@ should be committed.
 | 2 | ✅ **Fixed** | Schematic-wide | Rail was drawn as `+2V5`; **now `VCC`**, with `VIN` kept as the environment-facing alias |
 | 3 | Info | U302 / U2 | ADXL367 runs on **USART2 synchronous mode**, not an SPI peripheral — firmware config note |
 | 4 | ✅ **Fixed** / ⚠️ | U3 / PB1 | Inrush: **R2 = 10 Ω added**. Back-power sequencing remains a firmware contract |
-| 5 | ⚠️ **Open** | U1, U302 | `Value` names a different device than `MPN` on two parts |
+| 5 | ◐ **Partly fixed** | U1, U302 | `Value` vs `MPN` still disagree on two parts; **U3/project name resolved by rename** |
 | 6 | ✅ **Fixed** | U3 pin 9 | `L/M` is a lasermarking pad; **no-connect flag added** |
 | 7 | ❓ **Question** | Q501 | Reset transistor base has no series resistor, and this board has no baseboard |
 | 8 | Info | U1 | CS relies on PA15 internal pull-up; datasheet suggests 10 kΩ for the ramp window |
@@ -297,7 +314,7 @@ They do mislead human and automated review, and one of them is a genuine open qu
 
 On U3: the footprint is `LGA9_BMP585_BOS` (9 pins), while BMP581 is a *10-pin* metal-lid LGA
 ("Compact 10-pin metal-lid LGA package … 2.0 × 2.0 mm²"). **The board is built for a BMP585
-and the project name is stale**, not the other way round.
+and the project was misnamed** — resolved by the 2026-09-04 rename to `BitPresTagBMP585`.
 
 **Fix:** make `Value` match `MPN` on all three. Settle the U1 question before the BOM is used
 to order — if AT25FF321A is correct, its datasheet needs to be added to the shared store; if
@@ -607,7 +624,7 @@ as suppressions in `.kicad-happy.json` (which cut the EMC set from 54 active to 
 `project_settings.source` read `BitTagNG-LIS2DU12.kicad_pcb-back.kicad_pro`, so every
 rule-derived number in it was measured against the wrong rule set. That stray project file has
 since been swept from the directory. All results in this review come from a fresh
-2026-09-04_0738 run whose `rules_source` correctly reads `BitPresTagBMP581.kicad_pro`.
+2026-09-04_0738 run whose `rules_source` correctly reads `BitPresTagBMP585.kicad_pro`.
 
 ---
 
@@ -659,7 +676,7 @@ and its violation fixed.
    item with a concrete failure mode attached.
 4. Add a schematic text note giving the rail's voltage *range* (finding 2) — the one thing the
    `VCC` label cannot carry.
-5. Fix `Value` vs `MPN` on U1, U302 (finding 5); decide whether to rename the project to BMP585.
+5. Fix `Value` vs `MPN` on U1 and U302 (finding 5). The U3/project-name half is now closed.
 6. Fix the residual U501 pin types and add `Device` to `sym-lib-table` (finding 9), then drop
    the `lib_symbol_issues` exclusion.
 
@@ -686,7 +703,7 @@ alias (internal name vs environment-facing name), and the exclusion documents it
    flat path gets wrong numbers that look authoritative.
 
 **Suggested tag once the above is committed**, per house practice:
-`review/BitPresTagBMP581-2026-09-04` (annotated), recording 0.3 mm edge clearance,
+`review/BitPresTagBMP585-2026-09-04` (annotated), recording 0.3 mm edge clearance,
 0.1524 mm annular ring, DRC/ERC state, drill reconciliation and the PCBWay order spec.
 
 **Firmware hand-off** — see `mating_design.firmware_contracts` in `.kicad-happy.json`:

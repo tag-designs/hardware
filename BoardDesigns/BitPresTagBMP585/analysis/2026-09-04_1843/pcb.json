@@ -4,10 +4,10 @@
   "kicad_version": "10.0",
   "file_version": "20260206",
   "statistics": {
-    "footprint_count": 26,
-    "front_side": 17,
-    "back_side": 9,
-    "smd_count": 22,
+    "footprint_count": 28,
+    "front_side": 18,
+    "back_side": 10,
+    "smd_count": 24,
     "tht_count": 4,
     "copper_layers_used": 4,
     "copper_layer_names": [
@@ -16,14 +16,14 @@
       "In1.Cu",
       "In2.Cu"
     ],
-    "track_segments": 291,
-    "via_count": 39,
+    "track_segments": 305,
+    "via_count": 40,
     "zone_count": 2,
-    "total_track_length_mm": 168.44,
+    "total_track_length_mm": 174.74,
     "board_width_mm": 18.0,
     "board_height_mm": 10.0,
     "board_area_mm2": 180.0,
-    "net_count": 41,
+    "net_count": 42,
     "routing_complete": true,
     "unrouted_net_count": 0
   },
@@ -266,27 +266,28 @@
     "18": "/lps_rdy",
     "19": "GND",
     "20": "Net-(Q501-C)",
-    "21": "Net-(U501-VBACK)",
-    "22": "RST",
-    "23": "SWCLK",
-    "24": "SWDIO",
-    "25": "VBAT",
-    "26": "VIN",
-    "27": "unconnected-(U1-NC-PadA1)",
-    "28": "unconnected-(U1-NC-PadA5)",
-    "29": "unconnected-(U1-NC-PadG1)",
-    "30": "unconnected-(U1-NC-PadG5)",
-    "31": "unconnected-(U1-nWP-PadF4)",
-    "32": "unconnected-(U2-ADC_IN-Pad8)",
-    "33": "unconnected-(U2-INT2-Pad6)",
-    "34": "unconnected-(U2-VREG_OUT-Pad9)",
-    "35": "unconnected-(U3-L/M-Pad9)",
-    "36": "unconnected-(U302-PA10-Pad20)",
-    "37": "unconnected-(U302-PA7-Pad13)",
-    "38": "unconnected-(U302-PA8-Pad18)",
-    "39": "unconnected-(U302-PA9-Pad19)",
-    "40": "unconnected-(U302-PC15-Pad3)",
-    "41": "unconnected-(U501-~{INT}-Pad2)"
+    "21": "Net-(U2-VREG_OUT)",
+    "22": "Net-(U3-VDD)",
+    "23": "Net-(U501-VBACK)",
+    "24": "RST",
+    "25": "SWCLK",
+    "26": "SWDIO",
+    "27": "VBAT",
+    "28": "VIN",
+    "29": "unconnected-(U1-NC-PadA1)",
+    "30": "unconnected-(U1-NC-PadA5)",
+    "31": "unconnected-(U1-NC-PadG1)",
+    "32": "unconnected-(U1-NC-PadG5)",
+    "33": "unconnected-(U1-nWP-PadF4)",
+    "34": "unconnected-(U2-ADC_IN-Pad8)",
+    "35": "unconnected-(U2-INT2-Pad6)",
+    "36": "unconnected-(U3-L/M-Pad9)",
+    "37": "unconnected-(U302-PA10-Pad20)",
+    "38": "unconnected-(U302-PA7-Pad13)",
+    "39": "unconnected-(U302-PA8-Pad18)",
+    "40": "unconnected-(U302-PA9-Pad19)",
+    "41": "unconnected-(U302-PC15-Pad3)",
+    "42": "unconnected-(U501-~{INT}-Pad2)"
   },
   "net_name_to_id": {
     "/ACCEL_MISO": 1,
@@ -309,27 +310,28 @@
     "/lps_rdy": 18,
     "GND": 19,
     "Net-(Q501-C)": 20,
-    "Net-(U501-VBACK)": 21,
-    "RST": 22,
-    "SWCLK": 23,
-    "SWDIO": 24,
-    "VBAT": 25,
-    "VIN": 26,
-    "unconnected-(U1-NC-PadA1)": 27,
-    "unconnected-(U1-NC-PadA5)": 28,
-    "unconnected-(U1-NC-PadG1)": 29,
-    "unconnected-(U1-NC-PadG5)": 30,
-    "unconnected-(U1-nWP-PadF4)": 31,
-    "unconnected-(U2-ADC_IN-Pad8)": 32,
-    "unconnected-(U2-INT2-Pad6)": 33,
-    "unconnected-(U2-VREG_OUT-Pad9)": 34,
-    "unconnected-(U3-L/M-Pad9)": 35,
-    "unconnected-(U302-PA10-Pad20)": 36,
-    "unconnected-(U302-PA7-Pad13)": 37,
-    "unconnected-(U302-PA8-Pad18)": 38,
-    "unconnected-(U302-PA9-Pad19)": 39,
-    "unconnected-(U302-PC15-Pad3)": 40,
-    "unconnected-(U501-~{INT}-Pad2)": 41
+    "Net-(U2-VREG_OUT)": 21,
+    "Net-(U3-VDD)": 22,
+    "Net-(U501-VBACK)": 23,
+    "RST": 24,
+    "SWCLK": 25,
+    "SWDIO": 26,
+    "VBAT": 27,
+    "VIN": 28,
+    "unconnected-(U1-NC-PadA1)": 29,
+    "unconnected-(U1-NC-PadA5)": 30,
+    "unconnected-(U1-NC-PadG1)": 31,
+    "unconnected-(U1-NC-PadG5)": 32,
+    "unconnected-(U1-nWP-PadF4)": 33,
+    "unconnected-(U2-ADC_IN-Pad8)": 34,
+    "unconnected-(U2-INT2-Pad6)": 35,
+    "unconnected-(U3-L/M-Pad9)": 36,
+    "unconnected-(U302-PA10-Pad20)": 37,
+    "unconnected-(U302-PA7-Pad13)": 38,
+    "unconnected-(U302-PA8-Pad18)": 39,
+    "unconnected-(U302-PA9-Pad19)": 40,
+    "unconnected-(U302-PC15-Pad3)": 41,
+    "unconnected-(U501-~{INT}-Pad2)": 42
   },
   "board_outline": {
     "edge_count": 8,
@@ -452,7 +454,7 @@
   },
   "component_groups": {
     "C": {
-      "count": 12,
+      "count": 13,
       "references": [
         "C1",
         "C2",
@@ -465,7 +467,8 @@
         "C503",
         "C504",
         "C6",
-        "C7"
+        "C7",
+        "C8"
       ]
     },
     "D": {
@@ -492,9 +495,10 @@
       ]
     },
     "R": {
-      "count": 1,
+      "count": 2,
       "references": [
-        "R1"
+        "R1",
+        "R2"
       ]
     },
     "U": {
@@ -521,9 +525,10 @@
       "type": "through_hole",
       "pad_count": 1,
       "exclude_from_bom": true,
+      "exclude_from_pos": true,
       "sch_path": "/00000000-0000-0000-0000-00005c0f0b74",
       "sheetname": "/",
-      "sheetfile": "BitPresTagBMP581.kicad_sch",
+      "sheetfile": "BitPresTagBMP585.kicad_sch",
       "footprint": "AccelTag:taghole1.1mm",
       "pad_nets": {},
       "connected_nets": []
@@ -540,9 +545,10 @@
       "type": "smd",
       "pad_count": 2,
       "exclude_from_bom": true,
+      "exclude_from_pos": true,
       "sch_path": "/00000000-0000-0000-0000-00005c0f4161",
       "sheetname": "/",
-      "sheetfile": "BitPresTagBMP581.kicad_sch",
+      "sheetfile": "BitPresTagBMP585.kicad_sch",
       "models_3d": [
         "${KISYS3DMOD}/Battery.3dshapes/BatteryHolder_Seiko_MS621F.step"
       ],
@@ -575,7 +581,7 @@
       "pad_count": 2,
       "sch_path": "/00000000-0000-0000-0000-00005c0f418b",
       "sheetname": "/",
-      "sheetfile": "BitPresTagBMP581.kicad_sch",
+      "sheetfile": "BitPresTagBMP585.kicad_sch",
       "models_3d": [
         "${KICAD10_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0402_1005Metric.step"
       ],
@@ -632,7 +638,7 @@
       "pad_count": 8,
       "sch_path": "/00000000-0000-0000-0000-00005ef60ddb",
       "sheetname": "/",
-      "sheetfile": "BitPresTagBMP581.kicad_sch",
+      "sheetfile": "BitPresTagBMP585.kicad_sch",
       "models_3d": [
         "${KIPRJMOD}/../libraries/packages3D/RV-3028-C8.step"
       ],
@@ -720,7 +726,7 @@
       "pad_count": 4,
       "sch_path": "/00000000-0000-0000-0000-00005ef75c00",
       "sheetname": "/",
-      "sheetfile": "BitPresTagBMP581.kicad_sch",
+      "sheetfile": "BitPresTagBMP585.kicad_sch",
       "models_3d": [
         "${KICAD10_3DMODEL_DIR}/Resistor_SMD.3dshapes/R_0201_0603Metric.step"
       ],
@@ -777,7 +783,7 @@
       "pad_count": 4,
       "sch_path": "/00000000-0000-0000-0000-00005b1d510e",
       "sheetname": "/",
-      "sheetfile": "BitPresTagBMP581.kicad_sch",
+      "sheetfile": "BitPresTagBMP585.kicad_sch",
       "models_3d": [
         "${KICAD10_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0201_0603Metric.step"
       ],
@@ -834,7 +840,7 @@
       "pad_count": 4,
       "sch_path": "/00000000-0000-0000-0000-00005bbf7ec4",
       "sheetname": "/",
-      "sheetfile": "BitPresTagBMP581.kicad_sch",
+      "sheetfile": "BitPresTagBMP585.kicad_sch",
       "models_3d": [
         "${KICAD10_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0201_0603Metric.step"
       ],
@@ -891,7 +897,7 @@
       "pad_count": 2,
       "sch_path": "/00000000-0000-0000-0000-00005c0f416f",
       "sheetname": "/",
-      "sheetfile": "BitPresTagBMP581.kicad_sch",
+      "sheetfile": "BitPresTagBMP585.kicad_sch",
       "models_3d": [
         "${KIPRJMOD}/../libraries/packages3D/D_SOD-923.step"
       ],
@@ -950,7 +956,7 @@
       "pad_count": 12,
       "sch_path": "/00000000-0000-0000-0000-00005fd47223",
       "sheetname": "/",
-      "sheetfile": "BitPresTagBMP581.kicad_sch",
+      "sheetfile": "BitPresTagBMP585.kicad_sch",
       "models_3d": [
         "${KIPRJMOD}/packages3D/at25wlcsp.step"
       ],
@@ -1057,9 +1063,10 @@
       "type": "through_hole",
       "pad_count": 1,
       "exclude_from_bom": true,
+      "exclude_from_pos": true,
       "sch_path": "/00000000-0000-0000-0000-00005c0f0bc2",
       "sheetname": "/",
-      "sheetfile": "BitPresTagBMP581.kicad_sch",
+      "sheetfile": "BitPresTagBMP585.kicad_sch",
       "footprint": "AccelTag:taghole1.1mm",
       "pad_nets": {},
       "connected_nets": []
@@ -1076,9 +1083,10 @@
       "type": "through_hole",
       "pad_count": 1,
       "exclude_from_bom": true,
+      "exclude_from_pos": true,
       "sch_path": "/00000000-0000-0000-0000-00005c0ef344",
       "sheetname": "/",
-      "sheetfile": "BitPresTagBMP581.kicad_sch",
+      "sheetfile": "BitPresTagBMP585.kicad_sch",
       "footprint": "AccelTag:taghole1.1mm",
       "pad_nets": {},
       "connected_nets": []
@@ -1095,9 +1103,10 @@
       "type": "through_hole",
       "pad_count": 1,
       "exclude_from_bom": true,
+      "exclude_from_pos": true,
       "sch_path": "/00000000-0000-0000-0000-00005c0f0b10",
       "sheetname": "/",
-      "sheetfile": "BitPresTagBMP581.kicad_sch",
+      "sheetfile": "BitPresTagBMP585.kicad_sch",
       "footprint": "AccelTag:taghole1.1mm",
       "pad_nets": {},
       "connected_nets": []
@@ -1115,7 +1124,7 @@
       "pad_count": 4,
       "sch_path": "/28c5454d-0c4b-4d5f-ac75-f506f8721e69",
       "sheetname": "/",
-      "sheetfile": "BitPresTagBMP581.kicad_sch",
+      "sheetfile": "BitPresTagBMP585.kicad_sch",
       "models_3d": [
         "${KICAD10_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0201_0603Metric.step"
       ],
@@ -1148,15 +1157,15 @@
       "footprint": "Capacitor_SMD:C_0201_0603Metric",
       "pad_nets": {
         "1": {
-          "net": "/LPS_PWR"
+          "net": "Net-(U3-VDD)"
         },
         "2": {
           "net": "GND"
         }
       },
       "connected_nets": [
-        "/LPS_PWR",
-        "GND"
+        "GND",
+        "Net-(U3-VDD)"
       ]
     },
     {
@@ -1172,7 +1181,7 @@
       "pad_count": 9,
       "sch_path": "/b20aeed5-4162-4a9a-85af-ec03be437051",
       "sheetname": "/",
-      "sheetfile": "BitPresTagBMP581.kicad_sch",
+      "sheetfile": "BitPresTagBMP585.kicad_sch",
       "models_3d": [
         "${KIPRJMOD}/../libraries/packages3D/BMP585.step"
       ],
@@ -1217,7 +1226,7 @@
           "pin": "SDO_3"
         },
         "4": {
-          "net": "/LPS_PWR",
+          "net": "Net-(U3-VDD)",
           "pin": "VDDIO_4"
         },
         "5": {
@@ -1233,7 +1242,7 @@
           "pin": "CSB_7"
         },
         "8": {
-          "net": "/LPS_PWR",
+          "net": "Net-(U3-VDD)",
           "pin": "VDD_8"
         },
         "9": {
@@ -1245,10 +1254,10 @@
         "/LPS_CS",
         "/LPS_MISO",
         "/LPS_MOSI",
-        "/LPS_PWR",
         "/LPS_SCK",
         "/lps_rdy",
         "GND",
+        "Net-(U3-VDD)",
         "unconnected-(U3-L/M-Pad9)"
       ]
     },
@@ -1265,7 +1274,7 @@
       "pad_count": 4,
       "sch_path": "/7c7bd3fd-0524-4c23-b7c9-619cb3cfd9e2",
       "sheetname": "/",
-      "sheetfile": "BitPresTagBMP581.kicad_sch",
+      "sheetfile": "BitPresTagBMP585.kicad_sch",
       "models_3d": [
         "${KICAD10_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0201_0603Metric.step"
       ],
@@ -1310,6 +1319,64 @@
       ]
     },
     {
+      "library": "AccelTag:C_0201_0603Metric",
+      "reference": "C8",
+      "value": "220nf",
+      "mpn": "GRM033R60J224ME15D",
+      "x": 142.675,
+      "y": 109.555,
+      "angle": -90.0,
+      "layer": "F.Cu",
+      "type": "smd",
+      "pad_count": 4,
+      "sch_path": "/7b4b872b-7641-4220-8d1b-a9e28b3fa3db",
+      "sheetname": "/",
+      "sheetfile": "BitPresTagBMP585.kicad_sch",
+      "description": "Unpolarized capacitor",
+      "models_3d": [
+        "${KIPRJMOD}/packages3D/C_0201_0603Metric.step"
+      ],
+      "courtyard": {
+        "min_x": 142.325,
+        "min_y": 108.855,
+        "max_x": 143.025,
+        "max_y": 110.255
+      },
+      "courtyard_poly": [
+        [
+          [
+            143.025,
+            110.255
+          ],
+          [
+            142.325,
+            110.255
+          ],
+          [
+            142.325,
+            108.855
+          ],
+          [
+            143.025,
+            108.855
+          ]
+        ]
+      ],
+      "footprint": "AccelTag:C_0201_0603Metric",
+      "pad_nets": {
+        "1": {
+          "net": "Net-(U2-VREG_OUT)"
+        },
+        "2": {
+          "net": "GND"
+        }
+      },
+      "connected_nets": [
+        "GND",
+        "Net-(U2-VREG_OUT)"
+      ]
+    },
+    {
       "library": "Capacitor_SMD:C_0603_1608Metric",
       "reference": "C6",
       "value": "47uf",
@@ -1322,7 +1389,7 @@
       "pad_count": 2,
       "sch_path": "/940d7541-e2e1-4c90-ba2c-739cfbe2bab8",
       "sheetname": "/",
-      "sheetfile": "BitPresTagBMP581.kicad_sch",
+      "sheetfile": "BitPresTagBMP585.kicad_sch",
       "models_3d": [
         "${KICAD10_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0603_1608Metric.step"
       ],
@@ -1379,7 +1446,7 @@
       "pad_count": 4,
       "sch_path": "/2355d002-11d5-4925-b5f9-3b939a144041",
       "sheetname": "/",
-      "sheetfile": "BitPresTagBMP581.kicad_sch",
+      "sheetfile": "BitPresTagBMP585.kicad_sch",
       "models_3d": [
         "${KICAD10_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0201_0603Metric.step"
       ],
@@ -1435,9 +1502,10 @@
       "type": "smd",
       "pad_count": 6,
       "exclude_from_bom": true,
+      "exclude_from_pos": true,
       "sch_path": "/00000000-0000-0000-0000-00005c0ef350",
       "sheetname": "/",
-      "sheetfile": "BitPresTagBMP581.kicad_sch",
+      "sheetfile": "BitPresTagBMP585.kicad_sch",
       "courtyard": {
         "min_x": 154.13,
         "min_y": 106.095,
@@ -1513,7 +1581,7 @@
       "pad_count": 4,
       "sch_path": "/00000000-0000-0000-0000-00005b0073bf",
       "sheetname": "/",
-      "sheetfile": "BitPresTagBMP581.kicad_sch",
+      "sheetfile": "BitPresTagBMP585.kicad_sch",
       "models_3d": [
         "${KICAD10_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0201_0603Metric.step"
       ],
@@ -1570,7 +1638,7 @@
       "pad_count": 42,
       "sch_path": "/00000000-0000-0000-0000-000058a7531d",
       "sheetname": "/",
-      "sheetfile": "BitPresTagBMP581.kicad_sch",
+      "sheetfile": "BitPresTagBMP585.kicad_sch",
       "models_3d": [
         "${KICAD10_3DMODEL_DIR}/Package_DFN_QFN.3dshapes/QFN-32-1EP_5x5mm_P0.5mm_EP3.45x3.45mm.step"
       ],
@@ -1843,7 +1911,7 @@
       "pad_count": 3,
       "sch_path": "/00000000-0000-0000-0000-00005b44f199",
       "sheetname": "/",
-      "sheetfile": "BitPresTagBMP581.kicad_sch",
+      "sheetfile": "BitPresTagBMP585.kicad_sch",
       "models_3d": [
         "${KICAD6_3DMODEL_DIR}/Package_TO_SOT_SMD.3dshapes/SOT-883.wrl",
         "${KIPRJMOD}/packages3D/Diodes_DFN1006-3.step"
@@ -1908,7 +1976,7 @@
       "pad_count": 4,
       "sch_path": "/00000000-0000-0000-0000-000060cc6cfc",
       "sheetname": "/",
-      "sheetfile": "BitPresTagBMP581.kicad_sch",
+      "sheetfile": "BitPresTagBMP585.kicad_sch",
       "models_3d": [
         "${KICAD10_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0201_0603Metric.step"
       ],
@@ -1965,7 +2033,7 @@
       "pad_count": 4,
       "sch_path": "/c72ce1ca-a916-467a-acd4-4b6599742859",
       "sheetname": "/",
-      "sheetfile": "BitPresTagBMP581.kicad_sch",
+      "sheetfile": "BitPresTagBMP585.kicad_sch",
       "models_3d": [
         "${KICAD10_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0201_0603Metric.step"
       ],
@@ -2014,56 +2082,56 @@
       "reference": "C3",
       "value": "0.1uf",
       "mpn": "GRM033C81E104KE14D",
-      "x": 150.3,
-      "y": 105.1,
+      "x": 151.5,
+      "y": 104.425,
       "angle": 0.0,
       "layer": "B.Cu",
       "type": "smd",
       "pad_count": 4,
       "sch_path": "/556ebb51-5809-4e8d-9153-aa63998bbd91",
       "sheetname": "/",
-      "sheetfile": "BitPresTagBMP581.kicad_sch",
+      "sheetfile": "BitPresTagBMP585.kicad_sch",
       "models_3d": [
         "${KICAD10_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0201_0603Metric.step"
       ],
       "courtyard": {
-        "min_x": 149.6,
-        "min_y": 104.75,
-        "max_x": 151.0,
-        "max_y": 105.45
+        "min_x": 150.8,
+        "min_y": 104.075,
+        "max_x": 152.2,
+        "max_y": 104.775
       },
       "courtyard_poly": [
         [
           [
-            149.6,
-            105.45
+            150.8,
+            104.775
           ],
           [
-            151.0,
-            105.45
+            152.2,
+            104.775
           ],
           [
-            151.0,
-            104.75
+            152.2,
+            104.075
           ],
           [
-            149.6,
-            104.75
+            150.8,
+            104.075
           ]
         ]
       ],
       "footprint": "Capacitor_SMD:C_0201_0603Metric",
       "pad_nets": {
         "1": {
-          "net": "/LPS_PWR"
+          "net": "Net-(U3-VDD)"
         },
         "2": {
           "net": "GND"
         }
       },
       "connected_nets": [
-        "/LPS_PWR",
-        "GND"
+        "GND",
+        "Net-(U3-VDD)"
       ]
     },
     {
@@ -2079,7 +2147,7 @@
       "pad_count": 12,
       "sch_path": "/a563bab0-7ddd-451c-9428-f719ebbd92d2",
       "sheetname": "/",
-      "sheetfile": "BitPresTagBMP581.kicad_sch",
+      "sheetfile": "BitPresTagBMP585.kicad_sch",
       "models_3d": [
         "${KIPRJMOD}/../libraries/packages3D/CC-12-4_ADI.step"
       ],
@@ -2144,7 +2212,7 @@
           "pin": "ADC_IN_8"
         },
         "9": {
-          "net": "unconnected-(U2-VREG_OUT-Pad9)",
+          "net": "Net-(U2-VREG_OUT)",
           "pin": "VREG_OUT_9"
         },
         "10": {
@@ -2167,10 +2235,10 @@
         "/ACCEL_nCS",
         "/WKUP1",
         "GND",
+        "Net-(U2-VREG_OUT)",
         "VIN",
         "unconnected-(U2-ADC_IN-Pad8)",
-        "unconnected-(U2-INT2-Pad6)",
-        "unconnected-(U2-VREG_OUT-Pad9)"
+        "unconnected-(U2-INT2-Pad6)"
       ]
     },
     {
@@ -2186,7 +2254,7 @@
       "pad_count": 2,
       "sch_path": "/fcc9bf09-8484-43c5-bfff-f1c0faeccf22",
       "sheetname": "/",
-      "sheetfile": "BitPresTagBMP581.kicad_sch",
+      "sheetfile": "BitPresTagBMP585.kicad_sch",
       "models_3d": [
         "${KICAD10_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0402_1005Metric.step"
       ],
@@ -2229,19 +2297,77 @@
         "GND",
         "VIN"
       ]
+    },
+    {
+      "library": "AccelTag:R_0201_0603Metric",
+      "reference": "R2",
+      "value": "10",
+      "mpn": "RC0201FR-0710RL",
+      "x": 150.055,
+      "y": 104.425,
+      "angle": 180.0,
+      "layer": "B.Cu",
+      "type": "smd",
+      "pad_count": 4,
+      "sch_path": "/019fb521-871c-406b-9801-79c198715891",
+      "sheetname": "/",
+      "sheetfile": "BitPresTagBMP585.kicad_sch",
+      "description": "Resistor",
+      "models_3d": [
+        "${KICAD10_3DMODEL_DIR}/Resistor_SMD.3dshapes/R_0201_0603Metric.step"
+      ],
+      "courtyard": {
+        "min_x": 149.355,
+        "min_y": 104.075,
+        "max_x": 150.755,
+        "max_y": 104.775
+      },
+      "courtyard_poly": [
+        [
+          [
+            150.755,
+            104.775
+          ],
+          [
+            150.755,
+            104.075
+          ],
+          [
+            149.355,
+            104.075
+          ],
+          [
+            149.355,
+            104.775
+          ]
+        ]
+      ],
+      "footprint": "AccelTag:R_0201_0603Metric",
+      "pad_nets": {
+        "1": {
+          "net": "Net-(U3-VDD)"
+        },
+        "2": {
+          "net": "/LPS_PWR"
+        }
+      },
+      "connected_nets": [
+        "/LPS_PWR",
+        "Net-(U3-VDD)"
+      ]
     }
   ],
   "tracks": {
-    "segment_count": 291,
+    "segment_count": 305,
     "arc_count": 0,
     "width_distribution": {
-      "0.1524": 29,
-      "0.1016": 258,
+      "0.1524": 28,
+      "0.1016": 273,
       "0.2032": 4
     },
     "layer_distribution": {
-      "F.Cu": 147,
-      "B.Cu": 144
+      "F.Cu": 152,
+      "B.Cu": 153
     },
     "segments": [
       {
@@ -2251,7 +2377,7 @@
         "y2": 110.141,
         "width": 0.1524,
         "layer": "F.Cu",
-        "net": 25
+        "net": 27
       },
       {
         "x1": 152.84,
@@ -2260,7 +2386,7 @@
         "y2": 108.711,
         "width": 0.1016,
         "layer": "F.Cu",
-        "net": 25
+        "net": 27
       },
       {
         "x1": 152.795,
@@ -2269,7 +2395,7 @@
         "y2": 108.791,
         "width": 0.1524,
         "layer": "F.Cu",
-        "net": 25
+        "net": 27
       },
       {
         "x1": 151.83,
@@ -2278,7 +2404,7 @@
         "y2": 111.525,
         "width": 0.2032,
         "layer": "F.Cu",
-        "net": 25
+        "net": 27
       },
       {
         "x1": 153.1,
@@ -2287,7 +2413,7 @@
         "y2": 109.15,
         "width": 0.2032,
         "layer": "F.Cu",
-        "net": 25
+        "net": 27
       },
       {
         "x1": 152.985,
@@ -2296,7 +2422,7 @@
         "y2": 108.751,
         "width": 0.1016,
         "layer": "F.Cu",
-        "net": 25
+        "net": 27
       },
       {
         "x1": 152.175,
@@ -2305,7 +2431,7 @@
         "y2": 110.6,
         "width": 0.2032,
         "layer": "F.Cu",
-        "net": 25
+        "net": 27
       },
       {
         "x1": 153.1,
@@ -2314,7 +2440,7 @@
         "y2": 108.85,
         "width": 0.2032,
         "layer": "F.Cu",
-        "net": 25
+        "net": 27
       },
       {
         "x1": 152.955,
@@ -2323,7 +2449,7 @@
         "y2": 108.791,
         "width": 0.1524,
         "layer": "F.Cu",
-        "net": 25
+        "net": 27
       },
       {
         "x1": 152.69,
@@ -2332,7 +2458,7 @@
         "y2": 108.711,
         "width": 0.1016,
         "layer": "F.Cu",
-        "net": 25
+        "net": 27
       },
       {
         "x1": 156.05,
@@ -2341,7 +2467,7 @@
         "y2": 110.111,
         "width": 0.1524,
         "layer": "B.Cu",
-        "net": 25
+        "net": 27
       },
       {
         "x1": 156.05,
@@ -2350,7 +2476,7 @@
         "y2": 110.141,
         "width": 0.1524,
         "layer": "B.Cu",
-        "net": 25
+        "net": 27
       },
       {
         "x1": 150.265,
@@ -2366,6 +2492,15 @@
         "y1": 110.34,
         "x2": 147.77,
         "y2": 109.425,
+        "width": 0.1016,
+        "layer": "F.Cu",
+        "net": 19
+      },
+      {
+        "x1": 141.9,
+        "y1": 109.6,
+        "x2": 142.4,
+        "y2": 109.6,
         "width": 0.1016,
         "layer": "F.Cu",
         "net": 19
@@ -2402,15 +2537,6 @@
         "y1": 111.063884,
         "x2": 150.265,
         "y2": 111.455342,
-        "width": 0.1016,
-        "layer": "F.Cu",
-        "net": 19
-      },
-      {
-        "x1": 146.76,
-        "y1": 106.92,
-        "x2": 146.76,
-        "y2": 107.34,
         "width": 0.1016,
         "layer": "F.Cu",
         "net": 19
@@ -2497,15 +2623,6 @@
         "net": 19
       },
       {
-        "x1": 146.76,
-        "y1": 107.34,
-        "x2": 146.92,
-        "y2": 107.5,
-        "width": 0.1016,
-        "layer": "F.Cu",
-        "net": 19
-      },
-      {
         "x1": 149.13,
         "y1": 105.07,
         "x2": 149.2,
@@ -2519,6 +2636,15 @@
         "y1": 108.33,
         "x2": 146.81,
         "y2": 108.33,
+        "width": 0.1016,
+        "layer": "F.Cu",
+        "net": 19
+      },
+      {
+        "x1": 142.4,
+        "y1": 109.6,
+        "x2": 142.675,
+        "y2": 109.875,
         "width": 0.1016,
         "layer": "F.Cu",
         "net": 19
@@ -2583,6 +2709,15 @@
         "x2": 152.81,
         "y2": 106.16,
         "width": 0.1524,
+        "layer": "F.Cu",
+        "net": 19
+      },
+      {
+        "x1": 146.76,
+        "y1": 106.92,
+        "x2": 146.76,
+        "y2": 107.36,
+        "width": 0.1016,
         "layer": "F.Cu",
         "net": 19
       },
@@ -2704,6 +2839,15 @@
         "net": 19
       },
       {
+        "x1": 146.76,
+        "y1": 107.36,
+        "x2": 146.95,
+        "y2": 107.55,
+        "width": 0.1016,
+        "layer": "F.Cu",
+        "net": 19
+      },
+      {
         "x1": 145.18,
         "y1": 109.29,
         "x2": 144.69,
@@ -2717,6 +2861,15 @@
         "y1": 107.7,
         "x2": 142.33,
         "y2": 107.710001,
+        "width": 0.1016,
+        "layer": "B.Cu",
+        "net": 19
+      },
+      {
+        "x1": 151.82,
+        "y1": 104.76,
+        "x2": 151.37,
+        "y2": 105.21,
         "width": 0.1016,
         "layer": "B.Cu",
         "net": 19
@@ -2808,24 +2961,6 @@
         "x2": 144.4,
         "y2": 104.4,
         "width": 0.1016,
-        "layer": "B.Cu",
-        "net": 19
-      },
-      {
-        "x1": 150.62,
-        "y1": 105.1,
-        "x2": 151.26,
-        "y2": 105.1,
-        "width": 0.1016,
-        "layer": "B.Cu",
-        "net": 19
-      },
-      {
-        "x1": 146.818542,
-        "y1": 107.365,
-        "x2": 148.033542,
-        "y2": 108.58,
-        "width": 0.1524,
         "layer": "B.Cu",
         "net": 19
       },
@@ -2956,6 +3091,15 @@
         "net": 19
       },
       {
+        "x1": 151.82,
+        "y1": 104.425,
+        "x2": 151.82,
+        "y2": 104.76,
+        "width": 0.1016,
+        "layer": "B.Cu",
+        "net": 19
+      },
+      {
         "x1": 144.485,
         "y1": 109.985,
         "x2": 144.69,
@@ -2971,7 +3115,7 @@
         "y2": 111.708858,
         "width": 0.1016,
         "layer": "F.Cu",
-        "net": 26
+        "net": 28
       },
       {
         "x1": 142.06,
@@ -2980,7 +3124,7 @@
         "y2": 106.3,
         "width": 0.1016,
         "layer": "F.Cu",
-        "net": 26
+        "net": 28
       },
       {
         "x1": 151.3576,
@@ -2989,7 +3133,7 @@
         "y2": 110.555,
         "width": 0.1016,
         "layer": "F.Cu",
-        "net": 26
+        "net": 28
       },
       {
         "x1": 142.4,
@@ -2998,7 +3142,7 @@
         "y2": 106.66,
         "width": 0.1016,
         "layer": "F.Cu",
-        "net": 26
+        "net": 28
       },
       {
         "x1": 145.151144,
@@ -3007,7 +3151,7 @@
         "y2": 108.840012,
         "width": 0.1016,
         "layer": "F.Cu",
-        "net": 26
+        "net": 28
       },
       {
         "x1": 144.641132,
@@ -3016,7 +3160,7 @@
         "y2": 108.840012,
         "width": 0.1016,
         "layer": "F.Cu",
-        "net": 26
+        "net": 28
       },
       {
         "x1": 151.078858,
@@ -3025,7 +3169,7 @@
         "y2": 111.683058,
         "width": 0.1016,
         "layer": "F.Cu",
-        "net": 26
+        "net": 28
       },
       {
         "x1": 146.69,
@@ -3034,7 +3178,7 @@
         "y2": 110.34,
         "width": 0.1016,
         "layer": "F.Cu",
-        "net": 26
+        "net": 28
       },
       {
         "x1": 150.4682,
@@ -3043,7 +3187,7 @@
         "y2": 111.002303,
         "width": 0.1016,
         "layer": "F.Cu",
-        "net": 26
+        "net": 28
       },
       {
         "x1": 151.3576,
@@ -3052,7 +3196,7 @@
         "y2": 111.0274,
         "width": 0.1016,
         "layer": "F.Cu",
-        "net": 26
+        "net": 28
       },
       {
         "x1": 151.078858,
@@ -3061,7 +3205,7 @@
         "y2": 111.9618,
         "width": 0.1016,
         "layer": "F.Cu",
-        "net": 26
+        "net": 28
       },
       {
         "x1": 151.83,
@@ -3070,7 +3214,7 @@
         "y2": 110.555,
         "width": 0.1016,
         "layer": "F.Cu",
-        "net": 26
+        "net": 28
       },
       {
         "x1": 143.82,
@@ -3079,7 +3223,7 @@
         "y2": 106.055,
         "width": 0.1016,
         "layer": "F.Cu",
-        "net": 26
+        "net": 28
       },
       {
         "x1": 145.283542,
@@ -3088,7 +3232,7 @@
         "y2": 110.69,
         "width": 0.1016,
         "layer": "F.Cu",
-        "net": 26
+        "net": 28
       },
       {
         "x1": 145.965012,
@@ -3097,7 +3241,7 @@
         "y2": 109.29,
         "width": 0.1016,
         "layer": "F.Cu",
-        "net": 26
+        "net": 28
       },
       {
         "x1": 144.81,
@@ -3106,7 +3250,7 @@
         "y2": 110.66,
         "width": 0.1016,
         "layer": "F.Cu",
-        "net": 26
+        "net": 28
       },
       {
         "x1": 145.46,
@@ -3115,7 +3259,7 @@
         "y2": 108.33,
         "width": 0.1016,
         "layer": "F.Cu",
-        "net": 26
+        "net": 28
       },
       {
         "x1": 150.4682,
@@ -3124,7 +3268,7 @@
         "y2": 111.246961,
         "width": 0.1016,
         "layer": "F.Cu",
-        "net": 26
+        "net": 28
       },
       {
         "x1": 143.82,
@@ -3133,7 +3277,7 @@
         "y2": 106.175,
         "width": 0.1016,
         "layer": "F.Cu",
-        "net": 26
+        "net": 28
       },
       {
         "x1": 150.223542,
@@ -3142,7 +3286,7 @@
         "y2": 110.76,
         "width": 0.1016,
         "layer": "F.Cu",
-        "net": 26
+        "net": 28
       },
       {
         "x1": 142.4,
@@ -3151,7 +3295,7 @@
         "y2": 106.66,
         "width": 0.1016,
         "layer": "F.Cu",
-        "net": 26
+        "net": 28
       },
       {
         "x1": 143.215,
@@ -3160,7 +3304,7 @@
         "y2": 106.175,
         "width": 0.1016,
         "layer": "F.Cu",
-        "net": 26
+        "net": 28
       },
       {
         "x1": 143.443551,
@@ -3169,7 +3313,7 @@
         "y2": 104.508599,
         "width": 0.1016,
         "layer": "F.Cu",
-        "net": 26
+        "net": 28
       },
       {
         "x1": 143.82,
@@ -3178,7 +3322,7 @@
         "y2": 104.9,
         "width": 0.1016,
         "layer": "F.Cu",
-        "net": 26
+        "net": 28
       },
       {
         "x1": 150.223542,
@@ -3187,7 +3331,7 @@
         "y2": 110.76,
         "width": 0.1016,
         "layer": "F.Cu",
-        "net": 26
+        "net": 28
       },
       {
         "x1": 152.445,
@@ -3196,7 +3340,7 @@
         "y2": 110.5,
         "width": 0.1016,
         "layer": "F.Cu",
-        "net": 26
+        "net": 28
       },
       {
         "x1": 146.415,
@@ -3205,7 +3349,7 @@
         "y2": 109.565,
         "width": 0.1016,
         "layer": "F.Cu",
-        "net": 26
+        "net": 28
       },
       {
         "x1": 144.643667,
@@ -3214,7 +3358,7 @@
         "y2": 108.840012,
         "width": 0.1016,
         "layer": "F.Cu",
-        "net": 26
+        "net": 28
       },
       {
         "x1": 145.11,
@@ -3223,7 +3367,7 @@
         "y2": 110.66,
         "width": 0.1016,
         "layer": "B.Cu",
-        "net": 26
+        "net": 28
       },
       {
         "x1": 143.735,
@@ -3232,7 +3376,7 @@
         "y2": 105.02,
         "width": 0.1016,
         "layer": "B.Cu",
-        "net": 26
+        "net": 28
       },
       {
         "x1": 143.4436,
@@ -3241,7 +3385,7 @@
         "y2": 105.02,
         "width": 0.1016,
         "layer": "B.Cu",
-        "net": 26
+        "net": 28
       },
       {
         "x1": 145.151144,
@@ -3250,7 +3394,7 @@
         "y2": 108.840012,
         "width": 0.1524,
         "layer": "B.Cu",
-        "net": 26
+        "net": 28
       },
       {
         "x1": 145.596042,
@@ -3259,7 +3403,7 @@
         "y2": 108.33,
         "width": 0.1524,
         "layer": "B.Cu",
-        "net": 26
+        "net": 28
       },
       {
         "x1": 154.685,
@@ -3268,7 +3412,7 @@
         "y2": 109.211,
         "width": 0.1524,
         "layer": "B.Cu",
-        "net": 26
+        "net": 28
       },
       {
         "x1": 154.765,
@@ -3277,7 +3421,7 @@
         "y2": 109.655,
         "width": 0.1016,
         "layer": "B.Cu",
-        "net": 26
+        "net": 28
       },
       {
         "x1": 154.765,
@@ -3286,7 +3430,7 @@
         "y2": 110.06,
         "width": 0.1016,
         "layer": "B.Cu",
-        "net": 26
+        "net": 28
       },
       {
         "x1": 142.239999,
@@ -3295,7 +3439,7 @@
         "y2": 106.209999,
         "width": 0.1016,
         "layer": "B.Cu",
-        "net": 26
+        "net": 28
       },
       {
         "x1": 151.9,
@@ -3304,7 +3448,7 @@
         "y2": 106.66,
         "width": 0.1016,
         "layer": "B.Cu",
-        "net": 26
+        "net": 28
       },
       {
         "x1": 141.909999,
@@ -3313,7 +3457,7 @@
         "y2": 106.2,
         "width": 0.1016,
         "layer": "B.Cu",
-        "net": 26
+        "net": 28
       },
       {
         "x1": 152.5,
@@ -3322,7 +3466,7 @@
         "y2": 110.5,
         "width": 0.1016,
         "layer": "B.Cu",
-        "net": 26
+        "net": 28
       },
       {
         "x1": 151.09,
@@ -3331,7 +3475,7 @@
         "y2": 106.83,
         "width": 0.1016,
         "layer": "B.Cu",
-        "net": 26
+        "net": 28
       },
       {
         "x1": 141.7,
@@ -3340,7 +3484,7 @@
         "y2": 106.3,
         "width": 0.1016,
         "layer": "B.Cu",
-        "net": 26
+        "net": 28
       },
       {
         "x1": 151.9,
@@ -3349,7 +3493,7 @@
         "y2": 107.15,
         "width": 0.1016,
         "layer": "B.Cu",
-        "net": 26
+        "net": 28
       },
       {
         "x1": 145.563442,
@@ -3358,7 +3502,7 @@
         "y2": 110.33,
         "width": 0.1016,
         "layer": "B.Cu",
-        "net": 26
+        "net": 28
       },
       {
         "x1": 143.05215,
@@ -3367,7 +3511,7 @@
         "y2": 104.508599,
         "width": 0.1016,
         "layer": "B.Cu",
-        "net": 26
+        "net": 28
       },
       {
         "x1": 151.41,
@@ -3376,7 +3520,7 @@
         "y2": 106.83,
         "width": 0.1016,
         "layer": "B.Cu",
-        "net": 26
+        "net": 28
       },
       {
         "x1": 143.223599,
@@ -3385,7 +3529,7 @@
         "y2": 105.02,
         "width": 0.1016,
         "layer": "B.Cu",
-        "net": 26
+        "net": 28
       },
       {
         "x1": 151.89,
@@ -3394,7 +3538,7 @@
         "y2": 110.56,
         "width": 0.1016,
         "layer": "B.Cu",
-        "net": 26
+        "net": 28
       },
       {
         "x1": 145.596042,
@@ -3403,7 +3547,7 @@
         "y2": 110.33,
         "width": 0.1016,
         "layer": "B.Cu",
-        "net": 26
+        "net": 28
       },
       {
         "x1": 143.4436,
@@ -3412,7 +3556,7 @@
         "y2": 105.3864,
         "width": 0.1016,
         "layer": "B.Cu",
-        "net": 26
+        "net": 28
       },
       {
         "x1": 146.01,
@@ -3610,7 +3754,7 @@
         "y2": 110.325,
         "width": 0.1016,
         "layer": "F.Cu",
-        "net": 21
+        "net": 23
       },
       {
         "x1": 147.245,
@@ -3619,7 +3763,7 @@
         "y2": 110.34,
         "width": 0.1016,
         "layer": "F.Cu",
-        "net": 21
+        "net": 23
       },
       {
         "x1": 149.523542,
@@ -3952,7 +4096,7 @@
         "y2": 106.715,
         "width": 0.1016,
         "layer": "F.Cu",
-        "net": 12
+        "net": 22
       },
       {
         "x1": 150.1,
@@ -3961,7 +4105,7 @@
         "y2": 106.0292,
         "width": 0.1016,
         "layer": "F.Cu",
-        "net": 12
+        "net": 22
       },
       {
         "x1": 150.785,
@@ -3970,7 +4114,7 @@
         "y2": 106.2,
         "width": 0.1016,
         "layer": "F.Cu",
-        "net": 12
+        "net": 22
       },
       {
         "x1": 147.4758,
@@ -3979,7 +4123,7 @@
         "y2": 106.715,
         "width": 0.1016,
         "layer": "F.Cu",
-        "net": 12
+        "net": 22
       },
       {
         "x1": 147.0108,
@@ -3988,7 +4132,7 @@
         "y2": 106.28,
         "width": 0.1016,
         "layer": "F.Cu",
-        "net": 12
+        "net": 22
       },
       {
         "x1": 151.3,
@@ -3997,7 +4141,7 @@
         "y2": 106.0292,
         "width": 0.1016,
         "layer": "F.Cu",
-        "net": 12
+        "net": 22
       },
       {
         "x1": 146.76,
@@ -4006,7 +4150,7 @@
         "y2": 106.28,
         "width": 0.1016,
         "layer": "F.Cu",
-        "net": 12
+        "net": 22
       },
       {
         "x1": 151.1292,
@@ -4015,43 +4159,52 @@
         "y2": 106.0292,
         "width": 0.1016,
         "layer": "F.Cu",
-        "net": 12
+        "net": 22
       },
       {
-        "x1": 149.283542,
-        "y1": 106.1425,
-        "x2": 149.283542,
-        "y2": 105.796458,
-        "width": 0.1016,
-        "layer": "B.Cu",
-        "net": 12
-      },
-      {
-        "x1": 151.08,
+        "x1": 151.3,
         "y1": 106.2,
-        "x2": 149.98,
-        "y2": 105.1,
+        "x2": 150.925,
+        "y2": 105.825,
         "width": 0.1016,
         "layer": "B.Cu",
-        "net": 12
+        "net": 22
       },
       {
-        "x1": 149.98,
-        "y1": 105.1,
-        "x2": 149.940397,
-        "y2": 105.1,
+        "x1": 150.925,
+        "y1": 105.825,
+        "x2": 150.925,
+        "y2": 105.425,
         "width": 0.1016,
         "layer": "B.Cu",
-        "net": 12
+        "net": 22
       },
       {
-        "x1": 149.283542,
-        "y1": 105.796458,
-        "x2": 149.98,
-        "y2": 105.1,
+        "x1": 150.375,
+        "y1": 104.875,
+        "x2": 150.375,
+        "y2": 104.425,
         "width": 0.1016,
         "layer": "B.Cu",
-        "net": 12
+        "net": 22
+      },
+      {
+        "x1": 150.375,
+        "y1": 104.425,
+        "x2": 151.18,
+        "y2": 104.425,
+        "width": 0.1016,
+        "layer": "B.Cu",
+        "net": 22
+      },
+      {
+        "x1": 150.925,
+        "y1": 105.425,
+        "x2": 150.375,
+        "y2": 104.875,
+        "width": 0.1016,
+        "layer": "B.Cu",
+        "net": 22
       },
       {
         "x1": 151.3,
@@ -4060,13 +4213,13 @@
         "y2": 106.2,
         "width": 0.1016,
         "layer": "B.Cu",
-        "net": 12
+        "net": 22
       },
       {
-        "x1": 146.7342,
+        "x1": 148.03,
         "y1": 107.9342,
-        "x2": 148.03,
-        "y2": 107.9342,
+        "x2": 148.0094,
+        "y2": 107.9548,
         "width": 0.1016,
         "layer": "F.Cu",
         "net": 13
@@ -4081,10 +4234,19 @@
         "net": 13
       },
       {
-        "x1": 146.27,
-        "y1": 107.47,
-        "x2": 146.7342,
-        "y2": 107.9342,
+        "x1": 148.0094,
+        "y1": 107.9548,
+        "x2": 146.7548,
+        "y2": 107.9548,
+        "width": 0.1016,
+        "layer": "F.Cu",
+        "net": 13
+      },
+      {
+        "x1": 146.7548,
+        "y1": 107.9548,
+        "x2": 146.27,
+        "y2": 107.47,
         "width": 0.1016,
         "layer": "F.Cu",
         "net": 13
@@ -4333,13 +4495,67 @@
         "net": 9
       },
       {
+        "x1": 142.675,
+        "y1": 109.235,
+        "x2": 142.11,
+        "y2": 109.235,
+        "width": 0.1016,
+        "layer": "F.Cu",
+        "net": 21
+      },
+      {
+        "x1": 142.11,
+        "y1": 109.235,
+        "x2": 141.55,
+        "y2": 108.675,
+        "width": 0.1016,
+        "layer": "F.Cu",
+        "net": 21
+      },
+      {
+        "x1": 141.35,
+        "y1": 107.3979,
+        "x2": 141.35,
+        "y2": 108.475,
+        "width": 0.1016,
+        "layer": "B.Cu",
+        "net": 21
+      },
+      {
+        "x1": 141.35,
+        "y1": 108.475,
+        "x2": 141.55,
+        "y2": 108.675,
+        "width": 0.1016,
+        "layer": "B.Cu",
+        "net": 21
+      },
+      {
+        "x1": 142.0379,
+        "y1": 106.71,
+        "x2": 141.35,
+        "y2": 107.3979,
+        "width": 0.1016,
+        "layer": "B.Cu",
+        "net": 21
+      },
+      {
+        "x1": 142.33,
+        "y1": 106.71,
+        "x2": 142.0379,
+        "y2": 106.71,
+        "width": 0.1016,
+        "layer": "B.Cu",
+        "net": 21
+      },
+      {
         "x1": 152.882632,
         "y1": 108.0,
         "x2": 151.052632,
         "y2": 109.83,
         "width": 0.1016,
         "layer": "B.Cu",
-        "net": 24
+        "net": 26
       },
       {
         "x1": 151.052632,
@@ -4348,7 +4564,7 @@
         "y2": 109.83,
         "width": 0.1016,
         "layer": "B.Cu",
-        "net": 24
+        "net": 26
       },
       {
         "x1": 154.765,
@@ -4357,7 +4573,7 @@
         "y2": 108.0,
         "width": 0.1016,
         "layer": "B.Cu",
-        "net": 24
+        "net": 26
       },
       {
         "x1": 155.365,
@@ -4366,7 +4582,7 @@
         "y2": 108.0,
         "width": 0.1016,
         "layer": "B.Cu",
-        "net": 23
+        "net": 25
       },
       {
         "x1": 152.5,
@@ -4375,7 +4591,7 @@
         "y2": 108.67,
         "width": 0.1016,
         "layer": "B.Cu",
-        "net": 23
+        "net": 25
       },
       {
         "x1": 150.84,
@@ -4384,7 +4600,7 @@
         "y2": 108.67,
         "width": 0.1016,
         "layer": "B.Cu",
-        "net": 23
+        "net": 25
       },
       {
         "x1": 150.471042,
@@ -4393,34 +4609,7 @@
         "y2": 110.33,
         "width": 0.1016,
         "layer": "B.Cu",
-        "net": 23
-      },
-      {
-        "x1": 147.736974,
-        "y1": 104.365,
-        "x2": 149.463026,
-        "y2": 104.365,
-        "width": 0.1016,
-        "layer": "F.Cu",
-        "net": 22
-      },
-      {
-        "x1": 146.827458,
-        "y1": 104.5682,
-        "x2": 146.979058,
-        "y2": 104.4166,
-        "width": 0.1016,
-        "layer": "F.Cu",
-        "net": 22
-      },
-      {
-        "x1": 153.0682,
-        "y1": 104.5682,
-        "x2": 154.3,
-        "y2": 105.8,
-        "width": 0.1016,
-        "layer": "F.Cu",
-        "net": 22
+        "net": 25
       },
       {
         "x1": 146.2318,
@@ -4429,52 +4618,16 @@
         "y2": 104.5682,
         "width": 0.1016,
         "layer": "F.Cu",
-        "net": 22
-      },
-      {
-        "x1": 149.463026,
-        "y1": 104.365,
-        "x2": 149.666226,
-        "y2": 104.5682,
-        "width": 0.1016,
-        "layer": "F.Cu",
-        "net": 22
-      },
-      {
-        "x1": 145.9,
-        "y1": 104.9,
-        "x2": 146.2318,
-        "y2": 104.5682,
-        "width": 0.1016,
-        "layer": "F.Cu",
-        "net": 22
-      },
-      {
-        "x1": 145.9,
-        "y1": 106.8,
-        "x2": 145.9,
-        "y2": 104.9,
-        "width": 0.1016,
-        "layer": "F.Cu",
-        "net": 22
+        "net": 24
       },
       {
         "x1": 144.1,
-        "y1": 108.6,
-        "x2": 145.9,
-        "y2": 106.8,
-        "width": 0.1016,
-        "layer": "F.Cu",
-        "net": 22
-      },
-      {
-        "x1": 143.0,
-        "y1": 110.3,
+        "y1": 109.5,
         "x2": 144.1,
-        "y2": 109.2,
+        "y2": 108.6,
         "width": 0.1016,
         "layer": "F.Cu",
-        "net": 22
+        "net": 24
       },
       {
         "x1": 149.666226,
@@ -4483,25 +4636,79 @@
         "y2": 104.5682,
         "width": 0.1016,
         "layer": "F.Cu",
-        "net": 22
+        "net": 24
       },
       {
-        "x1": 146.979058,
-        "y1": 104.4166,
-        "x2": 147.685374,
-        "y2": 104.4166,
+        "x1": 143.075,
+        "y1": 110.525,
+        "x2": 144.1,
+        "y2": 109.5,
         "width": 0.1016,
         "layer": "F.Cu",
-        "net": 22
+        "net": 24
+      },
+      {
+        "x1": 145.9,
+        "y1": 104.9,
+        "x2": 146.2318,
+        "y2": 104.5682,
+        "width": 0.1016,
+        "layer": "F.Cu",
+        "net": 24
       },
       {
         "x1": 144.1,
-        "y1": 109.2,
-        "x2": 144.1,
-        "y2": 108.6,
+        "y1": 108.6,
+        "x2": 145.9,
+        "y2": 106.8,
         "width": 0.1016,
         "layer": "F.Cu",
-        "net": 22
+        "net": 24
+      },
+      {
+        "x1": 153.0682,
+        "y1": 104.5682,
+        "x2": 154.3,
+        "y2": 105.8,
+        "width": 0.1016,
+        "layer": "F.Cu",
+        "net": 24
+      },
+      {
+        "x1": 145.9,
+        "y1": 106.8,
+        "x2": 145.9,
+        "y2": 104.9,
+        "width": 0.1016,
+        "layer": "F.Cu",
+        "net": 24
+      },
+      {
+        "x1": 146.827458,
+        "y1": 104.5682,
+        "x2": 146.979058,
+        "y2": 104.4166,
+        "width": 0.1016,
+        "layer": "F.Cu",
+        "net": 24
+      },
+      {
+        "x1": 149.463026,
+        "y1": 104.365,
+        "x2": 149.666226,
+        "y2": 104.5682,
+        "width": 0.1016,
+        "layer": "F.Cu",
+        "net": 24
+      },
+      {
+        "x1": 147.736974,
+        "y1": 104.365,
+        "x2": 149.463026,
+        "y2": 104.365,
+        "width": 0.1016,
+        "layer": "F.Cu",
+        "net": 24
       },
       {
         "x1": 147.685374,
@@ -4510,25 +4717,16 @@
         "y2": 104.365,
         "width": 0.1016,
         "layer": "F.Cu",
-        "net": 22
+        "net": 24
       },
       {
-        "x1": 142.965,
-        "y1": 109.89,
-        "x2": 142.965,
-        "y2": 110.265,
+        "x1": 146.979058,
+        "y1": 104.4166,
+        "x2": 147.685374,
+        "y2": 104.4166,
         "width": 0.1016,
-        "layer": "B.Cu",
-        "net": 22
-      },
-      {
-        "x1": 142.965,
-        "y1": 110.265,
-        "x2": 143.0,
-        "y2": 110.3,
-        "width": 0.1016,
-        "layer": "B.Cu",
-        "net": 22
+        "layer": "F.Cu",
+        "net": 24
       },
       {
         "x1": 154.765,
@@ -4537,7 +4735,16 @@
         "y2": 106.265,
         "width": 0.1016,
         "layer": "B.Cu",
-        "net": 22
+        "net": 24
+      },
+      {
+        "x1": 142.965,
+        "y1": 110.415,
+        "x2": 143.075,
+        "y2": 110.525,
+        "width": 0.1016,
+        "layer": "B.Cu",
+        "net": 24
       },
       {
         "x1": 154.3,
@@ -4546,7 +4753,16 @@
         "y2": 105.8,
         "width": 0.1016,
         "layer": "B.Cu",
-        "net": 22
+        "net": 24
+      },
+      {
+        "x1": 142.965,
+        "y1": 109.89,
+        "x2": 142.965,
+        "y2": 110.415,
+        "width": 0.1016,
+        "layer": "B.Cu",
+        "net": 24
       },
       {
         "x1": 144.360658,
@@ -4862,21 +5078,57 @@
         "width": 0.1016,
         "layer": "B.Cu",
         "net": 3
+      },
+      {
+        "x1": 149.735,
+        "y1": 105.447896,
+        "x2": 149.283542,
+        "y2": 105.899354,
+        "width": 0.1016,
+        "layer": "B.Cu",
+        "net": 12
+      },
+      {
+        "x1": 149.283542,
+        "y1": 106.1425,
+        "x2": 149.283542,
+        "y2": 105.796458,
+        "width": 0.1016,
+        "layer": "B.Cu",
+        "net": 12
+      },
+      {
+        "x1": 149.283542,
+        "y1": 105.899354,
+        "x2": 149.283542,
+        "y2": 106.1425,
+        "width": 0.1016,
+        "layer": "B.Cu",
+        "net": 12
+      },
+      {
+        "x1": 149.735,
+        "y1": 104.425,
+        "x2": 149.735,
+        "y2": 105.447896,
+        "width": 0.1016,
+        "layer": "B.Cu",
+        "net": 12
       }
     ],
     "arcs": []
   },
   "vias": {
-    "count": 39,
+    "count": 40,
     "size_distribution": {
-      "0.5048/0.2": 39
+      "0.5048/0.2": 40
     },
     "via_analysis": {
       "type_breakdown": {
         "through": {
-          "count": 39,
+          "count": 40,
           "size_distribution": {
-            "0.5048/0.2": 39
+            "0.5048/0.2": 40
           }
         }
       },
@@ -4884,7 +5136,7 @@
         "min_mm": 0.152,
         "max_mm": 0.152,
         "distribution": {
-          "0.152": 39
+          "0.152": 40
         }
       },
       "via_in_pad": [
@@ -4900,8 +5152,8 @@
         {
           "component": "U302",
           "pad": "",
-          "via_x": 146.92,
-          "via_y": 107.5,
+          "via_x": 146.95,
+          "via_y": 107.55,
           "via_drill": 0.2,
           "same_net": false,
           "via_type": "through"
@@ -4918,15 +5170,15 @@
       ],
       "current_capacity": {
         "drill_size_distribution": {
-          "0.2": 39
+          "0.2": 40
         },
         "min_drill_mm": 0.2,
         "max_drill_mm": 0.2,
-        "total_vias": 39,
+        "total_vias": 40,
         "ratings": [
           {
             "drill_mm": 0.2,
-            "count": 39,
+            "count": 40,
             "plating_area_mm2": 0.0157,
             "approx_current_A": 5.2
           }
@@ -4939,7 +5191,7 @@
         "y": 110.141,
         "size": 0.5048,
         "drill": 0.2,
-        "net": 25,
+        "net": 27,
         "type": "through",
         "layers": [
           "F.Cu",
@@ -4971,8 +5223,8 @@
         ]
       },
       {
-        "x": 146.92,
-        "y": 107.5,
+        "x": 146.95,
+        "y": 107.55,
         "size": 0.5048,
         "drill": 0.2,
         "net": 19,
@@ -5119,7 +5371,7 @@
         "y": 110.5,
         "size": 0.5048,
         "drill": 0.2,
-        "net": 26,
+        "net": 28,
         "type": "through",
         "layers": [
           "F.Cu",
@@ -5131,7 +5383,7 @@
         "y": 108.840012,
         "size": 0.5048,
         "drill": 0.2,
-        "net": 26,
+        "net": 28,
         "type": "through",
         "layers": [
           "F.Cu",
@@ -5143,7 +5395,7 @@
         "y": 110.06,
         "size": 0.5048,
         "drill": 0.2,
-        "net": 26,
+        "net": 28,
         "type": "through",
         "layers": [
           "F.Cu",
@@ -5155,7 +5407,7 @@
         "y": 104.508599,
         "size": 0.5048,
         "drill": 0.2,
-        "net": 26,
+        "net": 28,
         "type": "through",
         "layers": [
           "F.Cu",
@@ -5167,7 +5419,7 @@
         "y": 107.15,
         "size": 0.5048,
         "drill": 0.2,
-        "net": 26,
+        "net": 28,
         "type": "through",
         "layers": [
           "F.Cu",
@@ -5179,7 +5431,7 @@
         "y": 110.66,
         "size": 0.5048,
         "drill": 0.2,
-        "net": 26,
+        "net": 28,
         "type": "through",
         "layers": [
           "F.Cu",
@@ -5191,7 +5443,7 @@
         "y": 106.3,
         "size": 0.5048,
         "drill": 0.2,
-        "net": 26,
+        "net": 28,
         "type": "through",
         "layers": [
           "F.Cu",
@@ -5287,7 +5539,7 @@
         "y": 106.2,
         "size": 0.5048,
         "drill": 0.2,
-        "net": 12,
+        "net": 22,
         "type": "through",
         "layers": [
           "F.Cu",
@@ -5355,11 +5607,23 @@
         ]
       },
       {
-        "x": 143.0,
-        "y": 110.3,
+        "x": 141.55,
+        "y": 108.675,
         "size": 0.5048,
         "drill": 0.2,
-        "net": 22,
+        "net": 21,
+        "type": "through",
+        "layers": [
+          "F.Cu",
+          "B.Cu"
+        ]
+      },
+      {
+        "x": 143.075,
+        "y": 110.525,
+        "size": 0.5048,
+        "drill": 0.2,
+        "net": 24,
         "type": "through",
         "layers": [
           "F.Cu",
@@ -5371,7 +5635,7 @@
         "y": 105.8,
         "size": 0.5048,
         "drill": 0.2,
-        "net": 22,
+        "net": 24,
         "type": "through",
         "layers": [
           "F.Cu",
@@ -5406,7 +5670,7 @@
   },
   "zones": [
     {
-      "net": 26,
+      "net": 28,
       "net_name": "VIN",
       "layers": [
         "In1.Cu"
@@ -5424,7 +5688,7 @@
         160.4,
         115.1
       ],
-      "filled_area_mm2": 102.99,
+      "filled_area_mm2": 102.07,
       "fill_region_count": 1,
       "filled_bbox": [
         140.3,
@@ -5432,7 +5696,7 @@
         157.7,
         112.7
       ],
-      "fill_ratio": 0.318
+      "fill_ratio": 0.315
     },
     {
       "net": 19,
@@ -5454,7 +5718,7 @@
         116.6
       ],
       "priority": 1,
-      "filled_area_mm2": 115.81,
+      "filled_area_mm2": 113.94,
       "fill_region_count": 1,
       "filled_bbox": [
         140.3,
@@ -5462,13 +5726,13 @@
         157.7,
         112.7
       ],
-      "fill_ratio": 0.298
+      "fill_ratio": 0.293
     }
   ],
   "keepout_zones": [],
   "connectivity": {
-    "total_nets_with_pads": 41,
-    "routed_nets": 26,
+    "total_nets_with_pads": 42,
+    "routed_nets": 28,
     "unrouted_count": 0,
     "routing_complete": true
   },
@@ -5476,17 +5740,17 @@
     {
       "net": "GND",
       "net_number": 19,
-      "total_length_mm": 34.909,
-      "segment_count": 68,
+      "total_length_mm": 34.474,
+      "segment_count": 70,
       "via_count": 14,
       "layers": {
         "B.Cu": {
-          "length_mm": 15.162,
+          "length_mm": 13.775,
           "segments": 28
         },
         "F.Cu": {
-          "length_mm": 19.747,
-          "segments": 40
+          "length_mm": 20.698,
+          "segments": 42
         }
       },
       "trace_segments": [
@@ -5499,6 +5763,12 @@
         {
           "layer": "F.Cu",
           "length_mm": 0.915,
+          "width_mm": 0.1016,
+          "impedance_ohm": 43.2
+        },
+        {
+          "layer": "F.Cu",
+          "length_mm": 0.5,
           "width_mm": 0.1016,
           "impedance_ohm": 43.2
         },
@@ -5523,12 +5793,6 @@
         {
           "layer": "F.Cu",
           "length_mm": 0.554,
-          "width_mm": 0.1016,
-          "impedance_ohm": 43.2
-        },
-        {
-          "layer": "F.Cu",
-          "length_mm": 0.42,
           "width_mm": 0.1016,
           "impedance_ohm": 43.2
         },
@@ -5588,12 +5852,6 @@
         },
         {
           "layer": "F.Cu",
-          "length_mm": 0.226,
-          "width_mm": 0.1016,
-          "impedance_ohm": 43.2
-        },
-        {
-          "layer": "F.Cu",
           "length_mm": 0.099,
           "width_mm": 0.1016,
           "impedance_ohm": 43.2
@@ -5601,6 +5859,12 @@
         {
           "layer": "F.Cu",
           "length_mm": 0.71,
+          "width_mm": 0.1016,
+          "impedance_ohm": 43.2
+        },
+        {
+          "layer": "F.Cu",
+          "length_mm": 0.389,
           "width_mm": 0.1016,
           "impedance_ohm": 43.2
         },
@@ -5645,6 +5909,12 @@
           "length_mm": 0.18,
           "width_mm": 0.1524,
           "impedance_ohm": 36.1
+        },
+        {
+          "layer": "F.Cu",
+          "length_mm": 0.44,
+          "width_mm": 0.1016,
+          "impedance_ohm": 43.2
         },
         {
           "layer": "F.Cu",
@@ -5726,6 +5996,12 @@
         },
         {
           "layer": "F.Cu",
+          "length_mm": 0.269,
+          "width_mm": 0.1016,
+          "impedance_ohm": 43.2
+        },
+        {
+          "layer": "F.Cu",
           "length_mm": 0.693,
           "width_mm": 0.1016,
           "impedance_ohm": 43.2
@@ -5733,6 +6009,12 @@
         {
           "layer": "B.Cu",
           "length_mm": 0.014,
+          "width_mm": 0.1016,
+          "impedance_ohm": 43.2
+        },
+        {
+          "layer": "B.Cu",
+          "length_mm": 0.636,
           "width_mm": 0.1016,
           "impedance_ohm": 43.2
         },
@@ -5795,18 +6077,6 @@
           "length_mm": 0.035,
           "width_mm": 0.1016,
           "impedance_ohm": 43.2
-        },
-        {
-          "layer": "B.Cu",
-          "length_mm": 0.64,
-          "width_mm": 0.1016,
-          "impedance_ohm": 43.2
-        },
-        {
-          "layer": "B.Cu",
-          "length_mm": 1.718,
-          "width_mm": 0.1524,
-          "impedance_ohm": 36.1
         },
         {
           "layer": "B.Cu",
@@ -5889,6 +6159,12 @@
         {
           "layer": "B.Cu",
           "length_mm": 0.595,
+          "width_mm": 0.1016,
+          "impedance_ohm": 43.2
+        },
+        {
+          "layer": "B.Cu",
+          "length_mm": 0.335,
           "width_mm": 0.1016,
           "impedance_ohm": 43.2
         },
@@ -6002,7 +6278,7 @@
     },
     {
       "net": "VIN",
-      "net_number": 26,
+      "net_number": 28,
       "total_length_mm": 22.63,
       "segment_count": 50,
       "via_count": 7,
@@ -6372,39 +6648,21 @@
     },
     {
       "net": "RST",
-      "net_number": 22,
-      "total_length_mm": 17.364,
+      "net_number": 24,
+      "total_length_mm": 17.814,
       "segment_count": 17,
       "via_count": 2,
       "layers": {
         "B.Cu": {
-          "length_mm": 1.547,
+          "length_mm": 1.803,
           "segments": 4
         },
         "F.Cu": {
-          "length_mm": 15.817,
+          "length_mm": 16.011,
           "segments": 13
         }
       },
       "trace_segments": [
-        {
-          "layer": "F.Cu",
-          "length_mm": 1.726,
-          "width_mm": 0.1016,
-          "impedance_ohm": 43.2
-        },
-        {
-          "layer": "F.Cu",
-          "length_mm": 0.214,
-          "width_mm": 0.1016,
-          "impedance_ohm": 43.2
-        },
-        {
-          "layer": "F.Cu",
-          "length_mm": 1.742,
-          "width_mm": 0.1016,
-          "impedance_ohm": 43.2
-        },
         {
           "layer": "F.Cu",
           "length_mm": 0.596,
@@ -6413,31 +6671,7 @@
         },
         {
           "layer": "F.Cu",
-          "length_mm": 0.287,
-          "width_mm": 0.1016,
-          "impedance_ohm": 43.2
-        },
-        {
-          "layer": "F.Cu",
-          "length_mm": 0.469,
-          "width_mm": 0.1016,
-          "impedance_ohm": 43.2
-        },
-        {
-          "layer": "F.Cu",
-          "length_mm": 1.9,
-          "width_mm": 0.1016,
-          "impedance_ohm": 43.2
-        },
-        {
-          "layer": "F.Cu",
-          "length_mm": 2.546,
-          "width_mm": 0.1016,
-          "impedance_ohm": 43.2
-        },
-        {
-          "layer": "F.Cu",
-          "length_mm": 1.556,
+          "length_mm": 0.9,
           "width_mm": 0.1016,
           "impedance_ohm": 43.2
         },
@@ -6449,13 +6683,49 @@
         },
         {
           "layer": "F.Cu",
-          "length_mm": 0.706,
+          "length_mm": 1.45,
           "width_mm": 0.1016,
           "impedance_ohm": 43.2
         },
         {
           "layer": "F.Cu",
-          "length_mm": 0.6,
+          "length_mm": 0.469,
+          "width_mm": 0.1016,
+          "impedance_ohm": 43.2
+        },
+        {
+          "layer": "F.Cu",
+          "length_mm": 2.546,
+          "width_mm": 0.1016,
+          "impedance_ohm": 43.2
+        },
+        {
+          "layer": "F.Cu",
+          "length_mm": 1.742,
+          "width_mm": 0.1016,
+          "impedance_ohm": 43.2
+        },
+        {
+          "layer": "F.Cu",
+          "length_mm": 1.9,
+          "width_mm": 0.1016,
+          "impedance_ohm": 43.2
+        },
+        {
+          "layer": "F.Cu",
+          "length_mm": 0.214,
+          "width_mm": 0.1016,
+          "impedance_ohm": 43.2
+        },
+        {
+          "layer": "F.Cu",
+          "length_mm": 0.287,
+          "width_mm": 0.1016,
+          "impedance_ohm": 43.2
+        },
+        {
+          "layer": "F.Cu",
+          "length_mm": 1.726,
           "width_mm": 0.1016,
           "impedance_ohm": 43.2
         },
@@ -6466,14 +6736,8 @@
           "impedance_ohm": 43.2
         },
         {
-          "layer": "B.Cu",
-          "length_mm": 0.375,
-          "width_mm": 0.1016,
-          "impedance_ohm": 43.2
-        },
-        {
-          "layer": "B.Cu",
-          "length_mm": 0.049,
+          "layer": "F.Cu",
+          "length_mm": 0.706,
           "width_mm": 0.1016,
           "impedance_ohm": 43.2
         },
@@ -6485,7 +6749,19 @@
         },
         {
           "layer": "B.Cu",
+          "length_mm": 0.156,
+          "width_mm": 0.1016,
+          "impedance_ohm": 43.2
+        },
+        {
+          "layer": "B.Cu",
           "length_mm": 0.465,
+          "width_mm": 0.1016,
+          "impedance_ohm": 43.2
+        },
+        {
+          "layer": "B.Cu",
+          "length_mm": 0.525,
           "width_mm": 0.1016,
           "impedance_ohm": 43.2
         }
@@ -6508,15 +6784,15 @@
       ]
     },
     {
-      "net": "/LPS_PWR",
-      "net_number": 12,
-      "total_length_mm": 10.356,
-      "segment_count": 13,
+      "net": "Net-(U3-VDD)",
+      "net_number": 22,
+      "total_length_mm": 10.393,
+      "segment_count": 14,
       "via_count": 1,
       "layers": {
         "B.Cu": {
-          "length_mm": 3.146,
-          "segments": 5
+          "length_mm": 3.183,
+          "segments": 6
         },
         "F.Cu": {
           "length_mm": 7.21,
@@ -6574,25 +6850,31 @@
         },
         {
           "layer": "B.Cu",
-          "length_mm": 0.346,
+          "length_mm": 0.53,
           "width_mm": 0.1016,
           "impedance_ohm": 43.2
         },
         {
           "layer": "B.Cu",
-          "length_mm": 1.556,
+          "length_mm": 0.4,
           "width_mm": 0.1016,
           "impedance_ohm": 43.2
         },
         {
           "layer": "B.Cu",
-          "length_mm": 0.04,
+          "length_mm": 0.45,
           "width_mm": 0.1016,
           "impedance_ohm": 43.2
         },
         {
           "layer": "B.Cu",
-          "length_mm": 0.985,
+          "length_mm": 0.805,
+          "width_mm": 0.1016,
+          "impedance_ohm": 43.2
+        },
+        {
+          "layer": "B.Cu",
+          "length_mm": 0.778,
           "width_mm": 0.1016,
           "impedance_ohm": 43.2
         },
@@ -6615,7 +6897,7 @@
     },
     {
       "net": "VBAT",
-      "net_number": 25,
+      "net_number": 27,
       "total_length_mm": 9.022,
       "segment_count": 12,
       "via_count": 1,
@@ -6715,7 +6997,7 @@
     },
     {
       "net": "SWCLK",
-      "net_number": 23,
+      "net_number": 25,
       "total_length_mm": 6.529,
       "segment_count": 4,
       "via_count": 0,
@@ -6755,8 +7037,8 @@
     {
       "net": "/LPS_SCK",
       "net_number": 13,
-      "total_length_mm": 5.988,
-      "segment_count": 8,
+      "total_length_mm": 6.005,
+      "segment_count": 9,
       "via_count": 1,
       "layers": {
         "B.Cu": {
@@ -6764,14 +7046,14 @@
           "segments": 4
         },
         "F.Cu": {
-          "length_mm": 4.433,
-          "segments": 4
+          "length_mm": 4.45,
+          "segments": 5
         }
       },
       "trace_segments": [
         {
           "layer": "F.Cu",
-          "length_mm": 1.296,
+          "length_mm": 0.029,
           "width_mm": 0.1016,
           "impedance_ohm": 43.2
         },
@@ -6783,7 +7065,13 @@
         },
         {
           "layer": "F.Cu",
-          "length_mm": 0.656,
+          "length_mm": 1.255,
+          "width_mm": 0.1016,
+          "impedance_ohm": 43.2
+        },
+        {
+          "layer": "F.Cu",
+          "length_mm": 0.686,
           "width_mm": 0.1016,
           "impedance_ohm": 43.2
         },
@@ -6918,7 +7206,7 @@
     },
     {
       "net": "SWDIO",
-      "net_number": 24,
+      "net_number": 26,
       "total_length_mm": 5.052,
       "segment_count": 3,
       "via_count": 0,
@@ -7275,6 +7563,70 @@
         {
           "layer": "B.Cu",
           "length_mm": 0.267,
+          "width_mm": 0.1016,
+          "impedance_ohm": 43.2
+        }
+      ],
+      "via_details": [
+        {
+          "drill_mm": 0.2,
+          "layers": [
+            "F.Cu",
+            "B.Cu"
+          ]
+        }
+      ]
+    },
+    {
+      "net": "Net-(U2-VREG_OUT)",
+      "net_number": 21,
+      "total_length_mm": 3.982,
+      "segment_count": 6,
+      "via_count": 1,
+      "layers": {
+        "B.Cu": {
+          "length_mm": 2.625,
+          "segments": 4
+        },
+        "F.Cu": {
+          "length_mm": 1.357,
+          "segments": 2
+        }
+      },
+      "trace_segments": [
+        {
+          "layer": "F.Cu",
+          "length_mm": 0.565,
+          "width_mm": 0.1016,
+          "impedance_ohm": 43.2
+        },
+        {
+          "layer": "F.Cu",
+          "length_mm": 0.792,
+          "width_mm": 0.1016,
+          "impedance_ohm": 43.2
+        },
+        {
+          "layer": "B.Cu",
+          "length_mm": 1.077,
+          "width_mm": 0.1016,
+          "impedance_ohm": 43.2
+        },
+        {
+          "layer": "B.Cu",
+          "length_mm": 0.283,
+          "width_mm": 0.1016,
+          "impedance_ohm": 43.2
+        },
+        {
+          "layer": "B.Cu",
+          "length_mm": 0.973,
+          "width_mm": 0.1016,
+          "impedance_ohm": 43.2
+        },
+        {
+          "layer": "B.Cu",
+          "length_mm": 0.292,
           "width_mm": 0.1016,
           "impedance_ohm": 43.2
         }
@@ -7730,6 +8082,45 @@
       ]
     },
     {
+      "net": "/LPS_PWR",
+      "net_number": 12,
+      "total_length_mm": 2.251,
+      "segment_count": 4,
+      "via_count": 0,
+      "layers": {
+        "B.Cu": {
+          "length_mm": 2.251,
+          "segments": 4
+        }
+      },
+      "trace_segments": [
+        {
+          "layer": "B.Cu",
+          "length_mm": 0.638,
+          "width_mm": 0.1016,
+          "impedance_ohm": 43.2
+        },
+        {
+          "layer": "B.Cu",
+          "length_mm": 0.346,
+          "width_mm": 0.1016,
+          "impedance_ohm": 43.2
+        },
+        {
+          "layer": "B.Cu",
+          "length_mm": 0.243,
+          "width_mm": 0.1016,
+          "impedance_ohm": 43.2
+        },
+        {
+          "layer": "B.Cu",
+          "length_mm": 1.023,
+          "width_mm": 0.1016,
+          "impedance_ohm": 43.2
+        }
+      ]
+    },
+    {
       "net": "/LPS_CS",
       "net_number": 9,
       "total_length_mm": 1.975,
@@ -7965,7 +8356,7 @@
     },
     {
       "net": "Net-(U501-VBACK)",
-      "net_number": 21,
+      "net_number": 23,
       "total_length_mm": 1.036,
       "segment_count": 2,
       "via_count": 0,
@@ -8189,80 +8580,80 @@
       "min_width_mm": 0.1016
     },
     "C5.1-U3.4": {
-      "net": "/LPS_PWR",
+      "net": "Net-(U3-VDD)",
       "routed_distance_mm": 5.879,
       "euclidean_distance_mm": 3.615,
       "ratio": 1.63,
       "min_width_mm": 0.1016
     },
     "C5.1-U3.8": {
-      "net": "/LPS_PWR",
+      "net": "Net-(U3-VDD)",
       "routed_distance_mm": 1.331,
       "euclidean_distance_mm": 1.23,
       "ratio": 1.08,
       "min_width_mm": 0.1016
     },
-    "C5.1-U302.15": {
-      "net": "/LPS_PWR",
-      "routed_distance_mm": 7.821,
-      "euclidean_distance_mm": 2.527,
-      "ratio": 3.09,
+    "C5.1-C3.1": {
+      "net": "Net-(U3-VDD)",
+      "routed_distance_mm": 7.678,
+      "euclidean_distance_mm": 4.793,
+      "ratio": 1.6,
       "min_width_mm": 0.1016
     },
-    "C5.1-C3.1": {
-      "net": "/LPS_PWR",
-      "routed_distance_mm": 6.49,
-      "euclidean_distance_mm": 3.429,
-      "ratio": 1.89,
+    "C5.1-R2.1": {
+      "net": "Net-(U3-VDD)",
+      "routed_distance_mm": 6.873,
+      "euclidean_distance_mm": 4.063,
+      "ratio": 1.69,
       "min_width_mm": 0.1016
     },
     "U3.4-U3.8": {
-      "net": "/LPS_PWR",
+      "net": "Net-(U3-VDD)",
       "routed_distance_mm": 7.21,
       "euclidean_distance_mm": 2.438,
       "ratio": 2.96,
       "min_width_mm": 0.1016
     },
-    "U3.4-U302.15": {
-      "net": "/LPS_PWR",
-      "routed_distance_mm": 4.271,
-      "euclidean_distance_mm": 1.21,
-      "ratio": 3.53,
-      "min_width_mm": 0.1016
-    },
     "U3.4-C3.1": {
-      "net": "/LPS_PWR",
-      "routed_distance_mm": 2.94,
-      "euclidean_distance_mm": 1.657,
-      "ratio": 1.77,
+      "net": "Net-(U3-VDD)",
+      "routed_distance_mm": 4.127,
+      "euclidean_distance_mm": 2.436,
+      "ratio": 1.69,
       "min_width_mm": 0.1016
     },
-    "U3.8-U302.15": {
-      "net": "/LPS_PWR",
-      "routed_distance_mm": 9.152,
-      "euclidean_distance_mm": 1.487,
-      "ratio": 6.15,
+    "U3.4-R2.1": {
+      "net": "Net-(U3-VDD)",
+      "routed_distance_mm": 3.322,
+      "euclidean_distance_mm": 2.29,
+      "ratio": 1.45,
       "min_width_mm": 0.1016
     },
     "U3.8-C3.1": {
-      "net": "/LPS_PWR",
-      "routed_distance_mm": 7.821,
-      "euclidean_distance_mm": 2.625,
-      "ratio": 2.98,
+      "net": "Net-(U3-VDD)",
+      "routed_distance_mm": 9.009,
+      "euclidean_distance_mm": 3.991,
+      "ratio": 2.26,
       "min_width_mm": 0.1016
     },
-    "U302.15-C3.1": {
-      "net": "/LPS_PWR",
-      "routed_distance_mm": 1.331,
-      "euclidean_distance_mm": 1.254,
-      "ratio": 1.06,
+    "U3.8-R2.1": {
+      "net": "Net-(U3-VDD)",
+      "routed_distance_mm": 8.204,
+      "euclidean_distance_mm": 3.364,
+      "ratio": 2.44,
+      "min_width_mm": 0.1016
+    },
+    "C3.1-R2.1": {
+      "net": "Net-(U3-VDD)",
+      "routed_distance_mm": 0.805,
+      "euclidean_distance_mm": 0.805,
+      "ratio": 1.0,
       "min_width_mm": 0.1016
     },
     "U3.1-U302.11": {
       "net": "/LPS_SCK",
-      "routed_distance_mm": 5.981,
+      "routed_distance_mm": 5.998,
       "euclidean_distance_mm": 1.941,
-      "ratio": 3.08,
+      "ratio": 3.09,
       "min_width_mm": 0.1016
     },
     "U3.2-U302.22": {
@@ -8293,6 +8684,13 @@
       "ratio": 1.99,
       "min_width_mm": 0.1016
     },
+    "C8.1-U2.9": {
+      "net": "Net-(U2-VREG_OUT)",
+      "routed_distance_mm": 3.982,
+      "euclidean_distance_mm": 2.548,
+      "ratio": 1.56,
+      "min_width_mm": 0.1016
+    },
     "J201.3-U302.23": {
       "net": "SWDIO",
       "routed_distance_mm": 5.052,
@@ -8309,9 +8707,9 @@
     },
     "J201.5-Q501.1": {
       "net": "RST",
-      "routed_distance_mm": 17.364,
+      "routed_distance_mm": 17.814,
       "euclidean_distance_mm": 12.216,
-      "ratio": 1.42,
+      "ratio": 1.46,
       "min_width_mm": 0.1016
     },
     "C502.1-Q501.3": {
@@ -8355,13 +8753,20 @@
       "euclidean_distance_mm": 2.727,
       "ratio": 1.31,
       "min_width_mm": 0.1016
+    },
+    "U302.15-R2.2": {
+      "net": "/LPS_PWR",
+      "routed_distance_mm": 1.905,
+      "euclidean_distance_mm": 1.776,
+      "ratio": 1.07,
+      "min_width_mm": 0.1016
     }
   },
   "power_net_routing": [
     {
       "net": "GND",
-      "track_count": 68,
-      "total_length_mm": 34.91,
+      "track_count": 70,
+      "total_length_mm": 34.47,
       "min_width_mm": 0.1016,
       "max_width_mm": 0.1524,
       "widths_used": [
@@ -8448,6 +8853,15 @@
           "same_side": true
         },
         {
+          "cap": "C8",
+          "value": "220nf",
+          "distance_mm": 3.5,
+          "shared_nets": [
+            "GND"
+          ],
+          "same_side": true
+        },
+        {
           "cap": "C6",
           "value": "47uf",
           "distance_mm": 3.58,
@@ -8510,7 +8924,7 @@
         {
           "cap": "C3",
           "value": "0.1uf",
-          "distance_mm": 5.68,
+          "distance_mm": 6.82,
           "shared_nets": [
             "GND"
           ],
@@ -8584,18 +8998,18 @@
           "same_side": true
         },
         {
-          "cap": "C3",
+          "cap": "C502",
           "value": "0.1uf",
-          "distance_mm": 5.46,
+          "distance_mm": 5.98,
           "shared_nets": [
             "GND"
           ],
           "same_side": false
         },
         {
-          "cap": "C502",
+          "cap": "C3",
           "value": "0.1uf",
-          "distance_mm": 5.98,
+          "distance_mm": 6.27,
           "shared_nets": [
             "GND"
           ],
@@ -8608,6 +9022,15 @@
           "shared_nets": [
             "GND",
             "VIN"
+          ],
+          "same_side": true
+        },
+        {
+          "cap": "C8",
+          "value": "220nf",
+          "distance_mm": 7.23,
+          "shared_nets": [
+            "GND"
           ],
           "same_side": true
         },
@@ -8650,47 +9073,38 @@
       "layer": "F.Cu",
       "nearby_caps": [
         {
-          "cap": "C3",
-          "value": "0.1uf",
-          "distance_mm": 0.92,
-          "shared_nets": [
-            "/LPS_PWR",
-            "GND"
-          ],
-          "same_side": false
-        },
-        {
           "cap": "C5",
           "value": "0.1uf",
-          "distance_mm": 2.49,
+          "distance_mm": 1.17,
           "shared_nets": [
-            "/LPS_PWR",
-            "GND"
+            "GND",
+            "Net-(U3-VDD)"
           ],
           "same_side": true
         },
         {
           "cap": "C2",
           "value": "0.1uf",
-          "distance_mm": 2.79,
+          "distance_mm": 1.57,
           "shared_nets": [
             "GND"
           ],
           "same_side": false
         },
         {
-          "cap": "C501",
+          "cap": "C3",
           "value": "0.1uf",
-          "distance_mm": 4.13,
+          "distance_mm": 2.29,
           "shared_nets": [
-            "GND"
+            "GND",
+            "Net-(U3-VDD)"
           ],
-          "same_side": true
+          "same_side": false
         },
         {
-          "cap": "C404",
-          "value": "22uf",
-          "distance_mm": 4.39,
+          "cap": "C501",
+          "value": "0.1uf",
+          "distance_mm": 2.41,
           "shared_nets": [
             "GND"
           ],
@@ -8699,7 +9113,16 @@
         {
           "cap": "C503",
           "value": "0.1uf",
-          "distance_mm": 4.65,
+          "distance_mm": 2.97,
+          "shared_nets": [
+            "GND"
+          ],
+          "same_side": true
+        },
+        {
+          "cap": "C404",
+          "value": "22uf",
+          "distance_mm": 3.62,
           "shared_nets": [
             "GND"
           ],
@@ -8708,7 +9131,16 @@
         {
           "cap": "C1",
           "value": "0.1uf",
-          "distance_mm": 4.75,
+          "distance_mm": 3.9,
+          "shared_nets": [
+            "GND"
+          ],
+          "same_side": false
+        },
+        {
+          "cap": "C4",
+          "value": "22uf",
+          "distance_mm": 4.12,
           "shared_nets": [
             "GND"
           ],
@@ -8717,25 +9149,16 @@
         {
           "cap": "C6",
           "value": "47uf",
-          "distance_mm": 5.47,
+          "distance_mm": 4.25,
           "shared_nets": [
             "GND"
           ],
           "same_side": true
         },
         {
-          "cap": "C4",
-          "value": "22uf",
-          "distance_mm": 5.74,
-          "shared_nets": [
-            "GND"
-          ],
-          "same_side": false
-        },
-        {
           "cap": "C504",
           "value": "0.1uf",
-          "distance_mm": 6.44,
+          "distance_mm": 4.74,
           "shared_nets": [
             "GND"
           ],
@@ -8744,7 +9167,7 @@
         {
           "cap": "C502",
           "value": "0.1uf",
-          "distance_mm": 6.46,
+          "distance_mm": 4.77,
           "shared_nets": [
             "GND"
           ],
@@ -8753,14 +9176,23 @@
         {
           "cap": "C7",
           "value": "0.1uf",
-          "distance_mm": 6.63,
+          "distance_mm": 5.31,
+          "shared_nets": [
+            "GND"
+          ],
+          "same_side": true
+        },
+        {
+          "cap": "C8",
+          "value": "220nf",
+          "distance_mm": 5.8,
           "shared_nets": [
             "GND"
           ],
           "same_side": true
         }
       ],
-      "closest_cap_mm": 0.92
+      "closest_cap_mm": 1.17
     },
     {
       "ic": "U302",
@@ -8776,16 +9208,6 @@
             "VIN"
           ],
           "same_side": false
-        },
-        {
-          "cap": "C3",
-          "value": "0.1uf",
-          "distance_mm": 1.06,
-          "shared_nets": [
-            "/LPS_PWR",
-            "GND"
-          ],
-          "same_side": true
         },
         {
           "cap": "C503",
@@ -8812,7 +9234,6 @@
           "value": "0.1uf",
           "distance_mm": 2.07,
           "shared_nets": [
-            "/LPS_PWR",
             "GND"
           ],
           "same_side": false
@@ -8828,6 +9249,15 @@
           "same_side": true
         },
         {
+          "cap": "C3",
+          "value": "0.1uf",
+          "distance_mm": 2.2,
+          "shared_nets": [
+            "GND"
+          ],
+          "same_side": true
+        },
+        {
           "cap": "C502",
           "value": "0.1uf",
           "distance_mm": 2.57,
@@ -8836,6 +9266,15 @@
             "Net-(Q501-C)"
           ],
           "same_side": true
+        },
+        {
+          "cap": "C8",
+          "value": "220nf",
+          "distance_mm": 3.78,
+          "shared_nets": [
+            "GND"
+          ],
+          "same_side": false
         },
         {
           "cap": "C6",
@@ -8936,6 +9375,16 @@
           "same_side": false
         },
         {
+          "cap": "C8",
+          "value": "220nf",
+          "distance_mm": 1.54,
+          "shared_nets": [
+            "GND",
+            "Net-(U2-VREG_OUT)"
+          ],
+          "same_side": false
+        },
+        {
           "cap": "C502",
           "value": "0.1uf",
           "distance_mm": 2.26,
@@ -8986,7 +9435,7 @@
         {
           "cap": "C3",
           "value": "0.1uf",
-          "distance_mm": 7.07,
+          "distance_mm": 8.37,
           "shared_nets": [
             "GND"
           ],
@@ -9072,6 +9521,16 @@
     },
     {
       "ic_ref": "U501",
+      "cap_ref": "C8",
+      "distance_mm": 3.5,
+      "cap_value": "220nf",
+      "same_side": true,
+      "shared_nets": [
+        "GND"
+      ]
+    },
+    {
+      "ic_ref": "U501",
       "cap_ref": "C6",
       "distance_mm": 3.58,
       "cap_value": "47uf",
@@ -9139,7 +9598,7 @@
     {
       "ic_ref": "U501",
       "cap_ref": "C3",
-      "distance_mm": 5.68,
+      "distance_mm": 6.82,
       "cap_value": "0.1uf",
       "same_side": false,
       "shared_nets": [
@@ -9213,8 +9672,8 @@
     },
     {
       "ic_ref": "U1",
-      "cap_ref": "C3",
-      "distance_mm": 5.46,
+      "cap_ref": "C502",
+      "distance_mm": 5.98,
       "cap_value": "0.1uf",
       "same_side": false,
       "shared_nets": [
@@ -9223,8 +9682,8 @@
     },
     {
       "ic_ref": "U1",
-      "cap_ref": "C502",
-      "distance_mm": 5.98,
+      "cap_ref": "C3",
+      "distance_mm": 6.27,
       "cap_value": "0.1uf",
       "same_side": false,
       "shared_nets": [
@@ -9240,6 +9699,16 @@
       "shared_nets": [
         "GND",
         "VIN"
+      ]
+    },
+    {
+      "ic_ref": "U1",
+      "cap_ref": "C8",
+      "distance_mm": 7.23,
+      "cap_value": "220nf",
+      "same_side": true,
+      "shared_nets": [
+        "GND"
       ]
     },
     {
@@ -9277,30 +9746,19 @@
     },
     {
       "ic_ref": "U3",
-      "cap_ref": "C3",
-      "distance_mm": 0.92,
-      "cap_value": "0.1uf",
-      "same_side": false,
-      "shared_nets": [
-        "/LPS_PWR",
-        "GND"
-      ]
-    },
-    {
-      "ic_ref": "U3",
       "cap_ref": "C5",
-      "distance_mm": 2.49,
+      "distance_mm": 1.17,
       "cap_value": "0.1uf",
       "same_side": true,
       "shared_nets": [
-        "/LPS_PWR",
-        "GND"
+        "GND",
+        "Net-(U3-VDD)"
       ]
     },
     {
       "ic_ref": "U3",
       "cap_ref": "C2",
-      "distance_mm": 2.79,
+      "distance_mm": 1.57,
       "cap_value": "0.1uf",
       "same_side": false,
       "shared_nets": [
@@ -9309,8 +9767,29 @@
     },
     {
       "ic_ref": "U3",
+      "cap_ref": "C3",
+      "distance_mm": 2.29,
+      "cap_value": "0.1uf",
+      "same_side": false,
+      "shared_nets": [
+        "GND",
+        "Net-(U3-VDD)"
+      ]
+    },
+    {
+      "ic_ref": "U3",
       "cap_ref": "C501",
-      "distance_mm": 4.13,
+      "distance_mm": 2.41,
+      "cap_value": "0.1uf",
+      "same_side": true,
+      "shared_nets": [
+        "GND"
+      ]
+    },
+    {
+      "ic_ref": "U3",
+      "cap_ref": "C503",
+      "distance_mm": 2.97,
       "cap_value": "0.1uf",
       "same_side": true,
       "shared_nets": [
@@ -9320,18 +9799,8 @@
     {
       "ic_ref": "U3",
       "cap_ref": "C404",
-      "distance_mm": 4.39,
+      "distance_mm": 3.62,
       "cap_value": "22uf",
-      "same_side": true,
-      "shared_nets": [
-        "GND"
-      ]
-    },
-    {
-      "ic_ref": "U3",
-      "cap_ref": "C503",
-      "distance_mm": 4.65,
-      "cap_value": "0.1uf",
       "same_side": true,
       "shared_nets": [
         "GND"
@@ -9340,7 +9809,7 @@
     {
       "ic_ref": "U3",
       "cap_ref": "C1",
-      "distance_mm": 4.75,
+      "distance_mm": 3.9,
       "cap_value": "0.1uf",
       "same_side": false,
       "shared_nets": [
@@ -9349,18 +9818,8 @@
     },
     {
       "ic_ref": "U3",
-      "cap_ref": "C6",
-      "distance_mm": 5.47,
-      "cap_value": "47uf",
-      "same_side": true,
-      "shared_nets": [
-        "GND"
-      ]
-    },
-    {
-      "ic_ref": "U3",
       "cap_ref": "C4",
-      "distance_mm": 5.74,
+      "distance_mm": 4.12,
       "cap_value": "22uf",
       "same_side": false,
       "shared_nets": [
@@ -9369,8 +9828,18 @@
     },
     {
       "ic_ref": "U3",
+      "cap_ref": "C6",
+      "distance_mm": 4.25,
+      "cap_value": "47uf",
+      "same_side": true,
+      "shared_nets": [
+        "GND"
+      ]
+    },
+    {
+      "ic_ref": "U3",
       "cap_ref": "C504",
-      "distance_mm": 6.44,
+      "distance_mm": 4.74,
       "cap_value": "0.1uf",
       "same_side": true,
       "shared_nets": [
@@ -9380,7 +9849,7 @@
     {
       "ic_ref": "U3",
       "cap_ref": "C502",
-      "distance_mm": 6.46,
+      "distance_mm": 4.77,
       "cap_value": "0.1uf",
       "same_side": false,
       "shared_nets": [
@@ -9390,8 +9859,18 @@
     {
       "ic_ref": "U3",
       "cap_ref": "C7",
-      "distance_mm": 6.63,
+      "distance_mm": 5.31,
       "cap_value": "0.1uf",
+      "same_side": true,
+      "shared_nets": [
+        "GND"
+      ]
+    },
+    {
+      "ic_ref": "U3",
+      "cap_ref": "C8",
+      "distance_mm": 5.8,
+      "cap_value": "220nf",
       "same_side": true,
       "shared_nets": [
         "GND"
@@ -9406,17 +9885,6 @@
       "shared_nets": [
         "GND",
         "VIN"
-      ]
-    },
-    {
-      "ic_ref": "U302",
-      "cap_ref": "C3",
-      "distance_mm": 1.06,
-      "cap_value": "0.1uf",
-      "same_side": true,
-      "shared_nets": [
-        "/LPS_PWR",
-        "GND"
       ]
     },
     {
@@ -9448,7 +9916,6 @@
       "cap_value": "0.1uf",
       "same_side": false,
       "shared_nets": [
-        "/LPS_PWR",
         "GND"
       ]
     },
@@ -9465,6 +9932,16 @@
     },
     {
       "ic_ref": "U302",
+      "cap_ref": "C3",
+      "distance_mm": 2.2,
+      "cap_value": "0.1uf",
+      "same_side": true,
+      "shared_nets": [
+        "GND"
+      ]
+    },
+    {
+      "ic_ref": "U302",
       "cap_ref": "C502",
       "distance_mm": 2.57,
       "cap_value": "0.1uf",
@@ -9472,6 +9949,16 @@
       "shared_nets": [
         "GND",
         "Net-(Q501-C)"
+      ]
+    },
+    {
+      "ic_ref": "U302",
+      "cap_ref": "C8",
+      "distance_mm": 3.78,
+      "cap_value": "220nf",
+      "same_side": false,
+      "shared_nets": [
+        "GND"
       ]
     },
     {
@@ -9575,6 +10062,17 @@
     },
     {
       "ic_ref": "U2",
+      "cap_ref": "C8",
+      "distance_mm": 1.54,
+      "cap_value": "220nf",
+      "same_side": false,
+      "shared_nets": [
+        "GND",
+        "Net-(U2-VREG_OUT)"
+      ]
+    },
+    {
+      "ic_ref": "U2",
       "cap_ref": "C502",
       "distance_mm": 2.26,
       "cap_value": "0.1uf",
@@ -9629,7 +10127,7 @@
     {
       "ic_ref": "U2",
       "cap_ref": "C3",
-      "distance_mm": 7.07,
+      "distance_mm": 8.37,
       "cap_value": "0.1uf",
       "same_side": true,
       "shared_nets": [
@@ -9665,7 +10163,7 @@
       {
         "net": "GND",
         "net_number": 19,
-        "component_count": 21,
+        "component_count": 22,
         "components": [
           "C1",
           "C2",
@@ -9679,6 +10177,7 @@
           "C504",
           "C6",
           "C7",
+          "C8",
           "J201",
           "J401",
           "Q501",
@@ -9728,7 +10227,7 @@
     },
     {
       "net": "RST",
-      "net_number": 22,
+      "net_number": 24,
       "copper_layers": [
         "B.Cu",
         "F.Cu"
@@ -9737,8 +10236,8 @@
       "via_count": 2,
       "via_positions": [
         {
-          "x": 143.0,
-          "y": 110.3,
+          "x": 143.07,
+          "y": 110.53,
           "layers": [
             "F.Cu",
             "B.Cu"
@@ -9895,26 +10394,6 @@
       ]
     },
     {
-      "net": "/LPS_PWR",
-      "net_number": 12,
-      "copper_layers": [
-        "B.Cu",
-        "F.Cu"
-      ],
-      "layer_count": 2,
-      "via_count": 1,
-      "via_positions": [
-        {
-          "x": 151.3,
-          "y": 106.2,
-          "layers": [
-            "F.Cu",
-            "B.Cu"
-          ]
-        }
-      ]
-    },
-    {
       "net": "/LPS_SCK",
       "net_number": 13,
       "copper_layers": [
@@ -10013,11 +10492,51 @@
           ]
         }
       ]
+    },
+    {
+      "net": "Net-(U2-VREG_OUT)",
+      "net_number": 21,
+      "copper_layers": [
+        "B.Cu",
+        "F.Cu"
+      ],
+      "layer_count": 2,
+      "via_count": 1,
+      "via_positions": [
+        {
+          "x": 141.55,
+          "y": 108.67,
+          "layers": [
+            "F.Cu",
+            "B.Cu"
+          ]
+        }
+      ]
+    },
+    {
+      "net": "Net-(U3-VDD)",
+      "net_number": 22,
+      "copper_layers": [
+        "B.Cu",
+        "F.Cu"
+      ],
+      "layer_count": 2,
+      "via_count": 1,
+      "via_positions": [
+        {
+          "x": 151.3,
+          "y": 106.2,
+          "layers": [
+            "F.Cu",
+            "B.Cu"
+          ]
+        }
+      ]
     }
   ],
   "silkscreen": {
     "board_text_count": 1,
-    "refs_visible_on_silk": 26,
+    "refs_visible_on_silk": 28,
     "refs_hidden_on_silk": 0,
     "board_texts": [
       {
@@ -10150,7 +10669,7 @@
     }
   ],
   "project_settings": {
-    "source": "BitPresTagBMP581.kicad_pro",
+    "source": "BitPresTagBMP585.kicad_pro",
     "net_classes": [
       {
         "name": "Default",
@@ -10232,7 +10751,7 @@
   "design_rule_compliance": {
     "compliant": true,
     "rules_checked": 3,
-    "rules_source": "BitPresTagBMP581.kicad_pro",
+    "rules_source": "BitPresTagBMP585.kicad_pro",
     "net_class_summary": [
       {
         "name": "MEDIUM",
@@ -10338,6 +10857,14 @@
       "gap_note": "2 of 6 sample points lack reference plane on opposite layer"
     },
     {
+      "net": "Net-(U2-VREG_OUT)",
+      "total_trace_mm": 4.0,
+      "samples_checked": 12,
+      "samples_with_reference_plane": 8,
+      "reference_plane_coverage_pct": 66.7,
+      "gap_note": "4 of 12 sample points lack reference plane on opposite layer"
+    },
+    {
       "net": "/AT25_MISO",
       "total_trace_mm": 4.1,
       "samples_checked": 20,
@@ -10346,20 +10873,20 @@
       "gap_note": "6 of 20 sample points lack reference plane on opposite layer"
     },
     {
-      "net": "/LPS_PWR",
-      "total_trace_mm": 10.4,
-      "samples_checked": 24,
-      "samples_with_reference_plane": 17,
-      "reference_plane_coverage_pct": 70.8,
-      "gap_note": "7 of 24 sample points lack reference plane on opposite layer"
-    },
-    {
       "net": "/AT25_SCK",
       "total_trace_mm": 4.5,
       "samples_checked": 14,
       "samples_with_reference_plane": 10,
       "reference_plane_coverage_pct": 71.4,
       "gap_note": "4 of 14 sample points lack reference plane on opposite layer"
+    },
+    {
+      "net": "Net-(U3-VDD)",
+      "total_trace_mm": 10.4,
+      "samples_checked": 28,
+      "samples_with_reference_plane": 21,
+      "reference_plane_coverage_pct": 75.0,
+      "gap_note": "7 of 28 sample points lack reference plane on opposite layer"
     },
     {
       "net": "/LPS_MISO",
@@ -10387,11 +10914,11 @@
     },
     {
       "net": "RST",
-      "total_trace_mm": 17.4,
-      "samples_checked": 30,
+      "total_trace_mm": 17.8,
+      "samples_checked": 32,
       "samples_with_reference_plane": 26,
-      "reference_plane_coverage_pct": 86.7,
-      "gap_note": "4 of 30 sample points lack reference plane on opposite layer"
+      "reference_plane_coverage_pct": 81.2,
+      "gap_note": "6 of 32 sample points lack reference plane on opposite layer"
     }
   ],
   "connectivity_graph": {
@@ -10491,7 +11018,7 @@
       ]
     },
     "GND": {
-      "islands": 3,
+      "islands": 4,
       "components": {
         "C1:2": 0,
         "C2:2": 0,
@@ -10505,6 +11032,7 @@
         "C5:2": 0,
         "C6:2": 0,
         "C7:2": 0,
+        "C8:2": 0,
         "J201:6": 0,
         "J401:2": 0,
         "Q501:2": 0,
@@ -10512,10 +11040,10 @@
         "U1:C3": 0,
         "U2:11": 0,
         "U2:7": 0,
-        "U302:16": 0,
-        "U302:31": 0,
-        "U302:32": 0,
-        "U302:33": 0,
+        "U302:16": 3,
+        "U302:31": 3,
+        "U302:32": 3,
+        "U302:33": 3,
         "U3:6": 0,
         "U501:5": 0,
         "U501:8": 0,
@@ -10564,6 +11092,19 @@
         {
           "layer": "F.Cu",
           "bbox": [
+            146.28,
+            106.12,
+            149.78,
+            111.02
+          ],
+          "between_islands": [
+            0,
+            3
+          ]
+        },
+        {
+          "layer": "F.Cu",
+          "bbox": [
             152.64,
             107.01,
             152.79,
@@ -10573,9 +11114,40 @@
             1,
             2
           ]
+        },
+        {
+          "layer": "B.Cu",
+          "bbox": [
+            149.78,
+            106.86,
+            152.64,
+            107.01
+          ],
+          "between_islands": [
+            1,
+            3
+          ]
+        },
+        {
+          "layer": "B.Cu",
+          "bbox": [
+            149.78,
+            107.01,
+            151.96,
+            107.01
+          ],
+          "between_islands": [
+            2,
+            3
+          ]
         }
       ],
-      "disconnected_pads": []
+      "disconnected_pads": [
+        [
+          "U501:5",
+          "U302:16"
+        ]
+      ]
     },
     "VIN": {
       "islands": 4,
@@ -10689,7 +11261,7 @@
       ],
       "disconnected_pads": [
         [
-          "C4:1",
+          "C2:1",
           "U2:12"
         ]
       ]
@@ -10821,12 +11393,12 @@
       "gaps": [],
       "disconnected_pads": []
     },
-    "/LPS_PWR": {
+    "Net-(U3-VDD)": {
       "islands": 1,
       "components": {
         "C3:1": 0,
         "C5:1": 0,
-        "U302:15": 0,
+        "R2:1": 0,
         "U3:4": 0,
         "U3:8": 0,
         "via_29": 0
@@ -10892,6 +11464,16 @@
       "gaps": [],
       "disconnected_pads": []
     },
+    "Net-(U2-VREG_OUT)": {
+      "islands": 1,
+      "components": {
+        "C8:1": 0,
+        "U2:9": 0,
+        "via_35": 0
+      },
+      "gaps": [],
+      "disconnected_pads": []
+    },
     "SWDIO": {
       "islands": 1,
       "components": {
@@ -10915,8 +11497,8 @@
       "components": {
         "J201:5": 0,
         "Q501:1": 0,
-        "via_35": 0,
-        "via_36": 0
+        "via_36": 0,
+        "via_37": 0
       },
       "gaps": [],
       "disconnected_pads": []
@@ -10990,8 +11572,8 @@
       "components": {
         "U2:3": 0,
         "U302:9": 0,
-        "via_37": 0,
-        "via_38": 0
+        "via_38": 0,
+        "via_39": 0
       },
       "gaps": [],
       "disconnected_pads": []
@@ -11009,6 +11591,15 @@
       "islands": 1,
       "components": {
         "U302:13": 0
+      },
+      "gaps": [],
+      "disconnected_pads": []
+    },
+    "/LPS_PWR": {
+      "islands": 1,
+      "components": {
+        "R2:2": 0,
+        "U302:15": 0
       },
       "gaps": [],
       "disconnected_pads": []
@@ -11052,14 +11643,6 @@
       },
       "gaps": [],
       "disconnected_pads": []
-    },
-    "unconnected-(U2-VREG_OUT-Pad9)": {
-      "islands": 1,
-      "components": {
-        "U2:9": 0
-      },
-      "gaps": [],
-      "disconnected_pads": []
     }
   },
   "dfm_summary": {
@@ -11076,8 +11659,8 @@
   },
   "placement_density": {
     "board_area_cm2": 1.8,
-    "front_density_per_cm2": 9.4,
-    "back_density_per_cm2": 5.0
+    "front_density_per_cm2": 10.0,
+    "back_density_per_cm2": 5.6
   },
   "thermal_pad_scan": [
     {
@@ -11141,7 +11724,7 @@
     },
     {
       "opposite_layer_nets": "GND",
-      "component_count": 8,
+      "component_count": 9,
       "components": [
         "C1",
         "C3",
@@ -11149,6 +11732,7 @@
         "C502",
         "J201",
         "Q501",
+        "R2",
         "U2",
         "U302"
       ]
@@ -11488,48 +12072,6 @@
       "finding_id": "pcb:CC-002:/lps_mosi"
     },
     {
-      "net": "/LPS_PWR",
-      "net_number": 12,
-      "min_track_width_mm": 0.1016,
-      "max_track_width_mm": 0.1016,
-      "track_widths_used": [
-        0.1016
-      ],
-      "copper_layers": [
-        "B.Cu",
-        "F.Cu"
-      ],
-      "segment_count": 13,
-      "via_count": 1,
-      "via_drill_sizes_mm": [
-        0.2
-      ],
-      "detector": "analyze_current_capacity",
-      "rule_id": "CC-002",
-      "category": "current_capacity",
-      "severity": "warning",
-      "confidence": "deterministic",
-      "evidence_source": "topology",
-      "summary": "Narrow signal: /LPS_PWR min 0.1016mm",
-      "description": "Signal net /LPS_PWR has narrow traces: min 0.1016mm across 13 segments.",
-      "components": [],
-      "nets": [
-        "/LPS_PWR"
-      ],
-      "pins": [],
-      "recommendation": "Widen trace or verify signal integrity requirements.",
-      "report_context": {
-        "section": "Current Capacity",
-        "impact": "Signal integrity",
-        "standard_ref": ""
-      },
-      "stages": [
-        "layout",
-        "pre_fab"
-      ],
-      "finding_id": "pcb:CC-002:/lps_pwr"
-    },
-    {
       "net": "/LPS_SCK",
       "net_number": 13,
       "min_track_width_mm": 0.1016,
@@ -11541,7 +12083,7 @@
         "B.Cu",
         "F.Cu"
       ],
-      "segment_count": 8,
+      "segment_count": 9,
       "via_count": 1,
       "via_drill_sizes_mm": [
         0.2
@@ -11553,7 +12095,7 @@
       "confidence": "deterministic",
       "evidence_source": "topology",
       "summary": "Narrow signal: /LPS_SCK min 0.1016mm",
-      "description": "Signal net /LPS_SCK has narrow traces: min 0.1016mm across 8 segments.",
+      "description": "Signal net /LPS_SCK has narrow traces: min 0.1016mm across 9 segments.",
       "components": [],
       "nets": [
         "/LPS_SCK"
@@ -11736,8 +12278,92 @@
       "finding_id": "pcb:CC-002:net--q501-c"
     },
     {
-      "net": "RST",
+      "net": "Net-(U2-VREG_OUT)",
+      "net_number": 21,
+      "min_track_width_mm": 0.1016,
+      "max_track_width_mm": 0.1016,
+      "track_widths_used": [
+        0.1016
+      ],
+      "copper_layers": [
+        "B.Cu",
+        "F.Cu"
+      ],
+      "segment_count": 6,
+      "via_count": 1,
+      "via_drill_sizes_mm": [
+        0.2
+      ],
+      "detector": "analyze_current_capacity",
+      "rule_id": "CC-002",
+      "category": "current_capacity",
+      "severity": "warning",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "Narrow signal: Net-(U2-VREG_OUT) min 0.1016mm",
+      "description": "Signal net Net-(U2-VREG_OUT) has narrow traces: min 0.1016mm across 6 segments.",
+      "components": [],
+      "nets": [
+        "Net-(U2-VREG_OUT)"
+      ],
+      "pins": [],
+      "recommendation": "Widen trace or verify signal integrity requirements.",
+      "report_context": {
+        "section": "Current Capacity",
+        "impact": "Signal integrity",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout",
+        "pre_fab"
+      ],
+      "finding_id": "pcb:CC-002:net--u2-vreg_out"
+    },
+    {
+      "net": "Net-(U3-VDD)",
       "net_number": 22,
+      "min_track_width_mm": 0.1016,
+      "max_track_width_mm": 0.1016,
+      "track_widths_used": [
+        0.1016
+      ],
+      "copper_layers": [
+        "B.Cu",
+        "F.Cu"
+      ],
+      "segment_count": 14,
+      "via_count": 1,
+      "via_drill_sizes_mm": [
+        0.2
+      ],
+      "detector": "analyze_current_capacity",
+      "rule_id": "CC-002",
+      "category": "current_capacity",
+      "severity": "warning",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "Narrow signal: Net-(U3-VDD) min 0.1016mm",
+      "description": "Signal net Net-(U3-VDD) has narrow traces: min 0.1016mm across 14 segments.",
+      "components": [],
+      "nets": [
+        "Net-(U3-VDD)"
+      ],
+      "pins": [],
+      "recommendation": "Widen trace or verify signal integrity requirements.",
+      "report_context": {
+        "section": "Current Capacity",
+        "impact": "Signal integrity",
+        "standard_ref": ""
+      },
+      "stages": [
+        "layout",
+        "pre_fab"
+      ],
+      "finding_id": "pcb:CC-002:net--u3-vdd"
+    },
+    {
+      "net": "RST",
+      "net_number": 24,
       "min_track_width_mm": 0.1016,
       "max_track_width_mm": 0.1016,
       "track_widths_used": [
@@ -11790,7 +12416,7 @@
         "B.Cu",
         "F.Cu"
       ],
-      "segment_count": 68,
+      "segment_count": 70,
       "via_count": 14,
       "via_drill_sizes_mm": [
         0.2
@@ -11800,7 +12426,7 @@
           "layers": [
             "In2.Cu"
           ],
-          "filled_area_mm2": 115.81,
+          "filled_area_mm2": 113.94,
           "min_thickness": 0.25
         }
       ],
@@ -11811,7 +12437,7 @@
       "confidence": "deterministic",
       "evidence_source": "topology",
       "summary": "Power net GND: 0.1016mm min trace",
-      "description": "Power/ground net GND: min trace 0.1016mm, max 0.1524mm, 68 segments.",
+      "description": "Power/ground net GND: min trace 0.1016mm, max 0.1524mm, 70 segments.",
       "components": [],
       "nets": [
         "GND"
@@ -11831,7 +12457,7 @@
     },
     {
       "net": "VBAT",
-      "net_number": 25,
+      "net_number": 27,
       "min_track_width_mm": 0.1016,
       "max_track_width_mm": 0.2032,
       "track_widths_used": [
@@ -11875,7 +12501,7 @@
     },
     {
       "net": "VIN",
-      "net_number": 26,
+      "net_number": 28,
       "min_track_width_mm": 0.1016,
       "max_track_width_mm": 0.1524,
       "track_widths_used": [
@@ -11896,7 +12522,7 @@
           "layers": [
             "In1.Cu"
           ],
-          "filled_area_mm2": 102.99,
+          "filled_area_mm2": 102.07,
           "min_thickness": 0.25
         }
       ],
@@ -12092,7 +12718,7 @@
       "side": "B.Cu",
       "fiducial_count": 0,
       "fiducial_refs": [],
-      "smd_component_count": 9,
+      "smd_component_count": 10,
       "finest_smd_pad_dim_mm": 0.25,
       "detector": "analyze_fiducials",
       "rule_id": "FD-001",
@@ -12100,8 +12726,8 @@
       "severity": "error",
       "confidence": "deterministic",
       "evidence_source": "topology",
-      "summary": "No fiducials on B.Cu (9 SMD components) (finest pad dim 0.25mm \u2014 BGA/fine-pitch QFN present)",
-      "description": "B.Cu has 0 fiducial(s) but 9 SMD components. Assembly machines need >= 3 fiducials for accurate placement.",
+      "summary": "No fiducials on B.Cu (10 SMD components) (finest pad dim 0.25mm \u2014 BGA/fine-pitch QFN present)",
+      "description": "B.Cu has 0 fiducial(s) but 10 SMD components. Assembly machines need >= 3 fiducials for accurate placement.",
       "components": [],
       "nets": [],
       "pins": [],
@@ -12114,13 +12740,13 @@
       "stages": [
         "pre_fab"
       ],
-      "finding_id": "pcb:FD-001:dd9a89026f88"
+      "finding_id": "pcb:FD-001:d62cbec6c074"
     },
     {
       "side": "F.Cu",
       "fiducial_count": 0,
       "fiducial_refs": [],
-      "smd_component_count": 13,
+      "smd_component_count": 14,
       "finest_smd_pad_dim_mm": 0.25,
       "detector": "analyze_fiducials",
       "rule_id": "FD-001",
@@ -12128,8 +12754,8 @@
       "severity": "error",
       "confidence": "deterministic",
       "evidence_source": "topology",
-      "summary": "No fiducials on F.Cu (13 SMD components) (finest pad dim 0.25mm \u2014 BGA/fine-pitch QFN present)",
-      "description": "F.Cu has 0 fiducial(s) but 13 SMD components. Assembly machines need >= 3 fiducials for accurate placement.",
+      "summary": "No fiducials on F.Cu (14 SMD components) (finest pad dim 0.25mm \u2014 BGA/fine-pitch QFN present)",
+      "description": "F.Cu has 0 fiducial(s) but 14 SMD components. Assembly machines need >= 3 fiducials for accurate placement.",
       "components": [],
       "nets": [],
       "pins": [],
@@ -12142,7 +12768,7 @@
       "stages": [
         "pre_fab"
       ],
-      "finding_id": "pcb:FD-001:54baea34ffa2"
+      "finding_id": "pcb:FD-001:10ef91b840ed"
     },
     {
       "component": "C4",
@@ -12217,7 +12843,7 @@
       "finding_id": "pcb:TB-001:c404"
     },
     {
-      "total_signal_nets": 40,
+      "total_signal_nets": 41,
       "nets_with_test_points": 0,
       "coverage_pct": 0.0,
       "test_point_count": 0,
@@ -12227,8 +12853,8 @@
       "severity": "warning",
       "confidence": "deterministic",
       "evidence_source": "topology",
-      "summary": "Test point coverage: 0/40 nets (0%)",
-      "description": "0 of 40 signal nets have test points (0% coverage).",
+      "summary": "Test point coverage: 0/41 nets (0%)",
+      "description": "0 of 41 signal nets have test points (0% coverage).",
       "components": [],
       "nets": [],
       "pins": [],
@@ -12241,7 +12867,7 @@
       "stages": [
         "pre_fab"
       ],
-      "finding_id": "pcb:TE-001:208abc6202e3"
+      "finding_id": "pcb:TE-001:68c71945f870"
     },
     {
       "net": "GND",
@@ -12372,16 +12998,16 @@
   ],
   "assessments": [],
   "trust_summary": {
-    "total_findings": 32,
+    "total_findings": 33,
     "trust_level": "high",
     "by_confidence": {
-      "deterministic": 32,
+      "deterministic": 33,
       "heuristic": 0,
       "datasheet_backed": 0
     },
     "by_evidence_source": {
       "datasheet": 0,
-      "topology": 28,
+      "topology": 29,
       "heuristic_rule": 0,
       "symbol_footprint": 0,
       "bom": 0,
@@ -12391,22 +13017,22 @@
     "provenance_coverage_pct": 0.0
   },
   "summary": {
-    "total_findings": 32,
+    "total_findings": 33,
     "by_severity": {
       "error": 2,
-      "warning": 19,
+      "warning": 20,
       "info": 11
     }
   },
   "inputs": {
     "source_files": [
-      "/Users/geobrown/Research/tag-designs/hardware/BoardDesigns/BitPresTagBMP581/BitPresTagBMP581.kicad_pcb"
+      "/Users/geobrown/Research/tag-designs/hardware/BoardDesigns/BitPresTagBMP585/BitPresTagBMP585.kicad_pcb"
     ],
     "source_hashes": {
-      "/Users/geobrown/Research/tag-designs/hardware/BoardDesigns/BitPresTagBMP581/BitPresTagBMP581.kicad_pcb": "06773732d29f329cfc53c03d1b3270286ca922200ef792ff1708f8192fe68684"
+      "/Users/geobrown/Research/tag-designs/hardware/BoardDesigns/BitPresTagBMP585/BitPresTagBMP585.kicad_pcb": "b93e910f35629c525a021ec4f6fa20bd86aae42e194b2ffea777e3d728862d85"
     },
-    "run_id": "20260904T113834Z-9f9a3f",
-    "config_hash": "7903509a130bbd6d20ec225259cfd90e5753286953f3a564377a182c29dde098",
+    "run_id": "20260904T224331Z-b7fc8f",
+    "config_hash": "3b60f37b141d27f0c5cd5cd4725f18755273e1b2c8223a02a7622f34e77aa489",
     "upstream_artifacts": {}
   },
   "compat": {
@@ -12416,7 +13042,8 @@
   },
   "project_config": {
     "ambient_temperature_c": 25,
-    "name": "BitPresTagBMP581"
+    "name": "BitPresTagBMP585",
+    "notes": "Project name says BMP581 but U3 is a BMP585 (9-pin LGA, footprint LGA9_BMP585_BOS). Reviewed 2026-09-04."
   },
   "design_intent": {
     "product_class": "prototype",
@@ -12449,14 +13076,14 @@
   },
   "audience_summary": {
     "designer": {
-      "total_findings": 32,
+      "total_findings": 33,
       "by_severity": {
         "error": 2,
-        "warning": 19,
+        "warning": 20,
         "info": 11
       },
       "by_category": {
-        "current_capacity": 18,
+        "current_capacity": 19,
         "copper_integrity": 4,
         "dfm": 4,
         "assembly": 2,
@@ -12468,7 +13095,7 @@
           "side": "B.Cu",
           "fiducial_count": 0,
           "fiducial_refs": [],
-          "smd_component_count": 9,
+          "smd_component_count": 10,
           "finest_smd_pad_dim_mm": 0.25,
           "detector": "analyze_fiducials",
           "rule_id": "FD-001",
@@ -12476,8 +13103,8 @@
           "severity": "error",
           "confidence": "deterministic",
           "evidence_source": "topology",
-          "summary": "No fiducials on B.Cu (9 SMD components) (finest pad dim 0.25mm \u2014 BGA/fine-pitch QFN present)",
-          "description": "B.Cu has 0 fiducial(s) but 9 SMD components. Assembly machines need >= 3 fiducials for accurate placement.",
+          "summary": "No fiducials on B.Cu (10 SMD components) (finest pad dim 0.25mm \u2014 BGA/fine-pitch QFN present)",
+          "description": "B.Cu has 0 fiducial(s) but 10 SMD components. Assembly machines need >= 3 fiducials for accurate placement.",
           "components": [],
           "nets": [],
           "pins": [],
@@ -12490,13 +13117,13 @@
           "stages": [
             "pre_fab"
           ],
-          "finding_id": "pcb:FD-001:dd9a89026f88"
+          "finding_id": "pcb:FD-001:d62cbec6c074"
         },
         {
           "side": "F.Cu",
           "fiducial_count": 0,
           "fiducial_refs": [],
-          "smd_component_count": 13,
+          "smd_component_count": 14,
           "finest_smd_pad_dim_mm": 0.25,
           "detector": "analyze_fiducials",
           "rule_id": "FD-001",
@@ -12504,8 +13131,8 @@
           "severity": "error",
           "confidence": "deterministic",
           "evidence_source": "topology",
-          "summary": "No fiducials on F.Cu (13 SMD components) (finest pad dim 0.25mm \u2014 BGA/fine-pitch QFN present)",
-          "description": "F.Cu has 0 fiducial(s) but 13 SMD components. Assembly machines need >= 3 fiducials for accurate placement.",
+          "summary": "No fiducials on F.Cu (14 SMD components) (finest pad dim 0.25mm \u2014 BGA/fine-pitch QFN present)",
+          "description": "F.Cu has 0 fiducial(s) but 14 SMD components. Assembly machines need >= 3 fiducials for accurate placement.",
           "components": [],
           "nets": [],
           "pins": [],
@@ -12518,7 +13145,7 @@
           "stages": [
             "pre_fab"
           ],
-          "finding_id": "pcb:FD-001:54baea34ffa2"
+          "finding_id": "pcb:FD-001:10ef91b840ed"
         },
         {
           "net": "/ACCEL_MISO",
@@ -12855,9 +13482,9 @@
       ]
     },
     "reviewer": {
-      "total_findings": 21,
+      "total_findings": 22,
       "by_category": {
-        "current_capacity": 15,
+        "current_capacity": 16,
         "dfm": 2,
         "assembly": 2,
         "testability": 1,
@@ -12867,14 +13494,14 @@
         {
           "rule_id": "FD-001",
           "severity": "error",
-          "summary": "No fiducials on B.Cu (9 SMD components) (finest pad dim 0.25mm \u2014 BGA/fine-pitch QFN present)",
+          "summary": "No fiducials on B.Cu (10 SMD components) (finest pad dim 0.25mm \u2014 BGA/fine-pitch QFN present)",
           "recommendation": "Add fiducial markers for pick-and-place alignment (3 per side with SMD).",
           "category": "assembly"
         },
         {
           "rule_id": "FD-001",
           "severity": "error",
-          "summary": "No fiducials on F.Cu (13 SMD components) (finest pad dim 0.25mm \u2014 BGA/fine-pitch QFN present)",
+          "summary": "No fiducials on F.Cu (14 SMD components) (finest pad dim 0.25mm \u2014 BGA/fine-pitch QFN present)",
           "recommendation": "Add fiducial markers for pick-and-place alignment (3 per side with SMD).",
           "category": "assembly"
         },
@@ -12937,13 +13564,6 @@
         {
           "rule_id": "CC-002",
           "severity": "warning",
-          "summary": "Narrow signal: /LPS_PWR min 0.1016mm",
-          "recommendation": "Widen trace or verify signal integrity requirements.",
-          "category": "current_capacity"
-        },
-        {
-          "rule_id": "CC-002",
-          "severity": "warning",
           "summary": "Narrow signal: /LPS_SCK min 0.1016mm",
           "recommendation": "Widen trace or verify signal integrity requirements.",
           "category": "current_capacity"
@@ -12979,6 +13599,20 @@
         {
           "rule_id": "CC-002",
           "severity": "warning",
+          "summary": "Narrow signal: Net-(U2-VREG_OUT) min 0.1016mm",
+          "recommendation": "Widen trace or verify signal integrity requirements.",
+          "category": "current_capacity"
+        },
+        {
+          "rule_id": "CC-002",
+          "severity": "warning",
+          "summary": "Narrow signal: Net-(U3-VDD) min 0.1016mm",
+          "recommendation": "Widen trace or verify signal integrity requirements.",
+          "category": "current_capacity"
+        },
+        {
+          "rule_id": "CC-002",
+          "severity": "warning",
           "summary": "Narrow signal: RST min 0.1016mm",
           "recommendation": "Widen trace or verify signal integrity requirements.",
           "category": "current_capacity"
@@ -13000,7 +13634,7 @@
         {
           "rule_id": "TE-001",
           "severity": "warning",
-          "summary": "Test point coverage: 0/40 nets (0%)",
+          "summary": "Test point coverage: 0/41 nets (0%)",
           "recommendation": "Add test points to improve ICT/flying probe coverage.",
           "category": "testability"
         },
@@ -13016,18 +13650,18 @@
     "manager": {
       "risk_level": "moderate",
       "blocker_count": 2,
-      "warning_count": 19,
+      "warning_count": 20,
       "stage_readiness": {
         "schematic": "pass",
         "layout": "needs_review",
         "pre_fab": "needs_work",
         "bring_up": "pass"
       },
-      "one_liner": "2 errors, 19 warnings across 5 categories. Pre-fab stage has blockers."
+      "one_liner": "2 errors, 20 warnings across 5 categories. Pre-fab stage has blockers."
     }
   },
   "capability_mode_ref": {
     "source": "analysis/capability_mode.json",
-    "run_id": "20260904T113834Z-9f9a3f"
+    "run_id": "20260904T224331Z-b7fc8f"
   }
 }

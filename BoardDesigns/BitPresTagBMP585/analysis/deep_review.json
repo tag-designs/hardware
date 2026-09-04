@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "produced_for_run_id": "2026-09-04_0738",
+  "produced_for_run_id": "2026-09-04_1843",
   "produced_at": "2026-09-04T08:40:00Z",
   "findings": [
     {
@@ -21,7 +21,7 @@
           "VBAT"
         ],
         "computation": {
-          "description": "Counted power symbol lib_ids in BitPresTagBMP581.kicad_sch and cross-checked against KiCad ERC output",
+          "description": "Counted power symbol lib_ids in BitPresTagBMP585.kicad_sch and cross-checked against KiCad ERC output",
           "result": "7 x power:+2V5, 0 x power:VIN, 2 x global_label VIN; ERC warning multiple_net_names confirms the merge. No regulator in the 11-line BOM."
         }
       },
@@ -82,9 +82,9 @@
       "category": "part_identity",
       "severity": "warning",
       "confidence": "high",
-      "summary": "Three parts carry a Value that names a different device than the MPN the fab will order (U1 flash, U302 MCU, U3 pressure sensor vs project name)",
-      "description": "U1 Value 'at25ex321D-UUN' (AT25XE321D) vs MPN 'AT25FF321A-UUN-T' - two different Renesas families, and only the AT25XE321D datasheet is on hand. U302 Value 'stm32l431kc' vs MPN 'STM32L432KCU6' - the L431 has no USB and a different peripheral set, so the label is not a harmless typo. U3 Value and MPN both say BMP585 with footprint LGA9_BMP585_BOS, while the project, the config and the only available datasheet all say BMP581 - BMP581 is a 10-pin metal-lid LGA, BMP585 a 9-pin part, so the board is built for BMP585 and the project name is stale - now confirmed, since bst-bmp585-ds003.pdf describes an 8-pin metal-lid LGA plus an L/M pad, matching LGA9_BMP585_BOS. Fab and assembly consume MPN, so none of these breaks a build, but each one misleads human and automated review.",
-      "recommendation": "Confirm which flash is intended and make Value match MPN on all three parts. If AT25FF321A is correct, add its datasheet; if AT25XE321D is correct, fix the MPN before the BOM is used to order. The BMP585 datasheet has since been supplied and its pinout is verified. Either rename the project or note in the config that BitPresTagBMP581 carries a BMP585.",
+      "summary": "Two parts carry a Value that names a different device than the MPN the fab will order (U1 flash, U302 MCU); the U3/project-name mismatch is resolved by the rename",
+      "description": "U1 Value 'at25ex321D-UUN' (AT25XE321D) vs MPN 'AT25FF321A-UUN-T' - two different Renesas families, and only the AT25XE321D datasheet is on hand. U302 Value 'stm32l431kc' vs MPN 'STM32L432KCU6' - the L431 has a different peripheral set, so the label is not a harmless typo. U3 was the third case: Value and MPN both say BMP585 with footprint LGA9_BMP585_BOS while the project was named BitPresTagBMP581. That is now RESOLVED - bst-bmp585-ds003.pdf confirms an 8-pin metal-lid LGA plus an L/M pad matching LGA9_BMP585_BOS, and the project was renamed to BitPresTagBMP585 on 2026-09-04. Fab and assembly consume MPN, so none of these breaks a build, but each one misleads human and automated review.",
+      "recommendation": "Confirm which flash is intended and make Value match MPN on U1 and U302. If AT25FF321A is correct, add its datasheet; if AT25XE321D is correct, fix the MPN before the BOM is used to order. No action remains for U3.",
       "evidence": {
         "components": [
           "U1",
@@ -110,8 +110,7 @@
       "evidence_checked": "partial",
       "components": [
         "U1",
-        "U302",
-        "U3"
+        "U302"
       ],
       "finding_id": "deep_review:c0eabec7acf7"
     },
@@ -332,7 +331,7 @@
           "U501.1"
         ],
         "computation": {
-          "description": "KiCad ERC on BitPresTagBMP581.kicad_sch, cross-referenced against pin_type in schematic.json and the lib entries in sym-lib-table",
+          "description": "KiCad ERC on BitPresTagBMP585.kicad_sch, cross-referenced against pin_type in schematic.json and the lib entries in sym-lib-table",
           "result": "6 ERC violations, of which 2 pin_to_pin and 1 power_pin_not_driven trace to declared pin types; sym-lib-table lists 5 libraries, none named Device"
         }
       },
@@ -369,7 +368,7 @@
           "U3.9"
         ],
         "computation": {
-          "description": "KiCad ERC on BitPresTagBMP581.kicad_sch, plus net pin count from schematic.json",
+          "description": "KiCad ERC on BitPresTagBMP585.kicad_sch, plus net pin count from schematic.json",
           "result": "ERC error pin_not_connected at Symbol U3 Pin 9 [L/M, Passive]; net __unnamed_16 has 1 pin"
         },
         "datasheet": [

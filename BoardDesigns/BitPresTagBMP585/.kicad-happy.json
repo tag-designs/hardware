@@ -1,9 +1,9 @@
 {
   "version": 1,
   "project": {
-    "name": "BitPresTagBMP581",
+    "name": "BitPresTagBMP585",
     "ambient_temperature_c": 25,
-    "notes": "Project name says BMP581 but U3 is a BMP585 (9-pin LGA, footprint LGA9_BMP585_BOS). Reviewed 2026-09-04."
+    "notes": "Renamed from BitPresTagBMP581 to BitPresTagBMP585 on 2026-09-04 to match the part actually fitted: U3 is a BMP585 (8-pin metal-lid LGA plus L/M pad, footprint LGA9_BMP585_BOS), not the 10-pin BMP581. Directory, all project files and every internal reference were renamed together; archive/ was deliberately left under the old name as a historical snapshot."
   },
   "design_intent": {
     "product_class": "prototype",
@@ -24,7 +24,7 @@
     "peak_current_a": 0.01,
     "peak_condition": "Flash write",
     "notes": [
-      "BitPresTagBMP581 is a low-power pressure/motion sensing tag on a coin cell.",
+      "BitPresTagBMP585 is a low-power pressure/motion sensing tag on a coin cell.",
       "Typical current about 10 uA; operating current below 1 mA; peak about 10 mA on flash write.",
       "U3 BMP585 peak draw is 260 uA max DC (BMP581 DS p.12), power-gated from PB1.",
       "Bulk on VIN is C4 22uF + C404 22uF + C6 47uF plus six 0.1uF, sized for flash-write pulses."
@@ -56,7 +56,7 @@
     }
   },
   "mating_design": {
-    "name": "BitPresTagBMP581 self-contained tag; J201 is a 6-pin SWD/programming header",
+    "name": "BitPresTagBMP585 self-contained tag; J201 is a 6-pin SWD/programming header",
     "host_mcu": "STM32L432KCU6",
     "source": "Derived 2026-09-04 from the schematic via kicad-helpers/stm32_pinmap.py, with alternate functions cross-checked against ST STM32_open_pin_data.",
     "notes": [
@@ -520,7 +520,7 @@
   ],
   "reviewer_notes": {
     "last_review": "2026-09-04 (re-verified after rail relabel)",
-    "report": "BitPresTagBMP581-design-review.md",
+    "report": "BitPresTagBMP585-design-review.md",
     "verified_correct": [
       "Q501 Q_NPN_BEC pinout matches the PMBT2222AMB datasheet (1=B, 2=E, 3=C) and is wired as a correct NPN reset inverter. Do not re-derive.",
       "U1 12-ball WLCSP ball map matches the AT25XE321D bottom-view figure ball for ball.",
@@ -537,7 +537,7 @@
     "open_items": [
       "The switched sensor-supply node (PB1 -> R2 -> U3) is an UNNAMED net (__unnamed_13). Give it a label such as LPS_VDD: it is the actual switched rail, and the PP-001 suppression keyed to an unnamed net number is fragile.",
       "Q501 base has no series resistor and this board has no baseboard -- confirm the programming adapter provides it.",
-      "Value vs MPN disagree on U1 (AT25XE321D vs AT25FF321A) and U302 (L431 vs L432). U1 is the one open item that could yield the wrong physical part, since the fab orders by MPN.",
+      "Value vs MPN disagree on U1 (AT25XE321D vs AT25FF321A) and U302 (L431 vs L432). U1 is the one open item that could yield the wrong physical part, since the fab orders by MPN. (U3/project-name mismatch resolved by the 2026-09-04 rename.)",
       "Residual symbol pin-type errors, latent now that ERC is clean: U501 pin 1 CLKOUT declared 'input' (it is the RTC clock output), U501 pins 3/4 SCL/SDA declared 'input' (SDA is bidirectional open-drain), U501 pin 5 GND declared 'power_out' -- the last no longer errors only because U2's GND is now power_in, so a second power_out anywhere would resurrect it.",
       "sym-lib-table still has no Device library, so Q501's Q_NPN_BEC resolves only from the embedded cache (pinout verified correct against PMBT2222AMB). The lib_symbol_issues ERC exclusion covers this; worth fixing since a mis-resolved transistor symbol passes DRC and ERC.",
       "Three poisoned analyzer JSONs are still committed at analysis/{pcb,schematic,cross_analysis}.json (rules_source = BitTagNG-LIS2DU12...). Recommend git rm."
@@ -561,7 +561,8 @@
       "DRC rule track_not_centered_on_via re-enabled (ignore -> error) and the resulting violation fixed. single_global_label raised ignore -> warning.",
       "KiCad DRC: 0 violations, 0 unconnected. KiCad ERC: 0 violations (was 6). padnet_crosscheck: 28 footprints, 0 mismatches.",
       "Rail relabel: the 7 power:+2V5 symbols are now power:VCC. The phantom '+2V5 = 2.5 V' rail no longer appears in analyzer output -- VCC carries no implied voltage. The 2 VIN global labels were deliberately retained (VIN is meaningful to the surrounding environment), so the netlist and PCB net name are unchanged and no copper moved. FINDING 2 CLOSED.",
-      "The multiple_net_names ERC exclusion is now CORRECT rather than a workaround: VCC and VIN on one net is a deliberate dual name (internal rail name vs environment-facing name), which is exactly what an exclusion is for. Do not 'fix' it by deleting one of the names."
+      "The multiple_net_names ERC exclusion is now CORRECT rather than a workaround: VCC and VIN on one net is a deliberate dual name (internal rail name vs environment-facing name), which is exactly what an exclusion is for. Do not 'fix' it by deleting one of the names.",
+      "Project renamed BitPresTagBMP581 -> BitPresTagBMP585. The name/part mismatch noted in finding 5 is closed. Verified after the rename: DRC 0 violations / 0 unconnected / 0 parity / 0 lib-footprint, ERC 0 violations, padnet_crosscheck 28 footprints / 0 mismatches, analyzer rules_source = BitPresTagBMP585.kicad_pro."
     ]
   }
 }
