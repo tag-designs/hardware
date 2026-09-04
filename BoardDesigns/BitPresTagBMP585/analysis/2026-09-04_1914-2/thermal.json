@@ -7,21 +7,21 @@
       "analysis/2026-09-04_1914-2/pcb.json"
     ],
     "source_hashes": {
-      "analysis/2026-09-04_1914-2/schematic.json": "4d5263c9c4df8df51ef193ae797a7ed77b3963f0e95caccd85f08121f3a4dc67",
-      "analysis/2026-09-04_1914-2/pcb.json": "1b1495deda3856d1a4124fe8032753e7191d52ab0775a417f7d02c1a30e9859f"
+      "analysis/2026-09-04_1914-2/schematic.json": "55de151d5b4c0bc963bda926af519afb401f41fa39b85051966723c99a18b781",
+      "analysis/2026-09-04_1914-2/pcb.json": "0ae2d8598477a503722cbe314db7a4f83dba30ef80aa84363b184a3ac58755ad"
     },
-    "run_id": "20260904T231436Z-196798",
+    "run_id": "20260904T232321Z-9bd8bc",
     "config_hash": null,
     "upstream_artifacts": {
       "schematic": {
         "path": "analysis/2026-09-04_1914-2/schematic.json",
-        "sha256": "4d5263c9c4df8df51ef193ae797a7ed77b3963f0e95caccd85f08121f3a4dc67",
+        "sha256": "55de151d5b4c0bc963bda926af519afb401f41fa39b85051966723c99a18b781",
         "schema_version": "1.4.0",
         "run_id": "20260904T224331Z-b7fc8f"
       },
       "pcb": {
         "path": "analysis/2026-09-04_1914-2/pcb.json",
-        "sha256": "1b1495deda3856d1a4124fe8032753e7191d52ab0775a417f7d02c1a30e9859f",
+        "sha256": "0ae2d8598477a503722cbe314db7a4f83dba30ef80aa84363b184a3ac58755ad",
         "schema_version": "1.4.0",
         "run_id": "20260904T224331Z-b7fc8f"
       }
@@ -74,6 +74,6 @@
   },
   "capability_mode_ref": {
     "source": "analysis/capability_mode.json",
-    "run_id": "20260904T231436Z-196798"
+    "run_id": "20260904T232321Z-9bd8bc"
   }
 }

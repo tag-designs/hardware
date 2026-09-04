@@ -114,9 +114,11 @@ re-enabled `track_not_centered_on_via`, KiCad ERC is clean (0 violations, down f
 pinout checked against a manufacturer PDF is correct — including the three most dangerous
 (the transistor, the 12-ball WLCSP flash, and the BMP585).
 
-What remains is **documentation and hygiene only — nothing that requires a board change**: an
-unnamed switched-supply net and two `Value`/`MPN` disagreements. The rail-label defect is fixed,
-the reset network is confirmed correct by design, and the two flash candidates are pin-identical.
+**Every finding this review raised is now closed.** The two electrical defects were fixed (C8,
+R2), the rail label and both `Value`/`MPN` disagreements corrected, the switched sensor rail
+named, the lasermarking pad flagged no-connect, and the reset network confirmed correct by
+design. The only action left is mechanical: regenerate the fab package so its cosmetic metadata
+catches up with the last two edits — the copper is already verified unchanged.
 The board's `.kicad-happy.json` — which had described a completely different board — has been
 rewritten, and the pin map it now carries records the firmware contracts: all three serial
 buses have hardware support, but on three *different* peripherals (USART2 synchronous mode,
@@ -148,12 +150,12 @@ should be committed.
 | 2 | ✅ **Fixed** | Schematic-wide | Rail was drawn as `+2V5`; **now `VCC`**, with `VIN` kept as the environment-facing alias |
 | 3 | Info | U302 / U2 | ADXL367 runs on **USART2 synchronous mode**, not an SPI peripheral — firmware config note |
 | 4 | ✅ **Fixed** / ⚠️ | U3 / PB1 | Inrush: **R2 = 10 Ω added**. Back-power sequencing remains a firmware contract |
-| 5 | ✅ **Fixed (U1)** | U1, U302 | **U1 settled on AT25FF321A**, `Value` now matches; U302 `L431` label still stale |
+| 5 | ✅ **Fixed** | U1, U302 | **Both settled** — U1 = AT25FF321A, U302 = STM32L432KCU6; `Value` matches `MPN` throughout |
 | 6 | ✅ **Fixed** | U3 pin 9 | `L/M` is a lasermarking pad; **no-connect flag added** |
 | 7 | ✅ **Not a defect** | Q501 | Base series resistor lives on the connecting board — confirmed, house convention |
 | 8 | Info | U1 | CS relies on PA15 internal pull-up; datasheet suggests 10 kΩ for the ramp window |
 | 9 | ◐ **Partly fixed** | U2, U501, Q501 | **U2 GND pin types fixed**; U501 CLKOUT/SDA/GND types and the unmapped `Device` library remain |
-| 10 | ⚠️ **New** | U3 supply node | The switched sensor rail (PB1 → R2 → U3) is an **unnamed net** |
+| 10 | ✅ **Fixed** | U3 supply node | Switched sensor rail is now labelled **`LPS_VDD`** |
 
 ---
 
@@ -544,8 +546,11 @@ that is actually the switched sensor rail carries no label at all.** Two consequ
    suppression will silently stop matching the next time the sheet changes, and PP-001 will
    reappear as two errors.
 
-**Fix:** label the post-resistor node, e.g. `LPS_VDD`. One label, and both problems go away.
-The config's `PP-001` suppression carries a note to update the net name when you do.
+**✅ Fixed 2026-09-04.** The post-resistor node is now labelled **`LPS_VDD`**, and `LPS_PWR`
+correctly names only the PB1 → R2 stub. Both problems are gone: the schematic reads correctly,
+and the `PP-001` suppression is re-keyed from the unstable `__unnamed_13` to `LPS_VDD` — it now
+survives schematic edits. Confirmed in the analyzer output, which reports PP-001 against net
+`LPS_VDD` rather than an unnamed number.
 
 ---
 
@@ -571,7 +576,7 @@ the same source STM32CubeMX uses. **Pin numbering matches the package** (25 GPIO
 | 12 | PA6 | `lps_rdy` | U3.5 BMP585 INT | GPIO input (`SPI1_MISO` unused) | input, **no pull-up** |
 | 13 | PA7 | — | — | unused (`SPI1_MOSI`) | analog/no-pull |
 | 14 | PB0 | `LPS_CS` | U3.7 BMP585 CSB | GPIO CS (SPI1_NSS capable) | high when powered |
-| 15 | PB1 | `LPS_PWR` | **R2 (10 Ω)** → U3.4 VDDIO, U3.8 VDD, C3, C5 | **GPIO power switch** | low speed (EMI/power) |
+| 15 | PB1 | `LPS_PWR` | **R2 (10 Ω)** → `LPS_VDD` → U3.4 VDDIO, U3.8 VDD, C3, C5 | **GPIO power switch** | low speed (EMI/power) |
 | 16 | VSS | GND | rail (22 nodes) | ground | — |
 | 17 | VDD | `VCC`/`VIN` | rail | supply | — |
 | 18 | PA8 | — | — | unused | analog/no-pull |
@@ -737,12 +742,14 @@ since been swept from the directory. All results in this review come from a fres
 no-connect (finding 6), U2 GND pin types (finding 9), `track_not_centered_on_via` re-enabled
 and its violation fixed.
 
-**Still open — electrical / sourcing:**
+**Everything this review raised is now closed.** The only action left is a mechanical one:
 
-*(U1 is settled — **AT25FF321A**, `Value` now matches `MPN`. One firmware consequence, below.)*
-
-1. **U302's `Value` still reads `stm32l431kc`** while `MPN` is `STM32L432KCU6` (finding 5). Worth
-   correcting — the L431 has a different peripheral set, so this is not a harmless label quirk.
+1. **Regenerate the fab package before ordering.** `pcbway_production/2026-09-04-19-11-58`
+   predates the U302 `Value` fix and the `LPS_VDD` label. I verified the **copper is unaffected** —
+   all 305 outer-layer track endpoints still match the board, 40 vias, 18 × 10 mm — and the BOM's
+   `MPN` column is correct, so nothing is functionally wrong. It is stale only in the cosmetic
+   BOM `Value` column (still reads `stm32l431kc`) and the `netlist.ipc` net labels. Regenerate
+   anyway, so nobody reviewing the assembly package reads a wrong part name.
 *(The Q501 base-resistor question is closed — see finding 7. **No remaining open item requires a
 board change.**)*
 

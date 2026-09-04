@@ -34,8 +34,8 @@
     },
     "2026-09-04_1914-2": {
       "source_hashes": {
-        "BitPresTagBMP585.kicad_sch": "sha256:19804c4c8d36c6b95c9ce7a6e593a519a6cae8feb9c52758120b56cb86b7543c",
-        "BitPresTagBMP585.kicad_pcb": "sha256:9af08d99cc75d155190efe8c43867f3bd1966ab9cc28367f10072a61b2567e8a"
+        "BitPresTagBMP585.kicad_sch": "sha256:53842e552bc5c5e039a4d85d9b2754130c6c5e317a4c2221068af9b7252f5e30",
+        "BitPresTagBMP585.kicad_pcb": "sha256:c1d80952c142f1750238d8990440e41f9b67aa74dbaf83df7e53dc4256b35a01"
       },
       "outputs": {
         "schematic": "schematic.json",
@@ -44,7 +44,7 @@
       "scripts": {
         "schematic": "analyze_schematic.py BitPresTagBMP585.kicad_sch"
       },
-      "generated": "2026-09-04T19:14:36-04:00",
+      "generated": "2026-09-04T19:23:21-04:00",
       "pinned": false
     }
   }

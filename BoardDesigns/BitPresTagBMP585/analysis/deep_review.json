@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
-  "produced_for_run_id": "2026-09-04_1843",
-  "produced_at": "2026-09-04T08:40:00Z",
+  "produced_for_run_id": "2026-09-04_1914-2",
+  "produced_at": "2026-09-04T19:40:00Z",
   "findings": [
     {
       "detector": "deep_review",
@@ -125,11 +125,11 @@
     {
       "detector": "deep_review",
       "category": "part_identity",
-      "severity": "warning",
+      "severity": "info",
       "confidence": "high",
-      "summary": "Two parts carry a Value that names a different device than the MPN the fab will order (U1 flash, U302 MCU); the U3/project-name mismatch is resolved by the rename",
-      "description": "U1 Value 'at25ex321D-UUN' (AT25XE321D) vs MPN 'AT25FF321A-UUN-T' - two different Renesas families, and only the AT25XE321D datasheet is on hand. U302 Value 'stm32l431kc' vs MPN 'STM32L432KCU6' - the L431 has a different peripheral set, so the label is not a harmless typo. U3 was the third case: Value and MPN both say BMP585 with footprint LGA9_BMP585_BOS while the project was named BitPresTagBMP581. That is now RESOLVED - bst-bmp585-ds003.pdf confirms an 8-pin metal-lid LGA plus an L/M pad matching LGA9_BMP585_BOS, and the project was renamed to BitPresTagBMP585 on 2026-09-04. Fab and assembly consume MPN, so none of these breaks a build, but each one misleads human and automated review.",
-      "recommendation": "Confirm which flash is intended and make Value match MPN on U1 and U302. If AT25FF321A is correct, add its datasheet; if AT25XE321D is correct, fix the MPN before the BOM is used to order. No action remains for U3.",
+      "summary": "Value/MPN disagreements on U1 and U302 - both resolved 2026-09-04",
+      "description": "U1 Value 'at25ex321D-UUN' (AT25XE321D) vs MPN 'AT25FF321A-UUN-T' - two different Renesas families, and only the AT25XE321D datasheet is on hand. U302 Value 'stm32l431kc' vs MPN 'STM32L432KCU6' - the L431 has a different peripheral set, so the label is not a harmless typo. U3 was the third case: Value and MPN both say BMP585 with footprint LGA9_BMP585_BOS while the project was named BitPresTagBMP581. That is now RESOLVED - bst-bmp585-ds003.pdf confirms an 8-pin metal-lid LGA plus an L/M pad matching LGA9_BMP585_BOS, and the project was renamed to BitPresTagBMP585 on 2026-09-04. Fab and assembly consume MPN, so none of these breaks a build, but each one misleads human and automated review. RESOLVED 2026-09-04: U1 settled on AT25FF321A-UUN-T and U302 Value corrected to STM32L432KCU6. Value now matches MPN on every part in both schematic and PCB.",
+      "recommendation": "No action outstanding. Note for firmware: the AT25FF321A has no 256-byte page erase, so its smallest erase is a 4 kByte block.",
       "evidence": {
         "components": [
           "U1",
@@ -158,7 +158,7 @@
         "U302",
         "U3"
       ],
-      "finding_id": "deep_review:84cb538420c0"
+      "finding_id": "deep_review:a1b4eb095619"
     },
     {
       "detector": "deep_review",
@@ -218,7 +218,7 @@
       "severity": "warning",
       "confidence": "high",
       "summary": "BMP585 is powered from GPIO PB1 with no series resistor; the 10 us minimum supply ramp is a normative datasheet requirement met only by 1.1-2.2x, and back-powering is a firmware contract",
-      "description": "U3 VDD and VDDIO are both fed directly from STM32 PB1 (net LPS_PWR) with C3+C5 = 0.2 uF local decoupling and no series resistance. Two consequences. (1) Inrush: the BMP585 datasheet makes this a normative footnote to the electrical characteristics table - 'For supply ramps < 0.01 ms, a 10 Ohm resistor must be connected in series to the power supply' - with t_VDDramp min 0.01 ms, specifically calling out repeated power cycles - which is exactly this design's duty cycle. The GPIO's own output impedance (roughly 25-50 ohm inferred from the STM32L432 VOH spec) already gives a 10-90% ramp of about 11-22 us, so the requirement is probably met, but the margin is thin and shrinks if firmware selects a high-speed output drive. (2) Back-powering: when PB1 is low the SPI lines LPS_SCK/LPS_MOSI/LPS_CS are still driven from the VIN domain and will inject current through the sensor's ESD diodes into its unpowered VDDIO. Sensor peak draw is only 260 uA, so PB1 has ample drive.",
+      "description": "U3 VDD and VDDIO are fed from STM32 PB1 through R2 = 10 ohm (PB1 on net LPS_PWR, the sensor side on net LPS_VDD) with C3+C5 = 0.2 uF local decoupling and no series resistance. Two consequences. (1) Inrush: the BMP585 datasheet makes this a normative footnote to the electrical characteristics table - 'For supply ramps < 0.01 ms, a 10 Ohm resistor must be connected in series to the power supply' - with t_VDDramp min 0.01 ms, specifically calling out repeated power cycles - which is exactly this design's duty cycle. The GPIO's own output impedance (roughly 25-50 ohm inferred from the STM32L432 VOH spec) already gives a 10-90% ramp of about 11-22 us, so the requirement is probably met, but the margin is thin and shrinks if firmware selects a high-speed output drive. (2) Back-powering: when PB1 is low the SPI lines LPS_SCK/LPS_MOSI/LPS_CS are still driven from the VIN domain and will inject current through the sensor's ESD diodes into its unpowered VDDIO. Sensor peak draw is only 260 uA, so PB1 has ample drive.",
       "recommendation": "Fit a 10 ohm series resistor in LPS_PWR on the next respin: it costs 2.6 mV at the 260 uA peak and satisfies the requirement by construction rather than by calculation. Until then keep PB1 on the lowest GPIO output-speed setting and treat that as a hard constraint. Separately, document the firmware contract: before pulling PB1 low, drive LPS_SCK, LPS_MOSI and LPS_CS low (or analog/high-Z), and keep PA6 (lps_rdy) an input with no pull-up.",
       "evidence": {
         "components": [
@@ -228,7 +228,8 @@
           "C5"
         ],
         "nets": [
-          "LPS_PWR"
+          "LPS_PWR",
+          "LPS_VDD"
         ],
         "pins": [
           "U302.15",
@@ -260,14 +261,15 @@
         "C5"
       ],
       "nets": [
-        "LPS_PWR"
+        "LPS_PWR",
+        "LPS_VDD"
       ],
       "pins": [
         "U302.15",
         "U3.4",
         "U3.8"
       ],
-      "finding_id": "deep_review:6623f2770869"
+      "finding_id": "deep_review:e6e68a6f86f1"
     },
     {
       "detector": "deep_review",
