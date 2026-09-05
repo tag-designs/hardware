@@ -289,11 +289,28 @@ Not design issues, but they will mislead the next review:
   version is written alongside this report.
 - Tracked files belonging to the ancestor design: `TorporTagBreakout-analysis.md`,
   `CompassTagBreakout.kibot.yaml`, `RV3028.step`, `UIUCBreakout-rescue.dcm`.
-- `datasheets/` holds the wrong parts entirely — `REN_DS-AT25XE321D-160P` (this board uses
-  AT25**FF**321A), `RV-3028-C7`, `adxl362` (this board uses ADXL3**67**), `lis2dw12`, `tmp119`.
-  None of the three parts actually on this board have a datasheet here. All three exist in
-  `BoardDesigns/libraries/datasheets/` (`REN_DS-AT25FF321A-181R_DST_20241219.pdf`, `adxl367.pdf`,
-  `bst-bmp585-ds003.pdf`); symlink to the shared store as other boards do.
+- **`datasheets/` — FIXED.** Now a symlink to `../libraries/datasheets`, matching BitPresTagBMP585,
+  BitTagNG, CompassTag, imutag-smps, IMUBreakout-v2, TorporTag and tag-breakout-l432-u375-lipo-v1.
+  It had been a real directory carrying six PDFs inherited from the obsolete TorporTagBreakout
+  (`REN_DS-AT25XE321D-160P`, `RV-3028-C7`, `adxl362`, `lis2dw12`, `stm32l432kc`, `tmp119`) — none of
+  them for parts on this board, and **all six byte-identical to copies already in the shared store**,
+  so nothing was lost. The board's own three (`REN_DS-AT25FF321A-181R_DST_20241219.pdf`,
+  `adxl367.pdf`, `bst-bmp585-ds003.pdf`) were always in the shared store and were used for this
+  review; the local directory was shadowing it, not replacing it.
+
+  Repo-wide, this pattern is worth a separate pass: **seven boards carry real `datasheets/`
+  directories totalling ~290 MB, and every file in all seven is a byte-identical duplicate of the
+  84 MB shared store** — zero unique files anywhere.
+
+  | Board | Size | Files | Unique |
+  |---|---|---|---|
+  | `CompassTagMMC5603` | 53 MB | 27 | 0 |
+  | `tag-breakout-u375-smps` | 53 MB | 27 | 0 |
+  | `tag-breakout-u375-smps-v1` | 53 MB | 27 | 0 |
+  | `tag-breakout-u375-v2` | 53 MB | 27 | 0 |
+  | `tag-breakout-l432-1v8-v1` | 52 MB | 26 | 0 |
+  | `TorporTagBreakout` (obsolete) | 13 MB | 6 | 0 |
+  | ~~`UIUCBreakout`~~ | ~~13 MB~~ | ~~6~~ | fixed |
 - `jlcpcb/production_files/` still holds `BOM-`, `CPL-` and `GERBER-TorporTagBreakout.*`
   (gitignored, so cosmetic).
 - No `analysis/` directory. If you want the analyzer JSON tracked, set `analysis.track_in_git: true`

@@ -366,7 +366,7 @@
     "open_findings": [],
     "housekeeping": [
       "This config previously described TorporTagBreakout and was rewritten 2026-09-05.",
-      "datasheets/ holds the wrong parts entirely (AT25XE321D, RV-3028, adxl362, lis2dw12, tmp119). All three parts on this board are in BoardDesigns/libraries/datasheets/. Symlink to the shared store.",
+      "datasheets/ is now a symlink to ../libraries/datasheets (the shared store), matching BitPresTagBMP585, BitTagNG, CompassTag, imutag-smps, IMUBreakout-v2, TorporTag and tag-breakout-l432-u375-lipo-v1. It was previously a real directory carrying six PDFs inherited from TorporTagBreakout -- all six byte-identical to copies already in the shared store, none of them for parts on this board. The three parts here (REN_DS-AT25FF321A-181R, adxl367.pdf, bst-bmp585-ds003.pdf) are all in the shared store and were used for this review.",
       "Stale tracked ancestor files: TorporTagBreakout-analysis.md, CompassTagBreakout.kibot.yaml, RV3028.step, UIUCBreakout-rescue.dcm."
     ],
     "accepted_decisions": [
