@@ -1,337 +1,375 @@
 {
   "version": 1,
-
   "project": {
-    "name": "TorporTagBreakout"
+    "name": "UIUCBreakout",
+    "description": "Sensor daughtercard (AT25FF321A NOR flash, ADXL367 accelerometer, BMP585 barometer) that plugs into tag-breakout-l432v2. Exists so firmware for BitPresTagBMP585 can be developed on a full-size, hand-solderable board.",
+    "derived_from": "TorporTagBreakout (board directory still carries some of its files - see UIUCBreakout-design-review.md 5)",
+    "board": "4 layer, 48.26 x 48.26 mm, 1.6 mm. In1.Cu = +3.3V plane, In2.Cu = GND plane, F.Cu/B.Cu GND pours."
   },
-
+  "analysis": {
+    "track_in_git": true,
+    "note": "Does not inherit from BoardDesigns/.kicad-happy.json; must be set here. Leave a comments-only analysis/.gitignore in place - analyze_pcb.py recreates that file unconditionally."
+  },
   "mating_design": {
-    "name": "TorporTag",
-    "host_mcu": "STM32L432",
-    "source": "User-provided mating-design intent for breakout analysis and firmware bring-up notes.",
+    "name": "tag-breakout-l432v2",
+    "host_mcu": "STM32L432KCU6 (UFQFPN-32)",
+    "target_design": "BitPresTagBMP585",
+    "source": "Verified 2026-09-05 by joining UIUCBreakout J3/J4 -> tag-breakout-l432v2 J3/J4 -> U3 port -> BitPresTagBMP585 U302 net, from kicad-cli netlist exports of all three schematics.",
     "notes": [
-      "TMP119 power is supplied from STM32 PB0 through tmp119_pwr.",
-      "TMP119 SDA, SCL, and RDY/ALERT normally use STM32L432 internal pull-ups. The I2C clock is expected to be slow because these pulls are high impedance.",
-      "R3/R4/R5 are optional fallback 10 kOhm pull-ups to tmp119_pwr and are not default population parts."
+      "Every signal net on both headers lands on the same STM32L432 pin as on BitPresTagBMP585. 17 signal nets, no exceptions. Firmware ports without a pin-map change.",
+      "KNOWN BASEBOARD ERROR, handled in software: on tag-breakout-l432v2, RV-3028 SCL -> net rtc_scl -> J3.3 -> PB7 (which is I2C1_SDA), and RV-3028 SDA -> net rtc_sda -> J3.4 -> PB6 (which is I2C1_SCL). The names are swapped relative to the MCU pin functions. UIUCBreakout leaves J3.3/J3.4 NC so this daughtercard is unaffected - but RTC driver code developed on this rig needs PB6 as SDA and PB7 as SCL, the opposite of BitPresTagBMP585. This is the only place the dev rig differs from the tag.",
+      "SPI peripheral assignment: BMP585 must use SPI1 (PA5/PA11/PA12 have no SPI3 alternative). The AT25 flash should therefore use SPI3 at AF6 (PB3/PB4/PB5 carry both SPI1 AF5 and SPI3 AF6). No collision.",
+      "The ADXL367 bus has no hardware SPI option: PA4 is SPI1_NSS/SPI3_NSS not SCK, and PA2/PA3 have no SPI AF at all. Inherited from BitPresTagBMP585. Alternative to bit-banging: USART2 synchronous master maps exactly - PA4=USART2_CK, PA2=USART2_TX, PA3=USART2_RX, PA1=CS as GPIO. ADXL367 is SPI mode 0; USART sync master does CPOL=0/CPHA=0 with CR2.MSBFIRST.",
+      "PA15 (AT25 nCS, JTDI) and PB4 (AT25 MISO, NJTRST) have default pull-ups, so the flash is deselected out of reset with no external resistor. PB3 (AT25 SCK) forfeits TRACESWO. BOOT0 is strapped to GND on the baseboard, same as the tag.",
+      "J4.6/J4.7/J4.8 (PA10/PA9/PA8) are unused and carry USART1_RX/TX/CK at AF7 - free console on the dev rig.",
+      "R1 (10 R) is required, not optional: it is the Bosch inrush limiter from BMP585 datasheet 6.2.5 Fig. 27, and it sits in series in the BMP585 supply path. Omitting it leaves U3 unpowered. Same role as R2 on BitPresTagBMP585.",
+      "C4 (0.22 uF) is required: ADXL367 datasheet Table 9 note 1 - VREG_OUT needs an external 0.2 uF. Its Value field reads \"C\"; the MPN (CL10B224KA8NNNC) is correct."
     ],
-
     "host_pin_map": [
       {
         "breakout_header": "J3.1",
         "breakout_net": "AT25_MISO",
         "host_pin": "PB4",
-        "host_function": "SPI MISO / AT25 SO",
-        "connected_part": "U1 AT25XE321D SO",
-        "required_state": "Pull-down or no-pull if known driven; high-Z input during reset/sleep is acceptable if nCS is held high.",
-        "reason": "Flash SO is normally tri-stated when AT25_nCS is high."
+        "bitpres_net": "AT25_MISO",
+        "connected_part": "U1 AT25FF321A-SHN-B SO (pin 2)",
+        "required_state": "Deselected via PA15 pull-up; SO is high-Z when nCS high."
       },
       {
         "breakout_header": "J3.2",
         "breakout_net": "AT25_MOSI",
         "host_pin": "PB5",
-        "host_function": "SPI MOSI / AT25 SI",
-        "connected_part": "U1 AT25XE321D SI",
-        "required_state": "Pull-down in reset/sleep/high-Z.",
-        "reason": "Keeps flash input quiet while the device is deselected."
+        "bitpres_net": "AT25_MOSI",
+        "connected_part": "U1 AT25FF321A-SHN-B SI (pin 5)",
+        "required_state": "Pull-down or driven; ignored while nCS high."
       },
       {
         "breakout_header": "J3.3",
         "breakout_net": "NO_CONNECT",
-        "host_pin": "TODO_J3_3",
-        "host_function": "unused placeholder",
-        "connected_part": "none",
-        "required_state": "Confirm no connection in mating design; if routed to MCU, use analog/no-pull or another documented low-leakage state.",
-        "reason": "Placeholder keeps mating-board pin assignment explicit."
+        "host_pin": "PB7",
+        "bitpres_net": "SDA",
+        "connected_part": null,
+        "required_state": "Not connected on this daughtercard."
       },
       {
         "breakout_header": "J3.4",
         "breakout_net": "NO_CONNECT",
-        "host_pin": "TODO_J3_4",
-        "host_function": "unused placeholder",
-        "connected_part": "none",
-        "required_state": "Confirm no connection in mating design; if routed to MCU, use analog/no-pull or another documented low-leakage state.",
-        "reason": "Placeholder keeps mating-board pin assignment explicit."
+        "host_pin": "PB6",
+        "bitpres_net": "SCL",
+        "connected_part": null,
+        "required_state": "Not connected on this daughtercard."
       },
       {
         "breakout_header": "J3.5",
         "breakout_net": "NO_CONNECT",
-        "host_pin": "TODO_J3_5",
-        "host_function": "unused placeholder",
-        "connected_part": "none",
-        "required_state": "Confirm no connection in mating design; if routed to MCU, use analog/no-pull or another documented low-leakage state.",
-        "reason": "Placeholder keeps mating-board pin assignment explicit."
+        "host_pin": "PB8 (not bonded on UFQFPN-32)",
+        "bitpres_net": null,
+        "connected_part": null,
+        "required_state": "Not connected on this daughtercard.",
+        "note": "Baseboard routes a net of this name to the header, but the STM32L432KCU6 in UFQFPN-32 has no such pin."
       },
       {
         "breakout_header": "J3.6",
         "breakout_net": "NO_CONNECT",
-        "host_pin": "TODO_J3_6",
-        "host_function": "unused placeholder",
-        "connected_part": "none",
-        "required_state": "Confirm no connection in mating design; if routed to MCU, use analog/no-pull or another documented low-leakage state.",
-        "reason": "Placeholder keeps mating-board pin assignment explicit."
+        "host_pin": "PB9 (not bonded on UFQFPN-32)",
+        "bitpres_net": null,
+        "connected_part": null,
+        "required_state": "Not connected on this daughtercard.",
+        "note": "Baseboard routes a net of this name to the header, but the STM32L432KCU6 in UFQFPN-32 has no such pin."
       },
       {
         "breakout_header": "J3.7",
         "breakout_net": "+3.3V",
         "host_pin": "HOST_3V3_RAIL",
-        "host_function": "3.3 V supply rail",
-        "connected_part": "U1 VCC, U2 VDDI/O/VS, LEDs, decoupling",
-        "required_state": "Supply a valid +3.3 V rail whenever AT25, ADXL362, or LEDs are in use.",
-        "reason": "Primary breakout supply rail."
+        "bitpres_net": "VIN",
+        "connected_part": "rail: U1 VCC + SIO2/SIO3, U2 VS/VDDIO, C1/C2/C7",
+        "required_state": "Always-on supply from the baseboard."
       },
       {
         "breakout_header": "J3.8",
         "breakout_net": "WKUP1",
         "host_pin": "PA0",
-        "host_function": "Wake input / ADXL362 INT2",
-        "connected_part": "U2 ADXL362 INT2",
-        "required_state": "Pull-down if interrupt is active-high; pull-up if configured active-low/open-drain.",
-        "reason": "Wake source inactive state must be deliberate for sleep current and false wake prevention."
+        "bitpres_net": "WKUP1",
+        "connected_part": "U2 ADXL367 INT1 (pin 5)",
+        "required_state": "PA0 is SYS_WKUP1. Pull-down if INT1 is active-high."
       },
       {
         "breakout_header": "J3.9",
-        "breakout_net": "tmp119_sda",
+        "breakout_net": "ACCEL_nCS",
         "host_pin": "PA1",
-        "host_function": "I2C SDA",
-        "connected_part": "U3 TMP119 SDA, optional R5 to tmp119_pwr",
-        "required_state": "Internal pull-up only when tmp119_pwr is on; no-pull/high-Z when tmp119_pwr is off.",
-        "reason": "Default design uses STM32 internal pull-up; avoid back-powering TMP119 when its rail is off."
+        "bitpres_net": "ACCEL_nCS",
+        "connected_part": "U2 ADXL367 *CS (pin 4)",
+        "required_state": "High to deselect. STM32 internal pull-up per house convention."
       },
       {
         "breakout_header": "J3.10",
-        "breakout_net": "tmp119_scl",
+        "breakout_net": "ACCEL_MOSI",
         "host_pin": "PA2",
-        "host_function": "I2C SCL",
-        "connected_part": "U3 TMP119 SCL, optional R4 to tmp119_pwr",
-        "required_state": "Internal pull-up only when tmp119_pwr is on; no-pull/high-Z when tmp119_pwr is off.",
-        "reason": "Weak internal pull-up means slow I2C timing; avoid back-powering TMP119 when its rail is off."
+        "bitpres_net": "ACCEL_MOSI",
+        "connected_part": "U2 ADXL367 MOSI (pin 2)",
+        "required_state": "Pull-down in reset/sleep. PA2 has no SPI AF; USART2_TX at AF7."
       },
       {
         "breakout_header": "J3.11",
-        "breakout_net": "tmp119_rdy",
+        "breakout_net": "ACCEL_MISO",
         "host_pin": "PA3",
-        "host_function": "TMP119 alert/ready",
-        "connected_part": "U3 TMP119 ALERT, optional R3 to tmp119_pwr",
-        "required_state": "Internal pull-up only when TMP119 is powered and alert is used; no-pull/high-Z when tmp119_pwr is off.",
-        "reason": "ALERT/RDY is open-drain style; avoid back-power paths."
+        "bitpres_net": "ACCEL_MISO",
+        "connected_part": "U2 ADXL367 MISO (pin 3)",
+        "required_state": "No-pull. PA3 has no SPI AF; USART2_RX at AF7."
       },
       {
         "breakout_header": "J3.12",
-        "breakout_net": "ACCEL_nCS",
+        "breakout_net": "ACCEL_SCK",
         "host_pin": "PA4",
-        "host_function": "SPI chip select / ADXL362 CS",
-        "connected_part": "U2 ADXL362 ~CS",
-        "required_state": "Pull-up during reset/sleep/high-Z unless an external pull-up is added.",
-        "reason": "Keeps accelerometer deselected."
+        "bitpres_net": "ACCEL_SCK",
+        "connected_part": "U2 ADXL367 SCLK (pin 1)",
+        "required_state": "Pull-down in reset/sleep. PA4 is SPI1_NSS, NOT SCK - no hardware SPI on this bus."
       },
       {
         "breakout_header": "J3.13",
-        "breakout_net": "ACCEL_SCK",
+        "breakout_net": "LPS_SCK",
         "host_pin": "PA5",
-        "host_function": "SPI SCK / ADXL362 SCLK",
-        "connected_part": "U2 ADXL362 SCLK",
-        "required_state": "Pull-down in reset/sleep/high-Z.",
-        "reason": "Prevents spurious accelerometer clocks."
+        "bitpres_net": "LPS_SCK",
+        "connected_part": "U3 BMP585 SCX (pin 1)",
+        "required_state": "SPI1_SCK at AF5."
       },
       {
         "breakout_header": "J3.14",
-        "breakout_net": "ACCEL_MISO",
+        "breakout_net": "LPS_RDY",
         "host_pin": "PA6",
-        "host_function": "SPI MISO / ADXL362 MSIO",
-        "connected_part": "U2 ADXL362 MSIO",
-        "required_state": "Pull-down or no-pull if ADXL362 is known driven in sleep.",
-        "reason": "Avoids floating host input while CS is high."
+        "bitpres_net": "lps_rdy",
+        "connected_part": "U3 BMP585 INT (pin 5)",
+        "required_state": "GPIO/EXTI6. PA6 is also SPI1_MISO - do not select AF5 here, SPI1 MISO lives on PA11."
       },
       {
         "breakout_header": "J3.15",
-        "breakout_net": "ACCEL_MOSI",
+        "breakout_net": "NO_CONNECT",
         "host_pin": "PA7",
-        "host_function": "SPI MOSI / ADXL362 MOSI",
-        "connected_part": "U2 ADXL362 MOSI",
-        "required_state": "Pull-down in reset/sleep/high-Z.",
-        "reason": "Keeps accelerometer input quiet."
+        "bitpres_net": null,
+        "connected_part": null,
+        "required_state": "Not connected on this daughtercard."
       },
       {
         "breakout_header": "J3.16",
-        "breakout_net": "tmp119_pwr",
+        "breakout_net": "LPS_CS",
         "host_pin": "PB0",
-        "host_function": "TMP119 switched power output",
-        "connected_part": "U3 TMP119 V+, C1, optional R3/R4/R5 pull-up rail",
-        "required_state": "Push-pull high to power TMP119; drive low or hold pull-down/off in sleep.",
-        "reason": "This pin is the switched sensor rail and controls TMP119 back-power behavior."
+        "bitpres_net": "LPS_CS",
+        "connected_part": "U3 BMP585 CSB (pin 7)",
+        "required_state": "High to deselect. BMP585 starts in I2C; a dummy SPI read switches it to SPI."
       },
       {
         "breakout_header": "J3.17",
         "breakout_net": "GND",
         "host_pin": "HOST_GND",
-        "host_function": "Ground reference",
+        "bitpres_net": "GND",
         "connected_part": "board ground",
-        "required_state": "Connect to mating-board ground.",
-        "reason": "Common return path for all breakout signals and supplies."
+        "required_state": "Common return."
       },
       {
         "breakout_header": "J4.1",
         "breakout_net": "+3.3V",
         "host_pin": "HOST_3V3_RAIL",
-        "host_function": "3.3 V supply rail",
-        "connected_part": "same +3.3 V rail as J3.7",
-        "required_state": "Supply a valid +3.3 V rail whenever AT25, ADXL362, or LEDs are in use.",
-        "reason": "Primary breakout supply rail."
+        "bitpres_net": "VIN",
+        "connected_part": "rail: U1 VCC + SIO2/SIO3, U2 VS/VDDIO, C1/C2/C7",
+        "required_state": "Always-on supply from the baseboard."
       },
       {
         "breakout_header": "J4.2",
         "breakout_net": "AT25_SCK",
         "host_pin": "PB3",
-        "host_function": "SPI SCK / AT25 SCK",
-        "connected_part": "U1 AT25XE321D SCK",
-        "required_state": "Pull-down in reset/sleep/high-Z.",
-        "reason": "Prevents spurious flash clocks."
+        "bitpres_net": "AT25_SCK",
+        "connected_part": "U1 AT25FF321A-SHN-B SCK (pin 6)",
+        "required_state": "Pull-down in reset/sleep. Costs TRACESWO (PB3 = JTDO AF0)."
       },
       {
         "breakout_header": "J4.3",
         "breakout_net": "AT25_nCS",
         "host_pin": "PA15",
-        "host_function": "SPI chip select / AT25 nCS",
-        "connected_part": "U1 AT25XE321D nCS",
-        "required_state": "Pull-up during reset/sleep/high-Z unless an external pull-up is added.",
-        "reason": "Keeps flash deselected."
+        "bitpres_net": "AT25_nCS",
+        "connected_part": "U1 AT25FF321A-SHN-B nCS (pin 1)",
+        "required_state": "High. PA15 has a default pull-up (JTDI), so the flash is deselected out of reset with no external resistor."
       },
       {
         "breakout_header": "J4.4",
-        "breakout_net": "NO_CONNECT",
-        "host_pin": "TODO_J4_4",
-        "host_function": "unused placeholder",
-        "connected_part": "none",
-        "required_state": "Confirm no connection in mating design; if routed to MCU, use analog/no-pull or another documented low-leakage state.",
-        "reason": "Placeholder keeps mating-board pin assignment explicit."
+        "breakout_net": "LPS_MOSI",
+        "host_pin": "PA12",
+        "bitpres_net": "LPS_MOSI",
+        "connected_part": "U3 BMP585 SDX (pin 2)",
+        "required_state": "SPI1_MOSI at AF5. Must not float while powered - see BMP585 datasheet 6.2.1."
       },
       {
         "breakout_header": "J4.5",
-        "breakout_net": "NO_CONNECT",
-        "host_pin": "TODO_J4_5",
-        "host_function": "unused placeholder",
-        "connected_part": "none",
-        "required_state": "Confirm no connection in mating design; if routed to MCU, use analog/no-pull or another documented low-leakage state.",
-        "reason": "Placeholder keeps mating-board pin assignment explicit."
+        "breakout_net": "LPS_MISO",
+        "host_pin": "PA11",
+        "bitpres_net": "LPS_MISO",
+        "connected_part": "U3 BMP585 SDO (pin 3)",
+        "required_state": "SPI1_MISO at AF5."
       },
       {
         "breakout_header": "J4.6",
         "breakout_net": "NO_CONNECT",
-        "host_pin": "TODO_J4_6",
-        "host_function": "unused placeholder",
-        "connected_part": "none",
-        "required_state": "Confirm no connection in mating design; if routed to MCU, use analog/no-pull or another documented low-leakage state.",
-        "reason": "Placeholder keeps mating-board pin assignment explicit."
+        "host_pin": "PA10",
+        "bitpres_net": null,
+        "connected_part": null,
+        "required_state": "Not connected on this daughtercard."
       },
       {
         "breakout_header": "J4.7",
         "breakout_net": "NO_CONNECT",
-        "host_pin": "TODO_J4_7",
-        "host_function": "unused placeholder",
-        "connected_part": "none",
-        "required_state": "Confirm no connection in mating design; if routed to MCU, use analog/no-pull or another documented low-leakage state.",
-        "reason": "Placeholder keeps mating-board pin assignment explicit."
+        "host_pin": "PA9",
+        "bitpres_net": null,
+        "connected_part": null,
+        "required_state": "Not connected on this daughtercard."
       },
       {
         "breakout_header": "J4.8",
-        "breakout_net": "LED1",
-        "host_pin": "TODO_LED1_HOST_PIN",
-        "host_function": "LED1 active-low drive",
-        "connected_part": "D1 cathode, R1 to +3.3V",
-        "required_state": "Pull-up or push-pull high for LED off; drive low for LED on.",
-        "reason": "LED is active-low from host perspective."
+        "breakout_net": "NO_CONNECT",
+        "host_pin": "PA8",
+        "bitpres_net": null,
+        "connected_part": null,
+        "required_state": "Not connected on this daughtercard."
       },
       {
         "breakout_header": "J4.9",
         "breakout_net": "NO_CONNECT",
-        "host_pin": "TODO_J4_9",
-        "host_function": "unused placeholder",
-        "connected_part": "none",
-        "required_state": "Confirm no connection in mating design; if routed to MCU, use analog/no-pull or another documented low-leakage state.",
-        "reason": "Placeholder keeps mating-board pin assignment explicit."
+        "host_pin": "PB15 (not bonded on UFQFPN-32)",
+        "bitpres_net": null,
+        "connected_part": null,
+        "required_state": "Not connected on this daughtercard.",
+        "note": "Baseboard routes a net of this name to the header, but the STM32L432KCU6 in UFQFPN-32 has no such pin."
       },
       {
         "breakout_header": "J4.10",
         "breakout_net": "NO_CONNECT",
-        "host_pin": "TODO_J4_10",
-        "host_function": "unused placeholder",
-        "connected_part": "none",
-        "required_state": "Confirm no connection in mating design; if routed to MCU, use analog/no-pull or another documented low-leakage state.",
-        "reason": "Placeholder keeps mating-board pin assignment explicit."
+        "host_pin": "PB14 (not bonded on UFQFPN-32)",
+        "bitpres_net": null,
+        "connected_part": null,
+        "required_state": "Not connected on this daughtercard.",
+        "note": "Baseboard routes a net of this name to the header, but the STM32L432KCU6 in UFQFPN-32 has no such pin."
       },
       {
         "breakout_header": "J4.11",
         "breakout_net": "NO_CONNECT",
-        "host_pin": "TODO_J4_11",
-        "host_function": "unused placeholder",
-        "connected_part": "none",
-        "required_state": "Confirm no connection in mating design; if routed to MCU, use analog/no-pull or another documented low-leakage state.",
-        "reason": "Placeholder keeps mating-board pin assignment explicit."
+        "host_pin": "PB13 (not bonded on UFQFPN-32)",
+        "bitpres_net": null,
+        "connected_part": null,
+        "required_state": "Not connected on this daughtercard.",
+        "note": "Baseboard routes a net of this name to the header, but the STM32L432KCU6 in UFQFPN-32 has no such pin."
       },
       {
         "breakout_header": "J4.12",
         "breakout_net": "NO_CONNECT",
-        "host_pin": "TODO_J4_12",
-        "host_function": "unused placeholder",
-        "connected_part": "none",
-        "required_state": "Confirm no connection in mating design; if routed to MCU, use analog/no-pull or another documented low-leakage state.",
-        "reason": "Placeholder keeps mating-board pin assignment explicit."
+        "host_pin": "PB12 (not bonded on UFQFPN-32)",
+        "bitpres_net": null,
+        "connected_part": null,
+        "required_state": "Not connected on this daughtercard.",
+        "note": "Baseboard routes a net of this name to the header, but the STM32L432KCU6 in UFQFPN-32 has no such pin."
       },
       {
         "breakout_header": "J4.13",
         "breakout_net": "NO_CONNECT",
-        "host_pin": "TODO_J4_13",
-        "host_function": "unused placeholder",
-        "connected_part": "none",
-        "required_state": "Confirm no connection in mating design; if routed to MCU, use analog/no-pull or another documented low-leakage state.",
-        "reason": "Placeholder keeps mating-board pin assignment explicit."
+        "host_pin": "PB11 (not bonded on UFQFPN-32)",
+        "bitpres_net": null,
+        "connected_part": null,
+        "required_state": "Not connected on this daughtercard.",
+        "note": "Baseboard routes a net of this name to the header, but the STM32L432KCU6 in UFQFPN-32 has no such pin."
       },
       {
         "breakout_header": "J4.14",
         "breakout_net": "NO_CONNECT",
-        "host_pin": "TODO_J4_14",
-        "host_function": "unused placeholder",
-        "connected_part": "none",
-        "required_state": "Confirm no connection in mating design; if routed to MCU, use analog/no-pull or another documented low-leakage state.",
-        "reason": "Placeholder keeps mating-board pin assignment explicit."
+        "host_pin": "PB10 (not bonded on UFQFPN-32)",
+        "bitpres_net": null,
+        "connected_part": null,
+        "required_state": "Not connected on this daughtercard.",
+        "note": "Baseboard routes a net of this name to the header, but the STM32L432KCU6 in UFQFPN-32 has no such pin."
       },
       {
         "breakout_header": "J4.15",
-        "breakout_net": "NC",
-        "host_pin": "TODO_J4_15",
-        "host_function": "explicit NC placeholder",
-        "connected_part": "none",
-        "required_state": "Confirm no connection in mating design; if routed to MCU, use analog/no-pull or another documented low-leakage state.",
-        "reason": "Schematic net is explicitly named NC."
+        "breakout_net": "NO_CONNECT",
+        "host_pin": "PB2 (not bonded on UFQFPN-32)",
+        "bitpres_net": null,
+        "connected_part": null,
+        "required_state": "Not connected on this daughtercard.",
+        "note": "Baseboard routes a net of this name to the header, but the STM32L432KCU6 in UFQFPN-32 has no such pin."
       },
       {
         "breakout_header": "J4.16",
-        "breakout_net": "LED2",
-        "host_pin": "TODO_LED2_HOST_PIN",
-        "host_function": "LED2 active-low drive",
-        "connected_part": "D2 cathode, R2 to +3.3V",
-        "required_state": "Pull-up or push-pull high for LED off; drive low for LED on.",
-        "reason": "LED is active-low from host perspective."
+        "breakout_net": "LPS_PWR_IN",
+        "host_pin": "PB1",
+        "bitpres_net": "LPS_PWR",
+        "connected_part": "R1 10 R -> U3 BMP585 VDD (pin 8) + VDDIO (pin 4)",
+        "required_state": "Push-pull high to power the BMP585; low in sleep. R1 is the Bosch-required inrush limiter (datasheet 6.2.5, Fig. 27)."
       },
       {
         "breakout_header": "J4.17",
         "breakout_net": "GND",
         "host_pin": "HOST_GND",
-        "host_function": "Ground reference",
+        "bitpres_net": "GND",
         "connected_part": "board ground",
-        "required_state": "Connect to mating-board ground.",
-        "reason": "Common return path for all breakout signals and supplies."
+        "required_state": "Common return."
       }
+    ]
+  },
+  "suppressions": [
+    {
+      "rule_ids": [
+        "PU-001"
+      ],
+      "refs": [
+        "U1",
+        "U2",
+        "U3"
+      ],
+      "reason": "House convention: no external chip-select or I2C pull-ups. Deselect is a firmware/reset-state contract on STM32 internal pull-ups; PA15 and PB4 additionally have hardware default pull-ups."
+    },
+    {
+      "rule_ids": [
+        "*"
+      ],
+      "refs": [
+        "J3",
+        "J4"
+      ],
+      "topic": "staggered header hole offset",
+      "reason": "J3/J4 are on B.Cu at 180 deg, which mirrors the footprint +/-0.127 mm stagger relative to the baseboard, so individual hole centres differ by 0.254 mm. This does not affect mating: the stagger is a per-board hand-soldering friction fit and both boards centre the connector at X = 106.68 / 149.86, so the connector bodies coincide and pin n mates with pin n. Same placement as CompassTagBreakout, IMUTagBreakout, IMUBreakout-v2, BitPresTagBreakout, TorporTagBreakout, IMUTagNandBreakout."
+    },
+    {
+      "rule_ids": [
+        "*"
+      ],
+      "topic": "solder mask expansion",
+      "reason": "pad_to_mask_clearance 0 is the KiCad default across 29 of 30 boards here; fabs apply their own expansion. Not a decision."
+    },
+    {
+      "rule_ids": [
+        "*"
+      ],
+      "topic": "4 mil traces",
+      "reason": "27 mm of 0.1016 mm track, all of it BMP585 LGA escape routing. Deliberate; a process-selection matter, never current capacity at these currents."
+    }
+  ],
+  "reviewer_notes": {
+    "last_review": "UIUCBreakout-design-review.md, 2026-09-05",
+    "verified_clean": [
+      "KiCad DRC in place with --refill-zones: 0 violations, 0 unconnected.",
+      "Schematic-to-PCB pad-net cross-check: 77 pads, 0 mismatches.",
+      "Pinouts verified against manufacturer PDFs, not symbols: BMP585 9/9 (bst-bmp585-ds003 Table 26), ADXL367 12/12 (adxl367.pdf Table 9), AT25FF321A 8/8 (REN_DS-AT25FF321A-181R Fig. 2).",
+      "AT25FF321A-SHN-B is the 208-mil wide EIAJ SOIC (Table 37), and Package_SO:SOIC-8_5.3x6.2mm_P1.27mm is KiCad's JEITA/EIAJ 08-001-BBA 208-mil footprint. Correct pairing - the 150-mil part is -SSHN-B.",
+      "Nearest copper to board edge 1.563 mm; via annular rings 0.152/0.155 mm; no via-in-pad; no silk over SMD pad."
     ],
-
-    "population_options": [
-      {
-        "refs": ["R3", "R4", "R5"],
-        "default": "DNP",
-        "condition": "Populate only if STM32L432 internal pull-ups are insufficient for TMP119 SDA/SCL/RDY at the selected slow I2C clock.",
-        "connected_rail": "tmp119_pwr",
-        "notes": "These optional resistors pull to the switched TMP119 rail, not the always-on +3.3V rail."
-      }
+    "open_findings": [
+      "M1: committed jlcpcb/gerber/ lacks CuIn1/CuIn2 - a 2-layer plot of a 4-layer board. J3.7 and J4.1 reach +3.3V only through the In1 plane, so that set would fab a dead board. Correct files exist untracked in the working tree and inside GERBER-UIUCBreakout.zip.",
+      "M2: tracked production/bom.csv and positions.csv (2026-08-20) omit R1 and C4. Today's jlcpcb/production_files/ pair is correct.",
+      "M3: U1 SIO2/SIO3 hard-tied to +3.3V rather than pulled up. Safe in single/dual SPI; destructive if firmware sets the QE bit. Recommend 10 k pull-ups. The WLCSP part on BitPresTagBMP585 cannot hit this.",
+      "L1: silkscreen at J3.3/J3.4 reads rtc_scl/rtc_sda, propagating the baseboard swap onto this board.",
+      "L2: 3 ERC errors / 5 warnings, all cosmetic. Move the +3.3V PWR_FLAG to J3.7/J4.1 and add one on /LPS_PWR_IN.",
+      "L3: U2 cached symbol is stale (GND pins power_out vs power_in in tag_library). Pin numbers and names identical - no pinout risk.",
+      "L4: no bulk capacitance on +3.3V (BitPresTagBMP585 has 22 uF + 47 uF); C7 is 10.7 mm from U1.8.",
+      "L5: C4 Value field reads \"C\" rather than 0.22uf."
+    ],
+    "housekeeping": [
+      "This config previously described TorporTagBreakout and was rewritten 2026-09-05.",
+      "datasheets/ holds the wrong parts entirely (AT25XE321D, RV-3028, adxl362, lis2dw12, tmp119). All three parts on this board are in BoardDesigns/libraries/datasheets/. Symlink to the shared store.",
+      "Stale tracked ancestor files: TorporTagBreakout-analysis.md, CompassTagBreakout.kibot.yaml, RV3028.step, UIUCBreakout-rescue.dcm."
     ]
   }
 }
