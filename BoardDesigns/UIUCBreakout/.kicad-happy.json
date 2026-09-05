@@ -17,13 +17,14 @@
     "source": "Verified 2026-09-05 by joining UIUCBreakout J3/J4 -> tag-breakout-l432v2 J3/J4 -> U3 port -> BitPresTagBMP585 U302 net, from kicad-cli netlist exports of all three schematics.",
     "notes": [
       "Every signal net on both headers lands on the same STM32L432 pin as on BitPresTagBMP585. 17 signal nets, no exceptions. Firmware ports without a pin-map change.",
-      "KNOWN BASEBOARD ERROR, handled in software: on tag-breakout-l432v2, RV-3028 SCL -> net rtc_scl -> J3.3 -> PB7 (which is I2C1_SDA), and RV-3028 SDA -> net rtc_sda -> J3.4 -> PB6 (which is I2C1_SCL). The names are swapped relative to the MCU pin functions. UIUCBreakout leaves J3.3/J3.4 NC so this daughtercard is unaffected - but RTC driver code developed on this rig needs PB6 as SDA and PB7 as SCL, the opposite of BitPresTagBMP585. This is the only place the dev rig differs from the tag.",
+      "KNOWN BASEBOARD ERROR, handled in software -- and it is a WIRING error, not a naming error. On tag-breakout-l432v2 the net names are accurate: /stm32/rtc_scl really carries the RV-3028 SCL (U6.3) and /stm32/rtc_sda really carries SDA (U6.4). What is crossed is which MCU pin each landed on: SCL -> J3.3 -> PB7, which is I2C1_SDA; SDA -> J3.4 -> PB6, which is I2C1_SCL. Verified against the Micro Crystal RV-3028-C7 Application Manual section 2.2 (pin 3 = SCL, pin 4 = SDA), not against the KiCad symbol. CONSEQUENCE: hardware I2C1 cannot drive the RTC at all, since PB7 can only ever be SDA -- the MCU would have to clock out of its data pin. Bit-bang only, with PB7 as clock and PB6 as data. The house already uses a slow software I2C driver for the RV-3028, so this costs nothing operationally. For a future baseboard spin, I2C1 also maps to PA9 (SCL) / PA10 (SDA), which reach J4.7 and J4.6 and are unused. UIUCBreakout leaves J3.3/J3.4 NC so this daughtercard is unaffected, but RTC driver code developed on this rig needs PB6 as SDA and PB7 as SCL -- the opposite of BitPresTagBMP585, where hardware I2C1 would work. This is the only place the dev rig differs from the tag.",
       "SPI peripheral assignment: BMP585 must use SPI1 (PA5/PA11/PA12 have no SPI3 alternative). The AT25 flash should therefore use SPI3 at AF6 (PB3/PB4/PB5 carry both SPI1 AF5 and SPI3 AF6). No collision.",
       "The ADXL367 bus has no hardware SPI option: PA4 is SPI1_NSS/SPI3_NSS not SCK, and PA2/PA3 have no SPI AF at all. Inherited from BitPresTagBMP585. Alternative to bit-banging: USART2 synchronous master maps exactly - PA4=USART2_CK, PA2=USART2_TX, PA3=USART2_RX, PA1=CS as GPIO. ADXL367 is SPI mode 0; USART sync master does CPOL=0/CPHA=0 with CR2.MSBFIRST.",
       "PA15 (AT25 nCS, JTDI) and PB4 (AT25 MISO, NJTRST) have default pull-ups, so the flash is deselected out of reset with no external resistor. PB3 (AT25 SCK) forfeits TRACESWO. BOOT0 is strapped to GND on the baseboard, same as the tag.",
       "J4.6/J4.7/J4.8 (PA10/PA9/PA8) are unused and carry USART1_RX/TX/CK at AF7 - free console on the dev rig.",
       "R1 (10 R) is required, not optional: it is the Bosch inrush limiter from BMP585 datasheet 6.2.5 Fig. 27, and it sits in series in the BMP585 supply path. Omitting it leaves U3 unpowered. Same role as R2 on BitPresTagBMP585.",
-      "C4 (0.22 uF) is required: ADXL367 datasheet Table 9 note 1 - VREG_OUT needs an external 0.2 uF. Its Value field reads \"C\"; the MPN (CL10B224KA8NNNC) is correct."
+      "C4 (0.22 uF) is required: ADXL367 datasheet Table 9 note 1 - VREG_OUT needs an external 0.2 uF. Its Value field reads \"C\"; the MPN (CL10B224KA8NNNC) is correct.",
+      "C6 (4.7 uF) is the bulk cap on +3.3V, placed 4.12 mm from U1.8. The flash is the only part on this board that draws real current (~15 mA during page-program and erase); the ADXL367 and BMP585 are microamp loads."
     ],
     "host_pin_map": [
       {
@@ -48,7 +49,8 @@
         "host_pin": "PB7",
         "bitpres_net": "SDA",
         "connected_part": null,
-        "required_state": "Not connected on this daughtercard."
+        "required_state": "Not connected on this daughtercard.",
+        "note": "NC here. On the baseboard this pin carries the RV-3028 SCL (net /stm32/rtc_scl) into PB7, which is I2C1_SDA. Silkscreen reads PB7."
       },
       {
         "breakout_header": "J3.4",
@@ -56,7 +58,8 @@
         "host_pin": "PB6",
         "bitpres_net": "SCL",
         "connected_part": null,
-        "required_state": "Not connected on this daughtercard."
+        "required_state": "Not connected on this daughtercard.",
+        "note": "NC here. On the baseboard this pin carries the RV-3028 SDA (net /stm32/rtc_sda) into PB6, which is I2C1_SCL. Silkscreen reads PB6."
       },
       {
         "breakout_header": "J3.5",
@@ -348,28 +351,46 @@
     }
   ],
   "reviewer_notes": {
-    "last_review": "UIUCBreakout-design-review.md, 2026-09-05",
+    "last_review": "UIUCBreakout-design-review.md, 2026-09-05. All findings dispositioned; board ready to order.",
     "verified_clean": [
       "KiCad DRC in place with --refill-zones: 0 violations, 0 unconnected.",
-      "Schematic-to-PCB pad-net cross-check: 77 pads, 0 mismatches.",
+      "ERC: 2 warnings, both the accepted M3. No errors.",
+      "Schematic-to-PCB pad-net cross-check: 79 pads, 0 mismatches.",
+      "Gerbers vs saved board, checked by geometry not mtime: 120/120 track starts on CuTop+CuBottom; CuIn1/CuIn2 carry 2960 / 2739 coordinates.",
+      "Drill reconciliation: 61 = 61 (0.2 mm x3 -> x5, 0.3 mm x22 vias, 1.0 mm x34 header pins).",
       "Pinouts verified against manufacturer PDFs, not symbols: BMP585 9/9 (bst-bmp585-ds003 Table 26), ADXL367 12/12 (adxl367.pdf Table 9), AT25FF321A 8/8 (REN_DS-AT25FF321A-181R Fig. 2).",
-      "AT25FF321A-SHN-B is the 208-mil wide EIAJ SOIC (Table 37), and Package_SO:SOIC-8_5.3x6.2mm_P1.27mm is KiCad's JEITA/EIAJ 08-001-BBA 208-mil footprint. Correct pairing - the 150-mil part is -SSHN-B.",
-      "Nearest copper to board edge 1.563 mm; via annular rings 0.152/0.155 mm; no via-in-pad; no silk over SMD pad."
+      "AT25FF321A-SHN-B is the 208-mil wide EIAJ SOIC (Table 37); Package_SO:SOIC-8_5.3x6.2mm_P1.27mm is KiCad\u2019s JEITA/EIAJ 08-001-BBA 208-mil pattern; LCSC C5591126 is package SOIC-8-208mil. Correct pairing; the 150-mil part is -SSHN-B / C7455378.",
+      "Nearest copper to board edge 1.563 mm; via annular rings 0.152/0.155 mm; no via-in-pad; no silk over SMD pad.",
+      "Every supply pin has a 0.1 uF within 2.73 mm; C6 4.7 uF provides bulk 4.12 mm from the flash."
     ],
-    "open_findings": [
-      "M1: committed jlcpcb/gerber/ lacks CuIn1/CuIn2 - a 2-layer plot of a 4-layer board. J3.7 and J4.1 reach +3.3V only through the In1 plane, so that set would fab a dead board. Correct files exist untracked in the working tree and inside GERBER-UIUCBreakout.zip.",
-      "M2: tracked production/bom.csv and positions.csv (2026-08-20) omit R1 and C4. Today's jlcpcb/production_files/ pair is correct.",
-      "M3: U1 SIO2/SIO3 hard-tied to +3.3V rather than pulled up. Safe in single/dual SPI; destructive if firmware sets the QE bit. Recommend 10 k pull-ups. The WLCSP part on BitPresTagBMP585 cannot hit this.",
-      "L1: silkscreen at J3.3/J3.4 reads rtc_scl/rtc_sda, propagating the baseboard swap onto this board.",
-      "L2: 3 ERC errors / 5 warnings, all cosmetic. Move the +3.3V PWR_FLAG to J3.7/J4.1 and add one on /LPS_PWR_IN.",
-      "L3: U2 cached symbol is stale (GND pins power_out vs power_in in tag_library). Pin numbers and names identical - no pinout risk.",
-      "L4: no bulk capacitance on +3.3V (BitPresTagBMP585 has 22 uF + 47 uF); C7 is 10.7 mm from U1.8.",
-      "L5: C4 Value field reads \"C\" rather than 0.22uf."
-    ],
+    "open_findings": [],
     "housekeeping": [
       "This config previously described TorporTagBreakout and was rewritten 2026-09-05.",
       "datasheets/ holds the wrong parts entirely (AT25XE321D, RV-3028, adxl362, lis2dw12, tmp119). All three parts on this board are in BoardDesigns/libraries/datasheets/. Symlink to the shared store.",
       "Stale tracked ancestor files: TorporTagBreakout-analysis.md, CompassTagBreakout.kibot.yaml, RV3028.step, UIUCBreakout-rescue.dcm."
+    ],
+    "accepted_decisions": [
+      {
+        "id": "M3",
+        "title": "U1 SIO2/SIO3 tied directly to +3.3V rather than pulled up",
+        "status": "accepted as-is, 2026-09-05, do not re-raise",
+        "reason": "The target tag has no room for the two 10k pull-ups, and this breakout is the preferred place for a quad-mode failure to occur: U1 here is an 8-lead SOIC that can be desoldered and replaced by hand, unlike the WLCSP on the tag. The hazard is deliberately located on the cheap, repairable board.",
+        "consequences": [
+          "The two pin_to_pin ERC warnings (Bidirectional connected to Power output, U1.3 and U1.7) are permanent and expected. They are inherent to tying bidirectional pins to a net carrying a PWR_FLAG and cannot be cleared by relocating the flag, since ERC evaluates net-wide. ERC steady state for this board is 2 warnings, 0 errors.",
+          "The tag cannot reach this state regardless: BitPresTag uses the 12-ball WLCSP AT25FF321A-UUN-T, whose pinout breaks out only SO and SI. There is no IO2/IO3, so quad mode is unavailable there."
+        ],
+        "firmware_note": "Setting the QE bit of AT25FF321A Status Register 2 on this board will make U1 drive IO2/IO3 into the 3.3 V rail. That is the experiment this board exists to survive; expect to replace U1 afterwards."
+      }
+    ],
+    "closed_findings": [
+      "L1: the rtc_scl/rtc_sda silkscreen at J3.3/J3.4 now reads PB7 and PB6 respectively, matching the baseboard. Labelling by MCU port rather than by the baseboard net name is deliberate -- the port is an invariant fact about the header pin and leads to a correct conclusion (\"PB7, so I2C1_SDA\"), whereas \"rtc_scl\" is equally true but invites \"SCL is here, so I2C1_SCL, so PB6\", which is the reasoning that produced the baseboard error. Confirmed in the shipped SilkTop.gbr, not just the board file.",
+      "M1: committed jlcpcb/gerber/ lacked CuIn1/CuIn2. Fixed and committed cf3eb53.",
+      "M2: R1 and C4 did not exist as of the 2026-08-20 production/ export. Both added; stale export deleted. Committed cf3eb53.",
+      "L2: PWR_FLAG count 1 -> 3; all three power_pin_not_driven errors and the four_way_junction warning cleared.",
+      "L3: U2 ADXL367BCCZ-RL7 symbol updated from tag_library; now identical pin for pin and type for type.",
+      "L4: RAISED IN ERROR and withdrawn. The claim that C7 sat 10.7 mm from the flash was wrong -- C7 is U2\u2019s cap at 1.61 mm from ADXL367 VS; the flash has C2 at 2.42 mm. Capacitors had been paired to parts by reference designator instead of measured. Measured nearest same-net cap per supply pin: U1 VCC/C2 2.42, U2 VS/C7 1.61, U2 VDDIO/C1 1.89, U2 VREG_OUT/C4 1.97, U3 VDD/C5 1.78, U3 VDDIO/C3 1.71 mm. The bulk half of the finding stood: C6 (4.7 uF) added 4.12 mm from U1.8.",
+      "L5: C4 Value field now reads 0.22uf and matches MPN CL10B224KA8NNNC.",
+      "L6: back silkscreen date corrected to 9/5/2026; J4.16 relabelled LPS_PWR_IN PB1; trailing whitespace removed from the PA7 and PA6 silk strings."
     ]
   }
 }

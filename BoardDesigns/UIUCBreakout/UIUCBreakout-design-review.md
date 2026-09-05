@@ -1,6 +1,6 @@
 # UIUCBreakout — design review
 
-**Date:** 2026-09-05
+**Date:** 2026-09-05 (findings raised) / 2026-09-05 (designer responses recorded)
 **Board:** `UIUCBreakout.kicad_pcb` / `.kicad_sch`, 4 layer, 48.26 × 48.26 mm
 **Role:** daughtercard for `tag-breakout-l432v2`, used to develop firmware for `BitPresTagBMP585`
 **Reviewer brief:** confirm the header pinout reproduces `BitPresTagBMP585` on the L432; account for the
@@ -13,8 +13,12 @@ on `BitPresTagBMP585`** — 17 signal nets, no exceptions — so firmware moves 
 tag without a pin-map change. Netlist, packages, footprints, DRC and the schematic↔PCB pad-net
 cross-check are all clean.
 
-Two things to fix before ordering, one of which would produce a dead board if the committed files were
-sent as-is. Neither is a schematic change.
+All findings are closed. M1, M2 and L1-L6 are fixed; **M3 is accepted as-is** on the designer's
+reasoning, which is better than the review's - see below. One review finding, L4, was **raised in
+error** and is corrected here.
+
+Closing state: DRC 0 violations / 0 unconnected, ERC 2 warnings (both intrinsic to the accepted M3,
+0 errors), pad-net cross-check 79/79, drill reconciliation 61 = 61. **Ready to order.**
 
 ---
 
@@ -90,139 +94,138 @@ resistor is on this board (R1); BitPresTagBMP585 uses R2 in the identical positi
 
 Confirmed in the files, and it does **not** touch this daughtercard.
 
-On `tag-breakout-l432v2`, U6 (RV-3028-C7) pin 3 `SCL` → net `/stm32/rtc_scl` → J3.3 → **PB7**, which
-is `I2C1_SDA`; U6 pin 4 `SDA` → `/stm32/rtc_sda` → J3.4 → **PB6**, which is `I2C1_SCL`. The net names
-and the silkscreen are swapped relative to the MCU's pin functions.
+**It is a wiring error, not a naming error** — a distinction worth stating precisely, because it
+decides how the daughtercard should label these pins. The baseboard's net names are *accurate*:
+`/stm32/rtc_scl` really does carry the RTC's SCL, and `/stm32/rtc_sda` really does carry its SDA. What
+is crossed is which MCU pin each signal landed on.
 
-UIUCBreakout leaves J3.3 and J3.4 unconnected, so nothing on this board is affected. But note the
-consequence for firmware portability, since it is the one place the dev rig differs from the tag:
+| RTC signal | Net (accurate) | Header | MCU pin | That pin's I²C1 role |
+|---|---|---|---|---|
+| U6.3 SCL | `/stm32/rtc_scl` | J3.3 | **PB7** | `I2C1_SDA` |
+| U6.4 SDA | `/stm32/rtc_sda` | J3.4 | **PB6** | `I2C1_SCL` |
 
-- On `BitPresTagBMP585`, PB6 = `/SCL` and PB7 = `/SDA` — correct.
-- On the dev rig, the RTC (on the *baseboard*, U6) requires PB6 driven as SDA and PB7 as SCL.
+Verified against the manufacturer PDF rather than the KiCad symbol, since a mislabelled symbol would
+have inverted this conclusion — Micro Crystal RV-3028-C7 Application Manual §2.2 gives **pin 3 = SCL**
+("I²C Serial Clock Input") and **pin 4 = SDA** ("I²C Serial Data Input-Output"). The symbol is correct,
+so the baseboard really does put the RTC's clock on PB7.
+
+UIUCBreakout leaves J3.3 and J3.4 unconnected, so nothing on this board is affected. Two consequences
+matter.
+
+**Hardware I²C1 cannot drive the RTC on this baseboard at all.** PB7 can only ever be `I2C1_SDA`, so
+the MCU would have to clock out of its data pin. The RTC must be bit-banged, with **PB7 as the clock
+and PB6 as the data line**. Because the house already drives the RV-3028 with a slow software I²C
+driver, this costs nothing operationally — which is why it has been fine in the field.
+
+For a future baseboard spin: `I2C1` also maps to PA9 (SCL) / PA10 (SDA) on this package, both of which
+reach J4.7 and J4.6 and are unused. That is where a hardware-I²C RTC would go, short of uncrossing
+PB6/PB7.
+
+**For firmware portability**, this is the one place the dev rig differs from the tag:
+
+- On `BitPresTagBMP585`, PB6 = `/SCL` and PB7 = `/SDA` — correct, and hardware I²C1 would work.
+- On the dev rig, the RTC sits on the baseboard and needs PB6 driven as SDA, PB7 as SCL.
 
 So RTC driver code developed on this rig must be conditionally swapped for the tag. Everything else
-ports unchanged. See finding **L1** — the silkscreen currently propagates the wrong names.
+ports unchanged.
 
-## 3. Findings
+## 3. Findings and dispositions
 
-### M1 — The committed Gerber set is a 2-layer plot of a 4-layer board; it would fab a dead board
+M1 and M2 were the two that would have produced unusable hardware. Both are fixed and committed
+(`cf3eb53`). Everything below records what the designer decided.
 
-`jlcpcb/gerber/` as committed contains `CuTop` and `CuBottom` but **no `CuIn1` / `CuIn2`**. The
-board is 4 layers, and In1.Cu carries the entire `+3.3V` plane.
+### M3 - U1 SIO2/SIO3 hard-tied to +3.3V - ACCEPTED AS-IS
 
-This is not cosmetic. `+3.3V` has only 12.3 mm of F.Cu track and 4 vias down to the In1 plane, and
-critically:
+`U1.3 (WP#/IO2)` and `U1.7 (HOLD#-RESET#/IO3)` connect directly to the rail. In single- and dual-SPI
+this is standard. Per the AT25FF321A datasheet section 3, setting the `QE` bit of Status Register 2
+makes both pins bidirectional quad-SPI I/O, and the device would then drive them into a hard short.
 
-```
-J3.7  on-layer-track = False
-J4.1  on-layer-track = False      # the two +3.3V supply pins from the baseboard
-```
+**Designer response, accepted:** the target tag has no room for the two pull-ups, and this breakout is
+the *preferred* place for a quad-mode failure to happen - the flash here is an 8-lead SOIC that can be
+desoldered and replaced by hand, where the tag's part cannot.
 
-Both header supply pins reach the rest of the board **only through the In1 plane**. Fabricated from
-the committed Gerbers, the board would receive no power at all. (GND survives — it has F.Cu and
-B.Cu pours as well as In2.)
+This is a better position than the review took. The review treated "someone tries quad mode on the dev
+board" as a risk to be designed out. It is more useful as a **deliberately cheap failure mode**: the
+experiment is only survivable *because* it happens on this board, and running it here is the only way
+to learn what the tag would do. Nothing to change.
 
-The working tree is already correct: `UIUCBreakout-CuIn1.gbr` and `-CuIn2.gbr` were regenerated
-today and are present but untracked, and `jlcpcb/production_files/GERBER-UIUCBreakout.zip` (the
-archive you would actually upload) contains all four copper layers plus both drill files.
+Two consequences to record, so neither is re-raised:
 
-**Fix:** commit the two inner-layer Gerbers, force-add the archive
-(`git add -f jlcpcb/production_files/GERBER-UIUCBreakout.zip` — `BoardDesigns/.gitignore` excludes
-`*.zip`), and stage the two stale `TorporTagBreakout-*-drl_map.pdf` deletions.
+- The two `pin_to_pin` ERC warnings (Bidirectional connected to Power output, U1.3 and U1.7) are
+  **permanent and expected**. They are inherent to tying bidirectional pins to a net carrying a
+  `PWR_FLAG` and cannot be cleared by moving the flag - ERC evaluates net-wide.
+- The tag itself cannot reach this state at all: BitPresTag uses the 12-ball WLCSP, whose pinout breaks
+  out only SO and SI. There is no IO2/IO3 to conflict, so quad mode is not available there either way.
 
-### M2 — The tracked BOM/CPL in `production/` is missing R1 and C4; R1 is in the power path
+### L1 — silkscreen at J3.3/J3.4 — FIXED
 
-`production/bom.csv` (2026-08-20, tracked) lists C1, C2, C3, C5, C7, U1, U2, U3 — and omits
-**R1 (10 Ω)** and **C4 (0.22 µF)**. `production/positions.csv` omits them too.
+`rtc_scl` / `rtc_sda` are gone and the two pins now carry port names: **J3.3 = `PB7`, J3.4 = `PB6`**,
+matching the baseboard. (A first attempt had the two inverted — the same trap the finding was about,
+since the baseboard runs this pair in the order PB7, PB6 rather than the PB6, PB7 that pin order
+suggests. Worth checking positions rather than merely confirming the strings changed.)
 
-- **R1 is in series in the BMP585's supply.** Not placing it leaves `LPS_PWR` open and U3 unpowered.
-- **C4 is mandatory.** ADXL367 datasheet Table 9, note 1: VREG_OUT "is used as an internal supply
-  decoupling pin, an external 0.2 μF capacitor is needed."
+Labelling by MCU port rather than by the baseboard's net name is the right convention here, for three
+reasons: the port is an invariant physical fact about the header pin, independent of anyone's view of
+the baseboard; it is what every other pin on this board does; and it leads a reader to a correct
+conclusion — "PB7, so that is `I2C1_SDA`". The alternative label `rtc_scl` would have been equally
+*true* and still misleading, because it invites "SCL is here, so this is the clock pin, so `I2C1_SCL`,
+so PB6" — precisely the reasoning that produced the baseboard error. A label can be accurate and still
+walk the reader into the trap.
 
-Today's regenerated `jlcpcb/production_files/BOM-UIUCBreakout.csv` and `CPL-UIUCBreakout.csv`
-include both, and are correct. **Fix:** delete or replace the stale `production/` CSVs so the
-incomplete pair cannot be picked up by mistake.
+Optional refinement, not done and not needed: `PB7 rtc_SCL` / `PB6 rtc_SDA` would record both facts and
+put the surprising one where someone will read it. These pins are NC on this board, so it is
+documentation only, with no electrical consequence.
 
-### M3 — U1 SIO2/SIO3 are hard-tied to +3.3V, not pulled up
+Confirmed in the shipped artwork, not just the board file: every coordinate in a fresh `kicad-cli` plot
+of F.Silkscreen is present in the packaged `SilkTop.gbr` (zero fresh-only points), and the glyph stroke
+counts corroborate the direction — J3.4's label carries 44 points against J3.3's 31, as a `6` needs
+more strokes than a `7`.
 
-`U1.3 (WP#/IO2)` and `U1.7 (HOLD#-RESET#/IO3)` connect directly to the `+3.3V` net. In single- and
-dual-SPI this is the standard treatment and is fine. But per the AT25FF321A datasheet §3, when the
-`QE` bit of Status Register 2 is set, both pins become **bidirectional quad-SPI I/O** — the device
-would then drive them into a hard short to the rail.
+### L2 - ERC - FIXED
 
-On a board whose entire purpose is firmware development, "someone tries quad mode" is a realistic
-path, and it is destructive rather than merely non-functional. This also produces the two ERC
-`pin_to_pin` warnings (Bidirectional connected to Power output).
+`PWR_FLAG` count went 1 -> 3. All three `power_pin_not_driven` errors are gone, as is the
+`four_way_junction` warning. ERC is now 8 violations -> **2 warnings**, both of them the accepted M3.
 
-Note the target tag cannot hit this: `BitPresTagBMP585` uses the 12-ball WLCSP (`AT25FF321A-UUN-T`),
-whose pinout breaks out only SO/SI — there is no IO2/IO3 to conflict.
+### L3 - stale U2 symbol - FIXED
 
-**Recommendation:** replace the two direct ties with 10 kΩ pull-ups to +3.3V. Two 0603 parts, no
-layout change of consequence, and quad-mode experiments become safe.
+The schematic's embedded `ADXL367BCCZ-RL7` now matches `libraries/tag_library.kicad_sym` pin for pin
+and type for type. The `lib_symbol_mismatch` and the GND `pin_to_pin` warning are both gone.
 
-### L1 — Silkscreen at J3.3/J3.4 reproduces the baseboard's swapped names
+### L4 - decoupling - RAISED IN ERROR; BULK ADDED
 
-The header silkscreen is otherwise excellent — every pin is labelled with both the L432 port and the
-net (`PA5 LPS_SCK`, `AT25_nCS PA15`, …). But J3.3 and J3.4 are labelled `rtc_scl` and `rtc_sda`,
-copied from the baseboard, which are exactly the names that are wrong. On a board that a student
-will probe, that silkscreen will actively mislead.
+**The first half of this finding was wrong.** The review claimed "C7 is 10.7 mm from the flash it
+decouples". It is not: C7 is *U2's* cap, 1.61 mm from the ADXL367's VS pin. The flash has C2 at
+2.42 mm. The error was pairing capacitors to parts by reading reference designators instead of
+measuring - the same class of mistake the repo's own notes warn about, applied to decoupling rather
+than to a pinout.
 
-Since both pins are NC here, label them `PB7` and `PB6` like every other pin, or `PB7 (rtc SDA)` /
-`PB6 (rtc SCL)` to record the correction where someone will read it.
+Measured, nearest same-net capacitor to every supply pin on the board:
 
-### L2 — ERC: 3 errors, 5 warnings, all cosmetic but worth clearing before ordering
+| Supply pin | Net | Nearest | Then |
+|---|---|---|---|
+| U1 AT25FF321A VCC | `+3.3V` | **C2 0.1 uF @ 2.42 mm** | C6 4.7 uF @ 4.12 mm |
+| U2 ADXL367 VS | `+3.3V` | **C7 0.1 uF @ 1.61 mm** | C1 0.1 uF @ 2.59 mm |
+| U2 ADXL367 VDDIO | `+3.3V` | **C1 0.1 uF @ 1.89 mm** | C7 0.1 uF @ 2.73 mm |
+| U2 ADXL367 VREG_OUT | `Net-(U2-VREG_OUT)` | **C4 0.22 uF @ 1.97 mm** | - |
+| U3 BMP585 VDD | `/LPS_PWR` | **C5 0.1 uF @ 1.78 mm** | C3 0.1 uF @ 4.14 mm |
+| U3 BMP585 VDDIO | `/LPS_PWR` | **C3 0.1 uF @ 1.71 mm** | C5 0.1 uF @ 4.22 mm |
 
-```
-ERROR   power_pin_not_driven   U3.4 VDDIO  (net /LPS_PWR)   ×2
-ERROR   power_pin_not_driven   U2.10 VS    (net +3.3V)
-WARNING pin_to_pin             U1.3 SIO2 / #FLG02           ] see M3
-WARNING pin_to_pin             U1.7 SIO3 / #FLG02           ]
-WARNING pin_to_pin             U2.7 GND / U2.11 GND         ] see L3
-WARNING lib_symbol_mismatch    U2 ADXL367BCCZ-RL7           ]
-WARNING four_way_junction      at (118.11, 181.61)
-```
+Every supply pin has a 0.1 uF within 2.73 mm. High-frequency decoupling was never a problem on this
+board.
 
-The single `PWR_FLAG` (#FLG02) sits on the U1 SIO2/SIO3 tie node. Moving it to J3.7/J4.1 — the
-actual origin of `+3.3V` — and adding a second on `/LPS_PWR_IN` at J4.16 clears the three
-`power_pin_not_driven` errors, and (with M3) the two `pin_to_pin` warnings.
+The second half stands and has been addressed: there was no bulk capacitance on `+3.3V`, against
+22 uF + 47 uF on the tag. **C6 (4.7 uF) added, 4.12 mm from U1.8** - the flash is the only part here
+that draws real current, so that is the right place for it.
 
-### L3 — U2's cached symbol is stale; the library has since been corrected
+### L5 - C4 Value field - FIXED
 
-`lib_symbol_mismatch` on U2 is benign. Diffing the embedded copy against
-`libraries/tag_library.kicad_sym`: **pin numbers and names are identical**; only pins 7 and 11 (GND)
-differ, `power_out` in the schematic's cached copy vs `power_in` in the library. The library is
-right. Updating the symbol from the library clears both this warning and the `pin_to_pin` GND
-conflict.
+`Value` now reads `0.22uf`, and the regenerated BOM line is `0.22uf,C4,C_0603_1608Metric,C21120,1`.
+Anyone hand-populating now sees the right number.
 
-Pinout independently verified against the manufacturer PDF — see §4.
+### L6 - cosmetic - FIXED
 
-### L4 — No bulk capacitance on +3.3V; C7 is 10.7 mm from the flash it decouples
-
-The `+3.3V` rail carries C1, C2, C7 — three 0.1 µF and nothing else. `BitPresTagBMP585` puts
-22 µF + 47 µF on the equivalent VIN rail. The AT25FF321A draws ~15 mA during page-program and erase,
-and its only local bypass is 10.7 mm away (C2 → U2 VDDIO is 12.3 mm; C1 → U2 VS is 2.6 mm, C3/C5 →
-U3 are 4.1/4.2 mm, C4 → U2 VREG_OUT is 2.0 mm — those are fine).
-
-The In1/In2 plane pair sits across a 1.24 mm core, so plane capacitance is ~65 pF and contributes
-nothing. The baseboard's C10 (4.7 µF) is the nearest bulk, across two header pins.
-
-Not a blocker on a plane-backed dev board at these currents, but a 4.7–10 µF 0603 on +3.3V near U1,
-and C7 moved closer to U1.8, would make the flash's supply environment match the tag's.
-
-### L5 — Value/MPN mismatch on C4, and the one that could actually bite
-
-`C4` has `Value = "C"` with `MPN = CL10B224KA8NNNC` (0.22 µF). Per house convention the MPN is what
-fab consumes, so the build is correct — but C4 is precisely the part where the required value is
-unusual (0.2 µF, not 0.1 µF), and every other capacitor on the board reads `0.1uf`. Anyone hand-
-populating from the schematic or the CPL (which prints `C4, C, C_0603_1608Metric`) will fit a
-0.1 µF. Set `Value` to `0.22uf`.
-
-### L6 — Cosmetic
-
-- B.Silkscreen reads `Geoffrey Brown 95/2026` — presumably `9/5/2026`.
-- J4.16 silk reads `LPS_PWR PB1`; the net at that pin is `LPS_PWR_IN` (pre-R1). `LPS_PWR` is the
-  post-R1 rail. Minor, but it matters when probing which side of R1 you are on.
-- Trailing whitespace/newline in the `PA7 ` and `PA6 LPS_RDY\n` silk strings.
+Back silkscreen reads `Geoffrey Brown 9/5/2026`; J4.16 reads `LPS_PWR_IN PB1`, matching the net; the
+trailing whitespace and newline in the `PA7` and `PA6 LPS_RDY` strings are gone.
 
 ## 4. Verified clean
 
@@ -297,16 +300,24 @@ Not design issues, but they will mislead the next review:
   in the board's own config and leave a comments-only `.gitignore` in `analysis/` — `analyze_pcb.py`
   recreates that file unconditionally otherwise.
 
-## 6. Suggested order of work
+## 6. Closing out
 
-1. **M1** — commit `CuIn1`/`CuIn2`, force-add the Gerber archive, stage the stale PDF deletions.
-2. **M2** — remove the stale `production/` CSVs.
-3. **M3** — 10 kΩ pull-ups on U1 SIO2/SIO3 (2 parts; schematic + a short reroute).
-4. **L1, L5, L6** — silkscreen at J3.3/J3.4 and the date; C4 `Value` → `0.22uf`.
-5. **L2, L3** — move/add PWR_FLAGs; update U2 from the library. Re-run ERC to zero.
-6. **L4** — optional: 4.7–10 µF on +3.3V near U1; pull C7 closer to U1.8.
-7. Re-run DRC and ERC on the **committed** state, then tag `review/UIUCBreakout-2026-09-05`.
+**Nothing outstanding.** All nine findings are dispositioned: seven fixed, one (M3) accepted as a
+design decision, one (L4) withdrawn as raised in error.
 
-Items 3 and 6 are the only ones touching copper. If you would rather order now, M1 and M2 alone are
-sufficient to get correct boards — M3 is a safety margin against a firmware experiment, not a defect
-in the board as drawn.
+M3 is recorded in `.kicad-happy.json` under `accepted_decisions` rather than as an open finding, so the
+two remaining ERC warnings are this board's expected steady state, not something for the next review to
+chase.
+
+Ready to tag `review/UIUCBreakout-2026-09-05`.
+
+### Closing state, verified against the working tree
+
+| Check | Result |
+|---|---|
+| KiCad DRC (`--refill-zones`, `--severity-all`) | 0 violations, 0 unconnected |
+| ERC | 2 warnings, both the accepted M3 (was 8) |
+| Schematic-to-PCB pad-net cross-check | 79 pads, 0 mismatches |
+| Gerbers vs. saved board | 120/120 track starts; CuIn1/CuIn2 carry 2960 / 2739 coordinates |
+| Drill reconciliation | 61 = 61 (0.2 mm x5, 0.3 mm x22 vias, 1.0 mm x34 header pins) |
+| BOM / CPL | 11 parts each, including C4 0.22 uF and C6 4.7 uF |

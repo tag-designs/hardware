@@ -2,8 +2,9 @@ Designator,Val,Package,Mid X,Mid Y,Rotation,Layer
 C1,0.1uf,C_0603_1608Metric,128.44,-87.977,0.0,top
 C2,0.1uf,C_0603_1608Metric,134.04,-78.177,90.0,top
 C3,0.1uf,C_0603_1608Metric,127.94,-101.877,90.0,top
-C4,C,C_0603_1608Metric,131.74,-91.577,0.0,top
+C4,0.22uf,C_0603_1608Metric,131.74,-91.577,0.0,top
 C5,0.1uf,C_0603_1608Metric,128.765,-108.577,0.0,top
+C6,4.7uf,C_0603_1608Metric,135.745,-78.172,90.0,top
 C7,0.1uf,C_0603_1608Metric,131.74,-89.977,0.0,top
 R1,10,R_0603_1608Metric,135.0775,-108.502,0.0,top
 U1,AT25FF321A-SHN-B,SOIC-8_5.3x6.2mm_P1.27mm,128.14,-81.172,270.0,top
