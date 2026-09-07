@@ -1,0 +1,130 @@
+{
+  "version": 1,
+  "project": {
+    "name": "tagbase-lipo-v1",
+    "description": "USB-powered base station that programs a tag over SWD and charges the tag's LiPo cell through the 6-pin tagpoint connector J101.",
+    "board": "4 layer, 50.95 x 70.00 mm, 1.6 mm. In1.Cu = +3V3 plane, In2.Cu = GND plane, F.Cu/B.Cu GND pours.",
+    "status": "Not fabricated as of 2026-09-07."
+  },
+  "analysis": {
+    "track_in_git": true,
+    "note": "Does not inherit from BoardDesigns/.kicad-happy.json; must be set here. Leave a comments-only analysis/.gitignore in place - analyze_pcb.py recreates that file unconditionally."
+  },
+  "design_intent": {
+    "power": [
+      "+3V3 (U1 XC6206P332MR) is derived from VUSB only. There is no battery path to the MCU - this is a bench instrument, not a portable one.",
+      "+1V8 (U3 AP2112K-1.8) is derived from +3V3 and enabled by PB6. Disabling it puts both level shifters into high impedance via the SN74LVC1T45 VCC-isolation feature - a clean idle state for the tag interface.",
+      "THE BATTERY IS ON THE TAG, NOT ON THIS BOARD. /BAT has exactly two pads: U2 pin 1 and SW2 pin 3. SW2 routes it to TAG_3V3 -> J101, so the charger charges the tag's cell through the tag connector. A charger plus no battery connector looks like a missing part and is not.",
+      "Tag supply select: SW1 chooses EXT_PWR (J1) or +3V3; SW2 chooses that or /BAT. Silkscreen reads EXT_PWR / 3.3V / Vbat."
+    ],
+    "tag_logic_domain": [
+      "THE TAGS CARRY THEIR OWN INTERNAL 1.8 V REGULATORS. TAG_3V3 is the regulator's INPUT, not the tag's logic rail. The tag processor always runs at 1.8 V regardless of switch position, so VCCB = +1V8 on U7/U8 is correct.",
+      "Do not read TAG_3V3 as naming the logic domain of the pins beside it. A reviewer who does will wrongly conclude the 1.8 V shifter outputs fail a 3.3 V tag's VIH."
+    ],
+    "swd_over_spi": [
+      "SWD to the tag is driven by SPI1 (AF5), not bit-banged and not SPI3. PB3 = SPI1_SCK, PB4 = SPI1_MISO, PB5 = SPI1_MOSI.",
+      "R4 (100 ohm) ties MOSI to MISO so the full-duplex peripheral drives the single half-duplex bidirectional SWDIO line, with the resistor limiting contention current during turnaround.",
+      "U8 DIR on PA15 flips the level shifter to match. U7 DIR is tied to +3V3, permanently A->B, correct for a host-driven SWCLK.",
+      "SELECT AF5. PA1 and PA15 also carry SPI1 functions but are used as plain GPIO here, so there is no collision.",
+      "SN74LVC1T45 direction, verified against TI Table 7-1: DIR low = B to A, DIR high = A to B."
+    ],
+    "charger": [
+      "U2 is XC6808A4C28R-G (LCSC C3682502). Field 2 = \"4\" selects the JEITA 4-temperature monitor, so PIN 5 IS THIN, NOT NF, AND R2 (10 kohm to GND) IS CORRECT AND REQUIRED. Do not remove it.",
+      "DO NOT SUBSTITUTE THE xN VARIANT. On XC6808ANC28R-G pin 5 is NF and Torex requires it OPEN (\"No Function (Please do not connect any terminal.)\" and Notes on Use item 13). R2 would then be wrong. The two variants differ only in field 2; everything else -- 4.20 V charge voltage, 10 h hold, trickle enabled, 1 kHz abnormal status, USP-6B07 -- is identical.",
+      "THE TEMPERATURE MONITOR IS DEFEATED, NOT ACTIVE. THIN has an internal 10.0 kohm pull-up to VTHIN_open = 2.00 V, so R2 = 10 kohm divides to 1.00 V = 50% of open -- between VT45 (31-35%) and VT10 (62-66%), the normal full-rate band, with ~15 points of margin each side. The IC therefore reads room temperature permanently. This is the datasheet default test condition (VTHIN = 1.0 V). Tolerance is a non-issue: +/-5% on R2 still gives 50% +/-1.9%.",
+      "Real JEITA protection is NOT available on this board: the NTC would have to sit at the cell, which is on the tag, and all six J101 pins are allocated. Adding a seventh tagpoint would enable it -- the A4 keeps that door open, the AN never could.",
+      "Battery insertion detection is unavailable. The datasheet senses it through THIN, and a fixed base-side resistor never moves. Re-apply VIN to restart the IC.",
+      "Required externals, both present: CIN = 1 uF on VIN (C10, 2.15 mm) and CL = 1 uF on BAT (C9, 1.56 mm).",
+      "Charge current: RISET (kohm) = 351 x ICHG(mA)^-1.11. R1 = 33 kohm -> about 8.4 mA, inside the valid 5-40 mA window.",
+      "ISET is destructive if shorted: Note 11 warns the IC may be destroyed if ISET is shorted to GND before the over-current monitor acts.",
+      "Operating range 4.5-6.0 V. CSO is open-drain, pulled up by R3 (10 kohm) into PA1.",
+      "Datasheet: libraries/datasheets/C3682502.pdf (covers the whole XC6808 series)."
+    ],
+    "sense": [
+      "U6 TLV9001IDCKR is a unity-gain follower sensing TAG_3V3 into PA0 (ADC1_IN5): TAG_3V3 -> R5 1M -> IN+, OUT tied to IN-, OUT -> R107 2k2 -> PA0.",
+      "R5 = 1 Mohm is protection, not a divider: on the Vbat position IN+ sees up to 4.2 V against a 3.8 V absolute maximum, and 1 Mohm limits clamp current to about 0.4 uA.",
+      "The follower saturates at the 3.3 V rail, so this is a rail-present detector, not a battery voltmeter."
+    ],
+    "leds": [
+      "R101 = R102 = 220 ohm is DELIBERATE. 100 ohm was measured as too bright, so the green runs at about 2.7 mA on purpose.",
+      "The schematic note beside the LEDs records this: 'Green 2.7Vf, 6mA, 100 ohm (3.3V) == too bright, using 220'. Do not 'correct' R102 to match the 100 ohm calculation."
+    ]
+  },
+  "firmware_contract": [
+    {
+      "signal": "TAG_RESET (PA10 via R104 2k2)",
+      "rule": "Drive low to assert reset; leave as a high-impedance input otherwise. NEVER drive it high.",
+      "reason": "This line is not level-shifted. The tag processor runs at 1.8 V, so a 3.3 V high relies on the tag's clamp diode. R104 limits injection to about 0.5 mA, inside the STM32 +/-5 mA per-pin limit, but the clamp should not be the design."
+    },
+    {
+      "signal": "tag interface idle",
+      "rule": "Disable the +1V8 rail via PB6 when no tag is attached.",
+      "reason": "SN74LVC1T45 datasheet section 3: input circuitry is always active on both ports and must have a logic HIGH or LOW applied to prevent excess ICC. With J101 empty, TAG_SCK and TAG_SWDIO float. Dropping +1V8 puts both ports high-Z via the VCC-isolation feature."
+    },
+    {
+      "signal": "SPI1 alternate function",
+      "rule": "Select AF5 on PB3/PB4/PB5.",
+      "reason": "AF6 would select SPI3, which also maps to these pins; the design intends SPI1."
+    }
+  ],
+  "suppressions": [
+    {
+      "rule_ids": [
+        "hole_to_hole"
+      ],
+      "refs": [
+        "J101"
+      ],
+      "reason": "J101 is a Mill-Max 855-22-0XX-10-001101 mid-profile through-hole spring-loaded (pogo) connector. VERIFIED AGAINST MILL-MAX'S OWN DRAWINGS (libraries/datasheets/855_10_001101_0.svg and 855_10_001101fp_1.svg): signal through-hole 0.56 +/-0.08 mm (board 0.610), suggested pad 0.81 mm (board 0.940), pitch and row spacing 1.27 mm (board exact), locating peg diameter 1.04 mm (board 1.067 mm holes, 0.027 mm clearance). The four 1.067 mm NPTH holes are the connector's locating pegs, one per row at each end of the array. Two pegs on the connector's own 1.27 mm row pitch leave 0.2032 mm of laminate between the drilled holes -- this is the part's geometry and cannot be opened without changing connector. The same 0.2032 mm gap appears in all seven boards carrying a tagpoint footprint under two footprint names, and tagbase-v7, tagbase-jlcpcb-v7 and TagPwrMonitor have all been fabricated with it. DO NOT RE-RAISE. A DRC exclusion would silence it at source. NOTE: the 110 MB Mill-Max catalog PDF in the shared store is an image-only scan with no text layer -- it cannot be searched; use the two SVGs."
+    },
+    {
+      "rule_ids": [
+        "lib_footprint_issues",
+        "lib_symbol_issues",
+        "footprint_link_issues"
+      ],
+      "reason": "J1's JST_XH_B04B-XH-AM_1x04_P2.50mm_Vertical is no longer in the stock Connector_JST library. The footprint is embedded in the board, so fabrication is unaffected; only the library link is stale."
+    },
+    {
+      "rule_ids": [
+        "*"
+      ],
+      "topic": "padnet crosscheck slash escaping",
+      "reason": "Net-(U2-THIN/NF) in the schematic vs Net-(U2-THIN{slash}NF) in the PCB is KiCad's escaping of '/' in net names, not a mismatch. Same artifact as U3-L{slash}M on UIUCBreakout. 164 of 166 pads match exactly and these two are the same net."
+    },
+    {
+      "rule_ids": [
+        "*"
+      ],
+      "topic": "4 mil traces",
+      "reason": "402 mm of 0.1016 mm track. House convention. At 8.58 mA charge current and tens of mA total this is never a current-capacity question, only fab process selection."
+    }
+  ],
+  "reviewer_notes": {
+    "last_review": "tagbase-lipo-v1-design-review.md, 2026-09-07. All findings closed; board ready to order.",
+    "open_findings": [],
+    "closed_findings": [
+      "H3: RESOLVED by changing U2 from XC6808ANC28R-G to XC6808A4C28R-G rather than depopulating R2. On the xN, pin 5 is NF and Torex requires it open; on the A4 it is THIN and R2 = 10 kohm is the correct termination. The two variants differ ONLY in field 2 (temperature monitor); charge voltage, hold time, trickle and package are identical. The A4 is also less than half the price ($1.237 vs $2.7275).",
+      "M3: RESOLVED. C9 (1 uF) added on /BAT, 1.56 mm from U2 pin 1. C10 (1 uF) added on VUSB, 2.15 mm from U2 pin 6. Both satisfy the datasheet CL and CIN requirements.",
+      "H1: BOM ordered C3682502 (XC6808A4C28R-G) against a schematic MPN of XC6808ANC28R-G. Caused by the export tool's LCSC auto-select mode, now disabled. Regenerated BOM reads C7123934, verified correct.",
+      "H2: WITHDRAWN, raised in error. See the suppression above - 0.2032 mm is fabricated house geometry.",
+      "M1: WITHDRAWN, raised in error. The tags have internal 1.8 V regulators; VCCB = +1V8 is correct.",
+      "M2: NOT A DEFECT. R102 = 220 ohm is deliberate (100 ohm measured too bright). The schematic note has been amended to say so, which closes the discrepancy that caused this to be raised."
+    ],
+    "verified_clean": [
+      "KiCad DRC with --refill-zones: 3 violations, 0 unconnected. Two are the accepted Mill-Max locating-peg spacing on J101; one is the stale J1 library link. Both suppressed above.",
+      "ERC: 2 warnings, both library-link only.",
+      "Schematic-to-PCB pad-net cross-check: 170 pads, 0 mismatches.",
+      "J101 verified against Mill-Max drawings: signal hole, pad, pitch, row spacing and locating-peg diameter all match.",
+      "U6 TLV9001 pinout verified against TI SBOS833R Table 6-1. The plain DCK is IN+=1, V-=2, IN-=3, OUT=4, V+=5. LCSC C398362 = TLV9001IDCKR, correct. TRAP: TLV9001T in the same DCK package is OUT=1, IN+=3, IN-=4 -- a one-letter MPN change would silently swap this follower.",
+      "SN74LVC1T45 DIR polarity verified against TI Table 7-1.",
+      "Decoupling measured, not assumed: every supply pin now has an appropriate cap within 1.09-2.86 mm."
+    ],
+    "review_method_lessons": [
+      "CHECK THE PATTERN, NOT THE FOOTPRINT NAME. H2 was raised because a grep for '6pin_tagpoints_double_screws' found only two boards. Measuring the actual NPTH geometry found the identical 0.2032 mm gap in seven boards under two footprint names.",
+      "FAB ARTEFACTS IN THE REPO DO NOT INDICATE WHETHER A BOARD WAS BUILT. tagbase-lipo-v1 has a production_files/*.zip that is only a review-time export; tagbase-jlcpcb-v7 has no artefacts and was fabricated. Ask the designer instead.",
+      "MEASURE DECOUPLING, DO NOT PAIR BY REFERENCE DESIGNATOR. Assuming C104 belongs to U5 or C7 to U1 produced a wrong finding on UIUCBreakout; nearest-same-net-pad distance is the only reliable method.",
+      "A MISSING DATASHEET IS A REAL BLOCKER, NOT A FOOTNOTE. The first pass closed with \"needs the XC6808 datasheet\" as a single low-priority item. When the datasheet arrived it produced the two highest-severity findings on the board. Chase the datasheet before ranking the findings."
+    ]
+  }
+}
