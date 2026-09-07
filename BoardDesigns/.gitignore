@@ -40,3 +40,6 @@ production/*
 tmp*.rpt
 # review helper bytecode
 kicad-helpers/__pycache__/
+
+# Microsoft Office lock/temp files
+~$*
