@@ -5173,12 +5173,6 @@
 		(path "/02a654fc-2ac8-4d5d-9892-24ae5476cbd0")
 		(sheetname "/")
 		(sheetfile "imutag-smps.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2" "3" "4" "5" "10" "9" "8" "7" "6")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -5333,6 +5327,19 @@
 			)
 			(layer "F.Fab")
 			(uuid "47d8759a-b059-4d98-8413-e616b82db9d7")
+		)
+		(fp_text user "*"
+			(at -2.05 0.555042 180)
+			(unlocked yes)
+			(layer "F.SilkS")
+			(uuid "e646cc0f-8d11-4646-9988-5941cda776b1")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.1)
+				)
+				(justify left bottom)
+			)
 		)
 		(fp_text user "${REFERENCE}"
 			(at 0 0 180)
