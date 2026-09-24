@@ -862,6 +862,12 @@
           "label": "MAXIMUM_PACKAGE_HEIGHT",
           "name": "MAXIMUM_PACKAGE_HEIGHT",
           "show": false
+        },
+        {
+          "group_by": false,
+          "label": "MANUFACTURER",
+          "name": "MANUFACTURER",
+          "show": false
         }
       ],
       "filter_string": "",

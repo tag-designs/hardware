@@ -29,7 +29,7 @@ variants:
     pre_transform: _rot_footprint
 
 import:
-  - ../Kibot-config/PCBWay.kibot.yaml
+  - ../../Kibot-config/PCBWay.kibot.yaml
 
 outputs:
 
