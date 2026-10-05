@@ -1,0 +1,40 @@
+{
+  "_doc_name": "BitPresTag_param",
+  "_out": "BitPresTag-param.FCStd",
+  "_stl_prefix": "BitPresTag-fc",
+
+  "name": "BitPrTagv1",
+
+  "enable_base_crossbar": "0",
+  "enable_post_boss_aux": "1",
+  "enable_post_web": "1",
+  "enable_battery_pocket": "1",
+  "enable_battery_end_pocket": "0",
+
+  "board_nominal_len": "18 mm",
+  "board_nominal_width": "10 mm",
+  "board_edge_clearance": "=0.0015 * 25.4 mm",
+
+  "pogo_pin_board_inset": "0.7 mm",
+  "pogo_center_x": "6.4 mm",
+
+  "alignment_pin_dx": "-8.5 mm",
+  "alignment_pin_dy": "10 mm",
+
+  "base_extra_height": "1 mm",
+
+  "battery_diameter": "10.5 mm",
+  "battery_height": "3 mm",
+  "battery_x": "=battery_diameter / 2 + pogo_center_x - 0.2 mm",
+
+  "lid_left_end_inset": "1.5 mm",
+  "lid_left_end_drop": "2.1 mm",
+  "lid_pogo_end_z_shift": "-0.1 mm",
+  "lid_pogo_end_extra": "0.1 mm",
+  "lid_body_inset": "0.5 mm",
+  "lid_body_len_trim": "1.1 mm",
+
+  "base_text_x": "0 mm",
+  "lid_text_x": "1.5 mm",
+  "lid_marker_x": "5 mm"
+}

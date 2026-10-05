@@ -1,0 +1,40 @@
+{
+  "_doc_name": "CompassTagv1_param",
+  "_out": "CompassTagv1-param.FCStd",
+  "_stl_prefix": "CompassTagv1-fc",
+
+  "name": "CTagV1",
+
+  "enable_base_crossbar": "1",
+  "enable_post_boss_aux": "0",
+  "enable_post_web": "0",
+  "enable_battery_pocket": "1",
+  "enable_battery_end_pocket": "1",
+
+  "board_nominal_len": "17.9 mm",
+  "board_nominal_width": "9 mm",
+  "board_edge_clearance": "=0.002 * 25.4 mm",
+
+  "pogo_pin_board_inset": "0.9 mm",
+  "pogo_center_x": "6.45 mm",
+
+  "alignment_pin_dx": "-5.0 mm",
+  "alignment_pin_dy": "6.5 mm",
+
+  "base_extra_height": "2 mm",
+
+  "battery_diameter": "12 mm",
+  "battery_height": "=board_sweep_height",
+  "battery_x": "=board_len / 2 + 2.5 mm",
+
+  "lid_left_end_inset": "1.4 mm",
+  "lid_left_end_drop": "1.8 mm",
+  "lid_pogo_end_z_shift": "0.5 mm",
+  "lid_pogo_end_extra": "-1 mm",
+  "lid_body_inset": "0.1 mm",
+  "lid_body_len_trim": "0.7 mm",
+
+  "base_text_x": "-4 mm",
+  "lid_text_x": "1 mm",
+  "lid_marker_x": "5.5 mm"
+}
