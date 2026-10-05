@@ -149,7 +149,7 @@
 			(mirror no)
 			(drillshape 0)
 			(scaleselection 1)
-			(outputdirectory "../../Mechanical/BitPresTag/")
+			(outputdirectory "../../../Mechanical/BitPresTag/")
 		)
 	)
 	(footprint "AccelTag:taghole1.1mm"
@@ -262,7 +262,7 @@
 				(pins)
 			)
 		)
-		(attr through_hole exclude_from_pos_files exclude_from_bom)
+		(attr through_hole exclude_from_pos_files exclude_from_bom dnp)
 		(duplicate_pad_numbers_are_jumpers no)
 		(pad "" np_thru_hole circle
 			(at 0 0)
@@ -383,7 +383,7 @@
 				(pins "1" "2")
 			)
 		)
-		(attr smd exclude_from_pos_files exclude_from_bom)
+		(attr smd exclude_from_pos_files exclude_from_bom dnp)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_text user "-"
 			(at 0.4 1.9 270)
@@ -1273,7 +1273,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C181047"
+		(property "LCSC" "C408130"
 			(at 258.6628 -37.766 90)
 			(layer "F.Fab")
 			(hide yes)
@@ -1285,7 +1285,7 @@
 				)
 			)
 		)
-		(property "MPN" "GRM033C81E104KE14D"
+		(property "MPN" "GRM033R61A104ME15D"
 			(at 258.6628 -37.766 90)
 			(layer "F.Fab")
 			(hide yes)
@@ -1502,7 +1502,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C181047"
+		(property "LCSC" "C408130"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -1514,7 +1514,7 @@
 				)
 			)
 		)
-		(property "MPN" "GRM033C81E104KE14D"
+		(property "MPN" "GRM033R61A104ME15D"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -2437,7 +2437,7 @@
 				(pins)
 			)
 		)
-		(attr through_hole exclude_from_pos_files exclude_from_bom)
+		(attr through_hole exclude_from_pos_files exclude_from_bom dnp)
 		(duplicate_pad_numbers_are_jumpers no)
 		(pad "" np_thru_hole circle
 			(at 0 0)
@@ -2558,7 +2558,7 @@
 				(pins)
 			)
 		)
-		(attr through_hole exclude_from_pos_files exclude_from_bom)
+		(attr through_hole exclude_from_pos_files exclude_from_bom dnp)
 		(duplicate_pad_numbers_are_jumpers no)
 		(pad "" np_thru_hole circle
 			(at 0 0)
@@ -2679,7 +2679,7 @@
 				(pins)
 			)
 		)
-		(attr through_hole exclude_from_pos_files exclude_from_bom)
+		(attr through_hole exclude_from_pos_files exclude_from_bom dnp)
 		(duplicate_pad_numbers_are_jumpers no)
 		(pad "" np_thru_hole circle
 			(at 0 0)
@@ -2792,7 +2792,7 @@
 				)
 			)
 		)
-		(property "MPN" "GRM033C81E104KE14D"
+		(property "MPN" "GRM033R61A104ME15D"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -2805,7 +2805,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C181047"
+		(property "LCSC" "C408130"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -3724,7 +3724,7 @@
 				)
 			)
 		)
-		(property "MPN" "GRM033C81E104KE14D"
+		(property "MPN" "GRM033R61A104ME15D"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -3750,7 +3750,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C181047"
+		(property "LCSC" "C408130"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -4404,7 +4404,7 @@
 				)
 			)
 		)
-		(property "MPN" "GRM033C81E104KE14D"
+		(property "MPN" "GRM033R61A104ME15D"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -4417,7 +4417,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C181047"
+		(property "LCSC" "C408130"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -4638,7 +4638,7 @@
 				(pins "1" "3" "5" "2" "4" "6")
 			)
 		)
-		(attr smd exclude_from_pos_files exclude_from_bom)
+		(attr smd exclude_from_pos_files exclude_from_bom dnp)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
 			(start 1.905 -1.27)
@@ -4820,7 +4820,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" "C181047"
+		(property "LCSC" "C408130"
 			(at 0 0 90)
 			(layer "B.Fab")
 			(hide yes)
@@ -4833,7 +4833,7 @@
 				(justify mirror)
 			)
 		)
-		(property "MPN" "GRM033C81E104KE14D"
+		(property "MPN" "GRM033R61A104ME15D"
 			(at 0 0 90)
 			(layer "B.Fab")
 			(hide yes)
@@ -4996,7 +4996,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Value" "STM32L432KCU6"
+		(property "Value" "STM32L432KCU6TR"
 			(at 0 -3.82 0)
 			(layer "B.Fab")
 			(hide yes)
@@ -5046,7 +5046,7 @@
 				(justify mirror)
 			)
 		)
-		(property "DISTPN" "497-16578-ND"
+		(property "DISTPN" "497-STM32L432KCU6TR-ND"
 			(at 0 0 0)
 			(layer "B.Fab")
 			(hide yes)
@@ -5072,7 +5072,7 @@
 				(justify mirror)
 			)
 		)
-		(property "MPN" "STM32L432KCU6"
+		(property "MPN" "STM32L432KCU6TR"
 			(at 0 0 0)
 			(layer "B.Fab")
 			(hide yes)
@@ -6241,7 +6241,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" "C181047"
+		(property "LCSC" "C408130"
 			(at 284.34 -218.142 90)
 			(layer "B.Fab")
 			(hide yes)
@@ -6254,7 +6254,7 @@
 				(justify mirror)
 			)
 		)
-		(property "MPN" "GRM033C81E104KE14D"
+		(property "MPN" "GRM033R61A104ME15D"
 			(at 284.34 -218.142 90)
 			(layer "B.Fab")
 			(hide yes)
@@ -6513,7 +6513,7 @@
 				(justify mirror)
 			)
 		)
-		(property "MPN" "GRM033C81E104KE14D"
+		(property "MPN" "GRM033R61A104ME15D"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -6540,7 +6540,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" "C181047"
+		(property "LCSC" "C408130"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -6746,7 +6746,7 @@
 				(justify mirror)
 			)
 		)
-		(property "MPN" "GRM033C81E104KE14D"
+		(property "MPN" "GRM033R61A104ME15D"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -6774,7 +6774,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" "C181047"
+		(property "LCSC" "C408130"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "B.Fab")

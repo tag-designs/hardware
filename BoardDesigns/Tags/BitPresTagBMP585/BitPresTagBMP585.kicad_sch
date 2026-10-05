@@ -5695,7 +5695,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "STM32L432KCU6"
+		(property "Value" "STM32L432KCU6TR"
 			(at 128.27 93.98 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5750,7 +5750,7 @@
 				)
 			)
 		)
-		(property "DISTPN" "497-16578-ND"
+		(property "DISTPN" "497-STM32L432KCU6TR-ND"
 			(at 87.63 76.2 0)
 			(hide yes)
 			(show_name no)
@@ -5761,7 +5761,7 @@
 				)
 			)
 		)
-		(property "MPN" "STM32L432KCU6"
+		(property "MPN" "STM32L432KCU6TR"
 			(at 0 152.4 0)
 			(hide yes)
 			(show_name no)
@@ -5979,7 +5979,7 @@
 				)
 			)
 		)
-		(property "MPN" "GRM033C81E104KE14D"
+		(property "MPN" "GRM033R61A104ME15D"
 			(at 60.96 97.79 0)
 			(hide yes)
 			(show_name no)
@@ -6001,7 +6001,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C181047"
+		(property "LCSC" "C408130"
 			(at 60.96 97.79 0)
 			(hide yes)
 			(show_name no)
@@ -6115,7 +6115,7 @@
 				)
 			)
 		)
-		(property "MPN" "GRM033C81E104KE14D"
+		(property "MPN" "GRM033R61A104ME15D"
 			(at 68.58 97.79 0)
 			(hide yes)
 			(show_name no)
@@ -6137,7 +6137,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C181047"
+		(property "LCSC" "C408130"
 			(at 68.58 97.79 0)
 			(hide yes)
 			(show_name no)
@@ -6357,7 +6357,7 @@
 				)
 			)
 		)
-		(property "MPN" "GRM033C81E104KE14D"
+		(property "MPN" "GRM033R61A104ME15D"
 			(at 254 83.82 0)
 			(hide yes)
 			(show_name no)
@@ -6390,7 +6390,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C181047"
+		(property "LCSC" "C408130"
 			(at 254 83.82 0)
 			(hide yes)
 			(show_name no)
@@ -6425,7 +6425,7 @@
 		(in_bom no)
 		(on_board yes)
 		(in_pos_files no)
-		(dnp no)
+		(dnp yes)
 		(uuid "00000000-0000-0000-0000-00005c0ef344")
 		(property "Reference" "J301"
 			(at 25.4 180.34 0)
@@ -6532,7 +6532,7 @@
 		(in_bom no)
 		(on_board yes)
 		(in_pos_files no)
-		(dnp no)
+		(dnp yes)
 		(uuid "00000000-0000-0000-0000-00005c0ef350")
 		(property "Reference" "J201"
 			(at 179.07 22.86 0)
@@ -7119,7 +7119,7 @@
 		(in_bom no)
 		(on_board yes)
 		(in_pos_files no)
-		(dnp no)
+		(dnp yes)
 		(uuid "00000000-0000-0000-0000-00005c0f0b10")
 		(property "Reference" "J302"
 			(at 33.02 180.34 0)
@@ -7226,7 +7226,7 @@
 		(in_bom no)
 		(on_board yes)
 		(in_pos_files no)
-		(dnp no)
+		(dnp yes)
 		(uuid "00000000-0000-0000-0000-00005c0f0b74")
 		(property "Reference" "J303"
 			(at 25.4 186.69 0)
@@ -7333,7 +7333,7 @@
 		(in_bom no)
 		(on_board yes)
 		(in_pos_files no)
-		(dnp no)
+		(dnp yes)
 		(uuid "00000000-0000-0000-0000-00005c0f0bc2")
 		(property "Reference" "J304"
 			(at 33.02 186.69 0)
@@ -7903,7 +7903,7 @@
 		(in_bom no)
 		(on_board yes)
 		(in_pos_files no)
-		(dnp no)
+		(dnp yes)
 		(uuid "00000000-0000-0000-0000-00005c0f4161")
 		(property "Reference" "J401"
 			(at 218.44 38.1 0)
@@ -8428,17 +8428,6 @@
 				)
 			)
 		)
-		(property "LCSC" "C46471039"
-			(at 224.79 76.2 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.524 1.524)
-				)
-			)
-		)
 		(pin "1"
 			(uuid "183e1dfb-9a39-46f7-ae95-750ffc7b2bd7")
 		)
@@ -8849,7 +8838,7 @@
 				)
 			)
 		)
-		(property "MPN" "GRM033C81E104KE14D"
+		(property "MPN" "GRM033R61A104ME15D"
 			(at 179.07 100.33 0)
 			(hide yes)
 			(show_name no)
@@ -8860,7 +8849,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C181047"
+		(property "LCSC" "C408130"
 			(at 179.07 100.33 0)
 			(hide yes)
 			(show_name no)
@@ -9175,7 +9164,7 @@
 				)
 			)
 		)
-		(property "MPN" "GRM033C81E104KE14D"
+		(property "MPN" "GRM033R61A104ME15D"
 			(at -43.18 262.89 0)
 			(hide yes)
 			(show_name no)
@@ -9186,7 +9175,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C181047"
+		(property "LCSC" "C408130"
 			(at 134.62 160.02 0)
 			(hide yes)
 			(show_name no)
@@ -9311,7 +9300,7 @@
 				)
 			)
 		)
-		(property "MPN" "GRM033C81E104KE14D"
+		(property "MPN" "GRM033R61A104ME15D"
 			(at 52.07 247.65 0)
 			(hide yes)
 			(show_name no)
@@ -9322,7 +9311,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C181047"
+		(property "LCSC" "C408130"
 			(at 229.87 144.78 0)
 			(hide yes)
 			(show_name no)
@@ -9678,7 +9667,7 @@
 				)
 			)
 		)
-		(property "MPN" "GRM033C81E104KE14D"
+		(property "MPN" "GRM033R61A104ME15D"
 			(at 43.18 247.65 0)
 			(hide yes)
 			(show_name no)
@@ -9689,7 +9678,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C181047"
+		(property "LCSC" "C408130"
 			(at 220.98 144.78 0)
 			(hide yes)
 			(show_name no)
@@ -9918,7 +9907,7 @@
 				)
 			)
 		)
-		(property "MPN" "GRM033C81E104KE14D"
+		(property "MPN" "GRM033R61A104ME15D"
 			(at 62.23 72.39 0)
 			(hide yes)
 			(show_name no)
@@ -9940,7 +9929,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C181047"
+		(property "LCSC" "C408130"
 			(at 62.23 72.39 0)
 			(hide yes)
 			(show_name no)
@@ -10876,7 +10865,7 @@
 				)
 			)
 		)
-		(property "MPN" "GRM033C81E104KE14D"
+		(property "MPN" "GRM033R61A104ME15D"
 			(at -52.07 262.89 0)
 			(hide yes)
 			(show_name no)
@@ -10887,7 +10876,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C181047"
+		(property "LCSC" "C408130"
 			(at 125.73 160.02 0)
 			(hide yes)
 			(show_name no)
