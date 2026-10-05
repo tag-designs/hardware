@@ -385,7 +385,6 @@
 		)
 		(embedded_fonts no)
 		(model "${TAG_LIBRARIES}/packages3D/lipo.step"
-			(hide yes)
 			(offset
 				(xyz 0 -1 0.5)
 			)
