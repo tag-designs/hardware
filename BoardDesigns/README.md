@@ -9,16 +9,19 @@ Tools needed to build base adapter plastic
 
 *   openscad
 
-The PCB designs are
+Boards are grouped by role; each board is `<Group>/<board>/`:
 
-* BitTagv5 -- the rv-8028 based bittag
-* BitTagv7 -- the rv-3032 based bittag
-* PresTag -- the design for the  pressure tag
+* Tags/ -- the animal-borne tags themselves (BitTag, PresTag, CompassTag, IMUTag, TorporTag, ...)
+* Bases/ -- boards a tag plugs into: tagbase-* production baseboards and the MCU-carrying tag-breakout-* boards
+* Prototypes/ -- tag circuits laid out as breakouts, ST eval daughter cards, imutag-daughtercard, UIUCBreakout
+* Chargers/ -- MultiCharger and its JLCPCB variant
+* Development/ -- bench and test equipment (TagPwrMonitor, js320-faceplate)
 
-* Multicharger -- the specialized bittag charging board
-* tag-breakout-v2 -- the breakout board for prototyping tags
-* steval-daughter-v2 -- and example daughter card for the breakout board which accepts ST Seval boards
-* tagbase-jlcpcb-v3 -- the latest baseboard
+Shared infrastructure stays at this level: libraries/, kicad_libraries/,
+kicad-helpers/, Kibot-config/, Templates/. Retired boards live in Obsolete/.
+Board files reach these through `${KIPRJMOD}/../../`, so moving a board to a
+different depth means rebasing its lib tables, 3D-model paths, kibot include
+and datasheets symlink.
 
 To build the various PCB files including pdf schematic, png 3d model, and fabrication files
 

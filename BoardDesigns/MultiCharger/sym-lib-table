@@ -1,3 +1,0 @@
-(sym_lib_table
-  (lib (name Multicharger)(type Legacy)(uri ${KIPRJMOD}/../kicad_libraries/lib_sch/MultiCharger.lib)(options "")(descr ""))
-)

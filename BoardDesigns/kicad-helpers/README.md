@@ -8,11 +8,11 @@ Run them **from a board directory** that has an `analysis/` folder — they read
 the newest run via `analysis/*/schematic.json` and `analysis/*/pcb.json`:
 
 ```bash
-cd BoardDesigns/<board>
+cd BoardDesigns/<Group>/<board>
 python3 <skill-path>/scripts/analyze_schematic.py <board>.kicad_sch --analysis-dir analysis/
 python3 <skill-path>/scripts/analyze_pcb.py <board>.kicad_pcb --analysis-dir analysis/ --full
 
-PYTHONPATH=../kicad-helpers python3 ../kicad-helpers/padnet_crosscheck.py
+PYTHONPATH=../../kicad-helpers python3 ../../kicad-helpers/padnet_crosscheck.py
 ```
 
 | Script | Answers |

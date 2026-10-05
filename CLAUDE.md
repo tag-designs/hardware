@@ -1,7 +1,14 @@
 # tag-designs / hardware — working notes
 
 KiCad projects for low-power animal-borne sensor tags. Each board lives in
-`BoardDesigns/<name>/`. Reviews use the `kicad-happy` skill suite (`kicad`,
+`BoardDesigns/<Group>/<name>/`, where `<Group>` is `Tags`, `Bases` (tagbase-\* and
+the MCU-carrying tag-breakout-\*), `Prototypes`, `Chargers` or `Development`.
+Shared infrastructure (`libraries`, `kicad_libraries`, `kicad-helpers`,
+`Kibot-config`, `Templates`, `Obsolete`) stays directly under `BoardDesigns/`,
+so board files reach it through `${KIPRJMOD}/../../` and symlinks through
+`../../libraries/...`. Moving a board to a different depth means rebasing its
+lib tables, 3D-model paths, kibot include, symlinks and `deep_review.json`
+helper citations — reorganized 2026-10-05. Reviews use the `kicad-happy` skill suite (`kicad`,
 `emc`, `spice`, `datasheets`, `bom`, distributor and fab skills).
 
 ## Before reviewing any board — read its `.kicad-happy.json` first
@@ -13,8 +20,8 @@ re-litigates settled decisions.
 
 Only 5 of the ~55 boards have one. If the board under review has no config,
 expect to re-derive conventions that are already written down elsewhere — read
-`BoardDesigns/CompassTag/.kicad-happy.json` and
-`BoardDesigns/BitTagNG/.kicad-happy.json` as the reference examples, and offer
+`BoardDesigns/Tags/CompassTag/.kicad-happy.json` and
+`BoardDesigns/Tags/BitTagNG/.kicad-happy.json` as the reference examples, and offer
 to write one for the board as part of the review.
 
 **Suppressions are only half-automatic — verified 2026-08-31.** `analyze_emc.py`
@@ -143,8 +150,8 @@ disagrees with the real part passes DRC and ERC silently.
 Run them from a board directory that has an `analysis/` folder:
 
 ```bash
-cd BoardDesigns/<board>
-PYTHONPATH=../kicad-helpers python3 ../kicad-helpers/padnet_crosscheck.py
+cd BoardDesigns/<Group>/<board>
+PYTHONPATH=../../kicad-helpers python3 ../../kicad-helpers/padnet_crosscheck.py
 ```
 
 `padnet_crosscheck.py` is worth running on **every** review — it compares every
@@ -191,7 +198,7 @@ capacitance, driver impedance). Read the docstring before quoting a number.
   the run looks fresh. Check `project_settings.source` on the run you intend to use,
   not on the newest directory.
 - Helpers live once, in `BoardDesigns/kicad-helpers/`. Cite them from
-  `deep_review.json` as `../kicad-helpers/<name>.py`; the gate checks the path
+  `deep_review.json` as `../../kicad-helpers/<name>.py`; the gate checks the path
   resolves, so a stale citation quarantines the finding.
 - **Every review of a board with an STM32-family part gets a pin-map table.**
   Generate it with `stm32_pinmap.py` and put the full table in the report — pin,
@@ -206,8 +213,8 @@ capacitance, driver impedance). Read the docstring before quoting a number.
   from the schematic — see `imutag-smps` and `CompassTag` for the shape.
 
   ```bash
-  cd BoardDesigns/<board>
-  PYTHONPATH=../kicad-helpers python3 ../kicad-helpers/stm32_pinmap.py
+  cd BoardDesigns/<Group>/<board>
+  PYTHONPATH=../../kicad-helpers python3 ../../kicad-helpers/stm32_pinmap.py
   ```
 
   **Include the alternate-function number for every peripheral signal**, and flag
