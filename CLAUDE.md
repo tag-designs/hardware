@@ -3,6 +3,8 @@
 KiCad projects for low-power animal-borne sensor tags. Each board lives in
 `BoardDesigns/<Group>/<name>/`, where `<Group>` is `Tags`, `Bases` (tagbase-\* and
 the MCU-carrying tag-breakout-\*), `Prototypes`, `Chargers` or `Development`.
+Superseded tag variants are one level deeper, in `Tags/Obsolete/<name>/`
+(`${KIPRJMOD}/../../../`).
 Shared infrastructure (`libraries`, `kicad_libraries`, `kicad-helpers`,
 `Kibot-config`, `Templates`, `Obsolete`) stays directly under `BoardDesigns/`,
 so board files reach it through `${KIPRJMOD}/../../` and symlinks through

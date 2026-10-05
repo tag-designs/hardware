@@ -11,14 +11,15 @@ Tools needed to build base adapter plastic
 
 Boards are grouped by role; each board is `<Group>/<board>/`:
 
-* Tags/ -- the animal-borne tags themselves (BitTag, PresTag, CompassTag, IMUTag, TorporTag, ...)
+* Tags/ -- the animal-borne tags themselves (BitTag, PresTag, CompassTag, IMUTag, ...);
+  superseded tag variants are in Tags/Obsolete/
 * Bases/ -- boards a tag plugs into: tagbase-* production baseboards and the MCU-carrying tag-breakout-* boards
 * Prototypes/ -- tag circuits laid out as breakouts, ST eval daughter cards, imutag-daughtercard, UIUCBreakout
 * Chargers/ -- MultiCharger and its JLCPCB variant
 * Development/ -- bench and test equipment (TagPwrMonitor, js320-faceplate)
 
 Shared infrastructure stays at this level: libraries/, kicad_libraries/,
-kicad-helpers/, Kibot-config/, Templates/. Retired boards live in Obsolete/.
+kicad-helpers/, Kibot-config/, Templates/. Older retired boards live in Obsolete/.
 Board files reach these through `${KIPRJMOD}/../../`, so moving a board to a
 different depth means rebasing its lib tables, 3D-model paths, kibot include
 and datasheets symlink.
