@@ -1,6 +1,10 @@
 site_name: "Ultralight Tags: Hardware"
 site_description: Board designs, mechanical designs and tag assembly for the ultralight tag project.
 site_author: Indiana University
+# Served as a project site under the organization site at the domain root.
+# Without this, MkDocs writes a sitemap with no entries and no canonical
+# link tags, so search engines are handed nothing to crawl.
+site_url: https://tag-designs.github.io/hardware/
 
 docs_dir: src
 site_dir: site
