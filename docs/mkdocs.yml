@@ -1,0 +1,59 @@
+site_name: "Ultralight Tags: Hardware"
+site_description: Board designs, mechanical designs and tag assembly for the ultralight tag project.
+site_author: Indiana University
+
+docs_dir: src
+site_dir: site
+use_directory_urls: false
+
+theme:
+  name: material
+  icon:
+    logo: material/chip
+  features:
+    - navigation.sections
+    - navigation.top
+    - search.highlight
+    - search.suggest
+    - toc.follow
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: teal
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: teal
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+
+extra_css:
+  - stylesheets/extra.css
+
+nav:
+  - Home: index.md
+  # The umbrella site at the organization root carries the project overview,
+  # the tag families and the cross-cutting field guides.
+  - Project Home: https://tag-designs.github.io/
+  - Board Designs: boards/index.md
+  - Mechanical Designs: mechanical/index.md
+  - Board Assembly: assembly/index.md

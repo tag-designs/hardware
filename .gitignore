@@ -38,3 +38,6 @@ public
 hardware/tag-breakout-template/jlcpcb/
 .vscode
 .DS_Store
+
+# Built documentation site
+docs/site/

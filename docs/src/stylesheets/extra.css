@@ -1,0 +1,5 @@
+/* Photographs in the assembly guide are bench shots, not diagrams: cap their
+   width so a 1200px photo does not dominate the page it illustrates. */
+.md-typeset img {
+  max-width: 32rem;
+}
