@@ -120,7 +120,7 @@
   (pad 10 smd rect (at 0.8255 -0.750001 90) (size 0.2794 0.3048) (layers F.Cu F.Paste F.Mask))
   (pad 11 smd rect (at 0.25 -0.8255) (size 0.2794 0.3048) (layers F.Cu F.Paste F.Mask))
   (pad 12 smd rect (at -0.25 -0.8255) (size 0.2794 0.3048) (layers F.Cu F.Paste F.Mask))
-  (model {TAG_LIBRARIES}/packages3D/LIS2DW12.STEP
+  (model ${TAG_LIBRARIES}/packages3D/LIS2DW12.STEP
     (at (xyz 0 0 0))
     (scale (xyz 1 1 1))
     (rotate (xyz -90 0 180))

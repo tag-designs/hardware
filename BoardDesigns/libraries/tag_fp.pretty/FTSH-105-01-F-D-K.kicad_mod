@@ -453,7 +453,7 @@
 		(uuid "15c8a013-1f38-404a-971c-36e21c5900a8")
 	)
 	(embedded_fonts no)
-	(model "{TAG_LIBRARIES}/packages3D/FTSH-105-01-F-D-K.stp"
+	(model "${TAG_LIBRARIES}/packages3D/FTSH-105-01-F-D-K.stp"
 		(offset
 			(xyz 0 0 0)
 		)

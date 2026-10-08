@@ -457,7 +457,7 @@
 		(uuid "7b2656ba-6e1a-46b6-81f1-2c44ae579c69")
 	)
 	(embedded_fonts no)
-	(model "{TAG_LIBRARIES}/packages3D/CJS-1200B_NDC.step"
+	(model "${TAG_LIBRARIES}/packages3D/CJS-1200B_NDC.step"
 		(offset
 			(xyz 0 0 0)
 		)

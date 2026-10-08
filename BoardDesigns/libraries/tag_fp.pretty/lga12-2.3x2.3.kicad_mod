@@ -34,7 +34,7 @@
   (pad "10" smd rect (at 0.9575 -0.75) (size 0.39 0.33) (layers "F.Cu" "F.Paste" "F.Mask") (tstamp 4e7d9071-66bb-40aa-8b30-3a655ced549b))
   (pad "11" smd rect (at 0.25 -1.0075 90) (size 0.39 0.33) (layers "F.Cu" "F.Paste" "F.Mask") (tstamp 88819fc3-b058-464e-a83b-76be58336ba7))
   (pad "12" smd rect (at -0.25 -1.0075 90) (size 0.39 0.33) (layers "F.Cu" "F.Paste" "F.Mask") (tstamp eec7ab94-30fa-4021-8cab-334bc9f278ab))
-  (model "{TAG_LIBRARIES}/packages3D/CC-12-4_ADI.step"
+  (model "${TAG_LIBRARIES}/packages3D/CC-12-4_ADI.step"
     (offset (xyz 0 0 0))
     (scale (xyz 1 1 1))
     (rotate (xyz 0 0 0))

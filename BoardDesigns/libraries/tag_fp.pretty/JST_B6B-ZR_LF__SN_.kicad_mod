@@ -258,7 +258,7 @@
 		(solder_mask_margin 0.102)
 		(uuid "ee0fe5e3-9b31-4346-a3e3-ec33c72cc73b")
 	)
-	(model "{TAG_LIBRARIES}/packages3D/B6B-ZR.STEP"
+	(model "${TAG_LIBRARIES}/packages3D/B6B-ZR.STEP"
 		(offset
 			(xyz 0 -1.6 0)
 		)

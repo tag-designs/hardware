@@ -939,7 +939,7 @@
 		(uuid "f3f48fe4-4323-41c3-b77e-9b6a9cf49de7")
 	)
 	(embedded_fonts no)
-	(model "{TAG_LIBRARIES}/packages3D/LGA14-L_2P59X3P1X0P5_STM.step"
+	(model "${TAG_LIBRARIES}/packages3D/LGA14-L_2P59X3P1X0P5_STM.step"
 		(offset
 			(xyz 0 0 0)
 		)

@@ -502,7 +502,7 @@
 		(layers "F.Cu" "F.Paste" "F.Mask")
 		(uuid "8add4635-3cc1-47f3-979b-f910fb3ff0a3")
 	)
-	(model "{TAG_LIBRARIES}/packages3D/CJS-1201A_NDC.step"
+	(model "${TAG_LIBRARIES}/packages3D/CJS-1201A_NDC.step"
 		(offset
 			(xyz 0 0 0)
 		)

@@ -373,7 +373,7 @@
 			(xyz -90 0 0)
 		)
 	)
-	(model "{TAG_LIBRARIES}/packages3D/taghardware.step"
+	(model "${TAG_LIBRARIES}/packages3D/taghardware.step"
 		(offset
 			(xyz 102 151 -1.5)
 		)
@@ -384,7 +384,7 @@
 			(xyz 0 0 90)
 		)
 	)
-	(model "{TAG_LIBRARIES}/packages3D/tag-v7.step"
+	(model "${TAG_LIBRARIES}/packages3D/tag-v7.step"
 		(offset
 			(xyz 0 0 5.5)
 		)
