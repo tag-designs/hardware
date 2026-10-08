@@ -157,11 +157,81 @@ evidently carries every variable these boards have accumulated across their
 eras, which is consistent with the renders: BitTagv7's twelve `KISYS3DMOD`
 models all drew.
 
+### The self-test answered: NOT DETECTED
+
+`kicad-cli` said nothing about a model pointed at a path that cannot exist. So
+**the clean run above is worthless as evidence** — a board where everything
+resolves and a board where nothing does produce identical output. Comparing
+rendered images is the only check available.
+
+That conclusion immediately earned its keep. See below.
+
+## Found this way: the reorganization broke `TAG_LIBRARIES`
+
+`kicad_common.json` (KiCad 10 only; 8.0 and 9.0 define no variables) sets:
+
+```
+TAG_LIBRARIES = ${KIPRJMOD}/../libraries
+```
+
+That is relative to the board. When boards lived at `BoardDesigns/<board>/` it
+resolved to `BoardDesigns/libraries`, which holds 72 models. Since the October
+reorganization they live at `BoardDesigns/Tags/<board>/`, so it resolves to
+`BoardDesigns/Tags/libraries` — **which does not exist**.
+
+Six model references are therefore resolving to nothing, and they are not minor
+parts:
+
+| Board | Reference | Part |
+| --- | --- | --- |
+| CompassTag | `RV-3028-C7.stp` | the RTC |
+| CompassTag | `LGA-12_2X2X0P7_STM.step` | the LIS2DU12 accelerometer |
+| CompassTag | `AK09940a.step` | the magnetometer |
+| imutag-smps | `RV-3028-C8.step` | the RTC |
+| imutag-smps | `BGA9_BMM350_BOS.step` | the magnetometer |
+| imutag-smps | `lipo.step` | the battery |
+
+Two `Datasheet` properties point through the same variable and are equally
+broken, with lower stakes.
+
+All six files are present in `BoardDesigns/libraries/packages3D/`. From a board
+directory the working spelling is `${KIPRJMOD}/../../libraries/packages3D/<file>`
+— one `../` more than the variable supplies.
+
+**Nothing reported this.** Not the build, not ERC or DRC, not `kicad-cli`, and
+not the renders in any obvious way — the parts are simply absent, which reads
+as a sparse board unless you know what should be there. It took defining the
+variable, reading it, and noticing the path arithmetic.
+
+Two ways to fix it, and they are not equivalent:
+
+1. **Change the variable** to `${KIPRJMOD}/../../libraries` in KiCad's settings.
+   One edit, fixes both boards immediately — but it lives in one machine's
+   configuration, so a clone still renders them empty.
+2. **Rewrite the six references** to `${KIPRJMOD}/../../libraries/packages3D/`.
+   Edits two `.kicad_pcb` files, and the fix travels with the repository.
+
+The second is the same move the normalization proposal below recommends, so
+doing it now is a down payment rather than extra work.
+
+## Migrating the version variables: open and save
+
+KiCad rewrites model paths on save, resolving the old variable and emitting the
+current one. Opening a board and saving it migrates `KISYS3DMOD` and the older
+`KICADn_3DMODEL_DIR` spellings to `KICAD10_3DMODEL_DIR` with no hand editing —
+this is how PresTag-v6 went from `KISYS3DMOD=8, KICAD6=11` to
+`KICAD10=10, KICAD6=9`.
+
+Worth being clear about what that does and does not achieve. It fixes
+**obsolete** variables, so the references stop depending on a KiCad 5 era name.
+It does not make them **portable**: `KICAD10_3DMODEL_DIR` is still outside the
+repository and still version-specific, so it will age exactly as `KISYS3DMOD`
+did. And it cannot help `TAG_LIBRARIES`, which currently resolves to nothing —
+there is no correct path for KiCad to rewrite it to.
+
 **But silence is only evidence if the probe can detect a failure.** If
 `kicad-cli` does not report unloadable models at all, a clean run means nothing.
-That is what `--self-test` settles: it copies a board, points one model at a
-path that cannot exist, and renders that. Until it has been run, the result
-above should be read as "no failures reported" rather than "no failures".
+That is what `--self-test` settled, and the answer was NOT DETECTED.
 
 ```sh
 BoardDesigns/kicad-helpers/model_resolution.py --self-test BoardDesigns/Tags/CompassTag
