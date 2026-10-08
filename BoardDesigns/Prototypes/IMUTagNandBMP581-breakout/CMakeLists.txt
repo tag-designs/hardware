@@ -1,1 +1,1 @@
-add_pcb_outputs(CompassTagBreakout)
+add_board_renders_top(IMUTagNandBMP581-breakout)

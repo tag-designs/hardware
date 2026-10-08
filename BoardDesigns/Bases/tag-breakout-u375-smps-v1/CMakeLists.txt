@@ -1,1 +1,1 @@
-add_pcb_outputs(tag-breakout-l432v1)
+add_board_renders_top(tag-breakout-u375-smps-v1)

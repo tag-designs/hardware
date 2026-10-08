@@ -1,1 +1,1 @@
-add_pcb_outputs(tagbase-v7)
+add_board_renders_top(tagbase-lipo-v1)

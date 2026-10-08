@@ -1,1 +1,1 @@
-add_pcb_outputs(steval-daughter-v2)
+add_board_renders_top(steval-daughter-v2)
