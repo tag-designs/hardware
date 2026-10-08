@@ -32,7 +32,7 @@ from pathlib import Path
 from PIL import Image
 
 FRAMES = [1200, 2400]
-ZOOMS = [None, "1", "2", "0.5"]
+ZOOMS = [None, "1", "2", "0.5", "0.25"]
 
 DEFAULT_CLI = "/Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli"
 
@@ -64,6 +64,7 @@ def main():
           f"{'board/frame':>12}  clipped")
     print("-" * 70)
 
+    seen = []
     with tempfile.TemporaryDirectory() as tmp:
         for frame in FRAMES:
             for zoom in ZOOMS:
@@ -85,7 +86,24 @@ def main():
                                 if c)
                 print(f"{frame:>7} {str(zoom):>8} {f'{W}x{H}':>12} "
                       f"{f'{r-l}x{b-t}':>12} {(r-l)/W:>11.3f}  {edges or '-'}")
+                seen.append((frame, zoom, (r - l) / W))
                 out.unlink()
+
+    print()
+    base = {f: r for f, z, r in seen if z in (None, "1")}
+    half = {f: r for f, z, r in seen if z == "0.5"}
+    if base and half:
+        shrink = [half[f] / base[f] for f in base if f in half]
+        if shrink and sum(shrink) / len(shrink) < 0.9:
+            print("--zoom below 1 pulls the camera back: it is the lever.")
+        else:
+            print("--zoom below 1 changes nothing: the camera is clamped at "
+                  "fit, so the frame cannot be widened that way.")
+    ratios = {z: [r for f, zz, r in seen if zz == z] for z in (None, "1")}
+    flat = [r for v in ratios.values() for r in v]
+    if len(set(round(r, 3) for r in flat)) == 1 and flat:
+        print("board/frame ratio is identical at both frame sizes: the board "
+              "is fitted to the frame, so a bigger frame buys no margin.")
 
 
 if __name__ == "__main__":

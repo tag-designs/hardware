@@ -61,16 +61,34 @@ if(NOT _pil EQUAL 0)
     "or point CMake at another interpreter with -DPython3_EXECUTABLE=...")
 endif()
 
-# Frame size. The render scale turns out to be fixed per board: the same layout
-# comes out 889 pixels wide whether the frame is 1176 or 1568 wide, and whether
-# --zoom is 0.9 or 0.65. kicad-cli documents --zoom as an integer factor and
-# evidently ignores a fraction, so the earlier "zoom out" never did anything and
-# the option is gone. Enlarging the frame is the only way to buy margin.
+# Framing. Measured, after two wrong guesses, with
+# kicad-helpers/probe_render_framing.py:
 #
-# It needs to be large because the camera frames the board outline, while a coin
-# cell overhangs it -- that overhang is what was being cut off. Generous is
-# cheap here: fit_render.py crops the result back to the board, so the extra
-# pixels cost render time and nothing in the committed file.
+#     frame   --zoom     board px   board/frame   clipped
+#      1200        1    1156x1156         0.983   -
+#      1200        2    1176x1176         1.000   all four edges
+#      1200      0.5      578x578         0.491   -
+#      2400        1    2311x2311         0.969   -
+#      2400      0.5    1156x1156         0.485   -
+#
+# So: the camera fits the board outline to the frame, and --zoom scales that fit
+# linearly in both directions. A larger frame alone buys no margin, because the
+# board grows with it -- which is why 2400 square clipped every board. --zoom
+# below 1 is what pulls the camera back, and it does work with a fraction; the
+# earlier conclusion that it did not came from two renders whose board widths
+# coincided at 889 pixels for unrelated reasons.
+#
+# At zoom 1 the outline all but fills the frame, so anything overhanging it --
+# a coin cell, mostly -- is cut off. 0.5 is one of the points actually measured
+# above rather than an interpolation between them, and it leaves the board at
+# about half the frame: a quarter of the frame clear on every side, which is
+# half the board's own size again. fit_render.py trims that slack away, so it
+# costs render time and nothing in the committed file.
+#
+# The frame is then only about resolution. At this zoom a 2400 frame puts the
+# board's limiting dimension near 1180 pixels, comfortable for figures shown at
+# 420.
+set(BOARD_RENDER_ZOOM "0.5" CACHE STRING "kicad-cli camera zoom; below 1 pulls back")
 set(BOARD_RENDER_FRAME "2400" CACHE STRING "kicad-cli render frame, pixels square")
 
 # Aggregate target: "cmake --build . --target board-renders" redraws every
@@ -121,6 +139,7 @@ function(_board_renders name)
       COMMAND ${kicad_cli_EXECUTABLE} pcb render
               --side ${side}
               --rotate 0,0,90
+              --zoom ${BOARD_RENDER_ZOOM}
               --quality high
               --width ${BOARD_RENDER_FRAME}
               --height ${BOARD_RENDER_FRAME}
