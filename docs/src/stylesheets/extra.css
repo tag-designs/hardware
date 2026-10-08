@@ -3,3 +3,25 @@
 .md-typeset img {
   max-width: 32rem;
 }
+
+/* Board renders sit two-up inside a .grid on the tag pages.
+   A grid item defaults to min-width:auto, so it refuses to shrink below its
+   content's intrinsic width. With the cap above that floor is 32rem per
+   figure, so a pair plus the gap overflows the content column -- the two
+   images run into each other and the overflow slides under the table of
+   contents. Letting the figures shrink and sizing the images to their cell
+   fixes both. */
+.md-typeset .grid > figure {
+  min-width: 0;
+  margin: 0;
+}
+
+.md-typeset .grid > figure > p {
+  margin: 0;
+}
+
+.md-typeset .grid img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
