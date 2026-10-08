@@ -20,7 +20,11 @@ Two steps:
 
 Refuses to trim an image whose content already runs into the frame edge: that
 means the render clipped the board, and trimming would quietly crop it further
-instead of saying so.
+instead of saying so. kicad-cli frames on the board outline, so anything that
+overhangs it -- a coin cell, mostly -- is what runs off; the cure is a larger
+BOARD_RENDER_FRAME, since the render scale is fixed and --zoom does nothing.
+Also warns when a board clears the frame by less than a tenth of it, so the
+margin can be seen shrinking before it is lost.
 
     python3 fit_render.py <png> [<png> ...]
 """
@@ -51,9 +55,18 @@ def fit(path, margin=MARGIN, rotate=True):
         return f"{path}: nothing was drawn"
 
     left, top, right, bottom = box
-    if left <= 0 or top <= 0 or right >= w or bottom >= h:
-        return (f"{path}: the board runs into the frame edge, so the render "
-                f"clipped it. Lower BOARD_RENDER_ZOOM and draw it again.")
+    edges = [name for name, clipped in (("left", left <= 0), ("top", top <= 0),
+                                        ("right", right >= w),
+                                        ("bottom", bottom >= h)) if clipped]
+    if edges:
+        return (f"{path}: the board runs off the {', '.join(edges)} of a "
+                f"{w}x{h} frame, so the render clipped it. Raise "
+                f"BOARD_RENDER_FRAME and draw it again.")
+
+    slack = min(left, top, w - right, h - bottom) / max(w, h)
+    if slack < 0.10:
+        print(f"note: {path} clears a {w}x{h} frame by only {slack:.1%}; "
+              f"raise BOARD_RENDER_FRAME before it clips", file=sys.stderr)
 
     pad = int(round(max(right - left, bottom - top) * margin))
     im = im.crop((max(left - pad, 0), max(top - pad, 0),

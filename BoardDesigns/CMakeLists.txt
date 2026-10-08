@@ -43,30 +43,35 @@ set(BOARD_FIT_SCRIPT   "${CMAKE_CURRENT_SOURCE_DIR}/kicad-helpers/fit_render.py"
 set(BOARD_SCHEMATIC_DIR "${_hw_root}/docs/src/schematics")
 
 # The renders are trimmed after drawing (see fit_render.py), which needs Pillow.
-# Without it the images are still produced, just framed as kicad-cli left them,
-# so this is a warning rather than an error.
-find_package(Python3 COMPONENTS Interpreter QUIET)
-set(BOARD_CAN_FIT FALSE)
-if(Python3_Interpreter_FOUND)
-  execute_process(COMMAND "${Python3_EXECUTABLE}" -c "import PIL"
-                  RESULT_VARIABLE _pil OUTPUT_QUIET ERROR_QUIET)
-  if(_pil EQUAL 0)
-    set(BOARD_CAN_FIT TRUE)
-  endif()
-endif()
-if(NOT BOARD_CAN_FIT)
-  message(WARNING
-    "Pillow not found, so board renders will not be trimmed and uprighted. "
-    "Install it with: python3 -m pip install Pillow")
+# A hard error rather than a warning: a warning scrolls past, and the build then
+# spends several minutes producing exactly the badly-framed images the trim
+# exists to prevent. That happened once already.
+#
+# find_package picks the first interpreter on the system, which on macOS is
+# often /usr/bin/python3 rather than the one with your packages in it. Point it
+# somewhere else with -DPython3_EXECUTABLE=/opt/homebrew/bin/python3.
+find_package(Python3 COMPONENTS Interpreter REQUIRED)
+execute_process(COMMAND "${Python3_EXECUTABLE}" -c "import PIL"
+                RESULT_VARIABLE _pil OUTPUT_QUIET ERROR_QUIET)
+if(NOT _pil EQUAL 0)
+  message(FATAL_ERROR
+    "Pillow is not installed for ${Python3_EXECUTABLE}, so the board renders "
+    "could not be trimmed. Install it there:\n"
+    "  ${Python3_EXECUTABLE} -m pip install Pillow\n"
+    "or point CMake at another interpreter with -DPython3_EXECUTABLE=...")
 endif()
 
-# Camera zoom. Smaller means a wider frame. Deliberately loose: the render is
-# trimmed to the board afterwards, so a generous margin here costs a little
-# resolution and nothing else, while too tight a frame clips the board and no
-# single value suits every board at once. A coin cell that overhangs the edge
-# needs more room than a bare carrier does.
-#   cmake -S BoardDesigns -B build-boards -DBOARD_RENDER_ZOOM=0.8
-set(BOARD_RENDER_ZOOM "0.65" CACHE STRING "kicad-cli camera zoom for board renders")
+# Frame size. The render scale turns out to be fixed per board: the same layout
+# comes out 889 pixels wide whether the frame is 1176 or 1568 wide, and whether
+# --zoom is 0.9 or 0.65. kicad-cli documents --zoom as an integer factor and
+# evidently ignores a fraction, so the earlier "zoom out" never did anything and
+# the option is gone. Enlarging the frame is the only way to buy margin.
+#
+# It needs to be large because the camera frames the board outline, while a coin
+# cell overhangs it -- that overhang is what was being cut off. Generous is
+# cheap here: fit_render.py crops the result back to the board, so the extra
+# pixels cost render time and nothing in the committed file.
+set(BOARD_RENDER_FRAME "2400" CACHE STRING "kicad-cli render frame, pixels square")
 
 # Aggregate target: "cmake --build . --target board-renders" redraws every
 # board whose .kicad_pcb has changed since its images were written. Deliberately
@@ -97,13 +102,6 @@ function(_board_renders name)
   foreach(side ${ARGN})
     set(out "${BOARD_RENDER_DIR}/${name}-${side}.png")
 
-    # Trim and upright the image once kicad-cli has drawn it. Skipped, with a
-    # warning at configure time, when Pillow is not installed.
-    set(_fit "")
-    if(BOARD_CAN_FIT)
-      set(_fit COMMAND "${Python3_EXECUTABLE}" "${BOARD_FIT_SCRIPT}" "${out}")
-    endif()
-
     add_custom_command(
       OUTPUT "${out}"
       COMMAND ${CMAKE_COMMAND} -E make_directory "${BOARD_RENDER_DIR}"
@@ -118,14 +116,13 @@ function(_board_renders name)
       COMMAND ${kicad_cli_EXECUTABLE} pcb render
               --side ${side}
               --rotate 0,0,90
-              --zoom ${BOARD_RENDER_ZOOM}
               --quality high
-              --width 1600
-              --height 1600
+              --width ${BOARD_RENDER_FRAME}
+              --height ${BOARD_RENDER_FRAME}
               --background transparent
               --output "${out}"
               "${board}"
-      ${_fit}
+      COMMAND "${Python3_EXECUTABLE}" "${BOARD_FIT_SCRIPT}" "${out}"
       DEPENDS "${board}" "${BOARD_FIT_SCRIPT}"
       COMMENT "Rendering ${name} (${side})"
       VERBATIM)
