@@ -62,6 +62,9 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--repo", type=Path, default=None,
                     help="hardware repository root (default: inferred)")
+    ap.add_argument("--stale-targets", action="store_true",
+                    help="print the CMake targets whose figures are out of "
+                         "date, one per line, and nothing else")
     args = ap.parse_args()
 
     repo = args.repo or Path(__file__).resolve().parents[2]
@@ -72,6 +75,7 @@ def main():
 
     problems = []
     unstamped = []
+    stale_targets = []
     claimed_png = set()
     claimed_pdf = set()
     checked = 0
@@ -96,10 +100,14 @@ def main():
             stamp = stamps / f"{name}.sha256"
             if not stamp.exists():
                 unstamped.append(f"{name} (renders)")
+                stale_targets.append(f"{name}-renders")
             elif read_stamp(stamp).get(pcb.name) != sha256(pcb):
                 problems.append(
                     f"{name}: the layout has changed since its renders were "
                     f"drawn")
+                stale_targets.append(f"{name}-renders")
+            elif any(not (renders / f"{name}-{s}.png").exists() for s in sides):
+                stale_targets.append(f"{name}-renders")
 
         # --- schematic PDF, against every sheet --------------------------
         sheets = sorted(d.glob("*.kicad_sch"))
@@ -113,6 +121,9 @@ def main():
         stamp = stamps / f"{name}.sch.sha256"
         if not stamp.exists():
             unstamped.append(f"{name} (schematic)")
+            stale_targets.append(f"{name}-schematic")
+        elif not pdf.exists():
+            stale_targets.append(f"{name}-schematic")
         else:
             recorded = read_stamp(stamp)
             actual = {s.name: sha256(s) for s in sheets}
@@ -128,6 +139,7 @@ def main():
                 problems.append(
                     f"{name}: the drawing has changed since its PDF was "
                     f"exported ({detail})")
+                stale_targets.append(f"{name}-schematic")
 
     for directory, claimed, what in ((renders, claimed_png, "render"),
                                      (schematics, claimed_pdf, "schematic")):
@@ -137,6 +149,11 @@ def main():
             if f.is_file() and f.name not in claimed:
                 problems.append(
                     f"{f.name}: {what} belongs to no board in the CMake files")
+
+    if args.stale_targets:
+        for target in stale_targets:
+            print(target)
+        return 0
 
     print(f"{checked} boards checked")
 

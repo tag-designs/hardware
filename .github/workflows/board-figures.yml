@@ -1,0 +1,143 @@
+name: Board figures (trial)
+
+# Generates the board renders and schematic PDFs in a container, uploads them
+# as an artifact, and publishes nothing.
+#
+# This is a trial, not the production path. The figures are still generated on
+# a workstation and committed; the question this job exists to answer is
+# whether a container produces the same ones. Download the artifact, compare it
+# against what is in the repository, and only then consider moving generation
+# here for good.
+#
+# Two things are known to be unverified:
+#
+#   * the KiCad version. The board files are in KiCad 10 format, so an older
+#     image may refuse them outright. The image is an input rather than a
+#     constant so it can be changed without editing this file, and the job
+#     prints the version it actually got.
+#   * fonts. Silkscreen and schematic text are rendered, so a container missing
+#     the fonts KiCad expects will produce different figures rather than fail.
+#     This is the main thing to look for when comparing.
+
+on:
+  workflow_dispatch:
+    inputs:
+      image:
+        description: "KiCad container image"
+        default: "kicad/kicad:10.0"
+        required: true
+      scope:
+        description: "What to generate"
+        type: choice
+        options: [stale, all]
+        default: stale
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  figures:
+    name: Generate in a container
+    runs-on: ubuntu-latest
+
+    container:
+      image: ${{ inputs.image }}
+      # kicad images run as a non-root user with a home the runner does not
+      # own; root avoids a pile of permission failures that have nothing to do
+      # with what is being tested.
+      options: --user root
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+        with:
+          submodules: false
+
+      - name: Let git look at the checkout
+        # The container runs as root over a checkout the runner owns, which
+        # git rejects as dubious ownership.
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
+      - name: Report the environment
+        run: |
+          kicad-cli version || kicad-cli --version
+          echo "---"
+          python3 --version
+          cmake --version | head -1
+          echo "--- fonts visible to the container ---"
+          fc-list 2>/dev/null | wc -l
+
+      # Pure Python, no KiCad. kicad-cli draws a model it cannot find as
+      # nothing and still reports success, so without this a container missing
+      # a model publishes a part-empty board with a green tick.
+      - name: Check every 3D model resolves
+        run: python3 BoardDesigns/kicad-helpers/check_models.py
+
+      - name: Install Pillow for the trim step
+        # The flag is required on a PEP 668 image and rejected by older pip,
+        # so try it and fall back rather than guessing which this image is.
+        run: |
+          python3 -c "import PIL" 2>/dev/null && { echo "already present"; exit 0; }
+          python3 -m pip install --break-system-packages Pillow \
+            || python3 -m pip install Pillow \
+            || { apt-get update && apt-get install -y python3-pil; }
+          python3 -c "import PIL, sys; print('Pillow', PIL.__version__)"
+
+      - name: Configure
+        run: cmake -S BoardDesigns -B build-boards
+
+      # A clone does not preserve mtimes, so CMake would consider every board
+      # out of date and redraw all nineteen. The stamps are content hashes, so
+      # they survive a clone and say which boards actually changed.
+      - name: Work out what needs generating
+        id: select
+        run: |
+          if [ "${{ inputs.scope }}" = "all" ]; then
+            targets=board-docs
+          else
+            targets=$(python3 BoardDesigns/kicad-helpers/check_renders.py --stale-targets | tr '\n' ' ')
+          fi
+          echo "targets=$targets" >> "$GITHUB_OUTPUT"
+          if [ -z "$targets" ]; then
+            echo "Every figure is current; nothing to generate."
+          else
+            echo "Generating: $targets"
+          fi
+
+      - name: Generate
+        if: steps.select.outputs.targets != ''
+        run: cmake --build build-boards --target ${{ steps.select.outputs.targets }}
+
+      # What the container produced, against what is committed. Not a pass/fail
+      # gate: renders carry raytracing noise, so a byte difference means
+      # nothing on its own and the point is to look at the images.
+      - name: Compare with the committed figures
+        if: steps.select.outputs.targets != ''
+        run: |
+          git -c core.fileMode=false status --porcelain \
+              docs/src/images/boards docs/src/schematics
+          echo "--- sizes ---"
+          python3 - <<'PY'
+          from PIL import Image
+          import glob, os
+          for f in sorted(glob.glob('docs/src/images/boards/*.png')):
+              im = Image.open(f).convert('RGBA')
+              w, h = im.size
+              l, t, r, b = im.getchannel('A').getbbox()
+              edge = [s for s, c in (('L', l <= 0), ('T', t <= 0),
+                                     ('R', r >= w), ('B', b >= h)) if c]
+              print(f"{os.path.basename(f):42s} {w}x{h} "
+                    f"{'CLIPPED ' + ','.join(edge) if edge else ''}")
+          PY
+
+      - name: Upload what the container produced
+        if: steps.select.outputs.targets != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: board-figures
+          path: |
+            docs/src/images/boards/
+            docs/src/schematics/
+            BoardDesigns/.render-stamps/
+          if-no-files-found: error
