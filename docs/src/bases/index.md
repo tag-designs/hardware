@@ -44,13 +44,13 @@ That section is documented here once rather than on four pages.
 **Every base has a charger**, but the word covers two quite different circuits.
 For a LiPo cell it is a real charger IC. For the MS621 and similar coin cells it
 is simply a 3.3 V supply through a fixed resistor — so the "charger" is a
-selectable array of resistors and a DIP switch. On `tagbase-jlcpcb-v3` that is
+selectable array of resistors and a DIP switch. On `tagbase-v7` that is
 four 620 Ω resistors against a 4-way switch.
 
 Some boards additionally carry **battery models**: resistors chosen to match the
 internal resistance of real cells, so a tag can be exercised against a realistic
-source impedance without a battery present. `tagbase-jlcpcb-v3` has a 33 Ω and an
-82 Ω for this.
+source impedance without a battery present. `tagbase-v7` has a 33 Ω and a
+100 Ω resistor for this.
 
 **The target interface is where the two kinds of base diverge**, and it is the
 only section that differs.
@@ -59,7 +59,7 @@ only section that differs.
 
 | | Holds | Target interface | Boards |
 | --- | --- | --- | --- |
-| **Tag bases** | A finished tag | 6-pin pogo connector pressing on the tag's test pads | [tagbase-jlcpcb-v3](tagbase-jlcpcb-v3.md), [tagbase-lipo-v1](tagbase-lipo-v1.md) |
+| **Tag bases** | A finished tag | 6-pin pogo connector pressing on the tag's test pads | [tagbase-v7](tagbase-v7.md), [tagbase-lipo-v1](tagbase-lipo-v1.md) |
 | **Breakout bases** | A prototype board | Tag-side processor, RTC and regulator, plus a pair of 1×17 headers | [tag-breakout-l432v2](tag-breakout-l432v2.md), [tag-breakout-u375-smps-v1](tag-breakout-u375-smps-v1.md) |
 
 A **tag base** is a test fixture: a finished tag drops into a 3D-printed holder
@@ -94,7 +94,7 @@ How the disconnect is made depends on what the tag runs from.
 | Cell | Mechanism | Boards |
 | --- | --- | --- |
 | **LiPo** | A physical changeover — SPDT slide switches | `tagbase-lipo-v1`, `tag-breakout-u375-smps-v1` |
-| **Coin cell** | A low-leakage analog switch, TS5A3159 | `tagbase-jlcpcb-v3`, `tag-breakout-l432v2` |
+| **Coin cell** | A low-leakage analog switch, TS5A3159 | `tagbase-v7`, `tag-breakout-l432v2` |
 
 The reason is what each supply looks like. A coin cell on these boards is not a
 cell at all: it is 3.3 V through a selected resistor, so the path can be broken
@@ -103,7 +103,7 @@ much against the hundreds of ohms already in series. A LiPo is a real cell
 delivering real current, and there the switch would sit directly in the measured
 path — so the connection is made and broken physically instead.
 
-`tagbase-jlcpcb-v3` is the fullest expression of the analog-switch approach,
+`tagbase-v7` is the fullest expression of the analog-switch approach,
 with four TS5A3159 parts gating `TAG_3V3_EN`, `TAG_VBAT_EN` and `ADC_EN` under
 firmware control, so a measurement sequence can be scripted rather than set by
 hand. `tag-breakout-l432v2` does the same job with one.
@@ -115,7 +115,7 @@ The external supply arrives on the 4-pin JST-XH at `J1`, on the net named
 
 | Board | Kind | Programming processor | Charger | Render |
 | --- | --- | --- | --- | --- |
-| [tagbase-jlcpcb-v3](tagbase-jlcpcb-v3.md) | Tag base | STM32F042G6 | Resistor array, 4×620 Ω | top |
+| [tagbase-v7](tagbase-v7.md) | Tag base | STM32F042G6 | Resistor array, 4×620 Ω | top |
 | [tagbase-lipo-v1](tagbase-lipo-v1.md) | Tag base | STM32L432KB | XC6808 LiPo charger | top |
 | [tag-breakout-l432v2](tag-breakout-l432v2.md) ⚠ | Breakout base | STM32F042K6 | Resistor array | top |
 | [tag-breakout-u375-smps-v1](tag-breakout-u375-smps-v1.md) | Breakout base | STM32L432 | Resistor array | top |

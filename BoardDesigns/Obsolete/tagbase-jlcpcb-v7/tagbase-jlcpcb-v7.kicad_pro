@@ -500,7 +500,7 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "tagbase-jlcpcb-v3.kicad_pro",
+    "filename": "tagbase-jlcpcb-v7.kicad_pro",
     "version": 3
   },
   "net_settings": {
@@ -540,7 +540,7 @@
       "plot": "",
       "pos_files": "",
       "specctra_dsn": "",
-      "step": "tagbase-jlcpcb-v3.step",
+      "step": "tagbase-jlcpcb-v7.step",
       "svg": "",
       "vrml": ""
     },
@@ -657,8 +657,8 @@
     "subpart_id_separator": 0,
     "top_level_sheets": [
       {
-        "filename": "tagbase-jlcpcb-v3.kicad_sch",
-        "name": "tagbase-jlcpcb-v3",
+        "filename": "tagbase-jlcpcb-v7.kicad_sch",
+        "name": "tagbase-jlcpcb-v7",
         "uuid": "00000000-0000-0000-0000-000000000000"
       }
     ]

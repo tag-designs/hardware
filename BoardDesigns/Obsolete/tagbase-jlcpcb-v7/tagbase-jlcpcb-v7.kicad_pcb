@@ -230,7 +230,7 @@
 			)
 		)
 		(path "/00000000-0000-0000-0000-00005b038987")
-		(sheetfile "tagbase-jlcpcb-v3.kicad_sch")
+		(sheetfile "tagbase-jlcpcb-v7.kicad_sch")
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -511,7 +511,7 @@
 			)
 		)
 		(path "/00000000-0000-0000-0000-00005b038a86")
-		(sheetfile "tagbase-jlcpcb-v3.kicad_sch")
+		(sheetfile "tagbase-jlcpcb-v7.kicad_sch")
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -792,7 +792,7 @@
 			)
 		)
 		(path "/00000000-0000-0000-0000-00005bf69467")
-		(sheetfile "tagbase-jlcpcb-v3.kicad_sch")
+		(sheetfile "tagbase-jlcpcb-v7.kicad_sch")
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -1023,7 +1023,7 @@
 			)
 		)
 		(path "/00000000-0000-0000-0000-00005c4ee665")
-		(sheetfile "tagbase-jlcpcb-v3.kicad_sch")
+		(sheetfile "tagbase-jlcpcb-v7.kicad_sch")
 		(attr through_hole)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -1546,7 +1546,7 @@
 			)
 		)
 		(path "/00000000-0000-0000-0000-00005bf233bc")
-		(sheetfile "tagbase-jlcpcb-v3.kicad_sch")
+		(sheetfile "tagbase-jlcpcb-v7.kicad_sch")
 		(attr through_hole)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -1957,7 +1957,7 @@
 			)
 		)
 		(path "/00000000-0000-0000-0000-00005edb2180")
-		(sheetfile "tagbase-jlcpcb-v3.kicad_sch")
+		(sheetfile "tagbase-jlcpcb-v7.kicad_sch")
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -2258,7 +2258,7 @@
 			)
 		)
 		(path "/00000000-0000-0000-0000-00005b67711a")
-		(sheetfile "tagbase-jlcpcb-v3.kicad_sch")
+		(sheetfile "tagbase-jlcpcb-v7.kicad_sch")
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -2862,7 +2862,7 @@
 			)
 		)
 		(path "/00000000-0000-0000-0000-00005ede5ddd")
-		(sheetfile "tagbase-jlcpcb-v3.kicad_sch")
+		(sheetfile "tagbase-jlcpcb-v7.kicad_sch")
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -3151,7 +3151,7 @@
 			)
 		)
 		(path "/00000000-0000-0000-0000-00005b01d2d6")
-		(sheetfile "tagbase-jlcpcb-v3.kicad_sch")
+		(sheetfile "tagbase-jlcpcb-v7.kicad_sch")
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -3454,7 +3454,7 @@
 			)
 		)
 		(path "/00000000-0000-0000-0000-00005edea1b5")
-		(sheetfile "tagbase-jlcpcb-v3.kicad_sch")
+		(sheetfile "tagbase-jlcpcb-v7.kicad_sch")
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -3701,7 +3701,7 @@
 			)
 		)
 		(path "/00000000-0000-0000-0000-00005b67033b")
-		(sheetfile "tagbase-jlcpcb-v3.kicad_sch")
+		(sheetfile "tagbase-jlcpcb-v7.kicad_sch")
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -3948,7 +3948,7 @@
 			)
 		)
 		(path "/00000000-0000-0000-0000-00005be768cb")
-		(sheetfile "tagbase-jlcpcb-v3.kicad_sch")
+		(sheetfile "tagbase-jlcpcb-v7.kicad_sch")
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -4194,7 +4194,7 @@
 			)
 		)
 		(path "/00000000-0000-0000-0000-00005be768ac")
-		(sheetfile "tagbase-jlcpcb-v3.kicad_sch")
+		(sheetfile "tagbase-jlcpcb-v7.kicad_sch")
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -4441,7 +4441,7 @@
 			)
 		)
 		(path "/00000000-0000-0000-0000-00005ee04da4")
-		(sheetfile "tagbase-jlcpcb-v3.kicad_sch")
+		(sheetfile "tagbase-jlcpcb-v7.kicad_sch")
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -4688,7 +4688,7 @@
 			)
 		)
 		(path "/00000000-0000-0000-0000-00005b038aed")
-		(sheetfile "tagbase-jlcpcb-v3.kicad_sch")
+		(sheetfile "tagbase-jlcpcb-v7.kicad_sch")
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -4934,7 +4934,7 @@
 			)
 		)
 		(path "/00000000-0000-0000-0000-00005b06b8b2")
-		(sheetfile "tagbase-jlcpcb-v3.kicad_sch")
+		(sheetfile "tagbase-jlcpcb-v7.kicad_sch")
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -5180,7 +5180,7 @@
 			)
 		)
 		(path "/00000000-0000-0000-0000-00005b9bee22")
-		(sheetfile "tagbase-jlcpcb-v3.kicad_sch")
+		(sheetfile "tagbase-jlcpcb-v7.kicad_sch")
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -5415,7 +5415,7 @@
 			)
 		)
 		(path "/00000000-0000-0000-0000-00005b66fea1")
-		(sheetfile "tagbase-jlcpcb-v3.kicad_sch")
+		(sheetfile "tagbase-jlcpcb-v7.kicad_sch")
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -5661,7 +5661,7 @@
 			)
 		)
 		(path "/00000000-0000-0000-0000-00005b673196")
-		(sheetfile "tagbase-jlcpcb-v3.kicad_sch")
+		(sheetfile "tagbase-jlcpcb-v7.kicad_sch")
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -5908,7 +5908,7 @@
 			)
 		)
 		(path "/00000000-0000-0000-0000-00005bf69470")
-		(sheetfile "tagbase-jlcpcb-v3.kicad_sch")
+		(sheetfile "tagbase-jlcpcb-v7.kicad_sch")
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -6154,7 +6154,7 @@
 			)
 		)
 		(path "/00000000-0000-0000-0000-00005bf6940e")
-		(sheetfile "tagbase-jlcpcb-v3.kicad_sch")
+		(sheetfile "tagbase-jlcpcb-v7.kicad_sch")
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -6401,7 +6401,7 @@
 			)
 		)
 		(path "/00000000-0000-0000-0000-00005edd8368")
-		(sheetfile "tagbase-jlcpcb-v3.kicad_sch")
+		(sheetfile "tagbase-jlcpcb-v7.kicad_sch")
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -6679,7 +6679,7 @@
 			)
 		)
 		(path "/00000000-0000-0000-0000-00005ee04d44")
-		(sheetfile "tagbase-jlcpcb-v3.kicad_sch")
+		(sheetfile "tagbase-jlcpcb-v7.kicad_sch")
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -6925,7 +6925,7 @@
 			)
 		)
 		(path "/00000000-0000-0000-0000-00005eed9696")
-		(sheetfile "tagbase-jlcpcb-v3.kicad_sch")
+		(sheetfile "tagbase-jlcpcb-v7.kicad_sch")
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -7228,7 +7228,7 @@
 			)
 		)
 		(path "/00000000-0000-0000-0000-00005ee5ca11")
-		(sheetfile "tagbase-jlcpcb-v3.kicad_sch")
+		(sheetfile "tagbase-jlcpcb-v7.kicad_sch")
 		(attr through_hole)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -7748,7 +7748,7 @@
 			)
 		)
 		(path "/00000000-0000-0000-0000-00005ee392f0")
-		(sheetfile "tagbase-jlcpcb-v3.kicad_sch")
+		(sheetfile "tagbase-jlcpcb-v7.kicad_sch")
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -8872,7 +8872,7 @@
 			)
 		)
 		(path "/00000000-0000-0000-0000-00005efd1c38")
-		(sheetfile "tagbase-jlcpcb-v3.kicad_sch")
+		(sheetfile "tagbase-jlcpcb-v7.kicad_sch")
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -9160,7 +9160,7 @@
 			)
 		)
 		(path "/00000000-0000-0000-0000-00005f004ffe")
-		(sheetfile "tagbase-jlcpcb-v3.kicad_sch")
+		(sheetfile "tagbase-jlcpcb-v7.kicad_sch")
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -9412,7 +9412,7 @@
 			)
 		)
 		(path "/00000000-0000-0000-0000-00005fce7579")
-		(sheetfile "tagbase-jlcpcb-v3.kicad_sch")
+		(sheetfile "tagbase-jlcpcb-v7.kicad_sch")
 		(attr through_hole)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -9712,7 +9712,7 @@
 			)
 		)
 		(path "/00000000-0000-0000-0000-00005fe920dd")
-		(sheetfile "tagbase-jlcpcb-v3.kicad_sch")
+		(sheetfile "tagbase-jlcpcb-v7.kicad_sch")
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -9958,7 +9958,7 @@
 			)
 		)
 		(path "/00000000-0000-0000-0000-00005fee9ec3")
-		(sheetfile "tagbase-jlcpcb-v3.kicad_sch")
+		(sheetfile "tagbase-jlcpcb-v7.kicad_sch")
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -10204,7 +10204,7 @@
 			)
 		)
 		(path "/00000000-0000-0000-0000-00006003f714")
-		(sheetfile "tagbase-jlcpcb-v3.kicad_sch")
+		(sheetfile "tagbase-jlcpcb-v7.kicad_sch")
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -10494,7 +10494,7 @@
 			)
 		)
 		(path "/65408328-3c30-4739-8fa5-b1c42f88e198")
-		(sheetfile "tagbase-jlcpcb-v3.kicad_sch")
+		(sheetfile "tagbase-jlcpcb-v7.kicad_sch")
 		(attr exclude_from_pos_files)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_circle
@@ -10593,7 +10593,7 @@
 			)
 		)
 		(path "/a4c4741c-7c1b-4383-9eb5-3eb0edf62109")
-		(sheetfile "tagbase-jlcpcb-v3.kicad_sch")
+		(sheetfile "tagbase-jlcpcb-v7.kicad_sch")
 		(attr exclude_from_pos_files)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_circle
@@ -10728,7 +10728,7 @@
 			)
 		)
 		(path "/ae857586-d6c1-4b1d-a79d-6256b8a37063")
-		(sheetfile "tagbase-jlcpcb-v3.kicad_sch")
+		(sheetfile "tagbase-jlcpcb-v7.kicad_sch")
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -10926,7 +10926,7 @@
 			)
 		)
 		(path "/46816835-8ab9-465f-bd45-6396c5d6d2c7")
-		(sheetfile "tagbase-jlcpcb-v3.kicad_sch")
+		(sheetfile "tagbase-jlcpcb-v7.kicad_sch")
 		(attr through_hole)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -11204,7 +11204,7 @@
 			)
 		)
 		(path "/f1f539c8-ebee-46fa-ac91-180a798759c8")
-		(sheetfile "tagbase-jlcpcb-v3.kicad_sch")
+		(sheetfile "tagbase-jlcpcb-v7.kicad_sch")
 		(attr exclude_from_pos_files)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_circle
@@ -11339,7 +11339,7 @@
 			)
 		)
 		(path "/47ee72fe-3318-409a-ab4e-3ed3b6624673")
-		(sheetfile "tagbase-jlcpcb-v3.kicad_sch")
+		(sheetfile "tagbase-jlcpcb-v7.kicad_sch")
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -11538,7 +11538,7 @@
 			)
 		)
 		(path "/38e3c492-507a-4d8f-9345-c2303a42a658")
-		(sheetfile "tagbase-jlcpcb-v3.kicad_sch")
+		(sheetfile "tagbase-jlcpcb-v7.kicad_sch")
 		(attr exclude_from_pos_files)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_circle
@@ -11673,7 +11673,7 @@
 			)
 		)
 		(path "/b44cdfab-2a73-416b-bc80-8e7ca843e03d")
-		(sheetfile "tagbase-jlcpcb-v3.kicad_sch")
+		(sheetfile "tagbase-jlcpcb-v7.kicad_sch")
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line

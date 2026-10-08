@@ -1,2 +1,1 @@
-# No build step for this board. Fabrication outputs are no longer driven
-# from CMake, and only the documented boards produce renders.
+add_board_renders_top(tagbase-v7)

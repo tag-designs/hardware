@@ -274,7 +274,7 @@ add_subdirectory(Tags/imutag-smps)
 add_subdirectory(Tags/BitPresTagBMP585)
 
 # Base boards -- top view only
-add_subdirectory(Bases/tagbase-jlcpcb-v3)
+add_subdirectory(Bases/tagbase-v7)
 add_subdirectory(Bases/tagbase-lipo-v1)
 add_subdirectory(Bases/tag-breakout-u375-smps-v1)
 add_subdirectory(Bases/tag-breakout-l432v2)

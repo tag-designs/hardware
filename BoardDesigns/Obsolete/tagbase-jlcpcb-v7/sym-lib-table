@@ -28,6 +28,6 @@
   (lib (name "RF_Switch")(type "Legacy")(uri "${KICAD_SYMBOL_DIR}/RF_Switch.lib")(options "")(descr "")(disabled))
   (lib (name "tagbase-ultralight-rescue")(type "Legacy")(uri "${KIPRJMOD}/tagbase-ultralight-rescue.lib")(options "")(descr "")(disabled))
   (lib (name "tagbase-jlcpcb-v2-rescue")(type "Legacy")(uri "${KIPRJMOD}/tagbase-jlcpcb-v2-rescue.lib")(options "")(descr "")(disabled))
-  (lib (name "tagbase-jlcpcb-v3-rescue")(type "Legacy")(uri "${KIPRJMOD}/tagbase-jlcpcb-v3-rescue.lib")(options "")(descr ""))
+  (lib (name "tagbase-jlcpcb-v7-rescue")(type "Legacy")(uri "${KIPRJMOD}/tagbase-jlcpcb-v7-rescue.lib")(options "")(descr ""))
   (lib (name "tagbase")(type "Legacy")(uri "${KIPRJMOD}/../../kicad_libraries/lib_sch/tagbase.lib")(options "")(descr ""))
 )

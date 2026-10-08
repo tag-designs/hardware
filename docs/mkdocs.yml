@@ -76,7 +76,7 @@ nav:
     - IMUTag: tags/imutag.md
   - Base Boards:
     - Overview: bases/index.md
-    - tagbase-jlcpcb-v3: bases/tagbase-jlcpcb-v3.md
+    - tagbase-v7: bases/tagbase-v7.md
     - tagbase-lipo-v1: bases/tagbase-lipo-v1.md
     - tag-breakout-l432v2: bases/tag-breakout-l432v2.md
     - tag-breakout-u375-smps-v1: bases/tag-breakout-u375-smps-v1.md
