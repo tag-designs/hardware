@@ -27,12 +27,13 @@ flowchart LR
       MCU --- FLASH
     end
     subgraph PWR[Power]
-      BAT["Battery (J401)"]
+      BAT["MS621FE-FL11E or<br/>MS920SE-FL27E coin cell"]
     end
+    IF["Interface<br/>SWD + pogo pads"]
     SW --- ON
   end
   ON --- PWR
-  ON --- IF["Interface<br/>SWD + pogo pads"]
+  ON --- IF
 ```
 
 ## Major components
@@ -45,6 +46,7 @@ flowchart LR
 | Sensor | AK09940A | **Switched, +1V8** | 3-axis magnetometer |
 | Regulator | TPS7A0218 | — | 1.8 V LDO serving only the magnetometer |
 | Memory | AT25XE321D-UUN | Always on, +2V5 | 4 MB serial flash |
+| Battery | MS621FE-FL11E or MS920SE-FL27E | — | 5.5 mAh / 230 mg, or 11 mAh / 450 mg |
 
 **The magnetometer has a rail of its own.** The AK09940A runs at 1.8 V, so it
 cannot share the +2V5 rail the rest of the board uses. The TPS7A0218 LDO

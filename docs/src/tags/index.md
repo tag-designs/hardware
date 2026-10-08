@@ -3,14 +3,14 @@
 Six fabricated tag boards, each documented with its major components, a block
 diagram, what it records, and a link to its design files.
 
-| | Senses | Processor | Memory | Switched rail |
-| --- | --- | --- | --- | --- |
-| [BitTagv7](bittag.md) | Movement | STM32L432KC | Internal only | — |
-| [BitTagNG](bittagng.md) | Movement | STM32L432KC | 4 MB serial | — |
-| [PresTag-v6](prestag.md) | Pressure | STM32L431KC | 4 MB serial | Pressure sensor |
-| [CompassTag](compasstag.md) | Movement, magnetic field | STM32L432KC | 4 MB serial | Magnetometer (+1V8) |
-| [UIUC Tag](uiuctag.md) | Movement, pressure | STM32L432KC | 4 MB serial | Pressure sensor |
-| [IMUTag](imutag.md) | Movement, rotation, magnetic field, pressure | STM32U375KG | NAND | — |
+| | Senses | Processor | Memory | Switched rail | Cell |
+| --- | --- | --- | --- | --- | --- |
+| [BitTagv7](bittag.md) | Movement | STM32L432KC | Internal only | — | Coin |
+| [BitTagNG](bittagng.md) | Movement | STM32L432KC | 4 MB serial | — | Coin |
+| [PresTag-v6](prestag.md) | Pressure | STM32L431KC | 4 MB serial | Pressure sensor | Coin |
+| [CompassTag](compasstag.md) | Movement, magnetic field | STM32L432KC | 4 MB serial | Magnetometer (+1V8) | Coin |
+| [UIUC Tag](uiuctag.md) | Movement, pressure | STM32L432KC | 4 MB serial | Pressure sensor | Coin |
+| [IMUTag](imutag.md) | Movement, rotation, magnetic field, pressure | STM32U375KG | NAND | — | 12 mAh LiPo |
 
 The [project home](https://tag-designs.github.io/) describes the tag families
 from a user's point of view — what each one is for and which questions it
@@ -56,10 +56,25 @@ All six carry a Micro Crystal RV-3028 real-time clock, in the C7 or C8 variant.
 At roughly 40 nA and 1 ppm it is what lets a tag sleep for months and still
 timestamp what it recorded.
 
+## Cells
+
+The five boards without a core regulator take one of two Seiko rechargeable coin
+cells, and the choice between them is mass against endurance:
+
+| Cell | Capacity | Mass |
+| --- | --- | --- |
+| MS621FE-FL11E | 5.5 mAh | 230 mg |
+| MS920SE-FL27E | 11 mAh | 450 mg |
+
+IMUTag is the exception. Its switching converter regulates whatever the cell
+gives down to 1.8 V, which frees it from the coin-cell voltage window; it runs
+from a 12 mAh LiPo, with the specific cell not yet settled.
+
 !!! warning "Battery chemistry is not interchangeable"
 
-    The boards without regulators run their parts directly at cell voltage less a
+    On the boards without regulators the rail follows the cell, less one Schottky
     diode drop. A 3 V coin cell lands near 2.8 V, comfortably within range. A
     3.7 V LiPo at full charge would reach roughly 4.0 V — the absolute maximum
     rating of several of the parts involved, not merely outside their operating
-    range.
+    range. That substitution is safe only on IMUTag, and only because the
+    converter stands between the cell and everything else.

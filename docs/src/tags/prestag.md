@@ -23,7 +23,7 @@ flowchart LR
       MCU --- FLASH
     end
     subgraph PWR[Power]
-      BAT["Battery (J401)<br/>D401 Schottky"]
+      BAT["MS621FE-FL11E or<br/>MS920SE-FL27E<br/>D401 Schottky"]
     end
     IF["Interface<br/>SWD + pogo pads"]
   end
@@ -44,6 +44,7 @@ supply line, `LPS_PWR`, driven by a processor pin rather than by the main rail.
 | Sensor | LPS27HHTW | **Switched** | Barometric pressure and temperature |
 | Memory | AT25FF321A-UUN | Always on | 4 MB; unusually low quiescent current for serial flash |
 | Power | D401 CDBQC0130L-HF | — | Schottky reverse-polarity protection; no regulator |
+| Battery | MS621FE-FL11E or MS920SE-FL27E | — | 5.5 mAh / 230 mg, or 11 mAh / 450 mg |
 
 **Why the pressure sensor is gated.** The LPS27 draws about 0.9 µA just sitting
 idle. On a tag whose whole budget is measured in microamps that is not a

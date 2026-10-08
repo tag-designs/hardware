@@ -27,12 +27,13 @@ flowchart LR
       MCU --- FLASH
     end
     subgraph PWR[Power]
-      BAT["Battery (J401)<br/>D401 Schottky"]
+      BAT["MS621FE-FL11E or<br/>MS920SE-FL27E<br/>D401 Schottky"]
     end
+    IF["Interface<br/>SWD + pogo pads"]
     SW --- ON
   end
   ON --- PWR
-  ON --- IF["Interface<br/>SWD + pogo pads"]
+  ON --- IF
 ```
 
 ## Major components
@@ -45,6 +46,7 @@ flowchart LR
 | Sensor | BMP585 | **Switched** | Barometric pressure and temperature |
 | Memory | AT25FF321A-UUN | Always on | 4 MB serial flash |
 | Power | D401 CDBQC0130L-HF | — | Schottky reverse-polarity protection; no regulator |
+| Battery | MS621FE-FL11E or MS920SE-FL27E | — | 5.5 mAh / 230 mg, or 11 mAh / 450 mg |
 
 **The pressure sensor is powered from a processor pin, through a resistor.**
 Pin `PB1` drives the net `LPS_PWR`, which passes through a 10 Ω series resistor

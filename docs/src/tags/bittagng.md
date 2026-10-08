@@ -29,7 +29,7 @@ flowchart LR
       MCU --- FLASH
     end
     subgraph PWR[Power]
-      BAT["MS621 coin cell (J401)<br/>D401 Schottky"]
+      BAT["MS621FE-FL11E or<br/>MS920SE-FL27E<br/>D401 Schottky"]
     end
     IF["Interface<br/>SWD + pogo pads"]
   end
@@ -50,6 +50,7 @@ would earn back.
 | Sensor | ADXL367BCCZ | 3-axis accelerometer; successor to the ADXL362 in BitTagv7 |
 | Memory | AT25FF321A-UUN | 4 MB serial flash, low quiescent current |
 | Power | D401 CDBQC0130L-HF | Schottky reverse-polarity protection; no regulator |
+| Battery | MS621FE-FL11E or MS920SE-FL27E | 5.5 mAh / 230 mg, or 11 mAh / 450 mg |
 
 **The power tree is one diode deep.** An MS621 3 V rechargeable coin cell feeds
 `VBAT`, D401 drops it to a `VIN` of roughly 2.8 V, and every device on the board
@@ -57,10 +58,16 @@ runs from that directly — processor, accelerometer, flash and RTC alike. The
 binding constraint is the 3.6 V shared operating limit of the STM32 and the
 ADXL367, against a 4.0 V absolute maximum on both.
 
-!!! warning "Do not substitute a 3.7 V LiPo"
+!!! warning "The cell chemistry is not a free choice"
 
-    Charged to 4.2 V, a LiPo would put `VIN` at roughly 4.0 V — the absolute
-    maximum of both the processor and the accelerometer.
+    This board takes one of two Seiko rechargeable coin cells: the
+    **MS621FE-FL11E** (5.5 mAh, 230 mg) or the **MS920SE-FL27E** (11 mAh,
+    450 mg). Which one is a mass-versus-endurance decision for the deployment.
+
+    Neither may be swapped for a 3.7 V LiPo. Without a regulator the rail
+    follows the cell, and a LiPo charged to 4.2 V would put roughly 4.0 V on it
+    — the absolute maximum rating of both the processor and the accelerometer,
+    not merely outside their operating range.
 
 ## What it records
 

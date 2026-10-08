@@ -26,7 +26,7 @@ flowchart LR
       MCU --- NAND
     end
     subgraph PWR[Power]
-      BAT["Battery (J401)"]
+      BAT["12 mAh LiPo cell"]
       BUCK["TPS62840 buck<br/>+ 2.2 µH"]
       BAT --- BUCK
     end
@@ -56,6 +56,7 @@ materially.
 | Sensor | BMP581 | Barometric pressure and temperature |
 | Memory | GD5F2GM7REYIGR | NAND flash — far larger than the serial flash the other tags carry |
 | Power | TPS62840YBGR + 2.2 µH | Step-down switching converter producing +1V8 |
+| Battery | 12 mAh LiPo | Specific cell not yet settled |
 
 **This is the only tag with a switching converter.** Every other board in the
 family runs its parts directly from the cell through a Schottky diode. At
@@ -63,6 +64,14 @@ IMUTag's sampling rates the processor and sensors draw enough that a buck
 converter's efficiency earns its complexity — and the whole board then sits on a
 single regulated 1.8 V rail rather than on a battery voltage that sags as the
 cell drains.
+
+The converter is also what lets this board use a different cell. Every other tag
+is tied to a 3 V coin cell because its parts sit directly on the rail; put a
+4.2 V LiPo on one and you are at the absolute maximum of the processor. Here the
+TPS62840 steps whatever the cell gives down to a regulated 1.8 V, so a **12 mAh
+LiPo** is usable — more capacity than a coin cell, and a rail that stays at
+1.8 V rather than sagging as the cell drains. The specific cell is not yet
+settled.
 
 Using the YBG package has one consequence worth knowing: it has no MODE pin, so
 forced-PWM operation is not available on this board.
