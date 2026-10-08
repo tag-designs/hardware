@@ -59,14 +59,33 @@ jobs:
         # git rejects as dubious ownership.
         run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
 
+      # Tolerant on purpose: this step reports what the image has, and a
+      # missing tool is an answer rather than a reason to stop here.
       - name: Report the environment
         run: |
-          kicad-cli version || kicad-cli --version
-          echo "---"
-          python3 --version
+          (kicad-cli version || kicad-cli --version) 2>/dev/null || echo "kicad-cli: ABSENT"
+          python3 --version 2>/dev/null || echo "python3: ABSENT"
+          python3 -m pip --version 2>/dev/null || echo "pip: absent"
+          cmake --version 2>/dev/null | head -1 || echo "cmake: absent"
+          echo "fonts visible: $(fc-list 2>/dev/null | wc -l)"
+
+      # The kicad images carry KiCad and its runtime, not a build toolchain, so
+      # cmake is usually missing. It is only needed to drive the same rules the
+      # workstation uses -- duplicating them in a script here would be a second
+      # source of truth and would drift.
+      - name: Install build prerequisites
+        run: |
+          need=""
+          command -v cmake >/dev/null || need="$need cmake"
+          command -v make  >/dev/null || need="$need make"
+          python3 -m pip --version >/dev/null 2>&1 || need="$need python3-pip"
+          if [ -n "$need" ]; then
+            echo "installing:$need"
+            apt-get update -qq && apt-get install -y -qq $need
+          else
+            echo "nothing to install"
+          fi
           cmake --version | head -1
-          echo "--- fonts visible to the container ---"
-          fc-list 2>/dev/null | wc -l
 
       # Pure Python, no KiCad. kicad-cli draws a model it cannot find as
       # nothing and still reports success, so without this a container missing
