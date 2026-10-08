@@ -25,6 +25,18 @@ find_program(kicad_cli_EXECUTABLE kicad-cli
              HINTS /Applications/KiCad/KiCad.app/Contents/MacOS/
              NO_CACHE)
 
+# A hard error, because the alternative is worse than a failure. Without
+# kicad-cli the functions below used to return early, so configuring succeeded,
+# no targets were created, and a build asked to produce every figure quietly
+# produced none and reported success. A CI run did exactly that.
+if(NOT kicad_cli_EXECUTABLE)
+  message(FATAL_ERROR
+    "kicad-cli not found. It ships inside KiCad; on macOS it lives in "
+    "KiCad.app/Contents/MacOS, which is already searched. Point at it with "
+    "-Dkicad_cli_EXECUTABLE=/path/to/kicad-cli if it is somewhere else.")
+endif()
+message(STATUS "kicad-cli: ${kicad_cli_EXECUTABLE}")
+
 # Renders are committed, so they belong in the source tree, not the build tree.
 get_filename_component(_hw_root "${CMAKE_CURRENT_SOURCE_DIR}/.." ABSOLUTE)
 set(BOARD_RENDER_DIR "${_hw_root}/docs/src/images/boards")
@@ -134,10 +146,6 @@ add_dependencies(board-docs board-renders board-schematics)
 # each, while the bases and prototype carriers are single-sided in any way that
 # matters and only need a top view.
 function(_board_renders name)
-  if(NOT kicad_cli_EXECUTABLE)
-    return()
-  endif()
-
   set(board "${CMAKE_CURRENT_SOURCE_DIR}/${name}.kicad_pcb")
   set(outputs "")
   set(images "")
@@ -202,10 +210,6 @@ endfunction()
 # out from, so a page can link the real thing rather than a transcription of it.
 # A hierarchical design exports every sheet into the one file.
 function(_board_schematic name)
-  if(NOT kicad_cli_EXECUTABLE)
-    return()
-  endif()
-
   set(sch "${CMAKE_CURRENT_SOURCE_DIR}/${name}.kicad_sch")
   if(NOT EXISTS "${sch}")
     message(WARNING "No ${name}.kicad_sch -- skipping its schematic PDF")
@@ -283,8 +287,3 @@ add_subdirectory(Bases/tag-breakout-l432v2)
 add_subdirectory(Prototypes/IMUTagNandBMP581-breakout)
 add_subdirectory(Prototypes/UIUCBreakout)
 add_subdirectory(Prototypes/steval-daughter-v2)
-
-
-if(NOT kicad_cli_EXECUTABLE)
-    message(STATUS "kicad-cli not found -- board renders cannot be regenerated")
-endif()

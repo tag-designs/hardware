@@ -119,7 +119,9 @@ jobs:
           fi
           echo "targets=$targets" >> "$GITHUB_OUTPUT"
           if [ -z "$targets" ]; then
-            echo "Every figure is current; nothing to generate."
+            echo "::warning::Every figure is current, so nothing was"\
+                 " generated and this run has not compared anything."\
+                 " Re-run with scope: all to actually exercise the container."
           else
             echo "Generating: $targets"
           fi
