@@ -385,6 +385,7 @@
 		)
 		(embedded_fonts no)
 		(model "${KIPRJMOD}/../../libraries/packages3D/lipo.step"
+			(hide yes)
 			(offset
 				(xyz 0 -1 0.5)
 			)
