@@ -26,7 +26,12 @@ BOARD_RENDER_FRAME, since the render scale is fixed and --zoom does nothing.
 Also warns when a board clears the frame by less than a tenth of it, so the
 margin can be seen shrinking before it is lost.
 
-    python3 fit_render.py <png> [<png> ...]
+Writes somewhere other than it read when given --output, so the render goes to
+a scratch file and only replaces the committed image once the trim has
+succeeded. A clipped board then leaves the previous image untouched instead of
+destroying it.
+
+    python3 fit_render.py <png> [--output <png>]
 """
 
 import argparse
@@ -43,7 +48,7 @@ except ImportError:  # pragma: no cover - reported to whoever ran the build
 MARGIN = 0.04
 
 
-def fit(path, margin=MARGIN, rotate=True):
+def fit(path, out=None, margin=MARGIN, rotate=True):
     """Trim and stand one render. Returns None, or a message on failure."""
     im = Image.open(path)
     if im.mode != "RGBA":
@@ -75,20 +80,25 @@ def fit(path, margin=MARGIN, rotate=True):
     if rotate and im.width > im.height:
         im = im.transpose(Image.ROTATE_270)   # PIL counts anticlockwise
 
-    im.save(path)
+    im.save(out or path)
     return None
 
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("images", nargs="+")
+    ap.add_argument("--output", type=str, default=None,
+                    help="write here instead of in place (one image only)")
     ap.add_argument("--margin", type=float, default=MARGIN,
                     help=f"margin as a fraction of the board (default {MARGIN})")
     ap.add_argument("--no-rotate", action="store_true",
                     help="trim only; leave a landscape board lying down")
     args = ap.parse_args()
 
-    bad = [m for m in (fit(p, args.margin, not args.no_rotate)
+    if args.output and len(args.images) != 1:
+        ap.error("--output takes exactly one image")
+
+    bad = [m for m in (fit(p, args.output, args.margin, not args.no_rotate)
                        for p in args.images) if m]
     for m in bad:
         print("ERROR " + m, file=sys.stderr)

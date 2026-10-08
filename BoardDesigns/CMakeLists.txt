@@ -98,21 +98,26 @@ function(_board_renders name)
 
   set(board "${CMAKE_CURRENT_SOURCE_DIR}/${name}.kicad_pcb")
   set(outputs "")
+  set(images "")
 
   foreach(side ${ARGN})
     set(out "${BOARD_RENDER_DIR}/${name}-${side}.png")
+    set(raw "${CMAKE_CURRENT_BINARY_DIR}/${name}-${side}.raw.png")
+    set(done "${CMAKE_CURRENT_BINARY_DIR}/${name}-${side}.done")
 
+    # The declared output is a marker in the build tree, not the image itself.
+    # make deletes an output whose command failed, and the images are committed
+    # files: a single board that would not trim once wiped all nineteen of them.
+    # With the marker as the output there is nothing make can destroy, and the
+    # two-step render-then-trim means a failure leaves the previous image in
+    # place rather than a half-made one.
     add_custom_command(
-      OUTPUT "${out}"
+      OUTPUT "${done}"
       COMMAND ${CMAKE_COMMAND} -E make_directory "${BOARD_RENDER_DIR}"
       # --background transparent so one image reads correctly against both the
-      # light and dark documentation themes, and so the trim below can find the
-      # board. Long option names throughout: kicad-cli's short -h means height,
-      # not help.
-      #
-      # Rotating 90 degrees about Z sets which way up each board is drawn. The
-      # frame is square and generously wide because fit_render.py decides the
-      # final crop and aspect -- nothing here has to suit every board at once.
+      # light and dark documentation themes, and so the trim can find the board.
+      # Long option names throughout: kicad-cli's short -h means height, not
+      # help.
       COMMAND ${kicad_cli_EXECUTABLE} pcb render
               --side ${side}
               --rotate 0,0,90
@@ -120,14 +125,17 @@ function(_board_renders name)
               --width ${BOARD_RENDER_FRAME}
               --height ${BOARD_RENDER_FRAME}
               --background transparent
-              --output "${out}"
+              --output "${raw}"
               "${board}"
-      COMMAND "${Python3_EXECUTABLE}" "${BOARD_FIT_SCRIPT}" "${out}"
+      COMMAND "${Python3_EXECUTABLE}" "${BOARD_FIT_SCRIPT}" "${raw}"
+              --output "${out}"
+      COMMAND ${CMAKE_COMMAND} -E touch "${done}"
       DEPENDS "${board}" "${BOARD_FIT_SCRIPT}"
       COMMENT "Rendering ${name} (${side})"
       VERBATIM)
 
-    list(APPEND outputs "${out}")
+    list(APPEND outputs "${done}")
+    list(APPEND images "${out}")
   endforeach()
 
   # One stamp per board, written after its images, so a half-finished render

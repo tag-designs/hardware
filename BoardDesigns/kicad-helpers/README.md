@@ -45,12 +45,13 @@ the constants for the board under review rather than assuming they transfer.
 
 ## Not a review probe
 
-Three files here answer a different question. They are run by CMake, or from the
+Four files here answer a different question. They are run by CMake, or from the
 repository root, not from a board directory:
 
 | File | Purpose |
 |------|---------|
 | `fit_render.py` | Trims a finished render back to the board and stands it upright. kicad-cli frames on the board outline, so a coin cell that overhangs it gets cut off, and the render scale is fixed -- `--zoom` does nothing with a fractional value, so a large frame is the only way to buy margin. The renders are therefore drawn deliberately large and cropped here, and a board that comes out wider than tall is turned 90° clockwise, which is what rights the bases and prototype carriers. Refuses to trim an image whose content already touches the frame edge, and warns when one clears it by less than a tenth, so `BOARD_RENDER_FRAME` can be raised before anything is lost. Needs Pillow. |
+| `probe_render_framing.py` | What actually controls kicad-cli's render framing? Renders one board across a matrix of frame sizes and `--zoom` values at basic quality and reports the geometry, so the question is settled by measurement rather than inference. Two guesses about it were wrong, both because every earlier measurement happened to share a frame height and so could not separate the two variables. |
 | `check_renders.py` | Are the published figures still of the committed designs? Reads the board list out of the CMake files, hashes each `.kicad_pcb` and each `.kicad_sch`, and compares against the stamps written when they were last generated. Needs no KiCad and compares files rather than images, so it cannot go flaky. The `Check board figures` job in `.github/workflows/docs.yml` runs it on every push. |
 | `stamp.cmake` | Writes those stamps. Invoked by `add_custom_command` after a board's figures complete; not meant to be run by hand. |
 
