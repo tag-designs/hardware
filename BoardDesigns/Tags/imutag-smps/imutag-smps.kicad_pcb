@@ -384,7 +384,7 @@
 			(uuid "9e7b558b-19ba-484e-b423-5e9d4a80dac6")
 		)
 		(embedded_fonts no)
-		(model "${TAG_LIBRARIES}/packages3D/lipo.step"
+		(model "${KIPRJMOD}/../../libraries/packages3D/lipo.step"
 			(offset
 				(xyz 0 -1 0.5)
 			)
@@ -676,7 +676,7 @@
 			(uuid "312a9b10-b16f-46a5-99d0-15c01cfd7627")
 		)
 		(embedded_fonts no)
-		(model "${TAG_LIBRARIES}/packages3D/RV-3028-C8.step"
+		(model "${KIPRJMOD}/../../libraries/packages3D/RV-3028-C8.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -3906,7 +3906,7 @@
 			(uuid "d9651768-8ee7-4f74-86cb-25f0ce86b54e")
 		)
 		(embedded_fonts no)
-		(model "${TAG_LIBRARIES}/packages3D/BGA9_BMM350_BOS.step"
+		(model "${KIPRJMOD}/../../libraries/packages3D/BGA9_BMM350_BOS.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -8458,7 +8458,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Datasheet" "file://${TAG_LIBRARIES}/datasheets/PMBT2222AMB.pdf"
+		(property "Datasheet" "file://${KIPRJMOD}/../../libraries/datasheets/PMBT2222AMB.pdf"
 			(at 0 0 180)
 			(layer "B.Fab")
 			(hide yes)

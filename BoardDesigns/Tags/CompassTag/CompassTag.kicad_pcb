@@ -674,7 +674,7 @@
 			(uuid "fd4eb64c-ec14-4396-a88b-6da45a5f3eb3")
 		)
 		(embedded_fonts no)
-		(model "${TAG_LIBRARIES}/packages3D/RV-3028-C7.stp"
+		(model "${KIPRJMOD}/../../libraries/packages3D/RV-3028-C7.stp"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -2332,7 +2332,7 @@
 				)
 			)
 		)
-		(property "Datasheet" "file://${TAG_LIBRARIES}/datasheets/PMBT2222AMB.pdf"
+		(property "Datasheet" "file://${KIPRJMOD}/../../libraries/datasheets/PMBT2222AMB.pdf"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
@@ -4323,7 +4323,7 @@
 			(uuid "a75e3013-d6cf-456a-9ffa-f9218e4118d6")
 		)
 		(embedded_fonts no)
-		(model "${TAG_LIBRARIES}/packages3D/LGA-12_2X2X0P7_STM.step"
+		(model "${KIPRJMOD}/../../libraries/packages3D/LGA-12_2X2X0P7_STM.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -7188,7 +7188,7 @@
 			(uuid "f02b17ca-8ccb-40ba-99b6-ba3f4630c0fb")
 		)
 		(embedded_fonts no)
-		(model "${TAG_LIBRARIES}/packages3D/AK09940a.step"
+		(model "${KIPRJMOD}/../../libraries/packages3D/AK09940a.step"
 			(offset
 				(xyz 0 0 0)
 			)
