@@ -16,8 +16,16 @@ Usage:
     model_resolution.py <board-dir-or-pcb> [...]
     model_resolution.py ../Tags/*/
 
+    model_resolution.py --self-test <board-dir-or-pcb>
+
 Needs kicad-cli on PATH, or KICAD_CLI set to it.  Renders go to a temporary
 directory and are deleted; nothing in the repository is touched.
+
+--self-test first:  a silent run only means "no models failed" if this tool can
+detect a failure at all.  --self-test copies a board to a temporary file, points
+one of its models at a path that cannot exist, and renders that.  If the probe
+stays silent on a deliberately broken board, then silence on a real one tells
+you nothing, and the images themselves are the only check left.
 """
 import os
 import re
@@ -77,9 +85,47 @@ def probe(pcb, tmp):
     return notable, r.returncode == 0
 
 
+def self_test(pcb, tmp):
+    """Break one model reference on purpose and see whether the probe notices."""
+    text = pcb.read_text(errors="replace")
+    m = MODEL.search(text)
+    if not m:
+        return None, "no model references to break"
+    broken_path = "${KIPRJMOD}/__no_such_dir__/__no_such_model__.step"
+    broken = text[:m.start(1)] + broken_path + text[m.end(1):]
+    victim = pathlib.Path(tmp) / ("selftest-" + pcb.name)
+    victim.write_text(broken)
+    notable, ok = probe(victim, tmp)
+    return notable, None
+
+
 def main(args):
     if not args:
         sys.exit(__doc__)
+
+    if args[0] == "--self-test":
+        rest = args[1:]
+        if not rest:
+            sys.exit("--self-test needs a board to work from")
+        tmp = tempfile.mkdtemp(prefix="model-selftest-")
+        pcb = next(boards(rest), None)
+        if pcb is None:
+            sys.exit("no .kicad_pcb found")
+        print(f"  Breaking one model reference in a scratch copy of {pcb.name} ...")
+        notable, err = self_test(pcb, tmp)
+        if err:
+            sys.exit("  " + err)
+        if notable:
+            print(f"  DETECTED -- kicad-cli said {len(notable)} thing(s) about it:")
+            for l in notable:
+                print(f"      {l}")
+            print("\n  So a silent run on a real board is meaningful.")
+        else:
+            print("  NOT DETECTED -- kicad-cli said nothing about a model that cannot exist.")
+            print("\n  So this probe cannot tell 'everything resolved' from 'nothing is")
+            print("  reported', and a silent run proves nothing. Compare rendered images")
+            print("  instead: a part that vanishes between two renders is the real signal.")
+        return
     tmp = tempfile.mkdtemp(prefix="model-probe-")
     total_complaints = 0
     for pcb in boards(args):

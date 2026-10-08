@@ -145,6 +145,32 @@ per-board `packages3D/` directories.** Those directories are already 74 MB and
 79 MB, and per-board copies are how one model comes to exist in the tree five
 times over.
 
+## Probe results, 2026-10-08
+
+`kicad-helpers/model_resolution.py` was run over all ten tag boards. **KiCad
+reported nothing about models on any of them**, and every render exited ok.
+
+Taken at face value that means every reference — `KISYS3DMOD`, `KICAD6`,
+`KICAD8`, `KICAD9`, `KICAD10`, `TAG_LIBRARIES`, the absolute path and the bare
+filenames alike — resolves on that machine. Its KiCad path configuration
+evidently carries every variable these boards have accumulated across their
+eras, which is consistent with the renders: BitTagv7's twelve `KISYS3DMOD`
+models all drew.
+
+**But silence is only evidence if the probe can detect a failure.** If
+`kicad-cli` does not report unloadable models at all, a clean run means nothing.
+That is what `--self-test` settles: it copies a board, points one model at a
+path that cannot exist, and renders that. Until it has been run, the result
+above should be read as "no failures reported" rather than "no failures".
+
+```sh
+BoardDesigns/kicad-helpers/model_resolution.py --self-test BoardDesigns/Tags/CompassTag
+```
+
+If the self-test comes back NOT DETECTED, comparing rendered images before and
+after a change is the only check available, and the board-at-a-time order below
+matters more rather than less.
+
 ## Open: kicad-cli and the KiCad GUI do not agree
 
 PresTag-v6 renders correctly in KiCad's own 3D viewer, while the part with the
