@@ -140,6 +140,41 @@ Two spellings, both already proven in this repository:
 
 No version-specific variable, no user path configuration, no absolute paths.
 
+**Decided: the eight relocatable files go into the shared library, not into
+per-board `packages3D/` directories.** Those directories are already 74 MB and
+79 MB, and per-board copies are how one model comes to exist in the tree five
+times over.
+
+## Open: kicad-cli and the KiCad GUI do not agree
+
+PresTag-v6 renders correctly in KiCad's own 3D viewer, while the part with the
+incorrect model is visible in the `kicad-cli` output. The same board, the same
+references, two different results.
+
+That matters more than any individual model, because **this audit's static
+reading of the `.kicad_pcb` is not the authority on what actually loads** —
+whatever `kicad-cli` does at render time is. Possible explanations, untested:
+
+- the 3D viewer caches models and may still be showing one whose path no longer
+  resolves;
+- the viewer and the CLI search differently when a path variable is undefined;
+- the two read different path configuration.
+
+### The diagnostic that would settle it
+
+KiCad reports models it cannot load. Capturing that from a render run gives the
+authoritative per-board list, rather than inferring it from path prefixes:
+
+```sh
+kicad-cli pcb render --side top --output /tmp/probe.png \
+    BoardDesigns/Tags/PresTag-v6/PresTag-v6.kicad_pcb 2>&1 | tee /tmp/render.log
+```
+
+Anything about a missing, unresolved or failed model in that output is a fact;
+everything in the tables above is an inference from path prefixes. If the two
+disagree, the log wins and this file should be corrected against it — as it
+already has been once, when the renders disproved its first version.
+
 ### Suggested order of work
 
 1. **One board at a time**, not a sweeping rewrite. Each board is independent
