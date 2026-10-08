@@ -88,8 +88,32 @@ endif()
 # The frame is then only about resolution. At this zoom a 2400 frame puts the
 # board's limiting dimension near 1180 pixels, comfortable for figures shown at
 # 420.
-set(BOARD_RENDER_ZOOM "0.5" CACHE STRING "kicad-cli camera zoom; below 1 pulls back")
-set(BOARD_RENDER_FRAME "2400" CACHE STRING "kicad-cli render frame, pixels square")
+# Plain variables, deliberately not CACHE. A cache entry is written the first
+# time a build directory is configured and never updated when the default here
+# changes, so an existing build-boards went on rendering at the 0.9 this file
+# used to carry long after it said 0.5 -- the clipping that followed looked like
+# a fault in the board. Override for an experiment with -DRENDER_ZOOM=0.4; the
+# names differ from these on purpose, so nothing of ours can go stale in a
+# cache.
+set(BOARD_RENDER_ZOOM "0.5")
+set(BOARD_RENDER_FRAME "2400")
+set(_render_note "")
+if(DEFINED RENDER_ZOOM)
+  set(BOARD_RENDER_ZOOM "${RENDER_ZOOM}")
+  set(_render_note " (zoom overridden)")
+endif()
+if(DEFINED RENDER_FRAME)
+  set(BOARD_RENDER_FRAME "${RENDER_FRAME}")
+  set(_render_note "${_render_note} (frame overridden)")
+endif()
+
+# Printed because the value in force was invisible, which is what let a stale
+# one go unnoticed through two builds. An override is named as such, because a
+# -D sticks in the cache for every later reconfigure of that directory and is
+# otherwise just as quiet as the thing it replaced.
+message(STATUS
+  "Board renders: zoom ${BOARD_RENDER_ZOOM}, frame ${BOARD_RENDER_FRAME} "
+  "square${_render_note}")
 
 # Aggregate target: "cmake --build . --target board-renders" redraws every
 # board whose .kicad_pcb has changed since its images were written. Deliberately
