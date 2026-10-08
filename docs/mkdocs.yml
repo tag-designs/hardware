@@ -52,8 +52,13 @@ markdown_extensions:
   - pymdownx.tabbed:
       alternate_style: true
 
+# Material fingerprints its own stylesheet filenames, so a theme update reaches
+# readers immediately. Files listed here are referenced by plain path and are
+# cached hard by browsers and by the Pages CDN, so a change to extra.css can go
+# unseen behind a stale copy. The query string is the version: bump it whenever
+# extra.css changes in a way readers need to see.
 extra_css:
-  - stylesheets/extra.css
+  - stylesheets/extra.css?v=2
 
 nav:
   - Hardware Home: index.md
