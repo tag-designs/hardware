@@ -90,14 +90,81 @@ in one case in a specific home directory. That means:
   error: a missing model is drawn as absence, not as a failure.
 - **The absolute path in `imutag-smps` is correct on one computer.**
 
-## What would change that
+## Proposed fix
 
-The in-repo convention already exists and already works: `${KIPRJMOD}/packages3D/`
-and `${KIPRJMOD}/../../kicad_libraries/3d_models/`, 50 references, all resolving.
-Four of the six boards already have a populated `packages3D/` directory.
+**This is almost entirely a rewrite, not a vendoring exercise.** The models are
+already in the repository; the references point outside it.
 
-Moving the remaining 88 onto that convention would make renders reproducible
-from a clone, make CI rendering viable, and turn a missing model into a visible
-absence in version control rather than a difference between two machines.
+Across the six boards there are **48 distinct references that are not
+`${KIPRJMOD}`**. Of those:
 
-That edits the `.kicad_pcb` files, so it is recorded here rather than done.
+| | Count | Situation |
+| --- | --- | --- |
+| Already have an in-repo copy reachable from their own board | 38 | Pure path rewrite |
+| File is in the repository, but not reachable from that board | 8 | Copy into the shared library, then rewrite |
+| File is not in the repository at all | 2 | Fetch once from KiCad's stock library |
+
+### `${TAG_LIBRARIES}` is not an external dependency
+
+It resolves to `BoardDesigns/libraries`, which is in this repository. All four
+references through it — `RV-3028-C8.step`, `lipo.step`, `BGA9_BMM350_BOS.step`
+and `LGA14-L_2P59X3P1X0P5_STM.step` — are present in
+`BoardDesigns/libraries/packages3D/`, which holds 72 models. The single absolute
+`/Users/geobrown/...` path points into that same directory.
+
+So from a board directory the portable spelling is already available:
+
+```
+${KIPRJMOD}/../../libraries/packages3D/<file>
+```
+
+matching the `${KIPRJMOD}/../../kicad_libraries/3d_models/<file>` convention
+the boards already use successfully 50 times.
+
+### The two models that are genuinely missing
+
+- `D_SOT-23` — referenced by BitTagv7 via `KISYS3DMOD`
+- `SOT-883` — referenced by BitTagNG and BitPresTagBMP585 via `KICAD6_3DMODEL_DIR`
+
+Neither exists anywhere in the tree. They come from KiCad's stock library and
+need copying in once.
+
+### Target convention
+
+Two spellings, both already proven in this repository:
+
+| For | Spelling |
+| --- | --- |
+| A model specific to one board | `${KIPRJMOD}/packages3D/<file>` |
+| A model shared between boards | `${KIPRJMOD}/../../kicad_libraries/3d_models/<file>` or `${KIPRJMOD}/../../libraries/packages3D/<file>` |
+
+No version-specific variable, no user path configuration, no absolute paths.
+
+### Suggested order of work
+
+1. **One board at a time**, not a sweeping rewrite. Each board is independent
+   and a mistake is then contained.
+2. **Render before, rewrite, render after, compare the images.** This is the
+   only check that actually works: a reference that fails to resolve draws
+   nothing, so a part vanishing between the two renders is the failure signal.
+   A diff of the `.kicad_pcb` will not tell you whether a path resolves.
+3. **Start with CompassTag**, which needs no new files at all — all six of its
+   external references already have a reachable copy. It proves the method
+   with the least that can go wrong.
+4. **Finish with BitTagv7**, which has the most to change relative to its size
+   and needs one of the two missing models.
+5. Leave PresTag-v6 until its incorrect model is sorted out, so the two changes
+   do not get tangled.
+
+### What it buys
+
+Renders become reproducible from a clone rather than from one machine's KiCad
+path configuration, which in turn makes CI rendering viable — at which point
+the images no longer need committing and the `board-renders` target becomes a
+check rather than a production step. It also makes a missing model a visible
+absence in version control instead of a difference between two computers.
+
+### What it does not buy
+
+Nothing about fabrication. Gerbers do not use 3D models. This is entirely about
+whether a picture of a board can be trusted and reproduced.
