@@ -1,19 +1,20 @@
 #!/usr/bin/env python3
-"""Check that the committed board renders match the committed layouts.
+"""Check that the published board figures still match the committed designs.
 
-The renders under docs/src/images/boards are produced by kicad-cli and then
-committed, because the workflow that publishes the hardware site has no KiCad
-in it. That arrangement has one failure mode: a layout is edited and the images
-are not redrawn, so the documentation shows a board that no longer exists.
+The renders and schematic PDFs under docs/src are committed, because the
+workflow that publishes the hardware site has no KiCad in it. That arrangement
+has one failure mode: a design is edited and the figures are not regenerated,
+so the documentation shows a board that no longer exists. Nothing reports it.
 
-This answers that without KiCad. Each time CMake renders a board it writes
-BoardDesigns/.render-stamps/<board>.sha256, holding the hash of the .kicad_pcb
-it drew from. Hashing the board again and comparing says whether the pictures
-are current -- a file comparison, not an image comparison, so there is nothing
-to go flaky.
+This answers it without KiCad. Each time CMake draws a board it writes a stamp
+under BoardDesigns/.render-stamps holding the SHA-256 of what it drew from --
+<board>.sha256 for the layout behind the renders, <board>.sch.sha256 for the
+sheets behind the PDF. Hashing the sources again and comparing says whether the
+figures are current: a file comparison, not an image comparison, so there is
+nothing to go flaky and no rendering nondeterminism to threshold against.
 
 The board list is read from the CMake files rather than repeated here, so this
-cannot drift from what actually gets rendered.
+cannot drift from what actually gets generated.
 
     python3 check_renders.py [--repo <hardware root>]
 
@@ -31,7 +32,7 @@ RENDER = re.compile(r"^\s*add_board_renders(_top)?\(\s*([^)\s]+)\s*\)", re.M)
 
 
 def boards(board_designs):
-    """Yield (name, pcb path, [expected render names]) for every rendered board."""
+    """Yield (name, directory, [sides]) for every board CMake generates for."""
     top = (board_designs / "CMakeLists.txt").read_text()
     for rel in SUBDIR.findall(top):
         d = board_designs / rel.strip()
@@ -40,8 +41,21 @@ def boards(board_designs):
             yield None, d, ["no CMakeLists.txt"]
             continue
         for top_only, name in RENDER.findall(cml.read_text()):
-            sides = ["top"] if top_only else ["top", "bottom"]
-            yield name, d / f"{name}.kicad_pcb", sides
+            yield name, d, (["top"] if top_only else ["top", "bottom"])
+
+
+def sha256(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def read_stamp(path):
+    """{filename: hash} from a stamp file."""
+    out = {}
+    for line in path.read_text().splitlines():
+        parts = line.split(None, 1)
+        if len(parts) == 2:
+            out[parts[1].strip()] = parts[0]
+    return out
 
 
 def main():
@@ -53,55 +67,86 @@ def main():
     repo = args.repo or Path(__file__).resolve().parents[2]
     bd = repo / "BoardDesigns"
     renders = repo / "docs" / "src" / "images" / "boards"
+    schematics = repo / "docs" / "src" / "schematics"
     stamps = bd / ".render-stamps"
 
     problems = []
     unstamped = []
-    claimed = set()
+    claimed_png = set()
+    claimed_pdf = set()
     checked = 0
 
-    for name, pcb, sides in boards(bd):
+    for name, d, sides in boards(bd):
         if name is None:
-            problems.append(f"{pcb}: {sides[0]}")
+            problems.append(f"{d}: {sides[0]}")
             continue
         checked += 1
-        if not pcb.exists():
-            problems.append(f"{name}: no layout at {pcb.relative_to(repo)}")
-            continue
 
+        # --- renders, against the layout --------------------------------
+        pcb = d / f"{name}.kicad_pcb"
         for side in sides:
             img = renders / f"{name}-{side}.png"
-            claimed.add(img.name)
+            claimed_png.add(img.name)
             if not img.exists():
                 problems.append(f"{name}: missing render {img.name}")
 
-        stamp = stamps / f"{name}.sha256"
-        if not stamp.exists():
-            unstamped.append(name)
-            continue
-
-        recorded = stamp.read_text().split()[0]
-        actual = hashlib.sha256(pcb.read_bytes()).hexdigest()
-        if recorded != actual:
-            problems.append(
-                f"{name}: layout has changed since its renders were drawn "
-                f"(stamp {recorded[:12]}, layout {actual[:12]})")
-
-    if renders.is_dir():
-        for img in sorted(renders.glob("*.png")):
-            if img.name not in claimed:
+        if not pcb.exists():
+            problems.append(f"{name}: no layout at {pcb.relative_to(repo)}")
+        else:
+            stamp = stamps / f"{name}.sha256"
+            if not stamp.exists():
+                unstamped.append(f"{name} (renders)")
+            elif read_stamp(stamp).get(pcb.name) != sha256(pcb):
                 problems.append(
-                    f"{img.name}: render belongs to no board in the CMake files")
+                    f"{name}: the layout has changed since its renders were "
+                    f"drawn")
+
+        # --- schematic PDF, against every sheet --------------------------
+        sheets = sorted(d.glob("*.kicad_sch"))
+        if not sheets:
+            continue
+        pdf = schematics / f"{name}.pdf"
+        claimed_pdf.add(pdf.name)
+        if not pdf.exists():
+            problems.append(f"{name}: missing schematic {pdf.name}")
+
+        stamp = stamps / f"{name}.sch.sha256"
+        if not stamp.exists():
+            unstamped.append(f"{name} (schematic)")
+        else:
+            recorded = read_stamp(stamp)
+            actual = {s.name: sha256(s) for s in sheets}
+            if recorded != actual:
+                added = sorted(set(actual) - set(recorded))
+                gone = sorted(set(recorded) - set(actual))
+                edited = sorted(k for k in set(actual) & set(recorded)
+                                if actual[k] != recorded[k])
+                detail = "; ".join(filter(None, [
+                    "sheets added: " + ", ".join(added) if added else "",
+                    "sheets removed: " + ", ".join(gone) if gone else "",
+                    "sheets edited: " + ", ".join(edited) if edited else ""]))
+                problems.append(
+                    f"{name}: the drawing has changed since its PDF was "
+                    f"exported ({detail})")
+
+    for directory, claimed, what in ((renders, claimed_png, "render"),
+                                     (schematics, claimed_pdf, "schematic")):
+        if not directory.is_dir():
+            continue
+        for f in sorted(directory.iterdir()):
+            if f.is_file() and f.name not in claimed:
+                problems.append(
+                    f"{f.name}: {what} belongs to no board in the CMake files")
 
     print(f"{checked} boards checked")
 
     if unstamped:
         print()
-        print("No render stamp for: " + ", ".join(sorted(unstamped)))
-        print("Nothing has been rendered since stamping was introduced. Run")
+        print("No stamp for: " + ", ".join(sorted(unstamped)))
+        print("Nothing has been generated since stamping was introduced. Run")
         print("  cmake -S BoardDesigns -B build-boards")
-        print("  cmake --build build-boards --target board-renders")
-        print("and commit the stamps alongside the images.")
+        print("  cmake --build build-boards --target board-docs")
+        print("and commit the stamps alongside the figures.")
 
     if problems:
         print()
@@ -109,11 +154,7 @@ def main():
             print("FAIL " + p)
         return 1
 
-    if unstamped:
-        return 1
-
-    print("renders are current")
-    return 0
+    return 0 if not unstamped else 1
 
 
 if __name__ == "__main__":

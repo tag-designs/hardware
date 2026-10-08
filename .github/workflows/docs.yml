@@ -21,10 +21,10 @@ concurrency:
 
 jobs:
   renders:
-    name: Check board renders
+    name: Check board figures
     runs-on: ubuntu-latest
 
-    # Deliberately not a prerequisite of build. A stale picture is a smaller
+    # Deliberately not a prerequisite of build. A stale figure is a smaller
     # problem than a documentation site that stops updating, and only a machine
     # with KiCad on it can redraw one -- gating the deploy would mean an
     # unrelated typo fix could not be published until someone reached that
@@ -36,9 +36,10 @@ jobs:
         with:
           submodules: false
 
-      # Hashes layouts against the stamps CMake wrote when it last drew them.
-      # No KiCad, no image comparison, nothing to go flaky.
-      - name: Compare layouts against their renders
+      # Hashes each layout and schematic against the stamps CMake wrote when it
+      # last generated their figures. No KiCad, no image comparison, nothing to
+      # go flaky.
+      - name: Compare designs against their published figures
         run: python3 BoardDesigns/kicad-helpers/check_renders.py
 
   build:

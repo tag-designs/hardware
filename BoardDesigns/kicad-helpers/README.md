@@ -45,18 +45,23 @@ the constants for the board under review rather than assuming they transfer.
 
 ## Not a review probe
 
-Two files here answer a different question and run from the repository root, not
-a board directory:
+Three files here answer a different question. They are run by CMake, or from the
+repository root, not from a board directory:
 
 | File | Purpose |
 |------|---------|
-| `check_renders.py` | Are the committed board renders still of the committed layouts? Reads the board list out of the CMake files, hashes each `.kicad_pcb`, and compares against the stamp written when it was last drawn. Needs no KiCad and compares files rather than images, so it cannot go flaky. The `Check board renders` job in `.github/workflows/docs.yml` runs it on every push. |
-| `stamp.cmake` | Writes those stamps. Invoked by `add_custom_command` after a board's renders complete; not meant to be run by hand. |
+| `fit_render.py` | Trims a finished render back to the board and stands it upright. One camera zoom cannot suit boards of different sizes, so the renders are drawn deliberately wide and cropped here; a board that comes out wider than tall is turned 90° clockwise, which is what rights the bases and prototype carriers. Refuses to trim an image whose content already touches the frame edge, because that means the render clipped the board. Needs Pillow. |
+| `check_renders.py` | Are the published figures still of the committed designs? Reads the board list out of the CMake files, hashes each `.kicad_pcb` and each `.kicad_sch`, and compares against the stamps written when they were last generated. Needs no KiCad and compares files rather than images, so it cannot go flaky. The `Check board figures` job in `.github/workflows/docs.yml` runs it on every push. |
+| `stamp.cmake` | Writes those stamps. Invoked by `add_custom_command` after a board's figures complete; not meant to be run by hand. |
 
-A failure means the pictures in the documentation are of an older board. Redraw
-them on a machine with KiCad and commit the images and stamps together:
+A failure means the documentation shows an older board. Regenerate on a machine
+with KiCad and commit the figures and stamps together:
 
 ```bash
 cmake -S BoardDesigns -B build-boards
-cmake --build build-boards --target board-renders
+cmake --build build-boards --target board-docs
 ```
+
+`board-docs` covers both halves; `board-renders` and `board-schematics` do one
+each. Neither is part of the default build, because a plain `make` should not
+rewrite files that are under version control.
