@@ -50,11 +50,18 @@ function(add_board_renders name)
       # --background transparent so one image reads correctly against both the
       # light and dark documentation themes. Long option names throughout:
       # kicad-cli's short -h means height, not help.
+      #
+      # The boards are wider than they are tall. Rotating 90 degrees about Z
+      # turns each one portrait, so a top-and-bottom pair sits side by side in
+      # the documentation's two-column grid without being squeezed. The frame
+      # is portrait to match -- otherwise the rotation just moves the empty
+      # margin from the sides to the top and bottom.
       COMMAND ${kicad_cli_EXECUTABLE} pcb render
               --side ${side}
+              --rotate 0,0,90
               --quality high
-              --width 1600
-              --height 1200
+              --width 1200
+              --height 1600
               --background transparent
               --output "${out}"
               "${board}"
