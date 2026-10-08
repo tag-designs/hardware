@@ -1629,6 +1629,7 @@
 			)
 		)
 		(model "${KIPRJMOD}/../../libraries/packages3D/taghardware.step"
+			(hide yes)
 			(offset
 				(xyz 102 151 -1.5)
 			)
@@ -1640,6 +1641,7 @@
 			)
 		)
 		(model "${KIPRJMOD}/../../libraries/packages3D/tag-v7.step"
+			(hide yes)
 			(offset
 				(xyz 0 0 5.5)
 			)
@@ -5501,15 +5503,15 @@
 			(uuid "cd1ffdde-d08f-4ac8-af32-0227bafb47a3")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/../../kicad_libraries/3d_models/CJS-1200B_NDC.step"
+		(model "/Users/geobrown/Research/tag-designs/hardware/BoardDesigns/kicad_libraries/3d_models/CJS-1200B.stp"
 			(offset
-				(xyz 0 0 0)
+				(xyz 0 0 2.5)
 			)
 			(scale
 				(xyz 1 1 1)
 			)
 			(rotate
-				(xyz 0 0 0)
+				(xyz -90 -0 -0)
 			)
 		)
 	)
@@ -12469,15 +12471,15 @@
 			(uuid "585c6d1e-479b-4812-a840-fa168a4d6e98")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/../../kicad_libraries/3d_models/CJS-1200B_NDC.step"
+		(model "/Users/geobrown/Research/tag-designs/hardware/BoardDesigns/kicad_libraries/3d_models/CJS-1200B.stp"
 			(offset
-				(xyz 0 0 0)
+				(xyz 0 0 2.5)
 			)
 			(scale
 				(xyz 1 1 1)
 			)
 			(rotate
-				(xyz 0 0 0)
+				(xyz -90 -0 -0)
 			)
 		)
 	)

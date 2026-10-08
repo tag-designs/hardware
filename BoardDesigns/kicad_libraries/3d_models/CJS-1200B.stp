@@ -11,14 +11,14 @@ FILE_DESCRIPTION(
 
 FILE_NAME(
 /* name */ 'CJS-1200B',
-/* time_stamp */ '2026-05-02T02:11:29+02:00',
+/* time_stamp */ '2026-10-08T19:02:04+02:00',
 /* author */ ('License CC BY-ND 4.0'),
 /* organization */ ('CADENAS'),
 /* preprocessor_version */ 'ST-DEVELOPER v20',
 /* originating_system */ 'PARTsolutions',
 /* authorisation */ '  ');
 
-FILE_SCHEMA (('CONFIG_CONTROL_DESIGN'));
+FILE_SCHEMA (('CONFIG_CONTROL_DESIGN','FEATURE_BASED_PROCESS_PLANNING'));
 ENDSEC;
 
 DATA;
