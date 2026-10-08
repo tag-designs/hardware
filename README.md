@@ -14,6 +14,23 @@ Board designs reach the shared symbol and footprint libraries through
 `${KIPRJMOD}/../../`, so a board is tied to its depth in the directory tree.
 Moving one between directories is more than a move.
 
+## Regenerating the figures
+
+The documentation's board renders and schematic PDFs are generated from the
+KiCad files and committed, because the workflow that publishes the site has no
+KiCad in it. After editing a board:
+
+```sh
+cmake -S BoardDesigns -B build-boards
+cmake --build build-boards --target board-docs
+```
+
+[`BoardDesigns/REGENERATING.md`](BoardDesigns/REGENERATING.md) covers the
+targets, the three checks that guard the figures, what each of their messages
+means, and why generation is not done in CI. Read it before chasing a render
+that looks wrong — in particular, `kicad-cli` reports nothing at all when it
+cannot find a 3D model.
+
 ## License
 
 Copyright &copy; 2018&ndash;2026 The Trustees of Indiana University.

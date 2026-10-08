@@ -109,6 +109,18 @@ endif()
 # cache.
 set(BOARD_RENDER_ZOOM "0.5")
 set(BOARD_RENDER_FRAME "2400")
+
+# Appearance preset. Stated rather than left to kicad-cli's default, which is
+# follow_plot_settings, because a container running the same command produced
+# different pictures: CompassTag's coin cell vanished and a board whose stackup
+# says Black came out green. The cell's footprint carries "dnp
+# exclude_from_bom", and whether such a part's model is drawn depends on the
+# preset -- so the figures were resting on a default nobody had chosen, and a
+# KiCad update could change them underfoot the same way.
+#
+# follow_pcb_editor draws what the board editor shows, which is what these
+# figures are meant to be a picture of.
+set(BOARD_RENDER_PRESET "follow_pcb_editor")
 set(_render_note "")
 if(DEFINED RENDER_ZOOM)
   set(BOARD_RENDER_ZOOM "${RENDER_ZOOM}")
@@ -118,6 +130,10 @@ if(DEFINED RENDER_FRAME)
   set(BOARD_RENDER_FRAME "${RENDER_FRAME}")
   set(_render_note "${_render_note} (frame overridden)")
 endif()
+if(DEFINED RENDER_PRESET)
+  set(BOARD_RENDER_PRESET "${RENDER_PRESET}")
+  set(_render_note "${_render_note} (preset overridden)")
+endif()
 
 # Printed because the value in force was invisible, which is what let a stale
 # one go unnoticed through two builds. An override is named as such, because a
@@ -125,7 +141,7 @@ endif()
 # otherwise just as quiet as the thing it replaced.
 message(STATUS
   "Board renders: zoom ${BOARD_RENDER_ZOOM}, frame ${BOARD_RENDER_FRAME} "
-  "square${_render_note}")
+  "square, preset ${BOARD_RENDER_PRESET}${_render_note}")
 
 # Aggregate target: "cmake --build . --target board-renders" redraws every
 # board whose .kicad_pcb has changed since its images were written. Deliberately
@@ -172,6 +188,7 @@ function(_board_renders name)
               --side ${side}
               --rotate 0,0,90
               --zoom ${BOARD_RENDER_ZOOM}
+              --preset ${BOARD_RENDER_PRESET}
               --quality high
               --width ${BOARD_RENDER_FRAME}
               --height ${BOARD_RENDER_FRAME}

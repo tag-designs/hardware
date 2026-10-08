@@ -1,25 +1,31 @@
-name: Board figures (trial)
+name: Board figures (drift check)
 
-# Generates the board renders and schematic PDFs in a container, uploads them
-# as an artifact, and publishes nothing.
+# Regenerates the board figures in a KiCad container and compares them with the
+# ones committed to the repository. It publishes nothing and commits nothing.
 #
-# This is a trial, not the production path. The figures are still generated on
-# a workstation and committed; the question this job exists to answer is
-# whether a container produces the same ones. Download the artifact, compare it
-# against what is in the repository, and only then consider moving generation
-# here for good.
+# Why it exists: the figures are generated on a workstation and committed,
+# because the workflow that publishes the site has no KiCad. That is fine until
+# something underneath moves -- a KiCad release changing how a board is drawn,
+# an appearance default shifting, a model that stops resolving. None of that
+# announces itself, and the hash stamps cannot see it: they only know whether a
+# figure is older than its design, not whether redrawing it today would produce
+# the same picture.
 #
-# Two things are known to be unverified:
+# So this runs weekly and says whether the two still agree. A failure is not
+# necessarily a problem with the repository -- it may be the container that
+# moved -- but it is always worth knowing.
 #
-#   * the KiCad version. The board files are in KiCad 10 format, so an older
-#     image may refuse them outright. The image is an input rather than a
-#     constant so it can be changed without editing this file, and the job
-#     prints the version it actually got.
-#   * fonts. Silkscreen and schematic text are rendered, so a container missing
-#     the fonts KiCad expects will produce different figures rather than fail.
-#     This is the main thing to look for when comparing.
+# It is NOT the generator. Moving generation here was considered and rejected:
+# a trial showed the container and the workstation disagreeing about which 3D
+# models to draw, and the staleness guard already covers the problem that moving
+# would have solved.
 
 on:
+  schedule:
+    # Weekly, early Monday. Not on push: the image pull and toolchain install
+    # cost minutes whether or not anything changed, and a full regeneration is
+    # about 17 minutes.
+    - cron: "17 6 * * 1"
   workflow_dispatch:
     inputs:
       image:
@@ -29,8 +35,8 @@ on:
       scope:
         description: "What to generate"
         type: choice
-        options: [stale, all]
-        default: stale
+        options: [all, stale]
+        default: all
         required: true
 
 permissions:
@@ -78,6 +84,7 @@ jobs:
           need=""
           command -v cmake >/dev/null || need="$need cmake"
           command -v make  >/dev/null || need="$need make"
+          command -v pdftotext >/dev/null || need="$need poppler-utils"
           python3 -m pip --version >/dev/null 2>&1 || need="$need python3-pip"
           if [ -n "$need" ]; then
             echo "installing:$need"
@@ -126,31 +133,30 @@ jobs:
             echo "Generating: $targets"
           fi
 
+      # cmake writes the figures into the working tree, on top of the committed
+      # ones, so the thing being compared against has to be put aside first.
+      - name: Put the committed figures aside
+        if: steps.select.outputs.targets != '''
+        run: |
+          mkdir -p _committed/docs/src
+          cp -a docs/src/images   _committed/docs/src/
+          cp -a docs/src/schematics _committed/docs/src/
+          echo "kept $(find _committed -type f | wc -l) committed figures"
+
       - name: Generate
         if: steps.select.outputs.targets != ''
         run: cmake --build build-boards --target ${{ steps.select.outputs.targets }}
 
-      # What the container produced, against what is committed. Not a pass/fail
-      # gate: renders carry raytracing noise, so a byte difference means
-      # nothing on its own and the point is to look at the images.
+      # The comparison proper. Byte equality means nothing here -- the renders
+      # are raytraced and two runs on one machine already differ -- so this
+      # reports trimmed image dimensions, which track what was actually drawn,
+      # a noise-tolerant pixel difference, and the schematic PDFs' text word
+      # for word.
       - name: Compare with the committed figures
         if: steps.select.outputs.targets != ''
         run: |
-          git -c core.fileMode=false status --porcelain \
-              docs/src/images/boards docs/src/schematics
-          echo "--- sizes ---"
-          python3 - <<'PY'
-          from PIL import Image
-          import glob, os
-          for f in sorted(glob.glob('docs/src/images/boards/*.png')):
-              im = Image.open(f).convert('RGBA')
-              w, h = im.size
-              l, t, r, b = im.getchannel('A').getbbox()
-              edge = [s for s, c in (('L', l <= 0), ('T', t <= 0),
-                                     ('R', r >= w), ('B', b >= h)) if c]
-              print(f"{os.path.basename(f):42s} {w}x{h} "
-                    f"{'CLIPPED ' + ','.join(edge) if edge else ''}")
-          PY
+          python3 BoardDesigns/kicad-helpers/compare_figures.py . \
+            --repo _committed | tee -a "$GITHUB_STEP_SUMMARY"
 
       - name: Upload what the container produced
         if: steps.select.outputs.targets != ''

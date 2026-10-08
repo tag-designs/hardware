@@ -32,16 +32,30 @@ Delete an item when it is done.
 
 ## Board designs
 
-- **The tag base figures are still the wrong board's.** The identification is
-  settled — `Bases/tagbase-v7` is the fabricated design (`R6` 100 Ω,
-  `production/gerber.zip`), the 82 Ω revision is retired to
-  `Obsolete/tagbase-jlcpcb-v7`, and the pages now describe the right board. But
-  `docs/src/images/boards/tagbase-v7-top.png` and
-  `docs/src/schematics/tagbase-v7.pdf` were generated from the 82 Ω copy and
-  renamed, not regenerated: the render's silkscreen legend reads 82 where the
-  board reads 100. They are deliberately left unstamped so the `Check board
-  figures` job reports them. One `board-docs` build fixes both. **Do not push
-  before that build.**
+- **The container and the workstation disagree about how to draw a board.**
+  A trial regeneration in a `kicad/kicad` container reproduced all thirteen
+  schematic PDFs word for word but none of the nineteen renders. Two causes,
+  both found:
+
+  - models on footprints marked `dnp` were not drawn, so CompassTag's and
+    BitPresTagBMP585's coin cells vanished and those renders lost 500+ pixels
+    of height;
+  - the board stackup's `Black` solder mask was ignored and came out green.
+
+  Both are appearance defaults rather than anything broken: every model
+  resolves, filename case matches on disk exactly, and `git ls-files` agrees
+  with the working tree, so a Linux clone gets identical names.
+
+  `--preset follow_pcb_editor` is now passed explicitly instead of relying on
+  kicad-cli's `follow_plot_settings` default, which should settle the first.
+  **This has not been verified** — it needs a local regeneration (do the
+  committed figures change?) and then one container run. The stackup colour is
+  unexplained; the KiCad version in the image has not been compared with the
+  workstation's, and that is the first thing to check.
+
+  Until it is settled, the weekly `Board figures (drift check)` job will report
+  differences. That is the job working correctly, but a check that is always
+  red gets ignored, so this is worth closing.
 - **Fifty-six `.kibot.yaml` files are still in the tree.** KiBot no longer
   drives anything from CMake. They were left to run by hand if wanted; if that
   is not wanted, they are dead weight, and several are named for the board they

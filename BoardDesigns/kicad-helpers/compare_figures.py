@@ -45,8 +45,8 @@ GRID = 64          # coarse grid for the pixel comparison
 
 def coarse_diff(a, b):
     """Mean absolute difference, 0..1, on a GRID x GRID grayscale downsample."""
-    ga = a.convert("L").resize((GRID, GRID), Image.LANCZOS).getdata()
-    gb = b.convert("L").resize((GRID, GRID), Image.LANCZOS).getdata()
+    ga = a.convert("L").resize((GRID, GRID), Image.LANCZOS).tobytes()
+    gb = b.convert("L").resize((GRID, GRID), Image.LANCZOS).tobytes()
     return sum(abs(x - y) for x, y in zip(ga, gb)) / (len(ga) * 255)
 
 
