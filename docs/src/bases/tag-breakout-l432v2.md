@@ -5,6 +5,31 @@ not being prototyped — processor and real-time clock — and exposes the rest 
 pair of 1×17 headers for a [prototype board](../prototypes/index.md) to plug
 into.
 
+!!! danger "Known wiring error: the RTC's SDA and SCL are swapped"
+
+    On this board the two I²C lines between the processor and the RV-3028 are
+    crossed at the processor:
+
+    | STM32L432KC pin | Alternate function (AF4) | Wired to |
+    | --- | --- | --- |
+    | 29 — `PB6` | `I2C1_SCL` | RTC `SDA` (U6 pin 4) |
+    | 30 — `PB7` | `I2C1_SDA` | RTC `SCL` (U6 pin 3) |
+
+    The RTC end and the 1×17 header (J3 pins 3 and 4) are consistent with each
+    other, so the crossing is specifically between the processor and the rest of
+    the bus. `tag-breakout-l432v1` was wired the right way round; the swap was
+    introduced in v2.
+
+    Nothing reports this. Peripheral I²C1 drives the wrong wires, the bus never
+    acknowledges, and the symptom looks like a dead or unpopulated RTC. It is a
+    defect in this board, not in the firmware under test, and it does not affect
+    the tags themselves or the
+    [u375 breakout base](tag-breakout-u375-smps-v1.md), which wires `PB6` to
+    `rtc_scl` and `PB7` to `rtc_sda` as the datasheet intends.
+
+    The workaround is to drive the clock in software (bit-banged on the swapped
+    pins) or to bodge the two nets.
+
 <figure markdown>
   ![tag-breakout-l432v2, top side](../images/boards/tag-breakout-l432v2-top.png){ width="420" }
   <figcaption>Top</figcaption>

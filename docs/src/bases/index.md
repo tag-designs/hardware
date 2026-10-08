@@ -117,8 +117,12 @@ The external supply arrives on the 4-pin JST-XH at `J1`, on the net named
 | --- | --- | --- | --- | --- |
 | [tagbase-jlcpcb-v3](tagbase-jlcpcb-v3.md) | Tag base | STM32F042G6 | Resistor array, 4×620 Ω | top |
 | [tagbase-lipo-v1](tagbase-lipo-v1.md) | Tag base | STM32L432KB | XC6808 LiPo charger | top |
-| [tag-breakout-l432v2](tag-breakout-l432v2.md) | Breakout base | STM32F042K6 | Resistor array | top |
+| [tag-breakout-l432v2](tag-breakout-l432v2.md) ⚠ | Breakout base | STM32F042K6 | Resistor array | top |
 | [tag-breakout-u375-smps-v1](tag-breakout-u375-smps-v1.md) | Breakout base | STM32L432 | Resistor array | top |
+
+⚠ `tag-breakout-l432v2` has a
+[known wiring error](tag-breakout-l432v2.md): the processor's `PB6` and `PB7`
+reach the RTC's `SDA` and `SCL` the wrong way round.
 
 These boards are documented from the top only. Unlike the tags, nothing on their
 undersides needs showing.

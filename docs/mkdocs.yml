@@ -82,6 +82,7 @@ nav:
     - tag-breakout-u375-smps-v1: bases/tag-breakout-u375-smps-v1.md
   - Prototype Boards:
     - Overview: prototypes/index.md
+    - Measuring and Debugging: prototypes/instruments.md
     - IMUTagNandBMP581: prototypes/imutag-nand-bmp581.md
     - UIUCBreakout: prototypes/uiuc.md
     - steval-daughter-v2: prototypes/steval-daughter.md
