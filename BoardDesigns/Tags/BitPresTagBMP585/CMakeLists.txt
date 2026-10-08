@@ -1,1 +1,2 @@
-add_pcb_outputs(BitTagNG)
+add_pcb_outputs(BitPresTagBMP585)
+add_board_renders(BitPresTagBMP585)
