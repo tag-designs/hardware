@@ -26,6 +26,15 @@ find_program(kicad_cli_EXECUTABLE kicad-cli
 get_filename_component(_hw_root "${CMAKE_CURRENT_SOURCE_DIR}/.." ABSOLUTE)
 set(BOARD_RENDER_DIR "${_hw_root}/docs/src/images/boards")
 
+# Camera zoom. kicad-cli's default of 1 frames the board tightly enough to clip
+# a coin cell that overhangs the edge, so pull back slightly. Exposed as a cache
+# variable because the right value is a judgement about how the images look:
+#   cmake -S BoardDesigns -B build-boards -DBOARD_RENDER_ZOOM=0.8
+# The CLI documentation describes this as an integer factor. If a fractional
+# value is rejected, that documentation is literal and the frame has to be
+# widened another way.
+set(BOARD_RENDER_ZOOM "0.9" CACHE STRING "kicad-cli camera zoom for board renders")
+
 # Aggregate target: "cmake --build . --target board-renders" redraws every
 # board whose .kicad_pcb has changed since its images were written. Deliberately
 # not part of ALL -- a normal build should not rewrite files under version
@@ -59,6 +68,7 @@ function(add_board_renders name)
       COMMAND ${kicad_cli_EXECUTABLE} pcb render
               --side ${side}
               --rotate 0,0,90
+              --zoom ${BOARD_RENDER_ZOOM}
               --quality high
               --width 1200
               --height 1600
