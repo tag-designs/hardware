@@ -74,5 +74,16 @@ nav:
     - CompassTag: tags/compasstag.md
     - UIUC Tag: tags/uiuctag.md
     - IMUTag: tags/imutag.md
+  - Base Boards:
+    - Overview: bases/index.md
+    - tagbase-jlcpcb-v3: bases/tagbase-jlcpcb-v3.md
+    - tagbase-lipo-v1: bases/tagbase-lipo-v1.md
+    - tag-breakout-l432v2: bases/tag-breakout-l432v2.md
+    - tag-breakout-u375-smps-v1: bases/tag-breakout-u375-smps-v1.md
+  - Prototype Boards:
+    - Overview: prototypes/index.md
+    - IMUTagNandBMP581: prototypes/imutag-nand-bmp581.md
+    - UIUCBreakout: prototypes/uiuc.md
+    - steval-daughter-v2: prototypes/steval-daughter.md
   - Mechanical Designs: mechanical/index.md
   - Board Assembly: assembly/index.md

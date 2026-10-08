@@ -70,7 +70,13 @@
           "thermal_relief_spoke_width": 0.5
         }
       },
-      "diff_pair_dimensions": [],
+      "diff_pair_dimensions": [
+        {
+          "gap": 0.0,
+          "via_gap": 0.0,
+          "width": 0.0
+        }
+      ],
       "drc_exclusions": [],
       "meta": {
         "filename": "board_design_settings.json",
@@ -153,9 +159,9 @@
         "min_copper_edge_clearance": 0.075,
         "min_groove_width": 0.0,
         "min_hole_clearance": 0.25,
-        "min_hole_to_hole": 0.25,
-        "min_microvia_diameter": 0.0,
-        "min_microvia_drill": 0.0,
+        "min_hole_to_hole": 0.2032,
+        "min_microvia_diameter": 0.2,
+        "min_microvia_drill": 0.1,
         "min_resolved_spokes": 2,
         "min_silk_clearance": 0.0,
         "min_text_height": 0.8,
@@ -213,7 +219,8 @@
       ],
       "track_widths": [
         0.0,
-        0.3048
+        0.3048,
+        0.508
       ],
       "tuning_pattern_settings": {
         "diff_pair_defaults": {
@@ -241,7 +248,12 @@
           "spacing": 0.6
         }
       },
-      "via_dimensions": [],
+      "via_dimensions": [
+        {
+          "diameter": 0.0,
+          "drill": 0.0
+        }
+      ],
       "zones_allow_external_fillets": false,
       "zones_use_no_outline": true
     },
@@ -459,15 +471,10 @@
       "duplicate_sheet_names": "error",
       "endpoint_off_grid": "warning",
       "extra_units": "error",
-      "footprint_filter": "ignore",
-      "footprint_link_issues": "warning",
-      "four_way_junction": "ignore",
       "global_label_dangling": "warning",
       "hier_label_mismatch": "error",
       "label_dangling": "error",
-      "label_multiple_wires": "warning",
       "lib_symbol_issues": "warning",
-      "lib_symbol_mismatch": "warning",
       "missing_bidi_pin": "warning",
       "missing_input_pin": "warning",
       "missing_power_pin": "error",
@@ -480,15 +487,9 @@
       "pin_not_driven": "error",
       "pin_to_pin": "warning",
       "power_pin_not_driven": "error",
-      "same_local_global_label": "warning",
-      "similar_label_and_power": "warning",
       "similar_labels": "warning",
-      "similar_power": "warning",
       "simulation_model_issue": "ignore",
-      "single_global_label": "ignore",
       "unannotated": "error",
-      "unconnected_wire_endpoint": "warning",
-      "undefined_netclass": "error",
       "unit_value_mismatch": "error",
       "unresolved_variable": "error",
       "wire_dangling": "error"
@@ -499,7 +500,7 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "steval-daughter-v2.kicad_pro",
+    "filename": "tagbase-jlcpcb-v3.kicad_pro",
     "version": 3
   },
   "net_settings": {
@@ -535,11 +536,11 @@
     "last_paths": {
       "gencad": "",
       "idf": "",
-      "netlist": "tag-breakout-jlcpcb.net",
+      "netlist": "",
       "plot": "",
       "pos_files": "",
       "specctra_dsn": "",
-      "step": "",
+      "step": "tagbase-jlcpcb-v3.step",
       "svg": "",
       "vrml": ""
     },
@@ -601,7 +602,6 @@
       ],
       "filter_string": "",
       "group_symbols": true,
-      "include_excluded_from_bom": false,
       "name": "Grouped By Value",
       "sort_asc": true,
       "sort_field": "Reference"
@@ -646,7 +646,6 @@
     },
     "page_layout_descr_file": "",
     "plot_directory": "",
-    "space_save_all_events": true,
     "spice_adjust_passive_values": false,
     "spice_current_sheet_as_root": false,
     "spice_external_command": "spice \"%I\"",
@@ -658,16 +657,16 @@
     "subpart_id_separator": 0,
     "top_level_sheets": [
       {
-        "filename": "steval-daughter-v2.kicad_sch",
-        "name": "steval-daughter-v2",
+        "filename": "tagbase-jlcpcb-v3.kicad_sch",
+        "name": "tagbase-jlcpcb-v3",
         "uuid": "00000000-0000-0000-0000-000000000000"
       }
     ]
   },
   "sheets": [
     [
-      "dc006d87-46a7-47a2-9c65-845f7016dec0",
-      "Root"
+      "4d87b1cc-f1d4-4d5c-b687-12b1ff6c9e14",
+      ""
     ]
   ],
   "text_variables": {},
