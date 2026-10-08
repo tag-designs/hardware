@@ -59,5 +59,13 @@ nav:
   # the tag families and the cross-cutting field guides.
   - Project Home: https://tag-designs.github.io/
   - Board Designs: boards/index.md
+  - Tag Designs:
+    - Overview: tags/index.md
+    - BitTagv7: tags/bittag.md
+    - BitTagNG: tags/bittagng.md
+    - PresTag: tags/prestag.md
+    - CompassTag: tags/compasstag.md
+    - UIUC Tag: tags/uiuctag.md
+    - IMUTag: tags/imutag.md
   - Mechanical Designs: mechanical/index.md
   - Board Assembly: assembly/index.md
