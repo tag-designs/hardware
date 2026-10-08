@@ -5503,7 +5503,7 @@
 			(uuid "cd1ffdde-d08f-4ac8-af32-0227bafb47a3")
 		)
 		(embedded_fonts no)
-		(model "/Users/geobrown/Research/tag-designs/hardware/BoardDesigns/kicad_libraries/3d_models/CJS-1200B.stp"
+		(model "${KIPRJMOD}/../../kicad_libraries/3d_models/CJS-1200B.stp"
 			(offset
 				(xyz 0 0 2.5)
 			)
@@ -12471,7 +12471,7 @@
 			(uuid "585c6d1e-479b-4812-a840-fa168a4d6e98")
 		)
 		(embedded_fonts no)
-		(model "/Users/geobrown/Research/tag-designs/hardware/BoardDesigns/kicad_libraries/3d_models/CJS-1200B.stp"
+		(model "${KIPRJMOD}/../../kicad_libraries/3d_models/CJS-1200B.stp"
 			(offset
 				(xyz 0 0 2.5)
 			)
