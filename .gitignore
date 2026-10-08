@@ -41,3 +41,6 @@ hardware/tag-breakout-template/jlcpcb/
 
 # Built documentation site
 docs/site/
+
+# CMake build directories (board renders, fabrication outputs)
+build*/
