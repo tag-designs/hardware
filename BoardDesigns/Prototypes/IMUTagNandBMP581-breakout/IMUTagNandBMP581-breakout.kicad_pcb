@@ -717,7 +717,7 @@
 			(uuid "946cedaf-877f-4d29-a1b9-9729eda08e22")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0603_1608Metric.step"
+		(model "${KIPRJMOD}/../../kicad_libraries/3d_models/C_0603_1608Metric.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -940,7 +940,7 @@
 			(uuid "11438f49-5f13-4589-a045-dd1a23ae31b3")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0603_1608Metric.step"
+		(model "${KIPRJMOD}/../../kicad_libraries/3d_models/C_0603_1608Metric.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -1163,7 +1163,7 @@
 			(uuid "bca25b66-8d8f-45e4-abac-c813a5f179eb")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0603_1608Metric.step"
+		(model "${KIPRJMOD}/../../kicad_libraries/3d_models/C_0603_1608Metric.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -1377,7 +1377,7 @@
 			(uuid "675e2048-77dc-49ad-bc5b-77a569309ed1")
 		)
 		(embedded_fonts no)
-		(model "${KICAD9_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0603_1608Metric.step"
+		(model "${KIPRJMOD}/../../kicad_libraries/3d_models/C_0603_1608Metric.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -1574,7 +1574,7 @@
 			(uuid "caeca2a3-944b-448e-bb31-6fe4b2388844")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0603_1608Metric.step"
+		(model "${KIPRJMOD}/../../kicad_libraries/3d_models/C_0603_1608Metric.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -1771,7 +1771,7 @@
 			(uuid "d1fa35e2-ec87-4098-aaeb-1406dce1060d")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Resistor_SMD.3dshapes/R_0603_1608Metric.step"
+		(model "${KIPRJMOD}/../../kicad_libraries/3d_models/R_0603_1608Metric.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -1995,7 +1995,7 @@
 			(uuid "c1e5c8ed-7d59-4e2f-b99d-de8be1c26453")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0603_1608Metric.step"
+		(model "${KIPRJMOD}/../../kicad_libraries/3d_models/C_0603_1608Metric.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -2219,7 +2219,7 @@
 			(uuid "cbcd0862-e554-43ca-9368-2f8c5c518283")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0603_1608Metric.step"
+		(model "${KIPRJMOD}/../../kicad_libraries/3d_models/C_0603_1608Metric.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -2433,7 +2433,7 @@
 			(uuid "3342b11c-3040-4fc5-b00b-f5c1462aaaf1")
 		)
 		(embedded_fonts no)
-		(model "${KICAD9_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0603_1608Metric.step"
+		(model "${KIPRJMOD}/../../kicad_libraries/3d_models/C_0603_1608Metric.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -2630,7 +2630,7 @@
 			(uuid "69e69c8f-3de6-4331-9b83-3b5c36e74f92")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Resistor_SMD.3dshapes/R_0603_1608Metric.step"
+		(model "${KIPRJMOD}/../../kicad_libraries/3d_models/R_0603_1608Metric.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -3250,7 +3250,7 @@
 			(uuid "8edd5acd-9d58-43ae-a1f5-8a40300ba9f6")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0603_1608Metric.step"
+		(model "${KIPRJMOD}/../../kicad_libraries/3d_models/C_0603_1608Metric.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -4617,7 +4617,7 @@
 			(uuid "806a660a-267f-40d4-9a73-4deca1d4f440")
 		)
 		(embedded_fonts no)
-		(model "${KICAD9_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0603_1608Metric.step"
+		(model "${KIPRJMOD}/../../kicad_libraries/3d_models/C_0603_1608Metric.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -4831,7 +4831,7 @@
 			(uuid "10f0c933-a1c9-4d77-84bd-2753b7847888")
 		)
 		(embedded_fonts no)
-		(model "${KICAD9_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0603_1608Metric.step"
+		(model "${KIPRJMOD}/../../kicad_libraries/3d_models/C_0603_1608Metric.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -6194,7 +6194,7 @@
 			(uuid "60947824-d203-4258-8ade-cd3f2d0f26ac")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_1x17_P2.54mm_Vertical.step"
+		(model "${KIPRJMOD}/../../kicad_libraries/3d_models/PinHeader_1x17_P2.54mm_Vertical.step"
 			(hide yes)
 			(offset
 				(xyz 0 0 0)
@@ -6206,7 +6206,7 @@
 				(xyz 0 0 0)
 			)
 		)
-		(model "${KISYS3DMOD}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_1x17_P2.54mm_Vertical.step"
+		(model "${KIPRJMOD}/../../kicad_libraries/3d_models/PinHeader_1x17_P2.54mm_Vertical.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -6639,7 +6639,7 @@
 			(uuid "b238ba4a-1fb0-4e88-b6b0-8dd80597e4ff")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_1x17_P2.54mm_Vertical.step"
+		(model "${KIPRJMOD}/../../kicad_libraries/3d_models/PinHeader_1x17_P2.54mm_Vertical.step"
 			(hide yes)
 			(offset
 				(xyz 0 0 0)
@@ -6651,7 +6651,7 @@
 				(xyz 0 0 0)
 			)
 		)
-		(model "${KISYS3DMOD}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_1x17_P2.54mm_Vertical.step"
+		(model "${KIPRJMOD}/../../kicad_libraries/3d_models/PinHeader_1x17_P2.54mm_Vertical.step"
 			(offset
 				(xyz 0 0 0)
 			)

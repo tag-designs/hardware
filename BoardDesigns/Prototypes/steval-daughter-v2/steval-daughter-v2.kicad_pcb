@@ -147,7 +147,7 @@
     (pad "7" smd roundrect locked (at 3.5 -0.635) (size 1.9 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25) (tstamp 8c813dc7-93c7-4f01-8a95-dc039a984446))
     (pad "8" smd roundrect locked (at 3.5 -1.905) (size 1.9 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25)
       (net 2 "/TAG_3V3") (tstamp 3328ff87-fa5f-4e5e-a5ba-31c6f3267362))
-    (model "${KISYS3DMOD}/Package_SO.3dshapes/SO-8_5.3x6.2mm_P1.27mm.wrl"
+    (model "${KIPRJMOD}/../../kicad_libraries/3d_models/SOIC-8_5.3x6.2mm_P1.27mm.step"
       (offset (xyz 0 0 0))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
@@ -244,7 +244,7 @@
       (net 9 "/PB5") (tstamp 68885215-2dd2-4612-b6d3-bd0cfb228c1b))
     (pad "24" thru_hole oval locked (at 15.24 0) (size 1.6 1.6) (drill 0.8) (layers *.Cu *.Mask)
       (net 17 "/PB4") (tstamp a490bc88-d2fc-4697-b73b-83506a9a5ff9))
-    (model "${KISYS3DMOD}/Package_DIP.3dshapes/DIP-24_W15.24mm_Socket.wrl"
+    (model "${KIPRJMOD}/../../kicad_libraries/3d_models/DIP-24_W15.24mm_Socket.step"
       (offset (xyz 0 0 0))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
@@ -284,7 +284,7 @@
       (net 2 "/TAG_3V3") (tstamp e0c130f4-6651-43f7-9779-32053589c841))
     (pad "2" smd roundrect locked (at 0.95 0 90) (size 1 1.45) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25)
       (net 1 "GND") (tstamp f0ac25cf-5b3b-4ab7-a822-695c17d1b5c9))
-    (model "${KISYS3DMOD}/Capacitor_SMD.3dshapes/C_0805_2012Metric.wrl"
+    (model "${KIPRJMOD}/../../kicad_libraries/3d_models/C_0805_2012Metric.wrl"
       (offset (xyz 0 0 0))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
@@ -324,7 +324,7 @@
       (net 2 "/TAG_3V3") (tstamp aa38fbc2-f0b6-4f3b-a9c4-5b53543a1f81))
     (pad "2" smd roundrect locked (at 0.95 0 90) (size 1 1.45) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25)
       (net 1 "GND") (tstamp bf3f0150-0c07-443c-b4e1-8eb841960c46))
-    (model "${KISYS3DMOD}/Capacitor_SMD.3dshapes/C_0805_2012Metric.wrl"
+    (model "${KIPRJMOD}/../../kicad_libraries/3d_models/C_0805_2012Metric.wrl"
       (offset (xyz 0 0 0))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
@@ -371,7 +371,7 @@
       (net 29 "Net-(J101-Pad2)") (tstamp 88de6a29-98ab-4aec-84d2-867a28d2d3da))
     (pad "3" thru_hole oval locked (at 0.127 5.08 180) (size 1.7 1.7) (drill 1) (layers *.Cu *.Mask)
       (net 8 "/PB8") (tstamp 74d3e085-0714-4ca0-a3ba-f97318c3ffe5))
-    (model "${KISYS3DMOD}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_1x03_P2.54mm_Vertical.wrl"
+    (model "${KIPRJMOD}/../../kicad_libraries/3d_models/PinHeader_1x03_P2.54mm_Vertical.step"
       (offset (xyz 0 0 0))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
@@ -444,7 +444,7 @@
       (net 12 "/PB0") (tstamp e4512558-7c79-4c4d-a84e-3377becd4b22))
     (pad "17" thru_hole oval locked (at 0.127 -40.64 180) (size 1.7 1.7) (drill 1) (layers *.Cu *.Mask)
       (net 1 "GND") (tstamp b149b54a-8589-4ea7-970b-62c0e05f0409))
-    (model "${KISYS3DMOD}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_1x17_P2.54mm_Vertical.wrl"
+    (model "${KIPRJMOD}/../../kicad_libraries/3d_models/PinHeader_1x17_P2.54mm_Vertical.step"
       (offset (xyz 0 0 0))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
@@ -519,7 +519,7 @@
       (net 18 "/PB1") (tstamp 8000c323-7372-4376-80f7-29ccd8d5ad15))
     (pad "17" thru_hole oval locked (at 0.127 -40.64 180) (size 1.7 1.7) (drill 1) (layers *.Cu *.Mask)
       (net 1 "GND") (tstamp 861225a8-72d7-408f-9282-e092fbbf220a))
-    (model "${KISYS3DMOD}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_1x17_P2.54mm_Vertical.wrl"
+    (model "${KIPRJMOD}/../../kicad_libraries/3d_models/PinHeader_1x17_P2.54mm_Vertical.step"
       (offset (xyz 0 0 0))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
