@@ -775,7 +775,7 @@
       {
         "filename": "BitTagNG.kicad_sch",
         "name": "BitTagNG",
-        "uuid": "00000000-0000-0000-0000-000000000000"
+        "uuid": "e44ca67a-43be-444b-8652-f54825a2eb6f"
       }
     ],
     "used_designators": "",
@@ -784,7 +784,7 @@
   "sheets": [
     [
       "e44ca67a-43be-444b-8652-f54825a2eb6f",
-      ""
+      "BitTagNG"
     ]
   ],
   "text_variables": {},
