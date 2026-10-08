@@ -21,6 +21,14 @@ find_program(kicad_cli_EXECUTABLE kicad-cli
 get_filename_component(_hw_root "${CMAKE_CURRENT_SOURCE_DIR}/.." ABSOLUTE)
 set(BOARD_RENDER_DIR "${_hw_root}/docs/src/images/boards")
 
+# Beside each set of renders, a stamp holding the SHA-256 of the .kicad_pcb they
+# were drawn from. CMake uses file timestamps, which a clone does not preserve,
+# so a checkout cannot tell by itself whether its images are current. The stamps
+# let CI answer that question without KiCad: hash the board, compare. They live
+# outside the documentation tree so MkDocs does not publish them.
+set(BOARD_STAMP_DIR "${CMAKE_CURRENT_SOURCE_DIR}/.render-stamps")
+set(BOARD_STAMP_SCRIPT "${CMAKE_CURRENT_SOURCE_DIR}/kicad-helpers/stamp.cmake")
+
 # Camera zoom. kicad-cli's default of 1 frames the board tightly enough to clip
 # a coin cell that overhangs the edge, so pull back slightly. Exposed as a cache
 # variable because the right value is a judgement about how the images look:
@@ -79,7 +87,20 @@ function(_board_renders name)
     list(APPEND outputs "${out}")
   endforeach()
 
-  add_custom_target(${name}-renders DEPENDS ${outputs})
+  # One stamp per board, written after its images, so a half-finished render
+  # never leaves a stamp claiming the board is up to date. Separate from the
+  # render commands because a two-sided board has two of them and they would
+  # otherwise race to write the same file.
+  set(stamp "${BOARD_STAMP_DIR}/${name}.sha256")
+  add_custom_command(
+    OUTPUT "${stamp}"
+    COMMAND ${CMAKE_COMMAND} -E make_directory "${BOARD_STAMP_DIR}"
+    COMMAND ${CMAKE_COMMAND} -DBOARD=${board} -DSTAMP=${stamp} -P "${BOARD_STAMP_SCRIPT}"
+    DEPENDS ${outputs}
+    COMMENT "Stamping ${name}"
+    VERBATIM)
+
+  add_custom_target(${name}-renders DEPENDS ${outputs} "${stamp}")
   add_dependencies(board-renders ${name}-renders)
 endfunction()
 

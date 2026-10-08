@@ -20,6 +20,27 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  renders:
+    name: Check board renders
+    runs-on: ubuntu-latest
+
+    # Deliberately not a prerequisite of build. A stale picture is a smaller
+    # problem than a documentation site that stops updating, and only a machine
+    # with KiCad on it can redraw one -- gating the deploy would mean an
+    # unrelated typo fix could not be published until someone reached that
+    # machine. This reports; it does not block.
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+        with:
+          submodules: false
+
+      # Hashes layouts against the stamps CMake wrote when it last drew them.
+      # No KiCad, no image comparison, nothing to go flaky.
+      - name: Compare layouts against their renders
+        run: python3 BoardDesigns/kicad-helpers/check_renders.py
+
   build:
     name: Build documentation
     runs-on: ubuntu-latest

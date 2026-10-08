@@ -42,3 +42,21 @@ PYTHONPATH=../../kicad-helpers python3 ../../kicad-helpers/padnet_crosscheck.py
 Several carry board-specific constants in their docstrings (pin capacitance,
 driver impedance, ambient). Read the docstring before quoting a number — adjust
 the constants for the board under review rather than assuming they transfer.
+
+## Not a review probe
+
+Two files here answer a different question and run from the repository root, not
+a board directory:
+
+| File | Purpose |
+|------|---------|
+| `check_renders.py` | Are the committed board renders still of the committed layouts? Reads the board list out of the CMake files, hashes each `.kicad_pcb`, and compares against the stamp written when it was last drawn. Needs no KiCad and compares files rather than images, so it cannot go flaky. The `Check board renders` job in `.github/workflows/docs.yml` runs it on every push. |
+| `stamp.cmake` | Writes those stamps. Invoked by `add_custom_command` after a board's renders complete; not meant to be run by hand. |
+
+A failure means the pictures in the documentation are of an older board. Redraw
+them on a machine with KiCad and commit the images and stamps together:
+
+```bash
+cmake -S BoardDesigns -B build-boards
+cmake --build build-boards --target board-renders
+```

@@ -44,3 +44,7 @@ docs/site/
 
 # CMake build directories (board renders, fabrication outputs)
 build*/
+
+# KiCad lock files
+*.lck
+~*.lck
