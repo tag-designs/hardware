@@ -12,11 +12,11 @@ Two steps:
   trim   the transparent border is cut back to a fixed fraction of the board,
          so every figure carries the same visual margin whatever its subject
 
-  stand  a board that comes out wider than tall is turned 90 degrees clockwise,
-         so every figure is portrait and a top/bottom pair sits side by side in
-         the documentation's two-column grid without being squeezed. The tags
-         are already portrait and are left alone; this is what rights the bases
-         and the prototype carriers.
+  stand  a board that is not taller than it is wide is turned 90 degrees
+         clockwise, so every figure is portrait and a top/bottom pair sits side
+         by side in the documentation's two-column grid without being squeezed.
+         The tags are already portrait and are left alone; this is what rights
+         the bases, and the square prototype carriers with them.
 
 Refuses to trim an image whose content already runs into the frame edge: that
 means the render clipped the board, and trimming would quietly crop it further
@@ -85,7 +85,11 @@ def fit(path, out=None, margin=MARGIN, rotate=True):
     im = im.crop((max(left - pad, 0), max(top - pad, 0),
                   min(right + pad, w), min(bottom + pad, h)))
 
-    if rotate and im.width > im.height:
+    # >= and not >, so a square board turns too. The prototype carriers are all
+    # 48.3 mm square, and left alone they came out in the one orientation
+    # nobody asked for; the tags are clearly taller than wide and are untouched
+    # either way.
+    if rotate and im.width >= im.height:
         im = im.transpose(Image.ROTATE_270)   # PIL counts anticlockwise
 
     im.save(out or path)

@@ -32,15 +32,36 @@ Delete an item when it is done.
 
 ## Board designs
 
-- **The tag base's silkscreen says `BitTag Base V7`.** Visible in its own
-  render, `docs/src/images/boards/tagbase-jlcpcb-v3-top.png`, while the
-  directory and every page call it `tagbase-jlcpcb-v3`. The directory name is
-  the agreed one; the board in hand disagrees with it, which will confuse
-  anyone holding both.
-- **Two directories are called `tagbase-jlcpcb-v3`.** `BoardDesigns/Bases/` and
-  `BoardDesigns/Obsolete/`. The one under `Bases/` is the current board, and
-  was itself renamed from `-v7` during this work. A grep or a path typed from
-  memory can reach the wrong one.
+- **The documented tag base is a design that was never built.** Three
+  directories hold this board, and the one the documentation describes is not
+  the one on the bench. Established by the silkscreen date, the fabrication
+  outputs and `R6`:
+
+  | Directory | Title block | Silk date | `R6` | Gerbers | 3D models |
+  | --- | --- | --- | --- | --- | --- |
+  | `Bases/tagbase-v7` | v7, 2023-05-31 | 5/31/2023 | **100 Ω** | `production/gerber.zip` | 25 `${KISYS3DMOD}`, not normalized |
+  | `Bases/tagbase-jlcpcb-v3` (really `-v7`) | v7, 2023-05-31 | 5/31/2023 | 82 Ω | none | normalized |
+  | `Obsolete/tagbase-jlcpcb-v3` | V3b (marked V7), 2020-12-21 | none | — | none | not normalized |
+
+  The physical board reads 100 Ω, so `Bases/tagbase-v7` is the fabricated
+  design. The documented copy carries 82 Ω and no gerbers. Both boards are
+  marked V7 on the silkscreen, which is why this took three attempts to pin
+  down, and the 2020 board's own title block says "V3b (marked V7)" — so that
+  marking is a recorded quirk, not a defect.
+
+  The two 2023 layouts place all forty parts identically and share the same
+  outline, but they are **not** interchangeable as pictures: the silkscreen
+  differs. The documented copy carries `82` in its battery-model legend and
+  the fabricated board carries `100`, and silkscreen is rendered — so the
+  committed render shows a value that is not on the board. The schematic PDF
+  is wrong for the same reason.
+
+  What this needs: `docs/src/bases/` must describe `tagbase-v7`, its battery
+  models corrected from "33 Ω, 82 Ω" to **33 Ω, 100 Ω** in both the page and
+  the block diagram, the directory names straightened out, and `tagbase-v7`
+  put through the 3D-model normalization before it is wired into the render
+  build — until then a build of it would replace a good image with a nearly
+  bare one and say nothing.
 - **Fifty-six `.kibot.yaml` files are still in the tree.** KiBot no longer
   drives anything from CMake. They were left to run by hand if wanted; if that
   is not wanted, they are dead weight, and several are named for the board they
