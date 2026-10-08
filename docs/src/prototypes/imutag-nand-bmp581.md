@@ -60,6 +60,7 @@ measurement that settled it was made on hardware like this.
 ## Design files
 
 [Design directory on GitHub](https://github.com/tag-designs/hardware/tree/main/BoardDesigns/Prototypes/IMUTagNandBMP581-breakout){ .md-button }
+[Schematic (PDF)](../schematics/IMUTagNandBMP581-breakout.pdf){ .md-button }
 
 No design review has been written for this board. The
 [imutag-smps review](https://github.com/tag-designs/hardware/blob/main/BoardDesigns/Tags/imutag-smps/imutag-smps-design-review.md)

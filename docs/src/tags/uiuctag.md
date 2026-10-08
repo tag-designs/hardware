@@ -101,6 +101,7 @@ one from the other.
 ## Design files
 
 [Design directory on GitHub](https://github.com/tag-designs/hardware/tree/main/BoardDesigns/Tags/BitPresTagBMP585){ .md-button }
+[Schematic (PDF)](../schematics/BitPresTagBMP585.pdf){ .md-button }
 [Design review](https://github.com/tag-designs/hardware/blob/main/BoardDesigns/Tags/BitPresTagBMP585/BitPresTagBMP585-design-review.md){ .md-button }
 
 The review carries the full STM32L432 pin map, the supply headroom analysis at a

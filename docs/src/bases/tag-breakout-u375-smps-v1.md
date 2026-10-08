@@ -93,4 +93,5 @@ BMP581, LSM6DSV and GD5F2GM7RE NAND are exactly the sensor and memory set of
 ## Design files
 
 [Design directory on GitHub](https://github.com/tag-designs/hardware/tree/main/BoardDesigns/Bases/tag-breakout-u375-smps-v1){ .md-button }
+[Schematic (PDF)](../schematics/tag-breakout-u375-smps-v1.pdf){ .md-button }
 [Design review (named for a sibling board)](https://github.com/tag-designs/hardware/blob/main/BoardDesigns/Bases/tag-breakout-u375-smps-v1/tag-breakout-l432-u375-lipo-v1-design-review.md){ .md-button }

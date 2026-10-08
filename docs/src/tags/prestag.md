@@ -91,6 +91,7 @@ and the cell size imply.
 ## Design files
 
 [Design directory on GitHub](https://github.com/tag-designs/hardware/tree/main/BoardDesigns/Tags/PresTag-v6){ .md-button }
+[Schematic (PDF)](../schematics/PresTag-v6.pdf){ .md-button }
 
 No design review has been written for this board. An earlier revision, a v3
 design, is in the repository under `BoardDesigns/Tags/PresTag`.

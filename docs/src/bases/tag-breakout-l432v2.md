@@ -92,4 +92,5 @@ exactly the sensor set of the
 ## Design files
 
 [Design directory on GitHub](https://github.com/tag-designs/hardware/tree/main/BoardDesigns/Bases/tag-breakout-l432v2){ .md-button }
+[Schematic (PDF)](../schematics/tag-breakout-l432v2.pdf){ .md-button }
 [Design notes](https://github.com/tag-designs/hardware/blob/main/BoardDesigns/Bases/tag-breakout-l432v2/DesignNotes.md){ .md-button }

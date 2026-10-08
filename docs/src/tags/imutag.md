@@ -110,6 +110,7 @@ on the software site carries the current figures for both.
 ## Design files
 
 [Design directory on GitHub](https://github.com/tag-designs/hardware/tree/main/BoardDesigns/Tags/imutag-smps){ .md-button }
+[Schematic (PDF)](../schematics/imutag-smps.pdf){ .md-button }
 [Design review](https://github.com/tag-designs/hardware/blob/main/BoardDesigns/Tags/imutag-smps/imutag-smps-design-review.md){ .md-button }
 
 The review is the most thorough in the repository: two rounds covering the

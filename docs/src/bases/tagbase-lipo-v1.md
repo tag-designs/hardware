@@ -70,6 +70,7 @@ since it is held against the pins for longer measurement runs.
 ## Design files
 
 [Design directory on GitHub](https://github.com/tag-designs/hardware/tree/main/BoardDesigns/Bases/tagbase-lipo-v1){ .md-button }
+[Schematic (PDF)](../schematics/tagbase-lipo-v1.pdf){ .md-button }
 [Design review](https://github.com/tag-designs/hardware/blob/main/BoardDesigns/Bases/tagbase-lipo-v1/tagbase-lipo-v1-design-review.md){ .md-button }
 
 The review is worth reading for its analysis of the pogo-pin footprint: the

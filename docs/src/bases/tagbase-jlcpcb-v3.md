@@ -71,5 +71,6 @@ make that trade and use a physical changeover instead — see
 ## Design files
 
 [Design directory on GitHub](https://github.com/tag-designs/hardware/tree/main/BoardDesigns/Bases/tagbase-jlcpcb-v3){ .md-button }
+[Schematic (PDF)](../schematics/tagbase-jlcpcb-v3.pdf){ .md-button }
 
 No design review has been written for this board.

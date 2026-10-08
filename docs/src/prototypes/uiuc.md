@@ -59,4 +59,5 @@ is easier to hand-solder.
 ## Design files
 
 [Design directory on GitHub](https://github.com/tag-designs/hardware/tree/main/BoardDesigns/Prototypes/UIUCBreakout){ .md-button }
+[Schematic (PDF)](../schematics/UIUCBreakout.pdf){ .md-button }
 [Design review](https://github.com/tag-designs/hardware/blob/main/BoardDesigns/Prototypes/UIUCBreakout/UIUCBreakout-design-review.md){ .md-button }

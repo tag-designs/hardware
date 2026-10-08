@@ -52,5 +52,6 @@ referencing VRML (`.wrl`) geometry that KiCad has since stopped shipping.
 ## Design files
 
 [Design directory on GitHub](https://github.com/tag-designs/hardware/tree/main/BoardDesigns/Prototypes/steval-daughter-v2){ .md-button }
+[Schematic (PDF)](../schematics/steval-daughter-v2.pdf){ .md-button }
 
 No design review has been written for this board.

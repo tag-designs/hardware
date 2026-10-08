@@ -97,6 +97,7 @@ the peak of a flash write.
 ## Design files
 
 [Design directory on GitHub](https://github.com/tag-designs/hardware/tree/main/BoardDesigns/Tags/CompassTag){ .md-button }
+[Schematic (PDF)](../schematics/CompassTag.pdf){ .md-button }
 [KiCad analysis](https://github.com/tag-designs/hardware/blob/main/BoardDesigns/Tags/CompassTag/CompassTag-analysis.md){ .md-button }
 
 The analysis document carries the full processor pin map with a recommended

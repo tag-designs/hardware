@@ -98,5 +98,6 @@ allows a BitTag to run for most of a year on a 5.5 mAh cell.
 ## Design files
 
 [Design directory on GitHub](https://github.com/tag-designs/hardware/tree/main/BoardDesigns/Tags/BitTagv7){ .md-button }
+[Schematic (PDF)](../schematics/BitTagv7.pdf){ .md-button }
 
 No design review has been written for this board.

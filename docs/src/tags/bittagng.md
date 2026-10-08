@@ -99,6 +99,7 @@ space available for records.
 ## Design files
 
 [Design directory on GitHub](https://github.com/tag-designs/hardware/tree/main/BoardDesigns/Tags/BitTagNG){ .md-button }
+[Schematic (PDF)](../schematics/BitTagNG.pdf){ .md-button }
 [Design review](https://github.com/tag-designs/hardware/blob/main/BoardDesigns/Tags/BitTagNG/BitTagNG-design-review.md){ .md-button }
 
 The review covers the power tree and rail headroom, pinout verification across
