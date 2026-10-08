@@ -12,6 +12,25 @@ flash chip so the record is no longer bounded by the processor's internal flash.
     exists and was measured, not because it supersedes
     [BitTagv7](bittag.md).
 
+## The board
+
+<div class="grid" markdown>
+
+<figure markdown>
+  ![BitTagNG, top side](../images/boards/BitTagNG-top.png)
+  <figcaption>Top</figcaption>
+</figure>
+
+<figure markdown>
+  ![BitTagNG, bottom side](../images/boards/BitTagNG-bottom.png)
+  <figcaption>Bottom</figcaption>
+</figure>
+
+</div>
+
+The external flash is what distinguishes this board from BitTagv7, alongside the processor, RTC and accelerometer. These are rendered from the KiCad layout by `kicad-cli`; see
+[Board Designs](../boards/index.md) for how they are regenerated.
+
 ## Block diagram
 
 ```mermaid

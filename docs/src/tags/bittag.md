@@ -4,6 +4,25 @@ BitTag is the smallest tag in the family and the one the whole architecture is
 named for. It answers a single question — *when was the bird active?* — and
 spends almost nothing doing it. The board documented here is **BitTagv7**.
 
+## The board
+
+<div class="grid" markdown>
+
+<figure markdown>
+  ![BitTagv7, top side](../images/boards/BitTagv7-top.png)
+  <figcaption>Top</figcaption>
+</figure>
+
+<figure markdown>
+  ![BitTagv7, bottom side](../images/boards/BitTagv7-bottom.png)
+  <figcaption>Bottom</figcaption>
+</figure>
+
+</div>
+
+The processor is on the top side; the accelerometer, RTC, Schottky and the six gold pogo pads are on the bottom. These are rendered from the KiCad layout by `kicad-cli`; see
+[Board Designs](../boards/index.md) for how they are regenerated.
+
 ## Block diagram
 
 ```mermaid

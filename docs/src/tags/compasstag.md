@@ -5,6 +5,25 @@ rather than an inferred one. It is also the first board in the family to carry a
 second voltage rail, because the magnetometer it uses will not run at battery
 voltage.
 
+## The board
+
+<div class="grid" markdown>
+
+<figure markdown>
+  ![CompassTag, top side](../images/boards/CompassTag-top.png)
+  <figcaption>Top</figcaption>
+</figure>
+
+<figure markdown>
+  ![CompassTag, bottom side](../images/boards/CompassTag-bottom.png)
+  <figcaption>Bottom</figcaption>
+</figure>
+
+</div>
+
+Two rails share this board: the magnetometer and its 1.8 V LDO against everything else on +2V5. These are rendered from the KiCad layout by `kicad-cli`; see
+[Board Designs](../boards/index.md) for how they are regenerated.
+
 ## Block diagram
 
 ```mermaid

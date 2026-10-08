@@ -5,6 +5,25 @@ BitTag tells you *when* a bird was active, a PresTag tells you *how high* it
 was, and when it climbed or descended. The board documented here is
 **PresTag-v6**.
 
+## The board
+
+<div class="grid" markdown>
+
+<figure markdown>
+  ![PresTag-v6, top side](../images/boards/PresTag-v6-top.png)
+  <figcaption>Top</figcaption>
+</figure>
+
+<figure markdown>
+  ![PresTag-v6, bottom side](../images/boards/PresTag-v6-bottom.png)
+  <figcaption>Bottom</figcaption>
+</figure>
+
+</div>
+
+The LPS27's circular pressure port is visible at the centre of the top side. These are rendered from the KiCad layout by `kicad-cli`; see
+[Board Designs](../boards/index.md) for how they are regenerated.
+
 ## Block diagram
 
 ```mermaid

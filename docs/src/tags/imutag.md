@@ -5,6 +5,25 @@ second, an IMUTag resolves individual wingbeats — and fills its memory in a da
 doing it. The board documented here is **imutag-smps**: the revision with a
 switching regulator and NAND flash.
 
+## The board
+
+<div class="grid" markdown>
+
+<figure markdown>
+  ![imutag-smps, top side](../images/boards/imutag-smps-top.png)
+  <figcaption>Top</figcaption>
+</figure>
+
+<figure markdown>
+  ![imutag-smps, bottom side](../images/boards/imutag-smps-bottom.png)
+  <figcaption>Bottom</figcaption>
+</figure>
+
+</div>
+
+The inductor beside the buck converter is the visible sign of the only switching supply in the family. These are rendered from the KiCad layout by `kicad-cli`; see
+[Board Designs](../boards/index.md) for how they are regenerated.
+
 ## Block diagram
 
 ```mermaid

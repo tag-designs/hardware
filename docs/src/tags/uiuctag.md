@@ -5,6 +5,25 @@ board: a BitTag's activity accelerometer and a PresTag's pressure sensor. The
 board documented here is **BitPresTagBMP585**, the revision using a Bosch BMP585
 in place of the original ST pressure part.
 
+## The board
+
+<div class="grid" markdown>
+
+<figure markdown>
+  ![BitPresTagBMP585, top side](../images/boards/BitPresTagBMP585-top.png)
+  <figcaption>Top</figcaption>
+</figure>
+
+<figure markdown>
+  ![BitPresTagBMP585, bottom side](../images/boards/BitPresTagBMP585-bottom.png)
+  <figcaption>Bottom</figcaption>
+</figure>
+
+</div>
+
+The 10 ohm inrush resistor sits in series between the processor pin and the pressure sensor's supply. These are rendered from the KiCad layout by `kicad-cli`; see
+[Board Designs](../boards/index.md) for how they are regenerated.
+
 ## Block diagram
 
 ```mermaid
