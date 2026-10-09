@@ -98,9 +98,11 @@ allows a BitTag to run for most of a year on a 5.5 mAh cell.
 ## Power
 
 Measured on firmware [`fw-v0.6`](https://github.com/tag-designs/software/releases/tag/fw-v0.6) at 2.4961 V from an unregulated 2.5 V
-cell. The figures come from a **BitTag v6** — the revision before this one, and
-not a design in this repository — so treat them as indicative for BitTagv7
-rather than measured on it.
+cell, on this board.
+
+The measurement logs record it as "BitTag V6": `BOARD_NAME` in the firmware's
+`custom.h` is stale and the board is a v7. Worth knowing if you read the
+software-side logs, and nothing more than that.
 
 | State | Current |
 | --- | ---: |

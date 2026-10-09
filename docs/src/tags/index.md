@@ -40,9 +40,8 @@ barely affected by the others.
 These are firmware qualification measurements, one board per tag, taken with a
 Joulescope at the supply and configuration shown. A different cell, sample
 period or room temperature moves them — CompassTag's idle shifts about 9% for
-3.5 °C. BitTag's come from a **BitTag v6**, the revision before the board
-documented here. Battery lives on each page are capacity over current and
-ignore self-discharge and derating, so treat them as upper bounds.
+3.5 °C. Battery lives on each page are capacity over current and ignore
+self-discharge and derating, so treat them as upper bounds.
 
 ## How to read the block diagrams
 

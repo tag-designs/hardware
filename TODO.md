@@ -67,6 +67,14 @@ Delete an item when it is done.
 
 ## Documentation
 
+- **The BitTag firmware still calls the board V6.** `BOARD_NAME` and
+  `FIRMWARE_STRING` in `embedded/tags/BitTag/inc/custom.h` (software
+  repository) read `BitTag V6`, and `BITTAG_V6` is recorded in
+  `custom-defines.md` as informational or obsolete. The board is a v7, so every
+  power measurement log and every `tag-info` identifies it by the wrong
+  revision. Harmless until someone tries to match a measurement to a board —
+  which cost an exchange while writing the power pages.
+
 - **The umbrella's hardware link is still the placeholder.** `mkdocs.yml` in
   `tag-designs.github.io` points at `https://tag-designs.github.io/hardware/`
   under a single "Hardware Documentation" entry, agreed when the hardware site
