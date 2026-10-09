@@ -98,14 +98,12 @@ space available for records.
 
 ## Power
 
-**Not measured.** BitTagNG has no firmware power qualification. The five
-targets qualified against [`fw-v0.6`](https://github.com/tag-designs/software/releases/tag/fw-v0.6) are BitTag, PresTag, CompassTag,
-UIUCTag and IMUTag; this board is not among them.
+**Not measured.** The five targets qualified against [`fw-v0.6`](https://github.com/tag-designs/software/releases/tag/fw-v0.6) are
+BitTag, PresTag, CompassTag, UIUCTag and IMUTag; BitTagNG is not among them.
 
-[BitTagv7's figures](bittag.md#power) are the closest available guide — the two
-share a processor, an accelerometer and an unregulated coin cell — but BitTagNG
-adds 4 MB of serial flash on the always-on rail, so its resting current should
-be expected to differ and has not been checked.
+[BitTag's figures](bittag.md#power) are the nearest guide — same processor,
+same accelerometer, same unregulated coin cell — but BitTagNG adds 4 MB of
+serial flash on the always-on rail, so expect its resting current to be higher.
 
 ## Design files
 

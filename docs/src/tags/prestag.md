@@ -90,35 +90,52 @@ and the cell size imply.
 
 ## Power
 
-Measured against firmware [`fw-v0.6`](https://github.com/tag-designs/software/releases/tag/fw-v0.6) at **2.4961 V** from an
-unregulated 2.5 V cell, at the 60 s sample period, with nothing attached.
+Measured on firmware [`fw-v0.6`](https://github.com/tag-designs/software/releases/tag/fw-v0.6) at 2.4961 V from an unregulated 2.5 V
+cell, at the 60 s sample period.
 
-| State | Current | Note |
-| --- | ---: | --- |
-| `IDLE`, clock set | 0.1118 µA | four trials 0.1227–0.1137 µA |
-| `RUNNING`, 60 s period | **0.3894 and 0.3908 µA** | two 30-minute runs, 0.36% apart |
-| `FINISHED` | 0.1108 µA | 0.9% from idle |
+| State | Current |
+| --- | ---: |
+| `IDLE` | 0.11 µA |
+| `RUNNING`, 60 s period | **0.39 µA** |
+| `FINISHED` | 0.11 µA |
 
-Derived life, ignoring derating and self-discharge:
+### Sample period
 
-| Cell | Resting | Recording at 60 s |
-| --- | ---: | ---: |
-| MS621FE-FL11E, 5.5 mAh | 2050 d | **589 d** |
-| MS920SE-FL27E, 11 mAh | 4100 d | **1177 d** |
+The sample period is the main lever on a PresTag deployment, and it has been
+measured rather than modelled — six points on one board, 1200 s per window:
 
-This was the first PresTag release qualification. Each run stored 31
-consecutive samples exactly 60 s apart with no gap and no drift.
+| Period | `RUNNING` | Period | `RUNNING` |
+| ---: | ---: | ---: | ---: |
+| 15 s | 1.13 µA | 45 s | 0.45 µA |
+| 20 s | 0.88 µA | 60 s | 0.37 µA |
+| 30 s | 0.62 µA | 90 s | 0.28 µA |
 
-!!! warning "Board-to-board spread exceeds the firmware differences"
+Fitting `I(T) = I_rest + Q/T` gives a resting term near 0.11 µA and
+**15.2 µC per sample**, R² 0.99994. The per-sample energy is the durable
+number — an independent campaign a month earlier got 15.3 µC — while the
+resting floor it sits on varies from board to board, by more than any firmware
+change has.
 
-    Two PresTag boards on the same image read about 0.12 µA and 0.28 µA
-    resting. The higher one dropped to 0.1249 µA after being unplugged and
-    replugged — it had latched a raised resting current that only a power cycle
-    cleared, and no firmware was ever at fault. A day was spent chasing a
-    regression that did not exist. **Power cycle before investigating an
-    unexplained resting current**, and record the board UUID with every figure.
+### What a deployment gets
 
-Full measurement log: [PresTag power results](https://github.com/tag-designs/software/blob/main/embedded/tags/families/PresTag/design/power-results.md).
+Battery is not always what runs out first. The 4 MB flash holds 1,048,560
+samples:
+
+| Period | 5.5 mAh cell | 11 mAh cell | Memory | Usable, 5.5 mAh | Usable, 11 mAh |
+| ---: | ---: | ---: | ---: | ---: | ---: |
+| 15 s | 204 d | 407 d | 182 d | **182 d** *(memory)* | **182 d** *(memory)* |
+| 20 s | 262 d | 523 d | 243 d | **243 d** *(memory)* | **243 d** *(memory)* |
+| 30 s | 371 d | 742 d | 364 d | **364 d** *(memory)* | **364 d** *(memory)* |
+| 45 s | 505 d | 1009 d | 546 d | **505 d** *(battery)* | **546 d** *(memory)* |
+| 60 s | 625 d | 1251 d | 728 d | **625 d** *(battery)* | **728 d** *(memory)* |
+| 90 s | 822 d | 1644 d | 1092 d | **822 d** *(battery)* | **1092 d** *(memory)* |
+
+On a 5.5 mAh cell the constraint switches from memory to battery around 33 s;
+on 11 mAh, not until about 200 s. **Below those, sampling faster spends current
+on data the flash cannot hold.** At the 60 s default: about 625 days on
+5.5 mAh, 728 on 11 mAh — the latter capped by flash rather than by the cell.
+
+Full log: [PresTag power results](https://github.com/tag-designs/software/blob/main/embedded/tags/families/PresTag/design/power-results.md).
 
 ## Design files
 

@@ -96,35 +96,27 @@ the peak of a flash write.
 
 ## Power
 
-Measured against firmware [`fw-v0.6`](https://github.com/tag-designs/software/releases/tag/fw-v0.6) at **2.4960 V** from an
-unregulated 2.5 V cell, at the shipped 30 s compass period, in a 19.5 °C room.
+Measured on firmware [`fw-v0.6`](https://github.com/tag-designs/software/releases/tag/fw-v0.6) at 2.4960 V from an unregulated 2.5 V
+cell, at the shipped 30 s compass period, in a 19.5 °C room.
 
-| State | Current | Note |
-| --- | ---: | --- |
-| `IDLE` | 0.2137 µA | four trials 0.2181–0.2137 µA, 2.0% spread |
-| `RUNNING`, 30 s period | **1.95 and 1.9478 µA** | two windows, 0.1% apart |
-| `FINISHED` | 0.21 µA | equal to idle |
+| State | Current |
+| --- | ---: |
+| `IDLE` | 0.21 µA |
+| `RUNNING`, 30 s period | **1.95 µA** |
+| `FINISHED` | 0.21 µA |
 
-Derived life, ignoring derating and self-discharge:
+On the cell alone, roughly **120 days** recording on a 5.5 mAh cell and
+**240 days** on 11 mAh.
 
-| Cell | Resting | Recording at 30 s |
-| --- | ---: | ---: |
-| MS621FE-FL11E, 5.5 mAh | 1070 d | **118 d** |
-| MS920SE-FL27E, 11 mAh | 2150 d | **235 d** |
+CompassTag runs several times harder than the other coin-cell tags — 1.95 µA
+against PresTag's 0.39 and UIUC Tag's 0.56. The magnetometer on the switched
+rail is why, and it makes the sample period a deployment-planning decision here
+rather than a detail.
 
-CompassTag runs several times harder than the other coin-cell tags: 1.9478 µA
-against PresTag's 0.3894 µA and UIUC Tag's 0.5620 µA. The magnetometer on the
-switched rail is the reason, and it is why this is the one coin-cell design where the sample period
-is a deployment-planning decision rather than a detail.
+Idle tracks room temperature: about 9% for 3.5 °C, while running stays flat to
+about 1%. Running is dominated by active work, idle by leakage.
 
-!!! note "Idle tracks room temperature, not the build"
-
-    Across three sessions on one board at the same supply, idle moved about 9%
-    for a 3.5 °C change in room temperature, while running current stayed flat
-    to about 1% — running is dominated by active work, idle by leakage. Compare
-    resting figures only against the temperature they were taken at.
-
-Full measurement log: [CompassTag power results](https://github.com/tag-designs/software/blob/main/embedded/tags/families/CompassTag/design/power-results.md).
+Full log: [CompassTag power results](https://github.com/tag-designs/software/blob/main/embedded/tags/families/CompassTag/design/power-results.md).
 
 ## Design files
 
