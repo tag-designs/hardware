@@ -88,6 +88,38 @@ The sample period sets the deployment length, which is why PresTag has no single
 headline endurance figure the way BitTag does — it is whatever the chosen period
 and the cell size imply.
 
+## Power
+
+Measured against firmware [`fw-v0.6`](https://github.com/tag-designs/software/releases/tag/fw-v0.6) at **2.4961 V** from an
+unregulated 2.5 V cell, at the 60 s sample period, with nothing attached.
+
+| State | Current | Note |
+| --- | ---: | --- |
+| `IDLE`, clock set | 0.1118 µA | four trials 0.1227–0.1137 µA |
+| `RUNNING`, 60 s period | **0.3894 and 0.3908 µA** | two 30-minute runs, 0.36% apart |
+| `FINISHED` | 0.1108 µA | 0.9% from idle |
+
+Derived life, ignoring derating and self-discharge:
+
+| Cell | Resting | Recording at 60 s |
+| --- | ---: | ---: |
+| MS621FE-FL11E, 5.5 mAh | 2050 d | **589 d** |
+| MS920SE-FL27E, 11 mAh | 4100 d | **1177 d** |
+
+This was the first PresTag release qualification. Each run stored 31
+consecutive samples exactly 60 s apart with no gap and no drift.
+
+!!! warning "Board-to-board spread exceeds the firmware differences"
+
+    Two PresTag boards on the same image read about 0.12 µA and 0.28 µA
+    resting. The higher one dropped to 0.1249 µA after being unplugged and
+    replugged — it had latched a raised resting current that only a power cycle
+    cleared, and no firmware was ever at fault. A day was spent chasing a
+    regression that did not exist. **Power cycle before investigating an
+    unexplained resting current**, and record the board UUID with every figure.
+
+Full measurement log: [PresTag power results](https://github.com/tag-designs/software/blob/main/embedded/tags/families/PresTag/design/power-results.md).
+
 ## Design files
 
 [Design directory on GitHub](https://github.com/tag-designs/hardware/tree/main/BoardDesigns/Tags/PresTag-v6){ .md-button }

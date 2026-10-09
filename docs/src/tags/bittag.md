@@ -95,6 +95,38 @@ The result is one activity bit per second, aggregated over an interval between
 one second and five minutes. That is a coarse record by design: it is what
 allows a BitTag to run for most of a year on a 5.5 mAh cell.
 
+## Power
+
+Measured against firmware [`fw-v0.6`](https://github.com/tag-designs/software/releases/tag/fw-v0.6) at **2.4961 V** from an
+unregulated 2.5 V cell, with nothing attached during any window.
+
+| State | Current | Note |
+| --- | ---: | --- |
+| `IDLE` | 0.1185 µA | after attach and clean detach |
+| `RUNNING`, 1 bit / 5 min (default) | **0.4941 µA** | |
+| `RUNNING`, 1 bit / s | 0.5073 and 0.5068 µA | two windows, 0.1% apart |
+| `FINISHED` | 0.1178 µA | data on the tag, not yet read |
+
+**The logging rate is nearly free.** Writing 300 times less often buys 2.6%
+— 0.5073 µA falls only to 0.4941 µA. BitTag's run current is set by the
+ADXL362 watching for activity, not by how often a bit is stored, so **do not
+estimate battery life from the record rate**; the two are almost independent.
+
+Derived life, ignoring derating and self-discharge:
+
+| Cell | Resting | Recording (default) |
+| --- | ---: | ---: |
+| MS621FE-FL11E, 5.5 mAh | 1930 d | **464 d** |
+| MS920SE-FL27E, 11 mAh | 3870 d | **928 d** |
+
+Resting and finished currents agree within 1%, which is the expected result
+rather than a lucky one: both states route through the same shutdown path.
+
+Full measurement log: [BitTag power results](https://github.com/tag-designs/software/blob/main/embedded/tags/BitTag/design/power-results.md).
+Activity sensitivity has never been measured — every qualified run so far was
+of a stationary tag, which records all-zero activity correctly, so none of them
+can distinguish a still tag from an unresponsive one.
+
 ## Design files
 
 [Design directory on GitHub](https://github.com/tag-designs/hardware/tree/main/BoardDesigns/Tags/BitTagv7){ .md-button }

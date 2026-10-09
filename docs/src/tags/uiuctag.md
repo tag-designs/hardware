@@ -98,6 +98,38 @@ altitude on its own schedule. Having both on one tag means an active period can
 be read alongside the altitude profile that accompanied it, rather than inferring
 one from the other.
 
+## Power
+
+Measured against firmware [`fw-v0.6`](https://github.com/tag-designs/software/releases/tag/fw-v0.6) at **2.4960 V** from an
+unregulated 2.5 V cell, at the shipped 300 s sample period, with nothing
+attached during any window.
+
+| State | Current | Note |
+| --- | ---: | --- |
+| `IDLE`, clock set | 0.1572 µA | tightest resting readings of any tag measured |
+| `RUNNING`, 300 s period | **0.5620 µA** | 1800 s window |
+| `FINISHED` | 0.1598 µA | 1.7% from idle |
+
+Derived life, ignoring derating and self-discharge:
+
+| Cell | Resting | Recording at 300 s |
+| --- | ---: | ---: |
+| MS621FE-FL11E, 5.5 mAh | 1460 d | **408 d** |
+| MS920SE-FL27E, 11 mAh | 2920 d | **816 d** |
+
+The run began 16:22:35Z and the first sample landed at 16:23:00Z — the first
+minute boundary, as designed — with no slot missed in 31 minutes.
+
+!!! note "Running current is 26% below the bring-up figure, and unexplained"
+
+    Bring-up measured 0.76 µA running on this same board; this qualification
+    measured 0.5620 µA. Lower is not a budget concern, but the difference is
+    real. The likeliest cause is accelerometer configuration rather than
+    firmware — bring-up was still resolving a pegged ADXL367 and a threshold
+    that was 2× off, and a pegged activity line costs current continuously.
+
+Full measurement log: [UIUCTag power results](https://github.com/tag-designs/software/blob/main/embedded/tags/UIUCTag/design/power-results.md).
+
 ## Design files
 
 [Design directory on GitHub](https://github.com/tag-designs/hardware/tree/main/BoardDesigns/Tags/BitPresTagBMP585){ .md-button }

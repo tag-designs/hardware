@@ -107,6 +107,47 @@ months, and spends the rest of its deployment armed and waiting for a trigger.
 The [IMUTag overview](https://tag-designs.github.io/software/user/imutag-overview.html)
 on the software site carries the current figures for both.
 
+## Power
+
+Measured against firmware [`fw-v0.6`](https://github.com/tag-designs/software/releases/tag/fw-v0.6) at **3.6932 V**. This board
+regulates with an SMPS, so **every figure scales with supply voltage and is
+meaningless without it** — unlike the coin-cell tags, whose rail follows the
+cell.
+
+| State | Current | Note |
+| --- | ---: | --- |
+| `IDLE` | 6.43 µA | four trials 6.4144–6.4382 µA, 0.4% spread |
+| `RUNNING` at 400 Hz | **665.41 µA** | |
+| `FINISHED` | 6.43 µA | equal to idle |
+
+Across sample rates, on a 12 mAh cell with the 2 Gbit NAND:
+
+| Rate | Running | Battery limit | Storage limit | Usable | Binds on |
+| --- | ---: | ---: | ---: | ---: | --- |
+| 100 Hz | 538.6 µA | 22.28 h | 54.6 h | **22.28 h** | battery |
+| 200 Hz | 579.6 µA | 20.70 h | 27.3 h | **20.70 h** | battery |
+| 400 Hz | 662.4 µA | 18.12 h | 13.7 h | **13.70 h** | storage |
+| 800 Hz | 826.5 µA | 14.52 h | 6.83 h | **6.83 h** | storage |
+| 1600 Hz | 1003.4 µA | 11.96 h | 3.41 h | **3.41 h** | storage |
+
+Those are from the 2026-10-03 rate sweep. The `fw-v0.6` qualification
+re-measured 400 Hz on the same board at 665.41 µA, 0.5% above the sweep's
+662.4 µA, so the runtimes above stand.
+
+**Above 200 Hz the flash fills before the battery empties.** That crossover,
+near 300 Hz, is the number to design a deployment around — adding cell capacity
+buys nothing at 400 Hz and up.
+
+Idle shelf life is quoted as **74 days** on a 12 mAh cell. That is the
+conservative end of an unresolved split: seventeen idle readings fall into two
+populations, 6.71 µA and 5.44–5.52 µA, separating 74 days from 91, and the
+split falls on the day boundary rather than on the procedure.
+
+IMUTag is three orders of magnitude above the coin-cell tags and alone decides
+whether a deployment makes its battery life.
+
+Full measurement log: [IMUTag power and runtime](https://github.com/tag-designs/software/blob/main/embedded/tags/families/IMUTag/design/power.md).
+
 ## Design files
 
 [Design directory on GitHub](https://github.com/tag-designs/hardware/tree/main/BoardDesigns/Tags/imutag-smps){ .md-button }

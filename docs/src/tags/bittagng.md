@@ -96,6 +96,17 @@ That is the whole point of the board: it removes the memory ceiling, so the
 limit on a deployment becomes the battery and the recovery date rather than the
 space available for records.
 
+## Power
+
+**Not measured.** BitTagNG has no firmware power qualification. The five
+targets qualified against [`fw-v0.6`](https://github.com/tag-designs/software/releases/tag/fw-v0.6) are BitTag, PresTag, CompassTag,
+UIUCTag and IMUTag; this board is not among them.
+
+[BitTagv7's figures](bittag.md#power) are the closest available guide — the two
+share a processor, an accelerometer and an unregulated coin cell — but BitTagNG
+adds 4 MB of serial flash on the always-on rail, so its resting current should
+be expected to differ and has not been checked.
+
 ## Design files
 
 [Design directory on GitHub](https://github.com/tag-designs/hardware/tree/main/BoardDesigns/Tags/BitTagNG){ .md-button }

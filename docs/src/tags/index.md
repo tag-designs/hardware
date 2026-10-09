@@ -16,6 +16,45 @@ The [project home](https://tag-designs.github.io/) describes the tag families
 from a user's point of view — what each one is for and which questions it
 answers. These pages are about the boards.
 
+## Measured power
+
+Every tag but BitTagNG has been measured against firmware release
+[`fw-v0.6`](https://github.com/tag-designs/software/releases/tag/fw-v0.6), on a
+Joulescope, with nothing attached during the measurement window.
+
+| | Supply | Resting | Running | Configuration |
+| --- | ---: | ---: | ---: | --- |
+| [BitTagv7](bittag.md) | 2.4961 V | 0.1185 µA | 0.4941 µA | 1 bit / 5 min (default) |
+| [BitTagNG](bittagng.md) | — | — | — | not measured |
+| [PresTag-v6](prestag.md) | 2.4961 V | 0.1118 µA | 0.3894 µA | 60 s sample period |
+| [CompassTag](compasstag.md) | 2.4960 V | 0.2137 µA | 1.9478 µA | 30 s compass period |
+| [UIUC Tag](uiuctag.md) | 2.4960 V | 0.1572 µA | 0.5620 µA | 300 s sample period |
+| [IMUTag](imutag.md) | 3.6932 V | 6.43 µA | 665.41 µA | 400 Hz |
+
+Three orders of magnitude separate IMUTag from the rest, and that is the whole
+story of the two architectures. The coin-cell tags sleep between events and
+wake briefly; IMUTag stays awake through a run, streaming an IMU into NAND. A
+deployment's battery life is decided by IMUTag if there is one in it, and
+barely affected by the others.
+
+!!! note "What these figures are, and are not"
+
+    They are **firmware qualification measurements**, taken by the software
+    project on one physical board per tag and recorded with its UUID. They
+    belong to a board, a firmware version, a configuration and a supply
+    voltage, all of which are stated. A different cell, a different sample
+    period or a warmer room will give a different number — CompassTag's idle
+    moves about 9% for 3.5 °C.
+
+    They are **not** per-design guarantees, and the board each was taken on is
+    not always the revision documented here: BitTag's firmware identifies
+    itself as `BitTag V6`, which is a string in `custom.h` rather than a
+    statement about the board it ran on.
+
+    The battery lives quoted on each page are **derived** — capacity divided by
+    current — and ignore self-discharge, derating and temperature. They are
+    upper bounds for comparing designs, not deployment planning figures.
+
 ## How to read the block diagrams
 
 Every diagram on these pages follows the generic structure set out in the
