@@ -12648,7 +12648,7 @@
 				)
 			)
 		)
-		(property "MFN" "STMicroelectronics"
+		(property "MFN" "TECH PUBLIC"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -12674,7 +12674,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C15999"
+		(property "LCSC" "C2827693"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")

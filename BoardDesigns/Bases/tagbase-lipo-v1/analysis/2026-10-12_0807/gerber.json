@@ -337,7 +337,7 @@
       "region_count": 1,
       "x2_attributes": {
         "GenerationSoftware": "KiCad,Pcbnew,10.0.2",
-        "CreationDate": "2026-10-12T08:06:51-04:00",
+        "CreationDate": "2026-10-12T09:46:37-04:00",
         "ProjectId": "tagbase-lipo-v1,74616762-6173-4652-9d6c-69706f2d7631,rev?",
         "SameCoordinates": "Original",
         "FileFunction": "Copper,L4,Bot",
@@ -375,7 +375,7 @@
       "region_count": 1,
       "x2_attributes": {
         "GenerationSoftware": "KiCad,Pcbnew,10.0.2",
-        "CreationDate": "2026-10-12T08:06:51-04:00",
+        "CreationDate": "2026-10-12T09:46:37-04:00",
         "ProjectId": "tagbase-lipo-v1,74616762-6173-4652-9d6c-69706f2d7631,rev?",
         "SameCoordinates": "Original",
         "FileFunction": "Copper,L2,Inr",
@@ -406,7 +406,7 @@
       "region_count": 1,
       "x2_attributes": {
         "GenerationSoftware": "KiCad,Pcbnew,10.0.2",
-        "CreationDate": "2026-10-12T08:06:51-04:00",
+        "CreationDate": "2026-10-12T09:46:37-04:00",
         "ProjectId": "tagbase-lipo-v1,74616762-6173-4652-9d6c-69706f2d7631,rev?",
         "SameCoordinates": "Original",
         "FileFunction": "Copper,L3,Inr",
@@ -437,7 +437,7 @@
       "region_count": 10,
       "x2_attributes": {
         "GenerationSoftware": "KiCad,Pcbnew,10.0.2",
-        "CreationDate": "2026-10-12T08:06:51-04:00",
+        "CreationDate": "2026-10-12T09:46:37-04:00",
         "ProjectId": "tagbase-lipo-v1,74616762-6173-4652-9d6c-69706f2d7631,rev?",
         "SameCoordinates": "Original",
         "FileFunction": "Copper,L1,Top",
@@ -480,7 +480,7 @@
       "region_count": 0,
       "x2_attributes": {
         "GenerationSoftware": "KiCad,Pcbnew,10.0.2",
-        "CreationDate": "2026-10-12T08:06:51-04:00",
+        "CreationDate": "2026-10-12T09:46:37-04:00",
         "ProjectId": "tagbase-lipo-v1,74616762-6173-4652-9d6c-69706f2d7631,rev?",
         "SameCoordinates": "Original",
         "FileFunction": "Profile,NP"
@@ -505,7 +505,7 @@
       "region_count": 0,
       "x2_attributes": {
         "GenerationSoftware": "KiCad,Pcbnew,10.0.2",
-        "CreationDate": "2026-10-12T08:06:51-04:00",
+        "CreationDate": "2026-10-12T09:46:37-04:00",
         "ProjectId": "tagbase-lipo-v1,74616762-6173-4652-9d6c-69706f2d7631,rev?",
         "SameCoordinates": "Original",
         "FileFunction": "Soldermask,Bot",
@@ -528,7 +528,7 @@
       "region_count": 6,
       "x2_attributes": {
         "GenerationSoftware": "KiCad,Pcbnew,10.0.2",
-        "CreationDate": "2026-10-12T08:06:51-04:00",
+        "CreationDate": "2026-10-12T09:46:37-04:00",
         "ProjectId": "tagbase-lipo-v1,74616762-6173-4652-9d6c-69706f2d7631,rev?",
         "SameCoordinates": "Original",
         "FileFunction": "Soldermask,Top",
@@ -551,7 +551,7 @@
       "region_count": 0,
       "x2_attributes": {
         "GenerationSoftware": "KiCad,Pcbnew,10.0.2",
-        "CreationDate": "2026-10-12T08:06:51-04:00",
+        "CreationDate": "2026-10-12T09:46:37-04:00",
         "ProjectId": "tagbase-lipo-v1,74616762-6173-4652-9d6c-69706f2d7631,rev?",
         "SameCoordinates": "Original",
         "FileFunction": "Paste,Bot",
@@ -568,7 +568,7 @@
       "region_count": 7,
       "x2_attributes": {
         "GenerationSoftware": "KiCad,Pcbnew,10.0.2",
-        "CreationDate": "2026-10-12T08:06:51-04:00",
+        "CreationDate": "2026-10-12T09:46:37-04:00",
         "ProjectId": "tagbase-lipo-v1,74616762-6173-4652-9d6c-69706f2d7631,rev?",
         "SameCoordinates": "Original",
         "FileFunction": "Paste,Top",
@@ -591,7 +591,7 @@
       "region_count": 0,
       "x2_attributes": {
         "GenerationSoftware": "KiCad,Pcbnew,10.0.2",
-        "CreationDate": "2026-10-12T08:06:51-04:00",
+        "CreationDate": "2026-10-12T09:46:37-04:00",
         "ProjectId": "tagbase-lipo-v1,74616762-6173-4652-9d6c-69706f2d7631,rev?",
         "SameCoordinates": "Original",
         "FileFunction": "Legend,Bot",
@@ -614,7 +614,7 @@
       "region_count": 13,
       "x2_attributes": {
         "GenerationSoftware": "KiCad,Pcbnew,10.0.2",
-        "CreationDate": "2026-10-12T08:06:51-04:00",
+        "CreationDate": "2026-10-12T09:46:37-04:00",
         "ProjectId": "tagbase-lipo-v1,74616762-6173-4652-9d6c-69706f2d7631,rev?",
         "SameCoordinates": "Original",
         "FileFunction": "Legend,Top",
@@ -666,7 +666,7 @@
         4
       ],
       "x2_attributes": {
-        "CreationDate": "2026-10-12T08:06:51-04:00",
+        "CreationDate": "2026-10-12T09:46:37-04:00",
         "GenerationSoftware": "Kicad,Pcbnew,10.0.2",
         "FileFunction": "NonPlated,1,4,NPTH"
       }
@@ -708,7 +708,7 @@
         4
       ],
       "x2_attributes": {
-        "CreationDate": "2026-10-12T08:06:51-04:00",
+        "CreationDate": "2026-10-12T09:46:37-04:00",
         "GenerationSoftware": "Kicad,Pcbnew,10.0.2",
         "FileFunction": "Plated,1,4,PTH"
       }
@@ -836,19 +836,19 @@
       "jlcpcb/gerber/tagbase-lipo-v1-SilkTop.gbr"
     ],
     "source_hashes": {
-      "jlcpcb/gerber/tagbase-lipo-v1-CuBottom.gbr": "858bbe92b37d1a1bfe4100e4303ee921e960b056fbb3f25e3cb1c370b0589a5a",
-      "jlcpcb/gerber/tagbase-lipo-v1-CuIn1.gbr": "936b4c7d42f6da0edf9c4c0b31185508113981f7eb29cceee85c9c1ac7350b0a",
-      "jlcpcb/gerber/tagbase-lipo-v1-CuIn2.gbr": "516b2c1a15885ef80f4cd59d1678f3bd90f649c37520d9466a64db0ab4b0ac44",
-      "jlcpcb/gerber/tagbase-lipo-v1-CuTop.gbr": "05229a6d08a9ffd97c3bc901b4cbec077214f053f954cf6b89e046986fa2e8d5",
-      "jlcpcb/gerber/tagbase-lipo-v1-EdgeCuts.gbr": "9678774fb727fd294ea0fdfb6087c2a877d3378d63663ea6d8ab4be222f9c970",
-      "jlcpcb/gerber/tagbase-lipo-v1-MaskBottom.gbr": "011c407ab313a0dcfab4f79efbf3a09640ba5d30b79bf64e37e9a77f4a1cc392",
-      "jlcpcb/gerber/tagbase-lipo-v1-MaskTop.gbr": "8ed80748e778aa910f0922f367963d6ef795f4836a1bf3308a3eba1e6970e087",
-      "jlcpcb/gerber/tagbase-lipo-v1-NPTH.drl": "2c10a22f115faf81bce16b0df7463aead2f1acc105f46fe147848fda0b13908c",
-      "jlcpcb/gerber/tagbase-lipo-v1-PTH.drl": "22eb027285281afdb6bac86ce5fcca1e6c5edf1cc3cf64466247c6b7bd83008b",
-      "jlcpcb/gerber/tagbase-lipo-v1-PasteBottom.gbr": "267cf7dda152bb77e2f523342464ccd70e3051c80e9ed062500281e139362677",
-      "jlcpcb/gerber/tagbase-lipo-v1-PasteTop.gbr": "4bc5a9b7674cc9d15fb1084568ea0a592a4aa122553f98df2f53dbb56acad4d4",
-      "jlcpcb/gerber/tagbase-lipo-v1-SilkBottom.gbr": "d3dafbf09d234b75995221925f4a1f81cdc4ec287dd0321f5bb16acb15dcd501",
-      "jlcpcb/gerber/tagbase-lipo-v1-SilkTop.gbr": "0de77b4f92a9083dd0fb48829190a5b4501bbc68594ce78829034ad3a2a6ec0f"
+      "jlcpcb/gerber/tagbase-lipo-v1-CuBottom.gbr": "94b4b395ffd13b28d536d3c36286a233db3e4acea7e61893c0347d5429c7a7c4",
+      "jlcpcb/gerber/tagbase-lipo-v1-CuIn1.gbr": "9406ccfcea9f10c38a140423e4f02595162b730640c09a2dbeef4b5e3d257984",
+      "jlcpcb/gerber/tagbase-lipo-v1-CuIn2.gbr": "fef29d9ee3b8e3c201a357f7b3022b3c1d03bafb5da10cbe95bd75a35812d0ce",
+      "jlcpcb/gerber/tagbase-lipo-v1-CuTop.gbr": "70b0b7c56ff0c0bf96245895916c732362fbb2a2568774b228daf7e619424dc0",
+      "jlcpcb/gerber/tagbase-lipo-v1-EdgeCuts.gbr": "b7fa02da40511b0bb8a562da05a3b725eb4d738ba6474efdb3a43eefa0fe7971",
+      "jlcpcb/gerber/tagbase-lipo-v1-MaskBottom.gbr": "49ab5762dc6aaf0d4f18f84c61a2c95ebe43b101178639ffff272b0f2fa94ec5",
+      "jlcpcb/gerber/tagbase-lipo-v1-MaskTop.gbr": "de5544043be5c44dedcd4c333a460c877b6e3c708753c07b0d1b8e74462fd64f",
+      "jlcpcb/gerber/tagbase-lipo-v1-NPTH.drl": "8955663ef160804f45cd40c6eaa61f026549202c9c28f25f936c18e716a86345",
+      "jlcpcb/gerber/tagbase-lipo-v1-PTH.drl": "fbe7ddde6684598371b0001e2c3259a4cce6c52ae3f5f538fa437ffdccdb94ad",
+      "jlcpcb/gerber/tagbase-lipo-v1-PasteBottom.gbr": "7d68a8dfa01ad7f28ce99a91828d9c9845e93531121fd0a76ad09d844f3981f1",
+      "jlcpcb/gerber/tagbase-lipo-v1-PasteTop.gbr": "842a2096f176c4edc8c03a85dc38070b3c836cbe648ade721b1cb2e77d14032b",
+      "jlcpcb/gerber/tagbase-lipo-v1-SilkBottom.gbr": "0b3a649ddff3848d68f49cc3831f3e64439a56e3ac6920d018a30c3a075ce6d9",
+      "jlcpcb/gerber/tagbase-lipo-v1-SilkTop.gbr": "3be68948df2549e965ccdf9bae530b033c8496f8e638653da4b8e6d6d0542405"
     },
     "run_id": "20261012T110124Z-5bbb21",
     "config_hash": null,

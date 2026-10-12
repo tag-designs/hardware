@@ -84,6 +84,53 @@ which is enough for a pogo or hook probe. Every label is 1.8–3.5 mm from its p
 `Reset` is left-justified and ends about 0.7 mm short of J7. The PCB analyzer raises no
 silk-over-pad findings.
 
+### U4 source → TECH PUBLIC `USBLC6-2P6` (C2827693) — ST part low on stock
+
+ST's `USBLC6-2P6` (C15999) was down to 5 in stock. TECH PUBLIC's part of the same name (C2827693,
+41,475 in stock, $0.16 against $0.25) is a drop-in. Both datasheets give the identical pin map:
+1/6 I/O1 → `/DP`, `/USB_DP`; 3/4 I/O2 → `/DM`, `/USB_DM`; 2 GND; 5 VBUS → `VUSB`. Both packages are
+SOT-666 at 0.5 mm pitch with matching body dimensions, so the stock footprint is unchanged.
+
+| | ST C15999 | TECH PUBLIC C2827693 |
+|---|---|---|
+| VRWM / VBR | 5.25 V / ≥ 6 V | **5.0 V** / ≥ 6 V |
+| Leakage | 150 nA max | 80 nA max |
+| Clamp, I/O | 12 V @ 1 A, 17 V @ 5 A | 10 V @ 1 A, 14 V @ 5.5 A |
+| ESD (IEC 61000-4-2) | 8 kV contact / 15 kV air | ±30 kV (claimed) |
+| Capacitance | 2.5–3.5 pF I/O–GND; 1.2–1.7 pF I/O–I/O | 0.35–0.5 pF I/O–I/O; I/O–GND not given |
+
+The lower VRWM sits under USB's 5.25 V ceiling, but breakdown is still at least 6 V, so it costs a
+little leakage and nothing else. The missing I/O-to-GND capacitance does not matter at full-speed
+USB. The TECH PUBLIC datasheet is a 4-page image-only scan, now in the shared store as
+`libraries/datasheets/C2827693.pdf`.
+
+`LCSC` and `MFN` were changed on the schematic, the PCB and in `jlcpcb/project.db`; `Value` and `MPN`
+stay `USBLC6-2P6`. DRC/ERC are unchanged. The BOM was re-exported with C2827693, and U4's rotation was fixed in the preview (see the
+rotations section below).
+
+### JLCPCB placement rotations — six parts corrected at the source
+
+The plugin's global community rules got six parts wrong, and they had to be fixed by hand in the
+JLCPCB placement preview. The fixes now live in this board's own `jlcpcb/project.db`. It has a
+`correction` table holding the 61 community rules plus six reference rules, and its presence
+makes the plugin ignore the global database. A re-export now produces the right CPL with no
+hand-editing.
+
+| Part | Package / LCSC | Community rule | Board rule | Final CPL |
+|---|---|---|---|---|
+| U1 | SOT-23-3, C5446 | `^SOT-23` −90 (wrong) | `^U1$` +180 | 270 |
+| U3 | SOT-23-5 | `^SOT-23` −90 (wrong) | `^U3$` +180 | 270 |
+| U2 | USP-6B07 (`xc6808`), C7123934 | none | `^U2$` −90 | 270 |
+| U4 | SOT-666, C2827693 | none | `^U4$` −90 | 270 |
+| U6 | SC-70-5, C398362 | `^SOT-353` +180 (wrong) | `^U6$` −90 | 0 |
+| J104 | USB Mini-B, C2681563 | none | `^J104$` −90 | 180 |
+
+Verified on the final export: the CPL differs from the previous commit in exactly these six rows,
+and the BOM only in U4's LCSC number. The Gerbers are content-identical. Placement models are per
+LCSC part, so **any future part substitution needs its own preview check**. U4's rule was found on
+the TECH PUBLIC part and may not hold for ST's C15999. The rules are mirrored in `.kicad-happy.json`
+under `fabrication.rotation_corrections`.
+
 ### N1 — The test pads were in the JLCPCB BOM and CPL — FIXED
 
 The first regeneration put five `Conn_01x01` lines with no LCSC number into the BOM, and four

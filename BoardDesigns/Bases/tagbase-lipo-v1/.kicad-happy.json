@@ -56,6 +56,12 @@
       "J3 is push-pull driven by PB6: probe only, do not force.",
       "EXCLUDED FROM THE JLCPCB BOM AND CPL at all three levels: in_bom no on the symbol (NOT dnp - they are copper), exclude_from_bom + exclude_from_pos_files on the footprint, and 1/1 in jlcpcb/project.db. Any new test pad needs the same, or it lands in the CPL as a bottom-side placement.",
       "No GND test pad; J5 pin 1 (DNP header, plated hole) is the nearest scope ground."
+    ],
+    "usb_esd": [
+      "U4 is USBLC6-2P6 in SOT-666 (KiCad stock footprint). Pin map, verified in both datasheets: 1/6 = I/O1 (/DP, /USB_DP), 3/4 = I/O2 (/DM, /USB_DM), 2 = GND, 5 = VBUS (VUSB).",
+      "Source since 2026-10-12: TECH PUBLIC USBLC6-2P6, LCSC C2827693 (41,475 in stock, $0.16 @5), because ST's C15999 was low (5 in stock). The ST part is an equal alternate; either can be fitted with no layout change. Datasheets: libraries/datasheets/C15999.pdf (ST), C2827693.pdf (TECH PUBLIC, image-only scan).",
+      "Differences: TECH PUBLIC rates VRWM 5.0 V against ST's 5.25 V. USB VBUS can reach 5.25 V, but breakdown is >= 6 V on both, so this is a leakage-only, non-issue on a bench instrument. TECH PUBLIC clamps lower (10 V @ 1 A, 14 V @ 5.5 A vs ST 12 / 17 V) and gives only I/O-to-I/O capacitance (0.35-0.5 pF), no I/O-to-GND figure. Irrelevant: the STM32L432 runs USB at full speed, 12 Mb/s.",
+      "JLCPCB placement models are per LCSC part, so a different maker's SOT-666 can sit at a different default rotation. U4 gets no plugin rotation correction - check its pin-1 in the JLCPCB preview after swapping sources."
     ]
   },
   "firmware_contract": [
@@ -112,6 +118,8 @@
     "last_review": "tagbase-lipo-v1-design-review.md, updated 2026-10-12: test pads J2/J3/J4/J6/J7, NRST label, U2 -> XC6808ANC28R-G with R2 not fitted (A4 out of stock). All findings closed; ready to order.",
     "open_findings": [],
     "closed_findings": [
+      "CPL ROTATIONS (2026-10-12): community corrections were wrong or missing for U1, U3 (SOT-23 -90 wrong), U6 (SOT-353 +180 wrong), U2, U4, J104 (no rule). Board-local correction table added to jlcpcb/project.db; see fabrication.rotation_corrections. Final export verified: CPL differs only in those six rows.",
+      "U4 SOURCE (2026-10-12): ST USBLC6-2P6 (C15999) low stock -> TECH PUBLIC USBLC6-2P6 (C2827693). Same SOT-666 package, identical pinout, no layout change. LCSC/MFN changed in schematic, PCB and jlcpcb/project.db. BOM re-exported with C2827693; U4 rotation rule ^U4$ -90 found on this part.",
       "U2 SUBSTITUTION (2026-10-12): XC6808A4C28R-G out of stock -> XC6808ANC28R-G (C7123934), R2 not fitted at symbol/footprint/plugin. PCB change is fields only; Gerbers content-identical; BOM/CPL drop R2 and relabel U2. LOW: R2 pads still receive paste - inspect for a bridge, or ask JLCPCB to leave them off the stencil.",
       "N1 (2026-10-12): test pads were in the JLCPCB BOM (5 lines, no LCSC) and CPL (4 bottom rows). FIXED at symbol, footprint and project.db; regenerated BOM/CPL identical to the 09-07 package, 0 bottom rows.",
       "N2 (2026-10-12): test pads labelled only by refdes. RESOLVED - function labels added, references hidden.",
@@ -142,5 +150,50 @@
       "A MISSING DATASHEET IS A REAL BLOCKER, NOT A FOOTNOTE. The first pass closed with \"needs the XC6808 datasheet\" as a single low-priority item. When the datasheet arrived it produced the two highest-severity findings on the board. Chase the datasheet before ranking the findings.",
       "ANALYSIS RUNS LAND IN NEW FOLDERS. When sources change, analysis_cache creates a new analysis/<timestamp>/ and moves 'current' in manifest.json. Read the current run from the manifest; a hard-coded run path silently reads stale JSON (2026-10-12: a fixed RS-001 looked unfixed)."
     ]
+  },
+  "fabrication": {
+    "fab_house": "JLCPCB, via bouni kicad-jlcpcb-tools (v2026.04.03). State lives in jlcpcb/project.db (part_info and correction tables).",
+    "rotation_corrections": {
+      "note": "jlcpcb/project.db has its OWN correction table (since 2026-10-12): the 61 community rules copied from the plugin's global corrections.db, plus the reference rules below. While that table exists, the plugin ignores the global database. Rules match reference, then value, then footprint name, so ^REF$ rules win. Each was found by hand in the JLCPCB placement preview, on the LCSC part listed.",
+      "rules": [
+        {
+          "regex": "^U1$",
+          "rotation": 180,
+          "part": "XC6206P332MR SOT-23-3 (C5446)",
+          "why": "community ^SOT-23 -90 is wrong for this part; final 270"
+        },
+        {
+          "regex": "^U3$",
+          "rotation": 180,
+          "part": "AP2112K-1.8 SOT-23-5",
+          "why": "community ^SOT-23 -90 is wrong; final 270"
+        },
+        {
+          "regex": "^U2$",
+          "rotation": -90,
+          "part": "XC6808ANC28R-G USP-6B07, custom xc6808 footprint (C7123934)",
+          "why": "no community rule; final 270"
+        },
+        {
+          "regex": "^J104$",
+          "rotation": -90,
+          "part": "USB Mini-B (C2681563)",
+          "why": "no community rule; final 180"
+        },
+        {
+          "regex": "^U4$",
+          "rotation": -90,
+          "part": "TECH PUBLIC USBLC6-2P6 SOT-666 (C2827693)",
+          "why": "no community rule; final 270. Model is per LCSC part - re-check if U4 goes back to ST C15999"
+        },
+        {
+          "regex": "^U6$",
+          "rotation": -90,
+          "part": "TLV9001IDCKR SC-70-5 (C398362)",
+          "why": "community ^SOT-353 +180 is wrong for this part; final 0"
+        }
+      ],
+      "after_export": "Check the CPL diff against the previous one, and any part whose LCSC number changed, in the JLCPCB preview. A substitute part needs its own rotation check."
+    }
   }
 }

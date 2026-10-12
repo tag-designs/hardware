@@ -17456,7 +17456,7 @@
 				)
 			)
 		)
-		(property "MFN" "STMicroelectronics"
+		(property "MFN" "TECH PUBLIC"
 			(at 175.26 158.75 0)
 			(hide yes)
 			(show_name no)
@@ -17478,7 +17478,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C15999"
+		(property "LCSC" "C2827693"
 			(at 175.26 158.75 0)
 			(hide yes)
 			(show_name no)

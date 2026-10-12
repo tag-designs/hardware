@@ -2101,7 +2101,7 @@
       "manufacturer": "",
       "digikey": "",
       "mouser": "",
-      "lcsc": "C15999",
+      "lcsc": "C2827693",
       "element14": "",
       "datasheet": "https://www.st.com/resource/en/datasheet/usblc6-2.pdf",
       "description": "Very low capacitance ESD protection diode, 2 data-line, SOT-666",
@@ -4094,7 +4094,7 @@
       "manufacturer": "",
       "digikey": "",
       "mouser": "",
-      "lcsc": "C15999",
+      "lcsc": "C2827693",
       "element14": "",
       "x": 175.26,
       "y": 158.75,
@@ -25436,8 +25436,8 @@
         ],
         "has_esd": true,
         "esd_protection": [
-          "U5",
-          "U4"
+          "U4",
+          "U5"
         ]
       }
     ],
@@ -28689,10 +28689,10 @@
       "/Users/geobrown/Research/tag-designs/hardware/BoardDesigns/Bases/tagbase-lipo-v1/tagbase-lipo-v1.kicad_sch"
     ],
     "source_hashes": {
-      "/Users/geobrown/Research/tag-designs/hardware/BoardDesigns/Bases/tagbase-lipo-v1/tagbase-lipo-v1.kicad_sch": "adfd57741a6bace15662e39e7df03d84ae55df52782b0881c8a72eee25737cda"
+      "/Users/geobrown/Research/tag-designs/hardware/BoardDesigns/Bases/tagbase-lipo-v1/tagbase-lipo-v1.kicad_sch": "ee8ceafaac6d1132190ed1d0990a085f805d6427d20af1886ea758b36e96080b"
     },
     "run_id": "20261012T110124Z-5bbb21",
-    "config_hash": "4c4e32a9298d6019a7d1facd00e2203cf16af3ec702a25d7488bc09cfa57365c",
+    "config_hash": "91fe3c49f08340f91f5767978d6bb438195359338ca7a09825febfadae499803",
     "upstream_artifacts": {}
   },
   "compat": {
@@ -28701,10 +28701,10 @@
     "experimental_fields": []
   },
   "project_config": {
-    "board": "4 layer, 50.95 x 70.00 mm, 1.6 mm. In1.Cu = +3V3 plane, In2.Cu = GND plane, F.Cu/B.Cu GND pours.",
-    "status": "Not fabricated as of 2026-10-12. Fab house: JLCPCB (jlcpcb/ - KiCad JLCPCB plugin, state in jlcpcb/project.db). pcbway_production/ is not the order.",
+    "status": "Not fabricated as of 2026-10-12. Fab house: JLCPCB (jlcpcb/ - KiCad JLCPCB plugin, state in jlcpcb/project.db).",
+    "description": "USB-powered base station that programs a tag over SWD and charges the tag's LiPo cell through the 6-pin tagpoint connector J101.",
     "name": "tagbase-lipo-v1",
-    "description": "USB-powered base station that programs a tag over SWD and charges the tag's LiPo cell through the 6-pin tagpoint connector J101."
+    "board": "4 layer, 50.95 x 70.00 mm, 1.6 mm. In1.Cu = +3V3 plane, In2.Cu = GND plane, F.Cu/B.Cu GND pours."
   },
   "design_intent": {
     "product_class": "prototype",
