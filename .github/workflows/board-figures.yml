@@ -136,7 +136,7 @@ jobs:
       # cmake writes the figures into the working tree, on top of the committed
       # ones, so the thing being compared against has to be put aside first.
       - name: Put the committed figures aside
-        if: steps.select.outputs.targets != '''
+        if: steps.select.outputs.targets != ''
         run: |
           mkdir -p _committed/docs/src
           cp -a docs/src/images   _committed/docs/src/
