@@ -1,0 +1,2 @@
+# Intentionally empty: analysis output is tracked (track_in_git: true).
+# analyze_pcb.py recreates an ignore-all .gitignore if this file is absent.

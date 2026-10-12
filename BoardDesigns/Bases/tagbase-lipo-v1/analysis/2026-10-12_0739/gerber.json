@@ -1,0 +1,931 @@
+{
+  "analyzer_type": "gerber",
+  "schema_version": "1.4.0",
+  "directory": "jlcpcb/gerber/",
+  "generator": "KiCad,Pcbnew,10.0.2",
+  "layer_count": 4,
+  "board_dimensions": {
+    "width_mm": 50.8,
+    "height_mm": 69.85,
+    "area_mm2": 3548.4,
+    "source": "edge_cuts_extents"
+  },
+  "statistics": {
+    "gerber_files": 11,
+    "drill_files": 2,
+    "total_holes": 102,
+    "total_flashes": 1066,
+    "total_draws": 17957
+  },
+  "completeness": {
+    "found_layers": [
+      "B.Cu",
+      "B.Mask",
+      "B.Paste",
+      "B.SilkS",
+      "Edge.Cuts",
+      "F.Cu",
+      "F.Mask",
+      "F.Paste",
+      "F.SilkS",
+      "In1.Cu",
+      "In2.Cu"
+    ],
+    "expected_layers": [],
+    "missing_required": [],
+    "missing_recommended": [],
+    "has_pth_drill": true,
+    "has_npth_drill": true,
+    "complete": true,
+    "source": "defaults"
+  },
+  "alignment": {
+    "aligned": false,
+    "issues": [
+      "Height varies by 26.3mm across copper/edge layers"
+    ],
+    "layer_extents": {
+      "B.Cu": {
+        "width": 50.199,
+        "height": 69.249
+      },
+      "In1.Cu": {
+        "width": 50.199,
+        "height": 43.514
+      },
+      "In2.Cu": {
+        "width": 50.199,
+        "height": 69.249
+      },
+      "F.Cu": {
+        "width": 50.199,
+        "height": 69.249
+      },
+      "Edge.Cuts": {
+        "width": 50.8,
+        "height": 69.85
+      },
+      "B.Mask": {
+        "width": 42.28,
+        "height": 46.044
+      },
+      "F.Mask": {
+        "width": 40.28,
+        "height": 42.593
+      },
+      "B.Paste": {
+        "width": 0,
+        "height": 0
+      },
+      "F.Paste": {
+        "width": 36.99,
+        "height": 30.629
+      },
+      "B.SilkS": {
+        "width": 42.28,
+        "height": 60.107
+      },
+      "F.SilkS": {
+        "width": 45.412,
+        "height": 65.263
+      },
+      "drill_NPTH": {
+        "width": 32.54,
+        "height": 46.043
+      },
+      "drill_PTH": {
+        "width": 40.282,
+        "height": 41.178
+      }
+    }
+  },
+  "drill_classification": {
+    "vias": {
+      "count": 67,
+      "tools": [
+        {
+          "diameter_mm": 0.2007,
+          "count": 67
+        }
+      ]
+    },
+    "component_holes": {
+      "count": 35,
+      "tools": [
+        {
+          "diameter_mm": 0.6096,
+          "count": 6
+        },
+        {
+          "diameter_mm": 0.635,
+          "count": 10
+        },
+        {
+          "diameter_mm": 0.8992,
+          "count": 2,
+          "type": "NPTH"
+        },
+        {
+          "diameter_mm": 0.95,
+          "count": 4
+        },
+        {
+          "diameter_mm": 1.0008,
+          "count": 2
+        },
+        {
+          "diameter_mm": 1.0668,
+          "count": 4,
+          "type": "NPTH"
+        },
+        {
+          "diameter_mm": 1.1989,
+          "count": 1,
+          "type": "NPTH"
+        },
+        {
+          "diameter_mm": 1.5875,
+          "count": 4,
+          "type": "NPTH"
+        },
+        {
+          "diameter_mm": 2.159,
+          "count": 2,
+          "type": "NPTH"
+        }
+      ]
+    },
+    "mounting_holes": {
+      "count": 0,
+      "tools": []
+    },
+    "classification_method": "x2_attributes"
+  },
+  "pad_summary": {
+    "smd_apertures": 151,
+    "via_apertures": 268,
+    "heatsink_apertures": 1,
+    "tht_holes": 35,
+    "smd_source": "x2_aperture_function",
+    "smd_ratio": 0.81
+  },
+  "trace_widths": {
+    "unique_widths_mm": [
+      0.1016,
+      0.1524,
+      0.254,
+      0.3048
+    ],
+    "min_trace_mm": 0.1016,
+    "max_trace_mm": 0.3048,
+    "width_count": 4,
+    "min_feature_mm": 0.1016
+  },
+  "component_analysis": {
+    "total_unique": 50,
+    "front_side": 46,
+    "back_side": 4,
+    "component_refs": [
+      "C1",
+      "C10",
+      "C102",
+      "C103",
+      "C104",
+      "C109",
+      "C110",
+      "C111",
+      "C2",
+      "C3",
+      "C4",
+      "C5",
+      "C6",
+      "C7",
+      "C8",
+      "C9",
+      "D101",
+      "D102",
+      "J1",
+      "J101",
+      "J102",
+      "J104",
+      "J2",
+      "J3",
+      "J4",
+      "J5",
+      "J6",
+      "J7",
+      "R1",
+      "R101",
+      "R102",
+      "R104",
+      "R105",
+      "R106",
+      "R107",
+      "R2",
+      "R3",
+      "R4",
+      "R5",
+      "SW1",
+      "SW2",
+      "U1",
+      "U105",
+      "U2",
+      "U3",
+      "U4",
+      "U5",
+      "U6",
+      "U7",
+      "U8"
+    ],
+    "has_x2_data": true,
+    "pads_per_component": {
+      "C1": 2,
+      "C10": 2,
+      "C102": 2,
+      "C103": 2,
+      "C104": 2,
+      "C109": 2,
+      "C110": 2,
+      "C111": 2,
+      "C2": 2,
+      "C3": 2,
+      "C4": 2,
+      "C5": 2,
+      "C6": 2,
+      "C7": 2,
+      "C8": 2,
+      "C9": 2,
+      "D101": 2,
+      "D102": 2,
+      "J1": 5,
+      "J101": 12,
+      "J102": 10,
+      "J104": 11,
+      "J2": 1,
+      "J3": 1,
+      "J4": 1,
+      "J5": 2,
+      "J6": 1,
+      "J7": 1,
+      "R1": 2,
+      "R101": 2,
+      "R102": 2,
+      "R104": 2,
+      "R105": 2,
+      "R106": 2,
+      "R107": 2,
+      "R2": 2,
+      "R3": 2,
+      "R4": 2,
+      "R5": 2,
+      "SW1": 3,
+      "SW2": 3,
+      "U1": 3,
+      "U105": 4,
+      "U2": 7,
+      "U3": 5,
+      "U4": 6,
+      "U5": 36,
+      "U6": 5,
+      "U7": 6,
+      "U8": 6
+    },
+    "total_pads": 187
+  },
+  "net_analysis": {
+    "total_unique": 53,
+    "named_nets": 24,
+    "unnamed_nets": 29,
+    "power_nets": [
+      "+1V8",
+      "+3V3",
+      "GND"
+    ],
+    "signal_nets": [
+      "/BAT",
+      "/CSO",
+      "/DM",
+      "/DP",
+      "/LED_GREEN",
+      "/LED_RED",
+      "/NRST",
+      "/SCLK",
+      "/SWDIO",
+      "/TAG_3V3_Valid",
+      "/UART_TX",
+      "/USB_DM",
+      "/USB_DP",
+      "/boot0",
+      "/en1.8v",
+      "TAG_3V3",
+      "TAG_3V3_IN",
+      "TAG_RESET",
+      "TAG_SCK",
+      "TAG_SWDIO",
+      "VUSB"
+    ],
+    "total_pins": 170
+  },
+  "gerbers": [
+    {
+      "filename": "tagbase-lipo-v1-CuBottom.gbr",
+      "layer_type": "B.Cu",
+      "units": "mm",
+      "aperture_count": 9,
+      "flash_count": 93,
+      "draw_count": 3239,
+      "region_count": 1,
+      "x2_attributes": {
+        "GenerationSoftware": "KiCad,Pcbnew,10.0.2",
+        "CreationDate": "2026-10-12T07:38:26-04:00",
+        "ProjectId": "tagbase-lipo-v1,74616762-6173-4652-9d6c-69706f2d7631,rev?",
+        "SameCoordinates": "Original",
+        "FileFunction": "Copper,L4,Bot",
+        "FilePolarity": "Positive"
+      },
+      "aperture_analysis": {
+        "by_function": {
+          "ComponentPad": 6,
+          "SMDPad": 1,
+          "ViaPad": 1,
+          "Conductor": 1
+        },
+        "by_function_flashes": {
+          "ComponentPad": 22,
+          "SMDPad": 4,
+          "ViaPad": 67,
+          "Conductor": 0
+        },
+        "conductor_widths_mm": [
+          0.1016
+        ],
+        "min_feature_mm": 0.1016
+      },
+      "x2_component_count": 0,
+      "x2_net_count": 24,
+      "x2_pin_count": 26
+    },
+    {
+      "filename": "tagbase-lipo-v1-CuIn1.gbr",
+      "layer_type": "In1.Cu",
+      "units": "mm",
+      "aperture_count": 7,
+      "flash_count": 89,
+      "draw_count": 3436,
+      "region_count": 1,
+      "x2_attributes": {
+        "GenerationSoftware": "KiCad,Pcbnew,10.0.2",
+        "CreationDate": "2026-10-12T07:38:26-04:00",
+        "ProjectId": "tagbase-lipo-v1,74616762-6173-4652-9d6c-69706f2d7631,rev?",
+        "SameCoordinates": "Original",
+        "FileFunction": "Copper,L2,Inr",
+        "FilePolarity": "Positive"
+      },
+      "aperture_analysis": {
+        "by_function": {
+          "ComponentPad": 6,
+          "ViaPad": 1
+        },
+        "by_function_flashes": {
+          "ComponentPad": 22,
+          "ViaPad": 67
+        },
+        "min_feature_mm": 0.5
+      },
+      "x2_component_count": 4,
+      "x2_net_count": 24,
+      "x2_pin_count": 0
+    },
+    {
+      "filename": "tagbase-lipo-v1-CuIn2.gbr",
+      "layer_type": "In2.Cu",
+      "units": "mm",
+      "aperture_count": 7,
+      "flash_count": 89,
+      "draw_count": 3636,
+      "region_count": 1,
+      "x2_attributes": {
+        "GenerationSoftware": "KiCad,Pcbnew,10.0.2",
+        "CreationDate": "2026-10-12T07:38:26-04:00",
+        "ProjectId": "tagbase-lipo-v1,74616762-6173-4652-9d6c-69706f2d7631,rev?",
+        "SameCoordinates": "Original",
+        "FileFunction": "Copper,L3,Inr",
+        "FilePolarity": "Positive"
+      },
+      "aperture_analysis": {
+        "by_function": {
+          "ComponentPad": 6,
+          "ViaPad": 1
+        },
+        "by_function_flashes": {
+          "ComponentPad": 22,
+          "ViaPad": 67
+        },
+        "min_feature_mm": 0.5
+      },
+      "x2_component_count": 4,
+      "x2_net_count": 24,
+      "x2_pin_count": 0
+    },
+    {
+      "filename": "tagbase-lipo-v1-CuTop.gbr",
+      "layer_type": "F.Cu",
+      "units": "mm",
+      "aperture_count": 36,
+      "flash_count": 238,
+      "draw_count": 5160,
+      "region_count": 10,
+      "x2_attributes": {
+        "GenerationSoftware": "KiCad,Pcbnew,10.0.2",
+        "CreationDate": "2026-10-12T07:38:26-04:00",
+        "ProjectId": "tagbase-lipo-v1,74616762-6173-4652-9d6c-69706f2d7631,rev?",
+        "SameCoordinates": "Original",
+        "FileFunction": "Copper,L1,Top",
+        "FilePolarity": "Positive"
+      },
+      "aperture_analysis": {
+        "by_function": {
+          "SMDPad": 23,
+          "ComponentPad": 6,
+          "HeatsinkPad": 1,
+          "ViaPad": 1,
+          "Conductor": 4
+        },
+        "by_function_flashes": {
+          "SMDPad": 147,
+          "ComponentPad": 22,
+          "HeatsinkPad": 1,
+          "ViaPad": 67,
+          "Conductor": 0
+        },
+        "conductor_widths_mm": [
+          0.1016,
+          0.1524,
+          0.254,
+          0.3048
+        ],
+        "min_feature_mm": 0.1016
+      },
+      "x2_component_count": 0,
+      "x2_net_count": 53,
+      "x2_pin_count": 166
+    },
+    {
+      "filename": "tagbase-lipo-v1-EdgeCuts.gbr",
+      "layer_type": "Edge.Cuts",
+      "units": "mm",
+      "aperture_count": 1,
+      "flash_count": 0,
+      "draw_count": 8,
+      "region_count": 0,
+      "x2_attributes": {
+        "GenerationSoftware": "KiCad,Pcbnew,10.0.2",
+        "CreationDate": "2026-10-12T07:38:26-04:00",
+        "ProjectId": "tagbase-lipo-v1,74616762-6173-4652-9d6c-69706f2d7631,rev?",
+        "SameCoordinates": "Original",
+        "FileFunction": "Profile,NP"
+      },
+      "aperture_analysis": {
+        "by_function": {
+          "Profile": 1
+        },
+        "by_function_flashes": {
+          "Profile": 0
+        },
+        "min_feature_mm": 0.15
+      }
+    },
+    {
+      "filename": "tagbase-lipo-v1-MaskBottom.gbr",
+      "layer_type": "B.Mask",
+      "units": "mm",
+      "aperture_count": 11,
+      "flash_count": 35,
+      "draw_count": 0,
+      "region_count": 0,
+      "x2_attributes": {
+        "GenerationSoftware": "KiCad,Pcbnew,10.0.2",
+        "CreationDate": "2026-10-12T07:38:26-04:00",
+        "ProjectId": "tagbase-lipo-v1,74616762-6173-4652-9d6c-69706f2d7631,rev?",
+        "SameCoordinates": "Original",
+        "FileFunction": "Soldermask,Bot",
+        "FilePolarity": "Negative"
+      },
+      "aperture_analysis": {
+        "min_feature_mm": 0.5
+      },
+      "x2_component_count": 9,
+      "x2_net_count": 0,
+      "x2_pin_count": 0
+    },
+    {
+      "filename": "tagbase-lipo-v1-MaskTop.gbr",
+      "layer_type": "F.Mask",
+      "units": "mm",
+      "aperture_count": 32,
+      "flash_count": 171,
+      "draw_count": 24,
+      "region_count": 6,
+      "x2_attributes": {
+        "GenerationSoftware": "KiCad,Pcbnew,10.0.2",
+        "CreationDate": "2026-10-12T07:38:26-04:00",
+        "ProjectId": "tagbase-lipo-v1,74616762-6173-4652-9d6c-69706f2d7631,rev?",
+        "SameCoordinates": "Original",
+        "FileFunction": "Soldermask,Top",
+        "FilePolarity": "Negative"
+      },
+      "aperture_analysis": {
+        "min_feature_mm": 0.125
+      },
+      "x2_component_count": 46,
+      "x2_net_count": 0,
+      "x2_pin_count": 0
+    },
+    {
+      "filename": "tagbase-lipo-v1-PasteBottom.gbr",
+      "layer_type": "B.Paste",
+      "units": "mm",
+      "aperture_count": 0,
+      "flash_count": 0,
+      "draw_count": 0,
+      "region_count": 0,
+      "x2_attributes": {
+        "GenerationSoftware": "KiCad,Pcbnew,10.0.2",
+        "CreationDate": "2026-10-12T07:38:26-04:00",
+        "ProjectId": "tagbase-lipo-v1,74616762-6173-4652-9d6c-69706f2d7631,rev?",
+        "SameCoordinates": "Original",
+        "FileFunction": "Paste,Bot",
+        "FilePolarity": "Positive"
+      }
+    },
+    {
+      "filename": "tagbase-lipo-v1-PasteTop.gbr",
+      "layer_type": "F.Paste",
+      "units": "mm",
+      "aperture_count": 21,
+      "flash_count": 136,
+      "draw_count": 28,
+      "region_count": 7,
+      "x2_attributes": {
+        "GenerationSoftware": "KiCad,Pcbnew,10.0.2",
+        "CreationDate": "2026-10-12T07:38:26-04:00",
+        "ProjectId": "tagbase-lipo-v1,74616762-6173-4652-9d6c-69706f2d7631,rev?",
+        "SameCoordinates": "Original",
+        "FileFunction": "Paste,Top",
+        "FilePolarity": "Positive"
+      },
+      "aperture_analysis": {
+        "min_feature_mm": 0.125
+      },
+      "x2_component_count": 40,
+      "x2_net_count": 0,
+      "x2_pin_count": 0
+    },
+    {
+      "filename": "tagbase-lipo-v1-SilkBottom.gbr",
+      "layer_type": "B.SilkS",
+      "units": "mm",
+      "aperture_count": 15,
+      "flash_count": 35,
+      "draw_count": 895,
+      "region_count": 0,
+      "x2_attributes": {
+        "GenerationSoftware": "KiCad,Pcbnew,10.0.2",
+        "CreationDate": "2026-10-12T07:38:26-04:00",
+        "ProjectId": "tagbase-lipo-v1,74616762-6173-4652-9d6c-69706f2d7631,rev?",
+        "SameCoordinates": "Original",
+        "FileFunction": "Legend,Bot",
+        "FilePolarity": "Positive"
+      },
+      "aperture_analysis": {
+        "min_feature_mm": 0.12
+      },
+      "x2_component_count": 9,
+      "x2_net_count": 0,
+      "x2_pin_count": 0
+    },
+    {
+      "filename": "tagbase-lipo-v1-SilkTop.gbr",
+      "layer_type": "F.SilkS",
+      "units": "mm",
+      "aperture_count": 42,
+      "flash_count": 180,
+      "draw_count": 1531,
+      "region_count": 13,
+      "x2_attributes": {
+        "GenerationSoftware": "KiCad,Pcbnew,10.0.2",
+        "CreationDate": "2026-10-12T07:38:26-04:00",
+        "ProjectId": "tagbase-lipo-v1,74616762-6173-4652-9d6c-69706f2d7631,rev?",
+        "SameCoordinates": "Original",
+        "FileFunction": "Legend,Top",
+        "FilePolarity": "Positive"
+      },
+      "aperture_analysis": {
+        "min_feature_mm": 0.1
+      },
+      "x2_component_count": 46,
+      "x2_net_count": 0,
+      "x2_pin_count": 0
+    }
+  ],
+  "drills": [
+    {
+      "filename": "tagbase-lipo-v1-NPTH.drl",
+      "type": "NPTH",
+      "units": "inch",
+      "hole_count": 13,
+      "tools": {
+        "T1": {
+          "diameter_mm": 0.8992,
+          "hole_count": 2,
+          "aper_function": "NonPlated,NPTH,ComponentDrill"
+        },
+        "T2": {
+          "diameter_mm": 1.0668,
+          "hole_count": 4,
+          "aper_function": "NonPlated,NPTH,ComponentDrill"
+        },
+        "T3": {
+          "diameter_mm": 1.1989,
+          "hole_count": 1,
+          "aper_function": "NonPlated,NPTH,ComponentDrill"
+        },
+        "T4": {
+          "diameter_mm": 1.5875,
+          "hole_count": 4,
+          "aper_function": "NonPlated,NPTH,ComponentDrill"
+        },
+        "T5": {
+          "diameter_mm": 2.159,
+          "hole_count": 2,
+          "aper_function": "NonPlated,NPTH,ComponentDrill"
+        }
+      },
+      "layer_span": [
+        1,
+        4
+      ],
+      "x2_attributes": {
+        "CreationDate": "2026-10-12T07:38:26-04:00",
+        "GenerationSoftware": "Kicad,Pcbnew,10.0.2",
+        "FileFunction": "NonPlated,1,4,NPTH"
+      }
+    },
+    {
+      "filename": "tagbase-lipo-v1-PTH.drl",
+      "type": "PTH",
+      "units": "inch",
+      "hole_count": 89,
+      "tools": {
+        "T1": {
+          "diameter_mm": 0.2007,
+          "hole_count": 67,
+          "aper_function": "Plated,PTH,ViaDrill"
+        },
+        "T2": {
+          "diameter_mm": 0.6096,
+          "hole_count": 6,
+          "aper_function": "Plated,PTH,ComponentDrill"
+        },
+        "T3": {
+          "diameter_mm": 0.635,
+          "hole_count": 10,
+          "aper_function": "Plated,PTH,ComponentDrill"
+        },
+        "T4": {
+          "diameter_mm": 0.95,
+          "hole_count": 4,
+          "aper_function": "Plated,PTH,ComponentDrill"
+        },
+        "T5": {
+          "diameter_mm": 1.0008,
+          "hole_count": 2,
+          "aper_function": "Plated,PTH,ComponentDrill"
+        }
+      },
+      "layer_span": [
+        1,
+        4
+      ],
+      "x2_attributes": {
+        "CreationDate": "2026-10-12T07:38:26-04:00",
+        "GenerationSoftware": "Kicad,Pcbnew,10.0.2",
+        "FileFunction": "Plated,1,4,PTH"
+      }
+    }
+  ],
+  "drill_tools": {
+    "0.8992mm": {
+      "diameter_mm": 0.8992,
+      "count": 2,
+      "type": "NPTH"
+    },
+    "1.0668mm": {
+      "diameter_mm": 1.0668,
+      "count": 4,
+      "type": "NPTH"
+    },
+    "1.1989mm": {
+      "diameter_mm": 1.1989,
+      "count": 1,
+      "type": "NPTH"
+    },
+    "1.5875mm": {
+      "diameter_mm": 1.5875,
+      "count": 4,
+      "type": "NPTH"
+    },
+    "2.159mm": {
+      "diameter_mm": 2.159,
+      "count": 2,
+      "type": "NPTH"
+    },
+    "0.2007mm": {
+      "diameter_mm": 0.2007,
+      "count": 67,
+      "type": "PTH"
+    },
+    "0.6096mm": {
+      "diameter_mm": 0.6096,
+      "count": 6,
+      "type": "PTH"
+    },
+    "0.635mm": {
+      "diameter_mm": 0.635,
+      "count": 10,
+      "type": "PTH"
+    },
+    "0.95mm": {
+      "diameter_mm": 0.95,
+      "count": 4,
+      "type": "PTH"
+    },
+    "1.0008mm": {
+      "diameter_mm": 1.0008,
+      "count": 2,
+      "type": "PTH"
+    }
+  },
+  "findings": [
+    {
+      "detector": "analyze_gerbers",
+      "rule_id": "GR-002",
+      "category": "gerber_alignment",
+      "severity": "warning",
+      "confidence": "deterministic",
+      "evidence_source": "topology",
+      "summary": "Alignment: Height varies by 26.3mm across copper/edge layers",
+      "description": "Layer alignment issue: Height varies by 26.3mm across copper/edge layers",
+      "components": [],
+      "nets": [],
+      "pins": [],
+      "recommendation": "Re-export gerbers to ensure consistent layer alignment.",
+      "report_context": {
+        "section": "Gerber Alignment",
+        "impact": "Layer misregistration",
+        "standard_ref": ""
+      },
+      "stages": [
+        "pre_fab"
+      ],
+      "finding_id": "gerber:GR-002:2f1f71985167"
+    }
+  ],
+  "assessments": [],
+  "summary": {
+    "total_findings": 1,
+    "by_severity": {
+      "error": 0,
+      "warning": 1,
+      "info": 0
+    }
+  },
+  "trust_summary": {
+    "total_findings": 1,
+    "trust_level": "high",
+    "by_confidence": {
+      "deterministic": 1,
+      "heuristic": 0,
+      "datasheet_backed": 0
+    },
+    "by_evidence_source": {
+      "datasheet": 0,
+      "topology": 1,
+      "heuristic_rule": 0,
+      "symbol_footprint": 0,
+      "bom": 0,
+      "geometry": 0,
+      "api_lookup": 0
+    },
+    "provenance_coverage_pct": 0.0
+  },
+  "inputs": {
+    "source_files": [
+      "jlcpcb/gerber/tagbase-lipo-v1-CuBottom.gbr",
+      "jlcpcb/gerber/tagbase-lipo-v1-CuIn1.gbr",
+      "jlcpcb/gerber/tagbase-lipo-v1-CuIn2.gbr",
+      "jlcpcb/gerber/tagbase-lipo-v1-CuTop.gbr",
+      "jlcpcb/gerber/tagbase-lipo-v1-EdgeCuts.gbr",
+      "jlcpcb/gerber/tagbase-lipo-v1-MaskBottom.gbr",
+      "jlcpcb/gerber/tagbase-lipo-v1-MaskTop.gbr",
+      "jlcpcb/gerber/tagbase-lipo-v1-NPTH.drl",
+      "jlcpcb/gerber/tagbase-lipo-v1-PTH.drl",
+      "jlcpcb/gerber/tagbase-lipo-v1-PasteBottom.gbr",
+      "jlcpcb/gerber/tagbase-lipo-v1-PasteTop.gbr",
+      "jlcpcb/gerber/tagbase-lipo-v1-SilkBottom.gbr",
+      "jlcpcb/gerber/tagbase-lipo-v1-SilkTop.gbr"
+    ],
+    "source_hashes": {
+      "jlcpcb/gerber/tagbase-lipo-v1-CuBottom.gbr": "333df7ead47d53700cf4ea3479521b9adb28d3a62e7509f59d2599a781607834",
+      "jlcpcb/gerber/tagbase-lipo-v1-CuIn1.gbr": "ac47e76f170992a3bb7a64c2f8ec1c26c44af31534c9d0dfa57842922ca245df",
+      "jlcpcb/gerber/tagbase-lipo-v1-CuIn2.gbr": "c4c493066d11618025a1f35f33f0ca5033043135ab70626e31cdf8088f4e85f8",
+      "jlcpcb/gerber/tagbase-lipo-v1-CuTop.gbr": "87ef65ff42c8e1c52b7639a6dd032aa24460c01d6c45c86b9a81eb9b1d24f7f6",
+      "jlcpcb/gerber/tagbase-lipo-v1-EdgeCuts.gbr": "42e50760b8554138b80915d1e8c43432ad3e1840f5e396aee86f02fa3b8a4ff2",
+      "jlcpcb/gerber/tagbase-lipo-v1-MaskBottom.gbr": "b73bced1b99deb7e2f4f1b29c6a988b377ba41f1ec9306ac3e2a1297cafd2e0f",
+      "jlcpcb/gerber/tagbase-lipo-v1-MaskTop.gbr": "b000a8004eecb77025c157f8614079d6a5a84208c8c3e2f1906b568d144f97c9",
+      "jlcpcb/gerber/tagbase-lipo-v1-NPTH.drl": "e3847d27e090d33ab7eff3ae313a6d20844c61d3196ab7db8f9a79fd3a0e681c",
+      "jlcpcb/gerber/tagbase-lipo-v1-PTH.drl": "ea6a4394923f5e4aca2315e329d928e25eededb567096cbbb1325f4790496bf1",
+      "jlcpcb/gerber/tagbase-lipo-v1-PasteBottom.gbr": "a9e475a7cbbf4b215ed5370075d340c6213a46706076812d8b7827c192a59c4c",
+      "jlcpcb/gerber/tagbase-lipo-v1-PasteTop.gbr": "d1e6ea9b98e8bffe435dc63595f3cb22225e5f9de873907a558528a2c798ebb0",
+      "jlcpcb/gerber/tagbase-lipo-v1-SilkBottom.gbr": "e3d62ce853a1277f51121cfe8e5ddea2d3318f53ce13b71f97381de5618c6a29",
+      "jlcpcb/gerber/tagbase-lipo-v1-SilkTop.gbr": "a42fcad0cad4367c3e8ee1ed230bb2be0eed9ef2aeeadb7a0fed2cb4cd38f18d"
+    },
+    "run_id": "20261012T110124Z-5bbb21",
+    "config_hash": null,
+    "upstream_artifacts": {}
+  },
+  "compat": {
+    "minimum_consumer_version": "1.4.0",
+    "deprecated_fields": [],
+    "experimental_fields": []
+  },
+  "audience_summary": {
+    "designer": {
+      "total_findings": 1,
+      "by_severity": {
+        "error": 0,
+        "warning": 1,
+        "info": 0
+      },
+      "by_category": {
+        "gerber_alignment": 1
+      },
+      "top_issues": [
+        {
+          "detector": "analyze_gerbers",
+          "rule_id": "GR-002",
+          "category": "gerber_alignment",
+          "severity": "warning",
+          "confidence": "deterministic",
+          "evidence_source": "topology",
+          "summary": "Alignment: Height varies by 26.3mm across copper/edge layers",
+          "description": "Layer alignment issue: Height varies by 26.3mm across copper/edge layers",
+          "components": [],
+          "nets": [],
+          "pins": [],
+          "recommendation": "Re-export gerbers to ensure consistent layer alignment.",
+          "report_context": {
+            "section": "Gerber Alignment",
+            "impact": "Layer misregistration",
+            "standard_ref": ""
+          },
+          "stages": [
+            "pre_fab"
+          ],
+          "finding_id": "gerber:GR-002:2f1f71985167"
+        }
+      ]
+    },
+    "reviewer": {
+      "total_findings": 1,
+      "by_category": {
+        "gerber_alignment": 1
+      },
+      "top_issues": [
+        {
+          "rule_id": "GR-002",
+          "severity": "warning",
+          "summary": "Alignment: Height varies by 26.3mm across copper/edge layers",
+          "recommendation": "Re-export gerbers to ensure consistent layer alignment.",
+          "category": "gerber_alignment"
+        }
+      ]
+    },
+    "manager": {
+      "risk_level": "low",
+      "blocker_count": 0,
+      "warning_count": 1,
+      "stage_readiness": {
+        "schematic": "pass",
+        "layout": "pass",
+        "pre_fab": "needs_review",
+        "bring_up": "pass"
+      },
+      "one_liner": "1 warning across 1 category."
+    }
+  },
+  "capability_mode_ref": {
+    "source": "analysis/capability_mode.json",
+    "run_id": "20261012T110124Z-5bbb21"
+  }
+}

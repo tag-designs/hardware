@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "project": "tagbase-lipo-v1.kicad_pro",
+  "current": "2026-10-12_0739",
+  "runs": {
+    "2026-10-12_0739": {
+      "source_hashes": {
+        "tagbase-lipo-v1.kicad_sch": "sha256:e6325258371f3f83c1f796ab2545c29170747b94f513b70ad1d29acbd90b8bd8",
+        "tagbase-lipo-v1.kicad_pcb": "sha256:013136540f614134070e8188df5faab8f43e0bb045dfc61e07615db189e42b46"
+      },
+      "outputs": {
+        "schematic": "schematic.json",
+        "pcb": "pcb.json",
+        "gerber": "gerber.json"
+      },
+      "scripts": {
+        "schematic": "analyze_schematic.py tagbase-lipo-v1.kicad_sch"
+      },
+      "generated": "2026-10-12T07:39:07-04:00",
+      "pinned": false
+    }
+  }
+}

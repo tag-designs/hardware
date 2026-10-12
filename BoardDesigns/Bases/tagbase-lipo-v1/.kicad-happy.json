@@ -4,7 +4,7 @@
     "name": "tagbase-lipo-v1",
     "description": "USB-powered base station that programs a tag over SWD and charges the tag's LiPo cell through the 6-pin tagpoint connector J101.",
     "board": "4 layer, 50.95 x 70.00 mm, 1.6 mm. In1.Cu = +3V3 plane, In2.Cu = GND plane, F.Cu/B.Cu GND pours.",
-    "status": "Not fabricated as of 2026-09-07."
+    "status": "Not fabricated as of 2026-10-12. Fab house: JLCPCB (jlcpcb/ - KiCad JLCPCB plugin, state in jlcpcb/project.db). pcbway_production/ is not the order."
   },
   "analysis": {
     "track_in_git": true,
@@ -48,6 +48,14 @@
     "leds": [
       "R101 = R102 = 220 ohm is DELIBERATE. 100 ohm was measured as too bright, so the green runs at about 2.7 mA on purpose.",
       "The schematic note beside the LEDs records this: 'Green 2.7Vf, 6mA, 100 ohm (3.3V) == too bright, using 220'. Do not 'correct' R102 to match the 100 ohm calculation."
+    ],
+    "test_points": [
+      "Five TestPoint_Pad_D1.5mm SMD pads added 2026-10-12 (symbol Conn_01x01). Copper + mask only, no paste - bare probe pads. References hidden; function labels on silk beside each pad.",
+      "J2 bottom '3v3 valid' /TAG_3V3_Valid (PA0 ADC node, after R107 2k2). J3 bottom 'en1.8v' /en1.8v (PB6 -> U3 EN). J4 bottom 'sck' TAG_SCK (tag side, 1.8 V). J6 bottom 'swdio' TAG_SWDIO (tag side of R106, 1.8 V). J7 TOP 'Reset' TAG_RESET (tag side of R104, with J101.1).",
+      "J7 is deliberately on the TAG side of R104 (moved there 2026-10-12): it shows the tag's actual reset pin, and shorting it to GND is a safe manual reset (R104 limits PA10 to ~1.5 mA). Firmware contract unchanged - never drive PA10 high.",
+      "J3 is push-pull driven by PB6: probe only, do not force.",
+      "EXCLUDED FROM THE JLCPCB BOM AND CPL at all three levels: in_bom no on the symbol (NOT dnp - they are copper), exclude_from_bom + exclude_from_pos_files on the footprint, and 1/1 in jlcpcb/project.db. Any new test pad needs the same, or it lands in the CPL as a bottom-side placement.",
+      "No GND test pad; J5 pin 1 (DNP header, plated hole) is the nearest scope ground."
     ]
   },
   "firmware_contract": [
@@ -89,8 +97,8 @@
       "rule_ids": [
         "*"
       ],
-      "topic": "padnet crosscheck slash escaping",
-      "reason": "Net-(U2-THIN/NF) in the schematic vs Net-(U2-THIN{slash}NF) in the PCB is KiCad's escaping of '/' in net names, not a mismatch. Same artifact as U3-L{slash}M on UIUCBreakout. 164 of 166 pads match exactly and these two are the same net."
+      "topic": "padnet crosscheck naming artifacts",
+      "reason": "Net-(U2-THIN/NF) in the schematic vs Net-(U2-THIN{slash}NF) in the PCB is KiCad's escaping of '/' in net names, not a mismatch. Same artifact as U3-L{slash}M on UIUCBreakout. 164 of 166 pads match exactly and these two are the same net. (2026-10-12: the THIN/NF artifact no longer appears, and an NRST artifact caused by a mislabelled power symbol was fixed at source; padnet_crosscheck is now 50 footprints, 0 mismatches.)"
     },
     {
       "rule_ids": [
@@ -101,9 +109,12 @@
     }
   ],
   "reviewer_notes": {
-    "last_review": "tagbase-lipo-v1-design-review.md, 2026-09-07. All findings closed; board ready to order.",
+    "last_review": "tagbase-lipo-v1-design-review.md, updated 2026-10-12 for test pads J2/J3/J4/J6/J7 and the regenerated JLCPCB package. All findings closed; ready to order.",
     "open_findings": [],
     "closed_findings": [
+      "N1 (2026-10-12): test pads were in the JLCPCB BOM (5 lines, no LCSC) and CPL (4 bottom rows). FIXED at symbol, footprint and project.db; regenerated BOM/CPL identical to the 09-07 package, 0 bottom rows.",
+      "N2 (2026-10-12): test pads labelled only by refdes. RESOLVED - function labels added, references hidden.",
+      "N3 (2026-10-12): RESOLVED. (1) PA10 net auto-renamed Net-(J7-Pin_1) - fixed by moving J7 to TAG_RESET. (2) C7 reached NRST through #PWR038, a power:+3V3 symbol with Value 'NRST' - it read as a +3V3 decoupler (the designer could not find C7) and split the analyzer's net view. Replaced with a local NRST label; net is /NRST = C7.1, J102.10, U5.4. PCB: net rename only.",
       "H3: RESOLVED by changing U2 from XC6808ANC28R-G to XC6808A4C28R-G rather than depopulating R2. On the xN, pin 5 is NF and Torex requires it open; on the A4 it is THIN and R2 = 10 kohm is the correct termination. The two variants differ ONLY in field 2 (temperature monitor); charge voltage, hold time, trickle and package are identical. The A4 is also less than half the price ($1.237 vs $2.7275).",
       "M3: RESOLVED. C9 (1 uF) added on /BAT, 1.56 mm from U2 pin 1. C10 (1 uF) added on VUSB, 2.15 mm from U2 pin 6. Both satisfy the datasheet CL and CIN requirements.",
       "H1: BOM ordered C3682502 (XC6808A4C28R-G) against a schematic MPN of XC6808ANC28R-G. Caused by the export tool's LCSC auto-select mode, now disabled. Regenerated BOM reads C7123934, verified correct.",
@@ -112,9 +123,12 @@
       "M2: NOT A DEFECT. R102 = 220 ohm is deliberate (100 ohm measured too bright). The schematic note has been amended to say so, which closes the discrepancy that caused this to be raised."
     ],
     "verified_clean": [
-      "KiCad DRC with --refill-zones: 3 violations, 0 unconnected. Two are the accepted Mill-Max locating-peg spacing on J101; one is the stale J1 library link. Both suppressed above.",
-      "ERC: 2 warnings, both library-link only.",
-      "Schematic-to-PCB pad-net cross-check: 170 pads, 0 mismatches.",
+      "2026-10-12 final state (labels, J7 move, NRST label), in place: DRC --refill-zones --severity-all --schematic-parity: 3 violations (2 J101 hole_to_hole, 1 J1 lib link - suppressed), 0 unconnected, 0 parity. ERC: 2 library-link warnings (J104 symbol, J1 footprint).",
+      "2026-10-12: padnet_crosscheck 50 footprints, 0 mismatches. Schematic analyzer: 0 errors, only DS-002 (no datasheets/ symlink).",
+      "2026-10-12: JLCPCB Gerbers (KiCad 10.0.2) - zip byte-identical to jlcpcb/gerber/. Origin = aux origin (101.6, 50.8). 350/350 track starts and 200/200 sampled zone-fill vertices match the board; test pads on Cu+Mask, no paste.",
+      "2026-10-12: drills reconcile exactly - 67 vias 0.2 mm; PTH 6x0.6096, 10x0.635, 4x0.95, 2x1.0; NPTH 2x0.9, 4x1.0668, 1x1.2, 4x1.5875, 2x2.16.",
+      "Gerber analyzer GR-002 (height varies across copper) is In1.Cu +3V3 plane covering only the upper ~35 mm - deliberate, unchanged from HEAD. Not a finding.",
+      "FD-001 no fiducials / PM-002 D101,D102 0.48 mm body-to-edge (pads 0.73 mm): pre-existing, accepted at the 09-07 sign-off.",
       "J101 verified against Mill-Max drawings: signal hole, pad, pitch, row spacing and locating-peg diameter all match.",
       "U6 TLV9001 pinout verified against TI SBOS833R Table 6-1. The plain DCK is IN+=1, V-=2, IN-=3, OUT=4, V+=5. LCSC C398362 = TLV9001IDCKR, correct. TRAP: TLV9001T in the same DCK package is OUT=1, IN+=3, IN-=4 -- a one-letter MPN change would silently swap this follower.",
       "SN74LVC1T45 DIR polarity verified against TI Table 7-1.",
@@ -124,7 +138,8 @@
       "CHECK THE PATTERN, NOT THE FOOTPRINT NAME. H2 was raised because a grep for '6pin_tagpoints_double_screws' found only two boards. Measuring the actual NPTH geometry found the identical 0.2032 mm gap in seven boards under two footprint names.",
       "FAB ARTEFACTS IN THE REPO DO NOT INDICATE WHETHER A BOARD WAS BUILT. tagbase-lipo-v1 has a production_files/*.zip that is only a review-time export; tagbase-jlcpcb-v7 has no artefacts and was fabricated. Ask the designer instead.",
       "MEASURE DECOUPLING, DO NOT PAIR BY REFERENCE DESIGNATOR. Assuming C104 belongs to U5 or C7 to U1 produced a wrong finding on UIUCBreakout; nearest-same-net-pad distance is the only reliable method.",
-      "A MISSING DATASHEET IS A REAL BLOCKER, NOT A FOOTNOTE. The first pass closed with \"needs the XC6808 datasheet\" as a single low-priority item. When the datasheet arrived it produced the two highest-severity findings on the board. Chase the datasheet before ranking the findings."
+      "A MISSING DATASHEET IS A REAL BLOCKER, NOT A FOOTNOTE. The first pass closed with \"needs the XC6808 datasheet\" as a single low-priority item. When the datasheet arrived it produced the two highest-severity findings on the board. Chase the datasheet before ranking the findings.",
+      "ANALYSIS RUNS LAND IN NEW FOLDERS. When sources change, analysis_cache creates a new analysis/<timestamp>/ and moves 'current' in manifest.json. Read the current run from the manifest; a hard-coded run path silently reads stale JSON (2026-10-12: a fixed RS-001 looked unfixed)."
     ]
   }
 }

@@ -1,12 +1,127 @@
 # tagbase-lipo-v1 — design review
 
-**Date:** 2026-09-07
+**Date:** 2026-09-07 — **updated 2026-10-12** for five added test pads and the regenerated JLCPCB package
 **Board:** `tagbase-lipo-v1.kicad_pcb` / `.kicad_sch` — 4 layer, 50.95 × 70.00 mm, 1.6 mm
 **Role:** USB-powered base station that programs a tag over SWD and charges the tag's LiPo cell
 through the 6-pin tagpoint connector.
-**Status:** not previously fabbed; no `.kicad-happy.json` (one is offered with this review).
+**Status:** not previously fabbed. **Fab house: JLCPCB** (`jlcpcb/`); `pcbway_production/` is not
+the order and is out of scope.
 
-## Verdict
+## Update 2026-10-12 — test pads J2, J3, J4, J6, J7
+
+**Verdict: ready to order. Every finding is closed.** The first pass on these pads found one real
+problem: they were in the JLCPCB BOM and CPL (N1). It is fixed at the source, and the regenerated
+package matches the committed 09-07 BOM and CPL exactly. The designer then added function labels, hid
+the reference designators, moved J7 to the tag side of R104, and replaced the mislabelled power
+symbol on the reset net (N3).
+
+### What changed
+
+The layout change is confined to the five test pads and their nets; no other footprint moved. Five
+`TestPoint:TestPoint_Pad_D1.5mm` SMD pads (Ø1.5 mm, copper and mask only, no paste) were added on
+schematic symbol `Conn_01x01`. Each has a hidden reference and a silkscreen label on its own side:
+
+| Ref | Side | Label | Net | Other pads on the net | What you see there |
+|---|---|---|---|---|---|
+| J2 | bottom | `3v3 valid` | `/TAG_3V3_Valid` | U5 PA0, R107.1 | The ADC input, after the 2.2 kΩ (follower output → R107 → here) |
+| J3 | bottom | `en1.8v` | `/en1.8v` | U5 PB6, U3 EN | The +1V8 regulator enable |
+| J4 | bottom | `sck` | `TAG_SCK` | U7 B, J101.4 | SWCLK on the tag side, at 1.8 V |
+| J6 | bottom | `swdio` | `TAG_SWDIO` | R106.2, J101.3 | SWDIO on the tag side of R106, at 1.8 V |
+| J7 | **top** | `Reset` | `TAG_RESET` | R104.2, J101.1 | The tag's reset pin, on the tag side of R104 |
+
+The change adds 67 vias in total (2 more than HEAD), all still 0.505/0.2 mm, and all new track is
+0.1016 mm, the house default.
+
+**Electrically correct.** J4 and J6 sit on the tag side of the shifters, where they show what the
+tag actually receives. The stubs they add, 2–4 mm plus about 0.5 pF of pad, are negligible at SWD
+clock rates. J2 is behind R107, so a scope probe on it cannot load the op-amp output.
+
+**J7 on `TAG_RESET` is the better place.** It now shows the tag's reset pin itself, so an open R104
+or a tag holding its own reset low is visible there. It also makes a manual reset easy: short J7 to
+GND. R104 (2.2 kΩ) limits current from PA10 to about 1.5 mA even if firmware were driving it high.
+The L1 contract still stands: firmware only ever drives PA10 low or leaves it as a high-impedance
+input.
+
+**J3 is for probing, not forcing.** PB6 drives this net push-pull, so clipping a supply onto J3 to
+force the 1.8 V rail on fights the MCU pin.
+
+**Placement is fine.** Each pad is at least 13.5 mm from the board edge and at least 2.4 mm from the
+nearest other pad (J7 to R106.2). The closest vias are 0.46–0.47 mm from the J2 and J7 pad edges,
+which is enough for a pogo or hook probe. Every label is 1.8–3.5 mm from its pad, on the same side.
+`Reset` is left-justified and ends about 0.7 mm short of J7. The PCB analyzer raises no
+silk-over-pad findings.
+
+### N1 — The test pads were in the JLCPCB BOM and CPL — FIXED
+
+The first regeneration put five `Conn_01x01` lines with no LCSC number into the BOM, and four
+bottom-side rows into a CPL that previously had none. That would make JLCPCB quote double-sided
+assembly. The cause was `jlcpcb/project.db`, where the pads had `exclude_from_bom = 0,
+exclude_from_pos = 0`, unlike every other connector.
+
+**Fixed at all three levels:** `in_bom no` on the symbols (not DNP), `exclude_from_bom
+exclude_from_pos_files` on the footprints, and `1, 1` in `project.db`. Verified in the
+regenerated package:
+- The BOM has no `Conn_01x01` lines.
+- The CPL has **0** bottom-side rows.
+- Both files are **identical to the committed 09-07 versions**.
+
+### N2 — The pads were labelled only `J2`…`J7` — RESOLVED
+
+Function labels added and references hidden, as tabulated above. A GND pad was not added, which is
+optional. J5 pin 1 (a DNP header, plated hole, GND) remains the nearest place for a scope ground
+clip.
+
+### N3 — Net naming — RESOLVED
+
+- **Resolved by the J7 move.** The PA10 net had been auto-renamed `Net-(J7-Pin_1)`. With J7 now on
+  `TAG_RESET`, the net is back to its original `Net-(U5-PA10)`, holding R104.1 and U5.20.
+- **Resolved, pre-existing:** C7 (0.1 µF) reached `NRST` through `#PWR038`, a `power:+3V3` symbol
+  with its Value changed to `NRST`. KiCad merged it correctly, but on the sheet it looked like a
+  +3V3 port: the designer could not find C7 at first, because it read as a rail decoupler. The
+  symbol also split the analyzer's view of the net. **Fixed:** `#PWR038` was replaced by a third
+  local `NRST` label. The net is now `/NRST` = C7.1, J102.10, U5.4 in KiCad's netlist, and the
+  RS-001 warning and both `padnet_crosscheck` artifacts are gone. On the board, the only change is
+  the net name; there is no geometry change.
+
+### Re-verification, 2026-10-12 (final state: labels, J7 move, NRST label)
+
+| Check | Result |
+|---|---|
+| Rules source | `pcb.json` `project_settings.source` and `rules_source` both `tagbase-lipo-v1.kicad_pro` |
+| KiCad DRC (`--refill-zones --severity-all --schematic-parity`, in place) | **Unchanged from 09-07:** 3 violations (2 × J101 locating-peg `hole_to_hole`, 1 × J1 library link — both suppressed). **0 unconnected, 0 parity errors** |
+| ERC | 2 warnings, both library-link only (J104 symbol, J1 footprint link) |
+| KiCad netlist | `TAG_RESET` = J101.1, J7.1, R104.2; `Net-(U5-PA10)` = R104.1, U5.20; `/NRST` = C7.1, J102.10, U5.4 |
+| Schematic ↔ PCB pad nets | **50 footprints, 0 mismatches** |
+| Schematic analyzer | 0 errors; 1 warning (DS-002: the board has no `datasheets/` symlink; the datasheets this review relies on are in `libraries/datasheets/`) |
+| Gerber set | 11 layers + PTH/NPTH, KiCad 10.0.2, regenerated 07:38. `GERBER-tagbase-lipo-v1.zip` is **byte-identical** to the 15 loose files in `jlcpcb/gerber/`. Copper net attributes carry `/NRST` |
+| Gerber ↔ board geometry | Origin = aux origin (101.6, 50.8). **350/350** track-segment starts and **200/200** sampled zone-fill vertices found. All five test pads flash on copper and mask, none on paste (correct). J7 is at its new position |
+| Drill reconciliation | 67 vias (0.2 mm) = 67 on board. PTH 6 × 0.61, 10 × 0.635, 4 × 0.95, 2 × 1.0; NPTH 2 × 0.9, 4 × 1.067, 1 × 1.2, 4 × 1.588, 2 × 2.16. **Every tool matches the board** |
+| Annular ring / min track | 0.152 mm via ring, 0.1016 mm track: unchanged house convention |
+| BOM / CPL | **Identical to the committed 09-07 package.** 0 bottom-side placements |
+
+**False positives triaged this pass, not raised:**
+- **Gerber analyzer GR-002**, "height varies by 26.3 mm across copper layers." This is In1.Cu, the
+  +3V3 plane, which deliberately covers only the upper 35 mm of the board. The zone outline and fill
+  are identical at HEAD.
+- **PCB analyzer CC-002**, "narrow signal" on the test-pad nets. These are 4 mil house-convention
+  tracks, already suppressed.
+- **FD-001 (no fiducials) and PM-002 (D101/D102 at 0.48 mm from the edge).** Both are pre-existing
+  and unchanged since the 09-07 sign-off. JLCPCB does not require fiducials on a single
+  (unpanelised) board. The LEDs sit on the top edge on purpose. Their nearest pads are 0.73 mm
+  from the edge (the 0.48 mm is the body), well clear of JLC's 0.3 mm copper-to-edge minimum.
+
+**Not re-run, and why:** EMC, SPICE, thermal and lifecycle. The change adds five passive copper pads
+and no components with electrical behaviour, so the 09-07 results stand. The STM32 pin map is
+unaffected: PA0, PA10 and PB6 were already allocated, and the pads add no new functions. No
+datasheets were needed.
+
+**Tooling note:** `kicad-helpers/padnet_crosscheck.py` ends with a hard-coded `U302` debug print,
+which raises `IndexError` on any board without a U302. It does so *after* the cross-check results
+print, so the results are valid, but the traceback looks like a failure.
+
+---
+
+## Verdict (2026-09-07)
 
 The design is coherent and the tricky parts are right — the op-amp pinout, the level-shifter
 direction logic, and the charge-current resistor all check out against the manufacturers' own
@@ -399,7 +514,7 @@ is irrelevant, so this is housekeeping rather than a power concern; setting them
 still the tidy default. PC14/PC15 remain available for a 32.768 kHz crystal if you ever want an RTC
 timebase.
 
-## 6. Closing state
+## 6. Closing state (2026-09-07 — superseded by the 2026-10-12 update at the top)
 
 **Nothing outstanding.** Every finding is closed: one real and fixed (H1), one resolved by a part
 change (H3), one resolved by two capacitors (M3), three withdrawn as raised in error (H2, M1, and the
