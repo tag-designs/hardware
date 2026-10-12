@@ -743,7 +743,7 @@
       "confidence": "deterministic",
       "evidence_source": "bom",
       "category": "verification",
-      "summary": "No datasheets directory found (41/41 parts have MPNs). Sync datasheets before making pin-level claims.",
+      "summary": "No datasheets directory found (40/40 parts have MPNs). Sync datasheets before making pin-level claims.",
       "components": [
         "C1",
         "C10",
@@ -770,7 +770,7 @@
       "pins": [],
       "datasheets_dir": null,
       "datasheet_file_count": 0,
-      "bom_size": 41,
+      "bom_size": 40,
       "mpn_coverage_percent": 100.0,
       "recommendation": "Run datasheet sync via the digikey / mouser / lcsc / element14 skill (which one depends on the user's distributor access and API credentials). A ./datasheets/ directory with PDFs and a manifest.json enables pin-level verification in the next analyzer run.",
       "report_context": {
@@ -1979,10 +1979,9 @@
       "datasheet": "",
       "description": "Resistor",
       "references": [
-        "R3",
-        "R2"
+        "R3"
       ],
-      "quantity": 2,
+      "quantity": 1,
       "dnp": false,
       "type": "resistor"
     },
@@ -2060,15 +2059,15 @@
       "type": "ic"
     },
     {
-      "value": "XC6808A4C28R-G",
+      "value": "XC6808ANC28R-G",
       "footprint": "tagbase:xc6808",
-      "mpn": "XC6808A4C28R-G",
+      "mpn": "XC6808ANC28R-G",
       "manufacturer": "",
       "digikey": "",
       "mouser": "",
-      "lcsc": "C3682502",
+      "lcsc": "C7123934",
       "element14": "",
-      "datasheet": "XC6808A4C28R-G",
+      "datasheet": "XC6808ANC28R-G",
       "description": "",
       "references": [
         "U2"
@@ -3316,17 +3315,17 @@
     },
     {
       "reference": "U2",
-      "value": "XC6808A4C28R-G",
+      "value": "XC6808ANC28R-G",
       "lib_id": "xc6808:XC6808ANC28R-G",
       "lib_name": "",
       "footprint": "tagbase:xc6808",
-      "datasheet": "XC6808A4C28R-G",
+      "datasheet": "XC6808ANC28R-G",
       "description": "",
-      "mpn": "XC6808A4C28R-G",
+      "mpn": "XC6808ANC28R-G",
       "manufacturer": "",
       "digikey": "",
       "mouser": "",
-      "lcsc": "C3682502",
+      "lcsc": "C7123934",
       "element14": "",
       "x": 81.28,
       "y": 123.19,
@@ -3567,8 +3566,8 @@
       "mirror_y": false,
       "unit": 1,
       "uuid": "a7458edf-112d-4fa9-a422-681d319eee6e",
-      "in_bom": true,
-      "dnp": false,
+      "in_bom": false,
+      "dnp": true,
       "on_board": true,
       "pin_uuids": {
         "2": "d3b8f306-8351-4306-be2b-ab9444ede635",
@@ -6176,7 +6175,7 @@
         },
         {
           "ref": "U2",
-          "value": "XC6808A4C28R-G",
+          "value": "XC6808ANC28R-G",
           "type": "ic"
         },
         {
@@ -6322,7 +6321,7 @@
         },
         {
           "ref": "U2",
-          "value": "XC6808A4C28R-G",
+          "value": "XC6808ANC28R-G",
           "type": "ic"
         },
         {
@@ -6350,8 +6349,8 @@
     },
     {
       "center_ic": "U2",
-      "ic_value": "XC6808A4C28R-G",
-      "ic_mpn": "XC6808A4C28R-G",
+      "ic_value": "XC6808ANC28R-G",
+      "ic_mpn": "XC6808ANC28R-G",
       "ic_lib_id": "xc6808:XC6808ANC28R-G",
       "neighbor_components": [
         {
@@ -6474,7 +6473,7 @@
         },
         {
           "ref": "U2",
-          "value": "XC6808A4C28R-G",
+          "value": "XC6808ANC28R-G",
           "type": "ic"
         },
         {
@@ -6535,7 +6534,7 @@
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "6",
               "pin_name": "VIN"
@@ -6770,14 +6769,14 @@
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "7",
               "pin_name": "EPAD"
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "2",
               "pin_name": "VSS"
@@ -7033,14 +7032,14 @@
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "7",
               "pin_name": "EPAD"
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "2",
               "pin_name": "VSS"
@@ -7296,14 +7295,14 @@
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "7",
               "pin_name": "EPAD"
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "2",
               "pin_name": "VSS"
@@ -7421,7 +7420,7 @@
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "6",
               "pin_name": "VIN"
@@ -7626,14 +7625,14 @@
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "7",
               "pin_name": "EPAD"
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "2",
               "pin_name": "VSS"
@@ -7889,14 +7888,14 @@
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "7",
               "pin_name": "EPAD"
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "2",
               "pin_name": "VSS"
@@ -8152,14 +8151,14 @@
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "7",
               "pin_name": "EPAD"
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "2",
               "pin_name": "VSS"
@@ -9005,14 +9004,14 @@
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "7",
               "pin_name": "EPAD"
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "2",
               "pin_name": "VSS"
@@ -9372,14 +9371,14 @@
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "7",
               "pin_name": "EPAD"
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "2",
               "pin_name": "VSS"
@@ -9974,14 +9973,14 @@
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "7",
               "pin_name": "EPAD"
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "2",
               "pin_name": "VSS"
@@ -10252,14 +10251,14 @@
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "7",
               "pin_name": "EPAD"
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "2",
               "pin_name": "VSS"
@@ -10536,14 +10535,14 @@
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "7",
               "pin_name": "EPAD"
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "2",
               "pin_name": "VSS"
@@ -11020,14 +11019,14 @@
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "7",
               "pin_name": "EPAD"
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "2",
               "pin_name": "VSS"
@@ -11283,14 +11282,14 @@
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "7",
               "pin_name": "EPAD"
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "2",
               "pin_name": "VSS"
@@ -11546,14 +11545,14 @@
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "7",
               "pin_name": "EPAD"
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "2",
               "pin_name": "VSS"
@@ -11948,14 +11947,14 @@
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "7",
               "pin_name": "EPAD"
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "2",
               "pin_name": "VSS"
@@ -12268,7 +12267,7 @@
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "6",
               "pin_name": "VIN"
@@ -12489,14 +12488,14 @@
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "7",
               "pin_name": "EPAD"
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "2",
               "pin_name": "VSS"
@@ -12809,7 +12808,7 @@
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "6",
               "pin_name": "VIN"
@@ -13122,14 +13121,14 @@
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "7",
               "pin_name": "EPAD"
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "2",
               "pin_name": "VSS"
@@ -13401,14 +13400,14 @@
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "7",
               "pin_name": "EPAD"
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "2",
               "pin_name": "VSS"
@@ -13724,14 +13723,14 @@
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "7",
               "pin_name": "EPAD"
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "2",
               "pin_name": "VSS"
@@ -14018,14 +14017,14 @@
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "7",
               "pin_name": "EPAD"
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "2",
               "pin_name": "VSS"
@@ -14517,14 +14516,14 @@
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "7",
               "pin_name": "EPAD"
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "2",
               "pin_name": "VSS"
@@ -15271,14 +15270,14 @@
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "7",
               "pin_name": "EPAD"
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "2",
               "pin_name": "VSS"
@@ -16096,14 +16095,14 @@
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "7",
               "pin_name": "EPAD"
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "2",
               "pin_name": "VSS"
@@ -16659,14 +16658,14 @@
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "7",
               "pin_name": "EPAD"
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "2",
               "pin_name": "VSS"
@@ -17112,14 +17111,14 @@
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "7",
               "pin_name": "EPAD"
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "2",
               "pin_name": "VSS"
@@ -17626,14 +17625,14 @@
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "7",
               "pin_name": "EPAD"
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "2",
               "pin_name": "VSS"
@@ -18470,7 +18469,7 @@
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "3",
               "pin_name": "CSO"
@@ -18749,14 +18748,14 @@
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "7",
               "pin_name": "EPAD"
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "2",
               "pin_name": "VSS"
@@ -19442,14 +19441,14 @@
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "7",
               "pin_name": "EPAD"
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "2",
               "pin_name": "VSS"
@@ -19705,14 +19704,14 @@
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "7",
               "pin_name": "EPAD"
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "2",
               "pin_name": "VSS"
@@ -20336,14 +20335,14 @@
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "7",
               "pin_name": "EPAD"
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "2",
               "pin_name": "VSS"
@@ -20782,14 +20781,14 @@
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "7",
               "pin_name": "EPAD"
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "2",
               "pin_name": "VSS"
@@ -21045,14 +21044,14 @@
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "7",
               "pin_name": "EPAD"
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "2",
               "pin_name": "VSS"
@@ -21215,7 +21214,7 @@
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "3",
               "pin_name": "CSO"
@@ -21605,12 +21604,12 @@
     },
     {
       "reference": "U2",
-      "value": "XC6808A4C28R-G",
+      "value": "XC6808ANC28R-G",
       "type": "ic",
       "lib_id": "xc6808:XC6808ANC28R-G",
-      "mpn": "XC6808A4C28R-G",
+      "mpn": "XC6808ANC28R-G",
       "description": "",
-      "datasheet": "XC6808A4C28R-G",
+      "datasheet": "XC6808ANC28R-G",
       "function": "FPGA (Xilinx)",
       "total_pins": 7,
       "unconnected_pins": 0,
@@ -23433,14 +23432,14 @@
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "7",
               "pin_name": "EPAD"
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "2",
               "pin_name": "VSS"
@@ -24035,14 +24034,14 @@
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "7",
               "pin_name": "EPAD"
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "2",
               "pin_name": "VSS"
@@ -24519,14 +24518,14 @@
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "7",
               "pin_name": "EPAD"
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "2",
               "pin_name": "VSS"
@@ -24672,7 +24671,7 @@
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "6",
               "pin_name": "VIN"
@@ -24908,14 +24907,14 @@
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "7",
               "pin_name": "EPAD"
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "2",
               "pin_name": "VSS"
@@ -25031,7 +25030,7 @@
             },
             {
               "ref": "U2",
-              "value": "XC6808A4C28R-G",
+              "value": "XC6808ANC28R-G",
               "type": "ic",
               "pin": "6",
               "pin_name": "VIN"
@@ -25241,7 +25240,7 @@
           "io_rails": null
         },
         "U2": {
-          "value": "XC6808A4C28R-G",
+          "value": "XC6808ANC28R-G",
           "power_rails": [
             "VUSB"
           ],
@@ -26554,8 +26553,8 @@
     }
   ],
   "sourcing_audit": {
-    "total_bom_components": 41,
-    "mpn_coverage": "41/41",
+    "total_bom_components": 40,
+    "mpn_coverage": "40/40",
     "missing_digikey": [
       "C1",
       "C10",
@@ -26583,7 +26582,6 @@
       "R105",
       "R106",
       "R107",
-      "R2",
       "R3",
       "R4",
       "R5",
@@ -28678,8 +28676,8 @@
     ]
   },
   "bom_lock": {
-    "total_bom_components": 41,
-    "components_with_mpn": 41,
+    "total_bom_components": 40,
+    "components_with_mpn": 40,
     "missing_mpn": [],
     "missing_mpn_count": 0,
     "generic_values": [],
@@ -28691,10 +28689,10 @@
       "/Users/geobrown/Research/tag-designs/hardware/BoardDesigns/Bases/tagbase-lipo-v1/tagbase-lipo-v1.kicad_sch"
     ],
     "source_hashes": {
-      "/Users/geobrown/Research/tag-designs/hardware/BoardDesigns/Bases/tagbase-lipo-v1/tagbase-lipo-v1.kicad_sch": "e6325258371f3f83c1f796ab2545c29170747b94f513b70ad1d29acbd90b8bd8"
+      "/Users/geobrown/Research/tag-designs/hardware/BoardDesigns/Bases/tagbase-lipo-v1/tagbase-lipo-v1.kicad_sch": "adfd57741a6bace15662e39e7df03d84ae55df52782b0881c8a72eee25737cda"
     },
     "run_id": "20261012T110124Z-5bbb21",
-    "config_hash": "24819ddce57ce4874db75e39aa1a69f3f2dbc7886a31cf743595ee718a60bec8",
+    "config_hash": "4c4e32a9298d6019a7d1facd00e2203cf16af3ec702a25d7488bc09cfa57365c",
     "upstream_artifacts": {}
   },
   "compat": {
@@ -28703,8 +28701,8 @@
     "experimental_fields": []
   },
   "project_config": {
-    "status": "Not fabricated as of 2026-10-12. Fab house: JLCPCB (jlcpcb/ - KiCad JLCPCB plugin, state in jlcpcb/project.db). pcbway_production/ is not the order.",
     "board": "4 layer, 50.95 x 70.00 mm, 1.6 mm. In1.Cu = +3V3 plane, In2.Cu = GND plane, F.Cu/B.Cu GND pours.",
+    "status": "Not fabricated as of 2026-10-12. Fab house: JLCPCB (jlcpcb/ - KiCad JLCPCB plugin, state in jlcpcb/project.db). pcbway_production/ is not the order.",
     "name": "tagbase-lipo-v1",
     "description": "USB-powered base station that programs a tag over SWD and charges the tag's LiPo cell through the 6-pin tagpoint connector J101."
   },
@@ -28766,7 +28764,7 @@
           "confidence": "deterministic",
           "evidence_source": "bom",
           "category": "verification",
-          "summary": "No datasheets directory found (41/41 parts have MPNs). Sync datasheets before making pin-level claims.",
+          "summary": "No datasheets directory found (40/40 parts have MPNs). Sync datasheets before making pin-level claims.",
           "components": [
             "C1",
             "C10",
@@ -28793,7 +28791,7 @@
           "pins": [],
           "datasheets_dir": null,
           "datasheet_file_count": 0,
-          "bom_size": 41,
+          "bom_size": 40,
           "mpn_coverage_percent": 100.0,
           "recommendation": "Run datasheet sync via the digikey / mouser / lcsc / element14 skill (which one depends on the user's distributor access and API credentials). A ./datasheets/ directory with PDFs and a manifest.json enables pin-level verification in the next analyzer run.",
           "report_context": {
@@ -28817,7 +28815,7 @@
         {
           "rule_id": "DS-002",
           "severity": "warning",
-          "summary": "No datasheets directory found (41/41 parts have MPNs). Sync datasheets before making pin-level claims.",
+          "summary": "No datasheets directory found (40/40 parts have MPNs). Sync datasheets before making pin-level claims.",
           "recommendation": "Run datasheet sync via the digikey / mouser / lcsc / element14 skill (which one depends on the user's distributor access and API credentials). A ./datasheets/ directory with PDFs and a manifest.json enables pin-level verification in the next analyzer run.",
           "category": "verification"
         }

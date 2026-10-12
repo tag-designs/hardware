@@ -4,7 +4,7 @@
     "name": "tagbase-lipo-v1",
     "description": "USB-powered base station that programs a tag over SWD and charges the tag's LiPo cell through the 6-pin tagpoint connector J101.",
     "board": "4 layer, 50.95 x 70.00 mm, 1.6 mm. In1.Cu = +3V3 plane, In2.Cu = GND plane, F.Cu/B.Cu GND pours.",
-    "status": "Not fabricated as of 2026-10-12. Fab house: JLCPCB (jlcpcb/ - KiCad JLCPCB plugin, state in jlcpcb/project.db). pcbway_production/ is not the order."
+    "status": "Not fabricated as of 2026-10-12. Fab house: JLCPCB (jlcpcb/ - KiCad JLCPCB plugin, state in jlcpcb/project.db)."
   },
   "analysis": {
     "track_in_git": true,
@@ -29,10 +29,10 @@
       "SN74LVC1T45 direction, verified against TI Table 7-1: DIR low = B to A, DIR high = A to B."
     ],
     "charger": [
-      "U2 is XC6808A4C28R-G (LCSC C3682502). Field 2 = \"4\" selects the JEITA 4-temperature monitor, so PIN 5 IS THIN, NOT NF, AND R2 (10 kohm to GND) IS CORRECT AND REQUIRED. Do not remove it.",
-      "DO NOT SUBSTITUTE THE xN VARIANT. On XC6808ANC28R-G pin 5 is NF and Torex requires it OPEN (\"No Function (Please do not connect any terminal.)\" and Notes on Use item 13). R2 would then be wrong. The two variants differ only in field 2; everything else -- 4.20 V charge voltage, 10 h hold, trickle enabled, 1 kHz abnormal status, USP-6B07 -- is identical.",
-      "THE TEMPERATURE MONITOR IS DEFEATED, NOT ACTIVE. THIN has an internal 10.0 kohm pull-up to VTHIN_open = 2.00 V, so R2 = 10 kohm divides to 1.00 V = 50% of open -- between VT45 (31-35%) and VT10 (62-66%), the normal full-rate band, with ~15 points of margin each side. The IC therefore reads room temperature permanently. This is the datasheet default test condition (VTHIN = 1.0 V). Tolerance is a non-issue: +/-5% on R2 still gives 50% +/-1.9%.",
-      "Real JEITA protection is NOT available on this board: the NTC would have to sit at the cell, which is on the tag, and all six J101 pins are allocated. Adding a seventh tagpoint would enable it -- the A4 keeps that door open, the AN never could.",
+      "U2 is XC6808ANC28R-G (LCSC C7123934) as of 2026-10-12, because XC6808A4C28R-G (C3682502) was out of stock (0 at LCSC). Field 2 = 'N': no temperature monitor, so PIN 5 IS NF AND MUST BE LEFT OPEN. R2 (10 kohm, pin 5 to GND) IS NOT FITTED - dnp + in_bom no on the symbol, exclude_from_bom/pos + dnp on the footprint, 1/1 in jlcpcb/project.db. Its footprint remains, so the A4 can be restored.",
+      "IF U2 GOES BACK TO XC6808A4C28R-G, R2 MUST BE FITTED AGAIN (on the A4, pin 5 is THIN and needs 10 kohm to read room temperature). If it stays an xN, R2 must stay unfitted: Torex 'No Function (Please do not connect any terminal.)' and Notes on Use item 13; the xN has a resistor to GND inside the chip. The two variants differ ONLY in field 2; 4.20 V, 10 h hold, trickle, 1 kHz abnormal status and USP-6B07 are identical. The only other standard 4.20 V XC6808 is one of these two - every other code is 4.35/4.40 V or semi-custom.",
+      "Temperature monitoring: none on the xN. (On the A4 it was present but permanently defeated by R2, which held THIN at 1.00 V = 50% of VTHIN_open - between VT45 31-35% and VT10 62-66%. Charging behaviour is identical between the two on this board.)",
+      "Real JEITA protection is NOT available: it would need the A4 plus an NTC at the cell, which is on the tag, and all six J101 pins are allocated.",
       "Battery insertion detection is unavailable. The datasheet senses it through THIN, and a fixed base-side resistor never moves. Re-apply VIN to restart the IC.",
       "Required externals, both present: CIN = 1 uF on VIN (C10, 2.15 mm) and CL = 1 uF on BAT (C9, 1.56 mm).",
       "Charge current: RISET (kohm) = 351 x ICHG(mA)^-1.11. R1 = 33 kohm -> about 8.4 mA, inside the valid 5-40 mA window.",
@@ -109,13 +109,14 @@
     }
   ],
   "reviewer_notes": {
-    "last_review": "tagbase-lipo-v1-design-review.md, updated 2026-10-12 for test pads J2/J3/J4/J6/J7 and the regenerated JLCPCB package. All findings closed; ready to order.",
+    "last_review": "tagbase-lipo-v1-design-review.md, updated 2026-10-12: test pads J2/J3/J4/J6/J7, NRST label, U2 -> XC6808ANC28R-G with R2 not fitted (A4 out of stock). All findings closed; ready to order.",
     "open_findings": [],
     "closed_findings": [
+      "U2 SUBSTITUTION (2026-10-12): XC6808A4C28R-G out of stock -> XC6808ANC28R-G (C7123934), R2 not fitted at symbol/footprint/plugin. PCB change is fields only; Gerbers content-identical; BOM/CPL drop R2 and relabel U2. LOW: R2 pads still receive paste - inspect for a bridge, or ask JLCPCB to leave them off the stencil.",
       "N1 (2026-10-12): test pads were in the JLCPCB BOM (5 lines, no LCSC) and CPL (4 bottom rows). FIXED at symbol, footprint and project.db; regenerated BOM/CPL identical to the 09-07 package, 0 bottom rows.",
       "N2 (2026-10-12): test pads labelled only by refdes. RESOLVED - function labels added, references hidden.",
       "N3 (2026-10-12): RESOLVED. (1) PA10 net auto-renamed Net-(J7-Pin_1) - fixed by moving J7 to TAG_RESET. (2) C7 reached NRST through #PWR038, a power:+3V3 symbol with Value 'NRST' - it read as a +3V3 decoupler (the designer could not find C7) and split the analyzer's net view. Replaced with a local NRST label; net is /NRST = C7.1, J102.10, U5.4. PCB: net rename only.",
-      "H3: RESOLVED by changing U2 from XC6808ANC28R-G to XC6808A4C28R-G rather than depopulating R2. On the xN, pin 5 is NF and Torex requires it open; on the A4 it is THIN and R2 = 10 kohm is the correct termination. The two variants differ ONLY in field 2 (temperature monitor); charge voltage, hold time, trickle and package are identical. The A4 is also less than half the price ($1.237 vs $2.7275).",
+      "H3: RESOLVED (2026-09-07) by changing U2 from XC6808ANC28R-G to XC6808A4C28R-G rather than depopulating R2. On the xN, pin 5 is NF and Torex requires it open; on the A4 it is THIN and R2 = 10 kohm is the correct termination. The two variants differ ONLY in field 2 (temperature monitor); charge voltage, hold time, trickle and package are identical. The A4 is also less than half the price ($1.237 vs $2.7275). SUPERSEDED 2026-10-12: A4 out of stock, back to the xN with R2 not fitted - which equally satisfies H3.",
       "M3: RESOLVED. C9 (1 uF) added on /BAT, 1.56 mm from U2 pin 1. C10 (1 uF) added on VUSB, 2.15 mm from U2 pin 6. Both satisfy the datasheet CL and CIN requirements.",
       "H1: BOM ordered C3682502 (XC6808A4C28R-G) against a schematic MPN of XC6808ANC28R-G. Caused by the export tool's LCSC auto-select mode, now disabled. Regenerated BOM reads C7123934, verified correct.",
       "H2: WITHDRAWN, raised in error. See the suppression above - 0.2032 mm is fabricated house geometry.",
@@ -123,7 +124,7 @@
       "M2: NOT A DEFECT. R102 = 220 ohm is deliberate (100 ohm measured too bright). The schematic note has been amended to say so, which closes the discrepancy that caused this to be raised."
     ],
     "verified_clean": [
-      "2026-10-12 final state (labels, J7 move, NRST label), in place: DRC --refill-zones --severity-all --schematic-parity: 3 violations (2 J101 hole_to_hole, 1 J1 lib link - suppressed), 0 unconnected, 0 parity. ERC: 2 library-link warnings (J104 symbol, J1 footprint).",
+      "2026-10-12 final state (test pads, NRST label, U2 = XC6808ANC28R-G, R2 not fitted), in place: DRC --refill-zones --severity-all --schematic-parity: 3 violations (2 J101 hole_to_hole, 1 J1 lib link - suppressed), 0 unconnected, 0 parity. ERC: 2 library-link warnings (J104 symbol, J1 footprint).",
       "2026-10-12: padnet_crosscheck 50 footprints, 0 mismatches. Schematic analyzer: 0 errors, only DS-002 (no datasheets/ symlink).",
       "2026-10-12: JLCPCB Gerbers (KiCad 10.0.2) - zip byte-identical to jlcpcb/gerber/. Origin = aux origin (101.6, 50.8). 350/350 track starts and 200/200 sampled zone-fill vertices match the board; test pads on Cu+Mask, no paste.",
       "2026-10-12: drills reconcile exactly - 67 vias 0.2 mm; PTH 6x0.6096, 10x0.635, 4x0.95, 2x1.0; NPTH 2x0.9, 4x1.0668, 1x1.2, 4x1.5875, 2x2.16.",

@@ -1,6 +1,6 @@
 # tagbase-lipo-v1 — design review
 
-**Date:** 2026-09-07 — **updated 2026-10-12** for five added test pads and the regenerated JLCPCB package
+**Date:** 2026-09-07 — **updated 2026-10-12** for five added test pads, the U2 change to `XC6808ANC28R-G` (R2 not fitted), and the regenerated JLCPCB package
 **Board:** `tagbase-lipo-v1.kicad_pcb` / `.kicad_sch` — 4 layer, 50.95 × 70.00 mm, 1.6 mm
 **Role:** USB-powered base station that programs a tag over SWD and charges the tag's LiPo cell
 through the 6-pin tagpoint connector.
@@ -10,10 +10,43 @@ the order and is out of scope.
 ## Update 2026-10-12 — test pads J2, J3, J4, J6, J7
 
 **Verdict: ready to order. Every finding is closed.** The first pass on these pads found one real
-problem: they were in the JLCPCB BOM and CPL (N1). It is fixed at the source, and the regenerated
-package matches the committed 09-07 BOM and CPL exactly. The designer then added function labels, hid
-the reference designators, moved J7 to the tag side of R104, and replaced the mislabelled power
-symbol on the reset net (N3).
+problem: they were in the JLCPCB BOM and CPL (N1). It is fixed at the source. The designer then added
+function labels, hid the reference designators, moved J7 to the tag side of R104, and replaced the
+mislabelled power symbol on the reset net (N3). Finally, **U2 was changed back to `XC6808ANC28R-G` with
+R2 not fitted**, because the A4 went out of stock (see below).
+
+### U2 → `XC6808ANC28R-G`, R2 not fitted — because the A4 is out of stock
+
+At order time LCSC had **0** of `XC6808A4C28R-G` (C3682502). Every other standard XC6808 code
+charges to 4.35 V or 4.40 V, or is semi-custom. That leaves `XC6808ANC28R-G` (C7123934; 9 in stock,
+$2.64 @1, $2.24 @10) as the only footprint-compatible 4.20 V part. The XC6802 and XC6804 Torex
+siblings LCSC suggests are 800 mA-class parts in different packages.
+
+The AN differs from the A4 only in ordering-code field ② (temperature monitor: N instead of 4).
+Charge voltage, hold time, trickle, status behaviour, package and the R1 charge-current formula are
+identical. **On this board the charging behaviour is the same:** the A4's monitor only ever read R2's
+fixed "room temperature". The only thing lost is the option of adding real JEITA protection later.
+
+**This variant requires pin 5 to be open** (H3 below). So R2 is now not fitted at every level:
+- **Schematic:** `dnp yes`, `in_bom no`.
+- **Footprint:** `exclude_from_pos_files exclude_from_bom dnp`.
+- **Plugin:** `1, 1` in `jlcpcb/project.db`.
+
+Its footprint stays on the board.
+
+| Check | Result |
+|---|---|
+| U2 fields (schematic and PCB) | Value, MPN, Datasheet = `XC6808ANC28R-G`; LCSC = `C7123934`. No `XC6808A4C28R-G` left anywhere in the design files |
+| BOM | `XC6808ANC28R-G,U2,xc6808,C7123934,1`; the 10 kΩ line is R3 only |
+| CPL | R2 removed, U2 relabelled at the same position and rotation; nothing else changed |
+| PCB vs the committed board | 8 lines: U2 Value/Datasheet/LCSC/MPN and R2's attributes. **No geometry change** |
+| Gerbers / drills | Content-identical to the committed set (sorted-line compare, timestamps ignored). Zip = loose files |
+| DRC / ERC / pad nets | Unchanged: 3 accepted DRC items, 0 unconnected, 0 parity; ERC library-link only; 50 footprints, 0 mismatches |
+
+**Low, at inspection:** R2's pads are still on the top paste layer, so the stencil puts solder on
+two bare 0402 pads. A bridge there is unlikely. If one did form, the NF pin would be grounded: within
+the absolute maximum ratings, but the condition Torex says to avoid. Look at it under magnification,
+or ask JLCPCB to leave R2 off the stencil.
 
 ### What changed
 
@@ -195,6 +228,9 @@ grounding it cannot damage the part — but it contradicts an explicit instructi
 reading is that Torex does not characterise the part with the pin loaded.
 
 ### Resolution — U2 changed to `XC6808A4C28R-G`, R2 kept
+
+> **Superseded 2026-10-12.** The A4 went out of stock, so U2 is `XC6808ANC28R-G` again, and this
+> time **R2 is not fitted**, which satisfies the NF requirement above. See the update at the top.
 
 Rather than depopulate R2, the part was changed to the variant that wants it. Decoding
 `XC6808①②③④⑤⑥-⑦` from the datasheet's classification table, **the two options differ in exactly one
@@ -529,7 +565,7 @@ Verified against the working tree after the changes:
 | Schematic ↔ PCB pad-net cross-check | **170 pads, 0 mismatches** |
 | `CL` on BAT | C9 1 µF at 1.56 mm from U2 pin 1 |
 | `CIN` on VIN | C10 1 µF at 2.15 mm from U2 pin 6 |
-| U2 | `XC6808A4C28R-G`, LCSC `C3682502` — MPN and part number now agree |
+| U2 | `XC6808A4C28R-G`, LCSC `C3682502` — MPN and part number now agree (**superseded 2026-10-12:** `XC6808ANC28R-G` / `C7123934`, R2 not fitted) |
 | R2 | retained, correct for the A4 variant |
 
 Nothing is outstanding, including the LED note, which now records the 220 Ω choice and the reason for

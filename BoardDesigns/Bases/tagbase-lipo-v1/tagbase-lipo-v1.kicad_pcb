@@ -6401,7 +6401,7 @@
 				)
 			)
 		)
-		(property "Value" "XC6808A4C28R-G"
+		(property "Value" "XC6808ANC28R-G"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -6413,7 +6413,7 @@
 				)
 			)
 		)
-		(property "Datasheet" "XC6808A4C28R-G"
+		(property "Datasheet" "XC6808ANC28R-G"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -6439,7 +6439,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C3682502"
+		(property "LCSC" "C7123934"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -6465,7 +6465,7 @@
 				)
 			)
 		)
-		(property "MPN" "XC6808A4C28R-G"
+		(property "MPN" "XC6808ANC28R-G"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -10489,7 +10489,7 @@
 				(pins "1" "2")
 			)
 		)
-		(attr smd)
+		(attr smd exclude_from_pos_files exclude_from_bom dnp)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
 			(start -0.153641 -0.38)

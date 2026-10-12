@@ -1900,8 +1900,8 @@
     {
       "library": "tagbase:xc6808",
       "reference": "U2",
-      "value": "XC6808A4C28R-G",
-      "mpn": "XC6808A4C28R-G",
+      "value": "XC6808ANC28R-G",
+      "mpn": "XC6808ANC28R-G",
       "x": 137.827601,
       "y": 66.1138,
       "angle": 0.0,
@@ -2915,6 +2915,9 @@
       "layer": "F.Cu",
       "type": "smd",
       "pad_count": 2,
+      "dnp": true,
+      "exclude_from_bom": true,
+      "exclude_from_pos": true,
       "sch_path": "/a7458edf-112d-4fa9-a422-681d319eee6e",
       "sheetname": "/",
       "sheetfile": "tagbase-lipo-v1.kicad_sch",
@@ -12226,7 +12229,7 @@
     },
     {
       "ic": "U2",
-      "value": "XC6808A4C28R-G",
+      "value": "XC6808ANC28R-G",
       "layer": "F.Cu",
       "nearby_caps": [
         {
@@ -14952,7 +14955,7 @@
       ],
       "disconnected_pads": [
         [
-          "U2:6",
+          "J104:1",
           "U1:3"
         ]
       ]
@@ -17469,42 +17472,6 @@
       "finding_id": "pcb:TB-001:r105"
     },
     {
-      "component": "R2",
-      "value": "10K",
-      "package": "0402",
-      "layer": "F.Cu",
-      "risk_level": "medium",
-      "pad_1_net": "Net-(U2-THIN/NF)",
-      "pad_2_net": "GND",
-      "reasons": [
-        "pad 2 connected to zone net (GND), other pad is signal-only \u2014 thermal asymmetry",
-        "pad 2 is GND (likely ground pour), other pad is signal \u2014 thermal asymmetry risk"
-      ],
-      "detector": "analyze_tombstoning_risk",
-      "rule_id": "TB-001",
-      "category": "dfm",
-      "severity": "info",
-      "confidence": "deterministic",
-      "evidence_source": "topology",
-      "summary": "R2 (0402) tombstoning risk: medium",
-      "description": "R2 (0402, 10K) has medium tombstoning risk due to thermal asymmetry between pads.",
-      "components": [
-        "R2"
-      ],
-      "nets": [],
-      "pins": [],
-      "recommendation": "pad 2 connected to zone net (GND), other pad is signal-only \u2014 thermal asymmetry; pad 2 is GND (likely ground pour), other pad is signal \u2014 thermal asymmetry risk",
-      "report_context": {
-        "section": "DFM",
-        "impact": "assembly",
-        "standard_ref": ""
-      },
-      "stages": [
-        "layout"
-      ],
-      "finding_id": "pcb:TB-001:r2"
-    },
-    {
       "component": "R3",
       "value": "10K",
       "package": "0402",
@@ -17732,16 +17699,16 @@
   ],
   "assessments": [],
   "trust_summary": {
-    "total_findings": 63,
+    "total_findings": 62,
     "trust_level": "high",
     "by_confidence": {
-      "deterministic": 62,
+      "deterministic": 61,
       "heuristic": 1,
       "datasheet_backed": 0
     },
     "by_evidence_source": {
       "datasheet": 0,
-      "topology": 59,
+      "topology": 58,
       "heuristic_rule": 0,
       "symbol_footprint": 0,
       "bom": 0,
@@ -17751,11 +17718,11 @@
     "provenance_coverage_pct": 0.0
   },
   "summary": {
-    "total_findings": 63,
+    "total_findings": 62,
     "by_severity": {
       "error": 3,
       "warning": 26,
-      "info": 34
+      "info": 33
     }
   },
   "inputs": {
@@ -17763,10 +17730,10 @@
       "/Users/geobrown/Research/tag-designs/hardware/BoardDesigns/Bases/tagbase-lipo-v1/tagbase-lipo-v1.kicad_pcb"
     ],
     "source_hashes": {
-      "/Users/geobrown/Research/tag-designs/hardware/BoardDesigns/Bases/tagbase-lipo-v1/tagbase-lipo-v1.kicad_pcb": "013136540f614134070e8188df5faab8f43e0bb045dfc61e07615db189e42b46"
+      "/Users/geobrown/Research/tag-designs/hardware/BoardDesigns/Bases/tagbase-lipo-v1/tagbase-lipo-v1.kicad_pcb": "853e2d332cb3efbc486f5c7845aea65bf0ce6b7a3af6eb5efcb6e21fc3a87f33"
     },
     "run_id": "20261012T110124Z-5bbb21",
-    "config_hash": "24819ddce57ce4874db75e39aa1a69f3f2dbc7886a31cf743595ee718a60bec8",
+    "config_hash": "4c4e32a9298d6019a7d1facd00e2203cf16af3ec702a25d7488bc09cfa57365c",
     "upstream_artifacts": {}
   },
   "compat": {
@@ -17777,8 +17744,8 @@
   "project_config": {
     "board": "4 layer, 50.95 x 70.00 mm, 1.6 mm. In1.Cu = +3V3 plane, In2.Cu = GND plane, F.Cu/B.Cu GND pours.",
     "name": "tagbase-lipo-v1",
-    "status": "Not fabricated as of 2026-10-12. Fab house: JLCPCB (jlcpcb/ - KiCad JLCPCB plugin, state in jlcpcb/project.db). pcbway_production/ is not the order.",
-    "description": "USB-powered base station that programs a tag over SWD and charges the tag's LiPo cell through the 6-pin tagpoint connector J101."
+    "description": "USB-powered base station that programs a tag over SWD and charges the tag's LiPo cell through the 6-pin tagpoint connector J101.",
+    "status": "Not fabricated as of 2026-10-12. Fab house: JLCPCB (jlcpcb/ - KiCad JLCPCB plugin, state in jlcpcb/project.db). pcbway_production/ is not the order."
   },
   "design_intent": {
     "product_class": "prototype",
@@ -17810,16 +17777,16 @@
   },
   "audience_summary": {
     "designer": {
-      "total_findings": 63,
+      "total_findings": 62,
       "by_severity": {
         "error": 3,
         "warning": 26,
-        "info": 34
+        "info": 33
       },
       "by_category": {
         "current_capacity": 23,
         "copper_integrity": 4,
-        "dfm": 23,
+        "dfm": 22,
         "assembly": 3,
         "placement": 6,
         "testability": 1,

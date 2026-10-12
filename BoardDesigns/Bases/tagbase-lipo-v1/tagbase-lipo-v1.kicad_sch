@@ -13194,7 +13194,7 @@
 				)
 			)
 		)
-		(property "Value" "XC6808A4C28R-G"
+		(property "Value" "XC6808ANC28R-G"
 			(at 58.42 115.57 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -13216,7 +13216,7 @@
 				)
 			)
 		)
-		(property "Datasheet" "XC6808A4C28R-G"
+		(property "Datasheet" "XC6808ANC28R-G"
 			(at 81.28 123.19 0)
 			(hide yes)
 			(show_name no)
@@ -13239,7 +13239,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C3682502"
+		(property "LCSC" "C7123934"
 			(at 81.28 123.19 0)
 			(hide yes)
 			(show_name no)
@@ -13261,7 +13261,7 @@
 				)
 			)
 		)
-		(property "MPN" "XC6808A4C28R-G"
+		(property "MPN" "XC6808ANC28R-G"
 			(at 81.28 123.19 0)
 			(hide yes)
 			(show_name no)
@@ -14345,10 +14345,10 @@
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
+		(in_pos_files no)
+		(dnp yes)
 		(uuid "a7458edf-112d-4fa9-a422-681d319eee6e")
 		(property "Reference" "R2"
 			(at 14.732 135.89 0)
