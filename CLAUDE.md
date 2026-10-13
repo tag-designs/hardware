@@ -337,3 +337,13 @@ mask, or a house-standard via:
   corner circles, not the outer extents** — add 2r to width and height. Reading
   them as extents produced a bogus 25% exposed-pad paste figure where the true
   value is 63%, and nearly cost a working design a redesign.
+
+## Tag cases (`Mechanical/`)
+
+Each tag needs a 3D-printed base and lid that mate it to a tag base's pogo
+array. Before making one, read `Mechanical/TAGCASES-general-principles.md`
+(what a case must do) and `Mechanical/TAGCASE-PROCESS.md` (how: geometry
+extraction with `Mechanical/tools/board_geometry.py`, base mating, coin-cell
+placement from the tab geometry, the floating lid, text sizing, and the
+`make check` / `make assembly` verification). Start from
+`Mechanical/BitPresTagBMP585/`, the most complete case.
