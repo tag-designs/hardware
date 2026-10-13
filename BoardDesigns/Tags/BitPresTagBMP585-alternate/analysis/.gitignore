@@ -1,0 +1,10 @@
+# Intentionally a no-op.
+#
+# analysis.track_in_git is true for this board: deep_review.json is
+# hand-authored and NOT regenerable, and the analyzer JSON is slow to
+# rebuild. This file exists only to hold the slot -- all three writers
+# (analysis_cache.ensure_analysis_dir, analyze_schematic.py and
+# analyze_pcb.py) create a real ignore file when none is present, and
+# analyze_pcb.py does so unconditionally, ignoring track_in_git.
+# Deleting this file will silently re-ignore the whole directory on the
+# next PCB run. Leave it here.
