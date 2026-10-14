@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "project": "UIUCTag.kicad_pro",
+  "current": "2026-10-14_0954",
+  "runs": {
+    "2026-10-14_0954": {
+      "source_hashes": {
+        "UIUCTag.kicad_sch": "sha256:d54c16f454d7b138073060097b8a9b16468e1d98e97b3c30fd013376b593ae79",
+        "UIUCTag.kicad_pcb": "sha256:717c7412dbd1379b20c2aeb7f41a4fd0c401df8695d1e3bf294abd6ed10a8fa9",
+        "schematic.json": "sha256:ea1741f15be44a7b52e3212134739c459cb7d86cbb2832233082e43367a2bacb",
+        "pcb.json": "sha256:2fcbf473e24e57a3ad65927a713720f53925696e90fdbd35316778d6c38c9ee8"
+      },
+      "outputs": {
+        "schematic": "schematic.json",
+        "pcb": "pcb.json",
+        "cross_analysis": "cross_analysis.json",
+        "emc": "emc.json",
+        "thermal": "thermal.json",
+        "gerber": "gerber.json"
+      },
+      "scripts": {
+        "schematic": "analyze_schematic.py UIUCTag.kicad_sch"
+      },
+      "generated": "2026-10-14T10:19:31-04:00",
+      "pinned": false
+    }
+  }
+}

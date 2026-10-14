@@ -1,0 +1,668 @@
+{
+  "schema_version": "1.0",
+  "produced_for_run_id": "2026-10-14_0954",
+  "produced_at": "2026-10-14T11:30:00-04:00",
+  "findings": [
+    {
+      "detector": "deep_review",
+      "category": "accepted_by_design",
+      "severity": "info",
+      "confidence": "high",
+      "summary": "Q501 reset inverter, now on F.Cu: base series resistor lives on the connecting board (house convention, confirmed 2026-09-04)",
+      "description": "Carried forward from the BitPresTagBMP585 review. Net RST has only Q501 base (pin 1) and J201 pin 5. UIUCTag moved Q501 (SOT-883) and C502 from B.Cu to F.Cu; padnet_crosscheck shows the flip preserved pad-to-net (B=RST, E=GND, C=NRST), and KiCad DRC is clean.",
+      "recommendation": "No change. mating_design.baseboard_contract records the obligation.",
+      "evidence": {
+        "components": [
+          "Q501",
+          "J201",
+          "C502"
+        ],
+        "nets": [
+          "RST"
+        ],
+        "pins": [
+          "Q501.1",
+          "J201.5"
+        ],
+        "datasheet": [
+          {
+            "mpn": "PMBT2222AMB",
+            "quote": "emitter"
+          }
+        ],
+        "computation": {
+          "description": "padnet_crosscheck.py after the side flip",
+          "script": "../../kicad-helpers/padnet_crosscheck.py",
+          "result": "27 footprints, 0 mismatches"
+        }
+      },
+      "evidence_checked": "full",
+      "components": [
+        "Q501",
+        "J201",
+        "C502"
+      ],
+      "nets": [
+        "RST"
+      ],
+      "pins": [
+        "Q501.1",
+        "J201.5"
+      ],
+      "finding_id": "deep_review:aae716b91180"
+    },
+    {
+      "detector": "deep_review",
+      "category": "decoupling",
+      "severity": "info",
+      "confidence": "high",
+      "summary": "ADXL362 supply decoupling meets the datasheet: 0.1 uF within 0.10 mm of VDD I/O and 1.13 mm of VS, closer than on BitTagv7",
+      "description": "Datasheet p.39 asks for 0.1 uF ceramic at VS and at VDD I/O, as close as possible. C7 (0.1 uF, F.Cu) sits 0.10 mm from U2.1 through the 0.4 mm board; C1 (0.1 uF, B.Cu) is 1.13 mm from U2.14, with C6 47 uF at 0.81 mm and C404 22 uF at 0.87 mm. BitTagv7's nearest caps were 1.41 mm and 1.21 mm. The datasheet also recommends separate VS and VDD I/O supplies; both are on VIN here, as on BitTagv7, which only matters for noise in measurement mode.",
+      "recommendation": "No action.",
+      "evidence": {
+        "components": [
+          "U2",
+          "C7",
+          "C1",
+          "C6",
+          "C404"
+        ],
+        "nets": [
+          "VIN"
+        ],
+        "pins": [
+          "U2.1",
+          "U2.14"
+        ],
+        "datasheet": [
+          {
+            "mpn": "adxl362",
+            "page": 39,
+            "quote": "A 0.1 \u00b5F ceramic capacitor (CS) at VS and a 0.1 \u00b5F ceramic capacitor (CIO) at VDD I/O placed as close as possible to the ADXL362."
+          }
+        ],
+        "computation": {
+          "description": "Nearest VIN capacitor pad to each U2 supply pad, from the .kicad_pcb",
+          "script": "analysis/helpers/u2_fit_check.py",
+          "result": "U2.1: C7 F.Cu 0.10 mm, C404 1.05 mm; U2.14: C6 0.81 mm, C404 0.87 mm, C1 B.Cu 1.13 mm"
+        }
+      },
+      "evidence_checked": "full",
+      "components": [
+        "U2",
+        "C7",
+        "C1",
+        "C6",
+        "C404"
+      ],
+      "nets": [
+        "VIN"
+      ],
+      "pins": [
+        "U2.1",
+        "U2.14"
+      ],
+      "finding_id": "deep_review:b49712b0705b"
+    },
+    {
+      "detector": "deep_review",
+      "category": "firmware_contract",
+      "severity": "info",
+      "confidence": "high",
+      "summary": "Both ADXL362 interrupt pins double as inputs: keep FILTER_CTL EXT_SAMPLE and EXT_CLK clear, and map activity through INTMAP2",
+      "description": "INT2 (pin 9) now drives PA0/WKUP1; INT1 (pin 11) is unconnected. INT2 also serves as the synchronized-sampling input (FILTER_CTL bit 3 EXT_SAMPLE); setting that bit turns the wake pin into an ADXL362 input that nothing drives except PA0, which is configured as a wake input. INT1 is the external-clock input (FILTER_CTL EXT_CLK); setting that bit leaves an undriven, floating input on an unconnected pin, a leakage path in a 10 uA design. With both bits at their reset value 0, both pins are push-pull outputs and the open INT1 is harmless. Designer confirmed 2026-10-14 that the part is used for activity detection only, never in measurement mode.",
+      "recommendation": "Firmware: map ACT (and INACT if used) via INTMAP2 (0x2B), leave EXT_SAMPLE and EXT_CLK at 0, and match the PA0 WKUP1 wake polarity (PWR_CR4.WP1) to INTMAP2.INT_LOW.",
+      "evidence": {
+        "components": [
+          "U2",
+          "U302"
+        ],
+        "nets": [
+          "WKUP1"
+        ],
+        "pins": [
+          "U2.9",
+          "U2.11",
+          "U302.6"
+        ],
+        "datasheet": [
+          {
+            "mpn": "adxl362",
+            "page": 7,
+            "quote": "INT2 also serves as an input for synchronized sampling."
+          },
+          {
+            "mpn": "adxl362",
+            "page": 7,
+            "quote": "INT1 also serves as an input for external clocking."
+          },
+          {
+            "mpn": "adxl362",
+            "page": 35,
+            "quote": "1 = the INT2 pin is used for external conversion timing control."
+          }
+        ],
+        "computation": {
+          "description": "Netlist re-exported after the INT1 -> INT2 change",
+          "result": "U2.9 INT2 -> /WKUP1 -> U302.6 (PA0); U2.11 INT1 unconnected"
+        }
+      },
+      "evidence_checked": "full",
+      "components": [
+        "U2",
+        "U302"
+      ],
+      "nets": [
+        "WKUP1"
+      ],
+      "pins": [
+        "U2.9",
+        "U2.11",
+        "U302.6"
+      ],
+      "finding_id": "deep_review:9f085fe094f4"
+    },
+    {
+      "detector": "deep_review",
+      "category": "mechanical_fit",
+      "severity": "warning",
+      "confidence": "high",
+      "summary": "Board extended 1 mm at the far end (18 -> 19 mm) to restore case room around U2; a UIUCTag case is still needed -- the BitPresTagBMP585 case does not fit",
+      "description": "As first reviewed, the 18 mm board left U2's body 0.93 mm from the far edge and C7/C404 under the parent lid's far block, so a case would have had a 0.08-0.73 mm far-end ledge and a split lid block. On 2026-10-14 the far edge was moved 1 mm (Edge.Cuts x 140 -> 139) with J303/J304 moving with it; the pogo end, J201, J401 and every part stayed put, so the base mating is unchanged. Now: U2 body 1.93 mm and courtyard 1.28 mm from the edge; far-end base ledge 1.08 mm with the pocket sized from the courtyard (as board_geometry.py does) or 1.73 mm from the body; lid far block clear strip 1.68 mm before C7, against the parent's 1.75 mm block. The parent case remains unusable because the board is now 19 mm.",
+      "recommendation": "Make a UIUCTag case per Mechanical/TAGCASE-PROCESS.md from board_geometry.py on the 19 mm board, with the lid far block within the 1.68 mm strip at the far end; run make check.",
+      "evidence": {
+        "components": [
+          "U2",
+          "C7",
+          "C404"
+        ],
+        "computation": {
+          "description": "Far-end case room on the extended board, in case coordinates",
+          "script": "analysis/helpers/u2_fit_check.py",
+          "result": "19.00 x 10.00 mm; U2 body x[-7.57,-4.38] (1.93 mm to edge), courtyard 1.28 mm; base ledge 1.08 mm (courtyard) / 1.73 mm (body); lid strip 1.68 mm before C7"
+        }
+      },
+      "evidence_checked": "full",
+      "components": [
+        "U2",
+        "C7",
+        "C404"
+      ],
+      "finding_id": "deep_review:21303eeba362"
+    },
+    {
+      "detector": "deep_review",
+      "category": "part_identity",
+      "severity": "info",
+      "confidence": "high",
+      "summary": "Post-review MPN changes inherited from BitPresTagBMP585 commit b6daea5: U302 -> STM32L432KCU6TR and nine 0.1 uF caps -> GRM033R61A104ME15D",
+      "description": "These changes landed on the parent after its 2026-09-04 review closed and were never reviewed. U302: STM32L432KCU6TR is the tape-and-reel packing of the same STM32L432KCU6, so no electrical change; Value and MPN agree. Caps C1, C2, C3, C5, C7, C501, C502, C503 and C504 changed from GRM033C81E104KE14D to GRM033R61A104ME15D (Murata code: 0201, 100 nF, 10 V, X5R, +-20%). 10 V against the 3.1 V maximum rail is 31% of rating. 0201 X5R loses a significant fraction of its capacitance at 3 V DC bias (inference, no Murata curve in the datasheet store), which is irrelevant at the ~10 uA operating point.",
+      "recommendation": "No action.",
+      "evidence": {
+        "components": [
+          "U302",
+          "C1",
+          "C2",
+          "C3",
+          "C5",
+          "C7",
+          "C501",
+          "C502",
+          "C503",
+          "C504"
+        ],
+        "computation": {
+          "description": "diff_analysis.py on BitPresTagBMP585 run 2026-09-04_1914-2 vs UIUCTag run 2026-10-14_0954, plus git log of the parent",
+          "result": "~ U302 mpn STM32L432KCU6 -> STM32L432KCU6TR; ~ C2/C501/C502/C503 (and C1/C3/C5/C7/C504) mpn -> GRM033R61A104ME15D; parent commit b6daea5 2026-10-05"
+        }
+      },
+      "evidence_checked": "full",
+      "components": [
+        "U302",
+        "C1",
+        "C2",
+        "C3",
+        "C5",
+        "C7",
+        "C501",
+        "C502",
+        "C503",
+        "C504"
+      ],
+      "finding_id": "deep_review:e45e30612c17"
+    },
+    {
+      "detector": "deep_review",
+      "category": "peripheral_mapping",
+      "severity": "info",
+      "confidence": "high",
+      "summary": "ADXL362 on USART2 synchronous mode (AF7, PA4/PA2/PA3, CS on PA1) carries over from the ADXL367 unchanged: same SPI mode 0, MSB-first protocol",
+      "description": "The MCU pins are identical to the parent's (stm32_pinmap.py: pin numbering matches the package, 25 GPIO pins checked against STM32_open_pin_data). ADXL362 SPI is CPHA = CPOL = 0 (p.21) with fCLK 2.4 kHz to 8 MHz (Table 10, p.23; the minimum applies only when using the FIFO), and CS must stay low for the whole transaction, which a GPIO CS on PA1 guarantees while USART2 inserts start/stop gaps between bytes. Command bytes 0x0A write / 0x0B read are the same as the ADXL367's. The ADXL367 caveat 'SCLK low selects I2C' no longer applies: the ADXL362 is SPI-only.",
+      "recommendation": "Firmware: keep the existing USART2 configuration (MSBFIRST, CPOL=0/CPHA=0, LBCL), keep SCK at or below 8 MHz, and replace the ADXL367 driver: PARTID 0xF2 (vs 0xF7), 12-bit data, different FIFO, filter and power-control registers.",
+      "evidence": {
+        "components": [
+          "U2",
+          "U302"
+        ],
+        "nets": [
+          "ACCEL_SCK",
+          "ACCEL_MOSI",
+          "ACCEL_MISO",
+          "ACCEL_nCS"
+        ],
+        "pins": [
+          "U302.7",
+          "U302.8",
+          "U302.9",
+          "U302.10"
+        ],
+        "datasheet": [
+          {
+            "mpn": "adxl362",
+            "page": 21,
+            "quote": "The SPI timing scheme follows CPHA = CPOL = 0."
+          },
+          {
+            "mpn": "stm32l432kc",
+            "quote": "SPI-like communication capability"
+          }
+        ],
+        "computation": {
+          "description": "stm32_pinmap.py AF cross-check against STM32_open_pin_data",
+          "script": "../../kicad-helpers/stm32_pinmap.py",
+          "result": "pin numbering matches the package (25 GPIO pins checked); PA2/PA3/PA4 = ACCEL_MOSI/MISO/SCK, PA1 = ACCEL_nCS; the only collisions are the known SPI1 LPS/AT25 ones, resolved by SPI3 (AF6) for the flash"
+        }
+      },
+      "evidence_checked": "full",
+      "components": [
+        "U2",
+        "U302"
+      ],
+      "nets": [
+        "ACCEL_SCK",
+        "ACCEL_MOSI",
+        "ACCEL_MISO",
+        "ACCEL_nCS"
+      ],
+      "pins": [
+        "U302.7",
+        "U302.8",
+        "U302.9",
+        "U302.10"
+      ],
+      "finding_id": "deep_review:efadfa15e340"
+    },
+    {
+      "detector": "deep_review",
+      "category": "power_gating",
+      "severity": "info",
+      "confidence": "high",
+      "summary": "BMP585 power gating from PB1 through R2 = 10 ohm (resolved on the parent 2026-09-04); back-powering is a firmware contract",
+      "description": "Carried forward unchanged: PB1 -> R2 10 ohm -> LPS_VDD (C3, C5, U3.4, U3.8). R2 satisfies the BMP585 Table 4 series-resistor requirement by construction. Firmware must drive LPS_SCK/LPS_MOSI/LPS_CS low before clearing PB1 and keep PA6 an input with no pull-up.",
+      "recommendation": "No change; see mating_design.firmware_contracts.",
+      "evidence": {
+        "components": [
+          "U3",
+          "U302",
+          "R2",
+          "C3",
+          "C5"
+        ],
+        "nets": [
+          "LPS_PWR",
+          "LPS_VDD"
+        ],
+        "pins": [
+          "U302.15",
+          "U3.4",
+          "U3.8"
+        ],
+        "computation": {
+          "description": "Net membership from schematic.json",
+          "result": "LPS_PWR = U302.15 + R2.2; LPS_VDD = R2.1, C5.1, C3.1, U3.4, U3.8"
+        }
+      },
+      "evidence_checked": "full",
+      "components": [
+        "U3",
+        "U302",
+        "R2",
+        "C3",
+        "C5"
+      ],
+      "nets": [
+        "LPS_PWR",
+        "LPS_VDD"
+      ],
+      "pins": [
+        "U302.15",
+        "U3.4",
+        "U3.8"
+      ],
+      "finding_id": "deep_review:46df909559b3"
+    },
+    {
+      "detector": "deep_review",
+      "category": "power_up_sequencing",
+      "severity": "info",
+      "confidence": "high",
+      "summary": "AT25 flash CS relies on the STM32 PA15 internal pull-up (house convention; datasheet recommends 10 kOhm external)",
+      "description": "Carried forward unchanged from the parent review.",
+      "recommendation": "Accept as house convention; drive AT25_nCS high as the first GPIO action.",
+      "evidence": {
+        "components": [
+          "U1",
+          "U302"
+        ],
+        "nets": [
+          "AT25_nCS"
+        ],
+        "pins": [
+          "U1.B4",
+          "U302.25"
+        ],
+        "computation": {
+          "description": "Net membership from schematic.json",
+          "result": "AT25_nCS = U1.B4 + U302.25 only; no resistor"
+        }
+      },
+      "evidence_checked": "full",
+      "components": [
+        "U1",
+        "U302"
+      ],
+      "nets": [
+        "AT25_nCS"
+      ],
+      "pins": [
+        "U1.B4",
+        "U302.25"
+      ],
+      "finding_id": "deep_review:10f4853b6a1b"
+    },
+    {
+      "detector": "deep_review",
+      "category": "power_up_sequencing",
+      "severity": "info",
+      "confidence": "high",
+      "summary": "ADXL362 Rev. G power-cycling rule: VS and VDD I/O must fall to <= 100 mV for >= 200 ms before power is reapplied",
+      "description": "Rev. G added VRESET, hold-time and rise-time requirements (p.40). On this tag they apply only at cell insertion or when the connecting board powers VIN through J201. The 91 uF of VIN bulk (C4 + C404 + C6) holds charge after a cell is pulled, so a quick re-insert can violate VRESET and leave the accelerometer in an undefined state.",
+      "recommendation": "Wait several seconds before re-inserting a cell or re-mating the tag. Firmware should issue a soft reset (0x52 to SOFT_RESET, 0x1F) at boot as a belt-and-braces measure.",
+      "evidence": {
+        "components": [
+          "U2",
+          "C4",
+          "C404",
+          "C6"
+        ],
+        "nets": [
+          "VIN"
+        ],
+        "pins": [
+          "U2.1",
+          "U2.14"
+        ],
+        "datasheet": [
+          {
+            "mpn": "adxl362",
+            "page": 40,
+            "quote": "VDD I/O supply must be discharged to a voltage VRESET \u2264 100 mV"
+          }
+        ],
+        "computation": {
+          "description": "Bulk capacitance on VIN from the BOM",
+          "result": "C4 22 uF + C404 22 uF + C6 47 uF = 91 uF"
+        }
+      },
+      "evidence_checked": "full",
+      "components": [
+        "U2",
+        "C4",
+        "C404",
+        "C6"
+      ],
+      "nets": [
+        "VIN"
+      ],
+      "pins": [
+        "U2.1",
+        "U2.14"
+      ],
+      "finding_id": "deep_review:9d973e7052b8"
+    },
+    {
+      "detector": "deep_review",
+      "category": "sourcing",
+      "severity": "info",
+      "confidence": "high",
+      "summary": "U2 LCSC C59641 confirmed as ADXL362BCCZ-RL by the designer (JLCPCB parts library), although the community jlcsearch mirror has no entry for it",
+      "description": "U2 carries MPN ADXL362BCCZ-RL and LCSC C59641. A query of the community JLC parts mirror (jlcsearch) returned C17643415 = ADXL367BCCZ-RL7 for the old part but nothing for C59641 or for any ADXL362. The mirror is incomplete, so this is not proof the number is wrong, but the JLCPCB placement of this part has never been exercised; BitTagv7 used ADXL362BCCZ-RL7 with no LCSC number. -RL is a 5000-piece reel; -RL7 (1500) is the same die and more commonly stocked as cut tape. RESOLVED 2026-10-14: the designer confirmed C59641 in the JLCPCB parts library (jlcpcb.com/parts/componentSearch?searchTxt=C59641).",
+      "recommendation": "None. -RL7 (1500 reel, BitTagv7's choice) remains an option if -RL sourcing is ever a problem.",
+      "evidence": {
+        "components": [
+          "U2"
+        ],
+        "computation": {
+          "description": "jlcsearch.tscircuit.com components/list.json?search= for C59641, ADXL362, C17643415 on 2026-10-14",
+          "result": "C59641: no result; ADXL362: no ADXL362 entry; C17643415: ADXL367BCCZ-RL7, LGA-12, stock 42; designer confirmation 2026-10-14: C59641 is the ADXL362"
+        }
+      },
+      "evidence_checked": "full",
+      "components": [
+        "U2"
+      ],
+      "finding_id": "deep_review:06ba1d3d9449"
+    },
+    {
+      "detector": "deep_review",
+      "category": "supply_range",
+      "severity": "info",
+      "confidence": "high",
+      "summary": "ADXL362 VS and VDD I/O ranges (1.6-3.5 V, VDD I/O <= VS) cover the unregulated cell rail across its life",
+      "description": "VIN is VBAT minus the D401 Schottky drop: about 3.1 V fresh, falling to about 1.9 V at end of life (config power_rails notes). Table 1 (p.4) gives VS 1.6-3.5 V and VDD I/O 1.6 V to VS. Both pins are on VIN, so VDD I/O = VS by construction. The binding floor stays the STM32L432 BOR and BMP585 at 1.71 V, not the accelerometer. Note the 362 floor (1.6 V) is higher than the 367's (1.1 V), which does not matter at a 1.9 V end-of-life rail.",
+      "recommendation": "No action. A connecting board that powers VIN through J201.1 must stay at or below 3.5 V.",
+      "evidence": {
+        "components": [
+          "U2",
+          "D401"
+        ],
+        "nets": [
+          "VIN"
+        ],
+        "pins": [
+          "U2.1",
+          "U2.14"
+        ],
+        "datasheet": [
+          {
+            "mpn": "adxl362",
+            "page": 4,
+            "quote": "Operating Voltage Range (VS)"
+          },
+          {
+            "mpn": "adxl362",
+            "page": 4,
+            "quote": "I/O Voltage Range (VDD I/O)"
+          }
+        ],
+        "computation": {
+          "description": "Table 1 limits vs VIN range from .kicad-happy.json analysis.power_rails notes",
+          "result": "VS/VDD I/O 1.6 V min, 3.5 V max (VDD I/O max = VS); VIN 1.9-3.1 V: in range with 0.3 V floor margin and 0.4 V ceiling margin"
+        }
+      },
+      "evidence_checked": "full",
+      "components": [
+        "U2",
+        "D401"
+      ],
+      "nets": [
+        "VIN"
+      ],
+      "pins": [
+        "U2.1",
+        "U2.14"
+      ],
+      "finding_id": "deep_review:cabbbad6ce26"
+    },
+    {
+      "detector": "deep_review",
+      "category": "symbol_hygiene",
+      "severity": "info",
+      "confidence": "high",
+      "summary": "Symbol pin types corrected 2026-10-14 (U501 RV-3028, adxl362) with a PWR_FLAG on GND; unused libraries pruned; ERC clean",
+      "description": "U501 (board-local BitTagNG.kicad_sym and the schematic's embedded copy): CLKOUT input -> output, INT input -> open_collector, SDA input -> bidirectional, GND power_out -> power_in, VDD input -> power_in. adxl362 (shared tag_library and embedded copy): NC pins 2/15 -> no_connect, RES 3/5 -> passive. U501's GND had been the only power output on GND, so correcting it surfaced power_pin_not_driven; a PWR_FLAG (#FLG0103) on GND, matching the existing VIN/VBAT flags, closes it. sym-lib-table: the unused adxl367/lis2dw12/lis2du12 entries were removed. The earlier 'no Device library' note was WRONG: KiCad 10's global table includes the stock libraries, so Device/power/Connector_Generic/Mechanical resolve.",
+      "recommendation": "None. Other boards using tag_library:adxl362 pick up the pin-type fix when their symbols are updated from the library.",
+      "evidence": {
+        "components": [
+          "U501",
+          "U2"
+        ],
+        "pins": [
+          "U501.1",
+          "U501.4",
+          "U501.5",
+          "U2.2",
+          "U2.15"
+        ],
+        "computation": {
+          "description": "KiCad ERC after the pin-type changes and the GND PWR_FLAG; netlist diff vs BitPresTagBMP585",
+          "result": "ERC 0 violations; no pin-net change outside U2/C8; sym-lib-table: BitTagNG, tag_library"
+        }
+      },
+      "evidence_checked": "full",
+      "components": [
+        "U501",
+        "U2"
+      ],
+      "pins": [
+        "U501.1",
+        "U501.4",
+        "U501.5",
+        "U2.2",
+        "U2.15"
+      ],
+      "finding_id": "deep_review:e139833ed802"
+    },
+    {
+      "detector": "deep_review",
+      "category": "verified_correct",
+      "severity": "info",
+      "confidence": "high",
+      "summary": "U2 ADXL362 pinout, footprint and pad nets verified against the ADI datasheet (Rev. G) and the shipped BitTagv7 footprint",
+      "description": "All 16 schematic pins match datasheet Table 6 (p.7): 1 VDD I/O=VIN, 4 SCLK=ACCEL_SCK, 6 MOSI=ACCEL_MOSI, 7 MISO=ACCEL_MISO, 8 CS=ACCEL_nCS, 9 INT2=WKUP1, 12/13/16 GND, 14 VS=VIN. NC pins 2/15 and reserved pins 3/5/10 are left open, which the datasheet permits; INT1 (11) is unused. The libraries:ADXL362 land pattern is pad-for-pad identical (0.798 x 0.300 mm, same positions) to bittag:ADXL362 on BitTagv7, a fabricated and working ADXL362 board, and runs clockwise from pin 1 as seen from the board top, correct for a B.Cu part. C8 (the ADXL367 VREG_OUT cap) was removed, correctly: the ADXL362 has no regulator pin.",
+      "recommendation": "No action. Recorded so the next review does not re-derive it.",
+      "evidence": {
+        "components": [
+          "U2",
+          "U302"
+        ],
+        "nets": [
+          "ACCEL_SCK",
+          "ACCEL_MOSI",
+          "ACCEL_MISO",
+          "ACCEL_nCS",
+          "WKUP1",
+          "VIN",
+          "GND"
+        ],
+        "pins": [
+          "U2.1",
+          "U2.4",
+          "U2.6",
+          "U2.7",
+          "U2.8",
+          "U2.9",
+          "U2.14"
+        ],
+        "datasheet": [
+          {
+            "mpn": "adxl362",
+            "page": 7,
+            "quote": "No Connect. Not internally connected."
+          },
+          {
+            "mpn": "adxl362",
+            "page": 7,
+            "quote": "Reserved. Can be left unconnected or connected to GND."
+          }
+        ],
+        "computation": {
+          "description": "padnet_crosscheck.py: every schematic pin-net against every PCB pad-net; plus a netlist diff against the current BitPresTagBMP585 schematic",
+          "script": "../../kicad-helpers/padnet_crosscheck.py",
+          "result": "footprints checked: 27, mismatches: 0. Netlist diff vs parent: only U2 (ADXL367 -> ADXL362) and C8 (removed) differ"
+        }
+      },
+      "evidence_checked": "full",
+      "components": [
+        "U2",
+        "U302"
+      ],
+      "nets": [
+        "ACCEL_SCK",
+        "ACCEL_MOSI",
+        "ACCEL_MISO",
+        "ACCEL_nCS",
+        "WKUP1",
+        "VIN",
+        "GND"
+      ],
+      "pins": [
+        "U2.1",
+        "U2.4",
+        "U2.6",
+        "U2.7",
+        "U2.8",
+        "U2.9",
+        "U2.14"
+      ],
+      "finding_id": "deep_review:10b7646e74e7"
+    },
+    {
+      "detector": "deep_review",
+      "category": "verified_correct",
+      "severity": "info",
+      "confidence": "high",
+      "summary": "Unchanged parts carried forward as verified on the parent: Q501 PMBT2222AMB, U1 AT25FF321A WLCSP, U3 BMP585 (incl. L/M pad no-connect), U501 RV-3028 backup network, U302 pin numbering",
+      "description": "Netlist diff against the current BitPresTagBMP585 shows these parts' pin-nets unchanged. U3 pin 9 (L/M lasermarking pad) carries its no-connect flag. U501 VBACKUP via R1 = 10 kOhm to VSS with EVI to GND is the datasheet no-backup configuration.",
+      "recommendation": "No action.",
+      "evidence": {
+        "components": [
+          "Q501",
+          "U1",
+          "U3",
+          "U501",
+          "U302",
+          "R1"
+        ],
+        "pins": [
+          "U3.9"
+        ],
+        "datasheet": [
+          {
+            "mpn": "RV-3028-C8",
+            "page": 9,
+            "quote": "VBACKUP must be tied to VSS with a 10 kOhm resistor"
+          }
+        ],
+        "computation": {
+          "description": "Netlist diff UIUCTag vs BitPresTagBMP585 (kicad-cli exports)",
+          "result": "no pin-net change outside U2 and C8"
+        }
+      },
+      "evidence_checked": "partial",
+      "components": [
+        "Q501",
+        "U1",
+        "U3",
+        "U501",
+        "U302",
+        "R1"
+      ],
+      "pins": [
+        "U3.9"
+      ],
+      "finding_id": "deep_review:d3d760d8dd9d"
+    }
+  ],
+  "quarantined": []
+}

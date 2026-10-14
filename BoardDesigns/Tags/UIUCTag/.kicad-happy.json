@@ -1,0 +1,572 @@
+{
+  "version": 1,
+  "project": {
+    "name": "UIUCTag",
+    "ambient_temperature_c": 38,
+    "notes": "Derived 2026-10-14 from BitPresTagBMP585 (same MCU, flash, BMP585, RTC and connecting-board contract). The only schematic change is U2 ADXL367BCCZ-RL7 -> ADXL362BCCZ-RL, with C8 (the 367's VREG_OUT cap) removed; the layout around U2 was re-placed (U2, C1, C6, C7, C404 moved; Q501 and C502 moved B.Cu -> F.Cu). OUTLINE: 19 x 10 mm, not the parent's 18 x 10 -- the far (non-pogo) edge was moved 1 mm on 2026-10-14 (J303/J304 moved with it) to give the case a far-end ledge and lid block around the larger ADXL362; the pogo end is unchanged. Parent history: ../BitPresTagBMP585/.kicad-happy.json. DEPLOYMENT: worn by birds, so the thermal ambient is body temperature, 38 C."
+  },
+  "design_intent": {
+    "product_class": "prototype",
+    "ipc_class": 2,
+    "target_market": "hobby",
+    "expected_lifetime_years": 5,
+    "operating_temp_range": [
+      -10,
+      70
+    ],
+    "preferred_passive_size": "0201",
+    "test_coverage_target": 0,
+    "operating_temp_range_note": "NOT A DECISION -- this is the kicad-happy tool's built-in commercial default. project_config.py line 586 sets operating_temp_range = [-10, 70] for any target_market that is not industrial/medical, automotive or aerospace; both 'hobby' and 'research' fall through to it. The value was written by the tool, never chosen, and the identical [-10, 70] appears in all six board configs in this repo. It is also currently INERT: no analyzer reads it. Its only real consumer is lifecycle_audit.py --temp-range (rule LT-001), which needs distributor API credentials that are not configured. Replace it with the real deployment envelope when that is known.",
+    "part_temperature_limits": "Every part on this board is rated -40...+85 C, verified against the manufacturer datasheets: STM32L432KC, BMP585, ADXL362, AT25FF321A, RV-3028-C8. D401 CDBQC0130L-HF is Tj -40...+125 C. So the silicon does not constrain the deployment envelope anywhere near [-10, 70]; the binding constraint is the cell and the current budget, not the parts."
+  },
+  "power_profile": {
+    "source": "User-provided design intent",
+    "typical_current_a": 1e-05,
+    "normal_operating_current_max_a": 0.001,
+    "peak_current_a": 0.01,
+    "peak_condition": "Flash write",
+    "notes": [
+      "UIUCTag is a low-power pressure/activity sensing tag on a coin cell.",
+      "U2 ADXL362 is used ONLY for activity detection (motion-activated wake-up mode, 270 nA per the datasheet front page; 10 nA standby), never in measurement mode -- designer, 2026-10-14. The ADXL367 it replaced drew 180 nA in the same mode, so the budget rises by ~0.09 uA.",
+      "Typical current about 10 uA; operating current below 1 mA; peak about 10 mA on flash write.",
+      "U3 BMP585 peak draw is 260 uA max DC (BMP581 DS p.12), power-gated from PB1.",
+      "Bulk on VIN is C4 22uF + C404 22uF + C6 47uF plus six 0.1uF, sized for flash-write pulses.",
+      "TEMPERATURE: the ~10 uA typical figure is a room-temperature number. In service the tag runs at 38 C body temperature, and the standby terms are leakage-dominated. The BMP585 datasheet gives standby 1.0 uA at 25 C and 3.5 uA at 55 C, which fits a doubling every ~16.6 C and puts it at ~1.7 uA at 38 C; deep standby 0.55 -> 0.85 uA. STM32L432 stop-mode leakage roughly doubles every 10 C. Battery-life estimates built on the 25 C budget will be optimistic - re-derive them at 38 C.",
+      "D401 (CDBQC0130L-HF) verified 2026-09-04: Vf typ 0.25 V / max 0.30 V at IF = 10 mA, 25 C; Io = 100 mA; VR = 30 V; IFSM 3 A; RthJA 200 C/W; Tj -40...+125 C. Schottky Vf falls ~65 mV/decade, so at the 10 uA typical point the drop is only ~0.06 V and the rail sits essentially at the cell voltage. The 10 mA flash-write pulse is supplied by the 91 uF of bulk on VCC, not carried by the diode.",
+      "D401 thermal is a non-issue: 10 mA x 0.25 V = 2.5 mW into 200 C/W is a 0.5 C rise, so Tj ~ 38.5 C against a 125 C limit. Io = 100 mA against a 10 mA peak is 10x margin."
+    ],
+    "ambient_c": 38
+  },
+  "analysis": {
+    "output_dir": "analysis",
+    "retention": 5,
+    "auto_diff": true,
+    "track_in_git": true,
+    "diff_threshold": "major",
+    "notes": [
+      "track_in_git is true and must be set HERE -- it does not inherit from BoardDesigns/.kicad-happy.json. analysis/.gitignore is a no-op comment-only file on purpose; analyze_pcb.py recreates a real one if it is absent.",
+      "Do NOT re-add a +2V5 voltage override. The +2V5 symbols were removed on 2026-09-04; the rail is unregulated battery voltage and never was 2.5 V."
+    ],
+    "power_rails": {
+      "voltage_overrides": {
+        "VIN": 2.85,
+        "VCC": 2.85,
+        "VBAT": 3.0
+      },
+      "notes": [
+        "The main rail is deliberately drawn as VCC and named VIN in the netlist. Resolved 2026-09-04: the 7 power:+2V5 symbols were replaced with power:VCC (no voltage claim), while the 2 VIN global labels were kept because VIN is the name the surrounding environment uses -- it is the J201 pin 1 / harness-facing name.",
+        "Both names are overridden to 2.85 V so any tool keying on either gets the right number. The analyzer lists VCC and VIN as two rails; they are the same node.",
+        "VIN/VCC = VBAT - D401 Schottky Vf. Tracks the cell: ~3.1 V fresh, falling toward ~1.9 V at end of life. NOT a regulated rail. No net name can express that range -- rely on this note.",
+        "The netlist and PCB net name is still VIN, so the relabel required no update-from-schematic and no copper change.",
+        "LPS_PWR is not a rail -- it is STM32 PB1 driving R2 (10 ohm) into the sensor supply node."
+      ]
+    }
+  },
+  "mating_design": {
+    "name": "UIUCTag tag on external connecting board (via J201)",
+    "host_mcu": "STM32L432KCU6",
+    "source": "Derived 2026-10-14 from the schematic via kicad-helpers/stm32_pinmap.py, alternate functions cross-checked against ST STM32_open_pin_data. Identical to BitPresTagBMP585 except the U2 pins.",
+    "notes": [
+      "This tag is driven by an external connecting board through J201. It is NOT self-contained.",
+      "Q501's base series resistor is on the CONNECTING BOARD, NOT on this board. Net RST reaching Q501.1 with no series resistor is intentional. Any new connecting board must supply it. Same arrangement as BitTagNG.",
+      "J201 (6-pin) carries VIN, VBAT, SWDIO, SWCLK, RST and GND to the connecting board. J401 (2-pin) is the battery connector. J301-J304 are 1.1 mm NPTH mounting holes, not I/O.",
+      "Actual devices: U302 STM32L432KCU6, U1 AT25 SPI flash (12-ball WLCSP), U2 ADXL362 accelerometer, U3 BMP585 pressure sensor, U501 RV-3028-C8 RTC.",
+      "THREE serial buses, each on a DIFFERENT hardware peripheral -- all can be live at once: ADXL362 -> USART2 SYNCHRONOUS MODE (AF7, PA4/PA2/PA3 = CK/TX/RX, CS on PA1); BMP585 -> SPI1 (AF5, PA5/PA12/PA11); flash -> SPI3 (AF6, PB3/PB5/PB4). Assigning them this way is what resolves the SPI1 collisions stm32_pinmap.py reports.",
+      "STM32L432 datasheet Table 11 confirms USART2 supports synchronous mode, and the text states USART1/USART2 provide 'SPI-like communication capability', DMA-served, up to 10 Mbit/s.",
+      "Sibling board BitTagNG solves the same problem differently -- accelerometer on PA5/PA6/PA7 (true SPI1) with CS on PA4. Neither board bit-bangs its accelerometer.",
+      "Power gating: PB1 supplies the BMP585 directly. Sequencing its SPI pins low before gating off is a firmware contract, not an optional optimisation.",
+      "J401 is the 2-pin battery connector; J301-J304 are 1.1 mm NPTH mounting holes, not I/O.",
+      "U2 orientation does not matter: the ADXL362 is used only for activity detection, never in measurement mode, so the X/Y inversion relative to BitPresTagBMP585 and BitTagv7 (U2 at 0 deg vs 180 deg, both on B.Cu) is irrelevant. Designer, 2026-10-14. Do not re-raise.",
+      "Interrupt: ADXL362 INT2 (pin 9) -> PA0/WKUP1. INT1 (pin 11) is unused. Changed from INT1 to INT2 by the designer on 2026-10-14."
+    ],
+    "host_pin_map": [
+      {
+        "host_pin": "VDD",
+        "pin_number": 1,
+        "net": "VIN",
+        "host_function": "power",
+        "connected_part": "rail (16 nodes)",
+        "required_state": "Supply.",
+        "reason": "STM32L432KC VDD range 1.71-3.6 V; VIN is in range across cell life."
+      },
+      {
+        "host_pin": "PC14",
+        "pin_number": 2,
+        "net": "clkout",
+        "host_function": "RCC_OSC32_IN (additional function)",
+        "connected_part": "U501.1 RV-3028 CLKOUT",
+        "required_state": "LSE bypass mode input.",
+        "reason": "RV-3028 32.768 kHz CLKOUT drives the LSE in bypass, giving a 1 PPM timebase with no crystal on the board. Not a plain GPIO -- RCC_OSC32_IN is an additional function, enabled via RCC, not GPIOx_AFR."
+      },
+      {
+        "host_pin": "PC15",
+        "pin_number": 3,
+        "net": "NO_CONNECT",
+        "host_function": "unused",
+        "connected_part": "none",
+        "required_state": "Analog/no-pull.",
+        "reason": "Lowest leakage for unused pin."
+      },
+      {
+        "host_pin": "NRST",
+        "pin_number": 4,
+        "net": "__unnamed_1",
+        "host_function": "Reset",
+        "connected_part": "C502.1, Q501.3 (collector)",
+        "required_state": "External reset network controls state.",
+        "reason": "Q501 NPN pulls NRST low when J201.5 RST is driven high. Verified NPN orientation: base=RST, emitter=GND, collector=NRST."
+      },
+      {
+        "host_pin": "VDDA/VREF+",
+        "pin_number": 5,
+        "net": "VIN",
+        "host_function": "analog supply",
+        "connected_part": "rail (16 nodes)",
+        "required_state": "Supply.",
+        "reason": "Tied directly to VIN; no ADC in use, C501/C503 within ~1-2 mm."
+      },
+      {
+        "host_pin": "PA0",
+        "pin_number": 6,
+        "net": "WKUP1",
+        "host_function": "GPIO / wake",
+        "connected_part": "U2.9 ADXL362 INT2",
+        "required_state": "Wake input; polarity (PWR_CR4.WP1) must match INTMAP2.INT_LOW. No pull needed: INT2 is a push-pull output.",
+        "reason": "Activity wake source. INT2 is also the ADXL362 synchronized-sampling input (FILTER_CTL EXT_SAMPLE); keep that bit 0 so the pin stays an output."
+      },
+      {
+        "host_pin": "PA1",
+        "pin_number": 7,
+        "net": "ACCEL_nCS",
+        "host_function": "GPIO CS (also USART2_RTS AF7)",
+        "connected_part": "U2.8 ADXL362 CS",
+        "required_state": "Drive/hold high during reset, sleep and high-Z.",
+        "reason": "Keeps the accelerometer deselected. PA1 also carries USART2_RTS (AF7) and USART2_DE as an additional function, so it belongs to the same USART2 group as PA2/PA3/PA4."
+      },
+      {
+        "host_pin": "PA2",
+        "pin_number": 8,
+        "net": "ACCEL_MOSI",
+        "host_function": "USART2_TX (AF7) - MOSI in synchronous mode",
+        "connected_part": "U2.6 ADXL362 MOSI",
+        "required_state": "Drive low or push-pull idle.",
+        "reason": "Hardware data-out for the accelerometer via USART2 synchronous mode. NOT a bit-bang pin."
+      },
+      {
+        "host_pin": "PA3",
+        "pin_number": 9,
+        "net": "ACCEL_MISO",
+        "host_function": "USART2_RX (AF7) - MISO in synchronous mode",
+        "connected_part": "U2.7 ADXL362 MISO",
+        "required_state": "Input, pull-down or no-pull while ACCEL_nCS is inactive.",
+        "reason": "Hardware data-in for the accelerometer via USART2 synchronous mode."
+      },
+      {
+        "host_pin": "PA4",
+        "pin_number": 10,
+        "net": "ACCEL_SCK",
+        "host_function": "USART2_CK (AF7) - SCK in synchronous mode",
+        "connected_part": "U2.4 ADXL362 SCLK",
+        "required_state": "Drive actively, idle low (CPOL = 0).",
+        "reason": "Hardware clock for the accelerometer via USART2 synchronous mode. ADXL362 fSCLK 2.4 kHz-8 MHz (Table 10); keep at or below 8 MHz."
+      },
+      {
+        "host_pin": "PA5",
+        "pin_number": 11,
+        "net": "LPS_SCK",
+        "host_function": "SPI1_SCK (AF5)",
+        "connected_part": "U3.1 BMP585 SCX",
+        "required_state": "Drive low in reset/sleep/high-Z, and before removing LPS_PWR.",
+        "reason": "Hardware SPI1 clock for the pressure sensor."
+      },
+      {
+        "host_pin": "PA6",
+        "pin_number": 12,
+        "net": "lps_rdy",
+        "host_function": "GPIO input",
+        "connected_part": "U3.5 BMP585 INT",
+        "required_state": "Input, NO pull-up -- must not source current into the INT output while LPS_PWR is off.",
+        "reason": "Data-ready/interrupt. PA6 is also SPI1_MISO (AF5), which is why it is worth noting it is spent on an interrupt here."
+      },
+      {
+        "host_pin": "PA7",
+        "pin_number": 13,
+        "net": "NO_CONNECT",
+        "host_function": "unused",
+        "connected_part": "none",
+        "required_state": "Analog/no-pull.",
+        "reason": "Unused, but it is SPI1_MOSI (AF5) -- the natural home for a hardware-SPI accelerometer in any respin."
+      },
+      {
+        "host_pin": "PB0",
+        "pin_number": 14,
+        "net": "LPS_CS",
+        "host_function": "GPIO CS (SPI1_NSS capable)",
+        "connected_part": "U3.7 BMP585 CSB",
+        "required_state": "Hold high while the sensor is powered; drive low before removing LPS_PWR.",
+        "reason": "Software-managed chip select is preferable to NSS here."
+      },
+      {
+        "host_pin": "PB1",
+        "pin_number": 15,
+        "net": "LPS_PWR",
+        "host_function": "GPIO power switch",
+        "connected_part": "R2 (10 ohm) -> LPS_VDD (U3.4 VDDIO, U3.8 VDD, C3, C5)",
+        "required_state": "Drive high to power the sensor; drive low to gate it off.",
+        "reason": "Power-gates the BMP585 (260 uA max) through R2 = 10 ohm, added 2026-09-04. R2 satisfies the BMP585 Table 4 requirement (\"For supply ramps < 0.01 ms, a 10 Ohm resistor must be connected in series to the power supply\") by construction rather than by relying on inferred GPIO output impedance. Decoupling C3/C5 sits on the sensor side of R2, which is correct. Before driving low, take LPS_SCK/MOSI/CS low to avoid back-powering through the sensor ESD diodes."
+      },
+      {
+        "host_pin": "VSS",
+        "pin_number": 16,
+        "net": "GND",
+        "host_function": "ground",
+        "connected_part": "rail (22 nodes)",
+        "required_state": "Ground."
+      },
+      {
+        "host_pin": "VDD",
+        "pin_number": 17,
+        "net": "VIN",
+        "host_function": "power",
+        "connected_part": "rail (16 nodes)",
+        "required_state": "Supply."
+      },
+      {
+        "host_pin": "PA8",
+        "pin_number": 18,
+        "net": "NO_CONNECT",
+        "host_function": "unused",
+        "connected_part": "none",
+        "required_state": "Analog/no-pull.",
+        "reason": "Lowest leakage for unused pin."
+      },
+      {
+        "host_pin": "PA9",
+        "pin_number": 19,
+        "net": "NO_CONNECT",
+        "host_function": "unused",
+        "connected_part": "none",
+        "required_state": "Analog/no-pull.",
+        "reason": "Lowest leakage for unused pin. (No LDO on this board -- earlier config wrongly listed an AK09940A rail enable here.)"
+      },
+      {
+        "host_pin": "PA10",
+        "pin_number": 20,
+        "net": "NO_CONNECT",
+        "host_function": "unused",
+        "connected_part": "none",
+        "required_state": "Analog/no-pull.",
+        "reason": "Lowest leakage for unused pin."
+      },
+      {
+        "host_pin": "PA11",
+        "pin_number": 21,
+        "net": "LPS_MISO",
+        "host_function": "SPI1_MISO (AF5)",
+        "connected_part": "U3.3 BMP585 SDO",
+        "required_state": "Input; no pull-up while LPS_PWR is off.",
+        "reason": "Hardware SPI1 data in."
+      },
+      {
+        "host_pin": "PA12",
+        "pin_number": 22,
+        "net": "LPS_MOSI",
+        "host_function": "SPI1_MOSI (AF5)",
+        "connected_part": "U3.2 BMP585 SDX",
+        "required_state": "Drive low before removing LPS_PWR.",
+        "reason": "Hardware SPI1 data out."
+      },
+      {
+        "host_pin": "PA13",
+        "pin_number": 23,
+        "net": "SWDIO",
+        "host_function": "SWDIO (AF0)",
+        "connected_part": "J201.3 (SWDIO to connecting board)",
+        "required_state": "Preserve SWD, or use a documented debug-disable state.",
+        "reason": "Debug access vs leakage trade-off."
+      },
+      {
+        "host_pin": "PA14",
+        "pin_number": 24,
+        "net": "SWCLK",
+        "host_function": "SWCLK (AF0)",
+        "connected_part": "J201.4 (SWCLK to connecting board)",
+        "required_state": "Preserve SWD, or pull down if debug is disabled.",
+        "reason": "Prevents a floating clock input."
+      },
+      {
+        "host_pin": "PA15",
+        "pin_number": 25,
+        "net": "AT25_nCS",
+        "host_function": "GPIO CS (SPI1/SPI3_NSS capable)",
+        "connected_part": "U1.B4 AT25 nCS",
+        "required_state": "Internal pull-up during reset/sleep/high-Z; drive high as the first GPIO action.",
+        "reason": "No external pull-up -- house convention. PA15 has a default pull-up at reset; set it explicitly. Datasheet recommends 10k to VCC for the ramp window (accepted, see suppressions)."
+      },
+      {
+        "host_pin": "PB3",
+        "pin_number": 26,
+        "net": "AT25_SCK",
+        "host_function": "SPI3_SCK (AF6)",
+        "connected_part": "U1.F2 AT25 SCK",
+        "required_state": "Drive low in reset/sleep/high-Z.",
+        "reason": "Assign the flash to SPI3 (AF6), NOT SPI1 -- that is what resolves the SPI1 collision with the LPS group. Costs TRACESWO on PB3."
+      },
+      {
+        "host_pin": "PB4",
+        "pin_number": 27,
+        "net": "AT25_MISO",
+        "host_function": "SPI3_MISO (AF6)",
+        "connected_part": "U1.D4 AT25 SO",
+        "required_state": "Input; pull-down or no-pull while AT25_nCS is high.",
+        "reason": "Flash SO is tri-stated when deselected. Costs NJTRST on PB4."
+      },
+      {
+        "host_pin": "PB5",
+        "pin_number": 28,
+        "net": "AT25_MOSI",
+        "host_function": "SPI3_MOSI (AF6)",
+        "connected_part": "U1.E3 AT25 SI",
+        "required_state": "Drive low in reset/sleep/high-Z.",
+        "reason": "Keeps the flash input quiet."
+      },
+      {
+        "host_pin": "PB6",
+        "pin_number": 29,
+        "net": "SCL",
+        "host_function": "GPIO (bit-banged I2C)",
+        "connected_part": "U501.3 RV-3028 SCL",
+        "required_state": "Internal pull-up, slow software I2C only.",
+        "reason": "No external pull-up -- house convention. PB6 has NO SPI function; hardware I2C1_SCL exists but the house driver is bit-banged. Does not survive a move to hardware I2C or 400 kHz."
+      },
+      {
+        "host_pin": "PB7",
+        "pin_number": 30,
+        "net": "SDA",
+        "host_function": "GPIO (bit-banged I2C)",
+        "connected_part": "U501.4 RV-3028 SDA",
+        "required_state": "Internal pull-up, slow software I2C only.",
+        "reason": "No external pull-up -- house convention. Datasheet requires pull-ups; measured worst-case rise on a tag is ~730 ns against the 1000 ns standard-mode limit."
+      },
+      {
+        "host_pin": "BOOT0",
+        "pin_number": 31,
+        "net": "GND",
+        "host_function": "Boot mode strap",
+        "connected_part": "GND",
+        "required_state": "Hard low.",
+        "reason": "Hard-tied to GND, so no option-byte concern on this board. stm32_pinmap.py reports it as \"PULLED via R1.2\" only because R1 sits on the GND net serving U501 VBACKUP -- that is an artefact, not a strap resistor."
+      },
+      {
+        "host_pin": "VSS",
+        "pin_number": 32,
+        "net": "GND",
+        "host_function": "ground",
+        "connected_part": "rail (22 nodes)",
+        "required_state": "Ground."
+      },
+      {
+        "host_pin": "GND",
+        "pin_number": 33,
+        "net": "GND",
+        "host_function": "exposed pad",
+        "connected_part": "rail (22 nodes)",
+        "required_state": "Ground.",
+        "reason": "QFN-32 exposed pad, 2 vias. Electrically adequate; the TV-001 \"insufficient 2/9\" finding is a thermal rule and meaningless at 10 uA."
+      }
+    ],
+    "firmware_contracts": [
+      "Drive AT25_nCS high as the first GPIO action after reset (no external pull-up).",
+      "ADXL362 runs on USART2 SYNCHRONOUS MODE (AF7). Configure CR2.MSBFIRST, CPOL = CPHA = 0 (ADXL362 DS p.21), and CR2.LBCL so the last data bit is clocked. Replace the ADXL367 driver: PARTID 0xF2 (not 0xF7), 12-bit data, different FIFO/filter/power registers; command bytes 0x0A/0x0B are unchanged.",
+      "ADXL362: map activity through INTMAP2 (0x2B) -- INT2 drives PA0. Leave FILTER_CTL EXT_SAMPLE (INT2 becomes an input) and EXT_CLK (INT1 becomes a floating input) at 0.",
+      "ADXL362 Rev. G power-cycling rule: VS/VDD I/O must fall to <= 100 mV for >= 200 ms before reapplying power (DS p.40). With 91 uF on VIN, wait several seconds before re-inserting a cell; issue a soft reset (0x52 -> 0x1F) at boot.",
+      "BMP585 on SPI1 (AF5); AT25 flash on SPI3 (AF6). With the accelerometer on USART2 nothing contends and all three buses can be live simultaneously.",
+      "BMP585 SPI supports modes 0 and 3 only; f_SPI max 12 MHz at VDDIO >= 1.62 V (7 MHz below).",
+      "Before clearing PB1 (LPS_PWR): drive LPS_SCK, LPS_MOSI and LPS_CS low, and keep PA6 as an input with no pull-up. Otherwise current flows into the unpowered sensor's ESD diodes.",
+      "Keep PB1 on the LOWEST GPIO output-speed setting. This is a hard constraint, not a preference: the BMP585 specifies a 10 us MINIMUM supply ramp (Table 4), and the estimated 11-22 us ramp clears it by only 1.1-2.2x on an inferred GPIO impedance.",
+      "Enable the RV-3028 CLKOUT and store the setting in its EEPROM, then select LSE bypass on PC14 (RCC_OSC32_IN) for the 1 PPM timebase.",
+      "Set the 5 unused GPIOs (PC15, PA7, PA8, PA9, PA10) to analog/no-pull for lowest leakage."
+    ],
+    "population_options": [
+      {
+        "refs": [
+          "external AT25_nCS pull-up"
+        ],
+        "default": "not populated / not present",
+        "condition": "Add only if firmware/internal pull-up cannot guarantee flash deselect during reset, sleep and the VIN ramp window.",
+        "connected_rail": "VIN",
+        "notes": "Current design relies on the STM32 PA15 internal pull-up (present in the reset state). AT25XE321D datasheet p.8 recommends 10 kOhm from CS to VCC."
+      }
+    ],
+    "baseboard_contract": [
+      "Supply Q501's base series resistor (~4.7-10 kOhm) between the connecting board's reset driver and J201.5. Without it, the driver sees a forward-biased base-emitter junction with no current limiting; Q501 (PMBT2222AMBYL) tolerates it at up to 200 mA peak base current, but the connecting board's output driver may not.",
+      "Drive J201.5 RST HIGH to assert reset: Q501 is an NPN with base=RST, emitter=GND, collector=STM32 NRST, so a high on RST pulls NRST low. Verified against the PMBT2222AMB pinning table (pin 1 B, pin 2 E, pin 3 C).",
+      "J201.1 VIN and J201.2 VBAT: VIN (drawn as VCC) is the post-diode rail; VBAT is the raw battery input shared with J401. Do not back-drive VBAT while a cell is fitted.",
+      "SWDIO/SWCLK on J201.3/J201.4 are the STM32 debug pins, no series termination on the tag."
+    ]
+  },
+  "suppressions": [
+    {
+      "rule_id": "CC-002",
+      "reason": "Low-power tag: ~10 uA typical, <1 mA operating, ~10 mA peak on flash write. 0.1016 mm traces are an advanced-process DFM note, never a current-capacity issue."
+    },
+    {
+      "rule_id": "DFM-001",
+      "reason": "0.1016 mm track/space is deliberate on these dense tags and is an accepted process-selection choice. PCBWay advanced process."
+    },
+    {
+      "rule_id": "RS-001",
+      "nets": [
+        "VBAT"
+      ],
+      "reason": "VBAT is the battery input from J401; passive connector pins give it no declared source. KiCad ERC is clean."
+    },
+    {
+      "rule_id": "RS-001",
+      "nets": [
+        "LPS_PWR"
+      ],
+      "reason": "LPS_PWR is the two-pin stub between GPIO PB1 and R2; LPS_VDD is the switched sensor supply on the far side. Neither is a rail with a declared source, by construction."
+    },
+    {
+      "rule_id": "PP-001",
+      "components": [
+        "U3"
+      ],
+      "nets": [
+        "LPS_VDD"
+      ],
+      "reason": "U3 VDD/VDDIO are intentionally fed from GPIO PB1 through R2 (10 ohm), not from a rail, so there is no DC path to a power net. This is the power-gating topology, not a defect. The switched node was labelled LPS_VDD on 2026-09-04, so this suppression is now keyed to a stable name rather than an unnamed-net number."
+    },
+    {
+      "rule_id": "PR-002",
+      "components": [
+        "U1"
+      ],
+      "nets": [
+        "AT25_nCS"
+      ],
+      "reason": "House convention: no external chip-select pull-ups. Deselect is a firmware/reset-state contract on the STM32 PA15 internal pull-up."
+    },
+    {
+      "rule_id": "PU-001",
+      "components": [
+        "U2"
+      ],
+      "pins": [
+        "INT1"
+      ],
+      "reason": "ADXL362 INT1 is an interrupt OUTPUT and is unused (INT2 is the wake line). An unconnected output needs no pull-up, provided FILTER_CTL EXT_CLK stays 0."
+    },
+    {
+      "rule_id": "FD-001",
+      "reason": "No board in this tag family carries fiducials, including BitTagNG, PresTag and CompassTag, all of which have been fabricated and assembled. House convention."
+    },
+    {
+      "rule_id": "TE-001",
+      "reason": "No test points by design: a 19x10 mm tag has no room, and J201 SWD plus the flash provide the bring-up path."
+    },
+    {
+      "rule_id": "TV-001",
+      "components": [
+        "U302"
+      ],
+      "reason": "Thermal-via rule. The STM32 exposed pad has 2 vias, electrically adequate; total board dissipation is microwatts."
+    },
+    {
+      "rule_id": "CP-002",
+      "components": [
+        "J301",
+        "J302",
+        "J303",
+        "J304"
+      ],
+      "reason": "J301-J304 are 1.1 mm NPTH mounting holes, not components. Copper-presence findings against them are noise."
+    },
+    {
+      "rule_id": "GP-004",
+      "reason": "FALSE POSITIVE. Fill ratio is computed against the user-drawn zone outline, which is much larger than the board. Re-verified on UIUCTag 2026-10-14: In2 GND is one fill region of 127.3 mm2 and In1 VIN one region of 118.2 mm2 on the 190 mm2 board."
+    },
+    {
+      "rule_id": "PS-002",
+      "nets": [
+        "VIN",
+        "VBAT"
+      ],
+      "reason": "FALSE POSITIVE, verified 2026-09-04. Both inner zones report fill_region_count = 1, and KiCad DRC reports 0 unconnected items. The analyzer union-find does not merge islands the way KiCad connectivity does."
+    },
+    {
+      "rule_id": "GP-001",
+      "reason": "FALSE POSITIVE, same root cause as PS-002/GP-004. In1.Cu is a solid VIN plane and In2.Cu a solid GND plane, each a single fill region under the whole board."
+    },
+    {
+      "rule_id": "RP-002",
+      "reason": "FALSE POSITIVE, same root cause: no real plane gaps exist to cross."
+    },
+    {
+      "rule_id": "CK-003",
+      "reason": "Cites J301-J304 and J401, which are mounting holes and a battery connector. Clock-near-connector findings against them are noise."
+    },
+    {
+      "rule_id": "CK-001",
+      "reason": "Accepted: a 4-layer 0.4 mm tag routes SPI and the 32.768 kHz clock on outer layers over solid inner planes. Emissions at 10 uA and <=1 MHz SPI are not a compliance risk for an animal-borne tag."
+    },
+    {
+      "rule_id": "RP-001",
+      "reason": "Stitching-via rule on a 19x10 mm board with solid inner planes. Return-path lengths are millimetres."
+    },
+    {
+      "rule_id": "GR-002",
+      "reason": "FALSE POSITIVE (verified on the parent 2026-09-04). Copper is inset 0.3 mm from Edge.Cuts, which the analyzer reads as misalignment. On UIUCTag expect inner-plane extents of about 18.4 x 9.4 mm against the 19 x 10 mm outline."
+    },
+    {
+      "rule_id": "EP-AUD",
+      "components": [
+        "J201"
+      ],
+      "reason": "J201 is the board-to-board connector to the connecting board, internal to the assembled tag, not an exposed external port. No ESD array by design."
+    },
+    {
+      "rule_id": "TB-001",
+      "components": [
+        "C4",
+        "C404"
+      ],
+      "reason": "0402 tombstoning risk on reflow-assembled bulk caps. Accepted; the pattern has shipped on sibling boards."
+    }
+  ],
+  "reviewer_notes": {
+    "last_review": "2026-10-14 (UIUCTag first review)",
+    "report": "UIUCTag-design-review.md",
+    "inherited": "Everything except U2 and its layout neighbourhood was reviewed and closed on BitPresTagBMP585 2026-09-04; see ../BitPresTagBMP585/.kicad-happy.json reviewer_notes for that history.",
+    "verified_correct": [
+      "U2 ADXL362: all 16 pins match the ADI datasheet Rev. G Table 6 (p.7). NC 2/15 and reserved 3/5/10 left open is permitted.",
+      "U2 land pattern is pad-for-pad identical to BitTagv7's shipped bittag:ADXL362 (known-good ADXL362 board).",
+      "U2 decoupling: C7 0.1 uF 0.10 mm from VDD I/O (through board), C1 0.1 uF 1.13 mm from VS, C6 47 uF 0.81 mm -- meets DS p.39.",
+      "VIN 1.9-3.1 V is inside ADXL362 VS 1.6-3.5 V; VDD I/O = VS by construction.",
+      "padnet_crosscheck: 27 footprints, 0 mismatches (includes Q501/C502 after their B.Cu -> F.Cu flip).",
+      "KiCad DRC: 0 violations / 0 unconnected / 0 parity on the 19 mm board, saved fill and --refill-zones. ERC: 0 violations (after the S2 pin-type fixes and the GND PWR_FLAG). Design rules identical to the parent.",
+      "Q501 Q_NPN_BEC, U1, U3, U501 unchanged from the parent; verified there.",
+      "LCSC C59641 = ADXL362BCCZ-RL confirmed by the designer against the JLCPCB parts library, 2026-10-14 (the community jlcsearch mirror has no entry for it -- do not re-raise).",
+      "Production package pcbway_production/2026-10-14-10-22-05 VERIFIED against the board by geometry: Edge.Cuts gerber spans (0,0)-(19,10) (origin at the board corner); 580/580 track endpoints, 35/35 vias and 2856/2856 In1/In2 fill vertices present; PTH 35 x 0.2007 mm = 35 vias, NPTH 4 x 1.0998 mm = J301-J304; inner planes 18.399 x 9.399 mm; BOM 21 designators == CPL 21, every CPL position equals the board position; U2 ADXL362BCCZ-RL/C59641, no C8. DRC 0/0/0 and ERC 0 after the origin change."
+    ],
+    "designer_responses_2026_10_14": [
+      "U2 orientation (X/Y inverted vs parent and BitTagv7) is irrelevant: activity detection only, never measurement mode.",
+      "Interrupt moved from INT1 to INT2 (U2.9 -> PA0/WKUP1)."
+    ],
+    "open_items": [
+      "Mechanical: make a UIUCTag case (the board is now 19 mm; the BitPresTagBMP585 case does not fit). Lid far block within the 1.68 mm strip at the far end."
+    ],
+    "analyzer_traps": [
+      "The analysis/ folder arrived as a copy of the parent's (manifest named BitPresTagBMP585.kicad_pro); it was cleared 2026-10-14 and re-run. rules_source = UIUCTag.kicad_pro."
+    ],
+    "changes_2026_10_14": [
+      "Board extended 1 mm at the far end: Edge.Cuts x 140 -> 139, J303/J304 x -1 mm; zones refilled. U2 body now 1.93 mm from the edge (was 0.93); far-end base ledge 1.08 mm (courtyard-sized pocket) / 1.73 mm (body); lid far-block strip 1.68 mm before C7.",
+      "S1: U2 Datasheet field -> ${KIPRJMOD}/datasheets/adxl362.pdf in the schematic, the PCB footprint and tag_library (was a non-existent hardware/hardware/... file URL). datasheets/ restored to the house symlink ../../libraries/datasheets (the copy was file-for-file identical).",
+      "S2: U501 pin types corrected in BitTagNG.kicad_sym and the embedded copy (CLKOUT output, INT open_collector, SDA bidirectional, GND and VDD power_in); adxl362 NC -> no_connect, RES -> passive in tag_library and the embedded copy; PWR_FLAG #FLG0103 added on GND (U501's mistyped GND had been the net's only power output); adxl367/lis2dw12/lis2du12 removed from sym-lib-table.",
+      "CORRECTION: the parent's note that sym-lib-table 'has no Device library' was wrong -- KiCad 10's global table includes the KiCad default libraries, so Device, power, Connector_Generic and Mechanical all resolve.",
+      "Drill/place (aux) origin moved from (140, 113) -- the old 18 mm corner -- to (139, 113), the new lower-left corner.",
+      "Pruned: pcbway_production/2026-09-04-19-26-51 (parent package), 2026-10-14-10-18-41 (old-origin export), BitPresTagBMP585-design-review.md, BitPresTagBMP585.kibot.yaml. Order package: pcbway_production/2026-10-14-10-22-05."
+    ]
+  }
+}
