@@ -10010,7 +10010,7 @@
 				)
 			)
 		)
-		(property "Datasheet" "file:///Users/geobrown/Research/tag-designs/hardware/hardware/libraries/datasheets/adxl362.pdf"
+		(property "Datasheet" "${KIPRJMOD}/datasheets/adxl362.pdf"
 			(at 0 0 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10072,7 +10072,7 @@
 					)
 				)
 			)
-			(pin output line
+			(pin no_connect line
 				(at 0 -2.54 0)
 				(length 5.08)
 				(name "NC"
@@ -10090,7 +10090,7 @@
 					)
 				)
 			)
-			(pin output line
+			(pin passive line
 				(at 0 -5.08 0)
 				(length 5.08)
 				(name "RES"
@@ -10126,7 +10126,7 @@
 					)
 				)
 			)
-			(pin output line
+			(pin passive line
 				(at 0 -10.16 0)
 				(length 5.08)
 				(name "RES"
@@ -10306,7 +10306,7 @@
 					)
 				)
 			)
-			(pin passive line
+			(pin no_connect line
 				(at 20.32 15.24 270)
 				(length 5.08)
 				(name "NC"
