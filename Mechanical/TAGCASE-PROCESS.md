@@ -5,10 +5,11 @@ for `BitPresTagBMP585/` on 2026-10-12, written down so the next case can follow
 it. Read `TAGCASES-general-principles.md` first: it says what a case must do.
 This document says how to get there.
 
-Start from `BitPresTagBMP585/`. It is the most complete case: it has
-interference checks, a FreeCAD assembly of the real parts, and a README that
-records every derived number. Copy the folder, rename the files, and work
-through the steps below.
+Start from `UIUCTag/`. It is the most complete case: it has interference
+checks, a FreeCAD assembly of the real parts, the standard no-battery lid, and
+a README that records every derived number. (`BitPresTagBMP585/` predates the
+no-battery lid, the merged pogo-end pocket and the recentred markers.) Copy
+the folder, rename the files, and work through the steps below.
 
 ## Tools
 
@@ -96,9 +97,13 @@ heights from it.
   Depth 1.5 (tallest bottom part here 1.06).
 - **Harness slots.** Each slot must fully cover its corner holes. Put the
   slot's −x edge just past the holes' −x edge (`harness_slot_margin` 0.1). At
-  the far end that keeps the end ledge wide. At the pogo end it leaves a
-  support bar between the pocket and the slot. Slots run the full base width
+  the far end that keeps the end ledge wide. Slots run the full base width
   (the thread may cross under the board).
+- **No free-standing bar at the pogo end.** Run the pocket on into the pogo-end
+  slot (`under_pocket_max` x = the slot centre). Stopping the pocket at the B.Cu
+  envelope leaves a thin bar (1.14 × 1.5 on BitPresTagBMP585) between the
+  pocket and the slot/pogo window, which does not print well and supports
+  nothing. Designer, 2026-10-14.
 
 ## 5. The coin cell and the positive stop
 
@@ -133,7 +138,21 @@ tops are at z = 1, well below the lid.
   always seats first. Gaps up to ~0.5 are fine, because the lid screw holes
   allow the tilt. Keep it clear of the corner holes (harness thread) and of
   F.Cu parts.
-- **Tag without a coin cell.** Both blocks bear on the board. See
+- **No-battery lid — standard on every case** (designer, 2026-10-14). Boards
+  are tested on the base before their cell is fitted, so each case ships a
+  second lid (`-D lid_no_battery=true`, `<case>-lid-nobattery.stl`). It keeps
+  the version text on the crossbar and adds `TEST` on the lid body, between
+  the far block and the crossbar; a suffix on the version text does not fit
+  beside six characters. It sits a cell stack height lower than the standard
+  lid, so **both end blocks are short**: the pogo-end block keeps the standard
+  2.1 drop and bears on the board top directly over the pogo pads; the far
+  block is 0.2 shorter so the pogo end seats first. Narrow the pogo-end block
+  to stay 0.25 clear of the pogo-end harness holes, which it would otherwise
+  cover. The screws run deeper into the through-inserts. Check it in both
+  `make check` and `make assembly`, including its clearance to the tallest
+  top-side part and to the dowel tops, which the lower lid comes close to.
+  See `UIUCTag/UIUCTag.scad`.
+- **Tag without a coin cell by design.** Both blocks bear on the board. See
   `IMUTag.scad` for the lipo case: the battery end must accommodate the
   battery thickness.
 
@@ -153,6 +172,14 @@ OpenSCAD -o t.dxf t.scad      # then take the x extent of the DXF points
 
 Engrave the base text on the underside, mirrored with `mirror([1,0,0])` so it
 reads from below.
+
+**The `*` pogo-end markers.** The asterisk sits high in its em box: with
+`valign="center"` it spans y −0.04s…+0.50s at size s, so a marker "centred" at
+y = 7.0 actually ran to within 0.02 of the base edge. Recentre it on its real
+extent (`translate([0, -0.229 * size])`), and place it by measured clearance:
+keep ≥ 0.5 from every edge, including the battery-relief arc that cuts into the
+base top beyond the board end, and from the lid's pogo end. Use size ≥ 3.5 on
+the base and ≥ 5 on the lid. See `marker()` in `UIUCTag/UIUCTag.scad`.
 
 ## 8. Verify
 
