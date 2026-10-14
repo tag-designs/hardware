@@ -554,19 +554,18 @@
       "U2 orientation (X/Y inverted vs parent and BitTagv7) is irrelevant: activity detection only, never measurement mode.",
       "Interrupt moved from INT1 to INT2 (U2.9 -> PA0/WKUP1)."
     ],
-    "open_items": [
-      "Mechanical: make a UIUCTag case (the board is now 19 mm; the BitPresTagBMP585 case does not fit). Lid far block within the 1.68 mm strip at the far end."
-    ],
+    "open_items": [],
     "analyzer_traps": [
       "The analysis/ folder arrived as a copy of the parent's (manifest named BitPresTagBMP585.kicad_pro); it was cleared 2026-10-14 and re-run. rules_source = UIUCTag.kicad_pro."
     ],
     "changes_2026_10_14": [
-      "Board extended 1 mm at the far end: Edge.Cuts x 140 -> 139, J303/J304 x -1 mm; zones refilled. U2 body now 1.93 mm from the edge (was 0.93); far-end base ledge 1.08 mm (courtyard-sized pocket) / 1.73 mm (body); lid far-block strip 1.68 mm before C7.",
+      "Board extended 1 mm at the far end: Edge.Cuts x 140 -> 139, J303/J304 x -1 mm; zones refilled. U2 body now 1.93 mm from the edge (was 0.93); far-end base ledge 0.82 mm (slot-limited, as on the parent; would have been 0.12 on the 18 mm board); lid far block 1.43 mm clear of C7 (parent 1.75).",
       "S1: U2 Datasheet field -> ${KIPRJMOD}/datasheets/adxl362.pdf in the schematic, the PCB footprint and tag_library (was a non-existent hardware/hardware/... file URL). datasheets/ restored to the house symlink ../../libraries/datasheets (the copy was file-for-file identical).",
       "S2: U501 pin types corrected in BitTagNG.kicad_sym and the embedded copy (CLKOUT output, INT open_collector, SDA bidirectional, GND and VDD power_in); adxl362 NC -> no_connect, RES -> passive in tag_library and the embedded copy; PWR_FLAG #FLG0103 added on GND (U501's mistyped GND had been the net's only power output); adxl367/lis2dw12/lis2du12 removed from sym-lib-table.",
       "CORRECTION: the parent's note that sym-lib-table 'has no Device library' was wrong -- KiCad 10's global table includes the KiCad default libraries, so Device, power, Connector_Generic and Mechanical all resolve.",
       "Drill/place (aux) origin moved from (140, 113) -- the old 18 mm corner -- to (139, 113), the new lower-left corner.",
-      "Pruned: pcbway_production/2026-09-04-19-26-51 (parent package), 2026-10-14-10-18-41 (old-origin export), BitPresTagBMP585-design-review.md, BitPresTagBMP585.kibot.yaml. Order package: pcbway_production/2026-10-14-10-22-05."
+      "Pruned: pcbway_production/2026-09-04-19-26-51 (parent package), 2026-10-14-10-18-41 (old-origin export), BitPresTagBMP585-design-review.md, BitPresTagBMP585.kibot.yaml. Order package: pcbway_production/2026-10-14-10-22-05.",
+      "Case built: Mechanical/UIUCTag (base, standard lid, no-battery lid); make check and FreeCAD make assembly ALL CLEAR."
     ]
   }
 }

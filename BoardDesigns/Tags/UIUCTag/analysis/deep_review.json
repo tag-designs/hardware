@@ -165,11 +165,11 @@
     {
       "detector": "deep_review",
       "category": "mechanical_fit",
-      "severity": "warning",
+      "severity": "info",
       "confidence": "high",
-      "summary": "Board extended 1 mm at the far end (18 -> 19 mm) to restore case room around U2; a UIUCTag case is still needed -- the BitPresTagBMP585 case does not fit",
-      "description": "As first reviewed, the 18 mm board left U2's body 0.93 mm from the far edge and C7/C404 under the parent lid's far block, so a case would have had a 0.08-0.73 mm far-end ledge and a split lid block. On 2026-10-14 the far edge was moved 1 mm (Edge.Cuts x 140 -> 139) with J303/J304 moving with it; the pogo end, J201, J401 and every part stayed put, so the base mating is unchanged. Now: U2 body 1.93 mm and courtyard 1.28 mm from the edge; far-end base ledge 1.08 mm with the pocket sized from the courtyard (as board_geometry.py does) or 1.73 mm from the body; lid far block clear strip 1.68 mm before C7, against the parent's 1.75 mm block. The parent case remains unusable because the board is now 19 mm.",
-      "recommendation": "Make a UIUCTag case per Mechanical/TAGCASE-PROCESS.md from board_geometry.py on the 19 mm board, with the lid far block within the 1.68 mm strip at the far end; run make check.",
+      "summary": "Board extended 1 mm at the far end (18 -> 19 mm) to restore case room around U2; Mechanical/UIUCTag case built and fit-checked",
+      "description": "On the 18 mm board U2's pocket would have cut past the far harness slot, leaving a 0.12 mm far-end ledge, and C7/C404 sat under the parent lid's far block. On 2026-10-14 the far edge moved 1 mm (J303/J304 with it); the pogo end and all parts stayed put. Now U2's body is 1.93 mm from the edge, the far-end ledge is 0.82 mm (limited by the harness slot, exactly as on BitPresTagBMP585), and the lid far block is 1.43 mm wide clear of C7 (parent 1.75). Mechanical/UIUCTag was built from these numbers and passes make check and the FreeCAD make assembly against the real board and both cells.",
+      "recommendation": "None.",
       "evidence": {
         "components": [
           "U2",
@@ -179,7 +179,7 @@
         "computation": {
           "description": "Far-end case room on the extended board, in case coordinates",
           "script": "analysis/helpers/u2_fit_check.py",
-          "result": "19.00 x 10.00 mm; U2 body x[-7.57,-4.38] (1.93 mm to edge), courtyard 1.28 mm; base ledge 1.08 mm (courtyard) / 1.73 mm (body); lid strip 1.68 mm before C7"
+          "result": "19.00 x 10.00 mm; U2 body 1.93 mm to edge; far-end ledge 0.82 mm (slot-limited); lid far block x[-9.25,-7.82] = 1.43 mm before C7"
         }
       },
       "evidence_checked": "full",
@@ -188,7 +188,7 @@
         "C7",
         "C404"
       ],
-      "finding_id": "deep_review:21303eeba362"
+      "finding_id": "deep_review:b0c8b3843dc4"
     },
     {
       "detector": "deep_review",

@@ -29,13 +29,13 @@ end of the board was extended by 1 mm (now 19 × 10 mm), so a case has room arou
 U2. Suggestions S1 and S2 are applied. The production package
 `pcbway_production/2026-10-14-10-22-05/` is verified against the board (see
 [Fab package](#fab-package-verified)). U2's LCSC number is confirmed by the
-designer. The one remaining item is a UIUCTag case.
+designer. The case, `Mechanical/UIUCTag/`, is built and fit-checked. Nothing is open.
 
 ## Critical Findings
 
 | Severity | Issue | Section |
 |---|---|---|
-| WARNING | No UIUCTag case yet. The board is now 19 mm long and the BitPresTagBMP585 case does not fit; the 1 mm extension gives the new case room | [W1](#w1--case-room-at-the-far-end-board-extended-1-mm) |
+| CLOSED | ~~No UIUCTag case~~. `Mechanical/UIUCTag/` built and fit-checked, with the standard no-battery lid | [W1](#w1--case-room-at-the-far-end-board-extended-1-mm) |
 | CLOSED | ~~No UIUCTag fab package; parent's package in `pcbway_production/`~~. UIUCTag package generated and verified; superseded exports pruned | [W2](#w2--fab-package-and-parent-files) |
 | CLOSED | ~~U2 LCSC C59641 unconfirmed~~. Confirmed by the designer against the JLCPCB parts library | [W3](#w3--u2-lcsc-number-confirmed) |
 
@@ -166,13 +166,18 @@ From `analysis/helpers/u2_fit_check.py` on the 19 mm board:
 | | Parent case | UIUCTag, 18 mm | **UIUCTag, 19 mm** |
 |---|---|---|---|
 | U2 body to far edge | — | 0.93 mm | **1.93 mm** |
-| Far-end base ledge (pocket from courtyard / body) | 1.59 mm | 0.08 / 0.73 mm | **1.08 / 1.73 mm** |
-| Clear strip for the lid far block | 1.75 mm | ~0.7 mm, split | **1.68 mm** before C7 |
+| Far-end base ledge (groove to pocket or harness slot, whichever is further out) | 0.82 mm | 0.12 mm (pocket from courtyard) / 0.77 mm (from body) | **0.82 mm**, slot-limited as on the parent |
+| Lid far block (0.25 from the edge, 0.25 clear of the first F.Cu part) | 1.75 mm | 0.43 mm, or split | **1.43 mm**, clear of C7 |
 
-**Still to do:** make a UIUCTag case. The BitPresTagBMP585 case cannot be reused
-on a 19 mm board. Follow `Mechanical/TAGCASE-PROCESS.md` using
-`board_geometry.py` on the new outline (centre now KiCad x = 148.5). Keep the lid
-far block within the 1.68 mm strip, then run `make check`.
+*Corrected 2026-10-14:* an earlier version of this table measured the ledge to
+the pocket only (ignoring the far harness slot, which is what limits it) and
+compared the 19 mm board's whole clear strip (1.68) with the parent's block
+(1.75). The numbers above are like for like, from the fixed
+`u2_fit_check.py`.
+
+**Done:** `Mechanical/UIUCTag/` (base, standard lid, no-battery lid) was built
+from these numbers and passes `make check` and the FreeCAD `make assembly`
+against the real board and both cells. See its README.
 
 ### W2 — fab package and parent files
 

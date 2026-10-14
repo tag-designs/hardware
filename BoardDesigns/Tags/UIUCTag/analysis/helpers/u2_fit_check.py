@@ -11,11 +11,12 @@ Prints
   2. the board outline, and U2's body (B.SilkS box, pin-1 tick excluded)
      and courtyard x-extent in case coordinates (x = KiCad x - centre, so -x
      is the far, non-pogo end -- see Mechanical/TAGCASE-PROCESS.md);
-  3. the room a case has at the far end: the base ledge left once the
-     under-board pocket clears U2's body (or courtyard) by 0.2 mm, and the
-     clear strip for the lid far block between the board edge and the first
-     F.Cu courtyard, less the 0.25 mm the process asks for. The
-     BitPresTagBMP585 case, for comparison, had a 1.59 mm ledge and a
+  3. the room a case has at the far end, as TAGCASE-PROCESS.md builds it:
+     the base ledge the board rests on, from the board groove (edge + 0.038)
+     to whichever reaches further out of the under-board pocket (U2 courtyard
+     + 0.2) and the far harness slot (hole edge + 0.1); and the lid far block,
+     0.25 in from the board edge and 0.25 clear of the first F.Cu courtyard.
+     The BitPresTagBMP585 case, for comparison, has a 0.82 mm ledge and a
      1.75 mm far block.
 """
 import math
@@ -25,6 +26,9 @@ from pathlib import Path
 
 PCB = Path("UIUCTag.kicad_pcb")
 BOTTOM_PARTS_CLEARANCE = 0.2    # TAGCASE-PROCESS.md: pocket = B.Cu envelope + 0.2
+GROOVE_CLEARANCE = 0.0015 * 25.4  # board groove: outline + 1.5 mil per edge
+HOLE_RADIUS = 0.55               # J30x harness holes
+SLOT_MARGIN = 0.1                # harness slot -x edge just past the holes
 LID_PART_CLEARANCE = 0.25       # TAGCASE-PROCESS.md: lid far block keeps >= 0.25 clear
 LID_FAR_BLOCK_HALF_WIDTH = 5.2 / 2
 
@@ -149,8 +153,13 @@ def main():
     print(f"   body-to-edge {body[0] - far_edge:.2f} mm, courtyard-to-edge {crt[0] - far_edge:.2f} mm")
 
     print("3. Far-end case room")
-    print(f"   base ledge with pocket from U2 body: {body[0] - BOTTOM_PARTS_CLEARANCE - far_edge:.2f} mm; "
-          f"from courtyard: {crt[0] - BOTTOM_PARTS_CLEARANCE - far_edge:.2f} mm")
+    far_holes = [placement(fp)[0] - centre[0] for ref, fp in fps.items() if ref in ("J303", "J304")]
+    slot_edge = sum(far_holes) / len(far_holes) - HOLE_RADIUS - SLOT_MARGIN
+    groove = far_edge - GROOVE_CLEARANCE
+    for label, pocket in (("U2 courtyard", crt[0]), ("U2 body", body[0])):
+        inner = min(pocket - BOTTOM_PARTS_CLEARANCE, slot_edge)
+        print(f"   base ledge, pocket from {label}: {inner - groove:.2f} mm "
+              f"(groove {groove:.2f} to {inner:.2f}; slot edge {slot_edge:.2f})")
     first = None
     for ref, fp in sorted(fps.items()):
         if placement(fp)[3] != "F.Cu" or ref.startswith("J"):
@@ -159,9 +168,9 @@ def main():
         if e and e[2] < LID_FAR_BLOCK_HALF_WIDTH and e[3] > -LID_FAR_BLOCK_HALF_WIDTH:
             if first is None or e[0] < first[1]:
                 first = (ref, e[0])
-    room = first[1] - LID_PART_CLEARANCE - far_edge
+    block = (first[1] - LID_PART_CLEARANCE) - (far_edge + LID_PART_CLEARANCE)
     print(f"   lid far block (|y| <= {LID_FAR_BLOCK_HALF_WIDTH}): first F.Cu part {first[0]} at x = {first[1]:.2f}; "
-          f"clear strip {room:.2f} mm after the {LID_PART_CLEARANCE} mm clearance")
+          f"block x[{far_edge + LID_PART_CLEARANCE:.2f}, {first[1] - LID_PART_CLEARANCE:.2f}] = {block:.2f} mm")
 
 
 if __name__ == "__main__":
