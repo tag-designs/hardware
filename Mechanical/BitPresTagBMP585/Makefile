@@ -1,14 +1,16 @@
 OPENSCAD ?= $(HOME)/Software/OpenSCAD-2021.01.app/Contents/MacOS/OpenSCAD
 SCAD := BitPresTagBMP585.scad
-STLS := BitPresTagBMP585-base.stl BitPresTagBMP585-lid.stl
+STLS := BitPresTagBMP585-base.stl BitPresTagBMP585-lid.stl BitPresTagBMP585-lid-nobattery.stl
 
-.PHONY: all base lid check assembly clean
+.PHONY: all base lid lid-nobattery check assembly clean
 
 all: $(STLS)
 
 base: BitPresTagBMP585-base.stl
 
 lid: BitPresTagBMP585-lid.stl
+
+lid-nobattery: BitPresTagBMP585-lid-nobattery.stl
 
 BitPresTagBMP585-base.stl: $(SCAD)
 	$(OPENSCAD) -o $@ -D makebase=true -D makelid=false $(SCAD)
@@ -17,11 +19,19 @@ BitPresTagBMP585-base.stl: $(SCAD)
 BitPresTagBMP585-lid.stl: $(SCAD)
 	$(OPENSCAD) -o $@ -D makebase=false -D makelid=true -D lid_preview_z=0 $(SCAD)
 
+# For testing a board before its coin cell is fitted; same screws.
+BitPresTagBMP585-lid-nobattery.stl: $(SCAD)
+	$(OPENSCAD) -o $@ -D makebase=false -D makelid=true -D lid_no_battery=true -D lid_preview_z=0 $(SCAD)
+
 # Base/tag, lid/board and lid/base interference. Passes when OpenSCAD reports
 # an empty top-level object and writes nothing.
+# Also fails on any OpenSCAD WARNING: an undefined variable once dropped the
+# no-battery lid's far block entirely and the interference check still passed.
 check: $(SCAD)
-	@rm -f check.stl
-	$(OPENSCAD) -o check.stl -D makechecks=true $(SCAD) 2>&1 | grep -q 'top level object is empty' \
+	@rm -f check.stl check.log
+	@$(OPENSCAD) -o check.stl -D makechecks=true $(SCAD) > check.log 2>&1; \
+	if grep -q WARNING check.log; then grep WARNING check.log; echo "check: OPENSCAD WARNINGS"; exit 1; fi; \
+	grep -q 'top level object is empty' check.log \
 		&& echo "check: no interference" \
 		|| { echo "check: INTERFERENCE (see check.stl)"; exit 1; }
 
@@ -39,4 +49,4 @@ assembly: $(STLS) tag-board.step assemble.py
 	$(FREECADCMD) assemble.py
 
 clean:
-	rm -f $(STLS) check.stl
+	rm -f $(STLS) check.stl check.log

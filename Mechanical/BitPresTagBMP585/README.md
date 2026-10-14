@@ -1,10 +1,11 @@
 # BitPresTagBMP585 tag case
 
-Base (adapter) and lid for `BoardDesigns/Tags/BitPresTagBMP585`. Also fits
-`BitPresTagBMP585-alternate`: its outline and every footprint position are identical.
+Base (adapter), standard lid and no-battery lid for
+`BoardDesigns/Tags/BitPresTagBMP585`. Also fits `BitPresTagBMP585-alternate`:
+its outline and every footprint position are identical.
 
 ```
-make            # BitPresTagBMP585-base.stl, BitPresTagBMP585-lid.stl
+make            # BitPresTagBMP585-base.stl, -lid.stl, -lid-nobattery.stl
 make check      # quick OpenSCAD interference check against a box model of the tag
 make assembly   # full fit check in FreeCAD against the real parts (see below)
 ```
@@ -34,6 +35,22 @@ changes the following, per `TAGCASES-general-principles.md`:
 The following are unchanged: base block and margins, pogo window and height
 (6.27 − 0.70 mid stroke), posts, insert and screw hole sizes, alignment pin hole
 size, the crossbar and boss reinforcement, and the lid crossbar and body.
+
+## 2026-10-14: brought up to the UIUCTag standard
+
+The case-design rules settled on `Mechanical/UIUCTag` were applied here. The
+`.scad` was regenerated from `UIUCTag.scad` with this board's parameters
+restored (outline, holes, cell centres, pogo position, B.Cu envelope, far block
+and top-side parts all unchanged), so the two files differ only in those
+parameters.
+
+| | before | now | why |
+|---|---|---|---|
+| No-battery lid | none | `BitPresTagBMP585-lid-nobattery.stl` | For testing a board before its cell is fitted. Sits 2.3 lower; the pogo-end block (drop 2.6, 5.9 wide) bears on the board over J201 and the far block is 0.2 shorter. Keeps `BPT585` and adds `TEST` on the lid body. Same screws |
+| Pogo-end pocket | stopped at the B.Cu envelope (x 3.49) | runs on to the slot centre | Removes the free-standing 1.14 × 1.5 bar between the pocket and the slot/pogo window, which does not print well |
+| Base `*` | size 3 at (11.3, 7.0), glyph not recentred: reached y 8.52 against an 8.54 edge | size 3.5, recentred, 0.54 from the edge and the battery-relief arc | Printability |
+| Lid `*` | size 4 at x 6.4: ran 0.17 past the lid end | size 5, recentred, 0.9 in from the lid end | Printability |
+| `make check` | interference only | also fails on any OpenSCAD `WARNING` | An undefined variable once silently dropped a lid block |
 
 ## Derived geometry
 
@@ -68,14 +85,18 @@ parts:
   the drawing (tip 6.27 above the base PCB top);
 - the dowel pins.
 
-It reports overlaps and gaps. Last run:
+It reports overlaps and gaps. Last run, 2026-10-14: **ALL CLEAR**.
 
-| | MS621 | MS920SE |
-|---|---|---|
-| base vs board and components | clear, 0.038 | clear, 0.038 |
-| base vs cell | clear, 0.185 | clear, 0.185 |
-| lid vs board and components | clear | clear |
-| lid far block to board top | 0.285 | 0.435 |
+| | MS621 | MS920SE | no battery |
+|---|---|---|---|
+| base vs board and components | clear, 0.038 | clear, 0.038 | — |
+| base vs cell | clear, 0.185 | clear, 0.185 | — |
+| lid vs board and components | clear | clear | clear (pogo block seated, 0.000) |
+| lid far block to board top | 0.285 | 0.435 | 0.200 |
+| lid vs base | — | — | 0.288 |
+| lid vs dowels | 2.880 | 2.880 | 0.595 |
+| lid underside to U3 | — | — | 0.555 |
+| lid pogo block to J301/J302 holes | — | — | 0.259 |
 
 The pogo plungers land on the J201 pad centres, with 0.70 compression. The
 connector clears the pogo window by 0.10. The dowels clear the tag (0.71) and
@@ -88,3 +109,6 @@ KiCad model.
   and 0.44 short with an MS920. Screw tension closes the gap by tilting the
   lid slightly, which the lid screw-hole clearance allows. Accepted as is,
   2026-10-12.
+- **No-battery lid block length** 2.6, not the standard lid's 2.1: at 2.1 the
+  lowered lid clears U3 by 0.055 and the dowel tops by 0.095 (measured on
+  UIUCTag, same geometry here). Settled 2026-10-14.

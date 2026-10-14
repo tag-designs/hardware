@@ -2,6 +2,10 @@ $fn = 120; // steps in generating circles
 
 makelid = true;
 makebase = true;
+// Second lid, for testing a board before its coin cell is fitted: the
+// pogo-end block reaches down to the board top instead of the cell. A standard
+// part of every case (Mechanical/TAGCASE-PROCESS.md, step 6).
+lid_no_battery = false;
 makeassembly = false;  // base + lid in place, with the tag as simple solids
 makechecks = false;    // interference volumes only; should render empty
 
@@ -10,7 +14,9 @@ makechecks = false;    // interference volumes only; should render empty
 version_string = "BPT585";
 
 // Fits BoardDesigns/Tags/BitPresTagBMP585 and BitPresTagBMP585-alternate,
-// which share outline and placement. Derivations are in README.md.
+// which share outline and placement. Derivations are in README.md. Brought up
+// to the UIUCTag standard on 2026-10-14: no-battery lid, pocket merged into
+// the pogo-end slot, recentred markers.
 //
 // All dimensions are millimeters. XY coordinates are board-centered with +x
 // toward the pogo/battery end and +y up the screen; KiCad's y runs down, so
@@ -43,8 +49,6 @@ bottom_parts_height = 1.06;        // CC-12-4 (U2) is the tallest
 bottom_parts_clearance = 0.2;
 under_board_cut_depth = 1.5;
 
-under_pocket_min = bottom_parts_min - [1, 1] * bottom_parts_clearance;
-under_pocket_max = bottom_parts_max + [1, 1] * bottom_parts_clearance;
 
 // J301-J304: 1.1 mm harness holes in the board corners.
 corner_hole_x = [-7.57, 5.28];
@@ -120,6 +124,14 @@ harness_slot_margin = 0.1;
 function harness_slot_x(hole_x) =
     hole_x - corner_hole_radius - harness_slot_margin + harness_slot_width / 2;
 
+// The pocket runs on into the pogo-end harness slot. Stopping it at the B.Cu
+// envelope (x 3.99) left a 1.14 x 1.5 mm free-standing bar between the pocket
+// and the slot/pogo window that does not print well; nothing under the board
+// needs it.
+under_pocket_min = bottom_parts_min - [1, 1] * bottom_parts_clearance;
+under_pocket_max = [harness_slot_x(corner_hole_x[1]),
+                    bottom_parts_max[1] + bottom_parts_clearance];
+
 // ---------------------------------------------------------------------------
 // Lid dimensions
 // ---------------------------------------------------------------------------
@@ -135,6 +147,7 @@ lid_pogo_block_drop = 2.1;
 lid_pogo_block_len = 2;
 lid_pogo_block_width = board_width - 1;
 
+
 // Stops short of the board by lid_far_block_gap so the pogo end always seats
 // first; screw tension closes the gap. Kept inside the corner holes in y and
 // clear of C7/C8 in x.
@@ -142,6 +155,19 @@ lid_far_block_gap = 0.2;
 lid_far_block_drop = lid_pogo_block_drop + battery_stack_height - lid_far_block_gap;
 lid_far_block_x = [-8.75, -7.0];
 lid_far_block_width = 5.2;
+
+// No-battery lid: with no cell to clear it sits lower, so both end blocks are
+// short. The pogo-end block lands on the board top directly above J201; the
+// far block is shorter by lid_far_block_gap so the pogo end still seats
+// first. The drop is 2.6, not the standard lid's 2.1: at 2.1 the lid underside
+// cleared U3 (BMP585, 1.96 tall) by 0.055 and the dowel tops by 0.095; 2.6
+// gives ~0.55 to both (make assembly). The screws run 2.3 further into the
+// (through) inserts. The pogo-end block is narrowed to stay
+// 0.25 clear of the J301/J302 harness holes, which it would otherwise cover.
+lid_nb_pogo_block_drop = 2.6;
+lid_nb_far_block_drop = lid_nb_pogo_block_drop - lid_far_block_gap;
+lid_nb_assembled_z = board_top_z + lid_nb_pogo_block_drop;
+lid_nb_pogo_block_width = 2 * (corner_hole_y - corner_hole_radius - 0.25);
 
 lid_body_x = [lid_far_block_x[0], pogo_center[0] + lid_pogo_block_len / 2];
 lid_assembled_z = battery_top_z + lid_pogo_block_drop;
@@ -159,9 +185,27 @@ text_depth_base = 0.8;
 text_depth_lid = 0.8;
 
 base_text_pos = [-4.5, 0, -pogo_pin_height_at_board];
-base_marker_pos = [11.3, 7.0, base_extra_height];
+// The "*" pogo-end markers. The asterisk sits high in its em box (at size s
+// it spans y -0.04s..+0.50s with valign="center"), so marker() recentres it on
+// its real extent. Beyond the board end the battery relief reaches y 5.54, so
+// the base marker is centred in the strip between that arc and the base edge
+// (y 8.54), 0.54 clear of each and 1.1 from the end; the earlier size-3 marker
+// ran to within 0.02 of the edge. The lid marker sits 0.9 in from the lid's
+// pogo end and ~1 clear of the lid text. Positions are formulas so the
+// rule carries to other boards.
+marker_size_base = 3.5;            // glyph 1.99 x 1.92
+marker_size_lid = 5;               // glyph 2.81 x 2.70
+base_marker_pos = [base_len / 2 - 2.04,
+                   (ms920_radius + battery_radius_clearance + base_width / 2) / 2,
+                   base_extra_height];
+lid_marker_pos = [pogo_center[0] + lid_pogo_block_len / 2 - 2.3, 0, lid_body_height];
 lid_text_pos = [post_center[0], 0, lid_body_height];
-lid_marker_pos = [pogo_center[0], 0, lid_body_height];
+
+// The no-battery lid keeps the version text and adds this label on the lid
+// body, centred between the far block and the crossbar. A suffix on the
+// version text does not fit: six bold characters already fill the crossbar.
+lid_nb_text = "TEST";              // 9.08 x 2.66 at text_size_lid; lid body is 10.08 wide
+lid_nb_text_pos = [(lid_far_block_x[0] + post_center[0] - post_radius) / 2, 0, lid_body_height];
 
 // Extra base support added around the post bosses.
 base_post_secondary_x = -3.5;
@@ -202,6 +246,12 @@ module rounded_rect_2d(size, radius) {
                 circle(r=radius);
         }
     }
+}
+
+module marker(size, depth) {
+    linear_extrude(depth + eps)
+        translate([0, -0.229 * size])
+            text(text="*", size=size, font=text_font, halign="center", valign="center");
 }
 
 module engraved_text(s, size, depth) {
@@ -333,8 +383,7 @@ module base_engraving() {
 
     // Top face at the pogo/battery end.
     translate(base_marker_pos - [0, 0, text_depth_base])
-        linear_extrude(text_depth_base + eps)
-            text(text="*", size=3, font=text_font, halign="center", valign="center");
+        marker(marker_size_base, text_depth_base);
 }
 
 module base_cutouts() {
@@ -359,37 +408,42 @@ module makeBase() {
 // Lid (lid coordinates: z=0 is the lid underside)
 // ---------------------------------------------------------------------------
 
-module lid_solid() {
+module lid_solid(nb) {
     crossbar_with_holes(lid_body_height, lid_end_height, screw_hole_radius);
 
     // Bears on the board at the end away from the battery.
     box_from([lid_far_block_x[0], -lid_far_block_width / 2],
              [lid_far_block_x[1],  lid_far_block_width / 2],
-             -lid_far_block_drop, lid_body_height);
+             -(nb ? lid_nb_far_block_drop : lid_far_block_drop), lid_body_height);
 
-    // Bears on the cell, above the pogo pins.
-    translate([pogo_center[0], pogo_center[1], -lid_pogo_block_drop])
-        xy_centered_cube([lid_pogo_block_len, lid_pogo_block_width,
-                          lid_pogo_block_drop + lid_body_height]);
+    // Bears on the cell above the pogo pins -- or, on the no-battery lid, on
+    // the board itself.
+    drop = nb ? lid_nb_pogo_block_drop : lid_pogo_block_drop;
+    width = nb ? lid_nb_pogo_block_width : lid_pogo_block_width;
+    translate([pogo_center[0], pogo_center[1], -drop])
+        xy_centered_cube([lid_pogo_block_len, width, drop + lid_body_height]);
 
     box_from([lid_body_x[0], -board_width / 2],
              [lid_body_x[1],  board_width / 2],
              0, lid_body_height);
 }
 
-module lid_engraving() {
+module lid_engraving(nb) {
     translate(lid_text_pos - [0, 0, text_depth_lid])
         engraved_text(version_string, text_size_lid, text_depth_lid);
 
+    if (nb)
+        translate(lid_nb_text_pos - [0, 0, text_depth_lid])
+            engraved_text(lid_nb_text, text_size_lid, text_depth_lid);
+
     translate(lid_marker_pos - [0, 0, text_depth_lid])
-        linear_extrude(text_depth_lid + eps)
-            text(text="*", size=4, font=text_font, halign="center", valign="center");
+        marker(marker_size_lid, text_depth_lid);
 }
 
-module makeLid() {
+module makeLid(nb=lid_no_battery) {
     difference() {
-        lid_solid();
-        lid_engraving();
+        lid_solid(nb);
+        lid_engraving(nb);
     }
 }
 
@@ -437,8 +491,10 @@ module tag() {
     tag_battery(ms920_center, ms920_radius);
 }
 
-module lid_in_place() {
-    translate([0, 0, lid_assembled_z]) makeLid();
+// The standard lid sits on the cell; the no-battery one, a cell stack lower,
+// with its pogo-end block on the board top.
+module lid_in_place(nb=lid_no_battery) {
+    translate([0, 0, nb ? lid_nb_assembled_z : lid_assembled_z]) makeLid(nb);
 }
 
 // ---------------------------------------------------------------------------
@@ -448,8 +504,10 @@ module lid_in_place() {
 if (makechecks) {
     // Each of these must be empty.
     intersection() { makeBase(); tag(); }
-    intersection() { lid_in_place(); tag_board(); }
-    intersection() { lid_in_place(); makeBase(); }
+    intersection() { lid_in_place(false); tag_board(); }
+    intersection() { lid_in_place(false); makeBase(); }
+    intersection() { lid_in_place(true); tag_board(); }
+    intersection() { lid_in_place(true); makeBase(); }
 } else if (makeassembly) {
     makeBase();
     lid_in_place();

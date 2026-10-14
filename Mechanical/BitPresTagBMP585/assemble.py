@@ -24,6 +24,8 @@ POGO = (6.4, 0.0)
 POST_X = POGO[0] - 5.0
 PIN_Y = 6.5                        # single-pair base
 LID_POGO_BLOCK_DROP = 2.1
+BATTERY_STACK_HEIGHT = 2.7
+LID_NB_POGO_BLOCK_DROP = 2.6       # lid_nb_pogo_block_drop: no-battery lid block, on the board
 BASE_PCB_THICKNESS = 1.6
 
 J401_X = 152.8 - 149.0             # J401 origin, case x; the cell lies toward +x
@@ -117,6 +119,7 @@ add("MS920SE_alternative", ms920, tag_group)
 
 base = stl_solid(os.path.join(HERE, "BitPresTagBMP585-base.stl"))
 lid_raw = stl_solid(os.path.join(HERE, "BitPresTagBMP585-lid.stl"))
+lid_nb_raw = stl_solid(os.path.join(HERE, "BitPresTagBMP585-lid-nobattery.stl"))
 
 
 def lid_on(cell):
@@ -129,6 +132,12 @@ def lid_on(cell):
 lid = lid_on(ms621)
 add("Base", base)
 add("Lid", lid)
+
+# No-battery lid, for a board without its cell: the pogo-end block lands on
+# the board top. Shown displaced in y so it does not hide the standard lid.
+lid_nb = lid_nb_raw.copy()
+lid_nb.translate(Vector(0, 0, board_top + LID_NB_POGO_BLOCK_DROP))
+add("Lid_no_battery", transformed(lid_nb, axes_matrix((1, 2, 3), (0, 30, 0))))
 
 # --- Base side: single-pair footprint PCB, pogo connector, dowel pins -------
 
@@ -194,6 +203,22 @@ for cell_name, cell in (("MS621", ms621), ("MS920SE", ms920)):
     far = lid_c.distToShape(tag_parts[pcb_name])[0]
     print("  %-44s %.3f" % ("lid far block to board top", far))
 
+print("\nNo-battery lid, seated on the board top at z %.3f:" % (board_top + LID_NB_POGO_BLOCK_DROP))
+must_clear("lid (no battery) vs board and components", lid_nb, tag)
+must_clear("lid (no battery) vs base", lid_nb, base)
+for d in dowels:
+    must_clear("lid (no battery) vs dowel at y %+.1f" % d.BoundBox.Center.y, lid_nb, d)
+u3 = next(s for k, s in tag_parts.items() if "BMP585" in k.upper() or "LGA9" in k.upper())
+print("  %-44s %.3f" % ("lid (no battery) underside to U3 top", lid_nb.distToShape(u3)[0]))
+pogo_zone = Part.makeBox(2.4, 12, 10, Vector(POGO[0] - 1.2, -6, board_top))
+print("  %-44s %.3f" % ("pogo-end block to board top",
+                         lid_nb.common(pogo_zone).distToShape(tag_parts[pcb_name])[0]))
+print("  %-44s %.3f" % ("far block to board top",
+                         lid_nb.common(Part.makeBox(3, 12, 10, Vector(-9.5, -6, board_top))).distToShape(tag_parts[pcb_name])[0]))
+holes = [Part.makeCylinder(0.55, 2, Vector(5.28, s * 3.75, -0.5)) for s in (-1, 1)]
+print("  %-44s %.3f" % ("pogo-end block to J301/J302 holes",
+                         min(lid_nb.distToShape(h)[0] for h in holes)))
+
 print("\nPogo pins (855, tip %.2f above board underside uncompressed):" % pogo.BoundBox.ZMax)
 for p in plungers:
     c = p.BoundBox.Center
@@ -215,11 +240,12 @@ for d in dowels:
 
 # Positive stop: gap from the board's battery-end edge to the end wall, and
 # how high that wall stands at the board edge.
-end_zone = Part.makeBox(10, 40, 20, Vector(8.9, -20, -10))
+BOARD_END_X = 9.0                  # half of the 18 mm board
+end_zone = Part.makeBox(10, 40, 20, Vector(BOARD_END_X - 0.1, -20, -10))
 end_wall = base.common(end_zone)
 print("\nBattery-end stop: board edge to end wall %.3f, wall top z %.3f (board top %.3f)"
       % (tag_parts[pcb_name].distToShape(end_wall)[0],
-         end_wall.common(Part.makeBox(0.3, 8, 20, Vector(9.0, -4, -10))).BoundBox.ZMax,
+         end_wall.common(Part.makeBox(0.3, 8, 20, Vector(BOARD_END_X, -4, -10))).BoundBox.ZMax,
          board_top))
 
 print("\n%s" % ("ALL CLEAR" if not fails else "FAILED: " + ", ".join(fails)))
