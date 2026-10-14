@@ -109,4 +109,8 @@ the connector clears the pogo window by 0.10. The battery-end stop wall is
   end length" of the standard lid; 2.6 against the standard lid's 2.1 / 4.6.
 - **Footprint on the tag base.** The base block extends 1 mm further from the
   pogo pins at the far end than the BitPresTagBMP585 case did (the board is
-  1 mm longer). Not checked against the tag bases' own layouts.
+  1 mm longer). No problem (designer, 2026-10-14); confirmed against
+  `Components/tag-pins.step` in the assembly: the base ends at x −13.54, 2.67
+  inside that board's −16.21 edge (3.17 for BitPresTagBMP585), on a top surface
+  with nothing standing on it apart from the 855 connector, which the case
+  clears by 0.101.
