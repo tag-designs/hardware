@@ -2,39 +2,150 @@
 
 One library derives a tag case (base, lid, no-battery lid) from the board's
 `.kicad_pcb`, instead of a hand-edited `.scad` per board. It covers the rules in
-`../TAGCASE-PROCESS.md`. Started 2026-10-15; not yet used for a printed case.
-The OpenSCAD cases in `../<Tag>/` remain the reference.
+`../TAGCASE-PROCESS.md`, and checks every case against the real parts before
+calling it done. Started 2026-10-15; not yet used for a printed case. The
+OpenSCAD cases in `../<Tag>/` remain the reference.
 
-```
-make                   # every case: parts, report, fit check -> out/ (~70 s from clean)
-make CASES=BitTagNG    # one case
-make render            # PNGs of the parts and the fit, from the last build
+## How to use it
+
+### 1. Set up (once)
+
+- **Python.** A virtual environment with the pinned packages. The commands
+  below assume it is `~/cq-env`:
+
+  ```bash
+  uv venv ~/cq-env && source ~/cq-env/bin/activate
+  uv pip install -r requirements.txt
+  ```
+
+- **KiCad 10** (`kicad-cli`). The case reads part heights from the board's 3D
+  export, so without KiCad the lids cannot be built at all, not just checked.
+  On macOS it is found inside `KiCad.app` automatically.
+- **OpenSCAD 2021.01**, at `~/Software/OpenSCAD-2021.01.app`, but only for its
+  bundled Liberation Sans Bold, the engraving font.
+
+### 2. Build the cases
+
+From this folder, with make:
+
+```bash
+make                     # every case: parts, report, fit check -> out/  (~70 s)
+make CASES=BitTagNG      # one case
+make render              # PNGs of each part and of the fit, from the last build
 make clean
-python -m tagcase.kicad <board>.kicad_pcb    # what the case reads from a board
 ```
 
-`out/` is not tracked: everything in it is regenerated from the board files.
-`make` exits non-zero if any fit requirement fails. **When a case is printed,
-copy its STLs into that tag's case folder and commit them there.** A rebuild
-reproduces the design, but not necessarily the exact files: a different
-build123d, OCCT or KiCad version, or a changed footprint model, can move the
-geometry slightly.
+Or with CMake, from the repository root. Only cases whose board or library
+changed are rebuilt:
 
-Environment: `requirements.txt` pins the Python packages (`uv pip install -r
-requirements.txt` into `~/cq-env`). Outside pip it needs:
-- **KiCad 10.0.2 `kicad-cli`**, for the board's 3D export. Part heights come
-  from it, so without KiCad the lids cannot be built, not just checked.
-- **OpenSCAD 2021.01**, only for its bundled Liberation Sans Bold.
+```bash
+cmake -S Mechanical/b123d-models -B build-tagcases
+cmake --build build-tagcases --target tagcases           # every case
+cmake --build build-tagcases --target tagcase-BitTagNG   # one case
+cmake --build build-tagcases --target tagcase-renders
+```
+
+CMake writes to `build-tagcases/out/`; make writes to `out/` here. The top-level
+configure (`cmake -S . -B build`) includes this folder too. Configure options:
+`-DTAGCASE_PYTHON=/path/to/python` if the environment is not `~/cq-env`, and
+`-DTAGCASES=OFF` to skip these cases in a checkout without it.
+
+Either way, the build fails if any fit requirement fails. Under CMake a failed
+case stays out of date, so the next build tries it again.
+
+### 3. Read the result
+
+For each case the build prints two blocks:
+
+- **The report**: every number derived from the board (base size, slot and
+  pocket positions, cell relief, lid heights, far block, marker position).
+  **A line ending in `**` is a decision for you**, not an error. Example:
+  `FEWER THAN TWO USABLE FEET`.
+- **The fit table**: one requirement per line, with the measured value, `ok` or
+  `FAIL`. Examples: base to board 0.038, each cell at nominal and ±5° skew,
+  each lid on each cell, the no-battery lid, pogo pins on their pads, the
+  dowels, the end stop. It ends `ALL CLEAR` or `FAILED: n`.
+
+A `CaseError` before either block means the rules cannot handle the board
+without a decision. The message says why. Examples: no harness holes at one
+end, J201 not at 90°, pins the base does not have.
+
+`out/` then holds, per case: `<Case>-base`, `-lid` and `-lid-nobattery` as STL
+and STEP, and `<Case>-assembly.step`. The assembly has the board, both cells,
+the tag-base PCB, the pogo connector, the dowels and the case, so you can look
+at the fit in FreeCAD or `ocp_vscode`. `make render` adds PNGs; look at them,
+because the checks do not see everything (see step 4).
+
+### 4. Add a case
+
+Add one line to `CASES` in `cases/build.py`: the board, then the label engraved
+on the parts.
+
+```python
+CASES = {
+    ...
+    "PresTag": (TAGS / "PresTag-v6/PresTag-v6.kicad_pcb", dict(label="PT6")),
+}
+```
+
+Then `make CASES=PresTag` and `make render CASES=PresTag` (CMake picks the new
+case up on its own). Everything else comes from the board. Add these to the
+`dict` only when the default is wrong for this tag:
+
+| argument | default | when to change it |
+|---|---|---|
+| `tag_base=` | `SINGLE_PAIR` | `LIPO` for the double-screw tag base |
+| `pins=` | `Pins.NARROW` | `Pins.WIDE` for a board too wide for the narrow pins (needs `LIPO`) |
+| `cells=` | from J401's footprint (MS621 → MS621F and MS920SE) | a tag that should be cased for other cells |
+| `design=` | `CaseDesign()` | a one-off rule change, e.g. `replace(CaseDesign(), far_block_bearing="board")` |
+
+What the board must have, because the reader finds parts by name: `J201` for
+the pogo pads (at 90°, on the +x end), `J401` for the battery pads, and
+`taghole` footprints for the harness holes at both ends.
+
+Check these by eye in the renders, because nothing tests them yet:
+- **The label fits the lid.** About six bold characters fit between the screw
+  bosses.
+- **A new cell lands on its pads**, if you added one (below).
+
+A **new battery footprint** needs a `CoinCell` in `tagcase/parts.py`: the STEP
+path, the remap from the vendor model's axes into J401's footprint frame, and
+the tab half-width. Map the footprint name in `BATTERY_FAMILIES`. The cell's
+centre and radius are read from the model. **LiPo tags** (IMUTag-style) are not
+supported yet.
+
+### 5. Print a case
+
+Build it, read the report and fit table, and look at the renders. Then **copy
+its three STLs into that tag's case folder (`../<Tag>/`) and commit them
+there**. `out/` is not tracked, and a rebuild reproduces the design but not
+necessarily the exact files: a different build123d, OCCT or KiCad version, or a
+changed footprint model, can move the geometry slightly. Note the commit of
+this folder the parts came from.
+
+### 6. Change a house rule
+
+The house rules are the defaults of `CaseDesign` in `tagcase/case.py`:
+clearances, skew allowance, block drops, text sizes and the far-block bearing
+rule. A change there changes every case, so rebuild all of them (`make`) and
+read every report. Record the decision under **Rules** below.
+
+To see what the library reads from a board without building anything:
+
+```bash
+~/cq-env/bin/python -m tagcase.kicad ../../BoardDesigns/Tags/<Tag>/<Tag>.kicad_pcb
+```
 
 ## Layout
 
 | | |
 |---|---|
-| `tagcase/kicad.py` | s-expression reader (KiCad 6–9). The Edge.Cuts outline as a face (lines, arcs, circles, rects, polys; degenerate edges reported, not used), footprints with courtyards in case coordinates, J201/J401/J30x. Also the kicad-cli STEP export (cached in `out/cache/`), which supplies part heights to the case and the real parts to the fit check. |
+| `tagcase/kicad.py` | s-expression reader (KiCad 6–10). The Edge.Cuts outline as a face (lines, arcs, circles, rects, polys; degenerate edges reported, not used), footprints with courtyards in case coordinates, J201/J401/J30x. Also the kicad-cli STEP export (cached in `out/cache/`), which supplies part heights to the case and the real parts to the fit check. |
 | `tagcase/parts.py` | Common parts: `MIN_BOARD_THICKNESS` 0.4; the cell library (MS621F, MS920SE, positioned from J401; centre and rim radius read from the models); `BATTERY_FAMILIES`; `Pins.NARROW` / `WIDE`; tag bases `SINGLE_PAIR` / `LIPO`. |
 | `tagcase/case.py` | `CaseDesign` (house rules, all overridable) and `TagCase` (features derived from the board). `report()` prints every derived number and flags anything that needs a decision. |
 | `tagcase/fit.py` | Fit check against the real parts: kicad-cli STEP of the board, cells at nominal and ± skew, tag-base PCB, 855 connector, dowels. Lids are seated on the real geometry. |
-| `cases/build.py` | One line per case. |
+| `cases/build.py` | The case list, one line per case; `--list` and `--out` for CMake. |
+| `Makefile`, `CMakeLists.txt`, `render.py` | Build, CMake targets, renders. |
 
 ## Rules (designer, 2026-10-15)
 

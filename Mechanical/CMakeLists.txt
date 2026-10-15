@@ -16,7 +16,9 @@ function (dxf_create scadfile)
         COMMENT "BUILDING ${scadfile}.dxf"
     )
 
-    add_custom_target(${scadfile} DEPENDS "${scadfile}.dxf")
+    # Target names may not contain "/", and these are paths (BitTag/BitTagvc).
+    string(REPLACE "/" "_" target "${scadfile}")
+    add_custom_target(${target} DEPENDS "${scadfile}.dxf")
 endfunction()
 
 function (stl_create scadfile)
@@ -29,8 +31,11 @@ function (stl_create scadfile)
         COMMENT "BUILDING ${scadfile}.stl"
     )
 
-    add_custom_target(${scadfile} DEPENDS "${scadfile}_lid.stl" "${scadfile}_base.stl")
+    string(REPLACE "/" "_" target "${scadfile}")
+    add_custom_target(${target} DEPENDS "${scadfile}_lid.stl" "${scadfile}_base.stl")
 endfunction()
 
 dxf_create(Acrylic/multicharger-acrylic)
 stl_create(BitTag/BitTagvc)
+# Experimental build123d tag cases; -DTAGCASES=OFF skips them.
+add_subdirectory(b123d-models)

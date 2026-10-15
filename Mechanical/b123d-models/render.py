@@ -1,10 +1,12 @@
 """Render the built parts to out/<case>-<view>.png.
 
-    ~/cq-env/bin/python render.py [UIUCTag BitTagNG ...]   # default: every case
+    ~/cq-env/bin/python render.py [--out DIR] [UIUCTag BitTagNG ...]   # default: every case
 
-Run `python -m cases.build` first; this reads its STL and assembly output.
+Run `python -m cases.build` first, with the same --out; this reads its STL and
+assembly output.
 """
-import sys
+import argparse
+from pathlib import Path
 
 import pyvista as pv
 from build123d import export_stl, import_step
@@ -24,19 +26,20 @@ VIEWS = [
 FIT_COLOURS = {"Tag": "#2e7d32", "Cells": "#9e9e9e", "Base": BASE, "TagBase": "#555555"}
 
 
-def render(name):
+def render(name, out=OUT):
+    out = Path(out)
     for view, part, colour, cam, up in VIEWS:
         p = pv.Plotter(off_screen=True, window_size=(1100, 800))
-        p.add_mesh(pv.read(OUT / ("%s-%s.stl" % (name, part))), color=colour, specular=0.3)
+        p.add_mesh(pv.read(out / ("%s-%s.stl" % (name, part))), color=colour, specular=0.3)
         p.camera_position = [cam, (0, 0, 0), up]
         p.reset_camera()
         p.camera.zoom(1.3)
-        p.screenshot(OUT / ("%s-%s.png" % (name, view)))
+        p.screenshot(out / ("%s-%s.png" % (name, view)))
 
     p = pv.Plotter(off_screen=True, window_size=(1200, 850))
-    tmp = OUT / "cache" / "_render.stl"
+    tmp = out / "cache" / "_render.stl"
     tmp.parent.mkdir(exist_ok=True)
-    for child in import_step(OUT / ("%s-assembly.step" % name)).children:
+    for child in import_step(out / ("%s-assembly.step" % name)).children:
         if child.label in FIT_COLOURS:
             export_stl(child, str(tmp), tolerance=0.01, angular_tolerance=0.2)
             p.add_mesh(pv.read(tmp), color=FIT_COLOURS[child.label], specular=0.3)
@@ -44,10 +47,14 @@ def render(name):
     p.camera_position = [(45, -55, 45), (2, 0, 0), (0, 0, 1)]
     p.reset_camera()
     p.camera.zoom(1.5)
-    p.screenshot(OUT / ("%s-fit.png" % name))
+    p.screenshot(out / ("%s-fit.png" % name))
     print("rendered %s" % name)
 
 
 if __name__ == "__main__":
-    for n in sys.argv[1:] or CASES:
-        render(n)
+    ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
+    ap.add_argument("cases", nargs="*", help="default: every case")
+    ap.add_argument("--out", type=Path, default=OUT)
+    a = ap.parse_args()
+    for n in a.cases or CASES:
+        render(n, a.out)
