@@ -23,8 +23,8 @@ POGO_H = POGO_FREE_HEIGHT - 0.7    # pogo_pin_height_at_board
 POGO = (6.9, 0.0)
 POST_X = POGO[0] - 5.0
 PIN_Y = 6.5                        # single-pair base
-LID_POGO_BLOCK_DROP = 2.1
-BATTERY_STACK_HEIGHT = 2.7
+LID_POGO_BLOCK_DROP = 1.95
+BATTERY_STACK_HEIGHT = 2.85         # to the top of the MS920 positive contact
 LID_NB_POGO_BLOCK_DROP = 2.6       # lid_nb_pogo_block_drop: no-battery lid block, on the board
 BASE_PCB_THICKNESS = 1.6
 

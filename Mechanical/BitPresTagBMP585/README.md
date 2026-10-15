@@ -67,10 +67,13 @@ parameters.
 - **Bottom-side envelope.** x −7.21…3.29, y −3.95…3.92 (courtyards), up to 1.06
   deep (U2). The pocket depth of 1.5 leaves 0.44.
 - **Lid.** The lid floats on its screws, as the earlier lids do. The pogo-end
-  block bears on the cell's positive tab directly above the pogo pins, and sets
-  the lid height. Its 2.1 drop is the old lid's, so the same screws reach. The
-  far block is longer by the cell stack height (2.7, from the MS621F model) minus
-  a 0.2 gap, so the pogo end always seats first and screw tension closes the gap.
+  block bears on the cell's positive contact directly above the pogo pins, and
+  sets the lid height, which is the old lid's, so the same screws reach. The
+  stack is the MS920's, 2.85 to the top of its positive contact (the MS621's is
+  2.7), so the block drops 1.95. The far block is longer by the stack minus a
+  0.2 gap, so the pogo end always seats first and screw tension closes the gap.
+  Until 2026-10-15 the block was 2.1 on a 2.7 stack, 0.15 too long on the
+  MS920.
 
 ## FreeCAD fit check
 
@@ -85,30 +88,31 @@ parts:
   the drawing (tip 6.27 above the base PCB top);
 - the dowel pins.
 
-It reports overlaps and gaps. Last run, 2026-10-14: **ALL CLEAR**.
+It reports overlaps and gaps. Last run, 2026-10-15: **ALL CLEAR**.
 
 | | MS621 | MS920SE | no battery |
 |---|---|---|---|
 | base vs board and components | clear, 0.038 | clear, 0.038 | — |
 | base vs cell | clear, 0.185 | clear, 0.185 | — |
 | lid vs board and components | clear | clear | clear (pogo block seated, 0.000) |
-| lid far block to board top | 0.285 | 0.435 | 0.200 |
+| lid far block to board top | 0.135 | 0.285 | 0.200 |
 | lid vs base | — | — | 0.288 |
-| lid vs dowels | 2.880 | 2.880 | 0.595 |
+| lid vs dowels | 2.730 | 2.730 | 0.595 |
 | lid underside to U3 | — | — | 0.555 |
 | lid pogo block to J301/J302 holes | — | — | 0.259 |
 
 The pogo plungers land on the J201 pad centres, with 0.70 compression. The
 connector clears the pogo window by 0.10. The dowels clear the tag (0.71) and
-the lid (2.9). The battery-end stop wall reaches z 0.35, the board top in the
+the lid (2.7). The battery-end stop wall reaches z 0.35, the board top in the
 KiCad model.
 
 ## Settled
 
-- **Lid far block gap.** It stops 0.29 short of the board with an MS621 fitted,
-  and 0.44 short with an MS920. Screw tension closes the gap by tilting the
+- **Lid far block gap.** It stops 0.29 short of the board with an MS920, the
+  cell this board flies with, and 0.14 short with an MS621 (0.44 and 0.29
+  before the 1.95 block, 2026-10-15). Screw tension closes the gap by tilting the
   lid slightly, which the lid screw-hole clearance allows. Accepted as is,
   2026-10-12.
-- **No-battery lid block length** 2.6, not the standard lid's 2.1: at 2.1 the
+- **No-battery lid block length** 2.6, not the standard lid's then 2.1: at 2.1 the
   lowered lid clears U3 by 0.055 and the dowel tops by 0.095 (measured on
   UIUCTag, same geometry here). Settled 2026-10-14.

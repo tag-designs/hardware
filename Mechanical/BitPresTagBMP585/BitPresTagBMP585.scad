@@ -70,7 +70,10 @@ ms920_center = [10.83, 0];
 ms920_radius = 5.14;
 battery_radius_clearance = 0.4;
 battery_cell_bottom_gap = 0.15;    // under-cell tab lifts the cell off the board
-battery_stack_height = 2.7;        // board top to top of the MS621 positive tab
+// Board top to the top of the MS920SE positive contact, which sets the lid
+// height on this board: the MS920 body is 2.70 like the MS621, and its contact
+// adds 0.15 (MS920SE-FL27E.STEP). The MS621 stack is 2.7.
+battery_stack_height = 2.85;
 
 // Beyond the board end the base keeps a shelf up to battery_stop_height, so
 // the board edge has a positive stop across its full width. The under-cell tab
@@ -142,8 +145,9 @@ lid_end_height = 4;
 
 // The lid floats on its screws: the pogo-end block bears on the cell above
 // the pogo pins and sets the lid height; the far block bears on the board.
-// The pogo drop is the previous BitPresTag lid's, so the screws still reach.
-lid_pogo_block_drop = 2.1;
+// The lid stays at the previous BitPresTag lid's height (2.1 on a 2.7 stack),
+// so the screws still reach; on the MS920's 2.85 stack that is a 1.95 drop.
+lid_pogo_block_drop = 1.95;
 lid_pogo_block_len = 2;
 lid_pogo_block_width = board_width - 1;
 

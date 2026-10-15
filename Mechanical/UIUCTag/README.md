@@ -53,9 +53,12 @@ boss reinforcement, battery relief and positive stop, text font and depth.
   base end. The lid `*` (size 5) sits 0.9 in from the lid's pogo end, about 1
   clear of the lid text. `marker()` recentres the glyph: with `valign="center"`
   an asterisk spans y −0.04s…+0.50s.
-- **Standard lid.** Floats on its screws; the pogo-end block (drop 2.1) bears on
-  the cell's positive tab above the pogo pins; the far block is longer by the
-  2.7 cell stack minus a 0.2 gap, so the pogo end seats first.
+- **Standard lid.** Floats on its screws; the pogo-end block (drop 1.95) bears
+  on the cell's positive contact above the pogo pins; the far block is longer
+  by the cell stack minus a 0.2 gap, so the pogo end seats first. The stack is
+  the MS920's, 2.85 to the top of its positive contact (the MS621's is 2.7),
+  since the MS920 is the cell this board flies with. Until 2026-10-15 the
+  block was 2.1 on a 2.7 stack, which left it 0.15 too long on the MS920.
 - **No-battery lid.** Sits 2.3 lower, so both end blocks are short: the
   pogo-end block (drop 2.6) bears on the board top directly above J201, and the
   far block is 0.2 shorter. 2.6 rather than the standard 2.1, because at 2.1
@@ -81,16 +84,16 @@ region where U2 overhangs the old pocket.
 
 `make assembly` (FreeCAD, against KiCad's STEP of the board with every
 component, both cells, the base PCB, the 855 connector and the dowels). Last
-run, 2026-10-14: **ALL CLEAR**.
+run, 2026-10-15: **ALL CLEAR**.
 
 | | MS621 | MS920SE | no battery |
 |---|---|---|---|
 | base vs board and components | clear, 0.038 | clear, 0.038 | — |
 | base vs cell | clear, 0.185 | clear, 0.185 | — |
 | lid vs board and components | clear | clear | clear (pogo block seated, 0.000) |
-| lid far block to board top | 0.285 | 0.435 | 0.200 |
+| lid far block to board top | 0.135 | 0.285 | 0.200 |
 | lid vs base | — | — | 0.288 |
-| lid vs dowels | 2.880 | 2.880 | 0.595 |
+| lid vs dowels | 2.730 | 2.730 | 0.595 |
 | lid underside to U3 | — | — | 0.555 |
 | lid pogo block to J301/J302 holes | — | — | 0.259 |
 
@@ -101,12 +104,13 @@ the connector clears the pogo window by 0.10. The battery-end stop wall is
 
 ## Settled
 
-- **Lid far block gap.** 0.29 (MS621) and 0.44 (MS920) above the board; screw
-  tension closes it by tilting the lid, as on BitPresTagBMP585 (accepted there
-  2026-10-12).
+- **Lid far block gap.** 0.29 above the board with the MS920, the cell this
+  board flies with, and 0.14 with an MS621 (0.29 and 0.44 before the 1.95
+  block, 2026-10-15); screw tension closes it by tilting the lid, as on
+  BitPresTagBMP585 (accepted there 2026-10-12).
 - **No-battery lid block length.** 2.6, not 2.1, for the U3 and dowel
   clearances above. The designer asked for end blocks "more like the battery
-  end length" of the standard lid; 2.6 against the standard lid's 2.1 / 4.6.
+  end length" of the standard lid; 2.6 against the standard lid's then 2.1 / 4.6.
 - **Footprint on the tag base.** The base block extends 1 mm further from the
   pogo pins at the far end than the BitPresTagBMP585 case did (the board is
   1 mm longer). No problem (designer, 2026-10-14); confirmed against
