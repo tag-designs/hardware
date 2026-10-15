@@ -48,3 +48,14 @@ build*/
 # KiCad lock files
 *.lck
 ~*.lck
+
+# FreeCAD automatic backups
+*.FCBak
+
+# Python bytecode (tag-case assemble.py runs)
+__pycache__/
+*.pyc
+
+# Tag-case `make check` output
+Mechanical/*/check.log
+Mechanical/*/check.stl
