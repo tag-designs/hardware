@@ -219,8 +219,13 @@ Gotchas found while writing it:
 - Vendor models use arbitrary axes (the MS920 is y-up with tabs toward −z).
   Find the feet with a script before placing them, and check the placed bbox
   lands where expected. A sign error first put the MS920 over the board.
-- OpenSCAD 2021 cannot export STEP. Load the STLs with
-  `makeShapeFromMesh`, then `Part.Solid(Part.Shell(...))`.
+- OpenSCAD 2021 cannot export STEP, and the checks (`common`, `distToShape`)
+  need solids, not meshes. Convert the STLs with `makeShapeFromMesh`, then
+  `Part.Solid(Part.Shell(...))`, but use the result only for the checks: it
+  has one planar face per triangle (6088 for the UIUCTag no-battery lid), so
+  it is slow to draw and bloats the `.FCStd`. Put the case parts in the
+  document as `Mesh::Feature` objects, moved exactly as the solids are, which
+  is what a direct import gives.
 - The lid's contact with the cell is zero-volume by construction, so report it
   but do not fail on it.
 

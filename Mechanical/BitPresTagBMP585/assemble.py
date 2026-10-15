@@ -44,11 +44,35 @@ def add(name, shape, group=None, color=None, visible=True):
     return o
 
 
-def stl_solid(path):
+def add_mesh(name, mesh, group=None):
+    o = doc.addObject("Mesh::Feature", name)
+    o.Mesh = mesh
+    if group:
+        group.addObject(o)
+    return o
+
+
+def stl_part(path):
+    # The fit checks need solids: common() and distToShape() do not work on a
+    # mesh, and OpenSCAD 2021 cannot export STEP. Converting a mesh makes one
+    # planar face per triangle, which is heavy to draw and to store, so the
+    # document gets the mesh and only the checks use the solid.
+    # removeSplitter() merges coplanar triangles (4992 faces to 1251 for the
+    # UIUCTag base) without changing volume or distance, and halves the time
+    # the checks take; curved walls stay faceted.
     m = Mesh.Mesh(path)
     s = Part.Shape()
     s.makeShapeFromMesh(m.Topology, 0.01)
-    return Part.Solid(Part.Shell(s.Faces))
+    return m, Part.Solid(Part.Shell(s.Faces)).removeSplitter()
+
+
+def moved_mesh(mesh, offset, matrix=None):
+    # Mirrors the translate (and transformed()) applied to a case solid.
+    m = mesh.copy()
+    m.translate(*offset)
+    if matrix is not None:
+        m.transform(matrix)
+    return m
 
 
 def step_shape(path):
@@ -117,27 +141,32 @@ add("MS920SE_alternative", ms920, tag_group)
 
 # --- Case -------------------------------------------------------------------
 
-base = stl_solid(os.path.join(HERE, "BitPresTagBMP585-base.stl"))
-lid_raw = stl_solid(os.path.join(HERE, "BitPresTagBMP585-lid.stl"))
-lid_nb_raw = stl_solid(os.path.join(HERE, "BitPresTagBMP585-lid-nobattery.stl"))
+base_mesh, base = stl_part(os.path.join(HERE, "BitPresTagBMP585-base.stl"))
+lid_mesh, lid_raw = stl_part(os.path.join(HERE, "BitPresTagBMP585-lid.stl"))
+lid_nb_mesh, lid_nb_raw = stl_part(os.path.join(HERE, "BitPresTagBMP585-lid-nobattery.stl"))
+
+
+def lid_z(cell):
+    # The lid floats on its screws; the pogo-end block lands on the cell.
+    return cell.BoundBox.ZMax + LID_POGO_BLOCK_DROP
 
 
 def lid_on(cell):
-    # The lid floats on its screws; the pogo-end block lands on the cell.
     lid = lid_raw.copy()
-    lid.translate(Vector(0, 0, cell.BoundBox.ZMax + LID_POGO_BLOCK_DROP))
+    lid.translate(Vector(0, 0, lid_z(cell)))
     return lid
 
 
 lid = lid_on(ms621)
-add("Base", base)
-add("Lid", lid)
+add_mesh("Base", base_mesh)
+add_mesh("Lid", moved_mesh(lid_mesh, (0, 0, lid_z(ms621))))
 
 # No-battery lid, for a board without its cell: the pogo-end block lands on
 # the board top. Shown displaced in y so it does not hide the standard lid.
 lid_nb = lid_nb_raw.copy()
 lid_nb.translate(Vector(0, 0, board_top + LID_NB_POGO_BLOCK_DROP))
-add("Lid_no_battery", transformed(lid_nb, axes_matrix((1, 2, 3), (0, 30, 0))))
+add_mesh("Lid_no_battery", moved_mesh(lid_nb_mesh, (0, 0, board_top + LID_NB_POGO_BLOCK_DROP),
+                                      axes_matrix((1, 2, 3), (0, 30, 0))))
 
 # --- Base side: single-pair footprint PCB, pogo connector, dowel pins -------
 
