@@ -39,10 +39,11 @@ flowchart TB
 
 ## What is distinctive
 
-**The sensor set is identical to the production tag's.** ADXL367, BMP585 and
-AT25FF321A are exactly what `BitPresTagBMP585` carries, so what is measured here
-is what the tag will do. The difference is only in packaging and in what the
-base supplies.
+**The sensor set is the production tag's, bar the accelerometer.** BMP585 and
+AT25FF321A are what `UIUCTag` carries. The ADXL367 here is what
+`BitPresTagBMP585` carried; UIUCTag replaced it with an ADXL362 because of
+problems with the ADXL367's inactivity detector, so accelerometer measurements
+made on this board do not carry over to the tag.
 
 **The flash is in a different package.** This board uses the `-SHN-B` variant of
 the AT25FF321A where the tag uses `-UUN-T` — a prototype can afford a part that
