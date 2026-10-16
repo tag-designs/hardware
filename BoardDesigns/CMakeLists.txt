@@ -292,7 +292,7 @@ add_subdirectory(Tags/BitTagNG)
 add_subdirectory(Tags/PresTag-v6)
 add_subdirectory(Tags/CompassTag)
 add_subdirectory(Tags/imutag-smps)
-add_subdirectory(Tags/BitPresTagBMP585)
+add_subdirectory(Tags/UIUCTag)
 
 # Base boards -- top view only
 add_subdirectory(Bases/tagbase-v7)

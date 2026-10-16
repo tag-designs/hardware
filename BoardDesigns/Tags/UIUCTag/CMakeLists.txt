@@ -1,1 +1,1 @@
-add_board_renders(BitPresTagBMP585)
+add_board_renders(UIUCTag)

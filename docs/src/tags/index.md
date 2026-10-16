@@ -28,7 +28,7 @@ Joulescope, with nothing attached during the measurement window.
 | [BitTagNG](bittagng.md) | — | — | — | not measured |
 | [PresTag-v6](prestag.md) | 2.4961 V | 0.11 µA | 0.39 µA | 60 s sample period |
 | [CompassTag](compasstag.md) | 2.4960 V | 0.21 µA | 1.95 µA | 30 s compass period |
-| [UIUC Tag](uiuctag.md) | 2.4960 V | 0.16 µA | 0.56 µA | 300 s sample period |
+| [UIUC Tag](uiuctag.md) | 2.4960 V | 0.16 µA | 0.56 µA | 300 s sample period; measured with the ADXL367 |
 | [IMUTag](imutag.md) | 3.6932 V | 6.43 µA | 665 µA | 400 Hz |
 
 Three orders of magnitude separate IMUTag from the rest, and that is the whole

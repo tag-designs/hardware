@@ -7015,7 +7015,7 @@
 			(uuid "eaba22ca-5392-439e-bb8a-e131332d2283")
 		)
 		(embedded_fonts no)
-		(model "${TAG_LIBRARIES}/packages3D/ADXL362.STEP"
+		(model "${KIPRJMOD}/../../kicad_libraries/3d_models/ADXL362.STEP"
 			(offset
 				(xyz 0 0 0)
 			)
