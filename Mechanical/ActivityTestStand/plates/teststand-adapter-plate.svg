@@ -25,10 +25,10 @@
 <line x1="-20.42" y1="14.5" x2="-17.5" y2="14.5" stroke="#000"/>
 <path d="M -14.5 17.5 A 3 3 0 0 0 -17.5 14.5" stroke="#000"/>
 <line x1="-14.5" y1="17.5" x2="-14.5" y2="20.42" stroke="#000"/>
-<circle cx="-5" cy="5" r="1.3462" stroke="#000"/>
-<circle cx="-5" cy="-5" r="1.3462" stroke="#000"/>
-<circle cx="5" cy="5" r="1.3462" stroke="#000"/>
-<circle cx="5" cy="-5" r="1.3462" stroke="#000"/>
+<circle cx="7" cy="-0" r="1.3462" stroke="#000"/>
+<circle cx="-7" cy="-0" r="1.3462" stroke="#000"/>
+<circle cx="0" cy="-7" r="1.3462" stroke="#000"/>
+<circle cx="0" cy="7" r="1.3462" stroke="#000"/>
 <circle cx="-9.5" cy="-21" r="1.4986" stroke="#d00"/>
 <circle cx="9.5" cy="-21" r="1.4986" stroke="#d00"/>
 <circle cx="-9.5" cy="21" r="1.4986" stroke="#d00"/>

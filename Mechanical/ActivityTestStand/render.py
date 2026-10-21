@@ -21,7 +21,7 @@ COLOURS = {
     "UBracket": dict(color="#3a3a3a"), "LX16A": dict(color="#141414"),
     "LX16A_horn": dict(color="#555555"), "BusLinker": dict(color="#2a5d9f"),
     "BusLinkerSpacers": dict(color="#f0f0e0"), "TagSpacersA": dict(color="#f0f0e0"),
-    "BaseInserts": dict(color="#c9a227"), "AdapterInserts": dict(color="#c9a227"),
+    "BaseInserts": dict(color="#c9a227"), "BracketScrews": dict(color="#9a9a9a"), "AdapterInserts": dict(color="#c9a227"),
     "TagbaseA": dict(color="#2e7d32"),
 }
 ROTOR = {"UBracket", "AdapterPlate", "AdapterInserts", "TagSpacersA", "TagbaseA"}

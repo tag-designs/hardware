@@ -33,10 +33,7 @@ def entities(plate):
         return [("ENGRAVE", "line", s) for s in ((a, b, c, b), (c, b, c, d), (c, d, a, d), (a, d, a, b))]
 
     if plate == "base":
-        # Shim / servo footprint, and the two L tabs.
-        e += rect(0, 0, ts.SERVO_D, ts.SERVO_W)
-        for sx in (-1, 1):
-            e += rect(sx * (ts.SERVO_D / 2 + ts.TAB_LEN / 2), 0, ts.TAB_LEN, ts.BOT_BRKT["y"])
+        e += rect(0, 0, ts.BOT_BRKT["x"], ts.BOT_BRKT["y"])
         L = ts.LINKER
         e += rect(L["cx"], L["cy"], L["lx"], L["ly"])
         # Tilt axis direction, beyond the bracket.

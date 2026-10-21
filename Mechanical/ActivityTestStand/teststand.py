@@ -50,43 +50,45 @@ SPACER_OD = 0.1875 * IN
 FOOT_H = 0.25 * IN             # rubber feet, for the model only
 FOOT_D = 0.5 * IN
 
-# --- Hiwonder brackets (vendor drawings, mm) ---------------------------------
+# --- Hiwonder brackets and servo -------------------------------------------
+# From Hiwonder's 1:1 DXFs in Mechanical/Components/ (Bottom Bracket.dxf,
+# "Staight U-shaped Bracket.dxf", "LX-16A+mounting holes.dxf"), 2026-10-21.
 # Both brackets carry the horn pattern: 8 holes on a 14 mm circle at 45 deg.
-# Bottom bracket: all eight are 2.0. U bracket base: diagonals 3.0, on-axis
-# 2.0, plus a 7.0 centre hole.
+# Bottom bracket: all eight 2.1. U bracket base: on-axis 3.2 (2-56 passes),
+# diagonals 2.2, centre 8.0. Axes are the U's length (x) and width (y).
 RING_R = 7.0
-RING_DIAG = [(sx * 5.0, sy * 5.0) for sx in (-1, 1) for sy in (-1, 1)]
+RING_DIAG = [(sx * 4.95, sy * 4.95) for sx in (-1, 1) for sy in (-1, 1)]
 RING_AXIAL = [(7.0, 0.0), (-7.0, 0.0), (0.0, 7.0), (0.0, -7.0)]
-BRACKET_T = 2.0                # U bracket, from the drawing
-# Bottom bracket: thin sheet, and its 2.0 holes are too small to pass 2-56,
-# too big to tap, and under the servo anyway. So it is cut in half across
-# the floor and each half turned 180 deg about z: two L-angles whose flanges
-# still hold the servo's horn and back faces but whose floor tabs now point
-# outward, clear of the servo, screwed down from the top into inserts.
-BOT_T = 1.0                    # VERIFY: sheet thickness (only the model uses it)
-BOT_BRKT = dict(x=35.0, y=25.0, h=14.0)          # outside, x spans the flanges
-# Tab inserts go in flange down (the screw pulls them up), so their bodies
-# stand proud of the plate top by TAB_LIFT and the tabs sit on them. The
-# servo stands on a shim of SHIM_T so its holes meet the flange holes as they
-# did when it sat on the bracket floor. In practice: shim until they line up.
-TAB_LIFT = INSERT_LEN - INSERT_FLANGE_T - PLEX_T
-SHIM_T = BOT_T + TAB_LIFT
-TAB_LEN = BOT_BRKT["x"] / 2    # each half's floor, flange face to the cut
-TAB_INSERTS = [(sx * 24.0, sy * 7.0) for sx in (-1, 1) for sy in (-1, 1)]
-TAB_CLEAR_D = 0.120 * IN       # #31, drilled through the tab via the 0.118" pilot
-U_BRKT = dict(x=40.0, y=22.0, h=38.0, axis_to_base=34.0, tip_below_axis=4.0,
-              bend_r=3.0)      # VERIFY: outer bend radius, from the photos
+BRACKET_T = 1.5                # U bracket sheet (bend radii 1.11 / 2.61)
+# Bottom bracket, used whole. The servo does not sit on its floor: the flange
+# holes put the servo's bottom end SERVO_GAP above the floor (back-face holes
+# 2.25 from the end <-> flange row 6.82 above the floor's underside; horn-face
+# holes 6.0 <-> 10.57; both give 4.57). The plate's inserts go in from below,
+# flange down, their bodies standing INSERT_PROUD above the plate top. Four of
+# the floor's ring holes are drilled to 1/8" to fit over those bodies, which
+# locate the bracket; 2-56 pan heads from inside the bracket, heads in the
+# gap under the servo, screw into the inserts.
+BOT_T = 1.5                    # sheet (bend radii 1.0 / 2.5)
+BOT_BRKT = dict(x=35.5, y=24.0, h=13.7)          # outside; 32.5 between the flanges
+SERVO_GAP = 4.57 - BOT_T       # VERIFY: floor top to servo bottom, from the drawings
+BRACKET_INSERTS = RING_DIAG    # floor holes drilled to 1/8"
+INSERT_PROUD = INSERT_LEN - INSERT_FLANGE_T - PLEX_T   # 0.28 mm
+PAN_HEAD = dict(d=0.167 * IN, h=0.053 * IN)           # 2-56 pan head
+U_BRKT = dict(x=36.6 + 2 * BRACKET_T, y=22.0, h=38.0, axis_to_base=34.0, tip_below_axis=4.0,
+              bend_r=2.61)     # outer bend radius
 
-# --- LX-16A (Hiwonder: 45.22 x 24.72 x 36.3 overall) --------------------------
-SERVO_H = 45.22                # z
-SERVO_W = 24.72                # y
-SERVO_D = BOT_BRKT["x"] - 2 * BOT_T       # x, body between the bracket flanges
-HORN_PROUD = 2.5               # VERIFY: horn face beyond body, +x
-BEARING_PROUD = U_BRKT["x"] - 2 * BRACKET_T - SERVO_D - HORN_PROUD  # -x; U inner is 36
-SHAFT_FROM_TOP = 11.5          # VERIFY: output axis below servo top
-HORN_D = 20.0                  # VERIFY
+# LX-16A drawing: 45 long, 24.5 wide, 32 between the horn and back faces;
+# output spline 1.7 proud of the front face, rear boss 2.6 proud of the back.
+SERVO_H = 45.0                 # z
+SERVO_W = 24.5                 # y
+SERVO_D = 32.0                 # x, horn face to back face
+SHAFT_FROM_TOP = 10.0          # output axis below the servo top
+HORN_PROUD = 2.0               # VERIFY: horn face beyond the body, +x (U inner 36.6 = 32 + 4.6)
+BEARING_PROUD = U_BRKT["x"] - 2 * BRACKET_T - SERVO_D - HORN_PROUD  # -x
+HORN_D = 20.0                  # from the STEP
 
-AXIS_Z = SHIM_T + SERVO_H - SHAFT_FROM_TOP
+SERVO_Z = BOT_T + SERVO_GAP     # servo bottom end above the plate top
+AXIS_Z = SERVO_Z + SERVO_H - SHAFT_FROM_TOP
 U_CX = (HORN_PROUD - BEARING_PROUD) / 2      # U centre, toward the horn
 U_BASE_TOP = AXIS_Z + U_BRKT["axis_to_base"]
 ADAPTER_TOP = U_BASE_TOP + PLEX_T
@@ -149,9 +151,9 @@ def plate_holes():
     """Every hole in both plates: (plate, x, y, laser_d, final_d, role)."""
     out = []
     # Base plate.
-    for x, y in TAB_INSERTS:
+    for x, y in BRACKET_INSERTS:
         out.append(("base", x, y, INSERT_LASER_D, INSERT_FINAL_D,
-                    "bracket tab insert, flange down; pilot guides #31 into the tab"))
+                    "bottom bracket insert, flange down; floor drilled 1/8\" over the body; 2-56 pan head from inside"))
     L = LINKER
     for sx in (-1, 1):
         for sy in (-1, 1):
@@ -161,7 +163,8 @@ def plate_holes():
         for y in (BASE["y0"] + FOOT_INSET, BASE["y1"] - FOOT_INSET):
             out.append(("base", x, y, INSERT_LASER_D, INSERT_FINAL_D, "foot insert (optional), flange up"))
     # Adapter plate, in its own frame (centred on the U ring).
-    for x, y in RING_DIAG:
+    # The U base's 3.2 holes, the only ones a 2-56 passes.
+    for x, y in RING_AXIAL:
         out.append(("adapter", x, y, CLEAR_D, CLEAR_D, "U bracket, 2-56 flat head countersunk from top, nut inside U"))
     rel, _, _ = tagbase_holes()
     for orient in ("A", "B"):

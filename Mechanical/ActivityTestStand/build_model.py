@@ -86,22 +86,18 @@ def static_parts():
     feet = [Part.makeCylinder(ts.FOOT_D / 2, ts.FOOT_H, V(x, y, -ts.PLEX_T - ts.FOOT_H))
             for p, x, y, _, _, role in ts.plate_holes() if role.startswith("foot")]
     parts["Feet"] = Part.makeCompound(feet)
-    # The two reversed halves: flange against the servo face, tab outward,
-    # resting on the tab inserts' proud bodies.
+    # The uncut bracket on the plate, floor holes at the inserts drilled 1/8".
     sd = ts.SERVO_D / 2
-    t, z0 = ts.BOT_T, ts.TAB_LIFT
-    halves = []
+    t = ts.BOT_T
+    brk = box(-b["x"] / 2, -b["y"] / 2, 0, b["x"] / 2, b["y"] / 2, t)
+    brk = ring_holes(brk, 0, t, ts.INSERT_FINAL_D, 2.1)
     for sx in (-1, 1):
-        xa, xb = sorted((sx * sd, sx * (sd + ts.TAB_LEN)))
-        tab = box(xa, -b["y"] / 2, z0, xb, b["y"] / 2, z0 + t)
-        fa, fb = sorted((sx * sd, sx * (sd + t)))
-        halves.append(tab.fuse(box(fa, -b["y"] / 2, z0, fb, b["y"] / 2, z0 + b["h"])))
-    brk = Part.makeCompound(halves)
-    for x, y in ts.TAB_INSERTS:
-        brk = brk.cut(Part.makeCylinder(ts.TAB_CLEAR_D / 2, t + 2, V(x, y, z0 - 1)))
+        x0 = sx * b["x"] / 2 - (t if sx > 0 else 0)
+        brk = brk.fuse(box(x0, -b["y"] / 2, 0, x0 + t, b["y"] / 2, b["h"]))
     parts["BottomBracket"] = brk
-    parts["Shim"] = box(-sd, -ts.SERVO_W / 2, 0, sd, ts.SERVO_W / 2, ts.SHIM_T)
-    body = box(-sd, -ts.SERVO_W / 2, ts.SHIM_T, sd, ts.SERVO_W / 2, ts.SHIM_T + ts.SERVO_H)
+    parts["BracketScrews"] = Part.makeCompound(
+        [Part.makeCylinder(ts.PAN_HEAD["d"] / 2, ts.PAN_HEAD["h"], V(x, y, t)) for x, y in ts.BRACKET_INSERTS])
+    body = box(-sd, -ts.SERVO_W / 2, ts.SERVO_Z, sd, ts.SERVO_W / 2, ts.SERVO_Z + ts.SERVO_H)
     parts["LX16A"] = body
     # Horn and rear bearing ride with the shaft; they belong to the servo but
     # are excluded from the sweep (the U bracket is bolted to them).
@@ -173,7 +169,7 @@ def rotor_parts(raw_tagbase):
     cx = ts.U_CX
     zb = ts.U_BASE_TOP
     base = box(cx - u["x"] / 2, -u["y"] / 2, zb - t, cx + u["x"] / 2, u["y"] / 2, zb)
-    base = ring_holes(base.translated(V(-cx, 0, 0)), zb - t, t, 3.0, 2.0, 7.0).translated(V(cx, 0, 0))
+    base = ring_holes(base.translated(V(-cx, 0, 0)), zb - t, t, 2.2, 3.2, 8.0).translated(V(cx, 0, 0))
     arms = [box(x0, -u["y"] / 2, ts.AXIS_Z - u["tip_below_axis"], x0 + t, u["y"] / 2, zb)
             for x0 in (cx - u["x"] / 2, cx + u["x"] / 2 - t)]
     ub = base.fuse(arms).removeSplitter()
@@ -256,12 +252,16 @@ def main():
         low = min(s.BoundBox.ZMin for s in tb.Solids)
         say("  lowest tagbase feature %.2f mm below the board (spacer %.2f)" % (ts.TAGBASE_BOTTOM - low, ts.TAG_SPACER))
 
+    # 1a. The bracket screws' heads stand in the gap under the servo.
+    v = st["BracketScrews"].common(st["LX16A"]).Volume
+    say("Bracket screw heads under the servo: %s (gap %.2f, head %.2f)" %
+        ("clear" if v < 1e-3 else "%.3f mm3 overlap" % v, ts.SERVO_GAP, ts.PAN_HEAD["h"]))
     # 1b. Inside the rotor: the plate must sit flat on the U base.
     for n in ("AdapterInserts",):
         v = ro[n].common(ro["UBracket"]).Volume
         say("%s against the U bracket: %s" % (n, "clear" if v < 1e-3 else "%.3f mm3 overlap" % v))
     # 2. Tilt range. Static obstacles exclude the horn; moving set is rigid.
-    static = {k: st[k] for k in ("BasePlate", "BottomBracket", "Shim", "LX16A", "BusLinker", "BusLinkerSpacers")}
+    static = {k: st[k] for k in ("BasePlate", "BottomBracket", "LX16A", "BusLinker", "BusLinkerSpacers")}
     for orient in ("A", "B"):
         mov = Part.makeCompound([ro["UBracket"], ro["AdapterPlate"], ro["TagSpacers" + orient],
                                  tagbase_envelope(orient)])
