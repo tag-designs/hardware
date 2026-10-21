@@ -1,0 +1,4 @@
+out/
+*.FCBak
+out-build.log
+__pycache__/
