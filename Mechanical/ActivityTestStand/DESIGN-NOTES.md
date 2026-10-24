@@ -109,7 +109,7 @@ things:
 
 | joint | hardware | why |
 |---|---|---|
-| bottom bracket → base plate | The **uncut** bracket. 4 inserts at the floor's diagonal ring holes (±4.95, ±4.95), **pressed in from below**, flange down. Those four floor holes drilled to 1/8", so the floor drops over the insert bodies standing 0.28 mm proud. 4 × 2-56 × 3/16" pan head from inside the bracket. | The bracket is 1.5 mm sheet, too thin to tap, and its Ø2.1 holes are too small to pass a 2-56. But the servo does not rest on the floor. Its flange screws hold its bottom end **about 3.07 mm above the floor**, which the drawings imply: the back-face holes (2.25 mm from the servo's end) meet the flange row 6.82 mm above the floor's underside, and the horn-face holes (6.0 mm) meet the row at 10.57 mm, both an offset of 4.57 mm. A pan head is 1.35 mm tall and Ø4.2, so it fits in the gap and bears on the floor around the 1/8" hole. Flange down, because the screw pulls the insert upward. The proud bodies locate the bracket. A 3/16" screw engages about 3.5 mm and stays inside the insert. |
+| bottom bracket → base plate | The **uncut** bracket. 4 inserts at the floor's diagonal ring holes (±4.95, ±4.95), **pressed in from below**, flange down. Those four floor holes drilled to 1/8", so the floor drops over the insert bodies standing 0.28 mm proud. 4 × 2-56 × 3/16" pan head from inside the bracket. | The bracket is 1.5 mm sheet, too thin to tap, and its Ø2.1 holes are too small to pass a 2-56. But the servo does not rest on the floor. Its flange screws hold its bottom end **about 3.07 mm above the floor**, which the drawings imply: the back-face holes (2.25 mm from the servo's end) meet the flange row 6.82 mm above the floor's underside, and the horn-face holes (6.0 mm) meet the row at 10.57 mm, both an offset of 4.57 mm, and the real parts confirm the room. A pan head is 1.35 mm tall and Ø4.2, so it fits in the gap and bears on the floor around the 1/8" hole. Flange down, because the screw pulls the insert upward. The proud bodies locate the bracket. A 3/16" screw engages about 3.5 mm and stays inside the insert. |
 | U bracket → adapter plate | 4 × 2-56 × 5/16" 82° flat head, countersunk from the top, nut (or nylock) inside the U | These are the U base's four Ø3.2 holes, on its axes at (±7, 0) and (0, ±7); the Ø2.2 diagonal holes are too small for 2-56. J101's pogo tails and the tag case screws sit over this area, so the plate top there must be flush. That rules out insert flanges. There is about 22 mm of room above the servo for the nuts. |
 | tagbase → adapter plate | 4 × 2-56 × 1/4" pan head, 4 × **1/16"** nylon spacers, inserts | 1/4" ends 0.8 mm short of the bottom of the insert, so it cannot reach the U bracket. |
 | BusLinker → base plate | 4 × 2-56 × 5/16" pan head, 4 × **1/8"** nylon spacers, inserts | Taller than the tagbase spacers, for the board's untrimmed DC-jack and terminal-block leads. The BusLinker's holes are 3 mm (measured), which passes 2-56 with about 0.4 mm of play per side. |
@@ -165,6 +165,11 @@ works.
 7. Mount the BusLinker in its engraved rectangle, servo ports toward the servo.
 
 ## Plate drawings
+
+`plates/teststand-{base,adapter}-plate-1to1.pdf` are printable full-size
+checks: print at 100% (no fit-to-page), confirm the 100 mm and 4 in scale bars,
+then lay the bracket, servo and BusLinker on the page. Dashed grey outlines show
+where each should land. They come from the same geometry as the DXFs.
 
 `plates/teststand-{base,adapter}-plate-{in,mm}.dxf`. The inch files match
 `Acrylic/multicharger-acrylic.dxf`; both carry `$INSUNITS`. Layers:
@@ -224,14 +229,14 @@ adapter plate's is the U-bracket ring centre. x is along the tilt axis.
 
 ### VERIFY: inferred, not read off a drawing
 
-Most of this table was settled by the vendor DXFs. Neither remaining row moves
-a plate hole, but the second decides whether the bottom-bracket screw heads fit. Measure them when the servo and brackets arrive, before cutting; each is
+Most of this table was settled by the vendor DXFs, and the servo gap by the
+parts themselves. Neither row moves a plate hole. Measure them when the servo and brackets arrive, before cutting; each is
 one parameter in `teststand.py`, and `make all` rebuilds and rechecks.
 
 | parameter | value | assumed | affects |
 |---|---|---|---|
 | `HORN_PROUD` | horn face beyond the servo body; the rear idler takes the rest of the U's 36.6 − 32 = 4.6 mm | 2.0 mm | where the U is centred (0.3 mm toward the idler) |
-| `SERVO_GAP` | floor top to servo bottom end | 3.07 mm, from the hole heights in the drawings | **whether the screw heads fit.** Screw the servo into the bracket and measure, especially at the four diagonal holes; anything at the servo's end the drawing doesn't show (cable connectors) sits here. Needs ≥ ~2 mm for pan heads. |
+| `SERVO_GAP` | floor top to servo bottom end | 3.07 mm, from the hole heights in the drawings | **Confirmed on the real servo and bracket, 2026-10-24:** plenty of room for the pan heads. |
 
 The servo, horn, brackets and BusLinker are envelope solids in the model, sized
 from the drawings.
@@ -240,7 +245,7 @@ from the drawings.
 
 ```
 teststand.py       parameters and plate geometry; the one source of truth
-make_plates.py     plates/*.dxf, *.svg
+make_plates.py     plates/*.dxf, *.svg, *-1to1.pdf
 build_model.py     teststand.FCStd, out/teststand-assembly.step, out/checks.txt
 render.py          renders/*.png
 ```

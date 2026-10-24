@@ -70,7 +70,8 @@ BRACKET_T = 1.5                # U bracket sheet (bend radii 1.11 / 2.61)
 # gap under the servo, screw into the inserts.
 BOT_T = 1.5                    # sheet (bend radii 1.0 / 2.5)
 BOT_BRKT = dict(x=35.5, y=24.0, h=13.7)          # outside; 32.5 between the flanges
-SERVO_GAP = 4.57 - BOT_T       # VERIFY: floor top to servo bottom, from the drawings
+SERVO_GAP = 4.57 - BOT_T       # floor top to servo bottom, from the drawings; room for
+                               # the screw heads confirmed on the parts, 2026-10-24
 BRACKET_INSERTS = RING_DIAG    # floor holes drilled to 1/8"
 INSERT_PROUD = INSERT_LEN - INSERT_FLANGE_T - PLEX_T   # 0.28 mm
 PAN_HEAD = dict(d=0.167 * IN, h=0.053 * IN)           # 2-56 pan head
