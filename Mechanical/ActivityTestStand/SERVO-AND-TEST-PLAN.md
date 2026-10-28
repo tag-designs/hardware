@@ -1,9 +1,12 @@
 # Activity test stand — servo control and test plan
 
-Status as of 2026-10-25. The stand is not yet assembled: every servo figure
-below was measured on a bare LX-16A with nothing on its horn, driven through
-the BusLinker V3.0 from this machine. Re-measure motion once the rotor, U
-bracket and tagbase are mounted.
+Status as of 2026-10-28. The stand is assembled, with a BitTag V6 on its tag
+base, and its range of motion is confirmed (section 4a). A BitTag edge-log
+build timestamps every activity and inactivity event (section 9), and the
+first stand results are in section 13. The figures in sections 4 and 5 were
+measured on 2026-10-25 on a bare LX-16A with nothing on its horn, driven
+through the BusLinker V3.0 from this machine. Speed has not been re-measured
+with the load on.
 
 ## Summary
 
@@ -22,9 +25,13 @@ bracket and tagbase are mounted.
   slowed moves.
 - **BitTag runs the ADXL362 in wake-up mode**, sampling about every 160 ms.
   That, not host polling latency, sets the timing resolution of every test.
-- **Testing needs a small BitTag firmware mode** to configure the
-  accelerometer and timestamp its AWAKE line while the host is attached, plus
-  a host script that combines the servo and tag-server.
+- **Activity and inactivity events are timestamped to 1 ms** by a BitTag
+  edge-log build, which keeps the AWAKE level of every wake in SRAM2 for
+  [`edge_log.py`](edge_log.py) to read after the run (section 9). No
+  tag-server is needed.
+- **Continuous ±30° swings hold the tag active**: 15 of 15 5 s bouts gave one
+  episode of 4.65–5.82 s on the replacement supply (section 13). A held tilt
+  does not — the tag goes inactive about 0.5 s after motion stops.
 - **Power versus activity needs no firmware change.** The tag runs detached
   under the Joulescope while [`stand_profile.py`](stand_profile.py) drives a
   logged stimulus. Each AWAKE edge wakes the MCU, so the expected cost of
@@ -94,7 +101,13 @@ The stored voltage limits are wider than the LX-16A's 6–8.4 V rating. Narrow
 them to 6.0–8.4 V (`set_vin_limits(6.0, 8.4)`, saved in the servo) once a
 meter has confirmed the servo's own voltage reading (section 3).
 
-## 3. Supply voltage — unresolved
+## 3. Supply voltage
+
+**Resolved 2026-10-28 by a stronger supply**: 7.63 V at rest and 6.50–7.81 V
+through 5 minutes of continuous swinging, inside the LX-16A's 6–8.4 V rating.
+On the 7.5 V adapter described below, swinging pulled the supply to 4.2 V at
+reversals and stalled the servo for about a second, 1–3 times per 15 bouts
+(section 13). The history follows.
 
 | Condition | On the "6 V" supply | On the "7.5 V" supply |
 |---|---|---|
@@ -157,6 +170,34 @@ only covered ±10°, and its moves to 500 were each run once.
   allow about 0.5 s to settle.**
 - Near level one count is about 4 mg on the tilted axis, so a threshold can be
   bracketed to about ±4 mg.
+
+## 4a. Assembled stand: range of motion
+
+Measured on 2026-10-27 with the rotor, U bracket, tag base and BitTag V6
+mounted. The servo was centred at 500 before the U bracket was bolted on, and
+the angle offset is still 0. Each move took 3–4.5 s from level, held 2 s, then
+returned. The tag-base cable was watched throughout.
+
+| Commanded | Reached | Supply |
+|---|---|---|
+| ±15° | +14.4° / −14.6° | 8.12–8.15 V |
+| ±30° | +29.5° / −29.5° | 8.09–8.14 V |
+| ±45° | +44.6° / −44.6° | 8.06–8.21 V |
+| ±60° | +59.3° / −59.8° | 8.10–8.20 V |
+| ±90° | +89.3° / −89.8° | 8.14–8.20 V |
+| ±100° | +99.1° / −99.8° | 8.07–8.19 V |
+
+- **±100° is the confirmed safe range.** Nothing hit anything and the cable did
+  not snag. It covers every test here up to the full 1 g change on one axis
+  (90°).
+- Beyond ±100° is untested. The servo's own end stops are at ±120°, and the
+  ±106.8° orientation case is not needed for routine testing.
+- With the load on, the servo still stops within 3 counts (0.75°) of the
+  target. It stops further short on the + side (0.5–0.9°) than on the − side
+  (0.2–0.5°), consistent with the load resisting the motor on that side.
+- The servo warmed from 30 °C to 38 °C over these sweeps.
+- "Level" is still servo position 500. Levelling against gravity needs the tag
+  to report its own tilt (section 12, step 2).
 
 ## 5. Speed and dynamics
 
@@ -273,31 +314,64 @@ reference is level.
 | Hold jitter | unknown | Turn torque off after moves if it disturbs low inactivity thresholds — check on the assembled rotor |
 | Host polling | a few ms | Negligible |
 
-## 9. Proposed implementation
+## 9. Implementation: the BitTag edge log
 
 **The constraint**: a running tag cannot be observed — attaching resets it
-(software repo `AGENTS.md`). In IDLE the firmware shuts the ADXL362 down. So
-the accelerometer has to be configured, and watched, while the host is
-attached.
+(software repo `AGENTS.md`). So the tag runs detached and reports afterwards.
 
-**Firmware: a BitTag stand mode**, behind a custom define so production
-images are unchanged:
+**Firmware.** BitTag already wakes from Standby on every edge of the ADXL362's
+AWAKE line, and `Running()` reads the line on each wake. A build with
+`BITTAG_EDGE_LOG=1` (software repo, `embedded/tags/BitTag/inc/edge_log.h`)
+adds a record per RUNNING wake: RTC Unix seconds, milliseconds and the AWAKE
+level, into a 2046-record ring at the start of SRAM2 (0x10000000).
 
-- While attached, call the same `adxl362_init()` as `Running`, with thresholds
-  and count from the host, so the test exercises the production register
-  setup.
-- Timestamp AWAKE edges (EXTI on `LINE_ACCEL_INT`) into a RAM ring buffer:
-  level and tag milliseconds.
-- Optionally record raw XYZ for move characterisation.
-- Open question: thresholds through the existing `Start(Config)` path or a new
-  test request.
+- A change of level between consecutive records is an edge. The minute-alarm
+  wakes repeat the level.
+- The timestamp is the RTC subsecond counter (PREDIV_S 1024, so 1 ms). It is
+  taken at the top of the main loop, a constant few milliseconds after the
+  edge.
+- SRAM2 is unused by the linker and crt0 never clears it, so the record
+  survives the reset that reading it causes. It survives Standby only because
+  the build also sets `TAG_RETAIN_SRAM2`, which makes `pwr-l432.c` set
+  `PWR_CR3_RRS`. That costs Standby current: **never use this build for power
+  runs.**
+- The firmware string ends ", edge log", so `tag-info` shows which image is on
+  the tag, and the build-options digest differs from a stock build's.
 
-**Host: `activity_stand.py`** beside `lx16a.py`, using `tagclient` over
-tag-server (run with `--enable-debug` for `read_memory`): configure, level
-calibration, trial matrix, polling the edge buffer, one CSV of servo positions
-and tag edges. Before the firmware exists, `read_u32` on the GPIO input
-register can poll the AWAKE line directly, but something must still configure
-the accelerometer.
+**Build and flash** (this Linux machine, 2026-10-27):
+
+```bash
+cmake -S ~/Research/software -B ~/Build/software-edgelog -DBUILD_HOST=OFF \
+      -DBUILD_QT_APPS=OFF -DBUILD_EMBEDDED=ON -DREGENERATE_SOURCES=OFF
+PATH=~/Software/arm-gnu-toolchain-15.3.rel2-x86_64-arm-none-eabi/bin:$PATH \
+  BITTAG_EDGE_LOG=1 cmake --build ~/Build/software-edgelog --target BitTag
+python3 embedded/tools/flash_release.py \
+  ~/Build/software-edgelog/embedded/tags/BitTag/build/BitTag.elf \
+  --programmer ~/Software/STM32CubeProgrammer/bin/STM32_Programmer_CLI --erase
+```
+
+The toolchain here is GCC 15.3, not the repo's pinned 14.2.1, so these images
+are for testing only. `--erase` is right for BitTag: it has no calibration
+table, and the edge-log code moves the stored-configuration region.
+
+**A run:**
+
+1. `tag-reset --set-rtc` (from FINISHED; the erase must be done by the image
+   that wrote the log).
+2. `tag-start --config runs/bittag-stand-config.json --set-rtc --start-now`.
+3. `stand_profile.py ... -o runs/<date>-<name>-stand.csv`.
+4. `edge_log.py --save-dump runs/<date>-<name>-sram2.txt -o runs/<date>-<name>-edges.csv`
+   — reads SRAM2 under reset with STM32CubeProgrammer.
+5. `tag-dwnld --stop -f text -o runs/<date>-<name>-log.txt` for the binned log.
+
+**Attaches fail intermittently with `status=0x81`; retry.** The software
+repo's DBG_SLEEP fix (0ba7dc22, in the Rust tools built from
+`host/commandline-rs`) removed the in-session bursts, cutting failures from
+5 in 10 to 3 in 10. What remains is a failed SWD enter that
+`stlink.rs`/`linkadapt.cc` log as a warning and continue past. The Rust
+`tag-dwnld` needs the C++ log writer, so downloads use the 3.2 release tool.
+
+Keep run files in `runs/`, never in `/tmp`: a reboot wiped the first five runs.
 
 ## 10. Power analysis with the stand
 
@@ -492,20 +566,23 @@ When the stand is assembled:
 
 1. Meter the servo supply (section 3); fit a regulated 7.4 V supply if the
    7.5 V adapter really idles near 8.1 V.
-2. Level the stand: centre the servo (500) before bolting on the U, then trim
-   with the angle offset against the tag's own accelerometer.
-3. Re-run the positioning and speed measurements with the rotor loaded.
+2. Level the stand: trim with the angle offset against the tag's own
+   accelerometer. Already done: the servo was centred at 500 before the U was
+   bolted on.
+3. Re-run the speed measurements with the rotor loaded. Already done: the range
+   and loaded accuracy (section 4a).
 4. Check whether the servo holds position with torque off under the rotor's
    gravity load, and whether loaded hold jitter is visible to the tag.
 
 Then, with a tag base connected:
 
-5. Build tag-server (`~/Research/software/host/tagserver/README.md`) and
-   install the tag base udev rule (`host/linux/70-ultralight-tags.rules`,
-   needs `sudo`).
-6. Write the BitTag stand mode, following the software repo's flashing
-   protocol (record UUID, erase, flash, self-test).
-7. Write `activity_stand.py` and run the wake-up rate test first.
+5. Done: the BitTag (UUID `2035374D303150190059002F`) runs the edge-log build
+   (section 9), and the first results are in section 13. The base powers the
+   tag at 3.3 V, so power runs need the Joulescope at 2.5 V. tag-server was
+   not needed.
+6. Run a still-only test to explain the stray episodes (section 13).
+7. Threshold and inactivity-time sweeps: step the tilt across the activity
+   threshold, and vary `inactive_sec` against bout length.
 
 For the power analysis, which needs a tag base and the Joulescope but no new
 firmware:
@@ -516,3 +593,57 @@ firmware:
    `power-results.md` as its Phase D.
 10. Check the bins (section 11) on the same runs, one run per log format for
     the format consistency check.
+
+## 13. Results
+
+### 2026-10-27: tilt pulses, 1 s bins (data lost with `/tmp`)
+
+Configuration: activity 0.25 g, inactivity 0.15 g for 3 samples,
+`BITTAG_BITPERSEC`, 3.3 V from the tag base. Profile `pulses --angle 30
+--period 20 --hold 2 --move-ms 600` for 5 minutes, 15 pulses.
+
+- **Every move produced exactly one activity episode**: 30 rises and 30 falls
+  for 15 tilts and 15 returns, none missed or extra.
+- **Activity was flagged 0.21–0.55 s after the move command** (median
+  0.45 s); **inactivity about 0.5 s after motion stopped** (0.28–0.64 s).
+- **Episode lengths are quantised in 0.166 s steps** (0.499, 0.665, 0.832,
+  0.996 s): wake-up mode samples at 6 Hz, and 3 samples is the 0.5 s minimum.
+- **The minute-alarm wakes landed on :00.000**, so tag and host clocks agree.
+- **The 1 s log matched the edges exactly**: 14 logged seconds, each predicted
+  by `floor(rise) ≤ s < floor(fall)`, none missing or extra.
+- **But only 14 of 31 episodes appear in the log.** BitTag counts whole
+  seconds from the active wake to the inactive wake, so an episode that starts
+  and ends within one second logs nothing. A sub-second episode is recorded
+  only if it crosses a second boundary — by design, but it matters when
+  reading the bins.
+
+### 2026-10-27/28: holding the tag active for 5 s
+
+A held tilt cannot keep the tag active; continuous motion can. Profile
+`bouts --bouts 5 --period 20 --angle 30 --move-ms 600` for 5 minutes: 5 s of
+±30° swings every 20 s, then a return to level. Same configuration.
+
+| Supply | Run | One ~5 s episode | Split by a servo stall | Split by the detector |
+|---|---|---|---|---|
+| 7.5 V adapter, 4.2–8.6 V | 2 | 12 of 15 | 2 | 1 |
+| | 3 | 12 of 15 | 3 | 0 |
+| | 4 | 13 of 15 | 1 | 1 |
+| | 5 | 13 of 15 | 1 | 1 |
+| Replacement, 6.5–7.8 V | [2026-10-28](runs/) | **15 of 15** | 0 | 0 |
+
+- **Clean episodes last 4.65–5.82 s** for 5 s of swinging plus a 0.6 s
+  return: activity flagged about 0.45 s after the bout starts, inactivity
+  about 0.5 s after motion ends, in 0.166 s steps.
+- **Servo stalls**: on the adapter, a reversal pulled the supply to 4.2–4.8 V
+  and the servo held still for about a second, which the tag rightly reported
+  as inactivity. The new supply removed them. `stand_profile.py` now also
+  resends dropped writes (one in 150 swings) and restarts a swing that has not
+  begun moving toward its target after 0.2 s, logging both.
+- **Detector splits**: about once per run on the adapter, the tag went
+  inactive for 0.5 s at the turnaround of the first swing, sitting within
+  0.15 g of the reference it latched at activity for 3 samples. That is the
+  detector working as configured. Faster or larger swings, or a longer
+  inactivity time, avoid it.
+- **Two stray 0.5 s episodes on 2026-10-28**, at 23:21:43 and 23:22:45 UTC,
+  between bouts while the servo read a steady 498. Either an outside knock or
+  something in the detector; a still-only run will tell.

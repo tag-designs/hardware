@@ -152,6 +152,23 @@ class LX16A:
         self._send(MOVE_TIME_WRITE, struct.pack("<HH", _clamp(pos, 0, 1000),
                                                 _clamp(ms, 0, 30000)))
 
+    def move_checked(self, pos, ms=0, tries=3):
+        """move(), then read the target back and resend until it matches.
+
+        Writes are never acknowledged, and the servo occasionally drops one
+        (seen twice in 150 swings on 2026-10-27, leaving the stand still for a
+        second).  Returns the number of sends; raises if none took.
+        """
+        want = (_clamp(pos, 0, 1000), _clamp(ms, 0, 30000))
+        for n in range(1, tries + 1):
+            self.move(*want)
+            try:
+                if self.move_target() == want:
+                    return n
+            except Exception:
+                pass
+        raise IOError(f"servo did not accept move to {want} in {tries} tries")
+
     def move_deg(self, deg, ms=0):
         """Move to an angle in degrees relative to centre (-120..+120)."""
         self.move(round(CENTER + deg / DEG_PER_COUNT), ms)

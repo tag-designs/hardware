@@ -62,6 +62,9 @@ class Run:
         self.w.writerow(["utc", "unix", "event", "target", "pos", "deg",
                          "vin", "temp"])
         self.stimuli = 0
+        self.resends = 0
+        self.restarts = 0
+        self.last_pos = None
         self.vin_lo = self.vin_hi = None
         self.temp_hi = None
         self.warned = set()
@@ -79,6 +82,7 @@ class Run:
         self.check("vin_high", v > VIN_MAX, f"servo supply {v:.2f} V above {VIN_MAX} V")
         self.check("vin_low", v < VIN_MIN, f"servo supply {v:.2f} V below {VIN_MIN} V")
         self.check("temp", c >= TEMP_WARN, f"servo at {c} C")
+        self.last_pos = p
         return p
 
     def check(self, key, bad, msg):
@@ -90,11 +94,17 @@ class Run:
     def summary(self):
         flags = f"; out of range: {', '.join(sorted(self.warned))}" if self.warned else ""
         return (f"servo supply {self.vin_lo:.2f}-{self.vin_hi:.2f} V, "
-                f"max {self.temp_hi} C{flags}")
+                f"max {self.temp_hi} C, {self.resends} dropped moves resent, "
+                f"{self.restarts} stalled swings restarted{flags}")
 
     def move(self, deg, ms, event):
-        self.s.move(counts(deg), ms)
-        self.log(event, counts(deg))
+        """Command a move and log it; returns the position when commanded."""
+        sends = self.s.move_checked(counts(deg), ms)
+        p = self.log(event, counts(deg))
+        if sends > 1:
+            self.resends += sends - 1
+            self.log("resend", sends - 1)
+        return p
 
     def wait_until(self, t_end):
         """Sample position every poll interval until t_end (unix time)."""
@@ -106,13 +116,35 @@ class Run:
             self.log("sample")
 
 
+STALL_CHECK_S = 0.2   # s after a swing command to confirm the servo is moving
+STALL_COUNTS = 5      # less movement than this by then is a stall
+
+
 def swing(r, a, t, t_end):
-    """Swing between +angle and -angle, one move per move_ms, until t_end."""
+    """Swing between +angle and -angle, one move per move_ms, until t_end.
+
+    A move that reaches the servo just as the previous one completes is
+    sometimes stored but not started -- move_target() reads back correct while
+    the horn sits still for a whole swing (3 of 15 bouts on 2026-10-27), which
+    the tag rightly reports as inactivity.  So each swing is checked for
+    motion and resent over its remaining time if it has not begun.
+    """
     side = 1
     while t < t_end:
-        r.move(side * a.angle, a.move_ms, "swing")
+        target = counts(side * a.angle)
+        p0 = r.move(side * a.angle, a.move_ms, "swing")
         if a.profile == "agitate":
             r.stimuli += 1
+        t_check = min(t + STALL_CHECK_S, t_end)
+        r.wait_until(t_check)
+        # progress toward the target; finishing the previous move does not count
+        way = 1 if target > p0 else -1
+        far = abs(target - p0) > 2 * STALL_COUNTS
+        if far and (r.last_pos - p0) * way < STALL_COUNTS and \
+                t_check < t + a.move_ms / 1000:
+            left = round((t + a.move_ms / 1000 - time.time()) * 1000)
+            r.move(side * a.angle, max(left, 100), "restart")
+            r.restarts += 1
         t += a.move_ms / 1000
         r.wait_until(min(t, t_end))
         side = -side
