@@ -13,6 +13,15 @@ Profiles (angles in degrees from level, + or -):
   agitate  swing continuously between +ANGLE and -ANGLE, MOVE_MS per swing
   bouts    every PERIOD s: agitate for the next duration in BOUTS (cycled),
            then hold level -- distinct, known amounts of activity per bin
+  steps    for each angle in ANGLES, REPS times: tilt over MOVE_MS, hold HOLD
+           s, return, rest REST s -- brackets an activity threshold
+  gaps     for each pause in GAPS, REPS times: agitate BOUT s, hold level for
+           the pause, agitate BOUT s, rest REST s -- brackets an inactivity time
+
+steps and gaps run every trial once per rep (--shuffle permutes each rep) and
+take no --minutes.  Each trial starts on a whole second with a "trial" row
+naming its angle or pause; gaps logs "still_start"/"still_end" around the
+pause and "stop" when the last return to level ends.
 
 Stimuli start on whole host seconds, so each lands in a known BITPERSEC bit.
 --start-on-minute delays the first one to the next whole minute, and
@@ -23,9 +32,12 @@ episode within one second or across a second boundary.
   python3 stand_profile.py agitate --angle 30 --move-ms 600 --minutes 20 -o run.csv
   python3 stand_profile.py still --minutes 20 --unload -o run.csv
   python3 stand_profile.py bouts --period 60 --bouts 2,5,10,20,40 --offset 0.5 --minutes 20 -o run.csv
+  python3 stand_profile.py steps --angles 16.3,18.4,19.4,21.6,22.6,24.8 --reps 3 --move-ms 1500 -o run.csv
+  python3 stand_profile.py gaps --gaps 0.25,0.5,1,1.5,2 --reps 3 --bout 2 -o run.csv
 """
 
 import argparse
+import random
 import csv
 import datetime
 import sys
@@ -154,16 +166,51 @@ def next_second(t):
     return float(int(t) + 1)
 
 
+def trial_order(values, reps, seed):
+    """values once per rep, each rep permuted when seed is given."""
+    rng = random.Random(seed)
+    order = []
+    for _ in range(reps):
+        rep = list(values)
+        if seed is not None:
+            rng.shuffle(rep)
+        order += rep
+    return order
+
+
+def floats(text):
+    return [float(v) for v in text.split(",")]
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
-    ap.add_argument("profile", choices=["still", "pulses", "agitate", "bouts"])
-    ap.add_argument("--minutes", type=float, required=True)
+    ap.add_argument("profile",
+                    choices=["still", "pulses", "agitate", "bouts", "steps", "gaps"])
+    ap.add_argument("--minutes", type=float,
+                    help="run length; not used by steps and gaps")
     ap.add_argument("--angle", type=float, default=30.0)
     ap.add_argument("--period", type=float, default=60.0, help="pulses: s between starts")
     ap.add_argument("--hold", type=float, default=2.0, help="pulses: s held tilted")
     ap.add_argument("--bouts", default="2,5,10,20,40",
                     help="bouts: comma-separated agitation durations in s, cycled")
+    ap.add_argument("--angles", type=floats, help="steps: comma-separated tilts in degrees")
+    ap.add_argument("--gaps", type=floats, help="gaps: comma-separated pauses in s")
+    ap.add_argument("--reps", type=int, default=3, help="steps, gaps: repetitions")
+    ap.add_argument("--rest", type=float, default=4.0,
+                    help="steps, gaps: s still at level after each trial")
+    ap.add_argument("--bout", type=float, default=2.0, help="gaps: s of agitation per bout")
+    ap.add_argument("--shuffle", type=int, metavar="SEED",
+                    help="steps, gaps: permute the trials of each rep")
     ap.add_argument("--move-ms", type=int, default=600, help="duration of each move")
+    ap.add_argument("--reset-angle", type=float,
+                    help="steps: before each trial, snap to this angle and straight "
+                    "back to level (400 ms each way), then rest. Pick it well above "
+                    "the activity threshold: the tag then goes inactive at level, "
+                    "latching a level reference whatever the previous trial left")
+    ap.add_argument("--return-ms", type=int,
+                    help="steps: duration of the return to level (default --move-ms). "
+                    "Keep it under the inactivity time, so the tag cannot declare "
+                    "inactivity mid-return and latch an off-level reference")
     ap.add_argument("--poll", type=float, default=0.1, help="s between position samples")
     ap.add_argument("--unload", action="store_true",
                     help="torque off while level and still (removes hold jitter)")
@@ -173,6 +220,13 @@ def main():
     ap.add_argument("--port", default=DEFAULT_PORT)
     ap.add_argument("-o", "--output", required=True)
     a = ap.parse_args()
+    trials = a.profile in ("steps", "gaps")
+    if not trials and a.minutes is None:
+        ap.error(f"{a.profile} needs --minutes")
+    if a.profile == "steps" and not a.angles:
+        ap.error("steps needs --angles")
+    if a.profile == "gaps" and not a.gaps:
+        ap.error("gaps needs --gaps")
 
     with LX16A(a.port) as s, open(a.output, "w", newline="") as f:
         r = Run(s, f, a.poll)
@@ -186,7 +240,7 @@ def main():
             t0 = (int(t0) // 60 + 1) * 60.0
         else:
             t0 = next_second(t0 + 1.0)
-        t_end = t0 + a.minutes * 60.0
+        t_end = t0 + (a.minutes * 60.0 if not trials else 0.0)
         t0 += a.offset
         r.log("start_at", utc(t0))
         if a.unload:
@@ -233,6 +287,45 @@ def main():
                         r.log("unload")
                     k += 1
                 r.wait_until(t_end)
+
+            elif a.profile == "steps":
+                for angle in trial_order(a.angles, a.reps, a.shuffle):
+                    if a.reset_angle:
+                        r.move(a.reset_angle, 400, "reset")
+                        r.wait_until(time.time() + 0.4)
+                        r.move(0.0, 400, "reset_return")
+                        r.wait_until(time.time() + 0.4 + a.rest)
+                    t = next_second(time.time())
+                    r.wait_until(t)
+                    r.log("trial", angle)
+                    r.move(angle, a.move_ms, "tilt")
+                    r.stimuli += 1
+                    r.wait_until(t + a.move_ms / 1000 + a.hold)
+                    ret_ms = a.return_ms or a.move_ms
+                    r.move(0.0, ret_ms, "return")
+                    r.wait_until(time.time() + ret_ms / 1000 + a.rest)
+                t_end = time.time()
+
+            elif a.profile == "gaps":
+                for gap in trial_order(a.gaps, a.reps, a.shuffle):
+                    t = next_second(time.time())
+                    r.wait_until(t)
+                    r.log("trial", gap)
+                    swing(r, a, t, t + a.bout)
+                    r.move(0.0, a.move_ms, "pause")
+                    t = time.time() + a.move_ms / 1000
+                    r.wait_until(t)
+                    r.log("still_start", gap)
+                    r.wait_until(t + gap)
+                    r.log("still_end", gap)
+                    t = time.time()
+                    swing(r, a, t, t + a.bout)
+                    r.move(0.0, a.move_ms, "trial_end")
+                    r.wait_until(time.time() + a.move_ms / 1000)
+                    r.log("stop")
+                    r.stimuli += 1
+                    r.wait_until(time.time() + a.rest)
+                t_end = time.time()
 
             else:  # agitate
                 swing(r, a, t0, t_end)

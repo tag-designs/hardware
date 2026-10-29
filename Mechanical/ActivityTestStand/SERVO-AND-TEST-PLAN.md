@@ -647,3 +647,66 @@ A held tilt cannot keep the tag active; continuous motion can. Profile
 - **Two stray 0.5 s episodes on 2026-10-28**, at 23:21:43 and 23:22:45 UTC,
   between bouts while the servo read a steady 498. Either an outside knock or
   something in the detector; a still-only run will tell.
+
+### 2026-10-28: activity threshold, 0.35, 0.5 and 0.85 g
+
+`steps` profile: tilt from level to 0.8–1.2 × the threshold on the tilted axis
+(sin θ; capped at 1 g, which is 90°), 1.5 s moves, 3 s hold, 400 ms return,
+3 reps in shuffled order. Inactivity 0.15 g for 3 samples. Runs
+`runs/2026-10-28-act0{35,50,85}-r3-*`; scored with `analyze_trials.py`.
+
+| Threshold | Never detected | Sometimes | Always detected |
+|---|---|---|---|
+| 0.35 g | ≤ 0.315 g | 0.332 g (1/3) | ≥ 0.367 g |
+| 0.5 g | ≤ 0.475 g | — | ≥ 0.525 g |
+| 0.85 g | ≤ 0.765 g | 0.807 g (2/3) | ≥ 0.893 g |
+
+- **Each threshold switches within about ±5% of nominal**, the effective point
+  at 0.95–1.0 × nominal — inside the ADXL362's ±10% sensitivity tolerance.
+  The stand's level (servo 500, uncalibrated against gravity) and the tag's
+  alignment on the platform also enter at the few-percent level.
+- **Every detected tilt went inactive while held, and every return was
+  detected.** A held tilt never keeps the tag active.
+- **Detection lands at the end of the 1.5 s move** (1.3–1.6 s after the
+  command), earlier only when the tilt passes the threshold mid-move (90°:
+  0.8–1.1 s). Near threshold a few came late, up to 2.3 s, when noise pushed
+  a held sample over.
+
+**The protocol needs a level reference before every trial.** BitTag uses
+referenced detection, so each tilt is measured against the sample at which the
+tag last went inactive. Two ways that went stale in the first runs
+(`-act050-*`, `-act0{35,50,85}-r2-*`), each costing a detection at an
+above-threshold tilt:
+
+- A slow return let inactivity be declared before the stand reached level,
+  latching a reference a few degrees off. `--return-ms 400` returns faster
+  than the 0.5 s inactivity time.
+- A just-detected tilt whose return was below threshold left the reference
+  tilted for the next trial. `--reset-angle` snaps to 1.5 × the threshold
+  (or 90°) and back before each trial, so the tag always settles at level.
+
+The same applies in the field: what counts as a change depends on where the
+animal last came to rest.
+
+### 2026-10-28: inactivity time, 3, 6 and 9 samples
+
+`gaps` profile: two 2 s bouts of ±30° swings (600 ms per swing) separated by
+a still pause at level of 0.25–2.5 s, 3 reps per pause, shuffled; activity
+0.25 g, inactivity 0.15 g. Runs `runs/2026-10-28-inact{3,6,9}-*`.
+
+| Samples | Nominal | Tag went inactive during the pause | Fall after the final stop (median, range) |
+|---|---|---|---|
+| 3 | 0.5 s | every pause, even 0.25 s | 0.38 s (−0.13–0.63) |
+| 6 | 1.0 s | ≥ 1.25 s always; 1.0 s 2/3; ≤ 0.75 s at most 1/3 | 0.89 s (0.38–1.20) |
+| 9 | 1.5 s | ≥ 1.25 s always; 1.0 s 2/3; ≤ 0.75 s never | 1.36 s (0.94–1.74) |
+
+- **Each 3 samples adds 0.47–0.51 s**, a sample period of about 0.163 s:
+  `inactive_sec` is a count of wake-up-mode samples at the nominal 6 Hz.
+- **Delays run about 0.1 s under N/6 s, and pauses split about 0.4 s
+  short of it**, because the tag already counts as still while the servo
+  decelerates into level and accelerates out again — the last and first few
+  degrees of each move are within 0.15 g of level.
+- **At 3 samples the swings themselves barely hold the tag active** (1 of 54
+  bouts dropped out mid-swing, at a turnaround); at 6 and 9, none of 108.
+- The 0.25 s steps and 3 reps resolve the split point only to about ±0.25 s;
+  finer pauses would sharpen it.
