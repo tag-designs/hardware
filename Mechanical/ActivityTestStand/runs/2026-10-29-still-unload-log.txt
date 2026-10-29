@@ -1,0 +1,92 @@
+#
+# Tag Read time: 1793237236
+#
+# Tag Error:     -0.001
+#
+#             Tag Info
+#
+# Tag Type:    BITTAG_LE
+# Tag Firmware:BitTag V6, Firmware version 2, edge log
+# Board:       BitTag V6
+# Build Date:  2026-10-28T23:37:07Z
+# Git Repo:    github.com/tag-designs/software
+# Source Path: /embedded/tags/BitTag
+# Git Hash:    757b1150
+# UUID:        2035374D303150190059002F
+# Internal Flash Size:  256KB
+# External Flash Size:  0KB
+# Test Status: ALL_PASSED
+#
+#             Configuration
+#
+# Range:       Rng_UNSPECIFIED
+# Frequency:   Odr_UNSPECIFIED
+# Filter:      Aa_UNSPESIFIED
+# Active Thresh: 0.248g
+# Inactive Thresh: 0.15g
+# Inactive Time: 3s
+# Start:       0
+# End:         2147483647
+# BitTag Log Format:      BITTAG_BITPERSEC
+# Hibernate[0] = {0, 0}
+# Hibernate[1] = {0, 0}
+#
+#             State Log
+#
+# Epoch: 1793236627
+# State: CONFIGURED
+# Entry Code: EVENT_STARTCMD
+# Temperature: 25.5
+# Voltage:     3.3
+# Internal Log Entries: 0
+# External Log Entries: 0
+#
+# Epoch: 1793236627
+# State: RUNNING
+# Entry Code: EVENT_STARTTIM
+# Temperature: 26.5
+# Voltage:     3.3
+# Internal Log Entries: 0
+# External Log Entries: 0
+#
+# Epoch: 1793237236
+# State: FINISHED
+# Entry Code: EVENT_STOPCMD
+# Temperature: 28.4
+# Voltage:     3.31
+# Internal Log Entries: 10
+# External Log Entries: 0
+#
+#
+#             Data Log
+#
+1793236650,SEC:0x00000000
+1793236680,SEC:0x00000000
+1793236680,V:3.3,TC:26.5
+1793236710,SEC:0x00000000
+1793236740,SEC:0x00000000
+1793236740,V:3.3,TC:26.5
+1793236770,SEC:0x00000000
+1793236800,SEC:0x00000000
+1793236800,V:3.3,TC:26.2
+1793236830,SEC:0x00000000
+1793236860,SEC:0x00000000
+1793236860,V:3.3,TC:26.2
+1793236890,SEC:0x00000000
+1793236920,SEC:0x00000000
+1793236920,V:3.3,TC:26.5
+1793236950,SEC:0x00000000
+1793236980,SEC:0x00000000
+1793236980,V:3.3,TC:26.5
+1793237010,SEC:0x00000000
+1793237040,SEC:0x00000000
+1793237040,V:3.3,TC:26.2
+1793237070,SEC:0x00000000
+1793237100,SEC:0x00000000
+1793237100,V:3.3,TC:26.2
+1793237130,SEC:0x00000000
+1793237160,SEC:0x00000000
+1793237160,V:3.3,TC:26.5
+1793237190,SEC:0x00000000
+1793237220,SEC:0x00000000
+1793237220,V:3.3,TC:25.5

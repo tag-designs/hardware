@@ -1,9 +1,12 @@
 # Activity test stand — servo control and test plan
 
-Status as of 2026-10-28. The stand is assembled, with a BitTag V6 on its tag
+Status as of 2026-10-29. The stand is assembled, with a BitTag V6 on its tag
 base, and its range of motion is confirmed (section 4a). A BitTag edge-log
-build timestamps every activity and inactivity event (section 9), and the
-first stand results are in section 13. The figures in sections 4 and 5 were
+build timestamps every activity and inactivity event and records the
+accelerometer sample at each (section 9). Section 13 has the results: the
+activity threshold, inactivity time, small and brief moves, the stand's
+level, and the activity log in all four formats. Everything left needs the
+Joulescope (section 10). The figures in sections 4 and 5 were
 measured on 2026-10-25 on a bare LX-16A with nothing on its horn, driven
 through the BusLinker V3.0 from this machine. Speed has not been re-measured
 with the load on.
@@ -32,6 +35,12 @@ with the load on.
 - **Continuous ±30° swings hold the tag active**: 15 of 15 5 s bouts gave one
   episode of 4.65–5.82 s on the replacement supply (section 13). A held tilt
   does not — the tag goes inactive about 0.5 s after motion stops.
+- **The detector does what it is configured to do.** Activity thresholds
+  switch within ±5% of nominal; `inactive_sec` counts 0.163 s samples; a
+  move is caught only if it stays past the threshold for about one sample.
+- **Every activity-log format is exact.** Over 1 s, 1, 4 and 5 minute bins,
+  every bin the edge log covers holds exactly the predicted count (section
+  13).
 - **Power versus activity needs no firmware change.** The tag runs detached
   under the Joulescope while [`stand_profile.py`](stand_profile.py) drives a
   logged stimulus. Each AWAKE edge wakes the MCU, so the expected cost of
@@ -322,8 +331,16 @@ reference is level.
 **Firmware.** BitTag already wakes from Standby on every edge of the ADXL362's
 AWAKE line, and `Running()` reads the line on each wake. A build with
 `BITTAG_EDGE_LOG=1` (software repo, `embedded/tags/BitTag/inc/edge_log.h`)
-adds a record per RUNNING wake: RTC Unix seconds, milliseconds and the AWAKE
-level, into a 2046-record ring at the start of SRAM2 (0x10000000).
+adds a 16-byte record per RUNNING wake: RTC Unix seconds, milliseconds, the
+AWAKE level and the ADXL362's current X/Y/Z sample (raw counts, 2 mg each at
+±4 g), into a 1023-record ring at the start of SRAM2 (0x10000000). The block's
+magic is "EDG2"; [`edge_log.py`](edge_log.py) still decodes the earlier
+8-byte "EDGL" records, which had no XYZ.
+
+- The XYZ on the minute-alarm records, taken while the tag is still, is its
+  gravity vector, which is how the stand was levelled (section 13). The first
+  records of a run read −4.096 g on every axis: the ADXL362 has not taken a
+  sample yet.
 
 - A change of level between consecutive records is an edge. The minute-alarm
   wakes repeat the level.
@@ -556,43 +573,41 @@ period, each bout starts at the same point in its 60 s bin. Tried on the bare
 servo: bouts began within 4 ms of the requested half-second and ended on
 schedule.
 
-A script to compute expected bins from the stand log and Joulescope wakes and
-compare them with the SQLite download should be written once a first run
-provides real data to check it against.
+[`analyze_bins.py`](analyze_bins.py) predicts every bin from the edge log
+(the edge-log build replaces the Joulescope wakes as the reference) and
+compares it with the tag's text download. `stand_profile.py --align S` starts
+the schedule 5 s before a multiple of S, so a long first bout can be placed
+to fill a whole bin. [`runs/2026-10-29-bins.sh`](runs/2026-10-29-bins.sh)
+runs all four formats, each long enough to cross a record boundary.
 
 ## 12. Next steps
 
-When the stand is assembled:
+Done without the Joulescope, 2026-10-25 to 2026-10-29:
 
-1. Meter the servo supply (section 3); fit a regulated 7.4 V supply if the
-   7.5 V adapter really idles near 8.1 V.
-2. Level the stand: trim with the angle offset against the tag's own
-   accelerometer. Already done: the servo was centred at 500 before the U was
-   bolted on.
-3. Re-run the speed measurements with the rotor loaded. Already done: the range
-   and loaded accuracy (section 4a).
-4. Check whether the servo holds position with torque off under the rotor's
-   gravity load, and whether loaded hold jitter is visible to the tag.
+- The servo supply was replaced; the stand was levelled against the tag's own
+  accelerometer (true level is servo +3.2°); the loaded range and accuracy
+  were measured; the servo holds position with torque off.
+- The BitTag (UUID `2035374D303150190059002F`) runs the edge-log build
+  (section 9).
+- Still-only runs: no stray activity in 20 minutes.
+- Activity threshold (0.35, 0.5, 0.85 g) and inactivity time (3, 6, 9
+  samples), including finer pauses at 6 and 9.
+- Small moves (nudges, out and back and held) and brief moves (blips).
+- The activity log in all four formats, against the edge log.
 
-Then, with a tag base connected:
+Left, all needing the Joulescope at 2.5 V and stock firmware (the edge-log
+build retains SRAM2, which costs Standby current):
 
-5. Done: the BitTag (UUID `2035374D303150190059002F`) runs the edge-log build
-   (section 9), and the first results are in section 13. The base powers the
-   tag at 3.3 V, so power runs need the Joulescope at 2.5 V. tag-server was
-   not needed.
-6. Run a still-only test to explain the stray episodes (section 13).
-7. Threshold and inactivity-time sweeps: step the tilt across the activity
-   threshold, and vary `inactive_sec` against bout length.
-
-For the power analysis, which needs a tag base and the Joulescope but no new
-firmware:
-
-8. Run P0 (stand control) before anything else; if the floor on the stand
+1. Run P0 (stand control) before anything else; if the floor on the stand
    differs from the bench's 0.507 µA, fix the rig first.
-9. Run P1–P4 (section 10), and append results to BitTag's
+2. Run P1–P4 (section 10), and append results to BitTag's
    `power-results.md` as its Phase D.
-10. Check the bins (section 11) on the same runs, one run per log format for
-    the format consistency check.
+
+Not yet tested, and possible without the Joulescope:
+
+- An inactivity-threshold sweep. Every run so far used 0.15 g.
+- Moves along the tag's other horizontal axis. The stand tilts about one axis
+  only, so this needs the tag remounted at 90°.
 
 ## 13. Results
 
@@ -710,3 +725,138 @@ a still pause at level of 0.25–2.5 s, 3 reps per pause, shuffled; activity
   bouts dropped out mid-swing, at a turnaround); at 6 and 9, none of 108.
 - The 0.25 s steps and 3 reps resolve the split point only to about ±0.25 s;
   finer pauses would sharpen it.
+
+### 2026-10-29: the stand still, and torque off
+
+Two 10-minute still runs at level, otherwise as before (activity 0.25 g,
+inactivity 0.15 g for 3 samples): `runs/2026-10-29-still-torque-*` with the
+servo holding, and `runs/2026-10-29-still-unload-*` with torque off.
+
+- **No activity in either run.** The only high records are the run start; the
+  tag fell inactive 0.12 s in and stayed so.
+- **Holding jitter does not reach the detector.** With torque on, the servo
+  read 497–504 (±0.8°), mostly 501–502. With torque off it read 501–502 for
+  the whole run; it drifted at most 1 count in 60 s at both 0° and +30°.
+- So the two stray episodes of 2026-10-28 were most likely outside knocks.
+
+### 2026-10-29: levelling the stand from the tag's gravity vector
+
+`runs/2026-10-29-gravity-*`: tilts held at ±30, ±60 and ±90° from servo 500,
+and the XYZ in the edge-log record at each.
+
+- **True level is servo +3.2°** (about +14 counts from 500), not the centred
+  500. `stand_profile.py` now applies this as `LEVEL_DEG`, and its logged
+  angles are relative to true level. The earlier threshold results were
+  measured from servo 500. Since detection measures change from a reference
+  that was also 3.2° off, the effect is small: about 0.003 g at the 0.35 g
+  threshold and 0.03 g at 0.85 g.
+- **Zero-g offsets: X +82 mg, Z +187 mg; gains about 1.0.** The Z offset is
+  larger than the ADXL362's typical ±150 mg but does not matter to the
+  detector, which measures change from a reference.
+
+### 2026-10-29: small moves (nudges)
+
+`nudge` profile: a reset snap, a rest at level, then a nudge out and back at
+250 ms each way during the countdown to inactivity, 3 reps per angle.
+Inactivity 0.15 g for 9 samples (1.5 s), so a restarted countdown shows as a
+later fall. `runs/2026-10-29-nudge-*`.
+
+The nudges stopped short of their commanded angles, since a 250 ms move turns
+round before it arrives. Scored against the peak the stand actually reached:
+
+| Commanded | Peak reached | Change, g | Countdown restarted |
+|---|---|---|---|
+| 3° | 1.8° | 0.03 | 0/3 |
+| 5.7° | 4.5° | 0.08 | 1/3 |
+| 7.5° | 6.2° | 0.11 | 2/3 |
+| 10° | 8.1° | 0.14 | 3/3 |
+| 11.5° | 9.5° | 0.17 | 2/3 |
+| 17.5° | 15° | 0.26 | 3/3 |
+
+- **A restart is probabilistic near the threshold.** With no restart the tag
+  fell 1.46–1.70 s after the rest began; with one, 2.06–2.47 s.
+- **Restarts below 0.15 g** (0.08–0.14 g) come from the reference: it is
+  latched while the reset snap is still settling, a few degrees past level,
+  so a nudge the other way measures larger than it is.
+- **The 0.17 g miss is sampling.** The nudge was near its peak only briefly,
+  and at 6 Hz the tag can miss it.
+
+**Held nudges** (`runs/2026-10-29-nudge-hold-*`: the same, held 3 s before
+returning; 0.1, 0.2 and 0.3 g, 3 reps each): **the tag went inactive while
+still displaced** in every trial, 1.1–2.4 s before the return. The countdown
+restarts and takes the displaced sample as its new reference, so a held
+change of any size looks like stillness once the inactivity time has passed.
+
+### 2026-10-29: brief moves (blips)
+
+`blip` profile: out to an angle near the 0.25 g activity threshold and
+straight back at full speed, no hold. The time each blip spent past the
+threshold comes from interpolating the logged positions.
+`runs/2026-10-29-blip-*`.
+
+| Time past the threshold | Detected |
+|---|---|
+| 0–0.05 s | 2/5 |
+| 0.05–0.10 s | 8/13 |
+| 0.10–0.15 s | 7/7 |
+| 0.15–0.20 s | 5/5 |
+
+**A move is caught if one 0.163 s sample lands while it is past the
+threshold**, so the chance is about D / 0.163 for a duration D. Above 0.1 s
+everything was caught, a little sooner than that predicts, because the
+interpolated duration under-reads a full-speed move.
+
+### 2026-10-29: inactivity time, finer pauses
+
+The `gaps` test of 2026-10-28 at 6 and 9 samples, with 0.1 s pause steps
+(`runs/2026-10-29-inact{6,9}-fine-*`).
+
+| Pause, s | 6 samples, inactive in pause | 9 samples, inactive in pause |
+|---|---|---|
+| 0.5 | 0/3 | |
+| 0.6 | 1/3 | |
+| 0.7 | 2/3 | |
+| 0.8 | 1/3 | 1/3 |
+| 0.9 | 3/3 | 1/3 |
+| 1.0 | 3/3 | 1/3 |
+| 1.1 | 3/3 | 3/3 |
+| 1.2 | 3/3 | 3/3 |
+| 1.3 | 3/3 | 2/3 |
+| 1.4 | | 1/3 |
+| 1.5 | | 2/3 |
+| 1.6 | | 3/3 |
+
+- **The split point is a band, not a point**: about 0.6–0.9 s at 6 samples
+  (nominal 1.0 s) and 0.8–1.6 s at 9 (nominal 1.5 s). Finer steps do not
+  sharpen it.
+- **The band comes from how much of the countdown is already done when the
+  stand stops.** The tag counts still samples from the first one within 0.15 g
+  of the reference, during the servo's deceleration. Measured from the start
+  of the pause, falls came 0.42–1.13 s later at 6 samples and 0.88–1.54 s at
+  9, a spread of about 0.7 s in each case. That also makes the 9-sample
+  result non-monotonic in pause length.
+
+### 2026-10-29: the activity log in every format
+
+`bouts` of 2, 5, 10, 20 and 40 s of ±30° swings every 50 s, starting half a
+second into a second; for the counted formats, a first bout longer than one
+bin, aligned to fill a whole bin. Activity 0.25 g, inactivity 0.15 g for 6
+samples. Each run crosses a record boundary. Scored with
+[`analyze_bins.py`](analyze_bins.py) against the edge log;
+`runs/2026-10-29-bins-*`, from [`runs/2026-10-29-bins.sh`](runs/2026-10-29-bins.sh).
+
+| Format | Run | Bins checked | With activity | Full | Active s, logged = predicted | Mismatched |
+|---|---|---|---|---|---|---|
+| `BITPERSEC` | 12 min | 709 | 218 | 218 | 218 | 0 |
+| `BITSPERMIN` | 12 min | 8 | 8 | 2 | 238 | 0 |
+| `BITSPERFOURMIN` | 28 min | 6 | 6 | 1 | 1306 | 0 |
+| `BITSPERFIVEMIN` | 47 min | 9 | 9 | 1 | 2216 | 0 |
+
+- **Every bin matches**: the labels are bin end times on the absolute grid,
+  and each count is exactly the whole seconds from active wake to inactive
+  wake.
+- **Full bins store 60, 240 and 300** without wrapping their 6, 8 and 9-bit
+  fields.
+- **Record boundaries split correctly**: each run crossed at least one.
+- **Every 1 s log on record agrees too**: 20 runs from 2026-10-28/29, 4,962
+  bins, 0 mismatched, including 1,200 still bins with no activity.

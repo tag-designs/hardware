@@ -1,7 +1,7 @@
 # Activity test stand — lessons learned
 
 From the first week of testing ADXL362 activity detection on BitTag V6 with the
-servo tilt stand, 2026-10-25 to 2026-10-28. The measurements are in
+servo tilt stand, 2026-10-25 to 2026-10-29. The measurements are in
 [`SERVO-AND-TEST-PLAN.md`](SERVO-AND-TEST-PLAN.md) section 13 and
 [`runs/`](runs/). This page is what to know before the next test, and why.
 
@@ -20,6 +20,10 @@ servo tilt stand, 2026-10-25 to 2026-10-28. The measurements are in
    edge to find.
 5. **Keep data in the repo, never in `/tmp`.** A reboot deleted the first five
    runs.
+6. **Near a threshold, results are probabilities.** Small moves, brief moves
+   and pauses near the inactivity time all gave mixed outcomes at the same
+   setting. Three reps show the band; they cannot locate a sharp edge,
+   because there is none.
 
 ## Observing the tag
 
@@ -40,6 +44,13 @@ checked for:
 
 The string also lets `tag-info` show which image is on a tag, and the
 build-options digest separates it from a stock build.
+
+**Record the accelerometer sample too.** Adding X/Y/Z to each record (16
+bytes, 1023 slots) cost one SPI read per wake. It gave the stand's true level
+(servo +3.2°, not the centred 500) and the tag's zero-g offsets (X +82 mg,
+Z +187 mg) from the minute-alarm records of one short run, with no extra
+instrument. The first records of a run read −4.096 g on every axis, before
+the ADXL362's first sample.
 
 **The RTC is good enough to timestamp edges.** It runs from the RV-3028's
 32 kHz clock with a 1024 subsecond prescaler, so it resolves 1 ms. The
@@ -93,6 +104,14 @@ streak of identical failures as information.
   the re-run with only the resend fix added is what showed that dropped writes
   were not the explanation.
 
+**Commanded is not reached.** A 250 ms out-and-back nudge turns round before
+it arrives: a 10° nudge peaked at 8.1°. Score against the logged positions,
+not the command.
+
+**The stand holds still, torque on or off.** Holding jitter (±0.8°) never
+triggered activity in 10 minutes, and with torque off the rotor drifted at
+most 1 count in 60 s.
+
 **Move speed is part of the stimulus.**
 
 - Full-speed moves jolt the tag by an estimated 0.4–0.75 g, the same size as
@@ -143,6 +162,20 @@ what counts as a change depends on where it last came to rest.
   were enough to split two bouts.
 - At 3 samples (0.5 s) the dwell at a swing's turnaround can be enough on its
   own: one bout in 54 dropped out mid-swing.
+- The pause that splits two bouts is a band about 0.6 s wide: 0.6–0.9 s at 6
+  samples, 0.8–1.6 s at 9. 0.1 s steps did not narrow it. How much of the
+  countdown is done when the stand stops varies by about 0.7 s from trial to
+  trial.
+
+**A held change becomes the new normal.** A nudge held for 3 s restarted the
+countdown, and then the tag went inactive while still displaced, at 0.1, 0.2
+and 0.3 g. On an animal, a posture change is one short episode, not a long
+one.
+
+**A brief move is caught only if a sample lands on it.** A move past the
+threshold for D seconds was caught with probability about D / 0.163 s. It
+was always caught above 0.1 s, and only 2 in 5 times under 0.05 s. Small moves
+near the inactivity threshold restart the countdown with similar odds.
 
 ## The activity log
 
@@ -157,6 +190,12 @@ logs nothing.
   boundary.
 - This is the design working as written, but it matters when reading activity
   counts from the field.
+
+**Otherwise every format is exact.** In the 1-second, 1-minute, 4-minute and
+5-minute formats, every bin matched the edge log's prediction. That covers
+4,962 one-second bins over 20 runs and full 60, 240 and 300 s bins with no
+field wrap. The edge-log build makes this a closed check: no Joulescope or
+timing reference is needed.
 
 ## Analysis
 
@@ -185,10 +224,12 @@ by the voltage column.
 
 ## Open questions
 
-- **Two 0.5 s activity episodes on 2026-10-28 while the servo was still.** An
-  outside knock, or something in the detector? A still-only run would tell.
-- **The inactivity threshold** has not been swept.
-- **The pause that splits two bouts at 6 and 9 samples** is only resolved to
-  about ±0.25 s. Finer pauses would sharpen it.
+- **The inactivity threshold** has not been swept; every run used 0.15 g.
+- **Only one tilt axis** has been exercised. The other horizontal axis needs
+  the tag remounted at 90°.
 - **Power versus activity** (plan section 10) is still to run, on stock
   firmware at 2.5 V under the Joulescope.
+
+Answered on 2026-10-29: the two stray episodes of 2026-10-28 were not the
+detector. 20 minutes still, torque on and off, gave none, so they were most
+likely knocks.

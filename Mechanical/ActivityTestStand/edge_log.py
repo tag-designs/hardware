@@ -5,7 +5,9 @@ The stand build of BitTag (software repo, `make BITTAG_EDGE_LOG=1`) records
 the RTC time and ADXL362 AWAKE level on every RUNNING wake into a ring at
 0x10000000 (embedded/tags/BitTag/inc/edge_log.h).  Every AWAKE edge wakes the
 tag, so a change of level between consecutive records is an edge; the
-minute-alarm wakes repeat the level.
+minute-alarm wakes repeat the level.  Records in the "EDG2" layout also carry
+the ADXL362's X/Y/Z sample at that wake, written out in g (2 mg per count at
+BitTag's +/-4 g range); the older "EDGL" layout has none.
 
 Read it after the run.  The dump uses STM32CubeProgrammer, connecting under
 reset, so it ends the run like any attach -- never read a run you still want.
@@ -29,7 +31,9 @@ import time
 
 BASE = 0x10000000
 WORDS = 4096                      # all 16 KB of SRAM2
-MAGIC = 0x4C474445                # "EDGL"
+MAGICS = {0x4C474445: 2,          # "EDGL": sec, info
+          0x32474445: 4}          # "EDG2": sec, info, xy, z
+G_PER_COUNT = 0.002               # ADXL362 at +/-4 g
 PROGRAMMER = (shutil.which("STM32_Programmer_CLI") or
               os.path.expanduser("~/Software/STM32CubeProgrammer/bin/STM32_Programmer_CLI"))
 KINDS = {0: "wake", 1: "start"}
@@ -58,21 +62,31 @@ def parse_words(text):
     return words
 
 
+def s16(v):
+    return v - 0x10000 if v & 0x8000 else v
+
+
 def decode(words):
     magic, count, slots = words[0], words[1], words[2]
-    if magic != MAGIC:
+    if magic not in MAGICS:
         sys.exit(f"no edge log at {BASE:#x} (magic {magic:#010x}): "
                  "not the edge-log build, never started, or SRAM2 lost power")
+    size = MAGICS[magic]
     n = min(count, slots)
     first = count - n
     recs = []
     for k in range(first, count):
-        i = 4 + 2 * (k % slots)
+        i = 4 + size * (k % slots)
         sec = struct.unpack("<i", struct.pack("<I", words[i]))[0]
         info = words[i + 1]
-        recs.append({"seq": k, "t": sec + (info & 0x3FF) / 1000.0,
-                     "level": (info >> 16) & 1,
-                     "kind": KINDS.get(info >> 24, str(info >> 24))})
+        r = {"seq": k, "t": sec + (info & 0x3FF) / 1000.0,
+             "level": (info >> 16) & 1,
+             "kind": KINDS.get(info >> 24, str(info >> 24))}
+        if size == 4:
+            xy, z = words[i + 2], words[i + 3]
+            r["xyz"] = tuple(G_PER_COUNT * s16(v) for v in
+                             (xy & 0xFFFF, xy >> 16, z & 0xFFFF))
+        recs.append(r)
     return count, slots, recs
 
 
@@ -96,7 +110,8 @@ def main():
 
     out = open(a.output, "w", newline="") if a.output else sys.stdout
     w = csv.writer(out)
-    w.writerow(["seq", "utc", "unix", "kind", "level", "edge", "since_edge_s"])
+    w.writerow(["seq", "utc", "unix", "kind", "level", "edge", "since_edge_s",
+                "x_g", "y_g", "z_g"])
     prev, last_edge = None, None
     edges = []
     for r in recs:
@@ -107,8 +122,9 @@ def main():
         since = f"{r['t'] - last_edge:.3f}" if edge and last_edge is not None else ""
         if edge:
             last_edge = r["t"]
+        xyz = [f"{v:.3f}" for v in r["xyz"]] if "xyz" in r else ["", "", ""]
         w.writerow([r["seq"], utc(r["t"]), f"{r['t']:.3f}", r["kind"],
-                    r["level"], edge, since])
+                    r["level"], edge, since, *xyz])
         prev = r["level"]
     if a.output:
         out.close()

@@ -7,7 +7,7 @@ the CSV is the ground truth to line up with the Joulescope trace and the tag's
 BITPERSEC download.  Times are host UTC; set the tag's clock from the same
 host (tag-reset --set-rtc) so the two agree to about a second.
 
-Profiles (angles in degrees from level, + or -):
+Profiles (angles in degrees from true level, + or -; LEVEL_DEG below):
   still    hold level for the whole run
   pulses   every PERIOD s: tilt to ANGLE over MOVE_MS, hold HOLD s, return
   agitate  swing continuously between +ANGLE and -ANGLE, MOVE_MS per swing
@@ -17,9 +17,16 @@ Profiles (angles in degrees from level, + or -):
            s, return, rest REST s -- brackets an activity threshold
   gaps     for each pause in GAPS, REPS times: agitate BOUT s, hold level for
            the pause, agitate BOUT s, rest REST s -- brackets an inactivity time
+  nudge    for each angle in ANGLES, REPS times: snap to RESET_ANGLE and back
+           (activity), wait DELAY s still, nudge to the angle and back over
+           MOVE_MS each way (holding HOLD s there), rest REST s -- does a
+           small move restart the inactivity countdown?
+  blip     for each angle in ANGLES, REPS times: out to the angle and straight
+           back, MOVE_MS each way, no hold, rest REST s -- short stimuli;
+           use a small --poll to time the excursion
 
-steps and gaps run every trial once per rep (--shuffle permutes each rep) and
-take no --minutes.  Each trial starts on a whole second with a "trial" row
+steps, gaps, nudge and blip run every trial once per rep (--shuffle permutes
+each rep) and take no --minutes.  Each trial starts on a whole second with a "trial" row
 naming its angle or pause; gaps logs "still_start"/"still_end" around the
 pause and "stop" when the last return to level ends.
 
@@ -37,6 +44,7 @@ episode within one second or across a second boundary.
 """
 
 import argparse
+import math
 import random
 import csv
 import datetime
@@ -51,8 +59,16 @@ def utc(t):
         timespec="milliseconds")
 
 
+# True level, against gravity, in servo degrees from CENTER. Fitted on
+# 2026-10-29 from the BitTag's own X/Z samples held at -90..+90 deg
+# (runs/2026-10-29-gravity-*): 3.2 deg, 13 counts. Runs before then used
+# CENTER as level; the difference changes a tilt's effect by under 1%.
+LEVEL_DEG = 3.2
+
+
 def counts(deg):
-    return round(CENTER + deg / DEG_PER_COUNT)
+    """Servo position for an angle in degrees from true level."""
+    return round(CENTER + (deg + LEVEL_DEG) / DEG_PER_COUNT)
 
 
 # LX-16A rating; outside it the run continues but is flagged.
@@ -87,7 +103,7 @@ class Run:
         v = self.s.vin()
         c = self.s.temp()
         self.w.writerow([utc(t), f"{t:.3f}", event, target, p,
-                         f"{(p - CENTER) * DEG_PER_COUNT:.2f}", f"{v:.3f}", c])
+                         f"{(p - CENTER) * DEG_PER_COUNT - LEVEL_DEG:.2f}", f"{v:.3f}", c])
         self.vin_lo = v if self.vin_lo is None else min(self.vin_lo, v)
         self.vin_hi = v if self.vin_hi is None else max(self.vin_hi, v)
         self.temp_hi = c if self.temp_hi is None else max(self.temp_hi, c)
@@ -185,12 +201,14 @@ def floats(text):
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("profile",
-                    choices=["still", "pulses", "agitate", "bouts", "steps", "gaps"])
+                    choices=["still", "pulses", "agitate", "bouts", "steps", "gaps",
+                             "nudge", "blip"])
     ap.add_argument("--minutes", type=float,
                     help="run length; not used by steps and gaps")
     ap.add_argument("--angle", type=float, default=30.0)
     ap.add_argument("--period", type=float, default=60.0, help="pulses: s between starts")
-    ap.add_argument("--hold", type=float, default=2.0, help="pulses: s held tilted")
+    ap.add_argument("--hold", type=float, default=2.0,
+                    help="pulses, steps, nudge: s held at the angle")
     ap.add_argument("--bouts", default="2,5,10,20,40",
                     help="bouts: comma-separated agitation durations in s, cycled")
     ap.add_argument("--angles", type=floats, help="steps: comma-separated tilts in degrees")
@@ -199,6 +217,8 @@ def main():
     ap.add_argument("--rest", type=float, default=4.0,
                     help="steps, gaps: s still at level after each trial")
     ap.add_argument("--bout", type=float, default=2.0, help="gaps: s of agitation per bout")
+    ap.add_argument("--delay", type=float, default=0.3,
+                    help="nudge: s still at level before the nudge")
     ap.add_argument("--shuffle", type=int, metavar="SEED",
                     help="steps, gaps: permute the trials of each rep")
     ap.add_argument("--move-ms", type=int, default=600, help="duration of each move")
@@ -215,28 +235,36 @@ def main():
     ap.add_argument("--unload", action="store_true",
                     help="torque off while level and still (removes hold jitter)")
     ap.add_argument("--start-on-minute", action="store_true")
+    ap.add_argument("--align", type=int, metavar="S",
+                    help="start the first stimulus 5 s before the next multiple of S "
+                    "Unix seconds; with a first bout longer than S, one whole bin "
+                    "of S seconds is active")
     ap.add_argument("--offset", type=float, default=0.0,
                     help="s added to each stimulus start, 0 <= offset < 1")
     ap.add_argument("--port", default=DEFAULT_PORT)
     ap.add_argument("-o", "--output", required=True)
     a = ap.parse_args()
-    trials = a.profile in ("steps", "gaps")
+    trials = a.profile in ("steps", "gaps", "nudge", "blip")
     if not trials and a.minutes is None:
         ap.error(f"{a.profile} needs --minutes")
-    if a.profile == "steps" and not a.angles:
-        ap.error("steps needs --angles")
+    if a.profile in ("steps", "nudge", "blip") and not a.angles:
+        ap.error(f"{a.profile} needs --angles")
+    if a.profile == "nudge" and not a.reset_angle:
+        ap.error("nudge needs --reset-angle")
     if a.profile == "gaps" and not a.gaps:
         ap.error("gaps needs --gaps")
 
     with LX16A(a.port) as s, open(a.output, "w", newline="") as f:
         r = Run(s, f, a.poll)
         s.load()
-        s.move(CENTER, 1000)
+        s.move(counts(0.0), 1000)
         s.wait_until_stopped(min_s=1.0)
         r.log("level")
 
         t0 = time.time()
-        if a.start_on_minute:
+        if a.align:
+            t0 = math.ceil((t0 + 6.0) / a.align) * a.align - 5.0
+        elif a.start_on_minute:
             t0 = (int(t0) // 60 + 1) * 60.0
         else:
             t0 = next_second(t0 + 1.0)
@@ -272,8 +300,8 @@ def main():
             elif a.profile == "bouts":
                 bouts = [float(b) for b in a.bouts.split(",")]
                 k = 0
-                while t0 + k * a.period < t_end:
-                    t = t0 + k * a.period
+                t = t0
+                while t < t_end:
                     r.wait_until(t)
                     if a.unload:
                         s.load()
@@ -286,7 +314,45 @@ def main():
                         s.unload()
                         r.log("unload")
                     k += 1
+                    # a bout longer than the period pushes the next one back,
+                    # keeping the offset within the second
+                    t_min = time.time() + 5.0
+                    t = t0 + k * a.period
+                    if t < t_min:
+                        t += math.ceil(t_min - t)
                 r.wait_until(t_end)
+
+            elif a.profile == "nudge":
+                for angle in trial_order(a.angles, a.reps, a.shuffle):
+                    t = next_second(time.time())
+                    r.wait_until(t)
+                    r.log("trial", angle)
+                    r.move(a.reset_angle, 400, "reset")
+                    r.wait_until(time.time() + 0.4)
+                    r.move(0.0, 400, "reset_return")
+                    r.wait_until(time.time() + 0.4)
+                    r.log("still_start")
+                    r.wait_until(time.time() + a.delay)
+                    r.move(angle, a.move_ms, "nudge")
+                    r.wait_until(time.time() + a.move_ms / 1000 + a.hold)
+                    r.move(0.0, a.move_ms, "nudge_return")
+                    r.wait_until(time.time() + a.move_ms / 1000)
+                    r.log("stop")
+                    r.stimuli += 1
+                    r.wait_until(time.time() + a.rest)
+                t_end = time.time()
+
+            elif a.profile == "blip":
+                for angle in trial_order(a.angles, a.reps, a.shuffle):
+                    t = next_second(time.time())
+                    r.wait_until(t)
+                    r.log("trial", angle)
+                    r.move(angle, a.move_ms, "tilt")
+                    r.wait_until(time.time() + a.move_ms / 1000)
+                    r.move(0.0, a.move_ms, "return")
+                    r.stimuli += 1
+                    r.wait_until(time.time() + a.move_ms / 1000 + a.rest)
+                t_end = time.time()
 
             elif a.profile == "steps":
                 for angle in trial_order(a.angles, a.reps, a.shuffle):
@@ -333,7 +399,7 @@ def main():
             r.log("interrupted")
         finally:
             s.load()
-            s.move(CENTER, 1000)
+            s.move(counts(0.0), 1000)
             s.wait_until_stopped(min_s=1.0)
             r.log("end")
             if a.unload:

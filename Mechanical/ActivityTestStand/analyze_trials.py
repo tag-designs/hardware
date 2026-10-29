@@ -13,7 +13,18 @@ a tag that dropped out at the last swing's turnaround has no fall in the
 pause), the delay of any fall after motion stopped, and the delay of the fall
 after the final stop.
 
+nudge -- per nudge angle, when the tag went inactive: measured from the
+moment it came to rest at level after the reset snap (still_start) and from
+the end of the nudge (stop).  If the nudge restarted the inactivity countdown
+the fall follows the stop by the full inactivity time; if not, it follows
+still_start by it.
+
+blip (--threshold G) -- per trial, how long the stand spent past the tilt at
+which the change reaches G (asin G), from the logged positions, and whether a
+rise followed; then detection rate against that time.
+
   python3 analyze_trials.py runs/2026-10-29-act035
+  python3 analyze_trials.py runs/2026-10-29-blip --threshold 0.35
 """
 
 import argparse
@@ -123,12 +134,70 @@ def gaps(stand, rises, falls, levels):
         print(f"{gap:7.2f}  {k['split']:>6}/{k['n']:<6}  {sd:>18}  {ed:>22}")
 
 
+def nudge(stand, rises, falls):
+    rows = defaultdict(lambda: {"n": 0, "after_rest": [], "after_nudge": [], "none": 0})
+    for tr in trials(stand):
+        angle = float(tr[0]["target"])
+        s0, stop, t_next = at(tr, "still_start"), at(tr, "stop"), at(tr, "next")
+        k = rows[angle]
+        k["n"] += 1
+        f = first(falls, s0, t_next)
+        if f is None:
+            k["none"] += 1
+            continue
+        k["after_rest"].append(f - s0)
+        k["after_nudge"].append(f - stop)
+    print("nudge_deg  change_g  fall_after_rest_s  fall_after_nudge_end_s  no_fall")
+    for angle in sorted(rows):
+        k = rows[angle]
+        rng = lambda v: f"{min(v):.2f}-{max(v):.2f}" if v else "-"
+        print(f"{angle:9.1f}  {math.sin(math.radians(abs(angle))):8.3f}  "
+              f"{rng(k['after_rest']):>17}  {rng(k['after_nudge']):>22}  "
+              f"{k['none']:>4}/{k['n']}")
+
+
+def blip(stand, rises, threshold):
+    theta = math.degrees(math.asin(min(threshold, 1.0)))
+    out = []
+    for tr in trials(stand):
+        t0, t_next = float(tr[0]["unix"]), at(tr, "next")
+        pts = [(float(r["unix"]), abs(float(r["deg"]))) for r in stand
+               if r["deg"] and t0 <= float(r["unix"]) < t_next]
+        above = 0.0
+        for (ta, da), (tb, db) in zip(pts, pts[1:]):
+            if da >= theta and db >= theta:
+                above += tb - ta
+            elif da >= theta or db >= theta:      # interpolate the crossing
+                frac = (max(da, db) - theta) / (abs(db - da) or 1)
+                above += frac * (tb - ta)
+        peak = max(d for _, d in pts)
+        hit = first(rises, t0, t_next) is not None
+        out.append((above, hit, peak))
+    print(f"threshold {threshold} g = {theta:.1f} deg; {len(out)} trials")
+    print("time_past_s  detected   (peak deg)")
+    for above, hit, peak in sorted(out):
+        print(f"{above:10.3f}  {'yes' if hit else 'no':>8}   ({peak:.1f})")
+    edges = [0, 0.05, 0.1, 0.15, 0.2, 0.3, 0.5, 10]
+    print("time_past_s     detected")
+    for lo, hi in zip(edges, edges[1:]):
+        sel = [h for a_, h, _ in out if lo <= a_ < hi]
+        if sel:
+            print(f"{lo:.2f}-{hi:.2f}  {sum(sel):>6}/{len(sel)}")
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("prefix", help="runs/<name>, without the -stand.csv suffix")
+    ap.add_argument("--threshold", type=float,
+                    help="blip runs: the activity threshold in g")
     a = ap.parse_args()
     stand, rises, falls, levels = load(a.prefix)
-    if any(r["event"] == "still_start" for r in stand):
+    events = {r["event"] for r in stand}
+    if "nudge" in events:
+        nudge(stand, rises, falls)
+    elif a.threshold is not None:
+        blip(stand, rises, a.threshold)
+    elif "still_start" in events:
         gaps(stand, rises, falls, levels)
     else:
         steps(stand, rises, falls)
