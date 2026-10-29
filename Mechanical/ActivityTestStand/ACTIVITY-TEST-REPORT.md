@@ -36,9 +36,10 @@ records it exactly. The surprises are all consequences of the ADXL362's
 moves — and of its 6 Hz sampling in wake-up mode. They matter for anyone
 interpreting BitTag activity data from the field.
 
-**Not covered:** power consumption versus activity, which needs the
-Joulescope and stock firmware, and tilts about the tag's second horizontal
-axis, which needs the tag remounted.
+**Power** has begun: section 5.9 has the stand control and a first
+field-like workload, on stock firmware under a Joulescope. **Not covered:**
+the remaining power runs, and tilts about the tag's second horizontal axis,
+which needs the tag remounted.
 
 ## 2. The test setup
 
@@ -307,6 +308,27 @@ bin, one run per format, each crossing a record boundary:
   sub-second episodes appeared in the log. This is the design as written,
   and it matters when reading activity counts from the field.
 
+### 5.9 Power (first runs)
+
+Stock `fw-v0.6`, default config (activity 0.35 g; inactivity 0.35 g after 1
+sample), 2.5 V through a Joulescope JS320 driven by `joulescope_server.py`;
+two 1200 s windows per run, `charge/time`.
+
+| Run | Window 1 | Window 2 |
+|---|---|---|
+| P0, stand still | 0.5126 µA | 0.5109 µA |
+| P4, discrete-Pareto bouts, 20% scheduled | 0.7762 µA | 0.8106 µA |
+
+- **The stand adds nothing**: P0 matches the bench qualification
+  (0.507–0.508 µA) within 1%, with no logged activity.
+- **The Pareto workload costs about 3.2 µC per bout**, 0.27–0.30 µA over
+  still. Bout lengths 0–30 s with P(x) ∝ 1/(x+1)^α (α = 3.66), drawn once per
+  still second, calibrated to be active 20% of the time.
+- **The tag logged only 4.7% as active.** With the default inactivity
+  setting, a ±30° bout breaks into sub-second episodes (holding active needs
+  1.2 × 0.35 g amplitude, section 5.7), most of which a 1 s log does not
+  record, while each still costs wakes.
+
 ## 6. What this means for BitTag data
 
 1. **Activity counts are counts of whole seconds between detector changes**,
@@ -321,12 +343,15 @@ bin, one run per format, each crossing a record boundary:
    is unspecified and varies by about 3% between parts, so inactivity times
    carry that uncertainty.
 5. **Thresholds are accurate to ±5%**, within the ADXL362's tolerance.
+6. **The default config under-records sustained motion.** Its 0.35 g, 1-sample
+   inactivity setting split ±30° bouts into fragments: a workload scheduled
+   20% active logged 4.7%.
 
 ## 7. Remaining work
 
-- **Power versus activity** (plan section 10): runs P0–P4 on stock firmware
-  at 2.5 V under the Joulescope. The edge-log build cannot be used, as it
-  keeps SRAM2 powered in Standby.
+- **Power versus activity** (plan section 10): P1–P3, and P4 at longer
+  inactivity counts. Count the wakes behind P4 by re-running its seed on the
+  edge-log build (which cannot itself measure power).
 - **The second horizontal axis**, with the tag remounted at 90°.
 - **An inactivity-threshold protocol in which the rocking itself starts each
   episode**, to recover the trials lost to the wake-up snap.

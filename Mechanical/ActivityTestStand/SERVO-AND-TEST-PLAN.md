@@ -595,13 +595,18 @@ Done without the Joulescope, 2026-10-25 to 2026-10-29:
 - Small moves (nudges, out and back and held) and brief moves (blips).
 - The activity log in all four formats, against the edge log.
 
-Left, all needing the Joulescope at 2.5 V and stock firmware (the edge-log
-build retains SRAM2, which costs Standby current):
+Power, with the Joulescope JS320 at 2.5 V and stock `fw-v0.6` (section 13):
+P0 passed on 2026-10-29, and a first P4 ran with a discrete-Pareto workload.
 
-1. Run P0 (stand control) before anything else; if the floor on the stand
-   differs from the bench's 0.507 µA, fix the rig first.
-2. Run P1–P4 (section 10), and append results to BitTag's
+Left:
+
+1. Run P1–P3 (section 10), and append results to BitTag's
    `power-results.md` as its Phase D.
+2. Count the wakes behind P4's 3.2 µC per bout: re-run the same seed (the
+   schedule is reproducible) on the edge-log build, which logs every edge
+   but cannot measure power.
+3. Repeat P4 with a longer inactivity count (P2's 25 and 255 samples), which
+   should both cut the edges and make the log record the bouts.
 
 Done 2026-10-29: the inactivity-threshold sweep (section 13).
 
@@ -907,3 +912,51 @@ Steady-rocking trials in which the tag went inactive, by amplitude / T:
   `-neg`) did not remove this. A longer still pause after the snap, so that
   the tag goes inactive and is woken by the rocking itself, would avoid it,
   but needs the rocking to exceed the activity threshold.
+
+### 2026-10-29: power, P0 and P4 (discrete-Pareto workload)
+
+Stock `fw-v0.6` (commit `56e5e6a0`, flashed with `flash_release.py`,
+`tag-test` all passed), default `bittag-bitpersec.json` config (activity
+0.35 g, inactivity 0.35 g after 1 sample). 2.5 V from a Joulescope JS320
+through `joulescope_server.py`; the tag base's 3.3 V is not on the tag. Each
+run: `tag-start --start-now`, 75 s settle, two 1200 s windows, `charge/time`.
+Before starting, the tag read 0.1233 µA in IDLE (bench 0.122 µA).
+
+**P0, still** (`still --unload`, servo powered, torque off;
+`runs/2026-10-29-p0-*`): **0.5126 and 0.5109 µA**, against the bench
+qualification's 0.507–0.508 µA. The stand adds no measurable current, and the
+1 s log held 88 records, all zero.
+
+**P4, discrete-Pareto workload** (`runs/2026-10-29-p4-pareto-*`, from
+[`runs/2026-10-29-p4-pareto.sh`](runs/2026-10-29-p4-pareto.sh)). The user's
+sampler: bout lengths 0–30 s with P(x) ∝ 1/(x+1)^α, drawn once per still
+second; 0 is a second at level, L > 0 is L s of ±30° swings at 600 ms then a
+return. The mean is calibrated so the schedule is active 20% of the time,
+counting each bout's return and one-sample tail: mean 0.157 per draw,
+α = 3.66, P(0) = 0.90 (`stand_profile.py pareto --duty 0.2 --seed 1`).
+Scored with [`analyze_pareto.py`](analyze_pareto.py).
+
+| Window | Bouts | Swinging | Logged active | Current |
+|---|---|---|---|---|
+| 1 | 102 | 151 s | 57 s | 0.7762 µA |
+| 2 | 107 | 155 s | 60 s | 0.8106 µA |
+
+- **The workload costs 0.27–0.30 µA over still, +55%.** Window 2 had 5% more
+  bouts and 4.4% more extra current: about **3.2 µC per bout**, at about 0.09
+  bouts/s.
+- **At this mean the distribution is steep**: of 227 bouts, 159 lasted 1 s and
+  the longest 7 s.
+- **The tag logged 4.7% of the run as active**, against 13.1% swinging and
+  about 20% scheduled. 94 of 159 one-second bouts left no logged second;
+  longer bouts logged 0.6–3 s each. Two logged seconds fell outside every
+  bout.
+- **Why: the default inactivity setting cannot hold a ±30° bout.** Holding
+  the tag active needs an amplitude of about 1.2× the 0.35 g inactivity
+  threshold (0.42 g; see the inactivity-threshold sweep); ±30° gives 0.5 g,
+  and with a 1-sample countdown any sample near a turnaround ends the
+  episode. Each bout breaks into sub-second episodes, which the 1 s log
+  mostly does not record (section 13, 2026-10-27), and each costs a wake at
+  each edge. So 3.2 µC per bout is several wakes, not two.
+- **For field data**: with the default config, an animal active 20% of the
+  time in this pattern would read as about 5% active, while paying for every
+  edge.

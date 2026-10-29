@@ -194,6 +194,51 @@ def trial_order(values, reps, seed):
     return order
 
 
+def discrete_pareto(target_mean, min_val=0, max_val=30):
+    """Bounded discrete Pareto, P(x) ~ 1/(x+1)^alpha on min_val..max_val, with
+    alpha found by bisection so the mean is target_mean.  The user's sampler of
+    2026-10-29, without numpy.  Returns (values, probabilities, alpha)."""
+    xs = list(range(min_val, max_val + 1))
+    low, high = 0.0, 20.0
+    for _ in range(50):
+        mid = (low + high) / 2
+        w = [1.0 / (x + 1) ** mid for x in xs]
+        mean = sum(x * wi for x, wi in zip(xs, w)) / sum(w)
+        if mean > target_mean:
+            low = mid
+        else:
+            high = mid
+    w = [1.0 / (x + 1) ** mid for x in xs]
+    return xs, [wi / sum(w) for wi in w], mid
+
+
+# A bout of L s of swings is followed by a return to level, given a whole
+# second; the tag stays active through the 0.6 s return and about one 0.163 s
+# sample after it (default config: inactivity after 1 sample).
+BOUT_TAIL_S = 0.75
+
+
+def pareto_for_duty(duty, max_val=30):
+    """The discrete Pareto whose schedule is active `duty` of the time.
+
+    One draw per still second: 0 is one second at level, L > 0 a bout taking
+    L + 1 s, of which about L + BOUT_TAIL_S active.  Bisect the target mean
+    so that E[active] / E[elapsed] = duty."""
+    def frac(m):
+        xs, ps, _ = discrete_pareto(m, 0, max_val)
+        act = sum(p * (x + BOUT_TAIL_S) for x, p in zip(xs, ps) if x)
+        el = sum(p * (x + 1 if x else 1) for x, p in zip(xs, ps))
+        return act / el
+    lo, hi = 0.0, max_val / 2
+    for _ in range(50):
+        m = (lo + hi) / 2
+        if frac(m) < duty:
+            lo = m
+        else:
+            hi = m
+    return (m,) + discrete_pareto(m, 0, max_val)
+
+
 def floats(text):
     return [float(v) for v in text.split(",")]
 
@@ -202,7 +247,7 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("profile",
                     choices=["still", "pulses", "agitate", "bouts", "steps", "gaps",
-                             "nudge", "blip", "rock"])
+                             "nudge", "blip", "rock", "pareto"])
     ap.add_argument("--minutes", type=float,
                     help="run length; not used by steps and gaps")
     ap.add_argument("--angle", type=float, default=30.0)
@@ -219,6 +264,11 @@ def main():
     ap.add_argument("--bout", type=float, default=2.0, help="gaps: s of agitation per bout; rock: s of rocking")
     ap.add_argument("--delay", type=float, default=0.3,
                     help="nudge: s still at level before the nudge")
+    ap.add_argument("--duty", type=float, default=0.2,
+                    help="pareto: long-run fraction of time active")
+    ap.add_argument("--max-bout", type=int, default=30,
+                    help="pareto: longest bout, s")
+    ap.add_argument("--seed", type=int, default=1, help="pareto: random seed")
     ap.add_argument("--shuffle", type=int, metavar="SEED",
                     help="steps, gaps: permute the trials of each rep")
     ap.add_argument("--move-ms", type=int, default=600, help="duration of each move")
@@ -341,6 +391,28 @@ def main():
                     r.stimuli += 1
                     r.wait_until(time.time() + a.rest)
                 t_end = time.time()
+
+            elif a.profile == "pareto":
+                # bouts of swings whose lengths are discrete Pareto, drawn once
+                # per still second, active --duty of the time
+                m, xs, ps, alpha = pareto_for_duty(a.duty, a.max_bout)
+                r.log("pareto", f"mean={m:.4f} alpha={alpha:.4f} p0={ps[0]:.4f}")
+                rng = random.Random(a.seed)
+                t = t0
+                while t < t_end:
+                    n = rng.choices(xs, ps)[0]
+                    if n == 0:
+                        t += 1
+                        r.wait_until(min(t, t_end))
+                        continue
+                    r.wait_until(t)
+                    r.log("bout_start", n)
+                    swing(r, a, t, t + n)
+                    r.move(0.0, a.move_ms, "bout_end")
+                    r.stimuli += 1
+                    t += n + 1
+                    r.wait_until(min(t, t_end))
+                r.wait_until(t_end)
 
             elif a.profile == "rock":
                 # wake the tag with a snap, then rock +/-angle for --bout s:
