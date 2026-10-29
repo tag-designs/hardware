@@ -605,8 +605,9 @@ Left:
 2. Count the wakes behind P4's 3.2 µC per bout: re-run the same seed (the
    schedule is reproducible) on the edge-log build, which logs every edge
    but cannot measure power.
-3. Repeat P4 with a longer inactivity count (P2's 25 and 255 samples), which
-   should both cut the edges and make the log record the bouts.
+3. Done for 8 samples (below). P2's longer counts (25, 255 samples) remain.
+4. Find why about 15% of 1 s bouts still leave no logged second at 8
+   samples; the edge-log replay of item 2 would show it.
 
 Done 2026-10-29: the inactivity-threshold sweep (section 13).
 
@@ -960,3 +961,35 @@ Scored with [`analyze_pareto.py`](analyze_pareto.py).
 - **For field data**: with the default config, an animal active 20% of the
   time in this pattern would read as about 5% active, while paying for every
   edge.
+- Rescored on 2026-10-29 over only the span the download covers (it ends at
+  the last complete record): 223 bouts, 4.8% logged; the figures above are
+  otherwise unchanged.
+
+**P4 repeated with an inactivity count of 8 samples** (about 1.3 s, the
+user's suggestion; otherwise identical, same seed and so the same schedule;
+`runs/2026-10-29-p4-pareto-inact8-*`):
+
+| | 1 sample (default) | 8 samples |
+|---|---|---|
+| Current, window 1 (102 bouts) | 0.7762 µA | 0.6163 µA |
+| Current, window 2 (107 bouts) | 0.8106 µA | 0.6280 µA |
+| Over still (0.511 µA) | 0.27–0.30 µA | 0.105–0.117 µA |
+| Charge per bout | ~3.2 µC | ~1.3 µC |
+| Logged active (scheduled ~19.5%, swinging 12.7%) | 4.8% | 18.6% |
+| 1 s bouts with no logged second | 93/158 | 23/158 |
+| Bouts of 2 s or more with no logged second | 22/65 | 0/65 |
+| Logged seconds per bout, 2–7 s bouts | 0.65–2.5 | 2.7–8.0, about length + 1 |
+| Logged seconds outside every bout | 2 | 0 |
+
+- **8 samples holds each bout as one episode.** Every bout of 2 s or more is
+  recorded, at about its length plus the 1.3 s tail, and the logged fraction
+  matches the schedule.
+- **It also cuts the activity cost by about 60%**, from ~3.2 to ~1.3 µC per
+  bout. Fewer edges outweigh the longer time spent active, which costs nothing
+  static (section 10's prediction).
+- **186 logged episodes for 224 bouts**: bouts closer together than the tail
+  merge, and 23 one-second bouts left no trace. Those 23 are unexplained:
+  a 1 s bout passes the 0.35 g activity threshold for about 0.35 s, two
+  samples, and any detected episode now lasts over 1 s and so must cross a
+  second boundary. The edge-log replay would show whether they were detected.
+- The servo supply touched 5.99 V once (rated 6.0 V); no stall.

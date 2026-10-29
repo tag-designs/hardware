@@ -7,7 +7,8 @@ bout if it lies between floor(bout_start) and the bout_end second + 1, which
 covers detection latency, the return and the one-sample tail.  Reports the
 active fraction the tag logged over the run, active seconds per bout length,
 bouts that left no logged second (sub-second episodes do not register in 1 s
-bins), and logged seconds outside every bout.
+bins), and logged seconds outside every bout.  Only the span the download
+covers is scored: it ends at the last complete record.
 
   python3 analyze_pareto.py runs/2026-10-29-p4-pareto
 """
@@ -38,6 +39,9 @@ def main():
             cur = None
 
     bins = {k[1]: v for k, v in logged_bins(a.prefix).items() if k[0] == "SEC"}
+    # the download ends at the last whole record; score only what it covers
+    t_hi = min(t_hi, max(bins))
+    bouts = [b for b in bouts if math.floor(b[1]) + 2 <= t_hi]
     # the log labels a second s as s + 1 (bin end)
     active = {end - 1 for end, v in bins.items() if v and t_lo <= end - 1 < t_hi}
     span = t_hi - t_lo

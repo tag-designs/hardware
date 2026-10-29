@@ -1,0 +1,6 @@
+== window 1 from 2026-10-29T14:35:37Z
+  current  (charge/time) :         0.6163 uA
+  voltage  mean          :         2.4960 V
+== window 2 from 2026-10-29T14:55:37Z
+  current  (charge/time) :         0.6280 uA
+  voltage  mean          :         2.4960 V

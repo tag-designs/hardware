@@ -318,6 +318,7 @@ two 1200 s windows per run, `charge/time`.
 |---|---|---|
 | P0, stand still | 0.5126 µA | 0.5109 µA |
 | P4, discrete-Pareto bouts, 20% scheduled | 0.7762 µA | 0.8106 µA |
+| P4 again, inactivity 8 samples | 0.6163 µA | 0.6280 µA |
 
 - **The stand adds nothing**: P0 matches the bench qualification
   (0.507–0.508 µA) within 1%, with no logged activity.
@@ -328,6 +329,9 @@ two 1200 s windows per run, `charge/time`.
   setting, a ±30° bout breaks into sub-second episodes (holding active needs
   1.2 × 0.35 g amplitude, section 5.7), most of which a 1 s log does not
   record, while each still costs wakes.
+- **An inactivity count of 8 samples (~1.3 s) fixes both.** The same
+  schedule logged 18.6% active (bouts of 2 s or more all recorded, at about
+  their length + 1 s), and cost ~1.3 µC per bout instead of ~3.2 µC.
 
 ## 6. What this means for BitTag data
 
@@ -343,14 +347,16 @@ two 1200 s windows per run, `charge/time`.
    is unspecified and varies by about 3% between parts, so inactivity times
    carry that uncertainty.
 5. **Thresholds are accurate to ±5%**, within the ADXL362's tolerance.
-6. **The default config under-records sustained motion.** Its 0.35 g, 1-sample
-   inactivity setting split ±30° bouts into fragments: a workload scheduled
-   20% active logged 4.7%.
+6. **The default config under-records sustained motion, and pays more for
+   it.** Its 0.35 g, 1-sample inactivity setting split ±30° bouts into
+   fragments: a workload scheduled 20% active logged 4.7%. At 8 samples the
+   same workload logged 18.6% and cost 60% less above the still floor. The
+   default `inactive_sec` (0.24, clamped to 1 sample) is worth changing.
 
 ## 7. Remaining work
 
-- **Power versus activity** (plan section 10): P1–P3, and P4 at longer
-  inactivity counts. Count the wakes behind P4 by re-running its seed on the
+- **Power versus activity** (plan section 10): P1–P3, and P4 at 25 and 255
+  samples. Count the wakes behind P4 by re-running its seed on the
   edge-log build (which cannot itself measure power).
 - **The second horizontal axis**, with the tag remounted at 90°.
 - **An inactivity-threshold protocol in which the rocking itself starts each

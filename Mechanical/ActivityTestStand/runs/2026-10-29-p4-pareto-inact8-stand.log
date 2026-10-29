@@ -1,0 +1,3 @@
+WARNING 2026-10-29T14:49:53.616+00:00: servo supply 5.99 V below 6.0 V (first occurrence)
+pareto: 227 stimuli from 2026-10-29T14:34:25.000+00:00 to 2026-10-29T15:18:25.000+00:00; log in runs/2026-10-29-p4-pareto-inact8-stand.csv
+servo supply 5.99-8.10 V, max 44 C, 0 dropped moves resent, 14 stalled swings restarted; out of range: vin_low
