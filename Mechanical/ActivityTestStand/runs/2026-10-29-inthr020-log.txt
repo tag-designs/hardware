@@ -1,0 +1,77 @@
+#
+# Tag Read time: 1793269421
+#
+# Tag Error:     -0.022
+#
+#             Tag Info
+#
+# Tag Type:    BITTAG_LE
+# Tag Firmware:BitTag V6, Firmware version 2, edge log
+# Board:       BitTag V6
+# Build Date:  2026-10-28T23:37:07Z
+# Git Repo:    github.com/tag-designs/software
+# Source Path: /embedded/tags/BitTag
+# Git Hash:    757b1150
+# UUID:        2035374D303150190059002F
+# Internal Flash Size:  256KB
+# External Flash Size:  0KB
+# Test Status: ALL_PASSED
+#
+#             Configuration
+#
+# Range:       Rng_UNSPECIFIED
+# Frequency:   Odr_UNSPECIFIED
+# Filter:      Aa_UNSPESIFIED
+# Active Thresh: 0.6g
+# Inactive Thresh: 0.2g
+# Inactive Time: 6s
+# Start:       0
+# End:         2147483647
+# BitTag Log Format:      BITTAG_BITPERSEC
+# Hibernate[0] = {0, 0}
+# Hibernate[1] = {0, 0}
+#
+#             State Log
+#
+# Epoch: 1793269123
+# State: CONFIGURED
+# Entry Code: EVENT_STARTCMD
+# Temperature: 24.6
+# Voltage:     3.29
+# Internal Log Entries: 0
+# External Log Entries: 0
+#
+# Epoch: 1793269123
+# State: RUNNING
+# Entry Code: EVENT_STARTTIM
+# Temperature: 23.9
+# Voltage:     3.3
+# Internal Log Entries: 0
+# External Log Entries: 0
+#
+# Epoch: 1793269420
+# State: FINISHED
+# Entry Code: EVENT_STOPCMD
+# Temperature: 24.6
+# Voltage:     3.3
+# Internal Log Entries: 5
+# External Log Entries: 0
+#
+#
+#             Data Log
+#
+1793269110,SEC:0x00000000
+1793269140,SEC:0x20020000
+1793269140,V:3.3,TC:24.9
+1793269170,SEC:0x07800807
+1793269200,SEC:0x20020060
+1793269200,V:3.3,TC:24.2
+1793269230,SEC:0x01801803
+1793269260,SEC:0x20061FE0
+1793269260,V:3.3,TC:24.2
+1793269290,SEC:0x00800800
+1793269320,SEC:0x20020020
+1793269320,V:3.3,TC:24.9
+1793269350,SEC:0x00800801
+1793269380,SEC:0x20020020
+1793269380,V:3.3,TC:24.6

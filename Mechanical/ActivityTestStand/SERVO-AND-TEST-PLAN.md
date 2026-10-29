@@ -603,9 +603,10 @@ build retains SRAM2, which costs Standby current):
 2. Run P1–P4 (section 10), and append results to BitTag's
    `power-results.md` as its Phase D.
 
+Done 2026-10-29: the inactivity-threshold sweep (section 13).
+
 Not yet tested, and possible without the Joulescope:
 
-- An inactivity-threshold sweep. Every run so far used 0.15 g.
 - Moves along the tag's other horizontal axis. The stand tilts about one axis
   only, so this needs the tag remounted at 90°.
 
@@ -860,3 +861,49 @@ samples. Each run crosses a record boundary. Scored with
 - **Record boundaries split correctly**: each run crossed at least one.
 - **Every 1 s log on record agrees too**: 20 runs from 2026-10-28/29, 4,962
   bins, 0 mismatched, including 1,200 still bins with no activity.
+
+### 2026-10-29: inactivity threshold, 0.1, 0.2, 0.3 and 0.5 g
+
+`rock` profile: a snap to ±60° and back wakes the tag; once the stand is back
+at level it rocks ±A about level, 600 ms per swing, for 6 s, then returns.
+Does the rocking keep the tag active? Activity 0.6 g, inactivity 6 samples
+(1 s); A set so the amplitude sin A spans 0.25–2× the threshold T, 3 reps,
+shuffled. Scored on the amplitude the stand actually reached (half the
+measured peak-to-peak, sin of the extreme logged angles), which fell 0.6–1°
+short of the command. Three passes, `runs/2026-10-29-inthr{010,020,030,050}{,-amp,-neg}-*`,
+from [`runs/2026-10-29-inactthresh*.sh`](runs/), pooled by
+[`runs/2026-10-29-inactthresh-pool.py`](runs/2026-10-29-inactthresh-pool.py).
+
+Steady-rocking trials in which the tag went inactive, by amplitude / T:
+
+| T | < 0.7 | 0.7–0.9 | 0.9–1.0 | 1.0–1.1 | 1.1–1.2 | 1.2–1.35 | 1.35–1.6 | ≥ 1.6 |
+|---|---|---|---|---|---|---|---|---|
+| 0.1 g | 11/15 | 1/4 | 1/4 | 3/8 | 2/4 | 0/4 | 0/6 | 0/3 |
+| 0.2 g | 3/4 | 5/6 | 2/5 | 0/4 | 0/2 | 0/4 | 0/5 | 0/3 |
+| 0.3 g | 4/4 | 6/8 | 2/2 | 1/2 | 0/1 | 0/4 | 0/6 | 0/3 |
+| 0.5 g | 4/4 | 4/7 | 1/4 | 1/3 | — | 0/5 | 0/5 | — |
+| All | 22/27 | 16/25 | 6/15 | 5/17 | 2/7 | **0/17** | **0/22** | **0/9** |
+
+- **Rocking holds the tag active when its amplitude from level exceeds about
+  1.2 T, at every threshold**: 0 of 48 steady trials went inactive. Below
+  0.7 T it mostly does not (22 of 27). In between, the odds fall from about
+  60% to 30%.
+- **So holding the tag active takes about 2.4 T peak-to-peak, not T.** The
+  reference is the last sample that exceeded T, which lands part-way through
+  a swing; it settles mid-swing, and from there the largest change is the
+  amplitude. A simulation of that rule (each axis against a reference that
+  moves to any sample more than T away; inactive after 6 samples within T;
+  samples every 0.163 s at random phase), over each trial's logged motion,
+  puts the switch at amplitude 1.0–1.25 T.
+- **At 0.1 g, small rocking sometimes holds the tag active** (4 of 15 below
+  0.7 T): the servo's jerky reversals at ±2–3°, logged as restarted swings,
+  add accelerations of the same size as the threshold.
+- **The first pass** (peak-to-peak 0.5–2 T, `-inthr*0`) never held the tag
+  active reliably, which is what showed that peak-to-peak is the wrong scale.
+- **110 of 249 trials fell in the first 1.2 s and are excluded.** The first
+  swing goes only from level to +A, half a stroke, and the countdown from
+  the snap is partly run by then, so near threshold it often expires before
+  the rocking is under way. Snapping to −60° instead of +60° (third pass,
+  `-neg`) did not remove this. A longer still pause after the snap, so that
+  the tag goes inactive and is woken by the rocking itself, would avoid it,
+  but needs the rocking to exceed the activity threshold.

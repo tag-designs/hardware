@@ -172,6 +172,22 @@ countdown, and then the tag went inactive while still displaced, at 0.1, 0.2
 and 0.3 g. On an animal, a posture change is one short episode, not a long
 one.
 
+**To stay active, the tag must keep moving more than the inactivity threshold
+away from wherever it last did.** Rocking about level held the tag active
+only when its amplitude exceeded about 1.2× the inactivity threshold, at 0.1,
+0.2, 0.3 and 0.5 g alike. That is 2.4× in peak-to-peak terms. The reference
+moves to each sample that exceeds the threshold, so it settles mid-swing.
+The first pass of this sweep was scaled in peak-to-peak and never held the
+tag active reliably. Ask what the reference is before choosing the scale of
+a stimulus.
+
+**Start each trial's stimulus well clear of the countdown.** In the
+inactivity-threshold sweep, 110 of 249 trials went inactive in the first
+1.2 s, before the rocking was under way. The countdown left by the wake-up
+snap was already partly run. Changing the snap's direction did not help.
+Score those trials separately, and design the next protocol so the stimulus
+itself starts the episode.
+
 **A brief move is caught only if a sample lands on it.** A move past the
 threshold for D seconds was caught with probability about D / 0.163 s. It
 was always caught above 0.1 s, and only 2 in 5 times under 0.05 s. Small moves
@@ -224,7 +240,6 @@ by the voltage column.
 
 ## Open questions
 
-- **The inactivity threshold** has not been swept; every run used 0.15 g.
 - **Only one tilt axis** has been exercised. The other horizontal axis needs
   the tag remounted at 90°.
 - **Power versus activity** (plan section 10) is still to run, on stock

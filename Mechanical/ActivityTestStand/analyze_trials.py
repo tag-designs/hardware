@@ -23,6 +23,14 @@ blip (--threshold G) -- per trial, how long the stand spent past the tilt at
 which the change reaches G (asin G), from the logged positions, and whether a
 rise followed; then detection rate against that time.
 
+rock -- per rocking amplitude, the peak-to-peak change the stand actually
+produced (sin of the extreme logged angles, from the second swing on), and whether the tag
+went inactive while rocking: early (already inactive at the start, or a fall
+in the first ROCK_SETTLE_S, while the countdown left from the snap can run
+out before the first swing is under way) or during steady rocking.  The
+steady count is the measure: rocking that holds the tag active has an
+amplitude above the inactivity threshold.
+
   python3 analyze_trials.py runs/2026-10-29-act035
   python3 analyze_trials.py runs/2026-10-29-blip --threshold 0.35
 """
@@ -156,6 +164,42 @@ def nudge(stand, rises, falls):
               f"{k['none']:>4}/{k['n']}")
 
 
+ROCK_SETTLE_S = 1.2   # level to +angle, then the first full swing begins
+
+
+def rock(stand, falls, levels):
+    rows = defaultdict(lambda: {"n": 0, "pp": [], "early": 0, "steady": 0,
+                                "fall_after": []})
+    for tr in trials(stand):
+        angle = float(tr[0]["target"])
+        r0, r1 = at(tr, "rock_start"), at(tr, "rock_end")
+        # from the second swing: the first only goes from level to +angle
+        w0 = [float(r["unix"]) for r in tr if r["event"] == "swing"][1]
+        degs = [float(r["deg"]) for r in stand
+                if r["deg"] and w0 <= float(r["unix"]) <= r1]
+        sin = lambda d: math.sin(math.radians(d))
+        k = rows[angle]
+        k["n"] += 1
+        k["pp"].append(sin(max(degs)) - sin(min(degs)))
+        f = first(falls, r0, r1)
+        if level_at(levels, r0) == 0 or (f is not None and f < r0 + ROCK_SETTLE_S):
+            k["early"] += 1
+        elif f is not None:
+            k["steady"] += 1
+        if f is not None:
+            k["fall_after"].append(f - r0)
+    print("rock_deg  nominal_pp_g  measured_pp_g  inactive_early  inactive_steady"
+          "  fall_after_start_s")
+    for angle in sorted(rows):
+        k = rows[angle]
+        fa = (f"{min(k['fall_after']):.2f}-{max(k['fall_after']):.2f}"
+              if k["fall_after"] else "-")
+        print(f"{angle:8.2f}  {2 * math.sin(math.radians(angle)):12.3f}  "
+              f"{min(k['pp']):6.3f}-{max(k['pp']):.3f}  "
+              f"{k['early']:>8}/{k['n']:<5}  {k['steady']:>9}/{k['n'] - k['early']:<5}"
+              f"  {fa:>18}")
+
+
 def blip(stand, rises, threshold):
     theta = math.degrees(math.asin(min(threshold, 1.0)))
     out = []
@@ -193,7 +237,9 @@ def main():
     a = ap.parse_args()
     stand, rises, falls, levels = load(a.prefix)
     events = {r["event"] for r in stand}
-    if "nudge" in events:
+    if "rock_start" in events:
+        rock(stand, falls, levels)
+    elif "nudge" in events:
         nudge(stand, rises, falls)
     elif a.threshold is not None:
         blip(stand, rises, a.threshold)

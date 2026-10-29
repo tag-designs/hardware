@@ -202,7 +202,7 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("profile",
                     choices=["still", "pulses", "agitate", "bouts", "steps", "gaps",
-                             "nudge", "blip"])
+                             "nudge", "blip", "rock"])
     ap.add_argument("--minutes", type=float,
                     help="run length; not used by steps and gaps")
     ap.add_argument("--angle", type=float, default=30.0)
@@ -216,7 +216,7 @@ def main():
     ap.add_argument("--reps", type=int, default=3, help="steps, gaps: repetitions")
     ap.add_argument("--rest", type=float, default=4.0,
                     help="steps, gaps: s still at level after each trial")
-    ap.add_argument("--bout", type=float, default=2.0, help="gaps: s of agitation per bout")
+    ap.add_argument("--bout", type=float, default=2.0, help="gaps: s of agitation per bout; rock: s of rocking")
     ap.add_argument("--delay", type=float, default=0.3,
                     help="nudge: s still at level before the nudge")
     ap.add_argument("--shuffle", type=int, metavar="SEED",
@@ -244,13 +244,13 @@ def main():
     ap.add_argument("--port", default=DEFAULT_PORT)
     ap.add_argument("-o", "--output", required=True)
     a = ap.parse_args()
-    trials = a.profile in ("steps", "gaps", "nudge", "blip")
+    trials = a.profile in ("steps", "gaps", "nudge", "blip", "rock")
     if not trials and a.minutes is None:
         ap.error(f"{a.profile} needs --minutes")
-    if a.profile in ("steps", "nudge", "blip") and not a.angles:
+    if a.profile in ("steps", "nudge", "blip", "rock") and not a.angles:
         ap.error(f"{a.profile} needs --angles")
-    if a.profile == "nudge" and not a.reset_angle:
-        ap.error("nudge needs --reset-angle")
+    if a.profile in ("nudge", "rock") and not a.reset_angle:
+        ap.error(f"{a.profile} needs --reset-angle")
     if a.profile == "gaps" and not a.gaps:
         ap.error("gaps needs --gaps")
 
@@ -340,6 +340,31 @@ def main():
                     r.log("stop")
                     r.stimuli += 1
                     r.wait_until(time.time() + a.rest)
+                t_end = time.time()
+
+            elif a.profile == "rock":
+                # wake the tag with a snap, then rock +/-angle for --bout s:
+                # does the rocking keep it active?
+                for angle in trial_order(a.angles, a.reps, a.shuffle):
+                    t = next_second(time.time())
+                    r.wait_until(t)
+                    r.log("trial", angle)
+                    r.move(a.reset_angle, 400, "reset")
+                    r.wait_until(time.time() + 0.4)
+                    r.move(0.0, 400, "reset_return")
+                    r.wait_until(time.time() + 0.4)
+                    # the return can lag; rock from level, not on the way down
+                    t = time.time() + 1.0
+                    while abs(r.last_pos - counts(0.0)) > 3 and time.time() < t:
+                        r.wait_until(time.time() + r.poll)
+                    r.log("rock_start")
+                    a.angle = angle
+                    t = time.time()
+                    swing(r, a, t, t + a.bout)
+                    r.log("rock_end")
+                    r.move(0.0, a.move_ms, "stop")
+                    r.stimuli += 1
+                    r.wait_until(time.time() + a.move_ms / 1000 + a.rest)
                 t_end = time.time()
 
             elif a.profile == "blip":
