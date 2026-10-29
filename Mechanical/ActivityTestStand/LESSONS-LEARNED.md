@@ -238,6 +238,23 @@ by the voltage column.
   inactivity threshold held at 0.15 g. The reader can then say if it was
   wrong.
 
+## Power
+
+**Check the rig against a known figure before measuring anything new.** The
+tag read 0.1233 µA in IDLE and 0.511 µA running still on the stand, against
+the bench's 0.122 and 0.507 µA. That is what lets the workload results be
+trusted.
+
+**A repeatable workload makes settings comparable.** The Pareto schedule is
+fixed by its seed, so the 1-sample and 8-sample runs saw identical motion, and
+the difference — 4.8% versus 18.6% logged, ~3.2 versus ~1.3 µC per bout — is
+the setting alone.
+
+**The cheapest setting can also be the most accurate one.** The default
+1-sample inactivity count fragments bouts, which both hides them from the
+1 s log and pays a wake for every fragment. Edges cost power; time spent
+active does not.
+
 ## Open questions
 
 - **Only one tilt axis** has been exercised. The other horizontal axis needs

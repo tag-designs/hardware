@@ -36,8 +36,12 @@ records it exactly. The surprises are all consequences of the ADXL362's
 moves — and of its 6 Hz sampling in wake-up mode. They matter for anyone
 interpreting BitTag activity data from the field.
 
-**Power** has begun: section 5.9 has the stand control and a first
-field-like workload, on stock firmware under a Joulescope. **Not covered:**
+**Power:** with a field-like workload — bouts whose lengths follow a
+discrete Pareto distribution, active about 18% of the time — stock BitTag
+averages **about 620 nA at 2.5 V** with an inactivity count of 8 samples,
+about **one year on a 5.5 mAh cell** before derating (section 5.9). The
+default inactivity setting costs more (about 790 nA) and logs only a quarter
+of that activity. **Not covered:**
 the remaining power runs, and tilts about the tag's second horizontal axis,
 which needs the tag remounted.
 
@@ -133,13 +137,36 @@ Each run talks to the tag four times, all over the ST-Link in the tag base:
 STM32CubeProgrammer's connect-under-reset also fails occasionally; it
 succeeded right after a `tag-info`.
 
-### 3.4 Running and scoring a test
+### 3.4 Measuring power
+
+Power runs use **stock firmware**, release `fw-v0.6` (commit `56e5e6a0`,
+built with the pinned GCC 14.2.1), flashed with `flash_release.py`, which
+refuses an image that does not match its build manifest's SHA-256. The
+software repo's flashing protocol was followed: record the UUID, erase with
+the firmware that wrote the log, flash, then `tag-test` (all passed).
+
+The current comes from a **Joulescope JS320** in series with the tag's
+supply at 2.5 V; the tag base's 3.3 V is not connected to the tag.
+
+- `pyjoulescope_driver` 2.5.5, in `~/.venvs/joulescope`, supports the JS320.
+  It needed a udev rule for USB ID `16d0:135a` and the `python3-venv`
+  package.
+- `joulescope_server.py` (software repo) holds the instrument open for the
+  whole session, as the bench rules require; its current range doubles as
+  the tag's power switch. `joulescope_measure.py --use-server` reads each
+  window as `charge/time`.
+- Each run: `tag-start --start-now`, a 75 s settle (BitTag can wait a minute
+  in `CONFIGURED`), then two 1200 s windows, which must agree. Scripts:
+  `runs/2026-10-29-p0.sh`, `runs/2026-10-29-p4-pareto*.sh`.
+
+### 3.5 Running and scoring a test
 
 | Tool | Role |
 |---|---|
 | [`run_trial.py`](run_trial.py) | One test end to end: writes the configuration, resets and starts the tag, runs the profile, reads the edge log, downloads the activity log. All files go to `runs/<date>-<name>-{config.json, stand.csv, sram2.txt, edges.csv, log.txt}`. |
 | [`analyze_trials.py`](analyze_trials.py) | Scores each trial's stand log against the tag's edges, by profile: detections per tilt, inactivity per pause, restarts per nudge, capture per blip time, inactivity per rocking amplitude. Scores the tag's *state* during each window, not just its edges, since a tag already inactive has no edge to find. |
 | [`analyze_bins.py`](analyze_bins.py) | Predicts every bin of the activity log from the edges and compares, in all four formats. |
+| [`analyze_pareto.py`](analyze_pareto.py) | For power runs, where there is no edge log: the tag's 1 s log against the stand's bout schedule. |
 
 ```bash
 python3 run_trial.py 2026-10-29-inthr020-neg --act 0.6 --inact 0.20 --samples 6 \
@@ -163,8 +190,10 @@ python3 analyze_trials.py runs/2026-10-29-inthr020-neg
 | Brief moves | `blip` | time past threshold | `blip` |
 | Inactivity threshold | `rock` | 0.1, 0.2, 0.3, 0.5 g; amplitude | `inthr*`, three passes |
 | Activity log | `bouts` | all four formats | `bins-{sec,min,fourmin,fivemin}` |
+| Power, stand control (P0) | `still --unload` | — | `p0` |
+| Power, field-like workload (P4) | `pareto` | inactivity 1 and 8 samples | `p4-pareto`, `p4-pareto-inact8` |
 
-About 35 tag runs in all, each scored from its own files.
+About 38 tag runs in all, each scored from its own files.
 
 ## 5. Results
 
@@ -325,13 +354,29 @@ two 1200 s windows per run, `charge/time`.
 - **The Pareto workload costs about 3.2 µC per bout**, 0.27–0.30 µA over
   still. Bout lengths 0–30 s with P(x) ∝ 1/(x+1)^α (α = 3.66), drawn once per
   still second, calibrated to be active 20% of the time.
-- **The tag logged only 4.7% as active.** With the default inactivity
+- **The tag logged only 4.8% as active.** With the default inactivity
   setting, a ±30° bout breaks into sub-second episodes (holding active needs
   1.2 × 0.35 g amplitude, section 5.7), most of which a 1 s log does not
   record, while each still costs wakes.
 - **An inactivity count of 8 samples (~1.3 s) fixes both.** The same
   schedule logged 18.6% active (bouts of 2 s or more all recorded, at about
   their length + 1 s), and cost ~1.3 µC per bout instead of ~3.2 µC.
+- **Activity's cost scales with bouts, not active time**: being active costs
+  nothing between wakes. Roughly, I ≈ 511 nA + 1.3 µC × bouts per second at
+  8 samples.
+
+**Battery life on a 5.5 mAh cell**, nominal capacity, no derating:
+
+| Case | Current | Life |
+|---|---|---|
+| Still, recording | 511 nA | 1.23 years |
+| Pareto workload, inactivity 8 samples | 616–628 nA | 0.99–1.02 years |
+| Pareto workload, default 1 sample | 776–811 nA | 0.77–0.81 years |
+
+A coin cell delivers less than its rating: the end-of-life voltage cutoff,
+self-discharge, cold and pulse loading typically cost 10–20%, putting the
+8-sample case at roughly 9½–11 months. These are one tag, at room
+temperature, with one workload seed.
 
 ## 6. What this means for BitTag data
 
@@ -349,7 +394,7 @@ two 1200 s windows per run, `charge/time`.
 5. **Thresholds are accurate to ±5%**, within the ADXL362's tolerance.
 6. **The default config under-records sustained motion, and pays more for
    it.** Its 0.35 g, 1-sample inactivity setting split ±30° bouts into
-   fragments: a workload scheduled 20% active logged 4.7%. At 8 samples the
+   fragments: a workload scheduled 20% active logged 4.8%. At 8 samples the
    same workload logged 18.6% and cost 60% less above the still floor. The
    default `inactive_sec` (0.24, clamped to 1 sample) is worth changing.
 
@@ -362,12 +407,17 @@ two 1200 s windows per run, `charge/time`.
 - **An inactivity-threshold protocol in which the rocking itself starts each
   episode**, to recover the trials lost to the wake-up snap.
 - **The threshold rounding fix** in `clampAdxl362Threshold()`.
+- **Why 23 of 158 one-second bouts left no trace at 8 samples**, when any
+  detected episode should now cross a second boundary. The edge-log replay
+  of the same seed would show it.
+- **A better default `inactive_sec`**: 8 samples worked here; the trade-off
+  against episode splitting and power deserves a sweep (P2).
 
 ## 8. Where things are
 
 | | |
 |---|---|
-| Stand code, scripts, results | `hardware` repo, branch `accel-testing`, `Mechanical/ActivityTestStand/` (commits `c862a7e`, `99ba552`, `02ab890`, `92fc5be`) |
+| Stand code, scripts, results | `hardware` repo, `Mechanical/ActivityTestStand/`, on `main` (merged from branch `accel-testing`) |
 | Edge-log firmware | `software` repo, branch `accel-testing`, `embedded/tags/BitTag/inc/edge_log.h` and `src/bt_state_run.c` (`757b1150`, `cc2fb9b9`) |
 | Run data | [`runs/`](runs/), one prefix per run; campaign scripts `runs/2026-10-29-*.sh` |
 | Detailed tables | [`SERVO-AND-TEST-PLAN.md`](SERVO-AND-TEST-PLAN.md) section 13 |
