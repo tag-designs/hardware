@@ -31,16 +31,19 @@ def balanced(text, i):
 
 
 def blocks(text, head, top_level=True):
-    """Yield each s-expression starting with `head` (top level: one tab in)."""
-    key = ("\n\t(" if top_level else "(") + head
+    """Yield each s-expression starting with `head` (top level: one indent in).
+
+    KiCad 7+ indents with a tab, KiCad 6 (e.g. BitTagv8) with two spaces.
+    """
+    key = re.compile((r"\n(?:\t|  )\(" if top_level else r"\(") + re.escape(head) + r"[\s)]")
     i = 0
     while True:
-        i = text.find(key, i)
-        if i < 0:
+        m = key.search(text, i)
+        if not m:
             return
-        b = balanced(text, text.index("(", i))
+        b = balanced(text, text.index("(", m.start()))
         yield b
-        i += len(b)
+        i = m.start() + len(b)
 
 
 def nums(s):
@@ -74,7 +77,8 @@ def main(path):
         name = re.search(r'\(footprint "([^"]+)"', f).group(1)
         layer = re.search(r'\(layer "([^"]+)"\)', f).group(1)
         at = nums(re.search(r"\(at ([^)]+)\)", f).group(1))
-        ref = re.search(r'\(property "Reference" "([^"]+)"', f).group(1)
+        # KiCad 7+: (property "Reference" ...); KiCad 6: (fp_text reference ...).
+        ref = re.search(r'\((?:property "Reference"|fp_text reference) "([^"]+)"', f).group(1)
         ox, oy, rot = at[0], at[1], (at[2] if len(at) > 2 else 0.0)
         a = math.radians(rot)
 

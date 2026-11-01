@@ -58,4 +58,8 @@ __pycache__/
 
 # Tag-case `make check` output
 Mechanical/*/check.log
+Mechanical/*/check-*.log
 Mechanical/*/check.stl
+# BitTag case: `make assembly` log and the per-board STEPs it exports from KiCad
+Mechanical/BitTag/assembly.log
+Mechanical/BitTag/tag-*.step

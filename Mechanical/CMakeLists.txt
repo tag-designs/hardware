@@ -16,7 +16,7 @@ function (dxf_create scadfile)
         COMMENT "BUILDING ${scadfile}.dxf"
     )
 
-    # Target names may not contain "/", and these are paths (BitTag/BitTagvc).
+    # Target names may not contain "/", and these are paths (BitTag/BitTag).
     string(REPLACE "/" "_" target "${scadfile}")
     add_custom_target(${target} DEPENDS "${scadfile}.dxf")
 endfunction()
@@ -36,6 +36,8 @@ function (stl_create scadfile)
 endfunction()
 
 dxf_create(Acrylic/multicharger-acrylic)
-stl_create(BitTag/BitTagvc)
+# The main base and the battery lid (the .scad defaults); BitTag/Makefile also
+# builds the PresTag-v6 base and the no-battery lid, and runs the fit checks.
+stl_create(BitTag/BitTag)
 # Experimental build123d tag cases; -DTAGCASES=OFF skips them.
 add_subdirectory(b123d-models)
