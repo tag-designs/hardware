@@ -176,7 +176,27 @@ Negative controls, each of which must produce geometry:
 | `lid_far_block_max=[-9.35,0.5]` (far block across C6) | collides with BitTagNG C6 |
 | `pogo_compression=0.6` | fails the compression rule |
 
-`make assembly` results are below.
+`make assembly` checks the real boards (KiCad STEP exports), both cells, the
+base PCB, the 855 connector model and the dowels in `BitTag-assembly.FCStd`:
+each board on each base it fits, with every lid pose. **ALL CLEAR, nine
+board/base pairs, no overlaps.**
+
+| board | base | insulator to bottom parts | no-battery lid over 1.0-proud inserts | lid to dowel | shoulder stop |
+|---|---|---|---|---|---|
+| BitTagv7 | main / v6 | 0.66 / 0.81 | 0.99 | 0.59 / 0.74 | 0.038 |
+| BitTagNG | main / v6 | 1.89 / 1.92 | 0.79 | 0.45 / 0.59 | 0.038 |
+| PresTag v3 | main / v6 | 1.95 / 1.98 | 0.79 | 0.45 / 0.59 | 0.043 |
+| **PresTag v5** | main / v6 | **0.38** / 0.58 (D401) | 0.79 | 0.45 / 0.59 | 0.043 |
+| PresTag-v6 | v6 only | 0.335 (C4) | 0.79 | 0.59 | 0.043 |
+
+On every board:
+- **No-battery lid:** underside 1.79 above the post tops (1.99 on v7). The
+  far block is 0.200 above the board when the pogo block has seated.
+- **Battery lid:** clears the cell by 0.35 for an MS920 and 0.50 for an
+  MS621, with the tab foot excluded. It is 1.635 over 1.0-proud inserts, and
+  the far block is 0.395 above the board.
+- **Dowel tops:** z 2.655 on the main base, 2.455 on the v6 base.
+- **Insulator top:** z −0.98 on the main base, −1.18 on the v6 base.
 
 ## Not covered / limits
 
